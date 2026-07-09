@@ -17,10 +17,7 @@ FI_ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(FI_ROOT))
 
 from flashinfer.grouped_mm import grouped_mm_fp8, moe_gemm_fp8_nt_groupwise  # noqa: E402
-from flashinfer.testing.utils import (  # noqa: E402
-    per_block_cast_to_fp8,
-    per_token_cast_to_fp8,
-)
+from flashinfer.testing.utils import per_block_cast_to_fp8  # noqa: E402
 
 sys.path.insert(0, str(FI_ROOT / "tests" / "grouped_mm"))
 from test_cute_sm120_fp8 import per_token_cast_to_fp8_for_moe_gemm  # noqa: E402
