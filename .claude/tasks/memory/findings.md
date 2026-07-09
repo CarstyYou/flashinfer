@@ -50,6 +50,28 @@
   (正式对比仍建议清)。
 - host (frontend) pre-commit 2.17.0 无法解析新式 hook manifest → FI commit 需容器内 lint 或 `--no-verify`。
 
+## task_02: FP8 moe_gemm_fp8_nt_groupwise 接线 (2026-07-09)
+
+### 实测
+
+- FP8 op/binding/JIT/Python entry 全链路一次接通: validation 13/13, correctness 34/34
+  (calc_diff 7.11e-4~7.14e-4, 与 6KD test_fp8 范围一致), bench vs cutlass grouped 24/24 全正
+  (小 M E=4 +57~69%, E=8 +16~19%, m_pe=1024 +0.4~5.1%), 两轮无漂移。数据 link:
+  [task_02/plan.md ## Results](../task_02/plan.md)。
+- 单 .so 双 family: fp8 3 个 .cu 加入 `gen_gemm_sm120_module_cute_mxfp8` sources, 增量编译 1m20s,
+  `.so` 1.02→1.52MB; 两个 binding 文件各自 `TVM_FFI_DLL_EXPORT_TYPED_FUNC` 共存无冲突
+  (先例: cutlass gemm_sm120 module 双 binding)。
+- **R3 复现**: `group_gemm_fp8_nt_groupwise` 在 2026-07 main 的 sm120 `num_groups > 1`
+  wrapper-level disable 仍在 (`gemm_base.py:7283`); `skip_check=True` 可 bypass 作 perf baseline。
+
+### 踩坑
+
+- **validation test 用方阵 shape 会漏 SFB transpose 检测**: n=k 时 [E,Kb,Nb] transpose 后 shape
+  不变, "bad shape" 用例静默通过 — negative test 的 shape 必须非对称 (Kb ≠ Nb)。
+- FP8 thop 校验 port 时 review 抓到两处漏检 (`n/k > 0`、cross-tensor same-device): MXFP8 op
+  不查这两项是因为 mxfp8 thop 自身没有, FP8 thop 有 → counterpart 对齐必须以各自 thop contract
+  为准, 不能只 diff FI 侧文件。
+
 ## MXFP8 集成沉淀 (task_01–13, 2026-06, 已归档)
 
 MXFP8 集成任务 (PR #3562) 的可复用 findings 摘编. 原 task_01..13 目录已清理; 完整 audit trail 见 `sm120_group_gemm_mxfp8_internal` 分支. 源码 line 引用基于 2026-06 main, 新 main 可能漂移.
