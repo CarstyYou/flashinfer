@@ -18,6 +18,7 @@ Tests for the cute SM120 FP8 float-scale zero-padding MoE GEMM entry
 """
 
 import math
+from typing import Tuple
 
 import pytest
 import torch
@@ -46,22 +47,36 @@ def compute_padded_offset(offset: int, problem_idx: int) -> int:
     return (offset + problem_idx * 3) // 4 * 4
 
 
-def build_zero_padding_sfa(sf_a: torch.Tensor, offsets) -> torch.Tensor:
-    """Re-pack a row-major per-token (cum_m, k_blocks) A-scale into the
-    zero-padding MN-major (k_blocks, m_padded) layout with per-expert
-    4-row-aligned start columns."""
-    total_rows = sf_a.size(0)
-    num_experts = len(offsets) - 1
-    scale_k = sf_a.size(1)
-    padded_m = compute_padded_offset(total_rows, num_experts)
-    padded = torch.zeros((scale_k, padded_m), device=sf_a.device, dtype=sf_a.dtype)
+def per_token_cast_to_fp8_for_moe_gemm(
+    x: torch.Tensor,
+    token_offset: torch.Tensor,
+) -> Tuple[torch.Tensor, torch.Tensor]:
+    """Python-eager reference for the cute SM120 FP8 moe_gemm zero-padding scale layout.
+
+    Quantizes ``x`` with per-token ``(1, 128)`` float32 scales (DG helper
+    per_token_cast_to_fp8; row-independent, so whole-tensor quantization equals
+    per-expert quantization) and re-packs the scales into the contiguous MN-major
+    ``(k_blocks, m_padded)`` layout with per-expert 4-row-aligned start columns;
+    padding columns are zero-filled and ignored by the kernel.
+    """
+    assert x.dim() == 2
+    assert token_offset.dtype == torch.int32
+    assert token_offset[0].item() == 0
+
+    token_num = x.shape[0]
+    num_experts = token_offset.numel() - 1
+    x_fp8, sf = per_token_cast_to_fp8(x)
+    scale_k = sf.size(1)
+    m_padded = compute_padded_offset(token_num, num_experts)
+    padded = torch.zeros((scale_k, m_padded), dtype=torch.float32, device=x.device)
     for i in range(num_experts):
-        start, end = offsets[i], offsets[i + 1]
+        start = int(token_offset[i].item())
+        end = int(token_offset[i + 1].item())
         if start == end:
             continue
         padded_start = compute_padded_offset(start, i)
-        padded[:, padded_start : padded_start + end - start] = sf_a[start:end].t()
-    return padded
+        padded[:, padded_start : padded_start + end - start] = sf[start:end].t()
+    return x_fp8, padded
 
 
 def make_inputs(m_per_expert_list, n, k):
@@ -84,8 +99,7 @@ def make_inputs(m_per_expert_list, n, k):
         if start < end:
             ref[start:end] = a[start:end] @ b[i].t()
 
-    a_fp8, sf_a = per_token_cast_to_fp8(a)
-    a_scale = build_zero_padding_sfa(sf_a, offsets)
+    a_fp8, a_scale = per_token_cast_to_fp8_for_moe_gemm(a, m_indptr)
     b_fp8_list, b_sf_list = [], []
     for i in range(num_experts):
         b_i_fp8, b_i_sf = per_block_cast_to_fp8(b[i])
