@@ -36,7 +36,10 @@ def median_us(call):
     torch.cuda.synchronize()
     times = []
     for _ in range(ITERS):
-        s, e = torch.cuda.Event(enable_timing=True), torch.cuda.Event(enable_timing=True)
+        s, e = (
+            torch.cuda.Event(enable_timing=True),
+            torch.cuda.Event(enable_timing=True),
+        )
         s.record()
         call()
         e.record()
@@ -76,8 +79,14 @@ def bench_cell(e, m_pe, n, k):
     # bypassed for perf baseline only, no correctness claim.
     us_base = median_us(
         lambda: group_gemm_fp8_nt_groupwise(
-            a_fp8, b_fp8, a_scale_mn, b_scale, m_indptr,
-            scale_major_mode="MN", out=out_base, skip_check=True,
+            a_fp8,
+            b_fp8,
+            a_scale_mn,
+            b_scale,
+            m_indptr,
+            scale_major_mode="MN",
+            out=out_base,
+            skip_check=True,
         )
     )
     return us_cute, us_base
@@ -97,7 +106,9 @@ def main():
             for m_pe in (4, 8, 16, 192, 256, 1024):
                 us_cute, us_base = bench_cell(e, m_pe, n, k)
                 pct = (us_base - us_cute) / us_base * 100.0
-                rows.append([e, m_pe, n, k, f"{us_cute:.3f}", f"{us_base:.3f}", f"{pct:+.2f}%"])
+                rows.append(
+                    [e, m_pe, n, k, f"{us_cute:.3f}", f"{us_base:.3f}", f"{pct:+.2f}%"]
+                )
                 print(rows[-1])
 
     out_csv = outdir / f"bench_fp8_vs_cutlass_{args.tag}.csv"

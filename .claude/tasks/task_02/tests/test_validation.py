@@ -58,41 +58,88 @@ def main():
     assert out.shape == (a.shape[0], b.shape[1]) and out.dtype == torch.bfloat16
     print("PASS baseline: valid inputs accepted")
 
-    ok &= expect_raise("bad granularity", ValueError,
-                       lambda: moe_gemm_fp8_nt_groupwise(a, b, a_scale, b_scale, m_indptr,
-                                                         scale_granularity_mnk=(1, 1, 128)))
-    ok &= expect_raise("bad scale_major_mode", ValueError,
-                       lambda: moe_gemm_fp8_nt_groupwise(a, b, a_scale, b_scale, m_indptr,
-                                                         scale_major_mode="K"))
-    ok &= expect_raise("bad backend", NotImplementedError,
-                       lambda: moe_gemm_fp8_nt_groupwise(a, b, a_scale, b_scale, m_indptr,
-                                                         backend="cutlass"))
-    ok &= expect_raise("bad out_dtype", NotImplementedError,
-                       lambda: moe_gemm_fp8_nt_groupwise(a, b, a_scale, b_scale, m_indptr,
-                                                         out_dtype=torch.float16))
-    ok &= expect_raise("bad m_indptr size", ValueError,
-                       lambda: moe_gemm_fp8_nt_groupwise(a, b, a_scale, b_scale, m_indptr[:-1]))
-    ok &= expect_raise("bad m_indptr dtype", ValueError,
-                       lambda: moe_gemm_fp8_nt_groupwise(a, b, a_scale, b_scale,
-                                                         m_indptr.to(torch.int64)))
-    ok &= expect_raise("SFA missing padding", Exception,
-                       lambda: moe_gemm_fp8_nt_groupwise(
-                           a, b, a_scale[:, : a.shape[0]].contiguous(), b_scale, m_indptr))
-    ok &= expect_raise("SFA non-contiguous", Exception,
-                       lambda: moe_gemm_fp8_nt_groupwise(
-                           a, b, a_scale.t().contiguous().t(), b_scale, m_indptr))
-    ok &= expect_raise("SFA K-major shape", Exception,
-                       lambda: moe_gemm_fp8_nt_groupwise(
-                           a, b, a_scale.t().contiguous(), b_scale, m_indptr))
-    ok &= expect_raise("SFB bad shape", Exception,
-                       lambda: moe_gemm_fp8_nt_groupwise(
-                           a, b, a_scale, b_scale.transpose(-1, -2).contiguous(), m_indptr))
-    ok &= expect_raise("SFB non-contiguous", Exception,
-                       lambda: moe_gemm_fp8_nt_groupwise(
-                           a, b, a_scale, b_scale.transpose(-1, -2), m_indptr))
-    ok &= expect_raise("bad a dtype", Exception,
-                       lambda: moe_gemm_fp8_nt_groupwise(
-                           a.view(torch.uint8), b, a_scale, b_scale, m_indptr))
+    ok &= expect_raise(
+        "bad granularity",
+        ValueError,
+        lambda: moe_gemm_fp8_nt_groupwise(
+            a, b, a_scale, b_scale, m_indptr, scale_granularity_mnk=(1, 1, 128)
+        ),
+    )
+    ok &= expect_raise(
+        "bad scale_major_mode",
+        ValueError,
+        lambda: moe_gemm_fp8_nt_groupwise(
+            a, b, a_scale, b_scale, m_indptr, scale_major_mode="K"
+        ),
+    )
+    ok &= expect_raise(
+        "bad backend",
+        NotImplementedError,
+        lambda: moe_gemm_fp8_nt_groupwise(
+            a, b, a_scale, b_scale, m_indptr, backend="cutlass"
+        ),
+    )
+    ok &= expect_raise(
+        "bad out_dtype",
+        NotImplementedError,
+        lambda: moe_gemm_fp8_nt_groupwise(
+            a, b, a_scale, b_scale, m_indptr, out_dtype=torch.float16
+        ),
+    )
+    ok &= expect_raise(
+        "bad m_indptr size",
+        ValueError,
+        lambda: moe_gemm_fp8_nt_groupwise(a, b, a_scale, b_scale, m_indptr[:-1]),
+    )
+    ok &= expect_raise(
+        "bad m_indptr dtype",
+        ValueError,
+        lambda: moe_gemm_fp8_nt_groupwise(
+            a, b, a_scale, b_scale, m_indptr.to(torch.int64)
+        ),
+    )
+    ok &= expect_raise(
+        "SFA missing padding",
+        Exception,
+        lambda: moe_gemm_fp8_nt_groupwise(
+            a, b, a_scale[:, : a.shape[0]].contiguous(), b_scale, m_indptr
+        ),
+    )
+    ok &= expect_raise(
+        "SFA non-contiguous",
+        Exception,
+        lambda: moe_gemm_fp8_nt_groupwise(
+            a, b, a_scale.t().contiguous().t(), b_scale, m_indptr
+        ),
+    )
+    ok &= expect_raise(
+        "SFA K-major shape",
+        Exception,
+        lambda: moe_gemm_fp8_nt_groupwise(
+            a, b, a_scale.t().contiguous(), b_scale, m_indptr
+        ),
+    )
+    ok &= expect_raise(
+        "SFB bad shape",
+        Exception,
+        lambda: moe_gemm_fp8_nt_groupwise(
+            a, b, a_scale, b_scale.transpose(-1, -2).contiguous(), m_indptr
+        ),
+    )
+    ok &= expect_raise(
+        "SFB non-contiguous",
+        Exception,
+        lambda: moe_gemm_fp8_nt_groupwise(
+            a, b, a_scale, b_scale.transpose(-1, -2), m_indptr
+        ),
+    )
+    ok &= expect_raise(
+        "bad a dtype",
+        Exception,
+        lambda: moe_gemm_fp8_nt_groupwise(
+            a.view(torch.uint8), b, a_scale, b_scale, m_indptr
+        ),
+    )
 
     print("[done]", "ALL PASS" if ok else "HAS FAIL")
     sys.exit(0 if ok else 1)

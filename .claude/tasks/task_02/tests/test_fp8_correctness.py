@@ -59,7 +59,9 @@ def run_cell(m_per_expert_list, n, k):
     total_rows = offsets[-1]
 
     a = torch.randn((total_rows, k), dtype=torch.bfloat16, device="cuda")
-    b = torch.randn((num_experts, n, k), dtype=torch.bfloat16, device="cuda") / math.sqrt(k)
+    b = torch.randn(
+        (num_experts, n, k), dtype=torch.bfloat16, device="cuda"
+    ) / math.sqrt(k)
     m_indptr = torch.tensor(offsets, dtype=torch.int32, device="cuda")
 
     ref = torch.zeros((total_rows, n), dtype=torch.bfloat16, device="cuda")

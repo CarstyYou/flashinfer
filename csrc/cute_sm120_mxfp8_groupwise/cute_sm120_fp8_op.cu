@@ -89,8 +89,8 @@ void CutlassFP8GroupwiseMoeGEMMSM120(TensorView a, TensorView b, TensorView a_sc
   int64_t expected_a_scale_m = compute_padded_offset(total_rows, num_experts);
 
   TVM_FFI_ICHECK(a_scale.size(0) == expected_scale_k && a_scale.size(1) == expected_a_scale_m)
-      << "a_scale must have zero-padding shape [" << expected_scale_k << ", "
-      << expected_a_scale_m << "] (contiguous [Kb, MpE], MpE = (total_rows + 3 * num_experts) / 4"
+      << "a_scale must have zero-padding shape [" << expected_scale_k << ", " << expected_a_scale_m
+      << "] (contiguous [Kb, MpE], MpE = (total_rows + 3 * num_experts) / 4"
       << " * 4), got [" << a_scale.size(0) << ", " << a_scale.size(1) << "]";
   TVM_FFI_ICHECK(reinterpret_cast<std::uintptr_t>(a_scale.data_ptr()) % 16 == 0)
       << "a_scale data pointer must be 16-byte aligned";
