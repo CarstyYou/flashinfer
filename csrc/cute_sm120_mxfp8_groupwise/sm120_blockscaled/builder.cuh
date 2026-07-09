@@ -16,24 +16,27 @@
 
 #pragma once
 
-#include <cutlass/arch/barrier.h>
-#include <cutlass/numeric_size.h>
-
+// clang-format off
 #include <cstdint>
+#include <type_traits>
+
 #include <cute/arch/copy_sm75.hpp>
 #include <cute/arch/copy_sm90.hpp>
+#include <cute/tensor.hpp>
 #include <cute/atom/copy_atom.hpp>
 #include <cute/atom/mma_atom.hpp>
 #include <cute/atom/mma_traits_sm120.hpp>
 #include <cute/layout.hpp>
-#include <cute/tensor.hpp>
-#include <type_traits>
 
-#include "cute_sm120_mxfp8_groupwise/sm120_blockscaled/sf_mxfp8_tma_load.cuh"
+#include <cutlass/arch/barrier.h>
+#include <cutlass/numeric_size.h>
+
 #include "cute_sm120_mxfp8_groupwise/sm120_common/ab_tma_load.cuh"
 #include "cute_sm120_mxfp8_groupwise/sm120_common/epilogue.cuh"
 #include "cute_sm120_mxfp8_groupwise/sm120_common/math.cuh"
 #include "cute_sm120_mxfp8_groupwise/sm120_common/scheduler.cuh"
+#include "cute_sm120_mxfp8_groupwise/sm120_blockscaled/sf_mxfp8_tma_load.cuh"
+// clang-format on
 
 namespace flashinfer::gemm::mxfp8_cute_sm120 {
 namespace sm120_blockscaled {

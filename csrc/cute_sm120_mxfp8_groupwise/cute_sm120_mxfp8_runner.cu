@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-#include <cuda_runtime.h>
-
+// clang-format off
 #include <algorithm>
 #include <cstdlib>
 #include <cstring>
-
+#include <cuda_runtime.h>
 #include "cute_sm120_mxfp8_groupwise/cute_sm120_mxfp8_runner.h"
+#include "cutlass/gemm_coord.h"
+#include "tvm_ffi_utils.h"
 #include "cute_sm120_mxfp8_groupwise/sm120_blockscaled/builder.cuh"
 #include "cute_sm120_mxfp8_groupwise/sm120_blockscaled/kernel_impl.cuh"
 #include "cute_sm120_mxfp8_groupwise/sm120_blockscaled/launch.cuh"
-#include "cutlass/gemm_coord.h"
-#include "tvm_ffi_utils.h"
+// clang-format on
 
 // 2-value granK dispatch. Validates input and instantiates the templated
 // callsite for each supported `granK` value. The else branch defends against

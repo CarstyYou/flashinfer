@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
+// clang-format off
 #include <cuda_runtime.h>
-
 #include <cstdint>
 #include <stdexcept>
 
 #include "cute_sm120_mxfp8_groupwise/cute_sm120_fp8_runner.h"
 #include "cute_sm120_mxfp8_groupwise/sm120_blockscaling/builder.cuh"
 #include "cute_sm120_mxfp8_groupwise/sm120_blockscaling/launch.cuh"
+// clang-format on
 
 namespace flashinfer::gemm::mxfp8_cute_sm120 {
 

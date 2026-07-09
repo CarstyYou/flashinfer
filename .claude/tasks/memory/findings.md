@@ -16,6 +16,12 @@
   6KD 原始风格不同 → 每次 sync 后 FI 侧跑 `pre-commit run --from-ref/--to-ref` 再 commit;
   sync script 的 byte-parity 只对 "sync 原始输出" 成立, 与 formatted in-tree 比较会有全量 whitespace diff
   (task_01 的大 churn 部分来自此)。FI pre-push hook 强制 lint-verified HEAD 才允许 push。
+- **clang-format include-Regroup 会破坏 6KD header 编译** (实测 3ea8225 全 69 test 编译 fail):
+  FI Google style = `IncludeBlocks: Regroup` 跨空行重排 include, 而 6KD header 的 include 顺序承载
+  依赖 (headers 非 self-contained, 如 `sf_mxfp8_tma_load.cuh` 依赖先 include 的 `sm120_common/*`),
+  重排后在 cutlass `cute/algorithm/copy.hpp` 报连锁错。修复: sync script `guard_include_block()`
+  对每个 synced 文件的 prologue include 块注入 `// clang-format off/on`; 长期修法是 6KD headers
+  self-contained 化 (6KD 侧 TODO)。
 
 ### 性能 (paired bench + 回退调查)
 

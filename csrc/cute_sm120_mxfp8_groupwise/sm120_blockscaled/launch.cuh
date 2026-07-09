@@ -16,12 +16,15 @@
 
 #pragma once
 
+// clang-format off
 #include <cuda_runtime.h>
-#include <cutlass/device_kernel.h>
 
 #include <cute/config.hpp>
 
+#include <cutlass/device_kernel.h>
+
 #include "kernel_impl.cuh"
+// clang-format on
 
 namespace flashinfer::gemm::mxfp8_cute_sm120 {
 namespace sm120_blockscaled {

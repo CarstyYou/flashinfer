@@ -10,7 +10,9 @@
 
 #pragma once
 
+// clang-format off
 #include <cute/config.hpp>
+// clang-format on
 
 namespace flashinfer::gemm::mxfp8_cute_sm120 {
 namespace sm120_common {

@@ -16,21 +16,24 @@
 
 #pragma once
 
-#include <cutlass/arch/barrier.h>
-#include <cutlass/array.h>
-#include <cutlass/numeric_conversion.h>
-#include <cutlass/numeric_types.h>
-
+// clang-format off
 #include <cstdint>
+
 #include <cute/arch/copy_sm75.hpp>
 #include <cute/arch/copy_sm90.hpp>
+#include <cute/tensor.hpp>
 #include <cute/atom/copy_atom.hpp>
 #include <cute/atom/mma_atom.hpp>
 #include <cute/atom/mma_traits_sm90_gmma.hpp>
 #include <cute/config.hpp>
 #include <cute/int_tuple.hpp>
 #include <cute/layout.hpp>
-#include <cute/tensor.hpp>
+
+#include <cutlass/arch/barrier.h>
+#include <cutlass/array.h>
+#include <cutlass/numeric_conversion.h>
+#include <cutlass/numeric_types.h>
+// clang-format on
 
 namespace flashinfer::gemm::mxfp8_cute_sm120 {
 namespace sm120_common {

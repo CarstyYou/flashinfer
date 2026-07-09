@@ -16,18 +16,21 @@
 
 #pragma once
 
-#include <cuda_runtime.h>
-#include <cutlass/arch/barrier.h>
-#include <cutlass/arch/reg_reconfig.h>
-#include <cutlass/cutlass.h>
-
+// clang-format off
 #include <type_traits>
+
+#include <cuda_runtime.h>
+
+#include <cutlass/arch/reg_reconfig.h>
+#include <cutlass/arch/barrier.h>
+#include <cutlass/cutlass.h>
 
 #include "cute_sm120_mxfp8_groupwise/sm120_blockscaling/builder.cuh"
 #include "cute_sm120_mxfp8_groupwise/sm120_common/ab_tma_load.cuh"
 #include "cute_sm120_mxfp8_groupwise/sm120_common/epilogue.cuh"
 #include "cute_sm120_mxfp8_groupwise/sm120_common/math.cuh"
 #include "cute_sm120_mxfp8_groupwise/sm120_common/scheduler.cuh"
+// clang-format on
 
 namespace flashinfer::gemm::mxfp8_cute_sm120 {
 namespace sm120_blockscaling {

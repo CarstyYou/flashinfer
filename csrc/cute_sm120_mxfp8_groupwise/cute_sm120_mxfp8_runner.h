@@ -15,13 +15,14 @@
  */
 
 #pragma once
-#include <cuda_bf16.h>
-#include <cuda_fp8.h>
-#include <cuda_runtime_api.h>
-
+// clang-format off
 #include <cstdint>
-#include <cute/numeric/numeric_types.hpp>
+#include <cuda_fp8.h>
+#include <cuda_bf16.h>
+#include <cuda_runtime_api.h>
 #include <vector>
+#include <cute/numeric/numeric_types.hpp>
+// clang-format on
 
 namespace flashinfer::gemm::mxfp8_cute_sm120 {
 
