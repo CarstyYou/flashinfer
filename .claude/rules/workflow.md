@@ -19,6 +19,9 @@
 4. **数据 / 代码 grounding** — 没 source 或 测试数据不推测, grep 优先
 5. **改完默认 stop unstaged** — xiy review diff 后 explicit 一句才 commit
 6. **6KD / 外部 repo 内部不动** (Phase 1 集成 scope); binding 层做 translation
+   - **`quantize_mxfp8_for_moe` 及其 kernel 永不参与集成** (xiy 2026-07-08 指定): 相关文件、声明和
+     实现不得进 FI 树; 6KD runner.{h,cu} 内联的 quantize 部分 sync 时必须 strip / guard; quant 侧
+     FI 一律用纯 PyTorch helper (复用 DG primitives)
 7. **汇报结论先行** — 每次汇报先给 high-level 结论 / 结果, 再展开证据和细节; 明确区分事实 / 假设 / 结论;
    一次只讨论一个决策, 不询问可从仓库自行确认的信息
 8. **MXFP8 counterpart 对齐 (结构基线)** — 已有 MXFP8 对应文件时 (op `.cu` / jit binding / JIT spec /
