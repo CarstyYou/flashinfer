@@ -72,6 +72,16 @@
   不查这两项是因为 mxfp8 thop 自身没有, FP8 thop 有 → counterpart 对齐必须以各自 thop contract
   为准, 不能只 diff FI 侧文件。
 
+## task_04: cute FP8 vs grouped_mm_fp8 (cudnn) 性能对比 (2026-07-09)
+
+- **`grouped_mm_fp8` (cudnn) 在 SM120 真实可用**: arch 列表含 120/121, 容器 cuDNN 9.21.0 恰达
+  `_CUDNN_MOE_MIN_VERSION`; 冒烟 4/4 calc_diff=0, 且接受 m_pe=1 / empty expert (无 mxfp8 式
+  swizzle 对齐限制 — per-tensor recipe 无 scale swizzle)。
+- Bench (perf-only, recipe 不同: 我们 (1,128,128) groupwise vs cudnn per-tensor alpha):
+  27/28 cells cute 领先, 小 M +17%~+58%; 唯一负点 `(E=8, m_pe=1024, fc1)` -2.2%~-2.5% 两轮一致,
+  方向与 recipe 差异一致 (cudnn 无 groupwise rescale 工作), 不视为 kernel 劣化。
+  数据 link: [task_04/plan.md ## Results](../task_04/plan.md)。
+
 ## MXFP8 集成沉淀 (task_01–13, 2026-06, 已归档)
 
 MXFP8 集成任务 (PR #3562) 的可复用 findings 摘编. 原 task_01..13 目录已清理; 完整 audit trail 见 `sm120_group_gemm_mxfp8_internal` 分支. 源码 line 引用基于 2026-06 main, 新 main 可能漂移.
