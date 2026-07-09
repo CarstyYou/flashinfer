@@ -39,7 +39,9 @@ def run_cell(m_per_expert_list, n, k, k_gran):
     token_num = offsets[-1]
 
     a = torch.randn((token_num, k), dtype=torch.bfloat16, device="cuda")
-    b = torch.randn((num_groups, n, k), dtype=torch.bfloat16, device="cuda") / math.sqrt(k)
+    b = torch.randn(
+        (num_groups, n, k), dtype=torch.bfloat16, device="cuda"
+    ) / math.sqrt(k)
     m_indptr = torch.tensor(offsets, dtype=torch.int32, device="cuda")
 
     a_fp8, a_sf = H.per_token_cast_to_mxfp8_for_moe_gemm(a, m_indptr, gran_k=k_gran)
@@ -49,8 +51,12 @@ def run_cell(m_per_expert_list, n, k, k_gran):
         start, end = offsets[j], offsets[j + 1]
         if start == end:
             continue
-        a_j_fp8, a_j_sf = H.per_token_cast_to_fp8(a[start:end], use_ue8m0=True, gran_k=k_gran)
-        a_deq[start:end] = H.per_token_dequant_from_fp8(a_j_fp8, a_j_sf, gran_k=k_gran, dtype=a.dtype)
+        a_j_fp8, a_j_sf = H.per_token_cast_to_fp8(
+            a[start:end], use_ue8m0=True, gran_k=k_gran
+        )
+        a_deq[start:end] = H.per_token_dequant_from_fp8(
+            a_j_fp8, a_j_sf, gran_k=k_gran, dtype=a.dtype
+        )
 
     b_fp8_list, b_sf_list = [], []
     for i in range(num_groups):
@@ -60,9 +66,16 @@ def run_cell(m_per_expert_list, n, k, k_gran):
     b_fp8 = torch.stack(b_fp8_list, dim=0)
     b_sf_ue8m0 = torch.stack(b_sf_list, dim=0)
     b_sf = H.transform_sf_into_required_layout(
-        b_sf_ue8m0, mn=n, k=k, recipe=(k_gran, k_gran), num_groups=num_groups, is_sfa=False
+        b_sf_ue8m0,
+        mn=n,
+        k=k,
+        recipe=(k_gran, k_gran),
+        num_groups=num_groups,
+        is_sfa=False,
     )
-    b_deq = H.per_block_dequant_from_fp8(b_fp8, b_sf_ue8m0, gran_k=k_gran, dtype=b.dtype)
+    b_deq = H.per_block_dequant_from_fp8(
+        b_fp8, b_sf_ue8m0, gran_k=k_gran, dtype=b.dtype
+    )
 
     ref = torch.zeros(token_num, n, dtype=torch.bfloat16, device="cuda")
     for j in range(num_groups):
@@ -72,12 +85,19 @@ def run_cell(m_per_expert_list, n, k, k_gran):
         ref[start:end] = (a_deq[start:end] @ b_deq[j].t()).to(torch.bfloat16)
 
     out = moe_gemm_mxfp8_nt_groupwise(
-        a_fp8, b_fp8, a_sf, b_sf, m_indptr,
-        scale_granularity_mnk=(1, 1, k_gran), out_dtype=torch.bfloat16,
+        a_fp8,
+        b_fp8,
+        a_sf,
+        b_sf,
+        m_indptr,
+        scale_granularity_mnk=(1, 1, k_gran),
+        out_dtype=torch.bfloat16,
     )
     torch.cuda.synchronize()
     diff = calc_diff(out.reshape(-1).float(), ref.reshape(-1).float())
-    cos = F.cosine_similarity(out.reshape(-1).float(), ref.reshape(-1).float(), dim=0).item()
+    cos = F.cosine_similarity(
+        out.reshape(-1).float(), ref.reshape(-1).float(), dim=0
+    ).item()
     return diff, cos
 
 
@@ -101,7 +121,18 @@ def main():
                 diff, cos = run_cell([m_pe] * e, n, k, k_gran)
                 ok = diff < 1e-3
                 failures += 0 if ok else 1
-                rows.append([e, f"uniform_{m_pe}", n, k, k_gran, f"{diff:.6e}", f"{cos:.6f}", "PASS" if ok else "FAIL"])
+                rows.append(
+                    [
+                        e,
+                        f"uniform_{m_pe}",
+                        n,
+                        k,
+                        k_gran,
+                        f"{diff:.6e}",
+                        f"{cos:.6f}",
+                        "PASS" if ok else "FAIL",
+                    ]
+                )
                 print(rows[-1])
         for label, mlist in [
             ("uneven", [1, 1, 8, 16, 64, 128, 192, 256]),
@@ -110,7 +141,18 @@ def main():
             diff, cos = run_cell(mlist, n, k, 128)
             ok = diff < 1e-3
             failures += 0 if ok else 1
-            rows.append([len(mlist), label, n, k, 128, f"{diff:.6e}", f"{cos:.6f}", "PASS" if ok else "FAIL"])
+            rows.append(
+                [
+                    len(mlist),
+                    label,
+                    n,
+                    k,
+                    128,
+                    f"{diff:.6e}",
+                    f"{cos:.6f}",
+                    "PASS" if ok else "FAIL",
+                ]
+            )
             print(rows[-1])
 
     out_csv = outdir / f"correctness_{args.tag}.csv"

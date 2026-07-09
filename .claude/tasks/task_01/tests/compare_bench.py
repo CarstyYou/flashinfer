@@ -24,7 +24,9 @@ def main():
         pct = (a - b) / a * 100.0
         if pct < worst[1]:
             worst = (key, pct)
-        print(f"| {key[0]} | {key[1]} | {key[2]} | {key[3]} | {a:.3f} | {b:.3f} | {pct:+.2f}% |")
+        print(
+            f"| {key[0]} | {key[1]} | {key[2]} | {key[3]} | {a:.3f} | {b:.3f} | {pct:+.2f}% |"
+        )
     print(f"\nworst cell: {worst[0]} {worst[1]:+.2f}%")
 
 

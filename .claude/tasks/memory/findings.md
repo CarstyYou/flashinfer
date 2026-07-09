@@ -12,6 +12,10 @@
 - sync script 新增 quantize strip 规则 (runner.h 声明 / runner.cu include + 双函数, 尾部锚定 regex,
   命中数 != 1 即 abort) + `quantize_mxfp8_for_moe` 入 LEFTOVER_PATTERNS; 实跑残留 0。
 - sync script 无 delete 能力, FI 侧被取代的 `sm120_blockscaled/{math,scheduler,utils}.cuh` 要手动 `git rm`。
+- **sync 输出必须补 pre-commit (clang-format)**: FI in-tree 稳态是 clang-formatted (PR #3562 task_12 先例),
+  6KD 原始风格不同 → 每次 sync 后 FI 侧跑 `pre-commit run --from-ref/--to-ref` 再 commit;
+  sync script 的 byte-parity 只对 "sync 原始输出" 成立, 与 formatted in-tree 比较会有全量 whitespace diff
+  (task_01 的大 churn 部分来自此)。FI pre-push hook 强制 lint-verified HEAD 才允许 push。
 
 ### 性能 (paired bench + 回退调查)
 

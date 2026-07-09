@@ -27,9 +27,13 @@ def bench_cell(m_per_expert, num_groups, n, k, k_gran):
     torch.random.manual_seed(0)
     token_num = m_per_expert * num_groups
     a = torch.randn((token_num, k), dtype=torch.bfloat16, device="cuda")
-    b = torch.randn((num_groups, n, k), dtype=torch.bfloat16, device="cuda") / math.sqrt(k)
+    b = torch.randn(
+        (num_groups, n, k), dtype=torch.bfloat16, device="cuda"
+    ) / math.sqrt(k)
     m_indptr = torch.tensor(
-        [i * m_per_expert for i in range(num_groups + 1)], dtype=torch.int32, device="cuda"
+        [i * m_per_expert for i in range(num_groups + 1)],
+        dtype=torch.int32,
+        device="cuda",
     )
     a_fp8, a_sf = H.per_token_cast_to_mxfp8_for_moe_gemm(a, m_indptr, gran_k=k_gran)
     b_fp8_list, b_sf_list = [], []
@@ -39,15 +43,24 @@ def bench_cell(m_per_expert, num_groups, n, k, k_gran):
         b_sf_list.append(b_i_sf)
     b_fp8 = torch.stack(b_fp8_list, dim=0)
     b_sf = H.transform_sf_into_required_layout(
-        torch.stack(b_sf_list, dim=0), mn=n, k=k, recipe=(k_gran, k_gran),
-        num_groups=num_groups, is_sfa=False,
+        torch.stack(b_sf_list, dim=0),
+        mn=n,
+        k=k,
+        recipe=(k_gran, k_gran),
+        num_groups=num_groups,
+        is_sfa=False,
     )
     out = torch.empty(token_num, n, dtype=torch.bfloat16, device="cuda")
 
     def call():
         moe_gemm_mxfp8_nt_groupwise(
-            a_fp8, b_fp8, a_sf, b_sf, m_indptr,
-            scale_granularity_mnk=(1, 1, k_gran), out=out,
+            a_fp8,
+            b_fp8,
+            a_sf,
+            b_sf,
+            m_indptr,
+            scale_granularity_mnk=(1, 1, k_gran),
+            out=out,
         )
 
     for _ in range(WARMUP):
@@ -55,7 +68,10 @@ def bench_cell(m_per_expert, num_groups, n, k, k_gran):
     torch.cuda.synchronize()
     times = []
     for _ in range(ITERS):
-        s, e = torch.cuda.Event(enable_timing=True), torch.cuda.Event(enable_timing=True)
+        s, e = (
+            torch.cuda.Event(enable_timing=True),
+            torch.cuda.Event(enable_timing=True),
+        )
         s.record()
         call()
         e.record()

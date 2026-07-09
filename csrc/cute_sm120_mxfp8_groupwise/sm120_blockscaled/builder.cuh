@@ -16,68 +16,64 @@
 
 #pragma once
 
-#include <cstdint>
-#include <type_traits>
+#include <cutlass/arch/barrier.h>
+#include <cutlass/numeric_size.h>
 
+#include <cstdint>
 #include <cute/arch/copy_sm75.hpp>
 #include <cute/arch/copy_sm90.hpp>
-#include <cute/tensor.hpp>
 #include <cute/atom/copy_atom.hpp>
 #include <cute/atom/mma_atom.hpp>
 #include <cute/atom/mma_traits_sm120.hpp>
 #include <cute/layout.hpp>
+#include <cute/tensor.hpp>
+#include <type_traits>
 
-#include <cutlass/arch/barrier.h>
-#include <cutlass/numeric_size.h>
-
+#include "cute_sm120_mxfp8_groupwise/sm120_blockscaled/sf_mxfp8_tma_load.cuh"
 #include "cute_sm120_mxfp8_groupwise/sm120_common/ab_tma_load.cuh"
 #include "cute_sm120_mxfp8_groupwise/sm120_common/epilogue.cuh"
 #include "cute_sm120_mxfp8_groupwise/sm120_common/math.cuh"
 #include "cute_sm120_mxfp8_groupwise/sm120_common/scheduler.cuh"
-#include "cute_sm120_mxfp8_groupwise/sm120_blockscaled/sf_mxfp8_tma_load.cuh"
 
 namespace flashinfer::gemm::mxfp8_cute_sm120 {
-namespace sm120_blockscaled
-{
+namespace sm120_blockscaled {
 
 using namespace cute;
 
 template <int kTileM, int kTileN, bool kUseTmaStore, bool kSwapAB = false>
 struct Sm120BlockScaledMMAConfig {
-
-  using MMA_Atom = cute::MMA_Atom<SM120::BLOCKSCALED::SM120_16x8x32_TN_VS<
-      cute::float_e4m3_t, cute::float_e4m3_t, float, cute::float_ue8m0_t, 32>>;
+  using MMA_Atom =
+      cute::MMA_Atom<SM120::BLOCKSCALED::SM120_16x8x32_TN_VS<cute::float_e4m3_t, cute::float_e4m3_t,
+                                                             float, cute::float_ue8m0_t, 32>>;
 
   static_assert(kTileN >= 8 && (kTileN % 8) == 0,
                 "kTileN must be >= 8 and multiple of MMA atom_N=8");
-  static constexpr int kNumMathWarpN   = (kTileN >= 32) ? 4 : (kTileN / 8);
-  static constexpr int kNumMathWarpM   = 8 / kNumMathWarpN;
-  static constexpr int kNumMathWarps   = kNumMathWarpM * kNumMathWarpN;
+  static constexpr int kNumMathWarpN = (kTileN >= 32) ? 4 : (kTileN / 8);
+  static constexpr int kNumMathWarpM = 8 / kNumMathWarpN;
+  static constexpr int kNumMathWarps = kNumMathWarpM * kNumMathWarpN;
   static constexpr int kNumMathThreads = kNumMathWarps * 32;
-  static constexpr int kNumMathWG      = kNumMathThreads / 128;
+  static constexpr int kNumMathWG = kNumMathThreads / 128;
   static_assert(kNumMathWarps == 8, "Total math warps must be 8 (256 threads = 2 WG)");
   static_assert(kTileM >= kNumMathWarpM * 16,
                 "kTileM must be >= kNumMathWarpM * 16 (ThrLayout M-direction lower bound).");
 
-  using PermMmaTileM = Int<(kUseTmaStore && !kSwapAB) ? ((kTileM < 32) ? kTileM : 32)
-                                                       : kTileM>;
+  using PermMmaTileM = Int<(kUseTmaStore && !kSwapAB) ? ((kTileM < 32) ? kTileM : 32) : kTileM>;
   using PermMmaTileN = Int<kTileN>;
 
   using TiledMma = TiledMMA<
       MMA_Atom,
-      Layout<Shape<Int<kNumMathWarpM>, Int<kNumMathWarpN>, _1>,
-             Stride<_1, Int<kNumMathWarpM>, _0>>,
+      Layout<Shape<Int<kNumMathWarpM>, Int<kNumMathWarpN>, _1>, Stride<_1, Int<kNumMathWarpM>, _0>>,
       Tile<PermMmaTileM, PermMmaTileN, Underscore>>;
 
   static_assert(size<2>(typename MMA_Atom::Shape_MNK{}) == 32,
                 "MMA atom K-dim must be 32 to match SFVecSize");
 };
 
-template <int TileM_=32, int TileN_=128, int TileK_=128, int Stages_=4, int GranK_=128,
-          sm120_common::GemmType GemmType_=sm120_common::GemmType::MGroupedContiguousWithPsumLayout,
-          bool SwapAB_=false>
+template <int TileM_ = 32, int TileN_ = 128, int TileK_ = 128, int Stages_ = 4, int GranK_ = 128,
+          sm120_common::GemmType GemmType_ =
+              sm120_common::GemmType::MGroupedContiguousWithPsumLayout,
+          bool SwapAB_ = false>
 struct SM120BlockScaledBuilder {
-
   using ElementA = cute::float_e4m3_t;
   using ElementB = cute::float_e4m3_t;
   using ElementAccum = float;
@@ -87,7 +83,7 @@ struct SM120BlockScaledBuilder {
   static constexpr bool kFlat = sm120_common::is_flat_gemm(GemmType_);
   static constexpr bool kSwapAB = SwapAB_;
   static constexpr bool kPerBatchAB = (GemmType_ == sm120_common::GemmType::Batched ||
-                                        GemmType_ == sm120_common::GemmType::MGroupedMasked);
+                                       GemmType_ == sm120_common::GemmType::MGroupedMasked);
   static constexpr bool kUseTmaStore =
       sm120_common::utils::EnableTmaStore<kFlat, kSwapAB, TileN_, kPerBatchAB>();
   static constexpr bool kUnionSmem = !kUseTmaStore;
@@ -99,26 +95,33 @@ struct SM120BlockScaledBuilder {
   static constexpr int kTileN = TileN_;
   static constexpr int kTileK = TileK_;
   using TileShape = Shape<Int<kTileM>, Int<kTileN>, Int<kTileK>>;
-  using ClusterShape = Shape<_1,_1,_1>;
-  using ProblemShape = Shape<int,int,int,int>;
+  using ClusterShape = Shape<_1, _1, _1>;
+  using ProblemShape = Shape<int, int, int, int>;
 
-  using SFConfig       = Sm120BlockScaledSFConfig<kTileM, kTileN, TileK_, Stages_, GranK_,
-                                                  int32_t, cute::float_ue8m0_t, kGemmType, kSwapAB>;
-  using MMAConfig      = Sm120BlockScaledMMAConfig<kTileM, kTileN, kUseTmaStore, kSwapAB>;
-  using ABLoadConfig   = sm120_common::Sm120BlockScaledABLoadConfig<kTileM, kTileN, kTileK,
-                                                                    AB_Stages, ElementA, ElementB>;
-  using TmaStoreConfig = std::conditional_t<kSwapAB,
+  using SFConfig = Sm120BlockScaledSFConfig<kTileM, kTileN, TileK_, Stages_, GranK_, int32_t,
+                                            cute::float_ue8m0_t, kGemmType, kSwapAB>;
+  using MMAConfig = Sm120BlockScaledMMAConfig<kTileM, kTileN, kUseTmaStore, kSwapAB>;
+  using ABLoadConfig = sm120_common::Sm120BlockScaledABLoadConfig<kTileM, kTileN, kTileK, AB_Stages,
+                                                                  ElementA, ElementB>;
+  using TmaStoreConfig = std::conditional_t<
+      kSwapAB,
       sm120_common::Sm120BlockScaledSwapABTmaStoreConfig<kTileM, kTileN, ElementD, kUseTmaStore>,
       sm120_common::Sm120BlockScaledTmaStoreConfig<kTileM, kTileN, ElementD, kUseTmaStore>>;
-  using R2GStoreConfig = std::conditional_t<kSwapAB,
-      sm120_common::Sm120BlockScaledSwapABR2GStoreConfig<kTileM, kTileN, ElementD>,
+  using R2GStoreConfig = std::conditional_t<
+      kSwapAB, sm120_common::Sm120BlockScaledSwapABR2GStoreConfig<kTileM, kTileN, ElementD>,
       sm120_common::Sm120BlockScaledR2GStoreConfig<kTileM, kTileN, ElementD>>;
 
   struct SharedStorageLoad : cute::aligned_struct<128, _0> {
-    alignas(1024) cute::ArrayEngine<ElementA, cute::cosize_v<typename ABLoadConfig::SmemLayoutA>> smem_A;
-    alignas(1024) cute::ArrayEngine<ElementB, cute::cosize_v<typename ABLoadConfig::SmemLayoutB>> smem_B;
-    cute::ArrayEngine<typename SFConfig::ElementSFLoad, cute::cosize_v<typename SFConfig::SmemLayoutSFA>> smem_SFA;
-    cute::ArrayEngine<typename SFConfig::ElementSFLoad, cute::cosize_v<typename SFConfig::SmemLayoutSFB>> smem_SFB;
+    alignas(1024)
+        cute::ArrayEngine<ElementA, cute::cosize_v<typename ABLoadConfig::SmemLayoutA>> smem_A;
+    alignas(1024)
+        cute::ArrayEngine<ElementB, cute::cosize_v<typename ABLoadConfig::SmemLayoutB>> smem_B;
+    cute::ArrayEngine<typename SFConfig::ElementSFLoad,
+                      cute::cosize_v<typename SFConfig::SmemLayoutSFA>>
+        smem_SFA;
+    cute::ArrayEngine<typename SFConfig::ElementSFLoad,
+                      cute::cosize_v<typename SFConfig::SmemLayoutSFB>>
+        smem_SFB;
   };
 
   using FullBarrier = cutlass::arch::ClusterTransactionBarrier;
@@ -145,7 +148,6 @@ struct SM120BlockScaledBuilder {
     SharedStorageLoad load;
     typename R2GStoreConfig::SharedStorageR2G store;
   };
-
 };
 
 }  // namespace sm120_blockscaled
