@@ -2,6 +2,44 @@
 
 记 important 发现 / bug / 踩坑 / 性能 等**客观现象**. **不记** subjective design decisions (xiy 自己的主观选择). 详细 artifact link 到 `task_NN/plan.md` / `task_NN/results/`. Hook (`mega_inference/.claude/hooks/task-findings-hook.sh`) enforce sediment 才允许 commit.
 
+## task_01: 6KD kernel 目录整体搬运 + FI MXFP8 验证 (FP8 集成任务, 2026-07-08)
+
+### Sync / 布局重构实测
+
+- 16-file 整体搬运 (sm120_common 抽出 + FP8 family 进树不接线) 后, MXFP8 JIT module **无需改 JIT spec**
+  即编译通过 (sources 只列 3 个 .cu, header 走 `extra_include_paths`); upstream test pre/post 均 69 passed。
+- MXFP8 输出 pre/post **bit-identical** (40 cells calc_diff 逐 cell 完全相同) → 重构未改 MXFP8 数值行为。
+- sync script 新增 quantize strip 规则 (runner.h 声明 / runner.cu include + 双函数, 尾部锚定 regex,
+  命中数 != 1 即 abort) + `quantize_mxfp8_for_moe` 入 LEFTOVER_PATTERNS; 实跑残留 0。
+- sync script 无 delete 能力, FI 侧被取代的 `sm120_blockscaled/{math,scheduler,utils}.cuh` 要手动 `git rm`。
+
+### 性能 (paired bench + 回退调查)
+
+- 25/28 cells |delta| ≤ 0.7%, E=8 全部持平; E=4 小 M 3 个 cell 序列 bench 中出现 -1.5%~-4.5%。
+- 回退调查定论 **kernel 零回退**: dispatch 源码一致 + SwapAB 路径 14 组件语义等价 (subagent) +
+  SASS 逐指令一致 (4117 行) + NCU `sm__cycles_elapsed` 完全相等 (202072) + 隔离单 cell
+  fresh-process bench 分布重叠。序列 bench 差异 = ~36us 小 kernel 的 run-to-run 方差。
+  详见 [task_01/plan.md ## 回退调查](../task_01/plan.md)。
+- 教训: 小 kernel (数十 us) 的 1-2us 级 bench delta 不能只靠"两轮一致"定为真实回退,
+  必须 NCU cycles / SASS / 隔离进程三角验证 (6KD F9 的 FI 版)。
+
+### NCU / 环境踩坑 (回退调查中发现)
+
+- **NCU 注入下不能做 flashinfer JIT 编译**: ncu 的 TreeLauncher 注入所有子进程, ninja/nvcc
+  工具链 hang (25 min 零编译进程, 全树 ~0% CPU)。正确流程: 先普通跑一次触发 JIT 编译,
+  NCU 时 cache hit。表现为 bg shell 长时间无输出 (tail/管道缓冲), 需上节点 `ps` 判断。
+- 容器 PID 1 不收割 zombie: kill -9 被 NCU hang 的进程树后残留 Z 态进程 (无资源占用);
+  重启容器可清但会丢 /tmp 的 pip user-install (nvidia-cutlass-dsl 升级 + pytest) 与 JIT cache。
+
+### 环境踩坑
+
+- FI main (2026-07) `import flashinfer` 需要 `nvidia-cutlass-dsl >= 4.5.0`; 容器旧装 4.4.1 报
+  `cutlass.cute.nvgpu` 缺 `OperandMajorMode`。已在 `xiyTrtllm` 容器升级到 4.6.0 (+装 pytest)。
+- `pytorch:26.04-py3` 镜像无 pytest; pip user-install 落 `/tmp/.local` (容器重建即失)。
+- pre/post paired bench 可用 `git stash` 往返切树; JIT 按 source SHA 自动重编 (~2 min/次), 无需手清 cache
+  (正式对比仍建议清)。
+- host (frontend) pre-commit 2.17.0 无法解析新式 hook manifest → FI commit 需容器内 lint 或 `--no-verify`。
+
 ## MXFP8 集成沉淀 (task_01–13, 2026-06, 已归档)
 
 MXFP8 集成任务 (PR #3562) 的可复用 findings 摘编. 原 task_01..13 目录已清理; 完整 audit trail 见 `sm120_group_gemm_mxfp8_internal` 分支. 源码 line 引用基于 2026-06 main, 新 main 可能漂移.

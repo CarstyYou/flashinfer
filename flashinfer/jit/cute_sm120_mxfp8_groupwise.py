@@ -31,7 +31,7 @@ def gen_gemm_sm120_module_cute_mxfp8() -> JitSpec:
     Bundles the cute SM120 MXFP8 groupwise runner with the public ``group_gemm_*``
     entries (currently zero_padding; future dispatch will share the same runner).
     All source is in-tree under ``csrc/cute_sm120_mxfp8_groupwise/{cute_sm120_mxfp8_runner.{h,cu},
-    cute_sm120_mxfp8_op.cu, cute_sm120_mxfp8_op_jit_binding.cu, sm120_blockscaled/}``;
+    cute_sm120_mxfp8_op.cu, cute_sm120_mxfp8_op_jit_binding.cu, sm120_blockscaled/, sm120_common/}``;
     the kernel uses flashinfer's own ``3rdparty/cutlass``.
     """
     csrc_dir = jit_env.FLASHINFER_CSRC_DIR / "cute_sm120_mxfp8_groupwise"
