@@ -41,6 +41,9 @@
 ## Push
 
 - push 必须单独得到 xiy 明确授权；commit、merge 或"完成任务"都不隐含 push 授权。
+- **push 前必须 pre-commit 全绿**：pre-push hook 三级放行（stamp == HEAD → 本地 pre-commit →
+  `precommit-runner.conf` 远程容器 runner，绿则自动写 stamp）；换 Slurm allocation 或容器后
+  必须先更新 `<git-dir>/precommit-runner.conf` 的 jobid + container ID。
 - 不 push upstream（flashinfer origin）；push 目标默认 xiy fork（remote `xiy`），且仍需明确授权。
 - force-push 必须再次取得单独、明确授权。
 
