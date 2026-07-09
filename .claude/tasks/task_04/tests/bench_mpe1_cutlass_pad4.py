@@ -31,7 +31,10 @@ def median_us(call):
     torch.cuda.synchronize()
     times = []
     for _ in range(ITERS):
-        s, e = torch.cuda.Event(enable_timing=True), torch.cuda.Event(enable_timing=True)
+        s, e = (
+            torch.cuda.Event(enable_timing=True),
+            torch.cuda.Event(enable_timing=True),
+        )
         s.record()
         call()
         e.record()
@@ -47,7 +50,9 @@ def bench(e, n, k):
     total = e * m_pe
     a = torch.randn((total, k), dtype=torch.bfloat16, device="cuda")
     b = torch.randn((e, n, k), dtype=torch.bfloat16, device="cuda") / math.sqrt(k)
-    m_indptr = torch.tensor([i * m_pe for i in range(e + 1)], dtype=torch.int32, device="cuda")
+    m_indptr = torch.tensor(
+        [i * m_pe for i in range(e + 1)], dtype=torch.int32, device="cuda"
+    )
 
     a_fp8, a_scale = per_token_cast_to_fp8_for_moe_gemm(a, m_indptr)
     b_fp8_list, b_sf_list = [], []
@@ -60,7 +65,9 @@ def bench(e, n, k):
 
     out_cute = torch.empty((total, n), dtype=torch.bfloat16, device="cuda")
     us_cute = median_us(
-        lambda: moe_gemm_fp8_nt_groupwise(a_fp8, b_fp8, a_scale, b_scale, m_indptr, out=out_cute)
+        lambda: moe_gemm_fp8_nt_groupwise(
+            a_fp8, b_fp8, a_scale, b_scale, m_indptr, out=out_cute
+        )
     )
 
     # cutlass side: pad each expert to 4 rows (its m_indptr multiple-of-4 contract).
@@ -68,18 +75,28 @@ def bench(e, n, k):
     a_padded = torch.zeros((e * pad, k), dtype=torch.bfloat16, device="cuda")
     for i in range(e):
         a_padded[i * pad] = a[i]
-    m_indptr_p = torch.tensor([i * pad for i in range(e + 1)], dtype=torch.int32, device="cuda")
+    m_indptr_p = torch.tensor(
+        [i * pad for i in range(e + 1)], dtype=torch.int32, device="cuda"
+    )
     ap_fp8, ap_sf = per_token_cast_to_fp8(a_padded)
     ap_scale_mn = ap_sf.t().contiguous()
     out_base = torch.empty((e * pad, n), dtype=torch.bfloat16, device="cuda")
     us_cutlass = median_us(
         lambda: group_gemm_fp8_nt_groupwise(
-            ap_fp8, b_fp8, ap_scale_mn, b_scale, m_indptr_p,
-            scale_major_mode="MN", out=out_base, skip_check=True,
+            ap_fp8,
+            b_fp8,
+            ap_scale_mn,
+            b_scale,
+            m_indptr_p,
+            scale_major_mode="MN",
+            out=out_base,
+            skip_check=True,
         )
     )
     pct_over = (us_cutlass / us_cute - 1.0) * 100.0
-    print(f"E={e} N={n} K={k}: cute {us_cute:.3f} us | cutlass(pad4) {us_cutlass:.3f} us (+{pct_over:.1f}%)")
+    print(
+        f"E={e} N={n} K={k}: cute {us_cute:.3f} us | cutlass(pad4) {us_cutlass:.3f} us (+{pct_over:.1f}%)"
+    )
 
 
 def main():

@@ -35,7 +35,10 @@ def median_us(call):
     torch.cuda.synchronize()
     times = []
     for _ in range(ITERS):
-        s, e = torch.cuda.Event(enable_timing=True), torch.cuda.Event(enable_timing=True)
+        s, e = (
+            torch.cuda.Event(enable_timing=True),
+            torch.cuda.Event(enable_timing=True),
+        )
         s.record()
         call()
         e.record()
@@ -69,9 +72,7 @@ def bench_cell(e, m_pe, n, k):
         )
     )
     out_cudnn = torch.empty((total, n), dtype=torch.bfloat16, device="cuda")
-    us_cudnn = median_us(
-        lambda: grouped_mm_fp8(a_fp8, b_fp8, m_indptr, out=out_cudnn)
-    )
+    us_cudnn = median_us(lambda: grouped_mm_fp8(a_fp8, b_fp8, m_indptr, out=out_cudnn))
     return us_cute, us_cudnn
 
 
