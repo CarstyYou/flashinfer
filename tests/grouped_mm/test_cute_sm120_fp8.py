@@ -131,14 +131,11 @@ def test_moe_gemm_fp8_nt_groupwise_irregular(m_per_expert_list):
         "granularity",
         "scale_major_mode",
         "backend",
-        "sfa_shape",
-        "sfb_shape",
         "m_indptr",
     ],
 )
 def test_moe_gemm_fp8_nt_groupwise_rejects_bad_input(bad_input):
     skip_if_not_sm120()
-    # Non-square Kb != Nb so transposed-scale shapes are detectable.
     a, b, a_scale, b_scale, m_indptr, _ = make_inputs([8] * 4, 256, 512)
     kwargs = {}
     if bad_input == "granularity":
@@ -150,17 +147,36 @@ def test_moe_gemm_fp8_nt_groupwise_rejects_bad_input(bad_input):
     elif bad_input == "backend":
         kwargs["backend"] = "cutlass"
         exc = NotImplementedError
-    elif bad_input == "sfa_shape":
-        a_scale = a_scale[:, : a.shape[0]].contiguous()
-        exc = Exception
-    elif bad_input == "sfb_shape":
-        b_scale = b_scale.transpose(-1, -2).contiguous()
-        exc = Exception
     else:
         m_indptr = m_indptr[:-1]
         exc = ValueError
     with pytest.raises(exc):
         moe_gemm_fp8_nt_groupwise(a, b, a_scale, b_scale, m_indptr, **kwargs)
+
+
+@pytest.mark.parametrize("bad_scale", ["a_kb", "a_m", "b_expert", "b_kb", "b_n"])
+def test_moe_gemm_fp8_nt_groupwise_rejects_bad_scale_shape(bad_scale):
+    skip_if_not_sm120()
+    # Non-square Kb != Nb so per-dimension shape damage is detectable.
+    a, b, a_scale, b_scale, m_indptr, _ = make_inputs([8] * 4, 256, 512)
+
+    expected_message = "a_scale must have zero-padding shape"
+    if bad_scale == "a_kb":
+        a_scale = a_scale[:-1, :].contiguous()
+    elif bad_scale == "a_m":
+        a_scale = a_scale[:, :-1].contiguous()
+    elif bad_scale == "b_expert":
+        b_scale = b_scale[:-1, :, :].contiguous()
+        expected_message = "b_scale must have shape"
+    elif bad_scale == "b_kb":
+        b_scale = b_scale[:, :-1, :].contiguous()
+        expected_message = "b_scale must have shape"
+    else:
+        b_scale = b_scale[:, :, :-1].contiguous()
+        expected_message = "b_scale must have shape"
+
+    with pytest.raises(Exception, match=expected_message):
+        moe_gemm_fp8_nt_groupwise(a, b, a_scale, b_scale, m_indptr)
 
 
 if __name__ == "__main__":
