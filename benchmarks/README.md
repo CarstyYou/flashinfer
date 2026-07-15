@@ -183,6 +183,26 @@ The output CSV will contain detailed metrics including:
 - Input flags
 - Reproducer commands if `--generate_repro_command` is provided
 
+### Qwen3.5 W4A4 B12x MoE experiment
+
+The SM120/SM121 Qwen3.5-35B per-rank shape has a focused dynamic-kernel sweep:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python3 benchmarks/run_qwen35_w4a4_moe.py
+```
+
+The controller runs `M=256,512,1024,2048,4096,8192` at
+`H=2048, I_tp=512, E=256, top_k=8`, using CUDA Graph event timing and the
+framework cold-L2 policy. It writes the raw framework CSV, run log, provenance,
+and an audited summary to a fresh `/tmp/flashinfer-qwen35-w4a4-*` directory.
+
+This is a performance evidence layer, not a correctness test. Validate its
+contract without CUDA with:
+
+```bash
+python3 benchmarks/run_qwen35_w4a4_moe.py --validate-only
+```
+
 ## Command Line Arguments
 ### General Flags
 | Flag                     | Description                                                                                                 |

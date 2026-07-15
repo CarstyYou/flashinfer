@@ -1,0 +1,19 @@
+# Qwen3.5-35B per-rank TP W4A4/NVFP4 fused-MoE experiment on SM120/SM121.
+# Shape: hidden=2048, intermediate_tp=512, experts=256, top_k=8.
+# The b12x_fused_moe routine uses FlashInfer B12xMoEWrapper by default.
+# Operator scope: preselected-topk BF16 input -> BF16 fused-MoE output.
+# Routing uses Gaussian logits, softmax, top-k, then selected-weight renormalization.
+# NVFP4 mode and random seed 42 are explicit parts of the experiment contract.
+# --use_cuda_events selects CUDA Graph event timing instead of the CLI's CUPTI default.
+#
+# Run from the FlashInfer repository root:
+# python3 benchmarks/flashinfer_benchmark.py \
+#   --testlist benchmarks/samples/qwen35_w4a4_moe_testlist.txt \
+#   --output_path /tmp/qwen35_w4a4_moe.csv
+
+--routine b12x_fused_moe --num_tokens 256 --hidden_size 2048 --intermediate_size 512 --num_experts 256 --top_k 8 --routing_method renormalize --input_dtype bfloat16 --weight_dtype bfloat16 --activation-type Swiglu --fp4_mode nvfp4 --random_seed 42 --use_cuda_events --num_iters 50 --dry_run_iters 5 -vv --generate_repro_command --case_tag "qwen35_w4a4_moe_m256"
+--routine b12x_fused_moe --num_tokens 512 --hidden_size 2048 --intermediate_size 512 --num_experts 256 --top_k 8 --routing_method renormalize --input_dtype bfloat16 --weight_dtype bfloat16 --activation-type Swiglu --fp4_mode nvfp4 --random_seed 42 --use_cuda_events --num_iters 50 --dry_run_iters 5 -vv --generate_repro_command --case_tag "qwen35_w4a4_moe_m512"
+--routine b12x_fused_moe --num_tokens 1024 --hidden_size 2048 --intermediate_size 512 --num_experts 256 --top_k 8 --routing_method renormalize --input_dtype bfloat16 --weight_dtype bfloat16 --activation-type Swiglu --fp4_mode nvfp4 --random_seed 42 --use_cuda_events --num_iters 50 --dry_run_iters 5 -vv --generate_repro_command --case_tag "qwen35_w4a4_moe_m1024"
+--routine b12x_fused_moe --num_tokens 2048 --hidden_size 2048 --intermediate_size 512 --num_experts 256 --top_k 8 --routing_method renormalize --input_dtype bfloat16 --weight_dtype bfloat16 --activation-type Swiglu --fp4_mode nvfp4 --random_seed 42 --use_cuda_events --num_iters 50 --dry_run_iters 5 -vv --generate_repro_command --case_tag "qwen35_w4a4_moe_m2048"
+--routine b12x_fused_moe --num_tokens 4096 --hidden_size 2048 --intermediate_size 512 --num_experts 256 --top_k 8 --routing_method renormalize --input_dtype bfloat16 --weight_dtype bfloat16 --activation-type Swiglu --fp4_mode nvfp4 --random_seed 42 --use_cuda_events --num_iters 50 --dry_run_iters 5 -vv --generate_repro_command --case_tag "qwen35_w4a4_moe_m4096"
+--routine b12x_fused_moe --num_tokens 8192 --hidden_size 2048 --intermediate_size 512 --num_experts 256 --top_k 8 --routing_method renormalize --input_dtype bfloat16 --weight_dtype bfloat16 --activation-type Swiglu --fp4_mode nvfp4 --random_seed 42 --use_cuda_events --num_iters 50 --dry_run_iters 5 -vv --generate_repro_command --case_tag "qwen35_w4a4_moe_m8192"

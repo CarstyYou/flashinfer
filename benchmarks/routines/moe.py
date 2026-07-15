@@ -1666,6 +1666,9 @@ def testB12xFusedMoe(args):
         print(f"[INFO] FlashInfer version: {flashinfer.__version__}")
 
     from flashinfer import B12xMoEWrapper
+    from flashinfer.fused_moe.cute_dsl.blackwell_sm12x.moe_dispatch import (
+        select_sm120_moe_backend,
+    )
 
     device = get_device(args)
     if args.generate_repro_command:
@@ -1683,7 +1686,20 @@ def testB12xFusedMoe(args):
     top_k = args.top_k
     local_num_experts = args.local_num_experts or num_experts
     is_cuda_graph_compatible = not args.no_cuda_graph
+    resolved_routing_method = "renormalize"
+    resolved_backend = select_sm120_moe_backend(
+        num_tokens=num_tokens,
+        num_topk=top_k,
+        quant_mode="w4a4",
+    )
     res = []
+
+    if args.routing_method != resolved_routing_method and args.verbose >= 1:
+        print(
+            f"[WARNING] b12x_fused_moe uses {resolved_routing_method!r} routing "
+            f"for precomputed expert assignments; requested "
+            f"routing_method={args.routing_method!r} is ignored."
+        )
 
     backends = ["b12x"]
     backends = filter_backends_by_compute_capability(backends, args.routine, device)
@@ -1694,7 +1710,8 @@ def testB12xFusedMoe(args):
     if args.verbose >= 1:
         print(
             f"[INFO] Configuration: tokens={num_tokens}, hidden={hidden_size}, "
-            f"intermediate={intermediate_size}, experts={num_experts}, top_k={top_k}"
+            f"intermediate={intermediate_size}, experts={num_experts}, top_k={top_k}, "
+            f"resolved_backend={resolved_backend}, routing={resolved_routing_method}"
         )
 
     # b12x supports SwiGLU (gated) and ReLU2 (non-gated)
@@ -1887,11 +1904,13 @@ def testB12xFusedMoe(args):
         cur_res["tflops"] = tflops
         cur_res["tb_per_sec"] = tb_per_sec
         cur_res["backend"] = backend
+        cur_res["resolved_backend"] = resolved_backend
         cur_res["num_tokens"] = num_tokens
         cur_res["hidden_size"] = hidden_size
         cur_res["intermediate_size"] = intermediate_size
         cur_res["num_experts"] = num_experts
         cur_res["top_k"] = top_k
+        cur_res["routing_method"] = resolved_routing_method
         cur_res["local_num_experts"] = local_num_experts
         cur_res["input_dtype"] = input_dtype
         cur_res["weight_dtype"] = weight_dtype
