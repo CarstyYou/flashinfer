@@ -46,7 +46,9 @@
 
 ```
 .claude/tasks/task_NN/                 # 一个任务一个目录, xiy review 的单一入口
-├── plan.md                              # 设计 + scope + sub-task 表 + risks + ## Results
+├── plan.md                              # 设计 + scope + sub-task 表 + risks (不放数据)
+├── result.md                            # 数据总结 + 结论 (xiy review 入口; 结论先行、表格主导、
+│                                        #   每个数字带 results/ 证据链接; 只用全量/正式 gate 数字下结论)
 ├── sub_task_0_findings.md               # 外部 repo state ground truth (verify 后)
 ├── tests/                               # 任务的测试 / bench 脚本 (不放 flashinfer/tests/)
 │   ├── smoke.py                         # 编译 / dispatch 冒烟
@@ -155,7 +157,8 @@ Pattern 参考:
 
 ### Phase 5: 记录精度 + 性能
 
-落到 `tasks/task_NN/results/` 下, 也复制结论到 `tasks/task_NN/plan.md` 底部 `## Results` section.
+落到 `tasks/task_NN/results/` 下, 汇总表 + 结论写 `tasks/task_NN/result.md`
+(xiy review 入口; plan.md 的 `## Results` 只留指向 result.md 的指针).
 
 **精度结果** (`results/correctness_<cell>.txt` 或 plan.md 表格):
 - 每 cell: `calc_diff` 值 + threshold + verdict
@@ -205,7 +208,8 @@ M{1/2/3/4} milestone reached. <剩余 sub-task / 待办 / Phase 2 scope>.
 
 **6b. Commit**
 
-- xiy review `plan.md ## Results` + shared `tasks/memory/findings.md` `## task_NN` section + 各 sub-task diff 后 explicit 一句 → commit
+- xiy review `result.md` + shared `tasks/memory/findings.md` `## task_NN` section + 各 sub-task diff 后 explicit 一句 → commit
+- **Task 收口 commit**: task 结束、xiy 对 result.md 收口确认后立即 commit (确认即授权, 不再单独等 commit 指令)
 - staging / commit subject / merge / push / 回退规则全部遵循 [git.md](git.md), 本文不复制
 - 涉及多 repo (mega_inference 父 + flashinfer submodule + 外部 repo) 时, 分 repo commit; 父 repo 只在
   submodule main advance 时 bump pointer
