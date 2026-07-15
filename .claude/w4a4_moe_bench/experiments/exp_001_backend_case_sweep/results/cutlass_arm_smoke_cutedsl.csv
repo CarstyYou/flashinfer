@@ -1,0 +1,2 @@
+backend,m,hidden,intermediate_tp,experts,topk,timing,flush_l2,l2_flush_bytes,warmup,iters,repeats,median_us,tflops,samples_ms,error,backend_detail,quant_mode,storage,implementation,input_dtype
+flashinfer_cutedsl,1,2048,512,256,8,direct_cuda_events,0,0,1,1,1,104.70400005578995,0.48070415622308166,0.104704,,flashinfer.fused_moe.cute_dsl.B12xMoEWrapper,w4a4(alias nvfp4),modelopt_packed_fp4,sm120_b12x_cutedsl_wrapper,bfloat16

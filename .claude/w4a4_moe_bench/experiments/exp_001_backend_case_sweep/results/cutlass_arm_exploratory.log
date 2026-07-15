@@ -1,0 +1,34 @@
+device=NVIDIA Graphics Device capability=sm120
+preset=Qwen3.5-35B hidden=2048 intermediate_tp=512 experts=256 topk=8
+backends=flashinfer_cutedsl,cutlass m_values=1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192
+timing=cuda_graph_replay timer_events=inside_cuda_graph flush_l2=1 l2_flush_bytes=201326592
+backend=flashinfer_cutedsl  m=    1 median_us=   46.266 tflops=    1.09 impl=sm120_b12x_cutedsl_wrapper samples_ms=0.046500;0.046148;0.046252;0.046266;0.046411
+backend=flashinfer_cutedsl  m=    2 median_us=   68.983 tflops=    1.46 impl=sm120_b12x_cutedsl_wrapper samples_ms=0.069317;0.068783;0.069123;0.068983;0.068959
+backend=flashinfer_cutedsl  m=    4 median_us=   92.792 tflops=    2.17 impl=sm120_b12x_cutedsl_wrapper samples_ms=0.092881;0.092792;0.092561;0.092799;0.092455
+backend=flashinfer_cutedsl  m=    8 median_us=  146.763 tflops=    2.74 impl=sm120_b12x_cutedsl_wrapper samples_ms=0.146660;0.146725;0.147325;0.146984;0.146763
+backend=flashinfer_cutedsl  m=   16 median_us=  214.972 tflops=    3.75 impl=sm120_b12x_cutedsl_wrapper samples_ms=0.215445;0.214707;0.215193;0.214971;0.214972
+backend=flashinfer_cutedsl  m=   32 median_us=  308.584 tflops=    5.22 impl=sm120_b12x_cutedsl_wrapper samples_ms=0.308584;0.308662;0.308586;0.308230;0.308534
+backend=flashinfer_cutedsl  m=   64 median_us=  430.271 tflops=    7.49 impl=sm120_b12x_cutedsl_wrapper samples_ms=0.430104;0.430271;0.430977;0.430606;0.430072
+backend=flashinfer_cutedsl  m=  128 median_us=  516.171 tflops=   12.48 impl=sm120_b12x_cutedsl_wrapper samples_ms=0.516307;0.516379;0.516171;0.515450;0.516058
+backend=flashinfer_cutedsl  m=  256 median_us=  529.468 tflops=   24.34 impl=sm120_b12x_cutedsl_wrapper samples_ms=0.529468;0.529059;0.529223;0.529485;0.529485
+backend=flashinfer_cutedsl  m=  512 median_us=  550.679 tflops=   46.80 impl=sm120_b12x_cutedsl_wrapper samples_ms=0.550679;0.550509;0.551016;0.550836;0.550616
+backend=flashinfer_cutedsl  m= 1024 median_us=  604.173 tflops=   85.31 impl=sm120_b12x_cutedsl_wrapper samples_ms=0.604173;0.603715;0.604227;0.603389;0.604343
+backend=flashinfer_cutedsl  m= 2048 median_us=  732.536 tflops=  140.72 impl=sm120_b12x_cutedsl_wrapper samples_ms=0.732439;0.732630;0.732467;0.733547;0.732536
+backend=flashinfer_cutedsl  m= 4096 median_us= 1001.122 tflops=  205.93 impl=sm120_b12x_cutedsl_wrapper samples_ms=1.001123;1.001122;1.001569;1.000873;1.000451
+backend=flashinfer_cutedsl  m= 8192 median_us= 1737.210 tflops=  237.34 impl=sm120_b12x_cutedsl_wrapper samples_ms=1.737204;1.737210;1.736896;1.737542;1.738373
+backend=cutlass             m=    1 median_us=   51.945 tflops=    0.97 impl=cutlass_fused_moe samples_ms=0.052226;0.051875;0.051945;0.052359;0.051559
+backend=cutlass             m=    2 median_us=   69.171 tflops=    1.46 impl=cutlass_fused_moe samples_ms=0.069288;0.069151;0.069372;0.069130;0.069171
+backend=cutlass             m=    4 median_us=  101.143 tflops=    1.99 impl=cutlass_fused_moe samples_ms=0.101207;0.101039;0.101372;0.101143;0.101062
+backend=cutlass             m=    8 median_us=  156.230 tflops=    2.58 impl=cutlass_fused_moe samples_ms=0.156122;0.156291;0.156281;0.155938;0.156230
+backend=cutlass             m=   16 median_us=  247.674 tflops=    3.25 impl=cutlass_fused_moe samples_ms=0.247827;0.247325;0.247233;0.247886;0.247674
+backend=cutlass             m=   32 median_us=  343.621 tflops=    4.69 impl=cutlass_fused_moe samples_ms=0.343664;0.343183;0.343442;0.343870;0.343621
+backend=cutlass             m=   64 median_us=  449.930 tflops=    7.16 impl=cutlass_fused_moe samples_ms=0.449859;0.449759;0.450559;0.449930;0.450122
+backend=cutlass             m=  128 median_us=  539.584 tflops=   11.94 impl=cutlass_fused_moe samples_ms=0.538830;0.539704;0.539584;0.540099;0.539272
+backend=cutlass             m=  256 median_us=  551.671 tflops=   23.36 impl=cutlass_fused_moe samples_ms=0.552640;0.551671;0.551190;0.551889;0.551659
+backend=cutlass             m=  512 median_us=  570.572 tflops=   45.16 impl=cutlass_fused_moe samples_ms=0.570557;0.569097;0.570969;0.570572;0.571062
+backend=cutlass             m= 1024 median_us=  602.580 tflops=   85.53 impl=cutlass_fused_moe samples_ms=0.602742;0.602566;0.602129;0.602580;0.603484
+backend=cutlass             m= 2048 median_us=  721.595 tflops=  142.85 impl=cutlass_fused_moe samples_ms=0.722035;0.721595;0.721386;0.721914;0.721502
+backend=cutlass             m= 4096 median_us= 1006.435 tflops=  204.84 impl=cutlass_fused_moe samples_ms=1.006435;1.005724;1.007609;1.006014;1.007321
+backend=cutlass             m= 8192 median_us= 1676.405 tflops=  245.95 impl=cutlass_fused_moe samples_ms=1.663939;1.670762;1.676405;1.680476;1.682668
+summary={"shape": {"experts": 256, "hidden": 2048, "intermediate_tp": 512, "model": "Qwen3.5-35B", "topk": 8}, "timing": {"cuda_graph": true, "flush_l2": true, "iters": 50, "l2_flush_bytes": 201326592, "repeats": 5, "timer_events": "inside_cuda_graph", "warmup": 5}}
+wrote_csv=/workspace/results/qwen35_w4a4_moe_sm120_20260715.csv

@@ -1,0 +1,2 @@
+backend,m,hidden,intermediate_tp,experts,topk,timing,flush_l2,l2_flush_bytes,warmup,iters,repeats,median_us,tflops,samples_ms,error,backend_detail,quant_mode,storage,implementation,input_dtype
+cutlass,1,2048,512,256,8,direct_cuda_events,0,0,1,1,1,142.91200041770935,0.35218629543277324,0.142912,,flashinfer.fused_moe.cutlass_fused_moe,nvfp4,cutlass_nvfp4_quantized_input,cutlass_fused_moe,uint8
