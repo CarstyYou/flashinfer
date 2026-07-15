@@ -78,7 +78,7 @@ PDL 只建立相邻 launch 的依赖，不把这些 kernels 合并成一个 kern
 
 | Area | Source |
 |---|---|
-| Bench contract and timing boundary | `../w4a4_moe_bench/scripts/bench_qwen35_w4a4_moe_backends.py:44-48,531-581,628-637` |
+| Bench contract and timing boundary | Archived reference, not tracked here: `w4a4_moe_bench/scripts/bench_qwen35_w4a4_moe_backends.py:44-48,531-581,628-637` |
 | Python API, separate GEMM tuning, `run_moe` | `flashinfer/fused_moe/core.py:524-644,856-1099` |
 | SM120 NVFP4 JIT flags | `flashinfer/jit/fused_moe.py:58-73` |
 | Route 1/3 branches and main sequence | `csrc/fused_moe/cutlass_backend/cutlass_fused_moe_kernels.cuh:350-583,868-930,3856-3968` |

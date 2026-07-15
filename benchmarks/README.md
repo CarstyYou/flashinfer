@@ -193,8 +193,11 @@ CUDA_VISIBLE_DEVICES=0 python3 benchmarks/run_qwen35_w4a4_moe.py
 
 The controller runs `M=256,512,1024,2048,4096,8192` at
 `H=2048, I_tp=512, E=256, top_k=8`, using CUDA Graph event timing and the
-framework cold-L2 policy. It writes the raw framework CSV, run log, provenance,
-and an audited summary to a fresh `/tmp/flashinfer-qwen35-w4a4-*` directory.
+framework cold-L2 policy. Each graph replay contains 10 operator calls; after
+3 eager pre-capture calls and 5 estimate replays, the run uses 5 warmup graph
+replays and 50 measured graph replays, reporting elapsed time divided by 10.
+It writes the raw framework CSV, run log, import/Git provenance, and an audited
+summary to a fresh `/tmp/flashinfer-qwen35-w4a4-*` directory.
 
 This is a performance evidence layer, not a correctness test. Validate its
 contract without CUDA with:

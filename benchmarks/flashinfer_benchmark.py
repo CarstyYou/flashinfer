@@ -1,4 +1,7 @@
 import argparse
+import os
+from pathlib import Path
+import shlex
 import sys
 
 # Only import utilities at module level - routine modules are imported lazily
@@ -281,7 +284,15 @@ def parse_args(line=sys.argv[1:]):
         raise ValueError(f"Unsupported routine: {args.routine}")
 
     if args.generate_repro_command:
-        args.repro_command = "python3 flashinfer_benchmark.py " + " ".join(line)
+        args.repro_command = shlex.join(
+            [
+                "env",
+                f"PYTHONPATH={os.environ.get('PYTHONPATH', '')}",
+                sys.executable,
+                str(Path(__file__).resolve()),
+                *line,
+            ]
+        )
 
     # Deprecation warning for use_cupti
     if args.use_cupti:

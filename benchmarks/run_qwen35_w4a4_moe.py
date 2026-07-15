@@ -42,6 +42,9 @@ EXPECTED_SHAPE = {
 EXPECTED_M_VALUES = (256, 512, 1024, 2048, 4096, 8192)
 EXPECTED_ROUTING = "renormalize"
 EXPECTED_DISPATCH = "dynamic"
+GRAPH_CALLS_PER_REPLAY = 10
+PRE_CAPTURE_EAGER_WARMUP_CALLS = 3
+ESTIMATE_GRAPH_REPLAYS = 5
 EXPECTED_FIXED_OPTIONS = {
     "--routine": "b12x_fused_moe",
     "--hidden_size": "2048",
@@ -156,7 +159,22 @@ def load_cases(testlist: Path) -> list[ExperimentCase]:
     return cases
 
 
-def _capture(command: Sequence[str], cwd: Path = REPO_ROOT) -> dict[str, object]:
+def _checkout_environment() -> dict[str, str]:
+    """Prefer this checkout's Python package over an installed wheel."""
+    env = os.environ.copy()
+    current_pythonpath = env.get("PYTHONPATH")
+    env["PYTHONPATH"] = str(REPO_ROOT) + (
+        os.pathsep + current_pythonpath if current_pythonpath else ""
+    )
+    return env
+
+
+def _capture(
+    command: Sequence[str],
+    cwd: Path = REPO_ROOT,
+    *,
+    env: Mapping[str, str] | None = None,
+) -> dict[str, object]:
     try:
         result = subprocess.run(
             command,
@@ -165,6 +183,7 @@ def _capture(command: Sequence[str], cwd: Path = REPO_ROOT) -> dict[str, object]
             text=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
+            env=env,
         )
     except OSError as exc:
         return {"status": "unavailable", "error": str(exc)}
@@ -176,21 +195,23 @@ def _capture(command: Sequence[str], cwd: Path = REPO_ROOT) -> dict[str, object]
     }
 
 
-def collect_provenance() -> dict[str, object]:
-    git_head = _capture(["git", "rev-parse", "HEAD"])
-    git_branch = _capture(["git", "rev-parse", "--abbrev-ref", "HEAD"])
-    git_status = _capture(["git", "status", "--short"])
+def collect_provenance(env: Mapping[str, str]) -> dict[str, object]:
+    git_head = _capture(["git", "rev-parse", "HEAD"], env=env)
+    git_branch = _capture(["git", "rev-parse", "--abbrev-ref", "HEAD"], env=env)
+    git_status = _capture(["git", "status", "--short"], env=env)
     nvidia_smi = _capture(
         [
             "nvidia-smi",
             "--query-gpu=index,name,uuid,pci.device_id,memory.total,driver_version",
             "--format=csv,noheader",
-        ]
+        ],
+        env=env,
     )
 
     probe_code = r"""
 import importlib.metadata
 import json
+from pathlib import Path
 import torch
 import flashinfer
 
@@ -198,6 +219,7 @@ device = torch.cuda.current_device()
 props = torch.cuda.get_device_properties(device)
 payload = {
     "flashinfer_version": getattr(flashinfer, "__version__", "unknown"),
+    "flashinfer_file": str(Path(flashinfer.__file__).resolve()),
     "torch_version": torch.__version__,
     "cuda_runtime": torch.version.cuda,
     "cuda_device_index": device,
@@ -213,10 +235,14 @@ for distribution in ("nvidia-cutlass-dsl", "cuda-python", "cupti-python"):
         payload[distribution] = None
 print(json.dumps(payload, sort_keys=True))
 """
-    probe = _capture([sys.executable, "-c", probe_code])
+    probe = _capture([sys.executable, "-c", probe_code], env=env)
     if probe.get("status") == "ok":
         try:
             probe = json.loads(str(probe["stdout"]).splitlines()[-1])
+            flashinfer_file = Path(str(probe["flashinfer_file"])).resolve()
+            probe["flashinfer_import_is_checkout"] = flashinfer_file.is_relative_to(
+                (REPO_ROOT / "flashinfer").resolve()
+            )
         except (IndexError, json.JSONDecodeError) as exc:
             probe = {"status": "error", "error": f"invalid probe output: {exc}"}
 
@@ -240,7 +266,7 @@ def _write_json(path: Path, value: Mapping[str, object]) -> None:
     path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
 
 
-def _run_and_tee(command: Sequence[str], log_path: Path) -> int:
+def _run_and_tee(command: Sequence[str], log_path: Path, env: Mapping[str, str]) -> int:
     with log_path.open("w") as log_file:
         process = subprocess.Popen(
             command,
@@ -249,6 +275,7 @@ def _run_and_tee(command: Sequence[str], log_path: Path) -> int:
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             bufsize=1,
+            env=env,
         )
         assert process.stdout is not None
         for line in process.stdout:
@@ -363,8 +390,9 @@ def write_summary(output_dir: Path, summary: Sequence[Mapping[str, object]]) -> 
         [
             "",
             "Timing contract: preselected-topk BF16-to-BF16 fused MoE, CUDA Graph "
-            "event timing, FlashInfer cold-L2 policy; router/top-k and weight "
-            "preparation are outside the timed region.",
+            "event timing, 10 calls per replay with per-call reporting, and the "
+            "FlashInfer cold-L2 policy; router/top-k and weight preparation are "
+            "outside the timed region.",
             "",
         ]
     )
@@ -399,8 +427,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         "m_values": [case.num_tokens for case in cases],
         "routing_method": EXPECTED_ROUTING,
         "random_seed": 42,
-        "measurement_iterations": 50,
-        "warmup_iterations": 5,
+        "cuda_graph_timing": {
+            "calls_per_replay": GRAPH_CALLS_PER_REPLAY,
+            "pre_capture_eager_warmup_calls": PRE_CAPTURE_EAGER_WARMUP_CALLS,
+            "estimate_graph_replays": ESTIMATE_GRAPH_REPLAYS,
+            "warmup_graph_replays": 5,
+            "measurement_graph_replays": 50,
+            "reported_latency": "replay_elapsed / calls_per_replay",
+        },
         "timing_requested": "cuda_graph_events_cold_l2",
         "expected_dispatch": EXPECTED_DISPATCH,
         "correctness": {
@@ -413,6 +447,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(json.dumps(plan, indent=2, sort_keys=True))
         return 0
 
+    run_env = _checkout_environment()
+
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     output_dir = (
         args.output_dir.resolve()
@@ -424,15 +460,25 @@ def main(argv: Sequence[str] | None = None) -> int:
     output_dir.mkdir(parents=True, exist_ok=True)
     shutil.copy2(testlist, output_dir / "cases.txt")
 
+    meta_path = output_dir / "run.meta.json"
     meta = {
         **plan,
         "run_id": output_dir.name,
         "started_at": datetime.now(timezone.utc).isoformat(),
         "status": "running",
-        "provenance": collect_provenance(),
+        "provenance": collect_provenance(run_env),
     }
-    meta_path = output_dir / "run.meta.json"
     _write_json(meta_path, meta)
+    runtime = meta["provenance"]["runtime"]
+    if not isinstance(runtime, dict) or not runtime.get(
+        "flashinfer_import_is_checkout"
+    ):
+        error = "flashinfer import did not resolve to this checkout; see provenance"
+        meta["status"] = "failed"
+        meta["error"] = error
+        meta["finished_at"] = datetime.now(timezone.utc).isoformat()
+        _write_json(meta_path, meta)
+        raise ExperimentError(error)
 
     raw_csv = output_dir / "raw.csv"
     log_path = output_dir / "run.log"
@@ -448,7 +494,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     _write_json(meta_path, meta)
 
     try:
-        returncode = _run_and_tee(command, log_path)
+        returncode = _run_and_tee(command, log_path, run_env)
         if returncode != 0:
             raise ExperimentError(f"benchmark driver exited with {returncode}")
         with raw_csv.open(newline="") as csv_file:

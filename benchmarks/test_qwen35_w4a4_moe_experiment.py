@@ -14,6 +14,17 @@ def test_qwen35_testlist_contract():
     assert all("--no_cuda_graph" not in case.argv for case in cases)
 
 
+def test_checkout_environment_prepends_repo(monkeypatch):
+    monkeypatch.setenv("PYTHONPATH", "/installed/packages")
+
+    env = experiment._checkout_environment()
+
+    assert env["PYTHONPATH"].split(":") == [
+        str(experiment.REPO_ROOT),
+        "/installed/packages",
+    ]
+
+
 def _result_row(case):
     return {
         "case_tag": case.case_tag,

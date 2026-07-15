@@ -1,15 +1,14 @@
 #!/usr/bin/env python3.10
-"""Generate matching Draw.io and SVG previews for the W4A4 fused-MoE overview.
+"""Generate matching Draw.io and SVG artifacts for the W4A4 fused-MoE overview.
 
-The Draw.io XML is the editable source of truth.  The SVG is generated from the
-same node/edge specification so it can be reviewed without a Draw.io desktop
-installation.
+The Python node/edge specification is canonical. The generated Draw.io XML is
+editable for exploration, and the SVG can be reviewed without Draw.io, but
+manual XML edits are overwritten on regeneration.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import date
 from html import escape
 from pathlib import Path
 import xml.etree.ElementTree as ET
@@ -978,7 +977,7 @@ def edge_style(edge: Edge) -> str:
 def write_drawio(path: Path) -> None:
     mxfile = ET.Element(
         "mxfile",
-        {"host": "Claude", "modified": str(date.today()), "type": "device"},
+        {"host": "Claude", "type": "device"},
     )
     diagram = ET.SubElement(
         mxfile, "diagram", {"id": "w4a4-moe-overview", "name": "W4A4 MoE Overview"}

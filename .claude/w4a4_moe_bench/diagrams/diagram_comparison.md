@@ -12,9 +12,12 @@ This version is easy to diff and edit in source control, but it is constrained b
 
 ![Draw.io SVG preview](w4a4_moe_fused_overview.svg)
 
-- Editable source: [w4a4_moe_fused_overview.drawio](w4a4_moe_fused_overview.drawio)
+- Canonical source: [generate_w4a4_moe_overview.py](generate_w4a4_moe_overview.py)
+- Generated, editable artifact: [w4a4_moe_fused_overview.drawio](w4a4_moe_fused_overview.drawio)
 - Generated preview: [w4a4_moe_fused_overview.svg](w4a4_moe_fused_overview.svg)
-- Reproducible generator: [generate_w4a4_moe_overview.py](generate_w4a4_moe_overview.py)
+
+Manual Draw.io edits are useful for exploration but are overwritten by the
+generator and must be transferred back to the Python specification to persist.
 
 The Draw.io version preserves fixed Warp 0–4 lanes, phase boxes, memory-space fills, copy mechanisms, barriers, and the bounded Warp 4 Down-TMA producer rail.
 
@@ -34,7 +37,7 @@ Its visual grammar is deliberately strict:
 | Inspect exact source-derived details | Best; labels can remain verbose | Good; intentionally keeps only overview-level evidence |
 | Read inline in Markdown | Best | Good through the generated SVG |
 | Review changes in Git | Best; ordinary text diff | Generator is diffable; generated XML/SVG are noisier |
-| Rearrange or present visually | Limited | Best; the `.drawio` file remains editable |
+| Rearrange or present visually | Limited | Best; `.drawio` is editable, then changes must be reflected in the generator |
 
 Recommended use: place the Draw.io/SVG overview near the top of `kernel_design.md`, then keep the text-box view—or a fact table derived from it—as the source-audit layer. The current `kernel_design.md` remains the facts source and has not been modified by this comparison.
 
