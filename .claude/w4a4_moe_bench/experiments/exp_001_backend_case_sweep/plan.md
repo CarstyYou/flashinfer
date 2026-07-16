@@ -1,5 +1,7 @@
 # Experiment 001 Plan: Qwen3.5 prefill MoE backend case sweep
 
+**Status: CLOSED — target not met; follow-up analysis continues in exp_002.**
+
 ## Goal
 
 Measure one fresh FlashInfer CuteDSL W4A4 latency series against:
