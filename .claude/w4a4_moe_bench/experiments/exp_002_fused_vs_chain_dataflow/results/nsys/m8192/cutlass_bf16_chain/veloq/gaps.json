@@ -1,0 +1,48 @@
+{
+  "schema": "v1",
+  "source": {
+    "kind": "nsys",
+    "version": "v2"
+  },
+  "command": "nsys.gaps",
+  "trace": {
+    "kind": "nsys",
+    "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/nsys/m8192/cutlass_bf16_chain/trace.nsys-rep"
+  },
+  "trace_span": {
+    "origin_ns": 32817731,
+    "span_ns": 1927576
+  },
+  "meta": {
+    "applied_scope": {
+      "device": 0,
+      "native_pid": 144
+    },
+    "warnings": [
+      {
+        "severity": "warn",
+        "code": "empty-with-scope",
+        "message": "scope filter (--device, native_pid) excluded every row. Drop a filter or widen the query — an empty list often means the scope didn't match anything in this trace."
+      }
+    ]
+  },
+  "data": {
+    "min_ns": 1,
+    "scope": "device",
+    "count": 0,
+    "total_matched": 0,
+    "rows": [],
+    "auxiliary": {
+      "streams": [
+        {
+          "key": "stream|dev:0|stream:141",
+          "device_id": 0,
+          "stream_id": 141,
+          "busy_ns": 1667452,
+          "span_ns": 1927576,
+          "busy_ratio": 0.8650512353339116
+        }
+      ]
+    }
+  }
+}

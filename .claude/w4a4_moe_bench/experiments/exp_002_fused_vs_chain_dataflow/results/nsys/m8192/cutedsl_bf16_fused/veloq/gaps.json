@@ -1,0 +1,67 @@
+{
+  "schema": "v1",
+  "source": {
+    "kind": "nsys",
+    "version": "v2"
+  },
+  "command": "nsys.gaps",
+  "trace": {
+    "kind": "nsys",
+    "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/nsys/m8192/cutedsl_bf16_fused/trace.nsys-rep"
+  },
+  "trace_span": {
+    "origin_ns": 10005780,
+    "span_ns": 2046184
+  },
+  "meta": {
+    "applied_scope": {
+      "device": 0,
+      "native_pid": 144
+    },
+    "next_steps": [
+      {
+        "hint": "Inspect the events bracketing the largest gap (`void at::native::elementwise_kernel<(int)128, (int)2, void at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase &)::[lambda() (instance 3)]::operator ()() const::[lambda() (instance 7)]::operator ()() const::[lambda(float) (instance 1)]>(at::TensorIteratorBase &, const T1 &)::[lambda(int) (instance 1)]>(int, T3)` → `kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0`).",
+        "command": "veloq inspect kernel:1 kernel:2"
+      }
+    ]
+  },
+  "data": {
+    "min_ns": 1,
+    "scope": "device",
+    "count": 1,
+    "total_matched": 1,
+    "rows": [
+      {
+        "key": "gap|dev:0|@10262850",
+        "device_id": 0,
+        "start_ns": 10262850,
+        "end_ns": 10263074,
+        "duration_ns": 224,
+        "prev": {
+          "row_id": "kernel:1",
+          "name": "void at::native::elementwise_kernel<(int)128, (int)2, void at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase &)::[lambda() (instance 3)]::operator ()() const::[lambda() (instance 7)]::operator ()() const::[lambda(float) (instance 1)]>(at::TensorIteratorBase &, const T1 &)::[lambda(int) (instance 1)]>(int, T3)",
+          "timestamp_ns": 10262850,
+          "stream_id": 141
+        },
+        "next": {
+          "row_id": "kernel:2",
+          "name": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+          "timestamp_ns": 10263074,
+          "stream_id": 141
+        }
+      }
+    ],
+    "auxiliary": {
+      "streams": [
+        {
+          "key": "stream|dev:0|stream:141",
+          "device_id": 0,
+          "stream_id": 141,
+          "busy_ns": 1760603,
+          "span_ns": 2046184,
+          "busy_ratio": 0.8604323951316206
+        }
+      ]
+    }
+  }
+}

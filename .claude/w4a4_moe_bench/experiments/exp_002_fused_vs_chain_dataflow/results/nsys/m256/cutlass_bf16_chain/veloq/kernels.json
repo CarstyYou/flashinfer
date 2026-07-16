@@ -1,0 +1,314 @@
+{
+  "schema": "v1",
+  "source": {
+    "kind": "nsys",
+    "version": "v2"
+  },
+  "command": "nsys.search",
+  "trace": {
+    "kind": "nsys",
+    "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/nsys/m256/cutlass_bf16_chain/trace.nsys-rep"
+  },
+  "trace_span": {
+    "origin_ns": 8594717,
+    "span_ns": 761846
+  },
+  "meta": {
+    "applied_scope": {
+      "device": 0,
+      "native_pid": 144,
+      "kind": "kernel"
+    },
+    "next_steps": [
+      {
+        "hint": "Expand the top hit `void tensorrt_llm::kernels::cutlass_kernels::blockExpertPrefixSumKernel<(int)256>(const int *, int *, int *, long, long, int)` with the full headline + NVTX context.",
+        "command": "veloq inspect kernel:1"
+      }
+    ]
+  },
+  "data": {
+    "count": 9,
+    "total_matched": 9,
+    "rows": [
+      {
+        "type": "kernel",
+        "key": "kernel:1",
+        "row_id": "kernel:1",
+        "name": "void tensorrt_llm::kernels::cutlass_kernels::blockExpertPrefixSumKernel<(int)256>(const int *, int *, int *, long, long, int)",
+        "start_ns": 8817955,
+        "duration_ns": 2080,
+        "device_id": 0,
+        "stream_id": 141,
+        "nvtx_context": {
+          "range_id": "nvtx:1",
+          "name": "exp002_m256_cutlass_bf16_chain_single_replay",
+          "depth": 0,
+          "iter_index": 0
+        },
+        "grid": [
+          256,
+          1,
+          1
+        ],
+        "block": [
+          256,
+          1,
+          1
+        ],
+        "registers_per_thread": 27,
+        "static_shared_memory": 1184,
+        "dynamic_shared_memory": 0,
+        "demangled_name": "void tensorrt_llm::kernels::cutlass_kernels::blockExpertPrefixSumKernel<(int)256>(const int *, int *, int *, long, long, int)",
+        "mangled_name": "_ZN12tensorrt_llm7kernels15cutlass_kernels26blockExpertPrefixSumKernelILi256EEEvPKiPiS5_lli"
+      },
+      {
+        "type": "kernel",
+        "key": "kernel:2",
+        "row_id": "kernel:2",
+        "name": "void tensorrt_llm::kernels::cutlass_kernels::globalExpertPrefixSumKernel<(int)256>(const int *, int *, long *, long, long)",
+        "start_ns": 8820003,
+        "duration_ns": 1119,
+        "device_id": 0,
+        "stream_id": 141,
+        "nvtx_context": {
+          "range_id": "nvtx:1",
+          "name": "exp002_m256_cutlass_bf16_chain_single_replay",
+          "depth": 0,
+          "iter_index": 0
+        },
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          256,
+          1,
+          1
+        ],
+        "registers_per_thread": 26,
+        "static_shared_memory": 1184,
+        "dynamic_shared_memory": 0,
+        "demangled_name": "void tensorrt_llm::kernels::cutlass_kernels::globalExpertPrefixSumKernel<(int)256>(const int *, int *, long *, long, long)",
+        "mangled_name": "_ZN12tensorrt_llm7kernels15cutlass_kernels27globalExpertPrefixSumKernelILi256EEEvPKiPiPlll"
+      },
+      {
+        "type": "kernel",
+        "key": "kernel:3",
+        "row_id": "kernel:3",
+        "name": "tensorrt_llm::kernels::cutlass_kernels::mergeExpertPrefixSumKernel(const int *, const int *, const int *, int *, int *, int *, int)",
+        "start_ns": 8821123,
+        "duration_ns": 1184,
+        "device_id": 0,
+        "stream_id": 141,
+        "nvtx_context": {
+          "range_id": "nvtx:1",
+          "name": "exp002_m256_cutlass_bf16_chain_single_replay",
+          "depth": 0,
+          "iter_index": 0
+        },
+        "grid": [
+          256,
+          1,
+          1
+        ],
+        "block": [
+          256,
+          1,
+          1
+        ],
+        "registers_per_thread": 18,
+        "static_shared_memory": 0,
+        "dynamic_shared_memory": 0,
+        "demangled_name": "tensorrt_llm::kernels::cutlass_kernels::mergeExpertPrefixSumKernel(const int *, const int *, const int *, int *, int *, int *, int)",
+        "mangled_name": "_ZN12tensorrt_llm7kernels15cutlass_kernels26mergeExpertPrefixSumKernelEPKiS3_S3_PiS4_S4_i"
+      },
+      {
+        "type": "kernel",
+        "key": "kernel:4",
+        "row_id": "kernel:4",
+        "name": "void tensorrt_llm::kernels::cutlass_kernels::expandInputRowsKernel<__nv_bfloat16, __nv_fp4_e2m1, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, (bool)0, (bool)0, std::integral_constant<bool, (bool)0>>(const T1 *, T2 *, const float *, float *, const int *, long, long, long, const float *, bool, const long *, unsigned char *, const unsigned char *, bool, long, const T1 *)",
+        "start_ns": 8821955,
+        "duration_ns": 11008,
+        "device_id": 0,
+        "stream_id": 141,
+        "nvtx_context": {
+          "range_id": "nvtx:1",
+          "name": "exp002_m256_cutlass_bf16_chain_single_replay",
+          "depth": 0,
+          "iter_index": 0
+        },
+        "grid": [
+          880,
+          1,
+          1
+        ],
+        "block": [
+          256,
+          1,
+          1
+        ],
+        "registers_per_thread": 48,
+        "static_shared_memory": 0,
+        "dynamic_shared_memory": 0,
+        "demangled_name": "void tensorrt_llm::kernels::cutlass_kernels::expandInputRowsKernel<__nv_bfloat16, __nv_fp4_e2m1, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, (bool)0, (bool)0, std::integral_constant<bool, (bool)0>>(const T1 *, T2 *, const float *, float *, const int *, long, long, long, const float *, bool, const long *, unsigned char *, const unsigned char *, bool, long, const T1 *)",
+        "mangled_name": "_ZN12tensorrt_llm7kernels15cutlass_kernels21expandInputRowsKernelI13__nv_bfloat1613__nv_fp4_e2m1LNS1_34TmaWarpSpecializedGroupedGemmInput19FpXBlockScalingTypeE1ELb0ELb0ESt17integral_constantIbLb0EEEEvPKT_PT0_PKfPfPKilllSF_bPKlPhPKhblSB_"
+      },
+      {
+        "type": "kernel",
+        "key": "kernel:5",
+        "row_id": "kernel:5",
+        "name": "void tensorrt_llm::kernels::cutlass_kernels::computeStridesTmaWarpSpecializedKernel<__nv_fp4_e2m1, __nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16>(const long *, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, long, long, long, long, long, long, long, const T1 *, const T1 *, const T2 *, const T2 *, const float *, const float *, const unsigned char *, const unsigned char *, tensorrt_llm::kernels::cutlass_kernels::QuantParams, const T4 *, const T4 *, T3 *, T3 *, const float *, const int *)",
+        "start_ns": 8832899,
+        "duration_ns": 1983,
+        "device_id": 0,
+        "stream_id": 141,
+        "nvtx_context": {
+          "range_id": "nvtx:1",
+          "name": "exp002_m256_cutlass_bf16_chain_single_replay",
+          "depth": 0,
+          "iter_index": 0
+        },
+        "grid": [
+          8,
+          1,
+          1
+        ],
+        "block": [
+          32,
+          1,
+          1
+        ],
+        "registers_per_thread": 30,
+        "static_shared_memory": 0,
+        "dynamic_shared_memory": 0,
+        "demangled_name": "void tensorrt_llm::kernels::cutlass_kernels::computeStridesTmaWarpSpecializedKernel<__nv_fp4_e2m1, __nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16>(const long *, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, long, long, long, long, long, long, long, const T1 *, const T1 *, const T2 *, const T2 *, const float *, const float *, const unsigned char *, const unsigned char *, tensorrt_llm::kernels::cutlass_kernels::QuantParams, const T4 *, const T4 *, T3 *, T3 *, const float *, const int *)",
+        "mangled_name": "_ZN12tensorrt_llm7kernels15cutlass_kernels38computeStridesTmaWarpSpecializedKernelI13__nv_fp4_e2m1S3_13__nv_bfloat16S4_EEvPKlNS1_34TmaWarpSpecializedGroupedGemmInputES7_lllllllPKT_SA_PKT0_SD_PKfSF_PKhSH_NS1_11QuantParamsEPKT2_SL_PT1_SN_SF_PKi"
+      },
+      {
+        "type": "kernel",
+        "key": "kernel:6",
+        "row_id": "kernel:6",
+        "name": "void cutlass::device_kernel<cutlass::gemm::kernel::GemmUniversal<cutlass::gemm::GroupProblemShape<cute::tuple<long, long, long>>, cutlass::gemm::collective::CollectiveMma<cutlass::gemm::MainloopSm120ArrayTmaWarpSpecializedBlockScaled<(int)2, (int)3, cute::tuple<cute::C<(int)1>, cute::C<(int)1>, cute::C<(int)1>>, cutlass::gemm::KernelPtrArrayTmaWarpSpecializedCooperativeBlockScaledSm120<(int)3>>, cute::tuple<cute::C<(int)128>, cute::C<(int)128>, cute::C<(int)256>>, cute::tuple<cutlass::float_e2m1_t, cutlass::float_ue4m3_t>, cute::tuple<cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::C<(int)1>, int>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)512>>, cute::tuple<cute::C<(int)0>, int>>> *>, cute::tuple<cutlass::float_e2m1_t, cutlass::float_ue4m3_t>, cute::tuple<cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::C<(int)1>, int>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)512>>, cute::tuple<cute::C<(int)0>, int>>> *>, cute::TiledMMA<cute::MMA_Atom<cute::SM120::BLOCKSCALED::SM120_16x8x64_TN_VS<cutlass::float_e2m1_t, cutlass::float_e2m1_t, float, cutlass::float_ue4m3_t, (int)16>>, cute::Layout<cute::tuple<cute::C<(int)4>, cute::C<(int)2>, cute::C<(int)1>>, cute::tuple<cute::C<(int)1>, cute::C<(int)4>, cute::C<(int)0>>>, cute::tuple<cute::C<(int)128>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)2>, cute::C<(int)2>>, cute::tuple<cute::C<(int)1>, cute::C<(int)16>, cute::C<(int)8>>>, cute::C<(int)64>>>, cute::tuple<cute::SM90_TMA_LOAD, cute::SM90_TMA_LOAD>, cute::tuple<cute::ComposedLayout<cute::Swizzle<(int)3, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)4>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)256>>, cute::tuple<cute::C<(int)256>, cute::C<(int)1>>>>, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, cute::C<(int)1>>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)1>, cute::C<(int)4>>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)512>>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)4>, cute::C<(int)512>>>>>, cute::tuple<cute::Copy_Atom<cute::SM75_U32x4_LDSM_N, cutlass::integer_subbyte<(int)4, (bool)0>>, cute::Copy_Atom<cute::UniversalCopy<cutlass::float_ue4m3_t, cutlass::float_ue4m3_t>, cutlass::float_ue4m3_t>>, cute::identity, cute::tuple<cute::SM90_TMA_LOAD, cute::SM90_TMA_LOAD>, cute::tuple<cute::ComposedLayout<cute::Swizzle<(int)3, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)4>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)256>>, cute::tuple<cute::C<(int)256>, cute::C<(int)1>>>>, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, cute::C<(int)1>>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)1>, cute::C<(int)4>>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)512>>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)4>, cute::C<(int)512>>>>>, cute::tuple<cute::Copy_Atom<cute::SM75_U32x4_LDSM_N, cutlass::integer_subbyte<(int)4, (bool)0>>, cute::Copy_Atom<cute::UniversalCopy<cutlass::float_ue4m3_t, cutlass::float_ue4m3_t>, cutlass::float_ue4m3_t>>, cute::identity>, cutlass::epilogue::collective::CollectiveEpilogue<cutlass::epilogue::Sm90PtrArrayTmaWarpSpecialized<(int)3, (int)2, (int)4, (bool)1, (bool)0, (int)2>, cute::tuple<cute::C<(int)128>, cute::C<(int)128>, cute::C<(int)256>>, cute::tuple<cute::C<(int)64>, cute::C<(int)32>>, cutlass::bfloat16_t, cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cutlass::bfloat16_t, cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cutlass::epilogue::fusion::FusionCallbacks<cutlass::epilogue::Sm120PtrArrayTmaWarpSpecialized<(int)3, (int)2, (int)4, (bool)1, (bool)0, (int)2>, cutlass::epilogue::fusion::LinearCombination<cutlass::bfloat16_t, float, cutlass::bfloat16_t, float, (cutlass::FloatRoundStyle)2>, cute::tuple<cute::C<(int)128>, cute::C<(int)128>, cute::C<(int)256>>, cute::tuple<cute::C<(int)64>, cute::C<(int)32>>, >, cute::SM90_TMA_LOAD, cute::ComposedLayout<cute::Swizzle<(int)2, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)16>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)32>>, cute::tuple<cute::C<(int)32>, cute::C<(int)1>>>>, cute::SM75_U32x2_LDSM_N, cute::SM90_TMA_STORE, cute::ComposedLayout<cute::Swizzle<(int)2, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)16>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)32>>, cute::tuple<cute::C<(int)32>, cute::C<(int)1>>>>, cute::SM90_U32x2_STSM_N, cute::Copy_Atom<cute::SM90_U32x2_STSM_N, cutlass::half_t>, void>, void, void>>(T1::Params)",
+        "start_ns": 8834883,
+        "duration_ns": 273248,
+        "device_id": 0,
+        "stream_id": 141,
+        "nvtx_context": {
+          "range_id": "nvtx:1",
+          "name": "exp002_m256_cutlass_bf16_chain_single_replay",
+          "depth": 0,
+          "iter_index": 0
+        },
+        "grid": [
+          1,
+          110,
+          1
+        ],
+        "block": [
+          384,
+          1,
+          1
+        ],
+        "registers_per_thread": 168,
+        "static_shared_memory": 0,
+        "dynamic_shared_memory": 89088,
+        "demangled_name": "void cutlass::device_kernel<cutlass::gemm::kernel::GemmUniversal<cutlass::gemm::GroupProblemShape<cute::tuple<long, long, long>>, cutlass::gemm::collective::CollectiveMma<cutlass::gemm::MainloopSm120ArrayTmaWarpSpecializedBlockScaled<(int)2, (int)3, cute::tuple<cute::C<(int)1>, cute::C<(int)1>, cute::C<(int)1>>, cutlass::gemm::KernelPtrArrayTmaWarpSpecializedCooperativeBlockScaledSm120<(int)3>>, cute::tuple<cute::C<(int)128>, cute::C<(int)128>, cute::C<(int)256>>, cute::tuple<cutlass::float_e2m1_t, cutlass::float_ue4m3_t>, cute::tuple<cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::C<(int)1>, int>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)512>>, cute::tuple<cute::C<(int)0>, int>>> *>, cute::tuple<cutlass::float_e2m1_t, cutlass::float_ue4m3_t>, cute::tuple<cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::C<(int)1>, int>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)512>>, cute::tuple<cute::C<(int)0>, int>>> *>, cute::TiledMMA<cute::MMA_Atom<cute::SM120::BLOCKSCALED::SM120_16x8x64_TN_VS<cutlass::float_e2m1_t, cutlass::float_e2m1_t, float, cutlass::float_ue4m3_t, (int)16>>, cute::Layout<cute::tuple<cute::C<(int)4>, cute::C<(int)2>, cute::C<(int)1>>, cute::tuple<cute::C<(int)1>, cute::C<(int)4>, cute::C<(int)0>>>, cute::tuple<cute::C<(int)128>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)2>, cute::C<(int)2>>, cute::tuple<cute::C<(int)1>, cute::C<(int)16>, cute::C<(int)8>>>, cute::C<(int)64>>>, cute::tuple<cute::SM90_TMA_LOAD, cute::SM90_TMA_LOAD>, cute::tuple<cute::ComposedLayout<cute::Swizzle<(int)3, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)4>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)256>>, cute::tuple<cute::C<(int)256>, cute::C<(int)1>>>>, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, cute::C<(int)1>>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)1>, cute::C<(int)4>>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)512>>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)4>, cute::C<(int)512>>>>>, cute::tuple<cute::Copy_Atom<cute::SM75_U32x4_LDSM_N, cutlass::integer_subbyte<(int)4, (bool)0>>, cute::Copy_Atom<cute::UniversalCopy<cutlass::float_ue4m3_t, cutlass::float_ue4m3_t>, cutlass::float_ue4m3_t>>, cute::identity, cute::tuple<cute::SM90_TMA_LOAD, cute::SM90_TMA_LOAD>, cute::tuple<cute::ComposedLayout<cute::Swizzle<(int)3, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)4>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)256>>, cute::tuple<cute::C<(int)256>, cute::C<(int)1>>>>, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, cute::C<(int)1>>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)1>, cute::C<(int)4>>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)512>>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)4>, cute::C<(int)512>>>>>, cute::tuple<cute::Copy_Atom<cute::SM75_U32x4_LDSM_N, cutlass::integer_subbyte<(int)4, (bool)0>>, cute::Copy_Atom<cute::UniversalCopy<cutlass::float_ue4m3_t, cutlass::float_ue4m3_t>, cutlass::float_ue4m3_t>>, cute::identity>, cutlass::epilogue::collective::CollectiveEpilogue<cutlass::epilogue::Sm90PtrArrayTmaWarpSpecialized<(int)3, (int)2, (int)4, (bool)1, (bool)0, (int)2>, cute::tuple<cute::C<(int)128>, cute::C<(int)128>, cute::C<(int)256>>, cute::tuple<cute::C<(int)64>, cute::C<(int)32>>, cutlass::bfloat16_t, cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cutlass::bfloat16_t, cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cutlass::epilogue::fusion::FusionCallbacks<cutlass::epilogue::Sm120PtrArrayTmaWarpSpecialized<(int)3, (int)2, (int)4, (bool)1, (bool)0, (int)2>, cutlass::epilogue::fusion::LinearCombination<cutlass::bfloat16_t, float, cutlass::bfloat16_t, float, (cutlass::FloatRoundStyle)2>, cute::tuple<cute::C<(int)128>, cute::C<(int)128>, cute::C<(int)256>>, cute::tuple<cute::C<(int)64>, cute::C<(int)32>>, >, cute::SM90_TMA_LOAD, cute::ComposedLayout<cute::Swizzle<(int)2, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)16>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)32>>, cute::tuple<cute::C<(int)32>, cute::C<(int)1>>>>, cute::SM75_U32x2_LDSM_N, cute::SM90_TMA_STORE, cute::ComposedLayout<cute::Swizzle<(int)2, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)16>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)32>>, cute::tuple<cute::C<(int)32>, cute::C<(int)1>>>>, cute::SM90_U32x2_STSM_N, cute::Copy_Atom<cute::SM90_U32x2_STSM_N, cutlass::half_t>, void>, void, void>>(T1::Params)",
+        "mangled_name": "_ZN7cutlass13device_kernelINS_4gemm6kernel13GemmUniversalINS1_17GroupProblemShapeIN4cute5tupleIJlllEEEEENS1_10collective13CollectiveMmaINS1_47MainloopSm120ArrayTmaWarpSpecializedBlockScaledILi2ELi3ENS6_IJNS5_1CILi1EEESD_SD_EEENS1_59KernelPtrArrayTmaWarpSpecializedCooperativeBlockScaledSm120ILi3EEEEENS6_IJNSC_ILi128EEESI_NSC_ILi256EEEEEENS6_IJNS_12float_e2m1_tENS_13float_ue4m3_tEEEENS6_IJPNS6_IJlSD_NSC_ILi0EEEEEEPNS5_6LayoutINS6_IJNS6_IJNS6_IJNSC_ILi32EEENSC_ILi4EEEEEEiEEENS6_IJNS6_IJNSC_ILi16EEEST_EEEiEEENS6_IJSD_iEEEEEENS6_IJSY_NS6_IJNS6_IJSO_SD_EEENSC_ILi512EEEEEENS6_IJSO_iEEEEEEEEEEESN_S18_NS5_8TiledMMAINS5_8MMA_AtomIJNS5_5SM12011BLOCKSCALED19SM120_16x8x64_TN_VSISL_SL_fSM_Li16EEEEEENSR_INS6_IJST_NSC_ILi2EEESD_EEENS6_IJSD_ST_SO_EEEEENS6_IJSI_NSR_INS6_IJNSC_ILi8EEES1G_S1G_EEENS6_IJSD_SW_S1K_EEEEENSC_ILi64EEEEEEEENS6_IJNS5_13SM90_TMA_LOADES1R_EEENS6_IJNS5_14ComposedLayoutINS5_7SwizzleILi3ELi4ELi3EEENS5_18smem_ptr_flag_bitsILi4EEENSR_INS6_IJS1K_SJ_EEENS6_IJSJ_SD_EEEEEEENSR_INS6_IJNS6_IJSU_SD_EEENS6_IJSX_SD_ST_EEEEEENS6_IJNS6_IJSX_S12_EEENS6_IJS11_ST_S12_EEEEEEEEEEENS6_IJNS5_9Copy_AtomIJNS5_17SM75_U32x4_LDSM_NENS_15integer_subbyteILi4ELb0EEEEEENS2A_IJNS5_13UniversalCopyISM_SM_EESM_EEEEEENS5_8identityES1S_S29_S2I_S2J_EENS_8epilogue10collective18CollectiveEpilogueINS2L_30Sm90PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEEJSK_NS6_IJS1O_SS_EEENS_10bfloat16_tESQ_S2R_SQ_NS2L_6fusion15FusionCallbacksINS2L_31Sm120PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEENS2S_17LinearCombinationIS2R_fS2R_fLNS_15FloatRoundStyleE2EEESK_S2Q_JEEES1R_NS1T_INS1U_ILi2ELi4ELi3EEENS1W_ILi16EEENSR_INS6_IJS1K_SS_EEENS6_IJSS_SD_EEEEEEENS5_17SM75_U32x2_LDSM_NENS5_14SM90_TMA_STOREES35_NS5_17SM90_U32x2_STSM_NENS2A_IJS38_NS_6half_tEEEEvEEEvvEEEEvNT_6ParamsE"
+      },
+      {
+        "type": "kernel",
+        "key": "kernel:7",
+        "row_id": "kernel:7",
+        "name": "void tensorrt_llm::kernels::cutlass_kernels::doActivationKernel<__nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16, tensorrt_llm::kernels::cutlass_kernels::GLUAdaptor<cutlass::epilogue::thread::SiLu>, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, (bool)0, std::integral_constant<bool, (bool)0>>(T1 *, const T2 *, const float *, const T3 *, bool, const long *, int, long, const float *, bool, unsigned char *, tensorrt_llm::kernels::cutlass_kernels::ActivationParams)",
+        "start_ns": 9108067,
+        "duration_ns": 9600,
+        "device_id": 0,
+        "stream_id": 141,
+        "nvtx_context": {
+          "range_id": "nvtx:1",
+          "name": "exp002_m256_cutlass_bf16_chain_single_replay",
+          "depth": 0,
+          "iter_index": 0
+        },
+        "grid": [
+          880,
+          1,
+          1
+        ],
+        "block": [
+          256,
+          1,
+          1
+        ],
+        "registers_per_thread": 57,
+        "static_shared_memory": 0,
+        "dynamic_shared_memory": 0,
+        "demangled_name": "void tensorrt_llm::kernels::cutlass_kernels::doActivationKernel<__nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16, tensorrt_llm::kernels::cutlass_kernels::GLUAdaptor<cutlass::epilogue::thread::SiLu>, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, (bool)0, std::integral_constant<bool, (bool)0>>(T1 *, const T2 *, const float *, const T3 *, bool, const long *, int, long, const float *, bool, unsigned char *, tensorrt_llm::kernels::cutlass_kernels::ActivationParams)",
+        "mangled_name": "_ZN12tensorrt_llm7kernels15cutlass_kernels18doActivationKernelI13__nv_fp4_e2m113__nv_bfloat16S4_NS1_10GLUAdaptorIN7cutlass8epilogue6thread4SiLuEEELNS1_34TmaWarpSpecializedGroupedGemmInput19FpXBlockScalingTypeE1ELb0ESt17integral_constantIbLb0EEEEvPT_PKT0_PKfPKT1_bPKlilSL_bPhNS1_16ActivationParamsE"
+      },
+      {
+        "type": "kernel",
+        "key": "kernel:8",
+        "row_id": "kernel:8",
+        "name": "void cutlass::device_kernel<cutlass::gemm::kernel::GemmUniversal<cutlass::gemm::GroupProblemShape<cute::tuple<long, long, long>>, cutlass::gemm::collective::CollectiveMma<cutlass::gemm::MainloopSm120ArrayTmaWarpSpecializedBlockScaled<(int)2, (int)3, cute::tuple<cute::C<(int)1>, cute::C<(int)1>, cute::C<(int)1>>, cutlass::gemm::KernelPtrArrayTmaWarpSpecializedCooperativeBlockScaledSm120<(int)3>>, cute::tuple<cute::C<(int)128>, cute::C<(int)128>, cute::C<(int)256>>, cute::tuple<cutlass::float_e2m1_t, cutlass::float_ue4m3_t>, cute::tuple<cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::C<(int)1>, int>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)512>>, cute::tuple<cute::C<(int)0>, int>>> *>, cute::tuple<cutlass::float_e2m1_t, cutlass::float_ue4m3_t>, cute::tuple<cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::C<(int)1>, int>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)512>>, cute::tuple<cute::C<(int)0>, int>>> *>, cute::TiledMMA<cute::MMA_Atom<cute::SM120::BLOCKSCALED::SM120_16x8x64_TN_VS<cutlass::float_e2m1_t, cutlass::float_e2m1_t, float, cutlass::float_ue4m3_t, (int)16>>, cute::Layout<cute::tuple<cute::C<(int)4>, cute::C<(int)2>, cute::C<(int)1>>, cute::tuple<cute::C<(int)1>, cute::C<(int)4>, cute::C<(int)0>>>, cute::tuple<cute::C<(int)128>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)2>, cute::C<(int)2>>, cute::tuple<cute::C<(int)1>, cute::C<(int)16>, cute::C<(int)8>>>, cute::C<(int)64>>>, cute::tuple<cute::SM90_TMA_LOAD, cute::SM90_TMA_LOAD>, cute::tuple<cute::ComposedLayout<cute::Swizzle<(int)3, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)4>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)256>>, cute::tuple<cute::C<(int)256>, cute::C<(int)1>>>>, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, cute::C<(int)1>>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)1>, cute::C<(int)4>>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)512>>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)4>, cute::C<(int)512>>>>>, cute::tuple<cute::Copy_Atom<cute::SM75_U32x4_LDSM_N, cutlass::integer_subbyte<(int)4, (bool)0>>, cute::Copy_Atom<cute::UniversalCopy<cutlass::float_ue4m3_t, cutlass::float_ue4m3_t>, cutlass::float_ue4m3_t>>, cute::identity, cute::tuple<cute::SM90_TMA_LOAD, cute::SM90_TMA_LOAD>, cute::tuple<cute::ComposedLayout<cute::Swizzle<(int)3, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)4>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)256>>, cute::tuple<cute::C<(int)256>, cute::C<(int)1>>>>, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, cute::C<(int)1>>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)1>, cute::C<(int)4>>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)512>>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)4>, cute::C<(int)512>>>>>, cute::tuple<cute::Copy_Atom<cute::SM75_U32x4_LDSM_N, cutlass::integer_subbyte<(int)4, (bool)0>>, cute::Copy_Atom<cute::UniversalCopy<cutlass::float_ue4m3_t, cutlass::float_ue4m3_t>, cutlass::float_ue4m3_t>>, cute::identity>, cutlass::epilogue::collective::CollectiveEpilogue<cutlass::epilogue::Sm90PtrArrayTmaWarpSpecialized<(int)3, (int)2, (int)4, (bool)1, (bool)0, (int)2>, cute::tuple<cute::C<(int)128>, cute::C<(int)128>, cute::C<(int)256>>, cute::tuple<cute::C<(int)64>, cute::C<(int)32>>, cutlass::bfloat16_t, cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cutlass::bfloat16_t, cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cutlass::epilogue::fusion::FusionCallbacks<cutlass::epilogue::Sm120PtrArrayTmaWarpSpecialized<(int)3, (int)2, (int)4, (bool)1, (bool)0, (int)2>, cutlass::epilogue::fusion::LinearCombination<cutlass::bfloat16_t, float, cutlass::bfloat16_t, float, (cutlass::FloatRoundStyle)2>, cute::tuple<cute::C<(int)128>, cute::C<(int)128>, cute::C<(int)256>>, cute::tuple<cute::C<(int)64>, cute::C<(int)32>>, >, cute::SM90_TMA_LOAD, cute::ComposedLayout<cute::Swizzle<(int)2, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)16>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)32>>, cute::tuple<cute::C<(int)32>, cute::C<(int)1>>>>, cute::SM75_U32x2_LDSM_N, cute::SM90_TMA_STORE, cute::ComposedLayout<cute::Swizzle<(int)2, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)16>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)32>>, cute::tuple<cute::C<(int)32>, cute::C<(int)1>>>>, cute::SM90_U32x2_STSM_N, cute::Copy_Atom<cute::SM90_U32x2_STSM_N, cutlass::half_t>, void>, void, void>>(T1::Params)",
+        "start_ns": 9116643,
+        "duration_ns": 204031,
+        "device_id": 0,
+        "stream_id": 141,
+        "nvtx_context": {
+          "range_id": "nvtx:1",
+          "name": "exp002_m256_cutlass_bf16_chain_single_replay",
+          "depth": 0,
+          "iter_index": 0
+        },
+        "grid": [
+          1,
+          110,
+          1
+        ],
+        "block": [
+          384,
+          1,
+          1
+        ],
+        "registers_per_thread": 168,
+        "static_shared_memory": 0,
+        "dynamic_shared_memory": 89088,
+        "demangled_name": "void cutlass::device_kernel<cutlass::gemm::kernel::GemmUniversal<cutlass::gemm::GroupProblemShape<cute::tuple<long, long, long>>, cutlass::gemm::collective::CollectiveMma<cutlass::gemm::MainloopSm120ArrayTmaWarpSpecializedBlockScaled<(int)2, (int)3, cute::tuple<cute::C<(int)1>, cute::C<(int)1>, cute::C<(int)1>>, cutlass::gemm::KernelPtrArrayTmaWarpSpecializedCooperativeBlockScaledSm120<(int)3>>, cute::tuple<cute::C<(int)128>, cute::C<(int)128>, cute::C<(int)256>>, cute::tuple<cutlass::float_e2m1_t, cutlass::float_ue4m3_t>, cute::tuple<cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::C<(int)1>, int>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)512>>, cute::tuple<cute::C<(int)0>, int>>> *>, cute::tuple<cutlass::float_e2m1_t, cutlass::float_ue4m3_t>, cute::tuple<cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::C<(int)1>, int>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, int>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)512>>, cute::tuple<cute::C<(int)0>, int>>> *>, cute::TiledMMA<cute::MMA_Atom<cute::SM120::BLOCKSCALED::SM120_16x8x64_TN_VS<cutlass::float_e2m1_t, cutlass::float_e2m1_t, float, cutlass::float_ue4m3_t, (int)16>>, cute::Layout<cute::tuple<cute::C<(int)4>, cute::C<(int)2>, cute::C<(int)1>>, cute::tuple<cute::C<(int)1>, cute::C<(int)4>, cute::C<(int)0>>>, cute::tuple<cute::C<(int)128>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)2>, cute::C<(int)2>>, cute::tuple<cute::C<(int)1>, cute::C<(int)16>, cute::C<(int)8>>>, cute::C<(int)64>>>, cute::tuple<cute::SM90_TMA_LOAD, cute::SM90_TMA_LOAD>, cute::tuple<cute::ComposedLayout<cute::Swizzle<(int)3, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)4>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)256>>, cute::tuple<cute::C<(int)256>, cute::C<(int)1>>>>, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, cute::C<(int)1>>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)1>, cute::C<(int)4>>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)512>>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)4>, cute::C<(int)512>>>>>, cute::tuple<cute::Copy_Atom<cute::SM75_U32x4_LDSM_N, cutlass::integer_subbyte<(int)4, (bool)0>>, cute::Copy_Atom<cute::UniversalCopy<cutlass::float_ue4m3_t, cutlass::float_ue4m3_t>, cutlass::float_ue4m3_t>>, cute::identity, cute::tuple<cute::SM90_TMA_LOAD, cute::SM90_TMA_LOAD>, cute::tuple<cute::ComposedLayout<cute::Swizzle<(int)3, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)4>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)256>>, cute::tuple<cute::C<(int)256>, cute::C<(int)1>>>>, cute::Layout<cute::tuple<cute::tuple<cute::tuple<cute::C<(int)32>, cute::C<(int)4>>, cute::C<(int)1>>, cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)1>, cute::C<(int)4>>>, cute::tuple<cute::tuple<cute::tuple<cute::C<(int)16>, cute::C<(int)4>>, cute::C<(int)512>>, cute::tuple<cute::tuple<cute::C<(int)0>, cute::C<(int)1>>, cute::C<(int)4>, cute::C<(int)512>>>>>, cute::tuple<cute::Copy_Atom<cute::SM75_U32x4_LDSM_N, cutlass::integer_subbyte<(int)4, (bool)0>>, cute::Copy_Atom<cute::UniversalCopy<cutlass::float_ue4m3_t, cutlass::float_ue4m3_t>, cutlass::float_ue4m3_t>>, cute::identity>, cutlass::epilogue::collective::CollectiveEpilogue<cutlass::epilogue::Sm90PtrArrayTmaWarpSpecialized<(int)3, (int)2, (int)4, (bool)1, (bool)0, (int)2>, cute::tuple<cute::C<(int)128>, cute::C<(int)128>, cute::C<(int)256>>, cute::tuple<cute::C<(int)64>, cute::C<(int)32>>, cutlass::bfloat16_t, cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cutlass::bfloat16_t, cute::tuple<long, cute::C<(int)1>, cute::C<(int)0>> *, cutlass::epilogue::fusion::FusionCallbacks<cutlass::epilogue::Sm120PtrArrayTmaWarpSpecialized<(int)3, (int)2, (int)4, (bool)1, (bool)0, (int)2>, cutlass::epilogue::fusion::LinearCombination<cutlass::bfloat16_t, float, cutlass::bfloat16_t, float, (cutlass::FloatRoundStyle)2>, cute::tuple<cute::C<(int)128>, cute::C<(int)128>, cute::C<(int)256>>, cute::tuple<cute::C<(int)64>, cute::C<(int)32>>, >, cute::SM90_TMA_LOAD, cute::ComposedLayout<cute::Swizzle<(int)2, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)16>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)32>>, cute::tuple<cute::C<(int)32>, cute::C<(int)1>>>>, cute::SM75_U32x2_LDSM_N, cute::SM90_TMA_STORE, cute::ComposedLayout<cute::Swizzle<(int)2, (int)4, (int)3>, cute::smem_ptr_flag_bits<(int)16>, cute::Layout<cute::tuple<cute::C<(int)8>, cute::C<(int)32>>, cute::tuple<cute::C<(int)32>, cute::C<(int)1>>>>, cute::SM90_U32x2_STSM_N, cute::Copy_Atom<cute::SM90_U32x2_STSM_N, cutlass::half_t>, void>, void, void>>(T1::Params)",
+        "mangled_name": "_ZN7cutlass13device_kernelINS_4gemm6kernel13GemmUniversalINS1_17GroupProblemShapeIN4cute5tupleIJlllEEEEENS1_10collective13CollectiveMmaINS1_47MainloopSm120ArrayTmaWarpSpecializedBlockScaledILi2ELi3ENS6_IJNS5_1CILi1EEESD_SD_EEENS1_59KernelPtrArrayTmaWarpSpecializedCooperativeBlockScaledSm120ILi3EEEEENS6_IJNSC_ILi128EEESI_NSC_ILi256EEEEEENS6_IJNS_12float_e2m1_tENS_13float_ue4m3_tEEEENS6_IJPNS6_IJlSD_NSC_ILi0EEEEEEPNS5_6LayoutINS6_IJNS6_IJNS6_IJNSC_ILi32EEENSC_ILi4EEEEEEiEEENS6_IJNS6_IJNSC_ILi16EEEST_EEEiEEENS6_IJSD_iEEEEEENS6_IJSY_NS6_IJNS6_IJSO_SD_EEENSC_ILi512EEEEEENS6_IJSO_iEEEEEEEEEEESN_S18_NS5_8TiledMMAINS5_8MMA_AtomIJNS5_5SM12011BLOCKSCALED19SM120_16x8x64_TN_VSISL_SL_fSM_Li16EEEEEENSR_INS6_IJST_NSC_ILi2EEESD_EEENS6_IJSD_ST_SO_EEEEENS6_IJSI_NSR_INS6_IJNSC_ILi8EEES1G_S1G_EEENS6_IJSD_SW_S1K_EEEEENSC_ILi64EEEEEEEENS6_IJNS5_13SM90_TMA_LOADES1R_EEENS6_IJNS5_14ComposedLayoutINS5_7SwizzleILi3ELi4ELi3EEENS5_18smem_ptr_flag_bitsILi4EEENSR_INS6_IJS1K_SJ_EEENS6_IJSJ_SD_EEEEEEENSR_INS6_IJNS6_IJSU_SD_EEENS6_IJSX_SD_ST_EEEEEENS6_IJNS6_IJSX_S12_EEENS6_IJS11_ST_S12_EEEEEEEEEEENS6_IJNS5_9Copy_AtomIJNS5_17SM75_U32x4_LDSM_NENS_15integer_subbyteILi4ELb0EEEEEENS2A_IJNS5_13UniversalCopyISM_SM_EESM_EEEEEENS5_8identityES1S_S29_S2I_S2J_EENS_8epilogue10collective18CollectiveEpilogueINS2L_30Sm90PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEEJSK_NS6_IJS1O_SS_EEENS_10bfloat16_tESQ_S2R_SQ_NS2L_6fusion15FusionCallbacksINS2L_31Sm120PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEENS2S_17LinearCombinationIS2R_fS2R_fLNS_15FloatRoundStyleE2EEESK_S2Q_JEEES1R_NS1T_INS1U_ILi2ELi4ELi3EEENS1W_ILi16EEENSR_INS6_IJS1K_SS_EEENS6_IJSS_SD_EEEEEEENS5_17SM75_U32x2_LDSM_NENS5_14SM90_TMA_STOREES35_NS5_17SM90_U32x2_STSM_NENS2A_IJS38_NS_6half_tEEEEvEEEvvEEEEvNT_6ParamsE"
+      },
+      {
+        "type": "kernel",
+        "key": "kernel:9",
+        "row_id": "kernel:9",
+        "name": "void tensorrt_llm::kernels::cutlass_kernels::finalizeMoeRoutingKernel<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, (tensorrt_llm::kernels::cutlass_kernels::ScaleMode)1>(const T2 *, T1 *, const T3 *, const float *, const int *, const int *, long, long, long, int, int)",
+        "start_ns": 9320610,
+        "duration_ns": 7040,
+        "device_id": 0,
+        "stream_id": 141,
+        "nvtx_context": {
+          "range_id": "nvtx:1",
+          "name": "exp002_m256_cutlass_bf16_chain_single_replay",
+          "depth": 0,
+          "iter_index": 0
+        },
+        "grid": [
+          256,
+          1,
+          1
+        ],
+        "block": [
+          256,
+          1,
+          1
+        ],
+        "registers_per_thread": 48,
+        "static_shared_memory": 0,
+        "dynamic_shared_memory": 0,
+        "demangled_name": "void tensorrt_llm::kernels::cutlass_kernels::finalizeMoeRoutingKernel<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, (tensorrt_llm::kernels::cutlass_kernels::ScaleMode)1>(const T2 *, T1 *, const T3 *, const float *, const int *, const int *, long, long, long, int, int)",
+        "mangled_name": "_ZN12tensorrt_llm7kernels15cutlass_kernels24finalizeMoeRoutingKernelI13__nv_bfloat16S3_S3_LNS1_9ScaleModeE1EEEvPKT0_PT_PKT1_PKfPKiSG_lllii"
+      }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "aggregation": "median of per-repeat means; preserve all raw samples",
+  "arms": [
+    "cutedsl_bf16_fused",
+    "cutlass_bf16_chain"
+  ],
+  "cache_policy": {
+    "l2_flush_bytes": 201326592,
+    "placement": "before each replay, outside timed interval"
+  },
+  "fingerprint_sha256": "0fbfc04cb17eb09e82ffc45f0a040954692e184b4fe31162d6cac6cb518e438b",
+  "iterations_per_sample": 50,
+  "m_values": [
+    256,
+    1024,
+    8192
+  ],
+  "order_policy": "even A>B; odd B>A; every repeat contains all arms",
+  "repeats": 5,
+  "schema_version": 2,
+  "timing": "outer CUDA graph replay; external CUDA events inside graph",
+  "warmup": 5
+}

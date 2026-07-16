@@ -1,0 +1,122 @@
+{
+  "classification": {
+    "dynamic_frequency_or_latency": "not_measured_by_static_sass",
+    "opcode_and_stack_offset_counts": "fact_from_captured_static_sass",
+    "source_object_or_phase_attribution": "inference_from_source_program_order; no source lineinfo"
+  },
+  "function": {
+    "instruction_count": 7568,
+    "length": 121088,
+    "name": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+    "source_lineinfo_present": false,
+    "start": 0
+  },
+  "identity": {
+    "artifact_fingerprint_sha256": "66fde3c106434ca2c978cc996d99cb119de38206f0db0eeb82e53632176041f4",
+    "comparison_group_id": "exp002_cutedsl_vs_cutlass_bf16",
+    "disassembly_json_sha256": "e12c743fee26af5884df5698953918c2adc053d5fabdff3c5bc72d11461dde3f",
+    "environment_lock_digest": "d1479643a41cb9ad8787e7b58844800265d6a196016e31a63a82bc60a29e0f2d",
+    "ncu_report_sha256": "e9d771dd858628a55222447dbca642672c2bcb5e52937736ee006b45eb2d2a1a",
+    "protocol_lock_digest": "0fbfc04cb17eb09e82ffc45f0a040954692e184b4fe31162d6cac6cb518e438b",
+    "rerun_id": "exp002-dsl460-20260716T0310Z-r1"
+  },
+  "limitations": [
+    "Static SASS does not establish dynamic execution frequency or critical-path latency.",
+    "The captured binary has no source line information, so a specific source-variable attribution is an inference.",
+    "Use the launch-level NCU local-memory counters for dynamic traffic; do not multiply these static counts into operator traffic without a validated execution model."
+  ],
+  "schema": "exp002.static-local-sass.v1",
+  "static_instruction_facts": {
+    "local_load_opcode_counts": {
+      "LDL.LU": 122
+    },
+    "local_store_opcode_counts": {
+      "STL": 14,
+      "STL.64": 54
+    },
+    "stack_roundtrip_model": {
+      "all_stored_slots_have_a_later_static_ldl": true,
+      "missing_later_ldl_offsets": [],
+      "program_order_markers": {
+        "first_ldl": "0xba90",
+        "last_tensor_opcode_before_first_ldl": "0xba60",
+        "stl64_first": "0x7860",
+        "stl64_last": "0x8060",
+        "stl_first": "0xbb40",
+        "stl_last": "0xbc30"
+      },
+      "stl64_covered_32bit_words": 108,
+      "stl_covered_32bit_words": 14,
+      "total_stored_32bit_words_per_lane": 122,
+      "unique_static_ldl_stack_offsets": 122
+    },
+    "stl64": {
+      "address_first": "0x7860",
+      "address_last": "0x8060",
+      "all_slots_have_a_later_static_ldl": true,
+      "bytes_per_lane_if_each_static_instruction_executes_once": 432,
+      "count": 54,
+      "covered_32bit_stack_slots": 108,
+      "missing_later_ldl_offsets": [],
+      "stack_offsets": [
+        "0x0",
+        "0x8",
+        "0x10",
+        "0x18",
+        "0x20",
+        "0x28",
+        "0x30",
+        "0x38",
+        "0x40",
+        "0x48",
+        "0x50",
+        "0x58",
+        "0x60",
+        "0x68",
+        "0x70",
+        "0x78",
+        "0x80",
+        "0x88",
+        "0x90",
+        "0x98",
+        "0xa0",
+        "0xa8",
+        "0xb0",
+        "0xb8",
+        "0xc0",
+        "0xc8",
+        "0xd0",
+        "0xd8",
+        "0xe0",
+        "0xe8",
+        "0xf0",
+        "0xf8",
+        "0x100",
+        "0x108",
+        "0x110",
+        "0x118",
+        "0x120",
+        "0x128",
+        "0x130",
+        "0x138",
+        "0x140",
+        "0x148",
+        "0x150",
+        "0x158",
+        "0x160",
+        "0x168",
+        "0x170",
+        "0x178",
+        "0x180",
+        "0x188",
+        "0x190",
+        "0x198",
+        "0x1a0",
+        "0x1a8"
+      ]
+    },
+    "tensor_opcodes": {
+      "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X": 896
+    }
+  }
+}

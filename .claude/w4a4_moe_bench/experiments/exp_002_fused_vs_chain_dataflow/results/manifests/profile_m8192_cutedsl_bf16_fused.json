@@ -1,0 +1,505 @@
+{
+  "arm": "cutedsl_bf16_fused",
+  "arm_metadata": {
+    "backend": "flashinfer.fused_moe.cute_dsl.B12xMoEWrapper",
+    "boundary": "BF16 input -> fused W4A4 MoE -> BF16 output",
+    "expected_launches": "one material fused kernel; NSys is authority",
+    "input_dtype": "bfloat16",
+    "role": "paired target"
+  },
+  "artifact_fingerprint_sha256": "66fde3c106434ca2c978cc996d99cb119de38206f0db0eeb82e53632176041f4",
+  "capture_trigger": "cudaProfilerStart/Stop around one NVTX-named graph replay",
+  "comparison_group_id": "exp002_cutedsl_vs_cutlass_bf16",
+  "environment_lock_digest": "d1479643a41cb9ad8787e7b58844800265d6a196016e31a63a82bc60a29e0f2d",
+  "event_elapsed_us": 1782.8799486160278,
+  "fixture": {
+    "duplicate_expert_ids": 0,
+    "fixture_kind": "deterministic_synthetic_random_logits",
+    "m": 8192,
+    "occupancy_max": 302,
+    "occupancy_min": 217,
+    "occupancy_p50": 256.0,
+    "occupancy_p95": 281.0,
+    "occupancy_sha256": "5e937225d3ac21770218000ebdedcb62cc211c4444bb260d0838656ca41260bc",
+    "predicted_cutlass_route_branch": "three_step_large_prefix_candidate",
+    "seed": 10218,
+    "shape": {
+      "experts": 256,
+      "hidden": 2048,
+      "intermediate_tp": 512,
+      "topk": 8
+    },
+    "topk_ids_sha256": "f9b3c632d767e754837a14016f5a2ea3c3fccfefef1adee4f9b7b966c68e2f7a",
+    "topk_weights_sha256": "ee885b45d94eee54d3c9114669492419003c914ea3bd1d29dbd58ad765fccb9d",
+    "weight_sum_max_abs_error": 2.384185791015625e-07,
+    "x_sha256": "6c95ae4406b2fc7ad4544936781b71288d98f496a60c58f5695e6dbf868864b4",
+    "zero_token_experts": 0
+  },
+  "graph_profiling": "node",
+  "jit_artifacts": [
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/cached_ops/fp4_quantization_120f/fp4_quantization_120f.so",
+      "sha256": "b959a4fc28caa22ff337602917c0f62cd9b17c9defbac02f4985aebc253ce34b",
+      "size": 2975168
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/cached_ops/fused_moe_120/fused_moe_120.so",
+      "sha256": "a805cd44b39d5cdf2bd4d86633f92e8abcc6ef8baff611489282fcce1627e563",
+      "size": 63030840
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group0.generated.cu",
+      "sha256": "4e4515e96329f54256bf60572c0225144b9c8af0fdd80c25a5144caf77b4f341",
+      "size": 5458
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group1.generated.cu",
+      "sha256": "b8a81dc23c8ac0eb009108bd7196946ced291c2ca2bca9ea2dd2ad1c98924cf4",
+      "size": 5464
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group10.generated.cu",
+      "sha256": "4cd326e244c049fdcd95155f46c1b0faf5ab7dfc35dfddcf39377cbc40a2fa39",
+      "size": 5552
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group11.generated.cu",
+      "sha256": "dbb5da11ca87ad57ad7e70449379a52dab945990892ff247855e59593ada438b",
+      "size": 5310
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group12.generated.cu",
+      "sha256": "035c440781d459067b3e0cc1020b7111829260533c53a7572c759795c5c7d99b",
+      "size": 5312
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group13.generated.cu",
+      "sha256": "06c4bef8a2c044fabfef31cac9815f9b84731d8c4431f8299a3b32f2fae777d9",
+      "size": 5320
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group14.generated.cu",
+      "sha256": "a7787c26e0299043ff85a6c55349dc9a5dbbfc639cfb31fd92fa36c875f635de",
+      "size": 5354
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group15.generated.cu",
+      "sha256": "489f60e0bd14f8c25caaf56edfd268fae5b6136f6256549383b470d468d69ff8",
+      "size": 5508
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group16.generated.cu",
+      "sha256": "d26c3a1efad2333ab315c9bfa876904a29526243fb9ca2673d5f679f6dd2bea6",
+      "size": 5956
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group17.generated.cu",
+      "sha256": "3853fb91bc4b8250db1199a354a6dea32cde4bdc4843b34f3f62801bac58e4b3",
+      "size": 5960
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group18.generated.cu",
+      "sha256": "2b1aeb55a7c4c82c24e061888fe20dc2cb93cf80fa6db703bd65f78200cedfbe",
+      "size": 5966
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group19.generated.cu",
+      "sha256": "619d806f1438fe64b3bf35c08976a3c609411df4c9d6e53184a61d71d6f97a85",
+      "size": 5992
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group2.generated.cu",
+      "sha256": "a22e57fc9ccf1315b849b27723370efa848a182e6873508d28c7ad3f189b3313",
+      "size": 5468
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group20.generated.cu",
+      "sha256": "6c773e8871f7b166f385abdf03f64a9bec657e3864d20c745526497141f23f57",
+      "size": 6008
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group21.generated.cu",
+      "sha256": "68b9564af5c36b99a118aa218f06da57ea9dc61169133de44c902a55d00eee33",
+      "size": 5146
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group22.generated.cu",
+      "sha256": "9f13e0bd474e49a479a9a14c83b301b4abbdc2ebe1391959ba1d235e76bccb03",
+      "size": 5152
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group23.generated.cu",
+      "sha256": "5828aa62465ccbbf37aa9b2912f3f688c6d36191ecdd06de4afb8df2f6241b9b",
+      "size": 5156
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group24.generated.cu",
+      "sha256": "7e4005c63b4c9fd105235c207ffc85e7c58be30eb6e311fc0b4f47944eded921",
+      "size": 5176
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group25.generated.cu",
+      "sha256": "838abedb21089d411d5ee05933b777f795ff00e91258d1cd6963559039dabac8",
+      "size": 5198
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group26.generated.cu",
+      "sha256": "ea58d6e7ef23189b16457a6222a1e0ca50218afbc7b50dd35af32fb0530c50c5",
+      "size": 5644
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group27.generated.cu",
+      "sha256": "9c014d4fe6a4da1fd7a507c5be64b4f84db48c19a3d442c1f139802ea8ea9514",
+      "size": 5800
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group28.generated.cu",
+      "sha256": "1434bfbd97e34f38e76c6be31fd9610299daf12c2ffc1f9fa9260b66629a2bc7",
+      "size": 5802
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group29.generated.cu",
+      "sha256": "c975b8ba9149c93f1bc20d3c42a0a2d8338dd56752d879047cb5f6520f0f57c2",
+      "size": 5816
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group3.generated.cu",
+      "sha256": "68c4f435fd58dd85eb29737ff935c4f24b41cf6c35282cd39e076ee5245ebb0f",
+      "size": 5488
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group30.generated.cu",
+      "sha256": "1cb336aa7c46e9bc834d07526b840f6176ce1fe96a9a4514c35370684e27ad32",
+      "size": 5844
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group31.generated.cu",
+      "sha256": "d4a60813d23ac46646e33b21e7e24b8e138a2a4115097de46b01b8dddaaefd2f",
+      "size": 3056
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group4.generated.cu",
+      "sha256": "f5372d0a94912257bd71746aa9000350216350620ee6866ac8f6c401f69e00e3",
+      "size": 5510
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group5.generated.cu",
+      "sha256": "42d39cd4ac92959d39de3dab829fc6708d37f1fa1fec38f853bdd8d1e732ae5f",
+      "size": 5686
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group6.generated.cu",
+      "sha256": "54cee2b535c1f2c85c84ca7c36516b241cc5bc69ccc5ed6d751a01cc222a12d5",
+      "size": 5752
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group7.generated.cu",
+      "sha256": "ed6667faddedcb58174264ce0392e13b759b779edf04d01757a4a33d3a67780b",
+      "size": 5754
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group8.generated.cu",
+      "sha256": "f87f623cf10bd57759a93f37b382c491f2282665d498ed7d7a4bcd2a02095dd0",
+      "size": 5768
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M128_group9.generated.cu",
+      "sha256": "45c289f7134690a7ea52fb197a4fa351540e5d43bb2068d0701d3bc0755e8119",
+      "size": 5796
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group0.generated.cu",
+      "sha256": "cd9d942b07db2d98b7041cc59807954bfc751a70624fee362a20714a1caf28d4",
+      "size": 5341
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group1.generated.cu",
+      "sha256": "04837639ff8803e6f148f294bef37b86ee3c3a9a2fa2cfe7dfe5bc0e925b90e0",
+      "size": 5358
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group10.generated.cu",
+      "sha256": "4f016da58a8b47dfc1636aab37fa81346ed24b251c72dd5b260e811d25e358c0",
+      "size": 5457
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group11.generated.cu",
+      "sha256": "d74c41262c69fa641c617caa44de9cde80b871aa80a7fc25b209992443b0b8ea",
+      "size": 5034
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group12.generated.cu",
+      "sha256": "3b41355184f2dd131952939c83d8186c8e03e462bf6601dde6ca9fc165689d0a",
+      "size": 5067
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group13.generated.cu",
+      "sha256": "e49fbfd7cbd8144357d1fe8469576005b843dace50097f071e6c9b9bbf673dcd",
+      "size": 5602
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group14.generated.cu",
+      "sha256": "2e63fa00292bf671ee5222632d59f8d82eb22eef52da97fe57531260c6ff6466",
+      "size": 5689
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group15.generated.cu",
+      "sha256": "ddb038286190f45afa5fab9c5428fd9a5e6fe5128b40b0ff5ef668efa3f0ad9c",
+      "size": 4360
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group2.generated.cu",
+      "sha256": "a3aece25798a56e77e166b1e055b369298ef87e193a1f0c7b1ad4353ac97d121",
+      "size": 5478
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group3.generated.cu",
+      "sha256": "c257d2c1227bbb08516f4d703e75db6fb0b139ae77d9ad6275c421a792798d53",
+      "size": 5633
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group4.generated.cu",
+      "sha256": "045e79589cd11997972eff4eed7c1ae02b9a0108ba1173037c6fd97a2259bf62",
+      "size": 5662
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group5.generated.cu",
+      "sha256": "a188bbe6fa120dc09d141a3958978d8e1446aaa89561e10d6bfa30e0e2de2dc7",
+      "size": 5311
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group6.generated.cu",
+      "sha256": "df96ac01bce17ee9f1e776e4f05da0df6229d7bb13dabd95a608c2bc578c56d4",
+      "size": 5196
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group7.generated.cu",
+      "sha256": "f06327741c5d08cffb2ffd32d748cd52bda509cc11272d21668fb33d116f6a7c",
+      "size": 5311
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group8.generated.cu",
+      "sha256": "6023ce1aaa194524c921adebbce12a3cf0f742813f508c0aa6aff5828144b697",
+      "size": 5838
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm/90/cutlass_kernel_file_gemm_sm90_M64_group9.generated.cu",
+      "sha256": "c92e340749d2d0bd9936066c1bd74e67f014aaffd7b46f1835adbd83446f0d1e",
+      "size": 5859
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/120/cutlass_kernel_file_gemm_grouped_sm120_M128_BS_group0.generated.cu",
+      "sha256": "8041d0c1fe873e6e2847d464efa42cec811a0705392a78367c5b0ff56256b647",
+      "size": 2237
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/120/cutlass_kernel_file_gemm_grouped_sm120_M128_BS_group1.generated.cu",
+      "sha256": "6ceb7d8edd9ffc8b29b4acb66f18ae698111a408011caffb5c7336b7f1ab335a",
+      "size": 2237
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/120/cutlass_kernel_file_gemm_grouped_sm120_M128_BS_group2.generated.cu",
+      "sha256": "f4bdbf8a05e006e2a123502c944e348287f13116a62e1cc7a730051358c3c12c",
+      "size": 2245
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/120/cutlass_kernel_file_gemm_grouped_sm120_M128_BS_group3.generated.cu",
+      "sha256": "b43d7b38b1f9cd972d9186673f4b08a5b147dba2e5087a4e504ddb622d89ea1e",
+      "size": 2257
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/120/cutlass_kernel_file_gemm_grouped_sm120_M128_BS_group4.generated.cu",
+      "sha256": "36d9dfaec60136ec03c4fa72e8d55ed4f782621abeb212456876e746535fd05b",
+      "size": 2269
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/120/cutlass_kernel_file_gemm_grouped_sm120_M128_BS_group5.generated.cu",
+      "sha256": "aa200244dbae942ada4a666f74aa5f2bdd03da61591703919a1268429e2b1099",
+      "size": 2273
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/120/cutlass_kernel_file_gemm_grouped_sm120_M128_BS_group6.generated.cu",
+      "sha256": "5e5a279421984d2e848e659f63808047ef08cd2fcbed17a36048734f2f7ad98c",
+      "size": 2277
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/120/cutlass_kernel_file_gemm_grouped_sm120_M128_BS_group7.generated.cu",
+      "sha256": "c73d5c600eb1ade42f856980599b9c26a35ef68c24527eb38ef4e5f9fd99f070",
+      "size": 2277
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/120/cutlass_kernel_file_gemm_grouped_sm120_M128_BS_group8.generated.cu",
+      "sha256": "004dd3fd3728d8cdfad71cc59dd981ca64750cef26c0c1029aa7631a3731bbe7",
+      "size": 2297
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/120/cutlass_kernel_file_gemm_grouped_sm120_M128_BS_group9.generated.cu",
+      "sha256": "8fdeec7d3f436856d28d9de2c4638339972efba75917b6af9459ed4f5a714bf1",
+      "size": 2313
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/120/cutlass_kernel_file_gemm_grouped_sm120_M256_BS_group0.generated.cu",
+      "sha256": "605ed41a654c5d3cab030f352e85582a3f7f15d183580dc3a4280f04a0147723",
+      "size": 2261
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/80/cutlass_kernel_file_gemm_grouped_sm80_M128_group0.generated.cu",
+      "sha256": "16d641c20a518437fef5246e517107be0a8bf1a717124a59bccb1c1f6d7d38ae",
+      "size": 4407
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/80/cutlass_kernel_file_gemm_grouped_sm80_M128_group1.generated.cu",
+      "sha256": "bba2e8635d730fcf37e0c24fada563398391ce4340bbf3b3a2d079ec5c26e0cb",
+      "size": 2411
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/80/cutlass_kernel_file_gemm_grouped_sm80_M16_group0.generated.cu",
+      "sha256": "12a06919ebf2472c12061369b466d756c3010df4ce6471940878605733d1b538",
+      "size": 4349
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/80/cutlass_kernel_file_gemm_grouped_sm80_M16_group1.generated.cu",
+      "sha256": "d163885a63db5f6422bd9dcbb64131c5322af20355be3235b60cee52e62704a4",
+      "size": 4449
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/80/cutlass_kernel_file_gemm_grouped_sm80_M16_group2.generated.cu",
+      "sha256": "4e913991b3cf66239633e870a7268e96a3bb0bb6d5fec9afb08208fd474eb159",
+      "size": 4549
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/80/cutlass_kernel_file_gemm_grouped_sm80_M32_group0.generated.cu",
+      "sha256": "c36a828433da067bf0f345b927c124d1ee9dac8e8caa66362d3efff9927181f6",
+      "size": 4399
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/80/cutlass_kernel_file_gemm_grouped_sm80_M32_group1.generated.cu",
+      "sha256": "c97070c1d8cefa6078147618bc64d7d7c03c706ad28e90a58df415d6f440bd4f",
+      "size": 2407
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/80/cutlass_kernel_file_gemm_grouped_sm80_M64_group0.generated.cu",
+      "sha256": "2a62dfd3792104948b56ef02589141ab10d0bd145eba61e5cd6964af6a509dfc",
+      "size": 4399
+    },
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/generated/cutlass_instantiations/120/gemm_grouped/80/cutlass_kernel_file_gemm_grouped_sm80_M64_group1.generated.cu",
+      "sha256": "427289068222db16f04838e62a8fe527ff8555087047e4a2d2bd3e4f37b3b654",
+      "size": 2407
+    }
+  ],
+  "m": 8192,
+  "nvtx_range": "exp002_m8192_cutedsl_bf16_fused_single_replay",
+  "output_sha256": "988f02212ce4a7284ea5ad155ce324488df3d2d2e39f1cb560a8f4aca0806a33",
+  "protocol_lock_digest": "0fbfc04cb17eb09e82ffc45f0a040954692e184b4fe31162d6cac6cb518e438b",
+  "rerun_id": "exp002-dsl460-20260716T0310Z-r1",
+  "runtime": {
+    "compute_capability": [
+      12,
+      0
+    ],
+    "cuda_graph": "outer graph, explicit non-default capture stream, external events",
+    "cuda_runtime": "13.2",
+    "cutlass_autotuner_contract": "default non-tuning fallback tactic -1 / built-in heuristic",
+    "enable_pdl": true,
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0",
+      "FLASHINFER_AUTOTUNER_LOAD_FROM_FILE": "",
+      "FLASHINFER_CUTEDSL_IKET_OVERLAY": "0",
+      "FLASHINFER_LOGLEVEL": "",
+      "FLASHINFER_NVFP4_4OVER6": "0",
+      "FLASHINFER_TACTICS_BLOCKLIST": "",
+      "FLASHINFER_WORKSPACE_BASE": "/workspace/jit",
+      "PYTHONPATH": "/workspace/source/flashinfer:/workspace/deps:/workspace/deps/nvidia_cutlass_dsl/dsl_packages",
+      "W4A4_IMAGE_DIGEST": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+      "W4A4_PYTHON_DEPS_SHA256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74"
+    },
+    "flashinfer_workspace_base": "/workspace/jit",
+    "foreign_compute_process_query": "",
+    "gpu_name": "NVIDIA Graphics Device",
+    "gpu_uuid": "GPU-4a286357-c999-9547-3a04-25961b1ffd08",
+    "hostname": "e8d224b46572",
+    "image": "nvcr.io/nvidia/pytorch:26.05-py3",
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "measurement_rerun_id": "exp002-dsl460-20260716T0310Z-r1",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "python_dependency_overlay": {
+      "apache_tvm_ffi": "0.1.11",
+      "cuda_python": "13.3.1",
+      "cutlass_module": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+      "numpy": "2.5.1",
+      "nvidia_cuda_nvdisasm": "13.3.73",
+      "nvidia_cutlass_dsl": "4.6.0",
+      "sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+      "tvm_ffi_module": "/workspace/deps/tvm_ffi/__init__.py"
+    },
+    "repo_root": "/workspace/source/flashinfer",
+    "resource_lease_id": "exp002-20260716T025625Z-9083",
+    "source": {
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "experiment_overlays": [
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/plan.md",
+          "sha256": "59565c324042fdfa4e46c9ac998d740c6851f03b15bb401ec0a8da81229ae4c9"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/fixture.py",
+          "sha256": "cffebe0a6c006425d058d6803be45ed373a4ebd5fcda0eb99ef019f05dc58eac"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/run_exp002.py",
+          "sha256": "2ece3b510a65f784e6ca02893218c86755cdf8bc0f3171236fad0585599477c3"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/run_benchmark.sh",
+          "sha256": "7881c4b58759d5b1934c942501f58ede122babb0270d7657ce37e362c8f0076f"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/build_result.py",
+          "sha256": "e7526f8527124f4743dabd70f8629f8d74b0697dbe6c33aa6c46aed1ac2193ce"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/cutedsl_460_requirements.lock.txt",
+          "sha256": "05d2d472459a2374c7042a434a55232758e0a210081243fee5f7c87e9be9c4a7"
+        }
+      ],
+      "flashinfer_commit": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+      "source_status": "?? .claude/w4a4_moe_bench/cutedsl_460_requirements.lock.txt\n?? .claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/"
+    },
+    "timestamp_unix": 1784171660.0514534,
+    "torch": "2.12.0a0+5aff3928d8.nv26.05",
+    "use_fused_finalize": true
+  },
+  "status": "complete",
+  "warmup": 5,
+  "weights": {
+    "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+    "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+    "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+    "seed": 2026,
+    "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+    "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+    "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+    "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+    "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+    "w1_packed_shape": [
+      256,
+      1024,
+      1024
+    ],
+    "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+    "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+    "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+    "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+    "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+    "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+    "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+    "w2_packed_shape": [
+      256,
+      2048,
+      256
+    ],
+    "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+    "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+  }
+}

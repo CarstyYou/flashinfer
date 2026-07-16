@@ -1,0 +1,172 @@
+{
+  "schema": "v1",
+  "source": {
+    "kind": "nsys",
+    "version": "v2"
+  },
+  "command": "nsys.graph-replays",
+  "trace": {
+    "kind": "nsys",
+    "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/nsys/m8192/cutlass_bf16_chain/trace.nsys-rep"
+  },
+  "trace_span": {
+    "origin_ns": 32817731,
+    "span_ns": 1927576
+  },
+  "meta": {
+    "applied_scope": {
+      "device": 0,
+      "native_pid": 144
+    }
+  },
+  "data": {
+    "count": 1,
+    "total_matched": 1,
+    "capture_mode": "graph_nodes",
+    "top_nodes_limit": 20,
+    "rows": [
+      {
+        "key": "graph-replay|0x0000010000000004",
+        "capture_mode": "graph_nodes",
+        "synthetic_id": "0x0000010000000004",
+        "device_id": 0,
+        "context_id": 1,
+        "correlation_id": 4,
+        "launcher_row_id": "runtime:2",
+        "start_ns": 33051113,
+        "end_ns": 34713221,
+        "wall_ns": 1662108,
+        "sum_gpu_ns": 1667452,
+        "busy_ns": 1662108,
+        "idle_inside_replay_ns": 0,
+        "event_count": 9,
+        "kernel_count": 9,
+        "memcpy_count": 0,
+        "memset_count": 0,
+        "graph_trace_count": 0,
+        "stream_count": 1,
+        "graph_id": 2,
+        "decomposition_available": true,
+        "top_nodes": [
+          {
+            "graph_node_id": 8589934598,
+            "kind": "kernel",
+            "name": "device_kernel",
+            "count": 1,
+            "stream_count": 1,
+            "start_ns": 33344872,
+            "end_ns": 33855047,
+            "wall_ns": 510175,
+            "sum_ns": 510175,
+            "max_ns": 510175,
+            "sum_share_of_replay_wall": 0.30694455474614163
+          },
+          {
+            "graph_node_id": 8589934600,
+            "kind": "kernel",
+            "name": "device_kernel",
+            "count": 1,
+            "stream_count": 1,
+            "start_ns": 34082118,
+            "end_ns": 34490373,
+            "wall_ns": 408255,
+            "sum_ns": 408255,
+            "max_ns": 408255,
+            "sum_share_of_replay_wall": 0.24562483304334015
+          },
+          {
+            "graph_node_id": 8589934596,
+            "kind": "kernel",
+            "name": "expandInputRowsKernel",
+            "count": 1,
+            "stream_count": 1,
+            "start_ns": 33097288,
+            "end_ns": 33342888,
+            "wall_ns": 245600,
+            "sum_ns": 245600,
+            "max_ns": 245600,
+            "sum_share_of_replay_wall": 0.14776416454285762
+          },
+          {
+            "graph_node_id": 8589934599,
+            "kind": "kernel",
+            "name": "doActivationKernel",
+            "count": 1,
+            "stream_count": 1,
+            "start_ns": 33854983,
+            "end_ns": 34086630,
+            "wall_ns": 231647,
+            "sum_ns": 231647,
+            "max_ns": 231647,
+            "sum_share_of_replay_wall": 0.1393694031916097
+          },
+          {
+            "graph_node_id": 8589934601,
+            "kind": "kernel",
+            "name": "finalizeMoeRoutingKernel",
+            "count": 1,
+            "stream_count": 1,
+            "start_ns": 34490277,
+            "end_ns": 34713221,
+            "wall_ns": 222944,
+            "sum_ns": 222944,
+            "max_ns": 222944,
+            "sum_share_of_replay_wall": 0.13413328135115166
+          },
+          {
+            "graph_node_id": 8589934593,
+            "kind": "kernel",
+            "name": "blockExpertPrefixSumKernel",
+            "count": 1,
+            "stream_count": 1,
+            "start_ns": 33051113,
+            "end_ns": 33083656,
+            "wall_ns": 32543,
+            "sum_ns": 32543,
+            "max_ns": 32543,
+            "sum_share_of_replay_wall": 0.019579353447549738
+          },
+          {
+            "graph_node_id": 8589934595,
+            "kind": "kernel",
+            "name": "mergeExpertPrefixSumKernel",
+            "count": 1,
+            "stream_count": 1,
+            "start_ns": 33085480,
+            "end_ns": 33097768,
+            "wall_ns": 12288,
+            "sum_ns": 12288,
+            "max_ns": 12288,
+            "sum_share_of_replay_wall": 0.007393021392111704
+          },
+          {
+            "graph_node_id": 8589934597,
+            "kind": "kernel",
+            "name": "computeStridesTmaWarpSpecializedKernel",
+            "count": 1,
+            "stream_count": 1,
+            "start_ns": 33342856,
+            "end_ns": 33344904,
+            "wall_ns": 2048,
+            "sum_ns": 2048,
+            "max_ns": 2048,
+            "sum_share_of_replay_wall": 0.0012321702320186173
+          },
+          {
+            "graph_node_id": 8589934594,
+            "kind": "kernel",
+            "name": "globalExpertPrefixSumLargeKernel",
+            "count": 1,
+            "stream_count": 1,
+            "start_ns": 33083592,
+            "end_ns": 33085544,
+            "wall_ns": 1952,
+            "sum_ns": 1952,
+            "max_ns": 1952,
+            "sum_share_of_replay_wall": 0.0011744122523927446
+          }
+        ]
+      }
+    ]
+  }
+}

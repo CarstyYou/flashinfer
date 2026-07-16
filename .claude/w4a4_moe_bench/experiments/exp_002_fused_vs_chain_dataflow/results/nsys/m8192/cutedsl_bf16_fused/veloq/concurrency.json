@@ -1,0 +1,50 @@
+{
+  "schema": "v1",
+  "source": {
+    "kind": "nsys",
+    "version": "v2"
+  },
+  "command": "nsys.concurrency",
+  "trace": {
+    "kind": "nsys",
+    "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/nsys/m8192/cutedsl_bf16_fused/trace.nsys-rep"
+  },
+  "trace_span": {
+    "origin_ns": 10005780,
+    "span_ns": 2046184
+  },
+  "meta": {
+    "applied_scope": {
+      "device": 0,
+      "native_pid": 144
+    }
+  },
+  "data": {
+    "count": 1,
+    "total_matched": 1,
+    "rows": [
+      {
+        "key": "concurrency|dev:0",
+        "device_id": 0,
+        "sum_busy_ns": 1760603,
+        "union_busy_ns": 1760603,
+        "overlap_ns": 0,
+        "max_concurrency": 1,
+        "compute_vs_copy": {
+          "compute_union_ns": 1760603,
+          "copy_union_ns": 0,
+          "compute_copy_overlap_ns": 0
+        },
+        "streams": [
+          {
+            "stream_id": 141,
+            "sum_busy_ns": 1760603,
+            "union_busy_ns": 1760603,
+            "overlap_ns": 0,
+            "max_concurrency": 1
+          }
+        ]
+      }
+    ]
+  }
+}

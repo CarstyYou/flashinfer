@@ -1,0 +1,81 @@
+{
+  "schema": "v1",
+  "source": {
+    "kind": "nsys",
+    "version": "v2"
+  },
+  "command": "nsys.graph-replays",
+  "trace": {
+    "kind": "nsys",
+    "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/nsys/m8192/cutedsl_bf16_fused/trace.nsys-rep"
+  },
+  "trace_span": {
+    "origin_ns": 10005780,
+    "span_ns": 2046184
+  },
+  "meta": {
+    "applied_scope": {
+      "device": 0,
+      "native_pid": 144
+    }
+  },
+  "data": {
+    "count": 1,
+    "total_matched": 1,
+    "capture_mode": "graph_nodes",
+    "top_nodes_limit": 20,
+    "rows": [
+      {
+        "key": "graph-replay|0x0000010000000004",
+        "capture_mode": "graph_nodes",
+        "synthetic_id": "0x0000010000000004",
+        "device_id": 0,
+        "context_id": 1,
+        "correlation_id": 4,
+        "launcher_row_id": "runtime:2",
+        "start_ns": 10261730,
+        "end_ns": 12022557,
+        "wall_ns": 1760827,
+        "sum_gpu_ns": 1760603,
+        "busy_ns": 1760603,
+        "idle_inside_replay_ns": 224,
+        "event_count": 2,
+        "kernel_count": 2,
+        "memcpy_count": 0,
+        "memset_count": 0,
+        "graph_trace_count": 0,
+        "stream_count": 1,
+        "graph_id": 2,
+        "decomposition_available": true,
+        "top_nodes": [
+          {
+            "graph_node_id": 8589934594,
+            "kind": "kernel",
+            "name": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+            "count": 1,
+            "stream_count": 1,
+            "start_ns": 10263074,
+            "end_ns": 12022557,
+            "wall_ns": 1759483,
+            "sum_ns": 1759483,
+            "max_ns": 1759483,
+            "sum_share_of_replay_wall": 0.9992367222901511
+          },
+          {
+            "graph_node_id": 8589934593,
+            "kind": "kernel",
+            "name": "elementwise_kernel",
+            "count": 1,
+            "stream_count": 1,
+            "start_ns": 10261730,
+            "end_ns": 10262850,
+            "wall_ns": 1120,
+            "sum_ns": 1120,
+            "max_ns": 1120,
+            "sum_share_of_replay_wall": 0.000636064758207365
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "duplicate_expert_ids": 0,
+  "fixture_kind": "deterministic_synthetic_random_logits",
+  "m": 256,
+  "occupancy_max": 18,
+  "occupancy_min": 1,
+  "occupancy_p50": 8.0,
+  "occupancy_p95": 13.0,
+  "occupancy_sha256": "7649e92fe10f6ca1e80de716b58d6ed5520b563094950bdf01075414c38d1c5d",
+  "predicted_cutlass_route_branch": "fused_route_candidate",
+  "seed": 2282,
+  "shape": {
+    "experts": 256,
+    "hidden": 2048,
+    "intermediate_tp": 512,
+    "topk": 8
+  },
+  "topk_ids_sha256": "a48c21b54f47265e7b98261363b94dc58a53e9858b79ffba4deda51128a8e108",
+  "topk_weights_sha256": "9791d0835e68b2cb438358d714a4446eed3fa3ae7224c47e80aa0cb70748bf0c",
+  "weight_sum_max_abs_error": 1.1920928955078125e-07,
+  "x_sha256": "2cd5ab903e8e9118cd70c7432c025040b3336e3db3e9840020c6eb8421ad80fb",
+  "zero_token_experts": 0
+}

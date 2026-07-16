@@ -1,0 +1,30 @@
+{
+  "arm": "cutedsl_bf16_fused",
+  "artifact_fingerprint_sha256": "66fde3c106434ca2c978cc996d99cb119de38206f0db0eeb82e53632176041f4",
+  "block": [
+    160,
+    1,
+    1
+  ],
+  "case": {
+    "m": 256
+  },
+  "comparison_group_id": "exp002_cutedsl_vs_cutlass_bf16",
+  "environment_lock_digest": "d1479643a41cb9ad8787e7b58844800265d6a196016e31a63a82bc60a29e0f2d",
+  "expected_kernel_substring": "MoEDynamicKernel",
+  "grid": [
+    1,
+    1,
+    110
+  ],
+  "kernel_demangled": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+  "kernel_match": true,
+  "ncu_row_id": "launch:0",
+  "nsys_row_id": "kernel:2",
+  "original_launch_skip": 1,
+  "phase": "fused_main",
+  "protocol_lock_digest": "0fbfc04cb17eb09e82ffc45f0a040954692e184b4fe31162d6cac6cb518e438b",
+  "report_sha256": "e92c849b77acc027bfdb2fabab9e759989d70b60d1c1b4a94cd51e1c766df1a8",
+  "rerun_id": "exp002-dsl460-20260716T0310Z-r1",
+  "schema": "exp002.ncu-target-manifest.v1"
+}

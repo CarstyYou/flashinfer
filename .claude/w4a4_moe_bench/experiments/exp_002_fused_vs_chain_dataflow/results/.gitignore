@@ -1,0 +1,14 @@
+*.nsys-rep
+*.ncu-rep
+*.qdstrm
+*.sqlite
+*.veloq/
+_pqtdir/
+
+# Large, reproducible NCU query caches.  The compact derived evidence lives in
+# results/ncu/*.json and results/ncu/*.csv and remains tracked.
+ncu/**/veloq/
+
+# Retain the invalidated CuteDSL 4.5.2 run locally for audit only.  It must not
+# be mixed with the canonical CuteDSL 4.6.0 evidence set.
+superseded_dsl452/

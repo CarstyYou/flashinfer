@@ -1,0 +1,80 @@
+{
+  "schema": "v1",
+  "source": {
+    "kind": "nsys",
+    "version": "v2"
+  },
+  "command": "nsys.stats",
+  "trace": {
+    "kind": "nsys",
+    "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/nsys/m256/cutedsl_bf16_fused/trace.nsys-rep"
+  },
+  "trace_span": {
+    "origin_ns": 43668667,
+    "span_ns": 824605
+  },
+  "meta": {
+    "applied_scope": {
+      "device": 0,
+      "native_pid": 144,
+      "kind": "kernel"
+    },
+    "next_steps": [
+      {
+        "hint": "List individual events behind the top stats row (`kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0`).",
+        "command": "veloq search <trace> --type kernel --name 'kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0' --device 0"
+      }
+    ]
+  },
+  "data": {
+    "count": 2,
+    "total_matched": 2,
+    "total_duration_ns": 497502,
+    "total_events": 2,
+    "time_window_ns": null,
+    "rows": [
+      {
+        "key": "kernel|kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0|grid:1x1x110|block:160x1x1",
+        "name": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "type": "kernel",
+        "short_name": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "count": 1,
+        "total_ns": 496414,
+        "avg_ns": 496414,
+        "min_ns": 496414,
+        "max_ns": 496414,
+        "p50_ns": 496414,
+        "p95_ns": 496414,
+        "p99_ns": 496414,
+        "percentage": 99.7813074118295,
+        "grid_x": 1,
+        "grid_y": 1,
+        "grid_z": 110,
+        "block_x": 160,
+        "block_y": 1,
+        "block_z": 1
+      },
+      {
+        "key": "kernel|void at::native::elementwise_kernel<(int)128, (int)2, void at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase &)::[lambda() (instance 3)]::operator ()() const::[lambda() (instance 7)]::operator ()() const::[lambda(float) (instance 1)]>(at::TensorIteratorBase &, const T1 &)::[lambda(int) (instance 1)]>(int, T3)|grid:1x1x1|block:128x1x1",
+        "name": "void at::native::elementwise_kernel<(int)128, (int)2, void at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase &)::[lambda() (instance 3)]::operator ()() const::[lambda() (instance 7)]::operator ()() const::[lambda(float) (instance 1)]>(at::TensorIteratorBase &, const T1 &)::[lambda(int) (instance 1)]>(int, T3)",
+        "type": "kernel",
+        "short_name": "elementwise_kernel",
+        "count": 1,
+        "total_ns": 1088,
+        "avg_ns": 1088,
+        "min_ns": 1088,
+        "max_ns": 1088,
+        "p50_ns": 1088,
+        "p95_ns": 1088,
+        "p99_ns": 1088,
+        "percentage": 0.21869258817049983,
+        "grid_x": 1,
+        "grid_y": 1,
+        "grid_z": 1,
+        "block_x": 128,
+        "block_y": 1,
+        "block_z": 1
+      }
+    ]
+  }
+}

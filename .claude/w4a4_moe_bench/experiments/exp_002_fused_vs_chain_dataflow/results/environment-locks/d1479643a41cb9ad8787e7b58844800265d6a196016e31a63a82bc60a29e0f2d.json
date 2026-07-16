@@ -1,0 +1,77 @@
+{
+  "fingerprint_sha256": "d1479643a41cb9ad8787e7b58844800265d6a196016e31a63a82bc60a29e0f2d",
+  "runtime": {
+    "compute_capability": [
+      12,
+      0
+    ],
+    "cuda_graph": "outer graph, explicit non-default capture stream, external events",
+    "cuda_runtime": "13.2",
+    "cutlass_autotuner_contract": "default non-tuning fallback tactic -1 / built-in heuristic",
+    "enable_pdl": true,
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0",
+      "FLASHINFER_AUTOTUNER_LOAD_FROM_FILE": "",
+      "FLASHINFER_CUTEDSL_IKET_OVERLAY": "0",
+      "FLASHINFER_LOGLEVEL": "",
+      "FLASHINFER_NVFP4_4OVER6": "0",
+      "FLASHINFER_TACTICS_BLOCKLIST": "",
+      "FLASHINFER_WORKSPACE_BASE": "/workspace/jit",
+      "PYTHONPATH": "/workspace/source/flashinfer:/workspace/deps:/workspace/deps/nvidia_cutlass_dsl/dsl_packages",
+      "W4A4_IMAGE_DIGEST": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+      "W4A4_PYTHON_DEPS_SHA256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74"
+    },
+    "flashinfer_workspace_base": "/workspace/jit",
+    "foreign_compute_process_query": "",
+    "gpu_name": "NVIDIA Graphics Device",
+    "gpu_uuid": "GPU-4a286357-c999-9547-3a04-25961b1ffd08",
+    "image": "nvcr.io/nvidia/pytorch:26.05-py3",
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "python_dependency_overlay": {
+      "apache_tvm_ffi": "0.1.11",
+      "cuda_python": "13.3.1",
+      "cutlass_module": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+      "numpy": "2.5.1",
+      "nvidia_cuda_nvdisasm": "13.3.73",
+      "nvidia_cutlass_dsl": "4.6.0",
+      "sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+      "tvm_ffi_module": "/workspace/deps/tvm_ffi/__init__.py"
+    },
+    "repo_root": "/workspace/source/flashinfer",
+    "source": {
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "experiment_overlays": [
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/plan.md",
+          "sha256": "59565c324042fdfa4e46c9ac998d740c6851f03b15bb401ec0a8da81229ae4c9"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/fixture.py",
+          "sha256": "cffebe0a6c006425d058d6803be45ed373a4ebd5fcda0eb99ef019f05dc58eac"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/run_exp002.py",
+          "sha256": "2ece3b510a65f784e6ca02893218c86755cdf8bc0f3171236fad0585599477c3"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/run_benchmark.sh",
+          "sha256": "7881c4b58759d5b1934c942501f58ede122babb0270d7657ce37e362c8f0076f"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/build_result.py",
+          "sha256": "e7526f8527124f4743dabd70f8629f8d74b0697dbe6c33aa6c46aed1ac2193ce"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/cutedsl_460_requirements.lock.txt",
+          "sha256": "05d2d472459a2374c7042a434a55232758e0a210081243fee5f7c87e9be9c4a7"
+        }
+      ],
+      "flashinfer_commit": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+      "source_status": "?? .claude/w4a4_moe_bench/cutedsl_460_requirements.lock.txt\n?? .claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/"
+    },
+    "torch": "2.12.0a0+5aff3928d8.nv26.05",
+    "use_fused_finalize": true
+  },
+  "schema_version": 2
+}

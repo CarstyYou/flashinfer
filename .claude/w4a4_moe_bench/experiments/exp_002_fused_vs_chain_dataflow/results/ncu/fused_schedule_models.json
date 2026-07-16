@@ -1,0 +1,88 @@
+{
+  "cases": [
+    {
+      "compute_task_count": 1024,
+      "intermediate_slices": 4,
+      "local_traffic_context": {
+        "classification": "launch-level dynamic NCU facts",
+        "execution_model_classification": "exact static-stack-to-dynamic-sector match",
+        "fused_minus_chain_local_footprint_bytes": 63754304.0,
+        "load_sector_residual": 0,
+        "measured_chain_fc1_fc2_local_footprint_bytes": 64171968.0,
+        "measured_fused_local_footprint_bytes": 127926272.0,
+        "measured_fused_local_load_sectors": 1998848,
+        "measured_fused_local_store_sectors": 1998848,
+        "predicted_local_sectors_per_direction": 1998848,
+        "predicted_stl64_sectors_per_direction": 1769472,
+        "source_phase_attribution": "program-order inference; no source lineinfo",
+        "static_stack_words_per_lane": 122,
+        "static_stl64_words_per_lane": 108,
+        "store_sector_residual": 0
+      },
+      "m": 256,
+      "partial_output_reduction_model": {
+        "classification": "exact count model for observed source schedule",
+        "expected_reduction_sectors": 1048576,
+        "logical_routed_rows": 2048,
+        "measured_fused_reduction_sectors": 1048576,
+        "measured_reduction_footprint_bytes": 33554432,
+        "reductions_per_output_element": 4,
+        "residual_sectors": 0
+      },
+      "physical_expert_m_tiles": 256,
+      "physical_routed_rows_from_tensor_ops": 32768
+    },
+    {
+      "compute_task_count": 2536,
+      "intermediate_slices": 4,
+      "local_traffic_context": {
+        "classification": "launch-level dynamic NCU facts",
+        "execution_model_classification": "exact static-stack-to-dynamic-sector match",
+        "fused_minus_chain_local_footprint_bytes": 162357056.0,
+        "load_sector_residual": 0,
+        "measured_chain_fc1_fc2_local_footprint_bytes": 154460352.0,
+        "measured_fused_local_footprint_bytes": 316817408.0,
+        "measured_fused_local_load_sectors": 4950272,
+        "measured_fused_local_store_sectors": 4950272,
+        "predicted_local_sectors_per_direction": 4950272,
+        "predicted_stl64_sectors_per_direction": 4382208,
+        "source_phase_attribution": "program-order inference; no source lineinfo",
+        "static_stack_words_per_lane": 122,
+        "static_stl64_words_per_lane": 108,
+        "store_sector_residual": 0
+      },
+      "m": 8192,
+      "partial_output_reduction_model": {
+        "classification": "exact count model for observed source schedule",
+        "expected_reduction_sectors": 33554432,
+        "logical_routed_rows": 65536,
+        "measured_fused_reduction_sectors": 33554432,
+        "measured_reduction_footprint_bytes": 1073741824,
+        "reductions_per_output_element": 4,
+        "residual_sectors": 0
+      },
+      "physical_expert_m_tiles": 634,
+      "physical_routed_rows_from_tensor_ops": 81152
+    }
+  ],
+  "constants": {
+    "hidden_size": 2048,
+    "intermediate_size": 512,
+    "mma_warps": 4,
+    "sector_bytes": 32,
+    "source_task_slice_chunk": 1,
+    "threads_per_warp": 32,
+    "tile_m": 128,
+    "tile_n": 128,
+    "topk": 8
+  },
+  "schema": "exp002.fused-schedule-models.v3",
+  "source_evidence": {
+    "fc2_output_tile_loop": "flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py:2352",
+    "gate_up_accumulators": "flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py:1651",
+    "per_tile_reduction": "flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py:2526",
+    "reduction_opcode_source": "flashinfer/cute_dsl/fp4_common.py:1798",
+    "slice_outer_loop": "flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py:1896",
+    "static_local_sass": "ncu/static_local_sass.json"
+  }
+}

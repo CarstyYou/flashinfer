@@ -1,0 +1,23 @@
+{
+  "duplicate_expert_ids": 0,
+  "fixture_kind": "deterministic_synthetic_random_logits",
+  "m": 8192,
+  "occupancy_max": 302,
+  "occupancy_min": 217,
+  "occupancy_p50": 256.0,
+  "occupancy_p95": 281.0,
+  "occupancy_sha256": "5e937225d3ac21770218000ebdedcb62cc211c4444bb260d0838656ca41260bc",
+  "predicted_cutlass_route_branch": "three_step_large_prefix_candidate",
+  "seed": 10218,
+  "shape": {
+    "experts": 256,
+    "hidden": 2048,
+    "intermediate_tp": 512,
+    "topk": 8
+  },
+  "topk_ids_sha256": "f9b3c632d767e754837a14016f5a2ea3c3fccfefef1adee4f9b7b966c68e2f7a",
+  "topk_weights_sha256": "ee885b45d94eee54d3c9114669492419003c914ea3bd1d29dbd58ad765fccb9d",
+  "weight_sum_max_abs_error": 2.384185791015625e-07,
+  "x_sha256": "6c95ae4406b2fc7ad4544936781b71288d98f496a60c58f5695e6dbf868864b4",
+  "zero_token_experts": 0
+}

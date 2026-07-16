@@ -1,0 +1,97 @@
+{
+  "schema": "v1",
+  "source": {
+    "kind": "nsys",
+    "version": "v2"
+  },
+  "command": "nsys.search",
+  "trace": {
+    "kind": "nsys",
+    "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/nsys/m8192/cutedsl_bf16_fused/trace.nsys-rep"
+  },
+  "trace_span": {
+    "origin_ns": 10005780,
+    "span_ns": 2046184
+  },
+  "meta": {
+    "applied_scope": {
+      "device": 0,
+      "native_pid": 144,
+      "kind": "kernel"
+    },
+    "next_steps": [
+      {
+        "hint": "Expand the top hit `void at::native::elementwise_kernel<(int)128, (int)2, void at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase &)::[lambda() (instance 3)]::operator ()() const::[lambda() (instance 7)]::operator ()() const::[lambda(float) (instance 1)]>(at::TensorIteratorBase &, const T1 &)::[lambda(int) (instance 1)]>(int, T3)` with the full headline + NVTX context.",
+        "command": "veloq inspect kernel:1"
+      }
+    ]
+  },
+  "data": {
+    "count": 2,
+    "total_matched": 2,
+    "rows": [
+      {
+        "type": "kernel",
+        "key": "kernel:1",
+        "row_id": "kernel:1",
+        "name": "void at::native::elementwise_kernel<(int)128, (int)2, void at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase &)::[lambda() (instance 3)]::operator ()() const::[lambda() (instance 7)]::operator ()() const::[lambda(float) (instance 1)]>(at::TensorIteratorBase &, const T1 &)::[lambda(int) (instance 1)]>(int, T3)",
+        "start_ns": 10261730,
+        "duration_ns": 1120,
+        "device_id": 0,
+        "stream_id": 141,
+        "nvtx_context": {
+          "range_id": "nvtx:1",
+          "name": "exp002_m8192_cutedsl_bf16_fused_single_replay",
+          "depth": 0,
+          "iter_index": 0
+        },
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "registers_per_thread": 18,
+        "static_shared_memory": 0,
+        "dynamic_shared_memory": 0,
+        "demangled_name": "void at::native::elementwise_kernel<(int)128, (int)2, void at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase &)::[lambda() (instance 3)]::operator ()() const::[lambda() (instance 7)]::operator ()() const::[lambda(float) (instance 1)]>(at::TensorIteratorBase &, const T1 &)::[lambda(int) (instance 1)]>(int, T3)",
+        "mangled_name": "_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_22gpu_kernel_impl_nocastIZZZNS0_23direct_copy_kernel_cudaERNS_18TensorIteratorBaseEENKUlvE1_clEvENKUlvE5_clEvEUlfE_EEvS4_RKT_EUliE_EEviT1_"
+      },
+      {
+        "type": "kernel",
+        "key": "kernel:2",
+        "row_id": "kernel:2",
+        "name": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "start_ns": 10263074,
+        "duration_ns": 1759483,
+        "device_id": 0,
+        "stream_id": 141,
+        "nvtx_context": {
+          "range_id": "nvtx:1",
+          "name": "exp002_m8192_cutedsl_bf16_fused_single_replay",
+          "depth": 0,
+          "iter_index": 0
+        },
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "block": [
+          160,
+          1,
+          1
+        ],
+        "registers_per_thread": 255,
+        "static_shared_memory": 0,
+        "dynamic_shared_memory": 91136,
+        "demangled_name": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "mangled_name": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
+      }
+    ]
+  }
+}

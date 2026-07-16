@@ -1,0 +1,50 @@
+{
+  "schema": "v1",
+  "source": {
+    "kind": "nsys",
+    "version": "v2"
+  },
+  "command": "nsys.concurrency",
+  "trace": {
+    "kind": "nsys",
+    "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/nsys/m256/cutlass_bf16_chain/trace.nsys-rep"
+  },
+  "trace_span": {
+    "origin_ns": 8594717,
+    "span_ns": 761846
+  },
+  "meta": {
+    "applied_scope": {
+      "device": 0,
+      "native_pid": 144
+    }
+  },
+  "data": {
+    "count": 1,
+    "total_matched": 1,
+    "rows": [
+      {
+        "key": "concurrency|dev:0",
+        "device_id": 0,
+        "sum_busy_ns": 511293,
+        "union_busy_ns": 509693,
+        "overlap_ns": 1600,
+        "max_concurrency": 2,
+        "compute_vs_copy": {
+          "compute_union_ns": 509693,
+          "copy_union_ns": 0,
+          "compute_copy_overlap_ns": 0
+        },
+        "streams": [
+          {
+            "stream_id": 141,
+            "sum_busy_ns": 511293,
+            "union_busy_ns": 509693,
+            "overlap_ns": 1600,
+            "max_concurrency": 2
+          }
+        ]
+      }
+    ]
+  }
+}

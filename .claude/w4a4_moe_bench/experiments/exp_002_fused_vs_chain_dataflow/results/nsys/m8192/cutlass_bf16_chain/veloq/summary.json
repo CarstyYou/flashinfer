@@ -1,0 +1,87 @@
+{
+  "schema": "v1",
+  "source": {
+    "kind": "nsys",
+    "version": "v2"
+  },
+  "command": "nsys.summary",
+  "trace": {
+    "kind": "nsys",
+    "path": ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/nsys/m8192/cutlass_bf16_chain/trace.nsys-rep"
+  },
+  "trace_span": {
+    "origin_ns": 32817731,
+    "span_ns": 1927576
+  },
+  "data": {
+    "count": 5,
+    "total_matched": 5,
+    "schema_version": "3.25.0",
+    "product_version": "2026.2.1.210",
+    "rows": [
+      {
+        "key": "table|CUPTI_ACTIVITY_KIND_KERNEL",
+        "name": "CUPTI_ACTIVITY_KIND_KERNEL",
+        "row_count": 9,
+        "start_ns": 33051113,
+        "end_ns": 34713221
+      },
+      {
+        "key": "table|CUPTI_ACTIVITY_KIND_RUNTIME",
+        "name": "CUPTI_ACTIVITY_KIND_RUNTIME",
+        "row_count": 5,
+        "start_ns": 32817731,
+        "end_ns": 34730207
+      },
+      {
+        "key": "table|CUPTI_ACTIVITY_KIND_SYNCHRONIZATION",
+        "name": "CUPTI_ACTIVITY_KIND_SYNCHRONIZATION",
+        "row_count": 4,
+        "start_ns": 33122146,
+        "end_ns": 34745307
+      },
+      {
+        "key": "table|OSRT_API",
+        "name": "OSRT_API",
+        "row_count": 4,
+        "start_ns": 32720963,
+        "end_ns": 35891737
+      },
+      {
+        "key": "table|NVTX_EVENTS",
+        "name": "NVTX_EVENTS",
+        "row_count": 1,
+        "start_ns": 32960189,
+        "end_ns": 34736867
+      }
+    ],
+    "auxiliary": {
+      "full_time_range_ns": {
+        "start": 32720963,
+        "end": 35891737,
+        "duration": 3170774
+      },
+      "capabilities": {
+        "has_kernels": true,
+        "has_memcpy": false,
+        "has_memset": false,
+        "has_sync": true,
+        "has_runtime": true,
+        "has_osrt": true,
+        "has_nvtx": true,
+        "has_graph_trace": false,
+        "has_graph_nodes": true,
+        "has_graph_events": false,
+        "has_cuda_event_activity": true,
+        "has_overhead": false,
+        "has_cuda_contexts": true,
+        "has_sampling": false,
+        "has_composite_events": false,
+        "has_sched_events": false,
+        "has_gpu_metrics": false,
+        "has_nic_metrics": false,
+        "has_target_info": true
+      }
+    }
+  }
+}
