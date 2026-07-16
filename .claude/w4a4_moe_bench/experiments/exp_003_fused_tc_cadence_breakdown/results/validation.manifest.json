@@ -1,0 +1,278 @@
+{
+  "schema_version": "exp003.validation.v1",
+  "status": "complete",
+  "formal_decision": "inconclusive",
+  "case": {
+    "arm": "cutedsl_bf16_fused",
+    "boundary": "BF16 input -> one fused W4A4 MoE launch -> BF16 output",
+    "m": 8192,
+    "experts": 256,
+    "hidden": 2048,
+    "intermediate_tp": 512,
+    "topk": 8,
+    "activation": "SwiGLU",
+    "fixture_seed": 10218,
+    "grid": [1, 1, 110],
+    "block": [160, 1, 1],
+    "expected_task_count": 2536,
+    "expected_task_head": 2646,
+    "expected_task_tail": 2536
+  },
+  "production_anchor": {
+    "source": "../../exp_002_fused_vs_chain_dataflow/results/fusedop_dataflow_bottleneck.md",
+    "fused_latency_us": 1782.547,
+    "cutlass_chain_latency_us": 1665.779,
+    "fused_speedup_percent": -6.55,
+    "fused_main_nsys_us": 1759.483,
+    "tc_subpipe_active_percent": 25.73,
+    "issue_active_percent": 19.95,
+    "interpretation": "production NCU/NSys anchor only; not numerically mixed with IKET raw timestamp units"
+  },
+  "evidence_location": {
+    "host": "10.6.142.16",
+    "physical_hostname": "R6KD-CX8aaS-GPU-16",
+    "remote_root": "/home/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_003_fused_tc_cadence_breakdown/results",
+    "raw_capture_policy": "provider-native raw artifacts retained remotely and gitignored locally",
+    "lease": {
+      "lease_id": "exp003-20260716T184159Z-codex",
+      "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+      "gpu_index_at_acquire": 2,
+      "created_at_utc": "2026-07-16T18:41:59Z",
+      "release_status": "released",
+      "released_at_utc": "2026-07-16T20:02:35Z",
+      "post_release_check": "6 MiB baseline memory, no compute process, no owned container"
+    }
+  },
+  "source_identity": {
+    "flashinfer_commit": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+    "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+    "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+    "fixture_sha256": "9c12529c20d99009ea9dfd846193337fcaf533f4b688d60b773661fe084fe0d2",
+    "plan_sha256": "0be1255b7e7e4c8bed3b540db004b850442a1e98d67ca218b0b76108724d1ee4",
+    "overlay_sha256": "486ac6ae64fa6394d21db4c25a2123e5133c346471446cca500312c751483b16",
+    "runner_sha256": "e2f6bec38c4344dfa810d04699b34ce55d201b9022a044525d166ec0674deb06",
+    "iket_helper_sha256": "e72254e2fbd397fe5236477e8987e264f8605ce5e322150f3bb3f995885225e9",
+    "binary_validator_sha256": "0e3c63a80ce781b283522d59ee99f4f77a6f4bae605df608a3196c994fcd3c8e",
+    "pc_sass_validator_sha256": "cb24360a3778b8a8b1e74da58aaf640f1447c1d2590364dba1855ff67b9880f1",
+    "overlay_event_contract": {
+      "unique_named_events": 30,
+      "static_range_sites": 50,
+      "generic_payload": "phase_id * 1000000 + ordinal + 1"
+    }
+  },
+  "runtime": {
+    "container": "nvcr.io/nvidia/pytorch:26.05-py3",
+    "container_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "gpu_name_reported": "NVIDIA Graphics Device",
+    "gpu_class": "5KP",
+    "gpu_compute_capability": "12.0",
+    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "driver": "580.95.05",
+    "cuda_runtime": "13.2",
+    "nvcc": "13.2.78",
+    "ptxas": "13.2.78",
+    "python": "3.12.3",
+    "torch": "2.12.0a0+5aff3928d8.nv26.05",
+    "cutlass_dsl": "4.6.0",
+    "tvm_ffi": "0.1.11",
+    "dependency_tree_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+    "iket": {
+      "version": "0.7.10",
+      "provider_tree_sha256": "417f7c3d68918a21f3e1ce1091e8c22a66ccf2b87df147078255aa4ced206086",
+      "run_iket_sha256": "e72254e2fbd397fe5236477e8987e264f8605ce5e322150f3bb3f995885225e9"
+    },
+    "compiler_contract": {
+      "CUTE_DSL_COMPILER_OPT": "iket",
+      "CUTE_DSL_KEEP": "ir,ptx,cubin,sass",
+      "jit_roots": "fresh and separate control/candidate roots"
+    }
+  },
+  "preparation": {
+    "control": {
+      "manifest_sha256": "145242e82892dcb3d30288dfe005e6fc943af3d6c188240b242707f3f50dfff3",
+      "status": "complete",
+      "gate_pass": true,
+      "correctness": {
+        "cosine": 0.999914824962616,
+        "relative_l2": 0.01305139809846878,
+        "max_abs": 0.060186222195625305,
+        "per_token_relative_l2_p99": 0.06021559610962868
+      },
+      "jit_artifact_set_sha256": "9ab3c0f6185a9af976b02d0f5d2e26161da71aa7691e8f450f87fd3888e6c475",
+      "cubin_sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+      "cubin_bytes": 190616
+    },
+    "candidate": {
+      "manifest_sha256": "605b4e9367cf8d7d3874213d0f3ef65097ad761528016947925d3a9c9dc96ee4",
+      "status": "complete",
+      "gate_pass": true,
+      "marker_vs_control_gate_pass": true,
+      "correctness": {
+        "cosine": 0.9999147653579712,
+        "relative_l2": 0.013053669594228268,
+        "max_abs": 0.062139347195625305,
+        "per_token_relative_l2_p99": 0.06039433181285858
+      },
+      "jit_artifact_set_sha256": "691c0d2cd67f0b5a6a2ffcc5bc41db0aa8e95cf1193e7509feb100fcecbdb42f",
+      "cubin_sha256": "a82f1850a27f4d9334bd52d3a22eab7681cf14c47997342571590dd291cf64e5",
+      "cubin_bytes": 442440
+    },
+    "workspace_checks_all_pass": true,
+    "task_model_pass": true
+  },
+  "static_binary_gate": {
+    "artifact": "validation/binary_gate/binary_gate.json",
+    "sha256": "df27bb06d9c01a5447d94dbff8fddbd7c8d0da4b2fc36a01772a7846c4c0b014",
+    "selected_semantic_opcode_counts_pass": true,
+    "selected_semantic_opcode_counts": {
+      "OMMA": 896,
+      "UTMALDG": 40,
+      "LDSM": 200,
+      "BAR": 34,
+      "ATOMG": 9,
+      "REDG": 4,
+      "LDG": 53,
+      "STG": 75
+    },
+    "control_resources": {"REG": 255, "STACK": 488, "SHARED": 1024, "LOCAL": 0},
+    "candidate_resources": {"REG": 255, "STACK": 432, "SHARED": 1024, "LOCAL": 0},
+    "resource_identity_pass": false,
+    "formal_dominance_eligible": false,
+    "formal_dominance_reasons": ["resource identity failed: STACK"],
+    "scope": {
+      "full_sass_identity_assessed": false,
+      "full_cfg_identity_assessed": false,
+      "local_zero_interpretation": "static LOCAL=0 is not evidence of zero dynamic spill"
+    }
+  },
+  "captures": [
+    {
+      "id": "cta_z000",
+      "selected_cta": [0, 0, 0],
+      "profile_pid": 373,
+      "container_hostname": "cbc4d57bb87d",
+      "target_manifest_sha256": "d4e601b3592ece8c143c885cd5556e15ca67756ddb048ade9e443fd45fd046c0",
+      "capture_manifest_sha256": "ad7cb5b75f252ff22d219e1a25914964fafaee9c6bec7a0d141dfcd4844d5205",
+      "raw_sha256": "c994ed1f97f6fd2b5fc405a0ac216d75589b5657e06c8367d1a55cb0056a94ac",
+      "decoded_sha256": "6aaf2c6466f23661d881659ac06d2bf0bb15ac263dc7bc155806d3d5036bf337",
+      "pc_sass_gate_sha256": "462e8d08fd73087e4c4821c8f3cbacf4b9a02ed202c92f5c8e58d2272d90b0f7",
+      "instrument_config_sha256": "a28fda73d16d7804dbfa8d0d5c46575313b1e1f9870475ec87deab8bdbe78cfb",
+      "mma_warp_capacity_utilization": 0.399311,
+      "tma_warp_capacity_utilization": 0.012377,
+      "capacity_pass": true,
+      "correctness_and_task_gates_pass": true
+    },
+    {
+      "id": "cta_z055",
+      "selected_cta": [0, 0, 55],
+      "profile_pid": 373,
+      "container_hostname": "91b0723eec63",
+      "target_manifest_sha256": "a8cef7d308ca40641d191f85d91511cded2bb19560cc3af56757697448bf634f",
+      "capture_manifest_sha256": "6559bc8deddff70b9996420c1a06bfb20f5f9e88239d8e9afdf91e543f85dd91",
+      "raw_sha256": "e74ccd759188cf7a20fe8f050987f4ba8662f00f8cc77e568ad1bd594af2d7a7",
+      "decoded_sha256": "baea0fb80afaadb5b073b89695dce53c0223d5133694daf41e5a9aad3bd7f0bb",
+      "pc_sass_gate_sha256": "462e8d08fd73087e4c4821c8f3cbacf4b9a02ed202c92f5c8e58d2272d90b0f7",
+      "instrument_config_sha256": "a28fda73d16d7804dbfa8d0d5c46575313b1e1f9870475ec87deab8bdbe78cfb",
+      "mma_warp_capacity_utilization": 0.399311,
+      "tma_warp_capacity_utilization": 0.012377,
+      "capacity_pass": true,
+      "correctness_and_task_gates_pass": true
+    },
+    {
+      "id": "cta_z109",
+      "selected_cta": [0, 0, 109],
+      "profile_pid": 373,
+      "container_hostname": "c64009e3e833",
+      "target_manifest_sha256": "879f169dadd611b9c93426a9a73fa591a42faec00588d4f56047c3dd1cd1fd05",
+      "capture_manifest_sha256": "5207f9a4cb4f09d504e432974ba7df9ddd89ee36236711ea7b28d2d8ae7192e1",
+      "raw_sha256": "bc8fdcd3c91ca416388cc4e60f9d7d459bc23971e774105846c5ae712479326c",
+      "decoded_sha256": "4c5fe853e2e88ea5e5730d1e91403c3f573696c56879b260341cbfa590bb6ab2",
+      "pc_sass_gate_sha256": "462e8d08fd73087e4c4821c8f3cbacf4b9a02ed202c92f5c8e58d2272d90b0f7",
+      "instrument_config_sha256": "a28fda73d16d7804dbfa8d0d5c46575313b1e1f9870475ec87deab8bdbe78cfb",
+      "mma_warp_capacity_utilization": 0.41667,
+      "tma_warp_capacity_utilization": 0.012913,
+      "capacity_pass": true,
+      "correctness_and_task_gates_pass": true
+    }
+  ],
+  "capture_common_identity": {
+    "profile_pid": 373,
+    "graph_context_id": 1,
+    "graph_launch_key": "graph_exec_2:0",
+    "grid_id": 1,
+    "tracker_cubin_sha256": "a82f1850a27f4d9334bd52d3a22eab7681cf14c47997342571590dd291cf64e5",
+    "candidate_jit_artifact_set_sha256": "691c0d2cd67f0b5a6a2ffcc5bc41db0aa8e95cf1193e7509feb100fcecbdb42f",
+    "runtime_canonical_sha256_without_hostname_timestamp_pid": "26b7d18b9c8014c70b94a83fcb363e7b71f48392a261a539103eb0a26977c1ea",
+    "pc_sass_verified_static_sites": 24,
+    "pc_sass_verified_wait_sites": 14,
+    "pc_sass_verified_barrier_sites": 10,
+    "capture_context_buffer_bytes": 1073741824,
+    "capture_hard_cap_bytes": 4294967296
+  },
+  "analysis": {
+    "timestamp_unit": "raw timestamp units",
+    "parallel_warp_rule": "gaps and interval unions are formed per warp; parallel warp durations are never added as elapsed time",
+    "analyzer_provenance": {
+      "capture_manifest_analyzer_sha256": "7d75fdf848041e5e02eb4af3e1b197a1f1cad1b9b8dfce2c5cf4cc0cd5249abd",
+      "initial_derived_analyzer_sha256": "18a8225293125c93bb70c104b6edad65b5a5c8c0a6421cd591dc4be9841adbfb",
+      "final_reproduction_analyzer_sha256": "827e87f356da54a48b5097002ccdabccc61c2a32dbf89b2c815202dd0e031905",
+      "reproduction_result": "all seven common derived files were byte-identical; final analyzer additionally emitted cadence_summary.json",
+      "post_capture_drift": "known parser-only changes after capture include unambiguous equal-timestamp boundary handling and exclusion of ephemeral Docker hostname; raw traces are unchanged and GPU/source/provider/image/toolchain/JIT remain identity-gated",
+      "limitation": "capture-time analyzer source was not retained for a cryptographic source diff; provenance drift cannot restore formal eligibility"
+    },
+    "event_count_closure": {
+      "pass": true,
+      "dynamic_events_per_warp_slice": {"gate": 1024, "up": 1024, "fc2": 1024},
+      "fc2_blocks": 16,
+      "static_semantic_omma_count": 896,
+      "comparison_policy": "dynamic runtime events and static semantic instruction sites have different denominators and are not compared"
+    },
+    "pc_sass_closure_pass": true,
+    "coverage": {
+      "pass": false,
+      "minimum_complete_tasks_per_stratum": 8,
+      "minimum_capture_count_per_stratum": 3,
+      "strata": {
+        "early_full": "3 tasks / 3 captures; fail",
+        "early_partial": "4 tasks / 3 captures; fail",
+        "steady_full": "28 tasks / 3 captures; pass",
+        "steady_partial": "28 tasks / 3 captures; pass",
+        "tail_full": "4 tasks / 2 captures; fail",
+        "tail_partial": "3 tasks / 2 captures; fail"
+      }
+    },
+    "bootstrap": {
+      "requested_replicates": 2000,
+      "valid_replicates": 1846,
+      "interpretation": "3-CTA diagnostic interval only; population_weighted_point is null",
+      "intervals": {
+        "tensor": [0.061655786755685296, 0.07407167561052301],
+        "planned": [0.16841328810334658, 0.17725205404309666],
+        "starvation": [0.012722388508284504, 0.013473681154263617],
+        "orchestration": [0.003063696151176387, 0.003218529918339521],
+        "unclassified": [0.7390018716878787, 0.7474639978490726]
+      }
+    },
+    "formal_blockers": [
+      "marker candidate changed STACK from 488 to 432 B/thread",
+      "population coverage gate failed",
+      "unclassified diagnostic upper bound exceeds 20%"
+    ],
+    "artifacts": {
+      "derived/cadence_summary.json": "63f25550e6345ee013b855ab461770c8771120b19c34f2150643c23892155f65",
+      "derived/exp003_analysis.json": "335f127c86ea619dc19ccf945051f6c83abb9434e5cd31941d60985516cb0000",
+      "derived/qmma_gaps.csv": "050afff611d56c0231800673b89002ee2cae7db7cdd147404371869c7c5e1c9c",
+      "derived/summary.md": "7634e1994368df22b647c9d19315a48eb7c3902c914cb1b3b78c2cef97dbe140",
+      "derived/task_population.json": "ed0aadbadda67b2ee1908fac35342e2a4f7404ca49135aa997f551504831c9ce",
+      "derived/top_level_phase_unions.csv": "a1c582bd615c08e1dadb77c765b1a4a847351510db8de5a9e2ccbead0042a79a",
+      "derived/warp_leaf_intervals.csv": "645c4a78bdd6515e026a6d2c5ac27cc46b6793e3877be50505348c5094e1b48a",
+      "derived/weighted_phase_shares.json": "b5bf9b29d6a72a1cfd75817bc66c6b95e358da5d382e46c4a8a7562b18e7ad23"
+    }
+  },
+  "protocol_disposition": {
+    "supplemental_ctas_captured": false,
+    "coverage_can_be_improved_by_more_ctas": true,
+    "reason_for_stopping": "STACK resource drift permanently removed formal binary comparability; more CTAs could improve sampling coverage but could not restore formal dominance eligibility, so the experiment closed diagnostic-only and inconclusive",
+    "next_experiment": "exp_004_fused_stack_spill_criticality"
+  }
+}

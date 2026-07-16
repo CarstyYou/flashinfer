@@ -1,0 +1,133 @@
+{
+  "calibration_p95": {
+    "mode": "consistent",
+    "per_warp": {
+      "0": 32.0,
+      "1": 32.0,
+      "2": 32.0,
+      "3": 32.0
+    },
+    "value": 32.0
+  },
+  "duration_total_semantics": "raw sum over gap samples; bucket totals use the same raw-duration denominator and are not production latency",
+  "parallel_warp_warning": "Each gap is formed only between consecutive QMMA ranges on one warp. Phase distributions pool those gap samples; durations from parallel warps are never interpreted as elapsed time.",
+  "percent_denominator": "gap count within each phase",
+  "phases": {
+    "fc1_gate_qmma": {
+      "bucket_duration_totals": {
+        "orchestration": 0,
+        "planned": 220480,
+        "starvation": 640,
+        "tensor": 0,
+        "unclassified": 4128960.0
+      },
+      "count": 286440,
+      "duration": {
+        "max": 928,
+        "p50": 0.0,
+        "p95": 32.0,
+        "p99": 96.0,
+        "p99.9": 224.0
+      },
+      "exceedance": {
+        "gt_2x_calibration_p95": {
+          "count": 6517,
+          "percentage": 2.275171
+        },
+        "gt_4x_calibration_p95": {
+          "count": 873,
+          "percentage": 0.304776
+        },
+        "gt_calibration_p95": {
+          "count": 9162,
+          "percentage": 3.198576
+        }
+      },
+      "gap_count_per_warp": {
+        "0": 71610,
+        "1": 71610,
+        "2": 71610,
+        "3": 71610
+      },
+      "total_gap_duration": 4350080
+    },
+    "fc1_up_qmma": {
+      "bucket_duration_totals": {
+        "orchestration": 0,
+        "planned": 326080,
+        "starvation": 1376,
+        "tensor": 0,
+        "unclassified": 3989056.0
+      },
+      "count": 286440,
+      "duration": {
+        "max": 704,
+        "p50": 0.0,
+        "p95": 32.0,
+        "p99": 128.0,
+        "p99.9": 224.0
+      },
+      "exceedance": {
+        "gt_2x_calibration_p95": {
+          "count": 6899,
+          "percentage": 2.408532
+        },
+        "gt_4x_calibration_p95": {
+          "count": 1037,
+          "percentage": 0.36203
+        },
+        "gt_calibration_p95": {
+          "count": 9255,
+          "percentage": 3.231043
+        }
+      },
+      "gap_count_per_warp": {
+        "0": 71610,
+        "1": 71610,
+        "2": 71610,
+        "3": 71610
+      },
+      "total_gap_duration": 4316512
+    },
+    "fc2_qmma": {
+      "bucket_duration_totals": {
+        "orchestration": 0,
+        "planned": 0,
+        "starvation": 0,
+        "tensor": 0,
+        "unclassified": 3766880.0
+      },
+      "count": 282240,
+      "duration": {
+        "max": 544,
+        "p50": 0.0,
+        "p95": 32.0,
+        "p99": 32.0,
+        "p99.9": 352.0
+      },
+      "exceedance": {
+        "gt_2x_calibration_p95": {
+          "count": 1339,
+          "percentage": 0.474419
+        },
+        "gt_4x_calibration_p95": {
+          "count": 1199,
+          "percentage": 0.424816
+        },
+        "gt_calibration_p95": {
+          "count": 1528,
+          "percentage": 0.541383
+        }
+      },
+      "gap_count_per_warp": {
+        "0": 70560,
+        "1": 70560,
+        "2": 70560,
+        "3": 70560
+      },
+      "total_gap_duration": 3766880
+    }
+  },
+  "schema_version": "exp003.cadence_summary.v1",
+  "timestamp_unit": "raw timestamp units"
+}

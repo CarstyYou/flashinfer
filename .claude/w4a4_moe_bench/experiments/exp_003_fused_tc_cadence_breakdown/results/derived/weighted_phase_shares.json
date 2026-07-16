@@ -1,0 +1,1077 @@
+{
+  "bootstrap": {
+    "cluster_unit": "cluster_id (capture_id fallback)",
+    "intervals": {
+      "orchestration": {
+        "lower": 0.003063696151176387,
+        "upper": 0.003218529918339521
+      },
+      "planned": {
+        "lower": 0.16841328810334658,
+        "upper": 0.17725205404309666
+      },
+      "starvation": {
+        "lower": 0.012722388508284504,
+        "upper": 0.013473681154263617
+      },
+      "tensor": {
+        "lower": 0.061655786755685296,
+        "upper": 0.07407167561052301
+      },
+      "unclassified": {
+        "lower": 0.7390018716878787,
+        "upper": 0.7474639978490726
+      }
+    },
+    "requested_replicates": 2000,
+    "seed": 20260716,
+    "valid_replicates": 1846
+  },
+  "complete_task_observations": [
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.0013669811834088074,
+        "planned": 0.2018627355069505,
+        "starvation": 0.020707649538393533,
+        "tensor": 0.11022278855133562,
+        "unclassified": 0.6658398452199116
+      },
+      "stratum": "early|full|slices=1",
+      "task_slot": 109,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.0023846352152616657,
+        "planned": 0.1850992523846352,
+        "starvation": 0.021010569734467646,
+        "tensor": 0.058584686774941996,
+        "unclassified": 0.7329208558906934
+      },
+      "stratum": "early|partial|slices=1",
+      "task_slot": 206,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.004726622381195708,
+        "planned": 0.21039856923863054,
+        "starvation": 0.013796627491057742,
+        "tensor": 0.058444047010730714,
+        "unclassified": 0.7126341338783853
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 280,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.0032877772047447138,
+        "planned": 0.1582645693656524,
+        "starvation": 0.012184115523465704,
+        "tensor": 0.05859979370809695,
+        "unclassified": 0.7676637441980403
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 404,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.003794700282994597,
+        "planned": 0.19584512477489066,
+        "starvation": 0.01382814509904811,
+        "tensor": 0.05505531258039619,
+        "unclassified": 0.7314767172626704
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 517,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.0028310789556464295,
+        "planned": 0.10679458949355143,
+        "starvation": 0.013211701793016672,
+        "tensor": 0.07628184963825102,
+        "unclassified": 0.8008807801195345
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 614,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.0033172496984318453,
+        "planned": 0.1265832328106152,
+        "starvation": 0.014927623642943305,
+        "tensor": 0.06928528347406514,
+        "unclassified": 0.7858866103739445
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 696,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.003581301834631817,
+        "planned": 0.1982910278964564,
+        "starvation": 0.010555415933651672,
+        "tensor": 0.060630811761749184,
+        "unclassified": 0.7269414425735109
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 789,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.003337729025975722,
+        "planned": 0.13654705356623906,
+        "starvation": 0.015163518081585515,
+        "tensor": 0.06957914647469943,
+        "unclassified": 0.7753725528515003
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 897,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.0024857954545454545,
+        "planned": 0.1286221590909091,
+        "starvation": 0.010369318181818181,
+        "tensor": 0.06910511363636364,
+        "unclassified": 0.7894176136363636
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 998,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.0042004200420042,
+        "planned": 0.11843684368436844,
+        "starvation": 0.01485148514851485,
+        "tensor": 0.07185718571857186,
+        "unclassified": 0.7906540654065407
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 1104,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.002029922585162884,
+        "planned": 0.18868094816412073,
+        "starvation": 0.010488340358696988,
+        "tensor": 0.11452584111801013,
+        "unclassified": 0.6842749477740093
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 1206,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.00275647171620326,
+        "planned": 0.19151486097794823,
+        "starvation": 0.013302972195589645,
+        "tensor": 0.07736097794822627,
+        "unclassified": 0.7150647171620326
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 1325,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.0022635215630212057,
+        "planned": 0.17875863712175363,
+        "starvation": 0.013700262091970455,
+        "tensor": 0.06719085060757685,
+        "unclassified": 0.7380867286156778
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 1439,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.0025266704098820887,
+        "planned": 0.13356260527793376,
+        "starvation": 0.011019090398652443,
+        "tensor": 0.0812043795620438,
+        "unclassified": 0.7716872543514879
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 1551,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.0030559473436765397,
+        "planned": 0.18735307945463092,
+        "starvation": 0.014515749882463564,
+        "tensor": 0.07410672308415608,
+        "unclassified": 0.7209685002350729
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 1653,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.003189792663476874,
+        "planned": 0.1548758259284575,
+        "starvation": 0.010936431989063567,
+        "tensor": 0.08857370699475964,
+        "unclassified": 0.7424242424242424
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 1769,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.002507861968044105,
+        "planned": 0.19830430081232253,
+        "starvation": 0.014032367721581748,
+        "tensor": 0.08013362064981466,
+        "unclassified": 0.7050218488482369
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 1895,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.0016881522406384283,
+        "planned": 0.12223756906077349,
+        "starvation": 0.011740331491712708,
+        "tensor": 0.08670963781461019,
+        "unclassified": 0.7776243093922652
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 2018,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.0031016921435183305,
+        "planned": 0.18282608987125173,
+        "starvation": 0.01326825661562006,
+        "tensor": 0.0870188831907677,
+        "unclassified": 0.7137850781788422
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 2109,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.00545171339563863,
+        "planned": 0.16810448118859334,
+        "starvation": 0.01317996645099449,
+        "tensor": 0.07806134675293554,
+        "unclassified": 0.735202492211838
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 2232,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.0015395547134059687,
+        "planned": 0.1933325438180957,
+        "starvation": 0.011369019422074847,
+        "tensor": 0.08053055423969682,
+        "unclassified": 0.7132283278067267
+      },
+      "stratum": "tail|full|slices=1",
+      "task_slot": 2349,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z000",
+      "cluster_id": "0,0,0",
+      "shares": {
+        "orchestration": 0.003341433778857837,
+        "planned": 0.16865127582017012,
+        "starvation": 0.01488456865127582,
+        "tensor": 0.06530984204131227,
+        "unclassified": 0.747812879708384
+      },
+      "stratum": "tail|full|slices=1",
+      "task_slot": 2472,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.0012775334095681936,
+        "planned": 0.18018241638437876,
+        "starvation": 0.01752774083289175,
+        "tensor": 0.09637706443650457,
+        "unclassified": 0.7046352449366567
+      },
+      "stratum": "early|full|slices=1",
+      "task_slot": 26,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.004259501965923984,
+        "planned": 0.0973132372214941,
+        "starvation": 0.017693315858453473,
+        "tensor": 0.07503276539973788,
+        "unclassified": 0.8057011795543906
+      },
+      "stratum": "early|partial|slices=1",
+      "task_slot": 180,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.00213857998289136,
+        "planned": 0.12125748502994012,
+        "starvation": 0.01204733390362133,
+        "tensor": 0.07035928143712575,
+        "unclassified": 0.7941973196464215
+      },
+      "stratum": "early|partial|slices=1",
+      "task_slot": 224,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.0032765794931646362,
+        "planned": 0.12603712896127742,
+        "starvation": 0.012192311051806038,
+        "tensor": 0.07543947599259596,
+        "unclassified": 0.783054504501156
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 331,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.004659117716442557,
+        "planned": 0.2019933946685539,
+        "starvation": 0.014449162538334512,
+        "tensor": 0.07094833687190374,
+        "unclassified": 0.7079499882047653
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 440,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.002556610664718773,
+        "planned": 0.17208424640857073,
+        "starvation": 0.013087411736060385,
+        "tensor": 0.06549793036279522,
+        "unclassified": 0.7467738008278548
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 552,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.003175775480059084,
+        "planned": 0.1328655834564254,
+        "starvation": 0.01395864106351551,
+        "tensor": 0.0878877400295421,
+        "unclassified": 0.762112259970458
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 672,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.003912834095834337,
+        "planned": 0.13478208523958585,
+        "starvation": 0.014688177221285818,
+        "tensor": 0.06784252347700458,
+        "unclassified": 0.7787743799662894
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 772,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.0018366147516896856,
+        "planned": 0.12760799294739936,
+        "starvation": 0.014178665883044372,
+        "tensor": 0.07544813399941228,
+        "unclassified": 0.7809285924184544
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 886,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.0014360938247965534,
+        "planned": 0.21260172331258975,
+        "starvation": 0.011309238870272858,
+        "tensor": 0.07234322642412638,
+        "unclassified": 0.7023097175682145
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 994,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.006091900673009978,
+        "planned": 0.16546762589928057,
+        "starvation": 0.009108841958691112,
+        "tensor": 0.08534462752378742,
+        "unclassified": 0.7339870039452309
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 1112,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.003983353151010702,
+        "planned": 0.2192627824019025,
+        "starvation": 0.012425683709869203,
+        "tensor": 0.06902497027348395,
+        "unclassified": 0.6953032104637337
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 1228,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.0017211703958691911,
+        "planned": 0.23241947381362182,
+        "starvation": 0.00872879272190804,
+        "tensor": 0.06638800098352594,
+        "unclassified": 0.690742562085075
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 1346,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.0037186052182394537,
+        "planned": 0.2150694952450622,
+        "starvation": 0.010790051207022677,
+        "tensor": 0.06595952206778835,
+        "unclassified": 0.7044623262618873
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 1463,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.0026035209521448055,
+        "planned": 0.16662534093726755,
+        "starvation": 0.008120505826927846,
+        "tensor": 0.06446813786263328,
+        "unclassified": 0.7581824944210266
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 1583,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.002064516129032258,
+        "planned": 0.19683870967741934,
+        "starvation": 0.013419354838709678,
+        "tensor": 0.05967741935483871,
+        "unclassified": 0.728
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 1702,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.002751375687843922,
+        "planned": 0.14851175587793897,
+        "starvation": 0.014007003501750876,
+        "tensor": 0.059842421210605304,
+        "unclassified": 0.7748874437218609
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 1801,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.0038883222845486998,
+        "planned": 0.12576491585925548,
+        "starvation": 0.013449770525242224,
+        "tensor": 0.06195818459969403,
+        "unclassified": 0.7949388067312596
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 1918,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.005456349206349206,
+        "planned": 0.1623263888888889,
+        "starvation": 0.011656746031746032,
+        "tensor": 0.054563492063492064,
+        "unclassified": 0.7659970238095238
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 2032,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.003162202380952381,
+        "planned": 0.18167162698412698,
+        "starvation": 0.014446924603174602,
+        "tensor": 0.05791170634920635,
+        "unclassified": 0.7428075396825398
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 2146,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.002694911005264477,
+        "planned": 0.16614439709200302,
+        "starvation": 0.011657056906492855,
+        "tensor": 0.05859864627726247,
+        "unclassified": 0.7609049887189772
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 2259,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.0025906735751295338,
+        "planned": 0.11170374885705578,
+        "starvation": 0.014782078634562632,
+        "tensor": 0.07535812252362084,
+        "unclassified": 0.7955653764096312
+      },
+      "stratum": "tail|partial|slices=1",
+      "task_slot": 2370,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z055",
+      "cluster_id": "0,0,55",
+      "shares": {
+        "orchestration": 0.004068141367912535,
+        "planned": 0.13647342995169082,
+        "starvation": 0.011886600559369439,
+        "tensor": 0.06172133231629799,
+        "unclassified": 0.7858504958047292
+      },
+      "stratum": "tail|partial|slices=1",
+      "task_slot": 2456,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0016710552967389102,
+        "planned": 0.21308486935385862,
+        "starvation": 0.02658497062993721,
+        "tensor": 0.10507393153737088,
+        "unclassified": 0.6535851731820944
+      },
+      "stratum": "early|partial|slices=1",
+      "task_slot": 7,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.005591540572215748,
+        "planned": 0.204832809036892,
+        "starvation": 0.015168086640785658,
+        "tensor": 0.05295963633503237,
+        "unclassified": 0.7214479274150742
+      },
+      "stratum": "early|full|slices=1",
+      "task_slot": 140,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.004938913439043411,
+        "planned": 0.14374837535742138,
+        "starvation": 0.013711983363659995,
+        "tensor": 0.0558877047049649,
+        "unclassified": 0.7817130231349103
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 277,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0038197692547552228,
+        "planned": 0.11100717181166199,
+        "starvation": 0.012472715933894606,
+        "tensor": 0.07210788899282819,
+        "unclassified": 0.80059245400686
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 380,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0037078934137757666,
+        "planned": 0.20977878330819508,
+        "starvation": 0.013386123680241327,
+        "tensor": 0.06083459024635495,
+        "unclassified": 0.7122926093514329
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 461,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0032394717169200097,
+        "planned": 0.18645651632195365,
+        "starvation": 0.0099676052828308,
+        "tensor": 0.05712683777722402,
+        "unclassified": 0.7432095689010715
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 587,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0015159171298635675,
+        "planned": 0.1778044466902476,
+        "starvation": 0.008400707427993936,
+        "tensor": 0.062215765538150586,
+        "unclassified": 0.7500631632137443
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 707,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0015220700152207,
+        "planned": 0.2009132420091324,
+        "starvation": 0.013127853881278538,
+        "tensor": 0.05733130390664637,
+        "unclassified": 0.727105530187722
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 823,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0030008694721984147,
+        "planned": 0.21821788855884167,
+        "starvation": 0.012768946079678354,
+        "tensor": 0.0584180465379613,
+        "unclassified": 0.7075942493513203
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 934,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0035058643549209585,
+        "planned": 0.20385007649158593,
+        "starvation": 0.01179245283018868,
+        "tensor": 0.05641254462009179,
+        "unclassified": 0.7244390617032126
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 1052,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0032262689991396616,
+        "planned": 0.11485517636937195,
+        "starvation": 0.011542873530255234,
+        "tensor": 0.05929165471752222,
+        "unclassified": 0.8110840263837109
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 1165,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.00308331235841933,
+        "planned": 0.17146992197331992,
+        "starvation": 0.010948905109489052,
+        "tensor": 0.06298766675056633,
+        "unclassified": 0.7515101938082054
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 1246,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0036387216822613665,
+        "planned": 0.2167883871226833,
+        "starvation": 0.013533354777621343,
+        "tensor": 0.05483553591466234,
+        "unclassified": 0.7112040005027717
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 1362,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.003654233870967742,
+        "planned": 0.15102066532258063,
+        "starvation": 0.011781754032258064,
+        "tensor": 0.055443548387096774,
+        "unclassified": 0.7780997983870968
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 1471,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.005361596009975062,
+        "planned": 0.20236907730673315,
+        "starvation": 0.010723192019950124,
+        "tensor": 0.05766832917705736,
+        "unclassified": 0.7238778054862842
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 1588,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.002638853983412918,
+        "planned": 0.1539331490324202,
+        "starvation": 0.00929881879869314,
+        "tensor": 0.0604423221915054,
+        "unclassified": 0.7736868559939684
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 1707,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0025137111517367456,
+        "planned": 0.10793723339427179,
+        "starvation": 0.01218769043266301,
+        "tensor": 0.06528031687995126,
+        "unclassified": 0.8120810481413772
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 1816,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0023217871485943773,
+        "planned": 0.1955321285140562,
+        "starvation": 0.011922690763052208,
+        "tensor": 0.05867218875502008,
+        "unclassified": 0.731551204819277
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 1903,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.002066115702479339,
+        "planned": 0.11268277177368087,
+        "starvation": 0.014224411951684678,
+        "tensor": 0.06865861411315957,
+        "unclassified": 0.8023680864589956
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 2018,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0016250000000000001,
+        "planned": 0.205125,
+        "starvation": 0.0090625,
+        "tensor": 0.06468750000000001,
+        "unclassified": 0.7195
+      },
+      "stratum": "steady|partial|slices=1",
+      "task_slot": 2105,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0033519553589240847,
+        "planned": 0.1641824524085067,
+        "starvation": 0.014401008806247995,
+        "tensor": 0.05760479043023642,
+        "unclassified": 0.7604597929960848
+      },
+      "stratum": "steady|full|slices=1",
+      "task_slot": 2217,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0038740314921269685,
+        "planned": 0.20169957510622344,
+        "starvation": 0.01274681329667583,
+        "tensor": 0.056798300424893776,
+        "unclassified": 0.72488127968008
+      },
+      "stratum": "tail|full|slices=1",
+      "task_slot": 2329,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.002420362273579013,
+        "planned": 0.11781698938163648,
+        "starvation": 0.012101811367895066,
+        "tensor": 0.07534353529044346,
+        "unclassified": 0.792317301686446
+      },
+      "stratum": "tail|partial|slices=1",
+      "task_slot": 2441,
+      "warp_count": 4
+    },
+    {
+      "capture_id": "cta_z109",
+      "cluster_id": "0,0,109",
+      "shares": {
+        "orchestration": 0.0032478073662112134,
+        "planned": 0.1494617623486734,
+        "starvation": 0.012035912794338577,
+        "tensor": 0.05979721990583761,
+        "unclassified": 0.7754572975849392
+      },
+      "stratum": "tail|full|slices=1",
+      "task_slot": 2529,
+      "warp_count": 4
+    }
+  ],
+  "coverage": {
+    "minimum_captures": 3,
+    "minimum_tasks": 8,
+    "pass": false,
+    "strata": [
+      {
+        "pass": false,
+        "population_tasks": 154,
+        "sample_capture_count": 3,
+        "sample_complete_tasks": 3,
+        "stratum": "early|full|slices=1"
+      },
+      {
+        "pass": false,
+        "population_tasks": 100,
+        "sample_capture_count": 3,
+        "sample_complete_tasks": 4,
+        "stratum": "early|partial|slices=1"
+      },
+      {
+        "pass": true,
+        "population_tasks": 1241,
+        "sample_capture_count": 3,
+        "sample_complete_tasks": 28,
+        "stratum": "steady|full|slices=1"
+      },
+      {
+        "pass": true,
+        "population_tasks": 788,
+        "sample_capture_count": 3,
+        "sample_complete_tasks": 28,
+        "stratum": "steady|partial|slices=1"
+      },
+      {
+        "pass": false,
+        "population_tasks": 149,
+        "sample_capture_count": 2,
+        "sample_complete_tasks": 4,
+        "stratum": "tail|full|slices=1"
+      },
+      {
+        "pass": false,
+        "population_tasks": 104,
+        "sample_capture_count": 2,
+        "sample_complete_tasks": 3,
+        "stratum": "tail|partial|slices=1"
+      }
+    ]
+  },
+  "decision": "inconclusive",
+  "decision_reasons": [
+    "static binary is not eligible for formal dominance",
+    "resource identity failed: STACK"
+  ],
+  "estimator": "equal-warp mean within complete tasks; stratum mean; population task-count weighting",
+  "formal_dominance_eligible": false,
+  "formal_dominance_reasons": [
+    "resource identity failed: STACK"
+  ],
+  "formal_event_count_closure": true,
+  "parallel_warp_rule": "warp intervals are never summed",
+  "pc_sass_closure": true,
+  "population_weighted_point": null,
+  "schema_version": 1,
+  "timestamp_unit": "raw timestamp units"
+}
