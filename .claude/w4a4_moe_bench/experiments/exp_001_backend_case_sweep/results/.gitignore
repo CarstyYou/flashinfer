@@ -1,0 +1,6 @@
+# Large deterministic fixture payloads stay in the experiment workspace.  The
+# generator, file manifest, per-tensor hashes, and occupancy hashes are tracked.
+fixtures/*.npz
+
+# Smoke runs are launch-contract checks, not canonical evidence.
+smoke_*/

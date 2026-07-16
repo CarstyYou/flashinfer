@@ -1,0 +1,591 @@
+{
+  "all_correctness_and_dispatch_gates_pass": true,
+  "cases": {
+    "1024": {
+      "contract": {
+        "alternate_dispatch": "direct callable; no runner/DeepGEMM/CUTLASS dispatcher",
+        "backend": "sglang_legacy_triton_fp8_chain",
+        "callable": "sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe.fused_experts_impl",
+        "callable_source": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+        "callable_source_sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056",
+        "config": {
+          "down": null,
+          "down_max_block_m": null,
+          "source": "default_heuristic",
+          "topk_ids_shape": [
+            1024,
+            8
+          ],
+          "tuned_grid": [],
+          "up": {
+            "BLOCK_SIZE_K": 256,
+            "BLOCK_SIZE_M": 64,
+            "BLOCK_SIZE_N": 128,
+            "GROUP_SIZE_M": 64,
+            "num_stages": 2,
+            "num_warps": 4
+          }
+        },
+        "quant_contract": {
+          "block_shape": null,
+          "input": "BF16 -> dynamic tensor-wise E4M3 inside FC1",
+          "intermediate": "BF16 -> dynamic tensor-wise E4M3 inside FC2",
+          "per_channel_quant": false,
+          "weight": "E4M3 per-expert tensor scale"
+        }
+      },
+      "correctness": {
+        "atol": 0.01,
+        "cosine": 0.9997226595878601,
+        "formal_pass": true,
+        "formal_percent_threshold": 97.0,
+        "formal_percent_within": 99.99895095825195,
+        "max_abs_error": 0.017108984291553497,
+        "max_relative_error": 70848.7265625,
+        "oracle": "actual E4M3 weights/scales plus two dynamic activation E4M3 round trips",
+        "output_sha256": "c2051707f0d6d1b68e389374e2c333abb293357c867bd9380ee5650aeb6247d7",
+        "reference_sha256": "1d795ce93c0799f0b2897b21a42ff839df437b548af525c7068fefe90ddc9352",
+        "relative_l2": 0.023552153259515762,
+        "rtol": 0.1
+      },
+      "dispatch_pass": true,
+      "fixture": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m1024.npz",
+        "fixture_sha256": "0fa7e8a7d8d1d32172971f987d6f55b534aabf8d12a84a910d010cec25ba04a5",
+        "m": 1024,
+        "occupancy_max": 50,
+        "occupancy_min": 14,
+        "occupancy_sha256": "e03917667a2d3629721f3c6a2b13dea8aac9c8593280282013395eb9a5f2e5bd",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "5d5fdccddc2828d49d466385a93fbeff720aba9361985a9c4bb35603bc5fa6d0",
+        "topk_weights_sha256": "d7342a44f8bfe9a2b0cf94a3d45e9ea30fbbe244d047feeaac7b212603103dcc",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "6339b37d71b116774bf956e5882b2f4d132c82f4a7fdbe01dbc07808698722b5"
+      },
+      "observed_cuda_kernels": [
+        "void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, int, int)",
+        "void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long)",
+        "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "void (anonymous namespace)::per_tensor_absmax_kernel<__nv_bfloat16>(__nv_bfloat16 const*, float*, long)",
+        "void (anonymous namespace)::per_tensor_quant_fp8_kernel<__nv_bfloat16, __nv_fp8_e4m3>(__nv_bfloat16 const*, __nv_fp8_e4m3*, float const*, long)",
+        "fused_moe_kernel",
+        "void (anonymous namespace)::act_and_mul_kernel<__nv_bfloat16, ((anonymous namespace)::ActivationKind)0, true, true>((anonymous namespace)::ActivationParams)",
+        "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "void (anonymous namespace)::per_tensor_absmax_kernel<__nv_bfloat16>(__nv_bfloat16 const*, float*, long)",
+        "void (anonymous namespace)::per_tensor_quant_fp8_kernel<__nv_bfloat16, __nv_fp8_e4m3>(__nv_bfloat16 const*, __nv_fp8_e4m3*, float const*, long)",
+        "fused_moe_kernel",
+        "void moe_sum_reduce_warp_per_token_vec_kernel<8>(c10::BFloat16 const*, c10::BFloat16*, long, long, long, long, long, long, float)"
+      ]
+    },
+    "2048": {
+      "contract": {
+        "alternate_dispatch": "direct callable; no runner/DeepGEMM/CUTLASS dispatcher",
+        "backend": "sglang_legacy_triton_fp8_chain",
+        "callable": "sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe.fused_experts_impl",
+        "callable_source": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+        "callable_source_sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056",
+        "config": {
+          "down": null,
+          "down_max_block_m": null,
+          "source": "default_heuristic",
+          "topk_ids_shape": [
+            2048,
+            8
+          ],
+          "tuned_grid": [],
+          "up": {
+            "BLOCK_SIZE_K": 256,
+            "BLOCK_SIZE_M": 64,
+            "BLOCK_SIZE_N": 128,
+            "GROUP_SIZE_M": 64,
+            "num_stages": 2,
+            "num_warps": 4
+          }
+        },
+        "quant_contract": {
+          "block_shape": null,
+          "input": "BF16 -> dynamic tensor-wise E4M3 inside FC1",
+          "intermediate": "BF16 -> dynamic tensor-wise E4M3 inside FC2",
+          "per_channel_quant": false,
+          "weight": "E4M3 per-expert tensor scale"
+        }
+      },
+      "correctness": {
+        "atol": 0.01,
+        "cosine": 0.9999037384986877,
+        "formal_pass": true,
+        "formal_percent_threshold": 97.0,
+        "formal_percent_within": 99.99978542327881,
+        "max_abs_error": 0.015221454203128815,
+        "max_relative_error": 35634.19921875,
+        "oracle": "actual E4M3 weights/scales plus two dynamic activation E4M3 round trips",
+        "output_sha256": "1908fb25ca6e1ca5d0713edc54f5c739af14610df7dc266abab8cadf2ad644ad",
+        "reference_sha256": "0e3f562d1b3383c1e6439832d2020417ea1e911f0f52ceaaa3b31b76b7b4af86",
+        "relative_l2": 0.013872149400413036,
+        "rtol": 0.1
+      },
+      "dispatch_pass": true,
+      "fixture": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m2048.npz",
+        "fixture_sha256": "5375fd8b3e5e15f8c956998bfc3e2f3ee59948a2aeaf5ba1294ec6a74092bde3",
+        "m": 2048,
+        "occupancy_max": 89,
+        "occupancy_min": 44,
+        "occupancy_sha256": "ef23f3672ac6f6dc3a6abbc1ad2fda9b4219cb091698affd6997a70e8b93a244",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "38801fb6845c3d19a502e035e5ec3ec008fa7c88933f05a33f276d8ce9e8654d",
+        "topk_weights_sha256": "b03cb15feff7fa5e53e95911f1987d57103666f577732fd1fb19d88f7192938b",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "ccf6bdc9fd88f35afb0fd317f930799053d8a614b4107e3cf16b8a0c115e884e"
+      },
+      "observed_cuda_kernels": [
+        "void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, int, int)",
+        "void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long)",
+        "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "void (anonymous namespace)::per_tensor_absmax_kernel<__nv_bfloat16>(__nv_bfloat16 const*, float*, long)",
+        "void (anonymous namespace)::per_tensor_quant_fp8_kernel<__nv_bfloat16, __nv_fp8_e4m3>(__nv_bfloat16 const*, __nv_fp8_e4m3*, float const*, long)",
+        "fused_moe_kernel",
+        "void (anonymous namespace)::act_and_mul_kernel<__nv_bfloat16, ((anonymous namespace)::ActivationKind)0, true, true>((anonymous namespace)::ActivationParams)",
+        "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "void (anonymous namespace)::per_tensor_absmax_kernel<__nv_bfloat16>(__nv_bfloat16 const*, float*, long)",
+        "void (anonymous namespace)::per_tensor_quant_fp8_kernel<__nv_bfloat16, __nv_fp8_e4m3>(__nv_bfloat16 const*, __nv_fp8_e4m3*, float const*, long)",
+        "fused_moe_kernel",
+        "void moe_sum_reduce_warp_per_token_vec_kernel<8>(c10::BFloat16 const*, c10::BFloat16*, long, long, long, long, long, long, float)"
+      ]
+    },
+    "256": {
+      "contract": {
+        "alternate_dispatch": "direct callable; no runner/DeepGEMM/CUTLASS dispatcher",
+        "backend": "sglang_legacy_triton_fp8_chain",
+        "callable": "sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe.fused_experts_impl",
+        "callable_source": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+        "callable_source_sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056",
+        "config": {
+          "down": null,
+          "down_max_block_m": null,
+          "source": "default_heuristic",
+          "topk_ids_shape": [
+            256,
+            8
+          ],
+          "tuned_grid": [],
+          "up": {
+            "BLOCK_SIZE_K": 256,
+            "BLOCK_SIZE_M": 32,
+            "BLOCK_SIZE_N": 64,
+            "GROUP_SIZE_M": 1,
+            "num_stages": 4,
+            "num_warps": 4
+          }
+        },
+        "quant_contract": {
+          "block_shape": null,
+          "input": "BF16 -> dynamic tensor-wise E4M3 inside FC1",
+          "intermediate": "BF16 -> dynamic tensor-wise E4M3 inside FC2",
+          "per_channel_quant": false,
+          "weight": "E4M3 per-expert tensor scale"
+        }
+      },
+      "correctness": {
+        "atol": 0.01,
+        "cosine": 0.9996999502182007,
+        "formal_pass": true,
+        "formal_percent_threshold": 97.0,
+        "formal_percent_within": 99.99675750732422,
+        "max_abs_error": 0.016593515872955322,
+        "max_relative_error": 8210.6171875,
+        "oracle": "actual E4M3 weights/scales plus two dynamic activation E4M3 round trips",
+        "output_sha256": "51f4604bfac72092fea43b9bcfa821b7a0c2edf6e0dddb0c7f369326c01fa62b",
+        "reference_sha256": "94a178e6ac216499815527a4893d523e8cb69bbd68b9a3abe3cfa687c3bfa7f1",
+        "relative_l2": 0.024491669610142708,
+        "rtol": 0.1
+      },
+      "dispatch_pass": true,
+      "fixture": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m256.npz",
+        "fixture_sha256": "86b505097acd06bed5a50c3528c78525e6087c07ed69f86606607599ffa21686",
+        "m": 256,
+        "occupancy_max": 15,
+        "occupancy_min": 2,
+        "occupancy_sha256": "60b4becc63e932fe7b11210c9ef78c1a4b58a38798024f55854808e35d6a4920",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "9cd310e245d39595e1d322c2da645fe67791f546c29994caea48f7786aa15dc1",
+        "topk_weights_sha256": "e1fdddd7af5a99de0dab6d8620c050e6cee25a0c27ff9c66e617ee346c0110f1",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "ec4c61e362a4de64083be4a9d357a498d28b8a74bb816e8f9dc04eb9f9a80d09"
+      },
+      "observed_cuda_kernels": [
+        "void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, int, int)",
+        "void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long)",
+        "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "void (anonymous namespace)::per_tensor_absmax_kernel<__nv_bfloat16>(__nv_bfloat16 const*, float*, long)",
+        "void (anonymous namespace)::per_tensor_quant_fp8_kernel<__nv_bfloat16, __nv_fp8_e4m3>(__nv_bfloat16 const*, __nv_fp8_e4m3*, float const*, long)",
+        "fused_moe_kernel",
+        "void (anonymous namespace)::act_and_mul_kernel<__nv_bfloat16, ((anonymous namespace)::ActivationKind)0, true, true>((anonymous namespace)::ActivationParams)",
+        "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "void (anonymous namespace)::per_tensor_absmax_kernel<__nv_bfloat16>(__nv_bfloat16 const*, float*, long)",
+        "void (anonymous namespace)::per_tensor_quant_fp8_kernel<__nv_bfloat16, __nv_fp8_e4m3>(__nv_bfloat16 const*, __nv_fp8_e4m3*, float const*, long)",
+        "fused_moe_kernel",
+        "void moe_sum_reduce_kernel_warp_token_topk<c10::BFloat16, 8, 4>(c10::BFloat16 const*, c10::BFloat16*, long, long, long, long, long, at::OpMathType<c10::BFloat16>::type)"
+      ]
+    },
+    "4096": {
+      "contract": {
+        "alternate_dispatch": "direct callable; no runner/DeepGEMM/CUTLASS dispatcher",
+        "backend": "sglang_legacy_triton_fp8_chain",
+        "callable": "sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe.fused_experts_impl",
+        "callable_source": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+        "callable_source_sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056",
+        "config": {
+          "down": null,
+          "down_max_block_m": null,
+          "source": "default_heuristic",
+          "topk_ids_shape": [
+            4096,
+            8
+          ],
+          "tuned_grid": [],
+          "up": {
+            "BLOCK_SIZE_K": 256,
+            "BLOCK_SIZE_M": 64,
+            "BLOCK_SIZE_N": 128,
+            "GROUP_SIZE_M": 64,
+            "num_stages": 2,
+            "num_warps": 4
+          }
+        },
+        "quant_contract": {
+          "block_shape": null,
+          "input": "BF16 -> dynamic tensor-wise E4M3 inside FC1",
+          "intermediate": "BF16 -> dynamic tensor-wise E4M3 inside FC2",
+          "per_channel_quant": false,
+          "weight": "E4M3 per-expert tensor scale"
+        }
+      },
+      "correctness": {
+        "atol": 0.01,
+        "cosine": 0.9999048709869385,
+        "formal_pass": true,
+        "formal_percent_threshold": 97.0,
+        "formal_percent_within": 99.99997615814209,
+        "max_abs_error": 0.014812067151069641,
+        "max_relative_error": 169983.0,
+        "oracle": "actual E4M3 weights/scales plus two dynamic activation E4M3 round trips",
+        "output_sha256": "21170d3501cbdf916a556e5c0a4a055fe645281b74ed73257f38b28288655c39",
+        "reference_sha256": "fb6a0d39d6402b9b2715131b0e2a121c4ba54e29178e83e9eba3e3561b61403a",
+        "relative_l2": 0.013798761181533337,
+        "rtol": 0.1
+      },
+      "dispatch_pass": true,
+      "fixture": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m4096.npz",
+        "fixture_sha256": "a1ac93cb8dfb2e81a000476efc36b75588f79f1954b406396b77c172464ce2cc",
+        "m": 4096,
+        "occupancy_max": 166,
+        "occupancy_min": 92,
+        "occupancy_sha256": "0b57ad7fd66d1405ea04eb3135a5615e45664eb1ea61d9b61e7cb7de333be5df",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "1f66203f9c8589a25517a3422c3012eea61aea2dc9ee4e2fc807fbf98ca667fc",
+        "topk_weights_sha256": "8d97adaf9846929c340a63d81d13816c06820e737797712a2ec7f94d1ae88232",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "d8ff96b666568acab63a31b7f5812da2678053931dd9ff60fe33eaa90f588870"
+      },
+      "observed_cuda_kernels": [
+        "void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, int, int)",
+        "void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long)",
+        "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "void (anonymous namespace)::per_tensor_absmax_kernel<__nv_bfloat16>(__nv_bfloat16 const*, float*, long)",
+        "void (anonymous namespace)::per_tensor_quant_fp8_kernel<__nv_bfloat16, __nv_fp8_e4m3>(__nv_bfloat16 const*, __nv_fp8_e4m3*, float const*, long)",
+        "fused_moe_kernel",
+        "void (anonymous namespace)::act_and_mul_kernel<__nv_bfloat16, ((anonymous namespace)::ActivationKind)0, true, true>((anonymous namespace)::ActivationParams)",
+        "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "void (anonymous namespace)::per_tensor_absmax_kernel<__nv_bfloat16>(__nv_bfloat16 const*, float*, long)",
+        "void (anonymous namespace)::per_tensor_quant_fp8_kernel<__nv_bfloat16, __nv_fp8_e4m3>(__nv_bfloat16 const*, __nv_fp8_e4m3*, float const*, long)",
+        "fused_moe_kernel",
+        "void moe_sum_reduce_warp_per_token_vec_kernel<8>(c10::BFloat16 const*, c10::BFloat16*, long, long, long, long, long, long, float)"
+      ]
+    },
+    "512": {
+      "contract": {
+        "alternate_dispatch": "direct callable; no runner/DeepGEMM/CUTLASS dispatcher",
+        "backend": "sglang_legacy_triton_fp8_chain",
+        "callable": "sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe.fused_experts_impl",
+        "callable_source": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+        "callable_source_sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056",
+        "config": {
+          "down": null,
+          "down_max_block_m": null,
+          "source": "default_heuristic",
+          "topk_ids_shape": [
+            512,
+            8
+          ],
+          "tuned_grid": [],
+          "up": {
+            "BLOCK_SIZE_K": 256,
+            "BLOCK_SIZE_M": 64,
+            "BLOCK_SIZE_N": 128,
+            "GROUP_SIZE_M": 64,
+            "num_stages": 2,
+            "num_warps": 4
+          }
+        },
+        "quant_contract": {
+          "block_shape": null,
+          "input": "BF16 -> dynamic tensor-wise E4M3 inside FC1",
+          "intermediate": "BF16 -> dynamic tensor-wise E4M3 inside FC2",
+          "per_channel_quant": false,
+          "weight": "E4M3 per-expert tensor scale"
+        }
+      },
+      "correctness": {
+        "atol": 0.01,
+        "cosine": 0.9999024868011475,
+        "formal_pass": true,
+        "formal_percent_threshold": 97.0,
+        "formal_percent_within": 99.99990463256836,
+        "max_abs_error": 0.012860365211963654,
+        "max_relative_error": 33939.28515625,
+        "oracle": "actual E4M3 weights/scales plus two dynamic activation E4M3 round trips",
+        "output_sha256": "a1822f8687cbc4b55b33d4a41e31b9b217806d0f6bd778b589a5b6d0124dfc52",
+        "reference_sha256": "67373347a2ca1f210e4df53eea22604256cf042cc0f234e36718c1c16a2f70f4",
+        "relative_l2": 0.013959500938653946,
+        "rtol": 0.1
+      },
+      "dispatch_pass": true,
+      "fixture": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m512.npz",
+        "fixture_sha256": "e6ddb487121a0d681a06bcb453f38623b3d5d8477f2232bbbf78cd2ea4ef23a3",
+        "m": 512,
+        "occupancy_max": 32,
+        "occupancy_min": 7,
+        "occupancy_sha256": "1743ac1105dd3d277607a09eda29d22e0d81293524e72589faf14eaaa6e4a6ed",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "6547b9e499a45732e2e209d6e7802bb869cf9c0f56dddebc38b94373d9125378",
+        "topk_weights_sha256": "31f9568afcba7d5f4df04ff5e61ecc082434dd9f045b7aec9d77a86e6e0143c0",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "5178555ed52d79f5945b7c6637c9c20371c902d69e3817437caf2bee7fb34087"
+      },
+      "observed_cuda_kernels": [
+        "void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, int, int)",
+        "void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long)",
+        "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "void (anonymous namespace)::per_tensor_absmax_kernel<__nv_bfloat16>(__nv_bfloat16 const*, float*, long)",
+        "void (anonymous namespace)::per_tensor_quant_fp8_kernel<__nv_bfloat16, __nv_fp8_e4m3>(__nv_bfloat16 const*, __nv_fp8_e4m3*, float const*, long)",
+        "fused_moe_kernel",
+        "void (anonymous namespace)::act_and_mul_kernel<__nv_bfloat16, ((anonymous namespace)::ActivationKind)0, true, true>((anonymous namespace)::ActivationParams)",
+        "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "void (anonymous namespace)::per_tensor_absmax_kernel<__nv_bfloat16>(__nv_bfloat16 const*, float*, long)",
+        "void (anonymous namespace)::per_tensor_quant_fp8_kernel<__nv_bfloat16, __nv_fp8_e4m3>(__nv_bfloat16 const*, __nv_fp8_e4m3*, float const*, long)",
+        "fused_moe_kernel",
+        "void moe_sum_reduce_warp_per_token_vec_kernel<8>(c10::BFloat16 const*, c10::BFloat16*, long, long, long, long, long, long, float)"
+      ]
+    },
+    "8192": {
+      "contract": {
+        "alternate_dispatch": "direct callable; no runner/DeepGEMM/CUTLASS dispatcher",
+        "backend": "sglang_legacy_triton_fp8_chain",
+        "callable": "sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe.fused_experts_impl",
+        "callable_source": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+        "callable_source_sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056",
+        "config": {
+          "down": null,
+          "down_max_block_m": null,
+          "source": "default_heuristic",
+          "topk_ids_shape": [
+            8192,
+            8
+          ],
+          "tuned_grid": [],
+          "up": {
+            "BLOCK_SIZE_K": 256,
+            "BLOCK_SIZE_M": 64,
+            "BLOCK_SIZE_N": 128,
+            "GROUP_SIZE_M": 64,
+            "num_stages": 2,
+            "num_warps": 4
+          }
+        },
+        "quant_contract": {
+          "block_shape": null,
+          "input": "BF16 -> dynamic tensor-wise E4M3 inside FC1",
+          "intermediate": "BF16 -> dynamic tensor-wise E4M3 inside FC2",
+          "per_channel_quant": false,
+          "weight": "E4M3 per-expert tensor scale"
+        }
+      },
+      "correctness": {
+        "atol": 0.01,
+        "cosine": 0.9999045133590698,
+        "formal_pass": true,
+        "formal_percent_threshold": 97.0,
+        "formal_percent_within": 99.99959468841553,
+        "max_abs_error": 0.03073546290397644,
+        "max_relative_error": 215148.46875,
+        "oracle": "actual E4M3 weights/scales plus two dynamic activation E4M3 round trips",
+        "output_sha256": "0b2dc0c560263a9ff2f6e8f7ede3783d63d4a6f982fe61344b5d5e499ca4fe61",
+        "reference_sha256": "4cb21025c276c9928825fcc0fffced9a85251519b023ecc4b75d3cf179f26037",
+        "relative_l2": 0.013822781853377819,
+        "rtol": 0.1
+      },
+      "dispatch_pass": true,
+      "fixture": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m8192.npz",
+        "fixture_sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438",
+        "m": 8192,
+        "occupancy_max": 295,
+        "occupancy_min": 205,
+        "occupancy_sha256": "3e4350788bfcdd1cca175141f0c6626934589b97cb23d74811e4bc2785531a94",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "c7ea3babd394cb6fc73980a2754b13a8215deaee991b3aaf7ce3b45502592abb",
+        "topk_weights_sha256": "441f51ba80975dc8cfc3fc0d7e5a07a8c474a6781f8d606ff0eaecef69adbcea",
+        "weight_sum_max_abs_error": 2.384185791015625e-07,
+        "x_sha256": "00d8fb81ac350100bdb9c4f9341ac2cbbc24d6c0b21b62f565f7f44a8ad24bec"
+      },
+      "observed_cuda_kernels": [
+        "void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, int, int)",
+        "void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long)",
+        "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "void (anonymous namespace)::per_tensor_absmax_kernel<__nv_bfloat16>(__nv_bfloat16 const*, float*, long)",
+        "void (anonymous namespace)::per_tensor_quant_fp8_kernel<__nv_bfloat16, __nv_fp8_e4m3>(__nv_bfloat16 const*, __nv_fp8_e4m3*, float const*, long)",
+        "fused_moe_kernel",
+        "void (anonymous namespace)::act_and_mul_kernel<__nv_bfloat16, ((anonymous namespace)::ActivationKind)0, true, true>((anonymous namespace)::ActivationParams)",
+        "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "void (anonymous namespace)::per_tensor_absmax_kernel<__nv_bfloat16>(__nv_bfloat16 const*, float*, long)",
+        "void (anonymous namespace)::per_tensor_quant_fp8_kernel<__nv_bfloat16, __nv_fp8_e4m3>(__nv_bfloat16 const*, __nv_fp8_e4m3*, float const*, long)",
+        "fused_moe_kernel",
+        "void moe_sum_reduce_warp_per_token_vec_kernel<8>(c10::BFloat16 const*, c10::BFloat16*, long, long, long, long, long, long, float)"
+      ]
+    }
+  },
+  "evidence_identity": {
+    "artifact_fingerprint_sha256": "7912fe8d5f4199e8c4813f8e1ad40a42fdd150ac440858101434dd2d8801835d",
+    "comparison_group_id": "exp001_cutedsl_vs_sglang_triton_fp8_cross_runtime",
+    "environment_lock_digest": "cdc072f99c7c1b3fb099066eddc38c5bfef8cb9da121a6a76177ddc3b11b3d35",
+    "fingerprint_sha256": "4cfa1118065fe870147fe4a13c72f4416be6a31224779273c4be892776fdabee",
+    "gpu_uuid": "GPU-4a286357-c999-9547-3a04-25961b1ffd08",
+    "m_values": [
+      256,
+      512,
+      1024,
+      2048,
+      4096,
+      8192
+    ],
+    "protocol_lock_digest": "a1a6a056b098c822b045dd8d1579ea475c32b7b0a4464fd588afd8e6dac928a8",
+    "rerun_id": "exp001-corrected-20260716T0443Z-r1",
+    "schema_version": 1,
+    "smoke": false
+  },
+  "protocol": {
+    "aggregation": "median of five repeat means",
+    "fingerprint_sha256": "a1a6a056b098c822b045dd8d1579ea475c32b7b0a4464fd588afd8e6dac928a8",
+    "iters": 50,
+    "l2_flush_bytes": 201326592,
+    "m_values": [
+      256,
+      512,
+      1024,
+      2048,
+      4096,
+      8192
+    ],
+    "repeats": 5,
+    "timing": "CUDA graph external events inside; synchronized L2 flush outside",
+    "warmup": 5
+  },
+  "runtime": {
+    "compute_capability": [
+      12,
+      0
+    ],
+    "cuda_runtime": "13.0",
+    "foreign_compute_process_query": "",
+    "gpu_name": "NVIDIA Graphics Device",
+    "gpu_uuid": "GPU-4a286357-c999-9547-3a04-25961b1ffd08",
+    "hostname": "995f85e50857",
+    "image": "lmsysorg/sglang:latest",
+    "image_digest": "sha256:00c53fe4c31bf22d7b37537f28bbdfd924c02de13cdfb4bff7378c9c34d75ab2",
+    "image_id": "sha256:663867442f321ded36228bafd889fd1db05cbef7a7c8ea6e072df33234dabbfd",
+    "measurement_rerun_id": "exp001-corrected-20260716T0443Z-r1",
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "resource_lease_id": "exp001-corrected-20260716T042843Z-23286",
+    "server_args": {
+      "enable_deterministic_inference": false,
+      "enable_fused_moe_sum_all_reduce": false,
+      "model_path": "dummy",
+      "moe_runner_backend": "triton"
+    },
+    "sglang_commit": "0b3bb0cbe31873994c9f989fddfe2f87ca839fdd",
+    "sglang_module": "/sgl-workspace/sglang/python/sglang/__init__.py",
+    "sglang_version": "0.5.15.post1",
+    "timestamp_unix": 1784177207.7358336,
+    "torch": "2.11.0+cu130",
+    "triton_version": "3.6.0"
+  },
+  "weights": {
+    "layout": {
+      "w1": [
+        256,
+        1024,
+        2048
+      ],
+      "w2": [
+        256,
+        2048,
+        512
+      ]
+    },
+    "master_distribution": "torch.float32 normal(0,0.1) rounded to BF16",
+    "quantizer": "sglang.srt.layers.quantization.fp8_kernel.scaled_fp8_quant",
+    "scale_contract": "FP32 [E], one tensor scale per expert",
+    "seed": 2026,
+    "storage_dtype": "float8_e4m3fn",
+    "w1_scale_sha256": "9e116b27c565caff2db6fa21680f8610525d38e4477156caa62b064d44241e1f",
+    "w1_sha256": "1258a066d515d569b164f19643ee5ea3ab6b0fae7eee141c59a6ea81fc020186",
+    "w2_scale_sha256": "4fc52fd21e883f98dedbf52421e9c249985bf432068fd9d3500db8e8f732faf2",
+    "w2_sha256": "3d64d5bc2ffd62640061dc53bd699fd9072166884786c8996bb12828470ee6e2"
+  }
+}

@@ -8,7 +8,6 @@ import json
 from pathlib import Path
 
 import numpy as np
-import torch
 
 from fixture import E, H, TOPK, fixture_path, sha256_file
 
@@ -16,10 +15,17 @@ M_VALUES = (256, 512, 1024, 2048, 4096, 8192)
 DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "results" / "fixtures"
 
 
+def float32_to_bf16_bits(value: np.ndarray) -> np.ndarray:
+    """Round finite float32 values to BF16 using round-to-nearest-even."""
+    bits = np.ascontiguousarray(value, dtype=np.float32).view(np.uint32)
+    bias = np.uint32(0x7FFF) + ((bits >> np.uint32(16)) & np.uint32(1))
+    return ((bits + bias) >> np.uint32(16)).astype(np.uint16)
+
+
 def make_fixture(root: Path, m: int, seed: int) -> dict[str, object]:
     rng = np.random.default_rng(seed + m)
     x = (rng.standard_normal((m, H), dtype=np.float32) / 10).astype(np.float32)
-    x_bits = torch.from_numpy(x).to(torch.bfloat16).view(torch.uint16).numpy().copy()
+    x_bits = float32_to_bf16_bits(x)
     logits = rng.standard_normal((m, E), dtype=np.float32)
     unsorted_ids = np.argpartition(logits, -TOPK, axis=1)[:, -TOPK:]
     unsorted_logits = np.take_along_axis(logits, unsorted_ids, axis=1)

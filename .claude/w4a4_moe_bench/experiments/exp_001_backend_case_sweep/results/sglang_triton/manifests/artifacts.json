@@ -1,0 +1,217 @@
+{
+  "fingerprint_sha256": "7912fe8d5f4199e8c4813f8e1ad40a42fdd150ac440858101434dd2d8801835d",
+  "jit_artifacts": [
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/__grp__fused_moe_kernel.json",
+      "sha256": "295965013bc31b95db34f2f5eff5bed7fc700a3d472ebb6fe6243ccc9e51839f",
+      "size": 849
+    },
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/fused_moe_kernel.cubin",
+      "sha256": "b22ba72ac72b6226739334e251d4398b1ee7bfbe58fc08a08582c9742002ebec",
+      "size": 133832
+    },
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/fused_moe_kernel.json",
+      "sha256": "ef4127de54e03b70a7572be24fc6f6250f8fa48a251e1d0391e34e9b1e94df7c",
+      "size": 1104
+    },
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/fused_moe_kernel.llir",
+      "sha256": "3025599d43ad8523fc7ec496a23752c8728bcdcb833d32cb861c4111169b5db2",
+      "size": 186173
+    },
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/fused_moe_kernel.ptx",
+      "sha256": "b961acdd03b756e3bfea3dca4954f9a5eaf111395d220a5455aea7bdc89451ed",
+      "size": 96394
+    },
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/fused_moe_kernel.source",
+      "sha256": "64bf08316fddd6298b5fc9ecddb8a1048efaef11c17dc5af9b81d8b0f20c0424",
+      "size": 51198
+    },
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/fused_moe_kernel.ttgir",
+      "sha256": "48fa25028fc36797659485ee61fe6f6a27dbf7e45a09f81c49c2d435f950512c",
+      "size": 41050
+    },
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/fused_moe_kernel.ttir",
+      "sha256": "7ad2ad4c8a792bd30b61e1315a67df15fe53283c976ec667c48d2963f1accb00",
+      "size": 30183
+    },
+    {
+      "path": "5WK6ANV7DWSBXM4FITM4HAQVLURE6AIJCMDSHPDUDQ75SJD4TVMQ/__triton_launcher.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "74969a8b7c64eefa40d9dd38fbd1f8d77f2ec60ebdc21376e002f9d14bff7c48",
+      "size": 25808
+    },
+    {
+      "path": "D4HP4USQXEEYPUGKU5P7OSZOSXMPMVBWU2F3KNIZB4R7XXIQBUTA/__grp__fused_moe_kernel.json",
+      "sha256": "d65102fa20a253887e619200beea9833153811fbdfb2ab1c8f1048cb3a805b28",
+      "size": 849
+    },
+    {
+      "path": "D4HP4USQXEEYPUGKU5P7OSZOSXMPMVBWU2F3KNIZB4R7XXIQBUTA/fused_moe_kernel.cubin",
+      "sha256": "cd59827d137a8e6124f5b9268d15ce9d90b311b78e6cdf62b780037d8c7e573a",
+      "size": 67296
+    },
+    {
+      "path": "D4HP4USQXEEYPUGKU5P7OSZOSXMPMVBWU2F3KNIZB4R7XXIQBUTA/fused_moe_kernel.json",
+      "sha256": "63b70b96f703ab7031f7789b0e4811cc2e4b092f4d283f12c346e7bc34336a28",
+      "size": 1104
+    },
+    {
+      "path": "D4HP4USQXEEYPUGKU5P7OSZOSXMPMVBWU2F3KNIZB4R7XXIQBUTA/fused_moe_kernel.llir",
+      "sha256": "655e31e65e8e2ed9a0ea6a9fc6b2b5cecda8e0cc7f280f91cb8353f4a50defb0",
+      "size": 79414
+    },
+    {
+      "path": "D4HP4USQXEEYPUGKU5P7OSZOSXMPMVBWU2F3KNIZB4R7XXIQBUTA/fused_moe_kernel.ptx",
+      "sha256": "f5de20dfd196f6e69f0f0a6089f10826d8cd04fe7935de85e9dddf06bfd5e2ac",
+      "size": 51363
+    },
+    {
+      "path": "D4HP4USQXEEYPUGKU5P7OSZOSXMPMVBWU2F3KNIZB4R7XXIQBUTA/fused_moe_kernel.source",
+      "sha256": "2a2ee3ac70a63b88d0929bbbeef9592ff000ae382aa9ecf873439030b8249af1",
+      "size": 49484
+    },
+    {
+      "path": "D4HP4USQXEEYPUGKU5P7OSZOSXMPMVBWU2F3KNIZB4R7XXIQBUTA/fused_moe_kernel.ttgir",
+      "sha256": "235ceeeafc8b84cd905224eff0a958f11e3f1f223e5b4a610019b354cb02538f",
+      "size": 41920
+    },
+    {
+      "path": "D4HP4USQXEEYPUGKU5P7OSZOSXMPMVBWU2F3KNIZB4R7XXIQBUTA/fused_moe_kernel.ttir",
+      "sha256": "80114426f9296f9ddfc60f42a5b6088f9a129d7a1c43b09f46c5536cbbbfa206",
+      "size": 28583
+    },
+    {
+      "path": "KXQSKEDSGHMFIU2L5XIPQ24IIOC6FVYL7YIT6QCH4DI3XCYSFOSQ/__grp__fused_moe_kernel.json",
+      "sha256": "b756210f14043151b661a5262fa2d5500c514ccf6182f20ae0390d0e8f0ced22",
+      "size": 849
+    },
+    {
+      "path": "KXQSKEDSGHMFIU2L5XIPQ24IIOC6FVYL7YIT6QCH4DI3XCYSFOSQ/fused_moe_kernel.cubin",
+      "sha256": "02cdf8124052b65252ada04e769fa579d0bf428b6592ae1d41835f3dd1c1ffa6",
+      "size": 70320
+    },
+    {
+      "path": "KXQSKEDSGHMFIU2L5XIPQ24IIOC6FVYL7YIT6QCH4DI3XCYSFOSQ/fused_moe_kernel.json",
+      "sha256": "5924e18b65fc9cd835af1297d2ef7a4b3229ff8f153065fd2d7272b6a9811e31",
+      "size": 1104
+    },
+    {
+      "path": "KXQSKEDSGHMFIU2L5XIPQ24IIOC6FVYL7YIT6QCH4DI3XCYSFOSQ/fused_moe_kernel.llir",
+      "sha256": "8c21a6dc7935733ee1fad61ca293eedffe375c61b3152a0e2f7835f5565f2d2c",
+      "size": 82389
+    },
+    {
+      "path": "KXQSKEDSGHMFIU2L5XIPQ24IIOC6FVYL7YIT6QCH4DI3XCYSFOSQ/fused_moe_kernel.ptx",
+      "sha256": "5f6814f962262816fd620a253f7e9bc75f7a572f5309337fdc5f2580f260efe2",
+      "size": 53449
+    },
+    {
+      "path": "KXQSKEDSGHMFIU2L5XIPQ24IIOC6FVYL7YIT6QCH4DI3XCYSFOSQ/fused_moe_kernel.source",
+      "sha256": "8677dfc00a9edb07a7a0fe9c194a0505630325ae16933fd9e953fd6b02b4140b",
+      "size": 51037
+    },
+    {
+      "path": "KXQSKEDSGHMFIU2L5XIPQ24IIOC6FVYL7YIT6QCH4DI3XCYSFOSQ/fused_moe_kernel.ttgir",
+      "sha256": "c302fcfc40b18d91a2eb149b9570d0cbe58157725ab9fa7649dc27756956b678",
+      "size": 44708
+    },
+    {
+      "path": "KXQSKEDSGHMFIU2L5XIPQ24IIOC6FVYL7YIT6QCH4DI3XCYSFOSQ/fused_moe_kernel.ttir",
+      "sha256": "3216509d50882a341d776ec8b049a3983ea43b0ea6f646f6a23a1c88f4dc9277",
+      "size": 29658
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/__grp__fused_moe_kernel.json",
+      "sha256": "9ecc3023594aea471355db43fc3a2fbc617de8dafbde79912a8a3139e6285302",
+      "size": 849
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/fused_moe_kernel.cubin",
+      "sha256": "395470053442f5818185036ec3ece20fee5b712e27d039149fb17c0e068422a6",
+      "size": 126720
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/fused_moe_kernel.json",
+      "sha256": "08a470149a31070afd604f40140e40bcdcd45cb46dce8067ac5620e7c2f2ada7",
+      "size": 1104
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/fused_moe_kernel.llir",
+      "sha256": "c086639e2b2761a2d59b9748535ced734b4076c3c0a511f35209a86a199b0eb5",
+      "size": 178795
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/fused_moe_kernel.ptx",
+      "sha256": "75a2e69b0908c9215c6bc3f3741f32a6d39d773fd3565319ece8fd8d84939a66",
+      "size": 91543
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/fused_moe_kernel.source",
+      "sha256": "749545297ef4d55ba54c15586d646475b0203f39f3da6e3999e716dc813fd102",
+      "size": 49643
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/fused_moe_kernel.ttgir",
+      "sha256": "eb6dd25c4bf91040ca37380e6c287084c93b713ab2e86399e38aea737f00e064",
+      "size": 38265
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/fused_moe_kernel.ttir",
+      "sha256": "57e40858cb8714cd8b8e469cf3014a0e22c1635cec5521eea2189fb9f2c4b1f6",
+      "size": 29106
+    },
+    {
+      "path": "XU5DT2AO5BD5AEHEYGLPP5LRDFHHCUEJT4LGDVLB4STXUGVGHFPA/cuda_utils.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "df6a80ec2ac13d6a6ee1a5272b3b837671f0d986d5abe349737e7d64a2e4139f",
+      "size": 31944
+    }
+  ],
+  "jit_root": "/workspace/jit",
+  "source_files": [
+    {
+      "path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/bench_triton_fp8.py",
+      "sha256": "96dbe559e1d61a894fd9fda98827ba4b9cd37e74f10ec45a5bc0d8aaccd7916b"
+    },
+    {
+      "path": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+      "sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056"
+    },
+    {
+      "path": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe_triton_config.py",
+      "sha256": "6bd14aea63c629bfab25c8d9a4f68087e59cb023b732db67fde94007af3306e7"
+    },
+    {
+      "path": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe_triton_kernels.py",
+      "sha256": "62cf5a03a1bfcaae1f1818d4d22315d10e5253bf26d7f790da781399bda07a31"
+    }
+  ],
+  "weights": {
+    "layout": {
+      "w1": [
+        256,
+        1024,
+        2048
+      ],
+      "w2": [
+        256,
+        2048,
+        512
+      ]
+    },
+    "master_distribution": "torch.float32 normal(0,0.1) rounded to BF16",
+    "quantizer": "sglang.srt.layers.quantization.fp8_kernel.scaled_fp8_quant",
+    "scale_contract": "FP32 [E], one tensor scale per expert",
+    "seed": 2026,
+    "storage_dtype": "float8_e4m3fn",
+    "w1_scale_sha256": "9e116b27c565caff2db6fa21680f8610525d38e4477156caa62b064d44241e1f",
+    "w1_sha256": "1258a066d515d569b164f19643ee5ea3ab6b0fae7eee141c59a6ea81fc020186",
+    "w2_scale_sha256": "4fc52fd21e883f98dedbf52421e9c249985bf432068fd9d3500db8e8f732faf2",
+    "w2_sha256": "3d64d5bc2ffd62640061dc53bd699fd9072166884786c8996bb12828470ee6e2"
+  }
+}

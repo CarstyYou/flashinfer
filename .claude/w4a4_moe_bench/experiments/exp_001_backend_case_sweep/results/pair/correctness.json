@@ -1,0 +1,891 @@
+{
+  "all_paired_gates_pass": true,
+  "cases": {
+    "1024": {
+      "arms": {
+        "cutedsl_bf16_fused": {
+          "actual_mean": 4.719067146652378e-05,
+          "actual_std": 0.16479571163654327,
+          "actual_to_reference_l2_ratio": 0.9999154806137085,
+          "backend": "flashinfer.fused_moe.cute_dsl.B12xMoEWrapper",
+          "boundary": "BF16 input -> fused W4A4 MoE -> BF16 output",
+          "cosine": 0.9999121427536011,
+          "dispatch_pass": true,
+          "dtype": "bfloat16",
+          "expected_launches": "one material fused kernel; NSys is authority",
+          "finite": true,
+          "formal_magnitude_atol": 0.2472144439816475,
+          "formal_magnitude_rtol": 0.5,
+          "formal_pass": true,
+          "formal_percent_threshold": 97.0,
+          "formal_percent_within": 100.0,
+          "input_dtype": "bfloat16",
+          "least_squares_actual_gain": 0.9998277425765991,
+          "max_abs_error": 0.04576123505830765,
+          "mean_abs_error": 0.0011540681589394808,
+          "nonzero": true,
+          "observed_cuda_kernels": [
+            "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
+            "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
+          ],
+          "output_sha256": "e0eec2ce35f12a9c3df574dd9417b7debf9e918b11f18ce3d65331821398b25b",
+          "percent_within_rtol_0.2_atol_0.2": 100.0,
+          "reference_mean": 4.9095262511400506e-05,
+          "reference_sha256": "38426265936390a2be9b8e9c014777ed243a9c5796c6f9bc3c273871e76c8be6",
+          "reference_std": 0.16480962932109833,
+          "relative_l2": 0.013251155614852905,
+          "role": "paired target",
+          "shape": [
+            1024,
+            2048
+          ],
+          "strict_rtol_0.2_atol_0.2_allclose": true
+        },
+        "cutlass_bf16_chain": {
+          "actual_mean": 5.0318532885285094e-05,
+          "actual_std": 0.1648060530424118,
+          "actual_to_reference_l2_ratio": 0.999978244304657,
+          "backend": "flashinfer.fused_moe.cutlass_fused_moe",
+          "boundary": "BF16 input -> native CUTLASS online quant chain -> BF16 output",
+          "cosine": 0.9996298551559448,
+          "dispatch_pass": true,
+          "dtype": "bfloat16",
+          "enable_pdl": true,
+          "expected_launches": "multi-kernel chain; NSys is authority",
+          "finite": true,
+          "formal_magnitude_atol": 0.2472144439816475,
+          "formal_magnitude_rtol": 0.5,
+          "formal_pass": true,
+          "formal_percent_threshold": 97.0,
+          "formal_percent_within": 100.0,
+          "input_dtype": "bfloat16",
+          "input_sf": false,
+          "least_squares_actual_gain": 0.999608039855957,
+          "max_abs_error": 0.05390404909849167,
+          "mean_abs_error": 0.0033462331630289555,
+          "nonzero": true,
+          "observed_cuda_kernels": [
+            "void tensorrt_llm::kernels::cutlass_kernels::blockExpertPrefixSumKernel<512>(int const*, int*, int*, long, long, int)",
+            "void tensorrt_llm::kernels::cutlass_kernels::globalExpertPrefixSumKernel<512>(int const*, int*, long*, long, long)",
+            "tensorrt_llm::kernels::cutlass_kernels::mergeExpertPrefixSumKernel(int const*, int const*, int const*, int*, int*, int*, int)",
+            "void tensorrt_llm::kernels::cutlass_kernels::expandInputRowsKernel<__nv_bfloat16, __nv_fp4_e2m1, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, false, false, std::integral_constant<bool, false> >(__nv_bfloat16 const*, __nv_fp4_e2m1*, float const*, float*, int const*, long, long, long, float const*, bool, long const*, unsigned char*, unsigned char const*, bool, long, __nv_bfloat16 const*)",
+            "void tensorrt_llm::kernels::cutlass_kernels::computeStridesTmaWarpSpecializedKernel<__nv_fp4_e2m1, __nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16>(long const*, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, long, long, long, long, long, long, long, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, float const*, float const*, unsigned char const*, unsigned char const*, tensorrt_llm::kernels::cutlass_kernels::QuantParams, __nv_bfloat16 const*, __nv_bfloat16 const*, __nv_bfloat16*, __nv_bfloat16*, float const*, int const*)",
+            "_ZN7cutlass13device_kernelINS_4gemm6kernel13GemmUniversalINS1_17GroupProblemShapeIN4cute5tupleIJlllEEEEENS1_10collective13CollectiveMmaINS1_47MainloopSm120ArrayTmaWarpSpecializedBlockScaledILi2ELi3ENS6_IJNS5_1CILi1EEESD_SD_EEENS1_59KernelPtrArrayTmaWarpSpecializedCooperativeBlockScaledSm120ILi3EEEEENS6_IJNSC_ILi128EEESI_NSC_ILi256EEEEEENS6_IJNS_12float_e2m1_tENS_13float_ue4m3_tEEEENS6_IJPNS6_IJlSD_NSC_ILi0EEEEEEPNS5_6LayoutINS6_IJNS6_IJNS6_IJNSC_ILi32EEENSC_ILi4EEEEEEiEEENS6_IJNS6_IJNSC_ILi16EEEST_EEEiEEENS6_IJSD_iEEEEEENS6_IJSY_NS6_IJNS6_IJSO_SD_EEENSC_ILi512EEEEEENS6_IJSO_iEEEEEEEEEEESN_S18_NS5_8TiledMMAINS5_8MMA_AtomIJNS5_5SM12011BLOCKSCALED19SM120_16x8x64_TN_VSISL_SL_fSM_Li16EEEEEENSR_INS6_IJST_NSC_ILi2EEESD_EEENS6_IJSD_ST_SO_EEEEENS6_IJSI_NSR_INS6_IJNSC_ILi8EEES1G_S1G_EEENS6_IJSD_SW_S1K_EEEEENSC_ILi64EEEEEEEENS6_IJNS5_13SM90_TMA_LOADES1R_EEENS6_IJNS5_14ComposedLayoutINS5_7SwizzleILi3ELi4ELi3EEENS5_18smem_ptr_flag_bitsILi4EEENSR_INS6_IJS1K_SJ_EEENS6_IJSJ_SD_EEEEEEENSR_INS6_IJNS6_IJSU_SD_EEENS6_IJSX_SD_ST_EEEEEENS6_IJNS6_IJSX_S12_EEENS6_IJS11_ST_S12_EEEEEEEEEEENS6_IJNS5_9Copy_AtomIJNS5_17SM75_U32x4_LDSM_NENS_15integer_subbyteILi4ELb0EEEEEENS2A_IJNS5_13UniversalCopyISM_SM_EESM_EEEEEENS5_8identityES1S_S29_S2I_S2J_EENS_8epilogue10collective18CollectiveEpilogueINS2L_30Sm90PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEEJSK_NS6_IJS1O_SS_EEENS_10bfloat16_tESQ_S2R_SQ_NS2L_6fusion15FusionCallbacksINS2L_31Sm120PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEENS2S_17LinearCombinationIS2R_fS2R_fLNS_15FloatRoundStyleE2EEESK_S2Q_JEEES1R_NS1T_INS1U_ILi2ELi4ELi3EEENS1W_ILi16EEENSR_INS6_IJS1K_SS_EEENS6_IJSS_SD_EEEEEEENS5_17SM75_U32x2_LDSM_NENS5_14SM90_TMA_STOREES35_NS5_17SM90_U32x2_STSM_NENS2A_IJS38_NS_6half_tEEEEvEEEvvEEEEvNT_6ParamsE",
+            "void tensorrt_llm::kernels::cutlass_kernels::doActivationKernel<__nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16, tensorrt_llm::kernels::cutlass_kernels::GLUAdaptor<cutlass::epilogue::thread::SiLu>, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, false, std::integral_constant<bool, false> >(__nv_fp4_e2m1*, __nv_bfloat16 const*, float const*, __nv_bfloat16 const*, bool, long const*, int, long, float const*, bool, unsigned char*, tensorrt_llm::kernels::cutlass_kernels::ActivationParams)",
+            "void tensorrt_llm::kernels::cutlass_kernels::finalizeMoeRoutingKernel<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, (tensorrt_llm::kernels::cutlass_kernels::ScaleMode)1>(__nv_bfloat16 const*, __nv_bfloat16*, __nv_bfloat16 const*, float const*, int const*, int const*, long, long, long, int, int)"
+          ],
+          "output_sha256": "c53bfa5d24c1da96377074651ae6f3bfb8638ad47b7f68e1e39e4cadc13fdbf5",
+          "percent_within_rtol_0.2_atol_0.2": 100.0,
+          "reference_mean": 4.9095262511400506e-05,
+          "reference_sha256": "38426265936390a2be9b8e9c014777ed243a9c5796c6f9bc3c273871e76c8be6",
+          "reference_std": 0.16480962932109833,
+          "relative_l2": 0.027208905667066574,
+          "role": "paired baseline",
+          "shape": [
+            1024,
+            2048
+          ],
+          "strict_rtol_0.2_atol_0.2_allclose": true,
+          "use_fused_finalize": true
+        }
+      },
+      "cross_backend_diagnostic": {
+        "cosine": 0.9995583295822144,
+        "relative_l2": 0.02972177043557167
+      },
+      "fixture": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m1024.npz",
+        "fixture_sha256": "0fa7e8a7d8d1d32172971f987d6f55b534aabf8d12a84a910d010cec25ba04a5",
+        "m": 1024,
+        "occupancy_max": 50,
+        "occupancy_min": 14,
+        "occupancy_sha256": "e03917667a2d3629721f3c6a2b13dea8aac9c8593280282013395eb9a5f2e5bd",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "5d5fdccddc2828d49d466385a93fbeff720aba9361985a9c4bb35603bc5fa6d0",
+        "topk_weights_sha256": "d7342a44f8bfe9a2b0cf94a3d45e9ea30fbbe244d047feeaac7b212603103dcc",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "6339b37d71b116774bf956e5882b2f4d132c82f4a7fdbe01dbc07808698722b5"
+      },
+      "formal_gate": {
+        "criterion": "at least 97% satisfy abs<max(0.05,1.5*oracle.std) OR rel<0.5",
+        "oracle": "dequantized per-expert PyTorch MoE with input and activation NVFP4 round trips"
+      },
+      "paired_gate_pass": true,
+      "reference_sha256": "38426265936390a2be9b8e9c014777ed243a9c5796c6f9bc3c273871e76c8be6"
+    },
+    "2048": {
+      "arms": {
+        "cutedsl_bf16_fused": {
+          "actual_mean": 7.276192627614364e-05,
+          "actual_std": 0.1653687208890915,
+          "actual_to_reference_l2_ratio": 0.9999427199363708,
+          "backend": "flashinfer.fused_moe.cute_dsl.B12xMoEWrapper",
+          "boundary": "BF16 input -> fused W4A4 MoE -> BF16 output",
+          "cosine": 0.9999253749847412,
+          "dispatch_pass": true,
+          "dtype": "bfloat16",
+          "expected_launches": "one material fused kernel; NSys is authority",
+          "finite": true,
+          "formal_magnitude_atol": 0.24806729704141617,
+          "formal_magnitude_rtol": 0.5,
+          "formal_pass": true,
+          "formal_percent_threshold": 97.0,
+          "formal_percent_within": 100.0,
+          "input_dtype": "bfloat16",
+          "least_squares_actual_gain": 0.9998679757118225,
+          "max_abs_error": 0.053821027278900146,
+          "mean_abs_error": 0.0011058538220822811,
+          "nonzero": true,
+          "observed_cuda_kernels": [
+            "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
+            "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
+          ],
+          "output_sha256": "d76cd3942bb3f9df51dcadd016543d989c3c96b7fd82efa3fc38042e82aad0d4",
+          "percent_within_rtol_0.2_atol_0.2": 100.0,
+          "reference_mean": 7.238458783831447e-05,
+          "reference_sha256": "55d4504de899389994b9077515f770d18fb63d24f8974f5258d1facd0338b448",
+          "reference_std": 0.16537819802761078,
+          "relative_l2": 0.012224630452692509,
+          "role": "paired target",
+          "shape": [
+            2048,
+            2048
+          ],
+          "strict_rtol_0.2_atol_0.2_allclose": true
+        },
+        "cutlass_bf16_chain": {
+          "actual_mean": 6.975252472329885e-05,
+          "actual_std": 0.16538673639297485,
+          "actual_to_reference_l2_ratio": 1.0000516176223755,
+          "backend": "flashinfer.fused_moe.cutlass_fused_moe",
+          "boundary": "BF16 input -> native CUTLASS online quant chain -> BF16 output",
+          "cosine": 0.999647855758667,
+          "dispatch_pass": true,
+          "dtype": "bfloat16",
+          "enable_pdl": true,
+          "expected_launches": "multi-kernel chain; NSys is authority",
+          "finite": true,
+          "formal_magnitude_atol": 0.24806729704141617,
+          "formal_magnitude_rtol": 0.5,
+          "formal_pass": true,
+          "formal_percent_threshold": 97.0,
+          "formal_percent_within": 100.0,
+          "input_dtype": "bfloat16",
+          "input_sf": false,
+          "least_squares_actual_gain": 0.9996994137763977,
+          "max_abs_error": 0.05117224156856537,
+          "mean_abs_error": 0.003293984103947878,
+          "nonzero": true,
+          "observed_cuda_kernels": [
+            "void tensorrt_llm::kernels::cutlass_kernels::blockExpertPrefixSumKernel<1024>(int const*, int*, int*, long, long, int)",
+            "void tensorrt_llm::kernels::cutlass_kernels::globalExpertPrefixSumKernel<512>(int const*, int*, long*, long, long)",
+            "tensorrt_llm::kernels::cutlass_kernels::mergeExpertPrefixSumKernel(int const*, int const*, int const*, int*, int*, int*, int)",
+            "void tensorrt_llm::kernels::cutlass_kernels::expandInputRowsKernel<__nv_bfloat16, __nv_fp4_e2m1, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, false, false, std::integral_constant<bool, false> >(__nv_bfloat16 const*, __nv_fp4_e2m1*, float const*, float*, int const*, long, long, long, float const*, bool, long const*, unsigned char*, unsigned char const*, bool, long, __nv_bfloat16 const*)",
+            "void tensorrt_llm::kernels::cutlass_kernels::computeStridesTmaWarpSpecializedKernel<__nv_fp4_e2m1, __nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16>(long const*, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, long, long, long, long, long, long, long, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, float const*, float const*, unsigned char const*, unsigned char const*, tensorrt_llm::kernels::cutlass_kernels::QuantParams, __nv_bfloat16 const*, __nv_bfloat16 const*, __nv_bfloat16*, __nv_bfloat16*, float const*, int const*)",
+            "_ZN7cutlass13device_kernelINS_4gemm6kernel13GemmUniversalINS1_17GroupProblemShapeIN4cute5tupleIJlllEEEEENS1_10collective13CollectiveMmaINS1_47MainloopSm120ArrayTmaWarpSpecializedBlockScaledILi2ELi3ENS6_IJNS5_1CILi1EEESD_SD_EEENS1_59KernelPtrArrayTmaWarpSpecializedCooperativeBlockScaledSm120ILi3EEEEENS6_IJNSC_ILi128EEESI_NSC_ILi256EEEEEENS6_IJNS_12float_e2m1_tENS_13float_ue4m3_tEEEENS6_IJPNS6_IJlSD_NSC_ILi0EEEEEEPNS5_6LayoutINS6_IJNS6_IJNS6_IJNSC_ILi32EEENSC_ILi4EEEEEEiEEENS6_IJNS6_IJNSC_ILi16EEEST_EEEiEEENS6_IJSD_iEEEEEENS6_IJSY_NS6_IJNS6_IJSO_SD_EEENSC_ILi512EEEEEENS6_IJSO_iEEEEEEEEEEESN_S18_NS5_8TiledMMAINS5_8MMA_AtomIJNS5_5SM12011BLOCKSCALED19SM120_16x8x64_TN_VSISL_SL_fSM_Li16EEEEEENSR_INS6_IJST_NSC_ILi2EEESD_EEENS6_IJSD_ST_SO_EEEEENS6_IJSI_NSR_INS6_IJNSC_ILi8EEES1G_S1G_EEENS6_IJSD_SW_S1K_EEEEENSC_ILi64EEEEEEEENS6_IJNS5_13SM90_TMA_LOADES1R_EEENS6_IJNS5_14ComposedLayoutINS5_7SwizzleILi3ELi4ELi3EEENS5_18smem_ptr_flag_bitsILi4EEENSR_INS6_IJS1K_SJ_EEENS6_IJSJ_SD_EEEEEEENSR_INS6_IJNS6_IJSU_SD_EEENS6_IJSX_SD_ST_EEEEEENS6_IJNS6_IJSX_S12_EEENS6_IJS11_ST_S12_EEEEEEEEEEENS6_IJNS5_9Copy_AtomIJNS5_17SM75_U32x4_LDSM_NENS_15integer_subbyteILi4ELb0EEEEEENS2A_IJNS5_13UniversalCopyISM_SM_EESM_EEEEEENS5_8identityES1S_S29_S2I_S2J_EENS_8epilogue10collective18CollectiveEpilogueINS2L_30Sm90PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEEJSK_NS6_IJS1O_SS_EEENS_10bfloat16_tESQ_S2R_SQ_NS2L_6fusion15FusionCallbacksINS2L_31Sm120PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEENS2S_17LinearCombinationIS2R_fS2R_fLNS_15FloatRoundStyleE2EEESK_S2Q_JEEES1R_NS1T_INS1U_ILi2ELi4ELi3EEENS1W_ILi16EEENSR_INS6_IJS1K_SS_EEENS6_IJSS_SD_EEEEEEENS5_17SM75_U32x2_LDSM_NENS5_14SM90_TMA_STOREES35_NS5_17SM90_U32x2_STSM_NENS2A_IJS38_NS_6half_tEEEEvEEEvvEEEEvNT_6ParamsE",
+            "void tensorrt_llm::kernels::cutlass_kernels::doActivationKernel<__nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16, tensorrt_llm::kernels::cutlass_kernels::GLUAdaptor<cutlass::epilogue::thread::SiLu>, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, false, std::integral_constant<bool, false> >(__nv_fp4_e2m1*, __nv_bfloat16 const*, float const*, __nv_bfloat16 const*, bool, long const*, int, long, float const*, bool, unsigned char*, tensorrt_llm::kernels::cutlass_kernels::ActivationParams)",
+            "void tensorrt_llm::kernels::cutlass_kernels::finalizeMoeRoutingKernel<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, (tensorrt_llm::kernels::cutlass_kernels::ScaleMode)1>(__nv_bfloat16 const*, __nv_bfloat16*, __nv_bfloat16 const*, float const*, int const*, int const*, long, long, long, int, int)"
+          ],
+          "output_sha256": "6690d442e94533dc761dcbded04f7d9e96bbc5db55fa63a8bb5a0db9b55ff2da",
+          "percent_within_rtol_0.2_atol_0.2": 100.0,
+          "reference_mean": 7.238458783831447e-05,
+          "reference_sha256": "55d4504de899389994b9077515f770d18fb63d24f8974f5258d1facd0338b448",
+          "reference_std": 0.16537819802761078,
+          "relative_l2": 0.026539530605077744,
+          "role": "paired baseline",
+          "shape": [
+            2048,
+            2048
+          ],
+          "strict_rtol_0.2_atol_0.2_allclose": true,
+          "use_fused_finalize": true
+        }
+      },
+      "cross_backend_diagnostic": {
+        "cosine": 0.9995867013931274,
+        "relative_l2": 0.028747716918587685
+      },
+      "fixture": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m2048.npz",
+        "fixture_sha256": "5375fd8b3e5e15f8c956998bfc3e2f3ee59948a2aeaf5ba1294ec6a74092bde3",
+        "m": 2048,
+        "occupancy_max": 89,
+        "occupancy_min": 44,
+        "occupancy_sha256": "ef23f3672ac6f6dc3a6abbc1ad2fda9b4219cb091698affd6997a70e8b93a244",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "38801fb6845c3d19a502e035e5ec3ec008fa7c88933f05a33f276d8ce9e8654d",
+        "topk_weights_sha256": "b03cb15feff7fa5e53e95911f1987d57103666f577732fd1fb19d88f7192938b",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "ccf6bdc9fd88f35afb0fd317f930799053d8a614b4107e3cf16b8a0c115e884e"
+      },
+      "formal_gate": {
+        "criterion": "at least 97% satisfy abs<max(0.05,1.5*oracle.std) OR rel<0.5",
+        "oracle": "dequantized per-expert PyTorch MoE with input and activation NVFP4 round trips"
+      },
+      "paired_gate_pass": true,
+      "reference_sha256": "55d4504de899389994b9077515f770d18fb63d24f8974f5258d1facd0338b448"
+    },
+    "256": {
+      "arms": {
+        "cutedsl_bf16_fused": {
+          "actual_mean": -0.00011683302000164986,
+          "actual_std": 0.16363251209259033,
+          "actual_to_reference_l2_ratio": 0.9999678730964661,
+          "backend": "flashinfer.fused_moe.cute_dsl.B12xMoEWrapper",
+          "boundary": "BF16 input -> fused W4A4 MoE -> BF16 output",
+          "cosine": 0.9999372959136963,
+          "dispatch_pass": true,
+          "dtype": "bfloat16",
+          "expected_launches": "one material fused kernel; NSys is authority",
+          "finite": true,
+          "formal_magnitude_atol": 0.24545665830373764,
+          "formal_magnitude_rtol": 0.5,
+          "formal_pass": true,
+          "formal_percent_threshold": 97.0,
+          "formal_percent_within": 100.0,
+          "input_dtype": "bfloat16",
+          "least_squares_actual_gain": 0.9999051094055176,
+          "max_abs_error": 0.03902062773704529,
+          "mean_abs_error": 0.0010634497739374638,
+          "nonzero": true,
+          "observed_cuda_kernels": [
+            "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
+            "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
+          ],
+          "output_sha256": "d2c5ebc0584d19d095f2ce337eab49e00129bf8578c31781edd055d12fae9181",
+          "percent_within_rtol_0.2_atol_0.2": 100.0,
+          "reference_mean": -0.00011236224963795394,
+          "reference_sha256": "f8ee0320e7923b46d816f3534dc5e9960df84f60f5be00fcf363947bf58110d8",
+          "reference_std": 0.16363777220249176,
+          "relative_l2": 0.011196202598512173,
+          "role": "paired target",
+          "shape": [
+            256,
+            2048
+          ],
+          "strict_rtol_0.2_atol_0.2_allclose": true
+        },
+        "cutlass_bf16_chain": {
+          "actual_mean": -0.0001069936843123287,
+          "actual_std": 0.1636178195476532,
+          "actual_to_reference_l2_ratio": 0.9998779892921448,
+          "backend": "flashinfer.fused_moe.cutlass_fused_moe",
+          "boundary": "BF16 input -> native CUTLASS online quant chain -> BF16 output",
+          "cosine": 0.9996310472488403,
+          "dispatch_pass": true,
+          "dtype": "bfloat16",
+          "enable_pdl": true,
+          "expected_launches": "multi-kernel chain; NSys is authority",
+          "finite": true,
+          "formal_magnitude_atol": 0.24545665830373764,
+          "formal_magnitude_rtol": 0.5,
+          "formal_pass": true,
+          "formal_percent_threshold": 97.0,
+          "formal_percent_within": 100.0,
+          "input_dtype": "bfloat16",
+          "input_sf": false,
+          "least_squares_actual_gain": 0.9995090961456299,
+          "max_abs_error": 0.03597542643547058,
+          "mean_abs_error": 0.0033702226355671883,
+          "nonzero": true,
+          "observed_cuda_kernels": [
+            "void tensorrt_llm::kernels::cutlass_kernels::blockExpertPrefixSumKernel<256>(int const*, int*, int*, long, long, int)",
+            "void tensorrt_llm::kernels::cutlass_kernels::globalExpertPrefixSumKernel<256>(int const*, int*, long*, long, long)",
+            "tensorrt_llm::kernels::cutlass_kernels::mergeExpertPrefixSumKernel(int const*, int const*, int const*, int*, int*, int*, int)",
+            "void tensorrt_llm::kernels::cutlass_kernels::expandInputRowsKernel<__nv_bfloat16, __nv_fp4_e2m1, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, false, false, std::integral_constant<bool, false> >(__nv_bfloat16 const*, __nv_fp4_e2m1*, float const*, float*, int const*, long, long, long, float const*, bool, long const*, unsigned char*, unsigned char const*, bool, long, __nv_bfloat16 const*)",
+            "void tensorrt_llm::kernels::cutlass_kernels::computeStridesTmaWarpSpecializedKernel<__nv_fp4_e2m1, __nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16>(long const*, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, long, long, long, long, long, long, long, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, float const*, float const*, unsigned char const*, unsigned char const*, tensorrt_llm::kernels::cutlass_kernels::QuantParams, __nv_bfloat16 const*, __nv_bfloat16 const*, __nv_bfloat16*, __nv_bfloat16*, float const*, int const*)",
+            "_ZN7cutlass13device_kernelINS_4gemm6kernel13GemmUniversalINS1_17GroupProblemShapeIN4cute5tupleIJlllEEEEENS1_10collective13CollectiveMmaINS1_47MainloopSm120ArrayTmaWarpSpecializedBlockScaledILi2ELi3ENS6_IJNS5_1CILi1EEESD_SD_EEENS1_59KernelPtrArrayTmaWarpSpecializedCooperativeBlockScaledSm120ILi3EEEEENS6_IJNSC_ILi128EEESI_NSC_ILi256EEEEEENS6_IJNS_12float_e2m1_tENS_13float_ue4m3_tEEEENS6_IJPNS6_IJlSD_NSC_ILi0EEEEEEPNS5_6LayoutINS6_IJNS6_IJNS6_IJNSC_ILi32EEENSC_ILi4EEEEEEiEEENS6_IJNS6_IJNSC_ILi16EEEST_EEEiEEENS6_IJSD_iEEEEEENS6_IJSY_NS6_IJNS6_IJSO_SD_EEENSC_ILi512EEEEEENS6_IJSO_iEEEEEEEEEEESN_S18_NS5_8TiledMMAINS5_8MMA_AtomIJNS5_5SM12011BLOCKSCALED19SM120_16x8x64_TN_VSISL_SL_fSM_Li16EEEEEENSR_INS6_IJST_NSC_ILi2EEESD_EEENS6_IJSD_ST_SO_EEEEENS6_IJSI_NSR_INS6_IJNSC_ILi8EEES1G_S1G_EEENS6_IJSD_SW_S1K_EEEEENSC_ILi64EEEEEEEENS6_IJNS5_13SM90_TMA_LOADES1R_EEENS6_IJNS5_14ComposedLayoutINS5_7SwizzleILi3ELi4ELi3EEENS5_18smem_ptr_flag_bitsILi4EEENSR_INS6_IJS1K_SJ_EEENS6_IJSJ_SD_EEEEEEENSR_INS6_IJNS6_IJSU_SD_EEENS6_IJSX_SD_ST_EEEEEENS6_IJNS6_IJSX_S12_EEENS6_IJS11_ST_S12_EEEEEEEEEEENS6_IJNS5_9Copy_AtomIJNS5_17SM75_U32x4_LDSM_NENS_15integer_subbyteILi4ELb0EEEEEENS2A_IJNS5_13UniversalCopyISM_SM_EESM_EEEEEENS5_8identityES1S_S29_S2I_S2J_EENS_8epilogue10collective18CollectiveEpilogueINS2L_30Sm90PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEEJSK_NS6_IJS1O_SS_EEENS_10bfloat16_tESQ_S2R_SQ_NS2L_6fusion15FusionCallbacksINS2L_31Sm120PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEENS2S_17LinearCombinationIS2R_fS2R_fLNS_15FloatRoundStyleE2EEESK_S2Q_JEEES1R_NS1T_INS1U_ILi2ELi4ELi3EEENS1W_ILi16EEENSR_INS6_IJS1K_SS_EEENS6_IJSS_SD_EEEEEEENS5_17SM75_U32x2_LDSM_NENS5_14SM90_TMA_STOREES35_NS5_17SM90_U32x2_STSM_NENS2A_IJS38_NS_6half_tEEEEvEEEvvEEEEvNT_6ParamsE",
+            "void tensorrt_llm::kernels::cutlass_kernels::doActivationKernel<__nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16, tensorrt_llm::kernels::cutlass_kernels::GLUAdaptor<cutlass::epilogue::thread::SiLu>, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, false, std::integral_constant<bool, false> >(__nv_fp4_e2m1*, __nv_bfloat16 const*, float const*, __nv_bfloat16 const*, bool, long const*, int, long, float const*, bool, unsigned char*, tensorrt_llm::kernels::cutlass_kernels::ActivationParams)",
+            "void tensorrt_llm::kernels::cutlass_kernels::finalizeMoeRoutingKernel<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, (tensorrt_llm::kernels::cutlass_kernels::ScaleMode)1>(__nv_bfloat16 const*, __nv_bfloat16*, __nv_bfloat16 const*, float const*, int const*, int const*, long, long, long, int, int)"
+          ],
+          "output_sha256": "5612aae89302f773746c295c1c2843e3af1ee738d76888edfb05a4aca40ad1a8",
+          "percent_within_rtol_0.2_atol_0.2": 100.0,
+          "reference_mean": -0.00011236224963795394,
+          "reference_sha256": "f8ee0320e7923b46d816f3534dc5e9960df84f60f5be00fcf363947bf58110d8",
+          "reference_std": 0.16363777220249176,
+          "relative_l2": 0.027162792161107063,
+          "role": "paired baseline",
+          "shape": [
+            256,
+            2048
+          ],
+          "strict_rtol_0.2_atol_0.2_allclose": true,
+          "use_fused_finalize": true
+        }
+      },
+      "cross_backend_diagnostic": {
+        "cosine": 0.9995744824409485,
+        "relative_l2": 0.029171984642744064
+      },
+      "fixture": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m256.npz",
+        "fixture_sha256": "86b505097acd06bed5a50c3528c78525e6087c07ed69f86606607599ffa21686",
+        "m": 256,
+        "occupancy_max": 15,
+        "occupancy_min": 2,
+        "occupancy_sha256": "60b4becc63e932fe7b11210c9ef78c1a4b58a38798024f55854808e35d6a4920",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "9cd310e245d39595e1d322c2da645fe67791f546c29994caea48f7786aa15dc1",
+        "topk_weights_sha256": "e1fdddd7af5a99de0dab6d8620c050e6cee25a0c27ff9c66e617ee346c0110f1",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "ec4c61e362a4de64083be4a9d357a498d28b8a74bb816e8f9dc04eb9f9a80d09"
+      },
+      "formal_gate": {
+        "criterion": "at least 97% satisfy abs<max(0.05,1.5*oracle.std) OR rel<0.5",
+        "oracle": "dequantized per-expert PyTorch MoE with input and activation NVFP4 round trips"
+      },
+      "paired_gate_pass": true,
+      "reference_sha256": "f8ee0320e7923b46d816f3534dc5e9960df84f60f5be00fcf363947bf58110d8"
+    },
+    "4096": {
+      "arms": {
+        "cutedsl_bf16_fused": {
+          "actual_mean": -0.00010347918578190729,
+          "actual_std": 0.16480018198490143,
+          "actual_to_reference_l2_ratio": 0.9999372959136963,
+          "backend": "flashinfer.fused_moe.cute_dsl.B12xMoEWrapper",
+          "boundary": "BF16 input -> fused W4A4 MoE -> BF16 output",
+          "cosine": 0.9999152421951294,
+          "dispatch_pass": true,
+          "dtype": "bfloat16",
+          "expected_launches": "one material fused kernel; NSys is authority",
+          "finite": true,
+          "formal_magnitude_atol": 0.24721576273441315,
+          "formal_magnitude_rtol": 0.5,
+          "formal_pass": true,
+          "formal_percent_threshold": 97.0,
+          "formal_percent_within": 100.0,
+          "input_dtype": "bfloat16",
+          "least_squares_actual_gain": 0.9998526573181152,
+          "max_abs_error": 0.05780520290136337,
+          "mean_abs_error": 0.0011397688649594784,
+          "nonzero": true,
+          "observed_cuda_kernels": [
+            "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
+            "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
+          ],
+          "output_sha256": "d720a91b4993ab579006d9976f1cc6146740ed8dfd6ae6914beedcb19291bab7",
+          "percent_within_rtol_0.2_atol_0.2": 100.0,
+          "reference_mean": -0.00010440069308970124,
+          "reference_sha256": "4aec474798c7ec7642e88ec7653095693402040fce0b7456c3db3ae0a560dea9",
+          "reference_std": 0.16481050848960876,
+          "relative_l2": 0.013013751246035099,
+          "role": "paired target",
+          "shape": [
+            4096,
+            2048
+          ],
+          "strict_rtol_0.2_atol_0.2_allclose": true
+        },
+        "cutlass_bf16_chain": {
+          "actual_mean": -0.00010424556239740923,
+          "actual_std": 0.16480444371700287,
+          "actual_to_reference_l2_ratio": 0.999963104724884,
+          "backend": "flashinfer.fused_moe.cutlass_fused_moe",
+          "boundary": "BF16 input -> native CUTLASS online quant chain -> BF16 output",
+          "cosine": 0.9996368288993835,
+          "dispatch_pass": true,
+          "dtype": "bfloat16",
+          "enable_pdl": true,
+          "expected_launches": "multi-kernel chain; NSys is authority",
+          "finite": true,
+          "formal_magnitude_atol": 0.24721576273441315,
+          "formal_magnitude_rtol": 0.5,
+          "formal_pass": true,
+          "formal_percent_threshold": 97.0,
+          "formal_percent_within": 100.0,
+          "input_dtype": "bfloat16",
+          "input_sf": false,
+          "least_squares_actual_gain": 0.9995999932289124,
+          "max_abs_error": 0.048342786729335785,
+          "mean_abs_error": 0.003325215307995677,
+          "nonzero": true,
+          "observed_cuda_kernels": [
+            "void tensorrt_llm::kernels::cutlass_kernels::blockExpertPrefixSumKernel<1024>(int const*, int*, int*, long, long, int)",
+            "void tensorrt_llm::kernels::cutlass_kernels::globalExpertPrefixSumKernel<1024>(int const*, int*, long*, long, long)",
+            "tensorrt_llm::kernels::cutlass_kernels::mergeExpertPrefixSumKernel(int const*, int const*, int const*, int*, int*, int*, int)",
+            "void tensorrt_llm::kernels::cutlass_kernels::expandInputRowsKernel<__nv_bfloat16, __nv_fp4_e2m1, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, false, false, std::integral_constant<bool, false> >(__nv_bfloat16 const*, __nv_fp4_e2m1*, float const*, float*, int const*, long, long, long, float const*, bool, long const*, unsigned char*, unsigned char const*, bool, long, __nv_bfloat16 const*)",
+            "void tensorrt_llm::kernels::cutlass_kernels::computeStridesTmaWarpSpecializedKernel<__nv_fp4_e2m1, __nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16>(long const*, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, long, long, long, long, long, long, long, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, float const*, float const*, unsigned char const*, unsigned char const*, tensorrt_llm::kernels::cutlass_kernels::QuantParams, __nv_bfloat16 const*, __nv_bfloat16 const*, __nv_bfloat16*, __nv_bfloat16*, float const*, int const*)",
+            "_ZN7cutlass13device_kernelINS_4gemm6kernel13GemmUniversalINS1_17GroupProblemShapeIN4cute5tupleIJlllEEEEENS1_10collective13CollectiveMmaINS1_47MainloopSm120ArrayTmaWarpSpecializedBlockScaledILi2ELi3ENS6_IJNS5_1CILi1EEESD_SD_EEENS1_59KernelPtrArrayTmaWarpSpecializedCooperativeBlockScaledSm120ILi3EEEEENS6_IJNSC_ILi128EEESI_NSC_ILi256EEEEEENS6_IJNS_12float_e2m1_tENS_13float_ue4m3_tEEEENS6_IJPNS6_IJlSD_NSC_ILi0EEEEEEPNS5_6LayoutINS6_IJNS6_IJNS6_IJNSC_ILi32EEENSC_ILi4EEEEEEiEEENS6_IJNS6_IJNSC_ILi16EEEST_EEEiEEENS6_IJSD_iEEEEEENS6_IJSY_NS6_IJNS6_IJSO_SD_EEENSC_ILi512EEEEEENS6_IJSO_iEEEEEEEEEEESN_S18_NS5_8TiledMMAINS5_8MMA_AtomIJNS5_5SM12011BLOCKSCALED19SM120_16x8x64_TN_VSISL_SL_fSM_Li16EEEEEENSR_INS6_IJST_NSC_ILi2EEESD_EEENS6_IJSD_ST_SO_EEEEENS6_IJSI_NSR_INS6_IJNSC_ILi8EEES1G_S1G_EEENS6_IJSD_SW_S1K_EEEEENSC_ILi64EEEEEEEENS6_IJNS5_13SM90_TMA_LOADES1R_EEENS6_IJNS5_14ComposedLayoutINS5_7SwizzleILi3ELi4ELi3EEENS5_18smem_ptr_flag_bitsILi4EEENSR_INS6_IJS1K_SJ_EEENS6_IJSJ_SD_EEEEEEENSR_INS6_IJNS6_IJSU_SD_EEENS6_IJSX_SD_ST_EEEEEENS6_IJNS6_IJSX_S12_EEENS6_IJS11_ST_S12_EEEEEEEEEEENS6_IJNS5_9Copy_AtomIJNS5_17SM75_U32x4_LDSM_NENS_15integer_subbyteILi4ELb0EEEEEENS2A_IJNS5_13UniversalCopyISM_SM_EESM_EEEEEENS5_8identityES1S_S29_S2I_S2J_EENS_8epilogue10collective18CollectiveEpilogueINS2L_30Sm90PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEEJSK_NS6_IJS1O_SS_EEENS_10bfloat16_tESQ_S2R_SQ_NS2L_6fusion15FusionCallbacksINS2L_31Sm120PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEENS2S_17LinearCombinationIS2R_fS2R_fLNS_15FloatRoundStyleE2EEESK_S2Q_JEEES1R_NS1T_INS1U_ILi2ELi4ELi3EEENS1W_ILi16EEENSR_INS6_IJS1K_SS_EEENS6_IJSS_SD_EEEEEEENS5_17SM75_U32x2_LDSM_NENS5_14SM90_TMA_STOREES35_NS5_17SM90_U32x2_STSM_NENS2A_IJS38_NS_6half_tEEEEvEEEvvEEEEvNT_6ParamsE",
+            "void tensorrt_llm::kernels::cutlass_kernels::doActivationKernel<__nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16, tensorrt_llm::kernels::cutlass_kernels::GLUAdaptor<cutlass::epilogue::thread::SiLu>, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, false, std::integral_constant<bool, false> >(__nv_fp4_e2m1*, __nv_bfloat16 const*, float const*, __nv_bfloat16 const*, bool, long const*, int, long, float const*, bool, unsigned char*, tensorrt_llm::kernels::cutlass_kernels::ActivationParams)",
+            "void tensorrt_llm::kernels::cutlass_kernels::finalizeMoeRoutingKernel<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, (tensorrt_llm::kernels::cutlass_kernels::ScaleMode)1>(__nv_bfloat16 const*, __nv_bfloat16*, __nv_bfloat16 const*, float const*, int const*, int const*, long, long, long, int, int)"
+          ],
+          "output_sha256": "8cb3e4c94a7fb2c35d0077abf05adae92368e61b3ef7be80c36a67096d990025",
+          "percent_within_rtol_0.2_atol_0.2": 100.0,
+          "reference_mean": -0.00010440069308970124,
+          "reference_sha256": "4aec474798c7ec7642e88ec7653095693402040fce0b7456c3db3ae0a560dea9",
+          "reference_std": 0.16481050848960876,
+          "relative_l2": 0.026949435472488403,
+          "role": "paired baseline",
+          "shape": [
+            4096,
+            2048
+          ],
+          "strict_rtol_0.2_atol_0.2_allclose": true,
+          "use_fused_finalize": true
+        }
+      },
+      "cross_backend_diagnostic": {
+        "cosine": 0.999564528465271,
+        "relative_l2": 0.029509639367461205
+      },
+      "fixture": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m4096.npz",
+        "fixture_sha256": "a1ac93cb8dfb2e81a000476efc36b75588f79f1954b406396b77c172464ce2cc",
+        "m": 4096,
+        "occupancy_max": 166,
+        "occupancy_min": 92,
+        "occupancy_sha256": "0b57ad7fd66d1405ea04eb3135a5615e45664eb1ea61d9b61e7cb7de333be5df",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "1f66203f9c8589a25517a3422c3012eea61aea2dc9ee4e2fc807fbf98ca667fc",
+        "topk_weights_sha256": "8d97adaf9846929c340a63d81d13816c06820e737797712a2ec7f94d1ae88232",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "d8ff96b666568acab63a31b7f5812da2678053931dd9ff60fe33eaa90f588870"
+      },
+      "formal_gate": {
+        "criterion": "at least 97% satisfy abs<max(0.05,1.5*oracle.std) OR rel<0.5",
+        "oracle": "dequantized per-expert PyTorch MoE with input and activation NVFP4 round trips"
+      },
+      "paired_gate_pass": true,
+      "reference_sha256": "4aec474798c7ec7642e88ec7653095693402040fce0b7456c3db3ae0a560dea9"
+    },
+    "512": {
+      "arms": {
+        "cutedsl_bf16_fused": {
+          "actual_mean": -4.3490177631611004e-05,
+          "actual_std": 0.16543292999267578,
+          "actual_to_reference_l2_ratio": 0.9999510049819946,
+          "backend": "flashinfer.fused_moe.cute_dsl.B12xMoEWrapper",
+          "boundary": "BF16 input -> fused W4A4 MoE -> BF16 output",
+          "cosine": 0.9998825788497925,
+          "dispatch_pass": true,
+          "dtype": "bfloat16",
+          "expected_launches": "one material fused kernel; NSys is authority",
+          "finite": true,
+          "formal_magnitude_atol": 0.24816155433654785,
+          "formal_magnitude_rtol": 0.5,
+          "formal_pass": true,
+          "formal_percent_threshold": 97.0,
+          "formal_percent_within": 100.0,
+          "input_dtype": "bfloat16",
+          "least_squares_actual_gain": 0.9998335242271423,
+          "max_abs_error": 0.05950194597244263,
+          "mean_abs_error": 0.001268550637178123,
+          "nonzero": true,
+          "observed_cuda_kernels": [
+            "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
+            "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
+          ],
+          "output_sha256": "8ee951b4f014acd397308b7a379274a720edc72bbc927b90416199ab340b4c32",
+          "percent_within_rtol_0.2_atol_0.2": 100.0,
+          "reference_mean": -4.530861770035699e-05,
+          "reference_sha256": "01670185cfaa652c96f90bda7d194a18d740d59fb2cc30080326a207f172be70",
+          "reference_std": 0.16544103622436523,
+          "relative_l2": 0.015325178392231464,
+          "role": "paired target",
+          "shape": [
+            512,
+            2048
+          ],
+          "strict_rtol_0.2_atol_0.2_allclose": true
+        },
+        "cutlass_bf16_chain": {
+          "actual_mean": -4.880395863438025e-05,
+          "actual_std": 0.1654324233531952,
+          "actual_to_reference_l2_ratio": 0.9999479651451111,
+          "backend": "flashinfer.fused_moe.cutlass_fused_moe",
+          "boundary": "BF16 input -> native CUTLASS online quant chain -> BF16 output",
+          "cosine": 0.9996492862701416,
+          "dispatch_pass": true,
+          "dtype": "bfloat16",
+          "enable_pdl": true,
+          "expected_launches": "multi-kernel chain; NSys is authority",
+          "finite": true,
+          "formal_magnitude_atol": 0.24816155433654785,
+          "formal_magnitude_rtol": 0.5,
+          "formal_pass": true,
+          "formal_percent_threshold": 97.0,
+          "formal_percent_within": 100.0,
+          "input_dtype": "bfloat16",
+          "input_sf": false,
+          "least_squares_actual_gain": 0.9995971918106079,
+          "max_abs_error": 0.044201821088790894,
+          "mean_abs_error": 0.003289279527962208,
+          "nonzero": true,
+          "observed_cuda_kernels": [
+            "void tensorrt_llm::kernels::cutlass_kernels::blockExpertPrefixSumKernel<512>(int const*, int*, int*, long, long, int)",
+            "void tensorrt_llm::kernels::cutlass_kernels::globalExpertPrefixSumKernel<256>(int const*, int*, long*, long, long)",
+            "tensorrt_llm::kernels::cutlass_kernels::mergeExpertPrefixSumKernel(int const*, int const*, int const*, int*, int*, int*, int)",
+            "void tensorrt_llm::kernels::cutlass_kernels::expandInputRowsKernel<__nv_bfloat16, __nv_fp4_e2m1, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, false, false, std::integral_constant<bool, false> >(__nv_bfloat16 const*, __nv_fp4_e2m1*, float const*, float*, int const*, long, long, long, float const*, bool, long const*, unsigned char*, unsigned char const*, bool, long, __nv_bfloat16 const*)",
+            "void tensorrt_llm::kernels::cutlass_kernels::computeStridesTmaWarpSpecializedKernel<__nv_fp4_e2m1, __nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16>(long const*, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, long, long, long, long, long, long, long, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, float const*, float const*, unsigned char const*, unsigned char const*, tensorrt_llm::kernels::cutlass_kernels::QuantParams, __nv_bfloat16 const*, __nv_bfloat16 const*, __nv_bfloat16*, __nv_bfloat16*, float const*, int const*)",
+            "_ZN7cutlass13device_kernelINS_4gemm6kernel13GemmUniversalINS1_17GroupProblemShapeIN4cute5tupleIJlllEEEEENS1_10collective13CollectiveMmaINS1_47MainloopSm120ArrayTmaWarpSpecializedBlockScaledILi2ELi3ENS6_IJNS5_1CILi1EEESD_SD_EEENS1_59KernelPtrArrayTmaWarpSpecializedCooperativeBlockScaledSm120ILi3EEEEENS6_IJNSC_ILi128EEESI_NSC_ILi256EEEEEENS6_IJNS_12float_e2m1_tENS_13float_ue4m3_tEEEENS6_IJPNS6_IJlSD_NSC_ILi0EEEEEEPNS5_6LayoutINS6_IJNS6_IJNS6_IJNSC_ILi32EEENSC_ILi4EEEEEEiEEENS6_IJNS6_IJNSC_ILi16EEEST_EEEiEEENS6_IJSD_iEEEEEENS6_IJSY_NS6_IJNS6_IJSO_SD_EEENSC_ILi512EEEEEENS6_IJSO_iEEEEEEEEEEESN_S18_NS5_8TiledMMAINS5_8MMA_AtomIJNS5_5SM12011BLOCKSCALED19SM120_16x8x64_TN_VSISL_SL_fSM_Li16EEEEEENSR_INS6_IJST_NSC_ILi2EEESD_EEENS6_IJSD_ST_SO_EEEEENS6_IJSI_NSR_INS6_IJNSC_ILi8EEES1G_S1G_EEENS6_IJSD_SW_S1K_EEEEENSC_ILi64EEEEEEEENS6_IJNS5_13SM90_TMA_LOADES1R_EEENS6_IJNS5_14ComposedLayoutINS5_7SwizzleILi3ELi4ELi3EEENS5_18smem_ptr_flag_bitsILi4EEENSR_INS6_IJS1K_SJ_EEENS6_IJSJ_SD_EEEEEEENSR_INS6_IJNS6_IJSU_SD_EEENS6_IJSX_SD_ST_EEEEEENS6_IJNS6_IJSX_S12_EEENS6_IJS11_ST_S12_EEEEEEEEEEENS6_IJNS5_9Copy_AtomIJNS5_17SM75_U32x4_LDSM_NENS_15integer_subbyteILi4ELb0EEEEEENS2A_IJNS5_13UniversalCopyISM_SM_EESM_EEEEEENS5_8identityES1S_S29_S2I_S2J_EENS_8epilogue10collective18CollectiveEpilogueINS2L_30Sm90PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEEJSK_NS6_IJS1O_SS_EEENS_10bfloat16_tESQ_S2R_SQ_NS2L_6fusion15FusionCallbacksINS2L_31Sm120PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEENS2S_17LinearCombinationIS2R_fS2R_fLNS_15FloatRoundStyleE2EEESK_S2Q_JEEES1R_NS1T_INS1U_ILi2ELi4ELi3EEENS1W_ILi16EEENSR_INS6_IJS1K_SS_EEENS6_IJSS_SD_EEEEEEENS5_17SM75_U32x2_LDSM_NENS5_14SM90_TMA_STOREES35_NS5_17SM90_U32x2_STSM_NENS2A_IJS38_NS_6half_tEEEEvEEEvvEEEEvNT_6ParamsE",
+            "void tensorrt_llm::kernels::cutlass_kernels::doActivationKernel<__nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16, tensorrt_llm::kernels::cutlass_kernels::GLUAdaptor<cutlass::epilogue::thread::SiLu>, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, false, std::integral_constant<bool, false> >(__nv_fp4_e2m1*, __nv_bfloat16 const*, float const*, __nv_bfloat16 const*, bool, long const*, int, long, float const*, bool, unsigned char*, tensorrt_llm::kernels::cutlass_kernels::ActivationParams)",
+            "void tensorrt_llm::kernels::cutlass_kernels::finalizeMoeRoutingKernel<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, (tensorrt_llm::kernels::cutlass_kernels::ScaleMode)1>(__nv_bfloat16 const*, __nv_bfloat16*, __nv_bfloat16 const*, float const*, int const*, int const*, long, long, long, int, int)"
+          ],
+          "output_sha256": "002d44ac9995bf2de2ddbf361cc0882ba41862af1d92377e681702ec5090767d",
+          "percent_within_rtol_0.2_atol_0.2": 100.0,
+          "reference_mean": -4.530861770035699e-05,
+          "reference_sha256": "01670185cfaa652c96f90bda7d194a18d740d59fb2cc30080326a207f172be70",
+          "reference_std": 0.16544103622436523,
+          "relative_l2": 0.026486346498131752,
+          "role": "paired baseline",
+          "shape": [
+            512,
+            2048
+          ],
+          "strict_rtol_0.2_atol_0.2_allclose": true,
+          "use_fused_finalize": true
+        }
+      },
+      "cross_backend_diagnostic": {
+        "cosine": 0.9995492696762085,
+        "relative_l2": 0.030025193467736244
+      },
+      "fixture": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m512.npz",
+        "fixture_sha256": "e6ddb487121a0d681a06bcb453f38623b3d5d8477f2232bbbf78cd2ea4ef23a3",
+        "m": 512,
+        "occupancy_max": 32,
+        "occupancy_min": 7,
+        "occupancy_sha256": "1743ac1105dd3d277607a09eda29d22e0d81293524e72589faf14eaaa6e4a6ed",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "6547b9e499a45732e2e209d6e7802bb869cf9c0f56dddebc38b94373d9125378",
+        "topk_weights_sha256": "31f9568afcba7d5f4df04ff5e61ecc082434dd9f045b7aec9d77a86e6e0143c0",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "5178555ed52d79f5945b7c6637c9c20371c902d69e3817437caf2bee7fb34087"
+      },
+      "formal_gate": {
+        "criterion": "at least 97% satisfy abs<max(0.05,1.5*oracle.std) OR rel<0.5",
+        "oracle": "dequantized per-expert PyTorch MoE with input and activation NVFP4 round trips"
+      },
+      "paired_gate_pass": true,
+      "reference_sha256": "01670185cfaa652c96f90bda7d194a18d740d59fb2cc30080326a207f172be70"
+    },
+    "8192": {
+      "arms": {
+        "cutedsl_bf16_fused": {
+          "actual_mean": -8.005091513041407e-05,
+          "actual_std": 0.16488496959209442,
+          "actual_to_reference_l2_ratio": 0.9999305009841919,
+          "backend": "flashinfer.fused_moe.cute_dsl.B12xMoEWrapper",
+          "boundary": "BF16 input -> fused W4A4 MoE -> BF16 output",
+          "cosine": 0.9999179840087891,
+          "dispatch_pass": true,
+          "dtype": "bfloat16",
+          "expected_launches": "one material fused kernel; NSys is authority",
+          "finite": true,
+          "formal_magnitude_atol": 0.24734464287757874,
+          "formal_magnitude_rtol": 0.5,
+          "formal_pass": true,
+          "formal_percent_threshold": 97.0,
+          "formal_percent_within": 100.0,
+          "input_dtype": "bfloat16",
+          "least_squares_actual_gain": 0.999848484992981,
+          "max_abs_error": 0.08801324665546417,
+          "mean_abs_error": 0.001120368018746376,
+          "nonzero": true,
+          "observed_cuda_kernels": [
+            "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
+            "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
+          ],
+          "output_sha256": "a102d5b328b9363bc439c399264c87f669d74c9044cbb4638379acd0e0b6aa6f",
+          "percent_within_rtol_0.2_atol_0.2": 100.0,
+          "reference_mean": -8.14411323517561e-05,
+          "reference_sha256": "7eac9ce7d735e78f809f657e5a567f0d861c4f33a34443206625b0aea7f035b0",
+          "reference_std": 0.1648964285850525,
+          "relative_l2": 0.012810303829610348,
+          "role": "paired target",
+          "shape": [
+            8192,
+            2048
+          ],
+          "strict_rtol_0.2_atol_0.2_allclose": true
+        },
+        "cutlass_bf16_chain": {
+          "actual_mean": -8.298421744257212e-05,
+          "actual_std": 0.16489097476005554,
+          "actual_to_reference_l2_ratio": 0.9999669194221497,
+          "backend": "flashinfer.fused_moe.cutlass_fused_moe",
+          "boundary": "BF16 input -> native CUTLASS online quant chain -> BF16 output",
+          "cosine": 0.9996322989463806,
+          "dispatch_pass": true,
+          "dtype": "bfloat16",
+          "enable_pdl": true,
+          "expected_launches": "multi-kernel chain; NSys is authority",
+          "finite": true,
+          "formal_magnitude_atol": 0.24734464287757874,
+          "formal_magnitude_rtol": 0.5,
+          "formal_pass": true,
+          "formal_percent_threshold": 97.0,
+          "formal_percent_within": 100.0,
+          "input_dtype": "bfloat16",
+          "input_sf": false,
+          "least_squares_actual_gain": 0.999599277973175,
+          "max_abs_error": 0.06457144021987915,
+          "mean_abs_error": 0.0033367923460900784,
+          "nonzero": true,
+          "observed_cuda_kernels": [
+            "void tensorrt_llm::kernels::cutlass_kernels::blockExpertPrefixSumKernel<1024>(int const*, int*, int*, long, long, int)",
+            "void tensorrt_llm::kernels::cutlass_kernels::globalExpertPrefixSumLargeKernel<1024>(int const*, int*, long*, long, long, long)",
+            "tensorrt_llm::kernels::cutlass_kernels::mergeExpertPrefixSumKernel(int const*, int const*, int const*, int*, int*, int*, int)",
+            "void tensorrt_llm::kernels::cutlass_kernels::expandInputRowsKernel<__nv_bfloat16, __nv_fp4_e2m1, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, false, false, std::integral_constant<bool, false> >(__nv_bfloat16 const*, __nv_fp4_e2m1*, float const*, float*, int const*, long, long, long, float const*, bool, long const*, unsigned char*, unsigned char const*, bool, long, __nv_bfloat16 const*)",
+            "void tensorrt_llm::kernels::cutlass_kernels::computeStridesTmaWarpSpecializedKernel<__nv_fp4_e2m1, __nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16>(long const*, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput, long, long, long, long, long, long, long, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, __nv_fp4_e2m1 const*, float const*, float const*, unsigned char const*, unsigned char const*, tensorrt_llm::kernels::cutlass_kernels::QuantParams, __nv_bfloat16 const*, __nv_bfloat16 const*, __nv_bfloat16*, __nv_bfloat16*, float const*, int const*)",
+            "_ZN7cutlass13device_kernelINS_4gemm6kernel13GemmUniversalINS1_17GroupProblemShapeIN4cute5tupleIJlllEEEEENS1_10collective13CollectiveMmaINS1_47MainloopSm120ArrayTmaWarpSpecializedBlockScaledILi2ELi3ENS6_IJNS5_1CILi1EEESD_SD_EEENS1_59KernelPtrArrayTmaWarpSpecializedCooperativeBlockScaledSm120ILi3EEEEENS6_IJNSC_ILi128EEESI_NSC_ILi256EEEEEENS6_IJNS_12float_e2m1_tENS_13float_ue4m3_tEEEENS6_IJPNS6_IJlSD_NSC_ILi0EEEEEEPNS5_6LayoutINS6_IJNS6_IJNS6_IJNSC_ILi32EEENSC_ILi4EEEEEEiEEENS6_IJNS6_IJNSC_ILi16EEEST_EEEiEEENS6_IJSD_iEEEEEENS6_IJSY_NS6_IJNS6_IJSO_SD_EEENSC_ILi512EEEEEENS6_IJSO_iEEEEEEEEEEESN_S18_NS5_8TiledMMAINS5_8MMA_AtomIJNS5_5SM12011BLOCKSCALED19SM120_16x8x64_TN_VSISL_SL_fSM_Li16EEEEEENSR_INS6_IJST_NSC_ILi2EEESD_EEENS6_IJSD_ST_SO_EEEEENS6_IJSI_NSR_INS6_IJNSC_ILi8EEES1G_S1G_EEENS6_IJSD_SW_S1K_EEEEENSC_ILi64EEEEEEEENS6_IJNS5_13SM90_TMA_LOADES1R_EEENS6_IJNS5_14ComposedLayoutINS5_7SwizzleILi3ELi4ELi3EEENS5_18smem_ptr_flag_bitsILi4EEENSR_INS6_IJS1K_SJ_EEENS6_IJSJ_SD_EEEEEEENSR_INS6_IJNS6_IJSU_SD_EEENS6_IJSX_SD_ST_EEEEEENS6_IJNS6_IJSX_S12_EEENS6_IJS11_ST_S12_EEEEEEEEEEENS6_IJNS5_9Copy_AtomIJNS5_17SM75_U32x4_LDSM_NENS_15integer_subbyteILi4ELb0EEEEEENS2A_IJNS5_13UniversalCopyISM_SM_EESM_EEEEEENS5_8identityES1S_S29_S2I_S2J_EENS_8epilogue10collective18CollectiveEpilogueINS2L_30Sm90PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEEJSK_NS6_IJS1O_SS_EEENS_10bfloat16_tESQ_S2R_SQ_NS2L_6fusion15FusionCallbacksINS2L_31Sm120PtrArrayTmaWarpSpecializedILi3ELi2ELi4ELb1ELb0ELi2EEENS2S_17LinearCombinationIS2R_fS2R_fLNS_15FloatRoundStyleE2EEESK_S2Q_JEEES1R_NS1T_INS1U_ILi2ELi4ELi3EEENS1W_ILi16EEENSR_INS6_IJS1K_SS_EEENS6_IJSS_SD_EEEEEEENS5_17SM75_U32x2_LDSM_NENS5_14SM90_TMA_STOREES35_NS5_17SM90_U32x2_STSM_NENS2A_IJS38_NS_6half_tEEEEvEEEvvEEEEvNT_6ParamsE",
+            "void tensorrt_llm::kernels::cutlass_kernels::doActivationKernel<__nv_fp4_e2m1, __nv_bfloat16, __nv_bfloat16, tensorrt_llm::kernels::cutlass_kernels::GLUAdaptor<cutlass::epilogue::thread::SiLu>, (tensorrt_llm::kernels::cutlass_kernels::TmaWarpSpecializedGroupedGemmInput::FpXBlockScalingType)1, false, std::integral_constant<bool, false> >(__nv_fp4_e2m1*, __nv_bfloat16 const*, float const*, __nv_bfloat16 const*, bool, long const*, int, long, float const*, bool, unsigned char*, tensorrt_llm::kernels::cutlass_kernels::ActivationParams)",
+            "void tensorrt_llm::kernels::cutlass_kernels::finalizeMoeRoutingKernel<__nv_bfloat16, __nv_bfloat16, __nv_bfloat16, (tensorrt_llm::kernels::cutlass_kernels::ScaleMode)1>(__nv_bfloat16 const*, __nv_bfloat16*, __nv_bfloat16 const*, float const*, int const*, int const*, long, long, long, int, int)"
+          ],
+          "output_sha256": "67faee7f78a7588e675cff81c0b899c372d40bf4d40ff8bda3e1d9c7a091e57b",
+          "percent_within_rtol_0.2_atol_0.2": 100.0,
+          "reference_mean": -8.14411323517561e-05,
+          "reference_sha256": "7eac9ce7d735e78f809f657e5a567f0d861c4f33a34443206625b0aea7f035b0",
+          "reference_std": 0.1648964285850525,
+          "relative_l2": 0.0271168015897274,
+          "role": "paired baseline",
+          "shape": [
+            8192,
+            2048
+          ],
+          "strict_rtol_0.2_atol_0.2_allclose": true,
+          "use_fused_finalize": true
+        }
+      },
+      "cross_backend_diagnostic": {
+        "cosine": 0.999565601348877,
+        "relative_l2": 0.029475368559360504
+      },
+      "fixture": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m8192.npz",
+        "fixture_sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438",
+        "m": 8192,
+        "occupancy_max": 295,
+        "occupancy_min": 205,
+        "occupancy_sha256": "3e4350788bfcdd1cca175141f0c6626934589b97cb23d74811e4bc2785531a94",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "c7ea3babd394cb6fc73980a2754b13a8215deaee991b3aaf7ce3b45502592abb",
+        "topk_weights_sha256": "441f51ba80975dc8cfc3fc0d7e5a07a8c474a6781f8d606ff0eaecef69adbcea",
+        "weight_sum_max_abs_error": 2.384185791015625e-07,
+        "x_sha256": "00d8fb81ac350100bdb9c4f9341ac2cbbc24d6c0b21b62f565f7f44a8ad24bec"
+      },
+      "formal_gate": {
+        "criterion": "at least 97% satisfy abs<max(0.05,1.5*oracle.std) OR rel<0.5",
+        "oracle": "dequantized per-expert PyTorch MoE with input and activation NVFP4 round trips"
+      },
+      "paired_gate_pass": true,
+      "reference_sha256": "7eac9ce7d735e78f809f657e5a567f0d861c4f33a34443206625b0aea7f035b0"
+    }
+  },
+  "evidence_identity": {
+    "artifact_lock_digest": "0faad00eeb2989275c8b73c549efdb5c7aff8f4d39aa210373d30e64d078581e",
+    "artifact_lock_path": "artifact-locks/0faad00eeb2989275c8b73c549efdb5c7aff8f4d39aa210373d30e64d078581e.json",
+    "comparison_group_id": "exp001_cutedsl_vs_cutlass_bf16_fresh",
+    "environment_lock_digest": "33eb08a9b99f6fd84e146b8a24f6e9bfbed0b4819792217e3a895f05086babd7",
+    "environment_lock_path": "environment-locks/33eb08a9b99f6fd84e146b8a24f6e9bfbed0b4819792217e3a895f05086babd7.json",
+    "per_arm_artifact_fingerprint_sha256": {
+      "cutedsl_bf16_fused": "acfe7363b418edae9585f1fb3b1fe5f55feb869db8f4bd39079e3686e247645e",
+      "cutlass_bf16_chain": "5d14e51d15abc4638425cbbb114bfe35fc23d671487d2c159e3fa9c0e7d0f4ff"
+    },
+    "protocol_lock_digest": "c0b6fe17b3ead2fbf6b2660821f0d39da1c85b1286515aeec87e0a5423141104",
+    "protocol_lock_path": "protocol-locks/c0b6fe17b3ead2fbf6b2660821f0d39da1c85b1286515aeec87e0a5423141104.json",
+    "rerun_id": "exp001-corrected-20260716T0443Z-r1",
+    "schema_version": 2
+  },
+  "experiment_config": {
+    "iters": 50,
+    "l2_flush_bytes": 201326592,
+    "m_values": [
+      256,
+      512,
+      1024,
+      2048,
+      4096,
+      8192
+    ],
+    "max_num_tokens": 8192,
+    "repeats": 5,
+    "seed": 2026,
+    "warmup": 5
+  },
+  "measurement_protocol": {
+    "aggregation": "median of per-repeat means; preserve all raw samples",
+    "arms": [
+      "cutedsl_bf16_fused",
+      "cutlass_bf16_chain"
+    ],
+    "cache_policy": {
+      "l2_flush_bytes": 201326592,
+      "placement": "before each replay, outside timed interval"
+    },
+    "fingerprint_sha256": "c0b6fe17b3ead2fbf6b2660821f0d39da1c85b1286515aeec87e0a5423141104",
+    "iterations_per_sample": 50,
+    "m_values": [
+      256,
+      512,
+      1024,
+      2048,
+      4096,
+      8192
+    ],
+    "order_policy": "even A>B; odd B>A; every repeat contains all arms",
+    "repeats": 5,
+    "schema_version": 2,
+    "timing": "outer CUDA graph replay; external CUDA events inside graph",
+    "warmup": 5
+  },
+  "runtime": {
+    "compute_capability": [
+      12,
+      0
+    ],
+    "cuda_graph": "outer graph, explicit non-default capture stream, external events",
+    "cuda_runtime": "13.2",
+    "cutlass_autotuner_contract": "default non-tuning fallback tactic -1 / built-in heuristic",
+    "enable_pdl": true,
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0",
+      "FLASHINFER_AUTOTUNER_LOAD_FROM_FILE": "",
+      "FLASHINFER_CUTEDSL_IKET_OVERLAY": "0",
+      "FLASHINFER_LOGLEVEL": "",
+      "FLASHINFER_NVFP4_4OVER6": "0",
+      "FLASHINFER_TACTICS_BLOCKLIST": "",
+      "FLASHINFER_WORKSPACE_BASE": "/workspace/jit",
+      "PYTHONPATH": "/workspace/source/flashinfer:/workspace/deps:/workspace/deps/nvidia_cutlass_dsl/dsl_packages",
+      "W4A4_IMAGE_DIGEST": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+      "W4A4_PYTHON_DEPS_SHA256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74"
+    },
+    "flashinfer_workspace_base": "/workspace/jit",
+    "foreign_compute_process_query": "",
+    "gpu_name": "NVIDIA Graphics Device",
+    "gpu_uuid": "GPU-4a286357-c999-9547-3a04-25961b1ffd08",
+    "hostname": "d687206b5806",
+    "image": "nvcr.io/nvidia/pytorch:26.05-py3",
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "measurement_rerun_id": "exp001-corrected-20260716T0443Z-r1",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "python_dependency_overlay": {
+      "apache_tvm_ffi": "0.1.11",
+      "cuda_python": "13.3.1",
+      "cutlass_module": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+      "numpy": "2.5.1",
+      "nvidia_cuda_nvdisasm": "13.3.73",
+      "nvidia_cutlass_dsl": "4.6.0",
+      "sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+      "tvm_ffi_module": "/workspace/deps/tvm_ffi/__init__.py"
+    },
+    "repo_root": "/workspace/source/flashinfer",
+    "resource_lease_id": "exp001-corrected-20260716T042843Z-23286",
+    "source": {
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "experiment_overlays": [
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/plan.md",
+          "sha256": "df9ab6d9eb587f8a61a46324c7d69a1e87dead0e1d488a8412ec83635614136c"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/fixture.py",
+          "sha256": "7a0a59c61ce8b635e1e937077da37acb9e5f5c25434913f92dff83d60ac19d2b"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/nvfp4_fixture.py",
+          "sha256": "9c12529c20d99009ea9dfd846193337fcaf533f4b688d60b773661fe084fe0d2"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/make_fixtures.py",
+          "sha256": "b78880f6f178fb497e0677ac289ed02620dbd21fe8753bc6d3134ce65b089144"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/run_pair.py",
+          "sha256": "43b9b08c1a063ffd8718b2ff6f4e88dad797da334f1bc1c6c869815734b65452"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/run_pair.sh",
+          "sha256": "2bdc4fac8ac0fc345f767e0e2259ead547be8798d2d5572d580402ca3c7ed324"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/build_result.py",
+          "sha256": "8daf8beac74c39d0ed51e03958980b466ac8731b539f241f3f32d82e70c95234"
+        },
+        {
+          "path": ".claude/w4a4_moe_bench/cutedsl_460_requirements.lock.txt",
+          "sha256": "05d2d472459a2374c7042a434a55232758e0a210081243fee5f7c87e9be9c4a7"
+        }
+      ],
+      "flashinfer_commit": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+      "source_status": "D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/bench_cutedsl_fp4.py\n M .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/bench_triton_fp8.py\n M .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/build_result.py\n M .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/fixture.py\n M .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/make_fixtures.py\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/merge_triton_rerun.py\n M .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/plan.md\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/cutlass_arm_exploratory.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/cutlass_arm_exploratory.log\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/cutlass_arm_raw.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/cutlass_arm_raw.log\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/cutlass_arm_smoke_cutedsl.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/cutlass_arm_smoke_cutlass.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/fixture_manifest.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/formal.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/manifest.md\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/result.md\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_cutedsl_initial.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_cutedsl_raw.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_cutedsl_raw.log\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_initial.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_initial.log\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_m8192_rerun.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_m8192_rerun.log\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_raw.csv\n M .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/test_build_result.py\n?? .claude/w4a4_moe_bench/cutedsl_460_requirements.lock.txt\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/nvfp4_fixture.py\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/fixtures/\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/smoke_sglang/\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/superseded_vllm_prequant/\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/run_pair.py\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/run_pair.sh\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/run_sglang.sh"
+    },
+    "timestamp_unix": 1784176889.4993668,
+    "torch": "2.12.0a0+5aff3928d8.nv26.05",
+    "use_fused_finalize": true
+  },
+  "weights": {
+    "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+    "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+    "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+    "seed": 2026,
+    "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+    "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+    "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+    "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+    "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+    "w1_packed_shape": [
+      256,
+      1024,
+      1024
+    ],
+    "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+    "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+    "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+    "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+    "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+    "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+    "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+    "w2_packed_shape": [
+      256,
+      2048,
+      256
+    ],
+    "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+    "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+  }
+}

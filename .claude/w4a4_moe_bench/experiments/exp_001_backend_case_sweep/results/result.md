@@ -1,46 +1,18 @@
-# Experiment 001 Result: CUTLASS vs CuteDSL vs Triton
+# Experiment 001 result: backend case sweep
 
-**Verdict:** the evaluated `100%` CuteDSL speedup threshold versus the vLLM
-Triton FP8 reference is **not met** for all prefill cases. `M=256`, `M=8192`
-fail; `M=512`, `M=1024`, `M=2048`, `M=4096` pass.
+**Verdict: TARGET NOT MET.** Customer criterion: CuteDSL FP4 must be at least 100% faster (2x throughput by latency ratio) than SGLang Triton FP8 for every M.
 
-`Speedup = (baseline time / CuteDSL time - 1) * 100%`.
-
-| M | CuteDSL (us) | CUTLASS (us) | Speedup vs CUTLASS | vLLM Triton FP8 (us) | Speedup vs Triton | 100% threshold |
+| M | CuteDSL FP4 (us) | CUTLASS BF16 chain (us) | SGLang Triton FP8 (us) | vs CUTLASS | vs SGLang | 2x target |
 |---:|---:|---:|---:|---:|---:|:---:|
-| 256 | 529.357 | 552.369 | 4.35% | 847.223 | 60.05% | FAIL |
-| 512 | 551.044 | 570.518 | 3.53% | 1650.833 | 199.58% | PASS |
-| 1024 | 604.466 | 603.039 | -0.24% | 1750.087 | 189.53% | PASS |
-| 2048 | 732.929 | 721.847 | -1.51% | 1888.346 | 157.64% | PASS |
-| 4096 | 1001.441 | 1006.863 | 0.54% | 2154.085 | 115.10% | PASS |
-| 8192 | 1738.950 | 1678.002 | -3.50% | 3297.283 | 89.61% | FAIL |
+| 256 | 541.118 | 547.422 | 773.806 | +1.16% | +43.00% | no |
+| 512 | 562.901 | 551.336 | 745.975 | -2.05% | +32.52% | no |
+| 1024 | 626.057 | 582.214 | 765.606 | -7.00% | +22.29% | no |
+| 2048 | 751.308 | 723.201 | 875.833 | -3.74% | +16.57% | no |
+| 4096 | 1025.632 | 1005.594 | 1156.068 | -1.95% | +12.72% | no |
+| 8192 | 1787.921 | 1676.457 | 2166.001 | -6.23% | +21.15% | no |
 
-Both speedups use the single CuteDSL measurement from the CUTLASS arm.
-Positive speedup means the baseline is slower than CuteDSL.
+Speedup is `(baseline_time / CuteDSL_time - 1) * 100%`. Both columns use the single CuteDSL series from the fresh paired CUTLASS rerun.
 
-## Scope
+CUTLASS is the matched BF16-input online-quantization chain. SGLang is the direct legacy Triton tensor-scaled W8A8 FP8 chain; its ratio is explicitly cross-runtime, not a fusion-only causal comparison.
 
-- Prefill only: `M={256,512,1024,2048,4096,8192}`.
-- CUTLASS and Triton were measured in separate arms on the same GPU class.
-  Speedup vs Triton is therefore a declared cross-arm ratio, not a paired
-  same-host comparison.
-- Canonical CuteDSL and Triton do not share recorded fixture/routing
-  identity; the CUTLASS-arm CSV does not carry those identity hashes.
-- CUTLASS excludes BF16 input quantization from its timed closure; CuteDSL
-  includes online input quantization.
-- Triton is vLLM `0.11.1rc1` legacy tensor-scaled W8A8 using an untuned
-  default heuristic, not a confirmed customer production recipe.
-- Measured Triton deltas versus the withdrawn historical W8A8 table
-  (not used in speedup calculations):
-  - `M=256` +15.55%, `M=512` +123.30%, `M=1024` +129.34%
-  - `M=2048` +122.29%, `M=4096` +95.38%, `M=8192` +91.26%
-- This is performance-only evidence and makes no FP4/FP8 numerical-equivalence
-  claim.
-
-## Evidence
-
-- [`formal.csv`](formal.csv): canonical three-backend result data.
-- [`cutlass_arm_raw.csv`](cutlass_arm_raw.csv): CUTLASS/CuteDSL raw arm.
-- [`triton_arm_raw.csv`](triton_arm_raw.csv): Triton FP8 raw arm.
-- [`manifest.md`](manifest.md): setup, source, stability, and evidence identity.
-- [`plan.md`](../plan.md): current experiment contract.
+Evidence rerun: `exp001-corrected-20260716T0443Z-r1`; GPU: `GPU-4a286357-c999-9547-3a04-25961b1ffd08`. All six per-arm correctness, dispatch, fixture, identity, and <=5% spread gates passed before publication.

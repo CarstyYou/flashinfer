@@ -1,0 +1,47 @@
+{
+  "seed": 2026,
+  "fixtures": [
+    {
+      "m": 256,
+      "path": "m256.npz",
+      "sha256": "86b505097acd06bed5a50c3528c78525e6087c07ed69f86606607599ffa21686",
+      "occupancy_min": 2,
+      "occupancy_max": 15
+    },
+    {
+      "m": 512,
+      "path": "m512.npz",
+      "sha256": "e6ddb487121a0d681a06bcb453f38623b3d5d8477f2232bbbf78cd2ea4ef23a3",
+      "occupancy_min": 7,
+      "occupancy_max": 32
+    },
+    {
+      "m": 1024,
+      "path": "m1024.npz",
+      "sha256": "0fa7e8a7d8d1d32172971f987d6f55b534aabf8d12a84a910d010cec25ba04a5",
+      "occupancy_min": 14,
+      "occupancy_max": 50
+    },
+    {
+      "m": 2048,
+      "path": "m2048.npz",
+      "sha256": "5375fd8b3e5e15f8c956998bfc3e2f3ee59948a2aeaf5ba1294ec6a74092bde3",
+      "occupancy_min": 44,
+      "occupancy_max": 89
+    },
+    {
+      "m": 4096,
+      "path": "m4096.npz",
+      "sha256": "a1ac93cb8dfb2e81a000476efc36b75588f79f1954b406396b77c172464ce2cc",
+      "occupancy_min": 92,
+      "occupancy_max": 166
+    },
+    {
+      "m": 8192,
+      "path": "m8192.npz",
+      "sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438",
+      "occupancy_min": 205,
+      "occupancy_max": 295
+    }
+  ]
+}

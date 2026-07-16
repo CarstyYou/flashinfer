@@ -1,0 +1,17 @@
+{
+  "aggregation": "median of five repeat means",
+  "fingerprint_sha256": "a1a6a056b098c822b045dd8d1579ea475c32b7b0a4464fd588afd8e6dac928a8",
+  "iters": 50,
+  "l2_flush_bytes": 201326592,
+  "m_values": [
+    256,
+    512,
+    1024,
+    2048,
+    4096,
+    8192
+  ],
+  "repeats": 5,
+  "timing": "CUDA graph external events inside; synchronized L2 flush outside",
+  "warmup": 5
+}

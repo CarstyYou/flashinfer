@@ -1,0 +1,29 @@
+{
+  "compute_capability": [
+    12,
+    0
+  ],
+  "cuda_runtime": "13.0",
+  "foreign_compute_process_query": "",
+  "gpu_name": "NVIDIA Graphics Device",
+  "gpu_uuid": "GPU-4a286357-c999-9547-3a04-25961b1ffd08",
+  "hostname": "995f85e50857",
+  "image": "lmsysorg/sglang:latest",
+  "image_digest": "sha256:00c53fe4c31bf22d7b37537f28bbdfd924c02de13cdfb4bff7378c9c34d75ab2",
+  "image_id": "sha256:663867442f321ded36228bafd889fd1db05cbef7a7c8ea6e072df33234dabbfd",
+  "measurement_rerun_id": "exp001-corrected-20260716T0443Z-r1",
+  "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+  "resource_lease_id": "exp001-corrected-20260716T042843Z-23286",
+  "server_args": {
+    "enable_deterministic_inference": false,
+    "enable_fused_moe_sum_all_reduce": false,
+    "model_path": "dummy",
+    "moe_runner_backend": "triton"
+  },
+  "sglang_commit": "0b3bb0cbe31873994c9f989fddfe2f87ca839fdd",
+  "sglang_module": "/sgl-workspace/sglang/python/sglang/__init__.py",
+  "sglang_version": "0.5.15.post1",
+  "timestamp_unix": 1784177207.7358336,
+  "torch": "2.11.0+cu130",
+  "triton_version": "3.6.0"
+}
