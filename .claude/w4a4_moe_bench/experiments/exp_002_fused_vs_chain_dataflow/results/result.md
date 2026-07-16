@@ -1,6 +1,6 @@
 # Experiment 002 Benchmark Result
 
-这里仅报告 correctness-qualified、未插桩 CUDA Graph benchmark；机制归因见 [`operator_dataflow_bottleneck.md`](operator_dataflow_bottleneck.md)。
+这里仅报告 correctness-qualified、未插桩 CUDA Graph benchmark；机制归因见 [`fusedop_dataflow_bottleneck.md`](fusedop_dataflow_bottleneck.md)。
 
 | M | CuteDSL fused (us) | CUTLASS BF16 chain (us) | CuteDSL speedup vs matched | Gate | Stable |
 |---:|---:|---:|---:|:---:|:---:|

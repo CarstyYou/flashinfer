@@ -1,0 +1,49 @@
+{
+  "canonical_prerequisites_revalidated": [
+    "paired correctness gate",
+    "per-arm oracle gate",
+    "fixture manifest",
+    "canonical weights/scales",
+    "JIT artifact manifest",
+    "benchmark row identity and stability",
+    "runtime software and GPU identity"
+  ],
+  "changed_overlays": {
+    ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/build_result.py": {
+      "actual_sha256": "e9cf0c612f2951412621158645a89756be5897ebd545a4febd92d1901b1986ea",
+      "canonical_sha256": "e7526f8527124f4743dabd70f8629f8d74b0697dbe6c33aa6c46aed1ac2193ce"
+    },
+    ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/fixture.py": {
+      "actual_sha256": "9c12529c20d99009ea9dfd846193337fcaf533f4b688d60b773661fe084fe0d2",
+      "canonical_sha256": "cffebe0a6c006425d058d6803be45ed373a4ebd5fcda0eb99ef019f05dc58eac"
+    },
+    ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/plan.md": {
+      "actual_sha256": "46bf545d61fbcd6ed2541be42b7fc0ff58db6da8c8fbff5482d7b67e7523c77a",
+      "canonical_sha256": "59565c324042fdfa4e46c9ac998d740c6851f03b15bb401ec0a8da81229ae4c9"
+    },
+    ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/run_benchmark.sh": {
+      "actual_sha256": "19966e1d2864aca19998b70c8998e3de16d87c64316bf0a0980668016339868c",
+      "canonical_sha256": "7881c4b58759d5b1934c942501f58ede122babb0270d7657ce37e362c8f0076f"
+    },
+    ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/run_exp002.py": {
+      "actual_sha256": "1f1e78702ba56f48a87b4166e81d49b8125c669593bbd315c3635835ee9a1c48",
+      "canonical_sha256": "2ece3b510a65f784e6ca02893218c86755cdf8bc0f3171236fad0585599477c3"
+    }
+  },
+  "post_capture_gates": [
+    "profile output SHA-256 equals canonical profile output",
+    "captured cubin SHA-256 equals canonical deep-profile cubin",
+    "kernel name/grid/block equal canonical target"
+  ],
+  "schema": "exp002.profile-followup-overlay-drift.v1",
+  "scope": {
+    "arm": "cutedsl_bf16_fused",
+    "m": 8192
+  },
+  "status": "accepted_for_diagnostic_profile",
+  "unchanged_source_identity": {
+    "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+    "flashinfer_commit": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+    "source_status": "?? .claude/w4a4_moe_bench/cutedsl_460_requirements.lock.txt\n?? .claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/"
+  }
+}

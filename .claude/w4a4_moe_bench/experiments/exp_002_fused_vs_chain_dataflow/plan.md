@@ -2,13 +2,13 @@
 
 Status: **complete (2026-07-16)**. Correctness-qualified benchmark、NSys、operator-range NCU、
 selected-launch NCU 与 current-binary SASS audit 已完成；判定和下一实验见
-[`results/operator_dataflow_bottleneck.md`](results/operator_dataflow_bottleneck.md)。
+[`results/fusedop_dataflow_bottleneck.md`](results/fusedop_dataflow_bottleneck.md)。
 
 ## Goal
 
 在 SM120 Qwen3.5 prefill MoE case 中，对比单-launch CuteDSL W4A4 与 CUDA Graph
 中的 CUTLASS multi-kernel chain，找到一项有证据、可验证的优化点；同时用真实场景验证
-KDK `operator-dataflow-bottleneck` 是否能正确处理 fused-vs-chain，而不是只生成 profiler
+KDK `fusedop-dataflow-bottleneck` 是否能正确处理 fused-vs-chain，而不是只生成 profiler
 摘要。
 
 本实验不重新回答 exp_001 的三 backend 性能排名，也不以拆出每个 phase 的精确耗时为目标。
@@ -21,7 +21,7 @@ KDK `operator-dataflow-bottleneck` 是否能正确处理 fused-vs-chain，而不
    resource pressure、synchronization、producer/consumer idle 或 tail 抵消？
 3. loss 与 control case 的差异能否定位到一项具体代码动作和一个可接受/推翻它的指标？
 
-## Fixed Case Contract
+## 固定用例的约定与约束
 
 - Hardware：一张 SM120 5KP；固定 GPU UUID
   `GPU-4a286357-c999-9547-3a04-25961b1ffd08`。
@@ -236,7 +236,7 @@ selected CTA 推广为 full grid。
 
 冻结待验证 KDK snapshot：clean HEAD
 `84d72d19d207cf0bebdc70a88b272d2c27d6c5a0`。先用独立手工 oracle
-完成 topology/roll-up 判定，再让 KDK `operator-dataflow-bottleneck` 能力处理同一证据，
+完成 topology/roll-up 判定，再让 KDK `fusedop-dataflow-bottleneck` 能力处理同一证据，
 避免循环自证。pass/fail assertions 是：
 
 1. 拒绝混用不同compiler/JIT fingerprint或单边重测的performance evidence；
@@ -270,7 +270,7 @@ exp_002_fused_vs_chain_dataflow/
     ├── nsys/
     ├── ncu/
     ├── manifests/
-    └── operator_dataflow_bottleneck.md
+    └── fusedop_dataflow_bottleneck.md
 ```
 
 Raw profiler artifacts不可覆盖；派生 VeloQ cache 不是第二 evidence source。

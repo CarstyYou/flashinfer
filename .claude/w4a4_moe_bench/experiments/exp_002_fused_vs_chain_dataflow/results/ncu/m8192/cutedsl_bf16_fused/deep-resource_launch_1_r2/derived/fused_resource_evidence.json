@@ -1,0 +1,500 @@
+{
+  "binary_resources": {
+    "actual_stack_frame_bytes_per_thread": 488,
+    "minimum_stack_bytes_per_thread": 488,
+    "registers_per_thread": 255,
+    "spillrefill_annotation_count": 190,
+    "static_local_bytes_outside_stack": 0,
+    "static_refill_width_bytes_per_lane": 488,
+    "static_shared_bytes": 1024,
+    "static_spillrefill_opcodes": {
+      "LDL.LU": 122,
+      "STL": 14,
+      "STL.64": 54
+    },
+    "static_store_width_bytes_per_lane": 488
+  },
+  "canonical_cubin_sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+  "cubin_sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+  "dispatch": {
+    "block": [
+      160,
+      1,
+      1
+    ],
+    "grid": [
+      1,
+      1,
+      110
+    ],
+    "kernel_demangled": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
+  },
+  "metrics": {
+    "achieved_occupancy_pct": {
+      "metric": "sm__warps_active.avg.pct_of_peak_sustained_active",
+      "unit": "%",
+      "value": 10.421329592587607
+    },
+    "active_warps_per_sm": {
+      "metric": "sm__warps_active.avg.per_cycle_active",
+      "unit": "warp",
+      "value": 5.002238204442052
+    },
+    "active_warps_per_smsp": {
+      "metric": "smsp__warps_active.avg.per_cycle_active",
+      "unit": "warp",
+      "value": 1.2494681173775628
+    },
+    "alu_pipe_active_active_cycle_pct": {
+      "metric": "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_active",
+      "unit": "%",
+      "value": 8.436110969769544
+    },
+    "alu_pipe_active_pct": {
+      "metric": "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 8.286243832921125
+    },
+    "aluheavy_pipe_active_pct": {
+      "metric": "sm__pipe_aluheavy_cycles_active.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 14.43616325731838
+    },
+    "compute_memory_throughput_pct": {
+      "metric": "gpu__compute_memory_throughput.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 41.34895821467568
+    },
+    "configured_stack_size": {
+      "metric": "launch__stack_size",
+      "unit": null,
+      "value": 1024.0
+    },
+    "dram_throughput_pct": {
+      "metric": "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 38.45750360713877
+    },
+    "dynamic_spill_refill_instructions": {
+      "metric": "sass__inst_executed_register_spilling_op_read",
+      "unit": "inst",
+      "value": 1237568
+    },
+    "dynamic_spill_store_instructions": {
+      "metric": "sass__inst_executed_register_spilling_op_write",
+      "unit": "inst",
+      "value": 689792
+    },
+    "eligible_warps_per_cycle": {
+      "metric": "smsp__warps_eligible.avg.per_cycle_active",
+      "unit": "warp",
+      "value": 0.20214627476852337
+    },
+    "fma_pipe_active_active_cycle_pct": {
+      "metric": "sm__pipe_fma_cycles_active.avg.pct_of_peak_sustained_active",
+      "unit": "%",
+      "value": 5.306867818411652
+    },
+    "fma_pipe_active_pct": {
+      "metric": "sm__pipe_fma_cycles_active.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 5.212591547221244
+    },
+    "fmaheavy_pipe_active_pct": {
+      "metric": "sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 9.17315395696176
+    },
+    "issue_active_active_cycle_pct": {
+      "metric": "smsp__issue_active.avg.pct_of_peak_sustained_active",
+      "unit": "%",
+      "value": 19.949892272874592
+    },
+    "issue_active_pct": {
+      "metric": "sm__issue_active.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 19.61271116647084
+    },
+    "l1tex_lsu_data_pipe_utilization_pct": {
+      "metric": "l1tex__data_pipe_lsu_wavefronts.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 35.675075610640675
+    },
+    "l1tex_throughput_active_pct": {
+      "metric": "l1tex__throughput.avg.pct_of_peak_sustained_active",
+      "unit": "%",
+      "value": 36.32030420231884
+    },
+    "l2_throughput_pct": {
+      "metric": "lts__throughput.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 41.34895821467568
+    },
+    "lsu_executed_pipe_utilization_active_cycle_pct": {
+      "metric": "sm__inst_executed_pipe_lsu.avg.pct_of_peak_sustained_active",
+      "unit": "%",
+      "value": 22.056021967819326
+    },
+    "lsu_executed_pipe_utilization_pct": {
+      "metric": "sm__inst_executed_pipe_lsu.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 21.664197716760047
+    },
+    "sm_throughput_pct": {
+      "metric": "sm__throughput.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 25.268139271275935
+    },
+    "tensor_hmma_qmma_omma_pipe_active_active_cycle_pct": {
+      "metric": "sm__pipe_tensor_subpipe_hmma_cycles_active.avg.pct_of_peak_sustained_active",
+      "unit": "%",
+      "value": 25.725145336077947
+    },
+    "tensor_hmma_qmma_omma_pipe_active_pct": {
+      "metric": "sm__pipe_tensor_subpipe_hmma_cycles_active.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 25.268139271275935
+    },
+    "tensor_imma_pipe_active_pct": {
+      "metric": "sm__pipe_tensor_subpipe_imma_cycles_active.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 0.0
+    },
+    "tensor_pipe_active_active_cycle_pct": {
+      "metric": "sm__pipe_tensor_cycles_active.avg.pct_of_peak_sustained_active",
+      "unit": "%",
+      "value": 25.725145336077947
+    },
+    "tensor_pipe_active_pct": {
+      "metric": "sm__pipe_tensor_cycles_active.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 25.268139271275935
+    },
+    "theoretical_occupancy_pct": {
+      "metric": "sm__maximum_warps_per_active_cycle_pct",
+      "unit": "%",
+      "value": 10.416666666666668
+    },
+    "tma_pipe_active_active_cycle_pct": {
+      "metric": "sm__pipe_tma_cycles_active.avg.pct_of_peak_sustained_active",
+      "unit": "%",
+      "value": 0.25163075462097745
+    },
+    "tma_pipe_active_pct": {
+      "metric": "sm__pipe_tma_cycles_active.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 0.24716054543653343
+    },
+    "warp_latency_per_issued_instruction": {
+      "metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "unit": "cycle",
+      "value": 6.263031901562876
+    },
+    "xu_executed_pipe_utilization_active_cycle_pct": {
+      "metric": "sm__inst_executed_pipe_xu.avg.pct_of_peak_sustained_active",
+      "unit": "%",
+      "value": 1.6411106610768122
+    },
+    "xu_executed_pipe_utilization_pct": {
+      "metric": "sm__inst_executed_pipe_xu.avg.pct_of_peak_sustained_elapsed",
+      "unit": "%",
+      "value": 1.6119564030415223
+    }
+  },
+  "non_additivity": [
+    "Tensor total contains its tensor subpipes.",
+    "ALU/FMA aggregates and ALUHeavy/FMAHeavy drill-downs are not additive.",
+    "Compute-memory, DRAM, L2, L1TEX, LSU, and TMA utilization are observation points, not additive traffic.",
+    "The selected stall reason is a non-stall baseline."
+  ],
+  "output_hash_audit": {
+    "canonical_exact_output_hash_is_stable": false,
+    "canonical_profile_output_sha256_values": [
+      "04206f9778ed683a4f77761a568ebda74c4113d53716d41ead2ea8c57f832d56",
+      "a5376e39fda8ba406b3f4caf832ed6d5c2a2aa3bb5c2a86c64d8cee76c495fb6"
+    ],
+    "followup_output_sha256": "5617486039e5c03f933fc076443a0cc13e15eca6702d812e7537dd5e8de489bb",
+    "interpretation": "Exact output SHA is not an equivalence gate because two canonical profiles already differ; fixture/weights/JIT prerequisites, output shape-dtype-finite validation, exact cubin, and dispatch are the accepted diagnostic-profile gates."
+  },
+  "profile_overlay_drift": {
+    "canonical_prerequisites_revalidated": [
+      "paired correctness gate",
+      "per-arm oracle gate",
+      "fixture manifest",
+      "canonical weights/scales",
+      "JIT artifact manifest",
+      "benchmark row identity and stability",
+      "runtime software and GPU identity"
+    ],
+    "changed_overlays": {
+      ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/build_result.py": {
+        "actual_sha256": "e9cf0c612f2951412621158645a89756be5897ebd545a4febd92d1901b1986ea",
+        "canonical_sha256": "e7526f8527124f4743dabd70f8629f8d74b0697dbe6c33aa6c46aed1ac2193ce"
+      },
+      ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/fixture.py": {
+        "actual_sha256": "9c12529c20d99009ea9dfd846193337fcaf533f4b688d60b773661fe084fe0d2",
+        "canonical_sha256": "cffebe0a6c006425d058d6803be45ed373a4ebd5fcda0eb99ef019f05dc58eac"
+      },
+      ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/plan.md": {
+        "actual_sha256": "46bf545d61fbcd6ed2541be42b7fc0ff58db6da8c8fbff5482d7b67e7523c77a",
+        "canonical_sha256": "59565c324042fdfa4e46c9ac998d740c6851f03b15bb401ec0a8da81229ae4c9"
+      },
+      ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/run_benchmark.sh": {
+        "actual_sha256": "19966e1d2864aca19998b70c8998e3de16d87c64316bf0a0980668016339868c",
+        "canonical_sha256": "7881c4b58759d5b1934c942501f58ede122babb0270d7657ce37e362c8f0076f"
+      },
+      ".claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/run_exp002.py": {
+        "actual_sha256": "1f1e78702ba56f48a87b4166e81d49b8125c669593bbd315c3635835ee9a1c48",
+        "canonical_sha256": "2ece3b510a65f784e6ca02893218c86755cdf8bc0f3171236fad0585599477c3"
+      }
+    },
+    "post_capture_gates": [
+      "profile output SHA-256 equals canonical profile output",
+      "captured cubin SHA-256 equals canonical deep-profile cubin",
+      "kernel name/grid/block equal canonical target"
+    ],
+    "schema": "exp002.profile-followup-overlay-drift.v1",
+    "scope": {
+      "arm": "cutedsl_bf16_fused",
+      "m": 8192
+    },
+    "status": "accepted_for_diagnostic_profile",
+    "unchanged_source_identity": {
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "flashinfer_commit": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+      "source_status": "?? .claude/w4a4_moe_bench/cutedsl_460_requirements.lock.txt\n?? .claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/"
+    }
+  },
+  "report_sha256": "b916470c29254ead5f6a4e6e98a33d1bea6bf0c8de398d35dbc17865652ab6fe",
+  "schema": "exp002.fused-resource-ncu-evidence.v1",
+  "scope": {
+    "arm": "cutedsl_bf16_fused",
+    "m": 8192
+  },
+  "stall_cycles_per_issued_instruction": {
+    "barrier": {
+      "metric": "smsp__average_warps_issue_stalled_barrier_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 0.35647723549069804
+    },
+    "branch_resolving": {
+      "metric": "smsp__average_warps_issue_stalled_branch_resolving_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 0.05385724728811313
+    },
+    "dispatch_stall": {
+      "metric": "smsp__average_warps_issue_stalled_dispatch_stall_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 0.033650283846844126
+    },
+    "drain": {
+      "metric": "smsp__average_warps_issue_stalled_drain_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 2.5348613067302543e-06
+    },
+    "lg_throttle": {
+      "metric": "smsp__average_warps_issue_stalled_lg_throttle_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 0.029716677802399383
+    },
+    "long_scoreboard": {
+      "metric": "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 1.1884142642025528
+    },
+    "math_pipe_throttle": {
+      "metric": "smsp__average_warps_issue_stalled_math_pipe_throttle_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 0.014670857354847884
+    },
+    "membar": {
+      "metric": "smsp__average_warps_issue_stalled_membar_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 0.00639870052621912
+    },
+    "mio_throttle": {
+      "metric": "smsp__average_warps_issue_stalled_mio_throttle_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 0.13768267661467862
+    },
+    "misc": {
+      "metric": "smsp__average_warps_issue_stalled_misc_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 0.0020726560913975588
+    },
+    "no_instruction": {
+      "metric": "smsp__average_warps_issue_stalled_no_instruction_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 0.059661932395006056
+    },
+    "not_selected": {
+      "metric": "smsp__average_warps_issue_stalled_not_selected_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 0.013276998878836786
+    },
+    "selected": {
+      "metric": "smsp__average_warps_issue_stalled_selected_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 0.999972687580008
+    },
+    "short_scoreboard": {
+      "metric": "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 0.6110792865288928
+    },
+    "sleeping": {
+      "metric": "smsp__average_warps_issue_stalled_sleeping_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 0.9247735566534604
+    },
+    "tex_throttle": {
+      "metric": "smsp__average_warps_issue_stalled_tex_throttle_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 0.0
+    },
+    "wait": {
+      "metric": "smsp__average_warps_issue_stalled_wait_per_issue_active.ratio",
+      "raw_ncu_unit": "inst",
+      "unit": "warp cycle / issued instruction",
+      "value": 1.829777830750034
+    }
+  },
+  "stall_pct_of_active_warp_cycles": {
+    "barrier": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_barrier_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 5.691767838540672
+    },
+    "branch_resolving": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_branch_resolving_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 0.8599229276586249
+    },
+    "dispatch_stall": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_dispatch_stall_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 0.5372842478807595
+    },
+    "drain": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_drain_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 4.047338967086701e-05
+    },
+    "lg_throttle": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_lg_throttle_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 0.47447750976621866
+    },
+    "long_scoreboard": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 18.97506324222931
+    },
+    "math_pipe_throttle": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_math_pipe_throttle_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 0.23424529182402729
+    },
+    "membar": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_membar_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 0.1021661812807051
+    },
+    "mio_throttle": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_mio_throttle_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 2.198339059718366
+    },
+    "misc": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_misc_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 0.03309349407721121
+    },
+    "no_instruction": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_no_instruction_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 0.952604638340067
+    },
+    "not_selected": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_not_selected_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 0.21198996089296057
+    },
+    "selected": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_selected_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 15.966271660383448
+    },
+    "short_scoreboard": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 9.756924379970094
+    },
+    "sleeping": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_sleeping_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 14.765589113839459
+    },
+    "tex_throttle": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_tex_throttle_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 0.0
+    },
+    "wait": {
+      "authority": "stall ratio / total warp latency",
+      "denominator_metric": "smsp__average_warp_latency_per_inst_issued.ratio",
+      "numerator_metric": "smsp__average_warps_issue_stalled_wait_per_issue_active.ratio",
+      "unit": "% of active-warp cycles",
+      "value": 29.21552787066966
+    }
+  },
+  "status": "vetted_with_profile_overlay_drift_disclosed"
+}

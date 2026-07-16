@@ -1,0 +1,73 @@
+category,field,authority,value,unit
+metric,achieved_occupancy_pct,sm__warps_active.avg.pct_of_peak_sustained_active,10.421329592587607,%
+metric,active_warps_per_sm,sm__warps_active.avg.per_cycle_active,5.002238204442052,warp
+metric,active_warps_per_smsp,smsp__warps_active.avg.per_cycle_active,1.2494681173775628,warp
+metric,alu_pipe_active_active_cycle_pct,sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_active,8.436110969769544,%
+metric,alu_pipe_active_pct,sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed,8.286243832921125,%
+metric,aluheavy_pipe_active_pct,sm__pipe_aluheavy_cycles_active.avg.pct_of_peak_sustained_elapsed,14.43616325731838,%
+metric,compute_memory_throughput_pct,gpu__compute_memory_throughput.avg.pct_of_peak_sustained_elapsed,41.34895821467568,%
+metric,configured_stack_size,launch__stack_size,1024.0,
+metric,dram_throughput_pct,gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed,38.45750360713877,%
+metric,dynamic_spill_refill_instructions,sass__inst_executed_register_spilling_op_read,1237568,inst
+metric,dynamic_spill_store_instructions,sass__inst_executed_register_spilling_op_write,689792,inst
+metric,eligible_warps_per_cycle,smsp__warps_eligible.avg.per_cycle_active,0.20214627476852337,warp
+metric,fma_pipe_active_active_cycle_pct,sm__pipe_fma_cycles_active.avg.pct_of_peak_sustained_active,5.306867818411652,%
+metric,fma_pipe_active_pct,sm__pipe_fma_cycles_active.avg.pct_of_peak_sustained_elapsed,5.212591547221244,%
+metric,fmaheavy_pipe_active_pct,sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed,9.17315395696176,%
+metric,issue_active_active_cycle_pct,smsp__issue_active.avg.pct_of_peak_sustained_active,19.949892272874592,%
+metric,issue_active_pct,sm__issue_active.avg.pct_of_peak_sustained_elapsed,19.61271116647084,%
+metric,l1tex_lsu_data_pipe_utilization_pct,l1tex__data_pipe_lsu_wavefronts.avg.pct_of_peak_sustained_elapsed,35.675075610640675,%
+metric,l1tex_throughput_active_pct,l1tex__throughput.avg.pct_of_peak_sustained_active,36.32030420231884,%
+metric,l2_throughput_pct,lts__throughput.avg.pct_of_peak_sustained_elapsed,41.34895821467568,%
+metric,lsu_executed_pipe_utilization_active_cycle_pct,sm__inst_executed_pipe_lsu.avg.pct_of_peak_sustained_active,22.056021967819326,%
+metric,lsu_executed_pipe_utilization_pct,sm__inst_executed_pipe_lsu.avg.pct_of_peak_sustained_elapsed,21.664197716760047,%
+metric,sm_throughput_pct,sm__throughput.avg.pct_of_peak_sustained_elapsed,25.268139271275935,%
+metric,tensor_hmma_qmma_omma_pipe_active_active_cycle_pct,sm__pipe_tensor_subpipe_hmma_cycles_active.avg.pct_of_peak_sustained_active,25.725145336077947,%
+metric,tensor_hmma_qmma_omma_pipe_active_pct,sm__pipe_tensor_subpipe_hmma_cycles_active.avg.pct_of_peak_sustained_elapsed,25.268139271275935,%
+metric,tensor_imma_pipe_active_pct,sm__pipe_tensor_subpipe_imma_cycles_active.avg.pct_of_peak_sustained_elapsed,0.0,%
+metric,tensor_pipe_active_active_cycle_pct,sm__pipe_tensor_cycles_active.avg.pct_of_peak_sustained_active,25.725145336077947,%
+metric,tensor_pipe_active_pct,sm__pipe_tensor_cycles_active.avg.pct_of_peak_sustained_elapsed,25.268139271275935,%
+metric,theoretical_occupancy_pct,sm__maximum_warps_per_active_cycle_pct,10.416666666666668,%
+metric,tma_pipe_active_active_cycle_pct,sm__pipe_tma_cycles_active.avg.pct_of_peak_sustained_active,0.25163075462097745,%
+metric,tma_pipe_active_pct,sm__pipe_tma_cycles_active.avg.pct_of_peak_sustained_elapsed,0.24716054543653343,%
+metric,warp_latency_per_issued_instruction,smsp__average_warp_latency_per_inst_issued.ratio,6.263031901562876,cycle
+metric,xu_executed_pipe_utilization_active_cycle_pct,sm__inst_executed_pipe_xu.avg.pct_of_peak_sustained_active,1.6411106610768122,%
+metric,xu_executed_pipe_utilization_pct,sm__inst_executed_pipe_xu.avg.pct_of_peak_sustained_elapsed,1.6119564030415223,%
+stall,barrier,smsp__average_warps_issue_stalled_barrier_per_issue_active.ratio,0.35647723549069804,warp cycle / issued instruction
+stall,branch_resolving,smsp__average_warps_issue_stalled_branch_resolving_per_issue_active.ratio,0.05385724728811313,warp cycle / issued instruction
+stall,dispatch_stall,smsp__average_warps_issue_stalled_dispatch_stall_per_issue_active.ratio,0.033650283846844126,warp cycle / issued instruction
+stall,drain,smsp__average_warps_issue_stalled_drain_per_issue_active.ratio,2.5348613067302543e-06,warp cycle / issued instruction
+stall,lg_throttle,smsp__average_warps_issue_stalled_lg_throttle_per_issue_active.ratio,0.029716677802399383,warp cycle / issued instruction
+stall,long_scoreboard,smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio,1.1884142642025528,warp cycle / issued instruction
+stall,math_pipe_throttle,smsp__average_warps_issue_stalled_math_pipe_throttle_per_issue_active.ratio,0.014670857354847884,warp cycle / issued instruction
+stall,membar,smsp__average_warps_issue_stalled_membar_per_issue_active.ratio,0.00639870052621912,warp cycle / issued instruction
+stall,mio_throttle,smsp__average_warps_issue_stalled_mio_throttle_per_issue_active.ratio,0.13768267661467862,warp cycle / issued instruction
+stall,misc,smsp__average_warps_issue_stalled_misc_per_issue_active.ratio,0.0020726560913975588,warp cycle / issued instruction
+stall,no_instruction,smsp__average_warps_issue_stalled_no_instruction_per_issue_active.ratio,0.059661932395006056,warp cycle / issued instruction
+stall,not_selected,smsp__average_warps_issue_stalled_not_selected_per_issue_active.ratio,0.013276998878836786,warp cycle / issued instruction
+stall,selected,smsp__average_warps_issue_stalled_selected_per_issue_active.ratio,0.999972687580008,warp cycle / issued instruction
+stall,short_scoreboard,smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio,0.6110792865288928,warp cycle / issued instruction
+stall,sleeping,smsp__average_warps_issue_stalled_sleeping_per_issue_active.ratio,0.9247735566534604,warp cycle / issued instruction
+stall,tex_throttle,smsp__average_warps_issue_stalled_tex_throttle_per_issue_active.ratio,0.0,warp cycle / issued instruction
+stall,wait,smsp__average_warps_issue_stalled_wait_per_issue_active.ratio,1.829777830750034,warp cycle / issued instruction
+stall_pct,barrier,stall ratio / total warp latency,5.691767838540672,% of active-warp cycles
+stall_pct,branch_resolving,stall ratio / total warp latency,0.8599229276586249,% of active-warp cycles
+stall_pct,dispatch_stall,stall ratio / total warp latency,0.5372842478807595,% of active-warp cycles
+stall_pct,drain,stall ratio / total warp latency,4.047338967086701e-05,% of active-warp cycles
+stall_pct,lg_throttle,stall ratio / total warp latency,0.47447750976621866,% of active-warp cycles
+stall_pct,long_scoreboard,stall ratio / total warp latency,18.97506324222931,% of active-warp cycles
+stall_pct,math_pipe_throttle,stall ratio / total warp latency,0.23424529182402729,% of active-warp cycles
+stall_pct,membar,stall ratio / total warp latency,0.1021661812807051,% of active-warp cycles
+stall_pct,mio_throttle,stall ratio / total warp latency,2.198339059718366,% of active-warp cycles
+stall_pct,misc,stall ratio / total warp latency,0.03309349407721121,% of active-warp cycles
+stall_pct,no_instruction,stall ratio / total warp latency,0.952604638340067,% of active-warp cycles
+stall_pct,not_selected,stall ratio / total warp latency,0.21198996089296057,% of active-warp cycles
+stall_pct,selected,stall ratio / total warp latency,15.966271660383448,% of active-warp cycles
+stall_pct,short_scoreboard,stall ratio / total warp latency,9.756924379970094,% of active-warp cycles
+stall_pct,sleeping,stall ratio / total warp latency,14.765589113839459,% of active-warp cycles
+stall_pct,tex_throttle,stall ratio / total warp latency,0.0,% of active-warp cycles
+stall_pct,wait,stall ratio / total warp latency,29.21552787066966,% of active-warp cycles
+binary,actual_stack_frame_bytes_per_thread,cuobjdump/ELF,488,B/thread
+binary,static_spill_refill_instructions,ELF SpillRefill + SASS,190,static inst
+binary,static_spill_store_instructions,ELF SpillRefill + SASS,68,static inst
+binary,static_spill_refill_load_instructions,ELF SpillRefill + SASS,122,static inst

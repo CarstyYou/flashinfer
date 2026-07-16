@@ -1,0 +1,1 @@
+cuobjdump warning : Deprecated ELF section name .note.nv.cuver

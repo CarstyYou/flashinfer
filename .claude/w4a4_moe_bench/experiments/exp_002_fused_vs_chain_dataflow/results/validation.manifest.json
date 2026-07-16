@@ -1,0 +1,187 @@
+{
+  "schema": "exp002.agent-validation-manifest.v1",
+  "reader_facing": false,
+  "purpose": "Agent-only entry point for validating comparison identity, toolchain provenance, correctness, measurement protocol, benchmark stability, and profiler provenance before accepting report claims.",
+  "comparison_group_id": "exp002_cutedsl_vs_cutlass_bf16",
+  "rerun_id": "exp002-dsl460-20260716T0310Z-r1",
+  "validation_status": {
+    "overall": "pass_with_limits",
+    "paired_comparison": "pass",
+    "paired_correctness": "pass",
+    "benchmark_stability": "pass",
+    "toolchain_identity": "identity-incomplete/reconstructed",
+    "allowed_claim_scope": "same-rerun implementation-confounded comparison",
+    "prohibited_claims": [
+      "compiler causality",
+      "cross-build reuse",
+      "mixing with the superseded CuteDSL 4.5.2 run"
+    ]
+  },
+  "canonical_inputs": {
+    "evidence_identity": {
+      "path": "evidence.identity.json",
+      "file_sha256": "26a35626c6b84e475ef1463a8b4af72723c718da606562438a73486b343d30ca"
+    },
+    "environment_lock": {
+      "path": "environment-locks/d1479643a41cb9ad8787e7b58844800265d6a196016e31a63a82bc60a29e0f2d.json",
+      "file_sha256": "dea189009776c022af2c3e5a11ce4a38954e2c9161ebfe6b191089c2dbf67510",
+      "semantic_fingerprint_sha256": "d1479643a41cb9ad8787e7b58844800265d6a196016e31a63a82bc60a29e0f2d"
+    },
+    "artifact_lock": {
+      "path": "artifact-locks/80dfb9707ecb4d7c79ce408c150ae22e62a564ed38c4b5d3ca57673fad8c8e44.json",
+      "file_sha256": "9483d3913c657f64787ae38db046d0900c6aa0b0f1add1b9a050972293508bcd",
+      "semantic_fingerprint_sha256": "80dfb9707ecb4d7c79ce408c150ae22e62a564ed38c4b5d3ca57673fad8c8e44"
+    },
+    "toolchain_identity": {
+      "path": "toolchain_identity.reconstructed.json",
+      "file_sha256": "1496937bf6f1c090658dea2e03e37f94e4eeb5c2983278177c7e854abb527f66",
+      "required_status": "identity-incomplete"
+    },
+    "runtime_manifest": {
+      "path": "manifests/runtime.json",
+      "file_sha256": "9df68a58b708416c8666e9093c981999cd65b9cfbfb176d51a8f14e966f33cfa"
+    },
+    "benchmark_command": {
+      "path": "manifests/benchmark_command.txt",
+      "file_sha256": "f852e5571682275c21e15f781830d433ef913701da24014e3db38d11ea8b2a77"
+    },
+    "container_image_id": {
+      "path": "manifests/docker-image-id.txt",
+      "file_sha256": "0bc06ec1fd36e6b9b7127f1283cbf68cc7911a7c55332ec7c7e0f775ca4356ca"
+    },
+    "jit_artifacts": {
+      "path": "manifests/jit_artifacts.json",
+      "file_sha256": "b8e903c25cdbb6dcec0ce8cf4832b7f0e518abeedd8e6c4465af89dd2f809af4"
+    },
+    "correctness": {
+      "path": "correctness.json",
+      "file_sha256": "2a7430beba70c3f689c8ed6b813bfb5a8605decd1a201788ecd2cef5bfca4ba8"
+    },
+    "fixture_m256": {
+      "path": "fixtures/m256_manifest.json",
+      "file_sha256": "29118569bf53b3a48067508cc3dc6873aa15d40ae4fd167532ff215029ecc884"
+    },
+    "fixture_m1024": {
+      "path": "fixtures/m1024_manifest.json",
+      "file_sha256": "8b9a67df0581843298f2e64656b90f9db3097eb980f1bb5d349e26526febdec4"
+    },
+    "fixture_m8192": {
+      "path": "fixtures/m8192_manifest.json",
+      "file_sha256": "61d1eb789226f1ab022755be1cfb0562272a698bbe922a0ce156ee9b1f0af382"
+    },
+    "protocol_lock": {
+      "path": "protocol-locks/0fbfc04cb17eb09e82ffc45f0a040954692e184b4fe31162d6cac6cb518e438b.json",
+      "file_sha256": "a427ad9046fadcc82ffe07b71b8f41bdc3a9473a82c89c0f7297ea484bf94f37",
+      "semantic_fingerprint_sha256": "0fbfc04cb17eb09e82ffc45f0a040954692e184b4fe31162d6cac6cb518e438b"
+    },
+    "benchmark_raw": {
+      "path": "benchmark_raw.csv",
+      "file_sha256": "cf9dfe9048fe1ac03e717c5e02f78c3a906cec960c816b4702408f4b8b4167aa"
+    },
+    "benchmark_summary": {
+      "path": "benchmark_summary.csv",
+      "file_sha256": "ca3fcfc2262c1bb734876d9bc0601b29db700073f4bb9aa3fe6144b9b4b0f74f"
+    },
+    "comparison": {
+      "path": "comparison.csv",
+      "file_sha256": "1c91971e3f5dc49f9606904a5ab21f43f5ad39b476f15c4447f3c8244af55ce2"
+    },
+    "profile_m256_cutedsl": {
+      "path": "manifests/profile_m256_cutedsl_bf16_fused.json",
+      "file_sha256": "397801a4f6a1199b716d067e5a1e401f5f47f3774d364041c960880ffb665c14"
+    },
+    "profile_m256_cutlass": {
+      "path": "manifests/profile_m256_cutlass_bf16_chain.json",
+      "file_sha256": "8dbba35f79c11c2fe97e474d40339b1d7023a785a90f6ab046a13515b29966bd"
+    },
+    "profile_m8192_cutedsl": {
+      "path": "manifests/profile_m8192_cutedsl_bf16_fused.json",
+      "file_sha256": "658df1a5eb3a6ff38a5861446ce950f0f960504871cd15a4343d44e1adbed251"
+    },
+    "profile_m8192_cutlass": {
+      "path": "manifests/profile_m8192_cutlass_bf16_chain.json",
+      "file_sha256": "a93525fd90209746e9d516be8baf6775a918b3185569b8c97517097a39423d82"
+    },
+    "operator_ncu_rollup": {
+      "path": "ncu/operator_traffic_v2.json",
+      "file_sha256": "2e251e5cb6675782ce983df8b328676f10e3aefc991642ddd5ec2c9912570cd8"
+    },
+    "operator_ncu_comparison": {
+      "path": "ncu/operator_comparison_v2.csv",
+      "file_sha256": "0ce4e28c2709ae24cbe2f46be4c887ae1dd16b49258dd173b06bee7fa2985a3c"
+    }
+  },
+  "required_assertions": [
+    {
+      "id": "canonical-identity-binding",
+      "check": "correctness.json#/evidence_identity equals evidence.identity.json#"
+    },
+    {
+      "id": "paired-correctness-gate",
+      "check": "correctness.json#/all_paired_gates_pass equals true; every case 256, 1024, 8192 has paired_gate_pass=true; every arm has formal_pass=true; fixture hashes match their dedicated manifests"
+    },
+    {
+      "id": "identity-digest-binding",
+      "check": "environment, protocol, artifact, comparison_group_id, rerun_id, and per-arm artifact fingerprints match evidence.identity.json in every consumed benchmark/profile artifact"
+    },
+    {
+      "id": "benchmark-stability-gate",
+      "check": "benchmark_raw.csv contains 3 M x 2 arms x 5 repeats; paired order and identity are valid; summary statistics are reproducible from raw; every summary row has stable_le_5_percent=True; comparison speedup is reproducible from summary and every comparison row has formal_comparison=True"
+    },
+    {
+      "id": "toolchain-claim-boundary",
+      "check": "toolchain_identity.reconstructed.json#/status remains identity-incomplete; reject compiler-causality and cross-build claims"
+    },
+    {
+      "id": "profiler-scope-binding",
+      "check": "all consumed NSys and NCU profile manifests match the canonical comparison/rerun/environment/protocol/artifact identity before their data is used"
+    }
+  ],
+  "profile_manifest_globs": [
+    "nsys/**/profile_manifest.json",
+    "ncu/**/profile_manifest.json"
+  ],
+  "evidence_scope_contract": {
+    "timing_authority": {
+      "uninstrumented_operator": "benchmark_raw.csv and benchmark_summary.csv",
+      "observed_gpu_timeline": "NSys graph replay window",
+      "prohibited": "NCU duration is not a production performance-time authority"
+    },
+    "operator_range_ncu": {
+      "capture": "app-range --cache-control all; five replay passes",
+      "coverage": "one complete CUDA Graph replay per arm, including 2 fused or 9 chain material kernels",
+      "allowed": "compatible additive DRAM, L2, request, local-address-space, TMA, and dynamic-instruction counters",
+      "prohibited": "single-phase timing/rate/SOL/occupancy/stall attribution"
+    },
+    "deep_launch_ncu": {
+      "capture": "kernel replay --graph-profiling node --cache-control all",
+      "coverage": "fused main kernel and selected chain launches only",
+      "allowed": "launch-local resources, rates, SOL, stalls, cadence, and source/SASS evidence",
+      "prohibited": "summing node-replay DRAM/L2 into an operator total or assigning a fused whole-kernel value to an internal phase"
+    },
+    "nsys": {
+      "coverage": "one complete CUDA Graph replay",
+      "allowed": "actual kernel nodes, GPU intervals, overlap/gap, and graph-level host correlation",
+      "prohibited": "TensorCore/stall attribution or fused-internal phase duration"
+    },
+    "memory_observation_points": {
+      "DRAM": "physical device-DRAM/off-chip read and write bytes",
+      "L2": "L2 sector traffic using the total authority counter",
+      "LSU_global": "L1TEX LSU T-stage sectorized global request footprint; excludes TMA",
+      "TMA": "TMA global-interface traffic; separate from LSU",
+      "local": "local-address-space request footprint; not DRAM bytes or source-object spill proof",
+      "rule": "Never add DRAM, L2, LSU global, TMA, or local into one total-global/GMEM quantity"
+    },
+    "rollup_rules": {
+      "sum": "only compatible additive counts over non-duplicated scope",
+      "timeline_union": "duration, overlap, and gaps from one declared NSys window",
+      "no_rollup": "occupancy, SOL, IPC, eligible warps, stall percentages, cache hit rate, and other launch-local ratios"
+    }
+  },
+  "agent_policy": [
+    "Validate every canonical input SHA256 before reading derived claims.",
+    "Treat a missing artifact, digest mismatch, failed assertion, or stale profile identity as a validation failure; do not ask the report reader to adjudicate it.",
+    "Keep detailed environment, toolchain, correctness, and protocol evidence out of the reader-facing bottleneck report.",
+    "Only expose evidence-identity limitations in the report if they directly invalidate or qualify a displayed conclusion."
+  ]
+}
