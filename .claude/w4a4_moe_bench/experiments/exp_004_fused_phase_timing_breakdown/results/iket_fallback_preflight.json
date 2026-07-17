@@ -1,0 +1,39 @@
+{
+  "admission": "admitted after the primary sparse clock probe failed its resource/spill and runtime event gates; execution is blocked because the audited provider is unavailable",
+  "coarse_overlay": {
+    "forbidden": "old per-OMMA/per-S2R/per-wait cadence overlay",
+    "required_ranges": [
+      "task_envelope",
+      "fc1_gate",
+      "fc1_up",
+      "swiglu_q1",
+      "fc2_gemm",
+      "fc2_epilogue_scatter",
+      "gate_tma",
+      "gate_pass_wait",
+      "up_tma",
+      "down_tma",
+      "final_pass_wait"
+    ],
+    "status": "not_built_provider_unavailable"
+  },
+  "kdk_safe_capture": {
+    "path": "/home/scratch.xiy_gpu/kernel-dev-kit/breakdown/iket_safe_capture.py",
+    "sha256": "9accdb91f6608b63cea7b901c5a30a79f54a0dde29567c63352189ae7320e6f8"
+  },
+  "provider": {
+    "observed_version": null,
+    "ready": false,
+    "requested": "run-iket",
+    "required_audited_version": "0.7.10",
+    "resolved": null
+  },
+  "required_if_admitted": [
+    "IKET-compiler normal/no-marker identity",
+    "IKET-compiler coarse-marker candidate identity",
+    "fresh KDK iket_safe_capture.py output",
+    "same resource/spill/SASS/work/correctness gates as primary"
+  ],
+  "schema": "exp004.iket-fallback-preflight.v1",
+  "status": "blocked_provider_unavailable_or_version_drift"
+}

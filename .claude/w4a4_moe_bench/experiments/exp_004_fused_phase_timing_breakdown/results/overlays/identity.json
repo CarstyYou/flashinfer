@@ -1,0 +1,44 @@
+{
+  "arms": {
+    "measurement_no_marker": {
+      "dispatch_byte_identical_to_production": false,
+      "dispatch_diff_sha256": "b24aa61c2d855c0a7c12b7d11b989c91838f14c3242d4f5ca49e4575a01042e5",
+      "dispatch_sha256": "5ed9755824fee7d44fb44539064a41e42c39ccf91ccbd9aa5129c12dae7a062d",
+      "kernel_byte_identical_to_production": false,
+      "kernel_diff_sha256": "afd67b1d968e83601c7a5ad0397051bd353efdfe7355c08098cd33e4e46fc1ea",
+      "kernel_sha256": "d782181afa5a85dcf7dcd1098d4352097f7b5329c63e542c952ecdca41580832",
+      "probe_enabled": false
+    },
+    "normal_no_marker": {
+      "dispatch_byte_identical_to_production": true,
+      "dispatch_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "dispatch_sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4",
+      "kernel_byte_identical_to_production": true,
+      "kernel_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+      "probe_enabled": false
+    },
+    "probe_candidate": {
+      "dispatch_byte_identical_to_production": false,
+      "dispatch_diff_sha256": "dfc19d0ededcf101b40880d645f4e9806b613887e4e8aae9daf557f3223d84b6",
+      "dispatch_sha256": "77c31a068c1ba6df31057e446971ecc70e22f5b05604943c5711a874bd515c84",
+      "kernel_byte_identical_to_production": false,
+      "kernel_diff_sha256": "869a4d88eaec0a5c169bdf436363adfc70609b772d5ae716ea3446204a822105",
+      "kernel_sha256": "d782181afa5a85dcf7dcd1098d4352097f7b5329c63e542c952ecdca41580832",
+      "probe_enabled": true
+    }
+  },
+  "probe_abi": {
+    "consumer_intervals": 37,
+    "consumer_warps": 4,
+    "edges": 2,
+    "ticks_per_task": 306,
+    "w4_intervals": 5
+  },
+  "production": {
+    "dispatch_sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4",
+    "kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+    "wrapper_sha256": "bcac806795c035decd0773f4f801d477e7ebf14c1d67c3e49eee42ee0579c0a4"
+  },
+  "schema": "exp004.overlays.v1"
+}

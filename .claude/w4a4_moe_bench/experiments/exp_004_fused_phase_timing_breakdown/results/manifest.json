@@ -1,0 +1,199 @@
+{
+  "arms": {
+    "measurement_no_marker": {
+      "artifact_hashes": {
+        "cubin": "e2a923e0e3f85d83afc1e229de8e4d429b177b5ffef93ef2eaf316ca3748f04e",
+        "elf_dump": "1533fd3ad87a72779f3f036986f49ff8e862b695f863b31f69e0064be39ca5b3",
+        "jit_artifact_set": "4bf44d1d6b203875609c1eaa137e9fef1b5f3b4dfb1207965d20a89eb27c33b8",
+        "ptx": "6db8b83065e6f52922d1c0f4804f8c1457392dbe8108fabd56c4f18612c74b7d",
+        "resource_dump": "a46cba341c7d0e76d28653d8327f2e3971c51768296ed90cee1f853f4b7bebce",
+        "sass": "34b4c38161642a27ca6b4ec41ffad0bd70f6ff99fd8118997a4b2416c5e3abba"
+      },
+      "cubin_sha256": "e2a923e0e3f85d83afc1e229de8e4d429b177b5ffef93ef2eaf316ca3748f04e",
+      "local_sass": {
+        "ldl_instruction_count": 122,
+        "spill_annotation_count": 190,
+        "stl_instruction_count": 68
+      },
+      "resource": {
+        "registers_per_thread": 255,
+        "stack_bytes_per_thread": 488,
+        "static_local_bytes_outside_stack": 0,
+        "static_shared_bytes_per_cta": 1024
+      },
+      "sass_sha256": "34b4c38161642a27ca6b4ec41ffad0bd70f6ff99fd8118997a4b2416c5e3abba",
+      "semantic_projection": {
+        "atomg": 9,
+        "bar": 34,
+        "ldg": 53,
+        "ldsm": 200,
+        "omma": 896,
+        "redg": 4,
+        "utmaldg": 40
+      }
+    },
+    "normal_no_marker": {
+      "artifact_hashes": {
+        "cubin": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+        "elf_dump": "ef168f380e15817765a9b35cd309ca9a29ae02f1ade794094963c490e69cd055",
+        "jit_artifact_set": "4a4b2aafc209e6bc884113e1494509b9d98fd5de31eb1e98bf020f38806ea61d",
+        "ptx": "d4d848e3b34963584e63c3cde91acc57a61389898e3f3a157b62da4be5c147ff",
+        "resource_dump": "1d1049159ba3812731e8700736c6c70dbb332065bd269c18208a1cf1410c7d64",
+        "sass": "34b4c38161642a27ca6b4ec41ffad0bd70f6ff99fd8118997a4b2416c5e3abba"
+      },
+      "cubin_sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+      "local_sass": {
+        "ldl_instruction_count": 122,
+        "spill_annotation_count": 190,
+        "stl_instruction_count": 68
+      },
+      "resource": {
+        "registers_per_thread": 255,
+        "stack_bytes_per_thread": 488,
+        "static_local_bytes_outside_stack": 0,
+        "static_shared_bytes_per_cta": 1024
+      },
+      "sass_sha256": "34b4c38161642a27ca6b4ec41ffad0bd70f6ff99fd8118997a4b2416c5e3abba",
+      "semantic_projection": {
+        "atomg": 9,
+        "bar": 34,
+        "ldg": 53,
+        "ldsm": 200,
+        "omma": 896,
+        "redg": 4,
+        "utmaldg": 40
+      }
+    },
+    "probe_candidate": {
+      "artifact_hashes": {
+        "cubin": "430d6049d67287e6e0c41e5e0e833c7e0529b520c875dd26e783afeb84aef5df",
+        "elf_dump": "6b391d486447c0f2829bf3de1dcfea8098b575b3fb71e5a2877aada02bf612e1",
+        "jit_artifact_set": "5c4be3b1455783b95808be23e37b23adf03a9e208bad7eb6079013cb422d3d65",
+        "ptx": "d71c92caeb21b59ed9a45bd37742a0e834632050b46889f050e48306444dc2dd",
+        "resource_dump": "7ac23639df4f03f859fccfe2e26523aa6c7995e7784ffd671b17fd9ea7342351",
+        "sass": "2fa52b9b9405ed019939f65cec766a088651fa593a1089ee119c8bfa36b6f795"
+      },
+      "cubin_sha256": "430d6049d67287e6e0c41e5e0e833c7e0529b520c875dd26e783afeb84aef5df",
+      "local_sass": {
+        "ldl_instruction_count": 132,
+        "spill_annotation_count": 196,
+        "stl_instruction_count": 64
+      },
+      "resource": {
+        "registers_per_thread": 255,
+        "stack_bytes_per_thread": 456,
+        "static_local_bytes_outside_stack": 0,
+        "static_shared_bytes_per_cta": 1024
+      },
+      "sass_sha256": "2fa52b9b9405ed019939f65cec766a088651fa593a1089ee119c8bfa36b6f795",
+      "semantic_projection": {
+        "atomg": 9,
+        "bar": 34,
+        "ldg": 53,
+        "ldsm": 200,
+        "omma": 896,
+        "redg": 4,
+        "utmaldg": 40
+      }
+    }
+  },
+  "blocked_gate": {
+    "closure_gate_pass": true,
+    "path": "derived/blocked_gate.json",
+    "sha256": "f2b1c8995708448623109f9300523fb28a130b677c24985ca44defd1ac791613"
+  },
+  "correctness": {
+    "probe_preparation_gates": {
+      "output_contract": true,
+      "reference_correctness": false,
+      "reference_metrics": {
+        "cosine": 0.9970622475927143,
+        "max_abs": 0.8690239191055298,
+        "relative_l2": 0.07654395699501038,
+        "token_rel_l2_p99": 0.30527544021606445
+      },
+      "workspace_contract": true
+    },
+    "status": "probe_preparation_failed_before_cross_arm_correctness"
+  },
+  "evidence_identity": {
+    "gpu": {
+      "compute_capability": [
+        12,
+        0
+      ],
+      "driver": "580.95.05",
+      "name": "NVIDIA Graphics Device",
+      "pci_bus_id": "00000000:76:00.0",
+      "sm_count": 110,
+      "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+    },
+    "source": {
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "dispatch_sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4",
+      "flashinfer_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+      "kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+      "wrapper_sha256": "bcac806795c035decd0773f4f801d477e7ebf14c1d67c3e49eee42ee0579c0a4"
+    },
+    "toolchain": {
+      "cuda_runtime": "13.2",
+      "cutlass_dsl_module": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+      "cutlass_dsl_version": "4.6.0",
+      "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+      "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+      "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+      "torch": "2.12.0a0+5aff3928d8.nv26.05"
+    }
+  },
+  "iket_preflight": {
+    "path": "iket_fallback_preflight.json",
+    "sha256": "358f05a6ff7c2bec4c25a93b499b58bf21953609018ab5fb7ba178daf0ffe18b"
+  },
+  "manifest_payload_sha256": "cb54042c752979267e0c8c5b23a06cdff5daf2346430a2d0845f5eb77d9d0d73",
+  "overlay_identity": {
+    "path": "overlays/identity.json",
+    "sha256": "a205e087d76aca318e754afef0ae745697adf37fd5a044a997ad77eca2d7e723"
+  },
+  "phase_captures": {},
+  "profiles": {},
+  "raw_preflight": {
+    "path": "raw/blocked_preflight.json",
+    "sha256": "93eb3a850e742cd8a5043b6f39cb81d47ff000814b60c213e20ffef4465c0de7"
+  },
+  "result": {
+    "path": "result.md",
+    "phase_share_published": false,
+    "sha256": "816f07443a1509bf372648f37eeb8ea081fe0323629ac81ccd062fe21817e787"
+  },
+  "runtime_observations": {
+    "measurement_no_marker": {
+      "applications_graphics_clock_mhz": "2377",
+      "graphics_clock_mhz": "2370",
+      "jit_artifact_set_sha256": "4bf44d1d6b203875609c1eaa137e9fef1b5f3b4dfb1207965d20a89eb27c33b8",
+      "lease_id": "exp004-phase-20260717T140751Z-902614",
+      "max_graphics_clock_mhz": "3090",
+      "power_draw_w": "59.65"
+    },
+    "normal_no_marker": {
+      "applications_graphics_clock_mhz": "2377",
+      "graphics_clock_mhz": "2370",
+      "jit_artifact_set_sha256": "4a4b2aafc209e6bc884113e1494509b9d98fd5de31eb1e98bf020f38806ea61d",
+      "lease_id": "exp004-phase-20260717T140751Z-902614",
+      "max_graphics_clock_mhz": "3090",
+      "power_draw_w": "58.75"
+    },
+    "probe_candidate": {
+      "applications_graphics_clock_mhz": "2377",
+      "graphics_clock_mhz": "2370",
+      "jit_artifact_set_sha256": "5c4be3b1455783b95808be23e37b23adf03a9e208bad7eb6079013cb422d3d65",
+      "lease_id": "exp004-phase-20260717T140751Z-902614",
+      "max_graphics_clock_mhz": "3090",
+      "power_draw_w": "59.19"
+    }
+  },
+  "schema": "exp004.run-manifest.v1",
+  "status": "blocked_by_measurement_gate",
+  "verdict": "measurement_perturbation_prevented_formal_timing"
+}

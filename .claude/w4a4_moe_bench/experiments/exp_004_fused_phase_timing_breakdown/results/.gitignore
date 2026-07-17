@@ -1,0 +1,12 @@
+# Large immutable provider artifacts stay on the evidence host.  Compact
+# derived CSV/JSON evidence and result.md may be reviewed/committed later.
+raw/*
+!raw/blocked_preflight.json
+overlays/*
+!overlays/identity.json
+*.ncu-rep
+*.nsys-rep
+*.qdstrm
+*.sqlite
+_pqtdir/
+**/veloq/
