@@ -9,11 +9,19 @@ from exp004_common import (
     EXPECTED_TAIL_SECTOR_DELTA,
     EXPECTED_TASK_COUNT,
     EXPECTED_TENSOR_INSTRUCTIONS,
+    build_empty_manifest,
     correctness_thresholds,
     evaluate_correctness_gate,
     qualify_spill_candidate,
     summarize_paired_benchmark,
 )
+
+
+def test_legacy_runner_still_initializes_its_original_v1_contract() -> None:
+    manifest = build_empty_manifest()
+    assert manifest["schema"] == "exp004.validation-manifest.v1"
+    assert manifest["status"] == "not_started"
+    assert "problem_point_localization" not in manifest
 
 
 def work_payload(**extra):

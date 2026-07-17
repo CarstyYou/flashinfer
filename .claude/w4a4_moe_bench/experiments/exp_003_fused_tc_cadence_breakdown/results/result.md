@@ -85,9 +85,10 @@ diagnostic 升级为 formal result。因此本轮选择在三个 CTA 停止补�
 这是一项收口决策，不表示 coverage 已经闭合或无法改善。
 
 如果未来继续调查 TC cadence，最小下一步应先给 `unclassified` 的 inter-QMMA 与 phase-transition
-区间增加可验证的语义边界，再决定是否扩展 CTA population。当前按项目优先级独立建立
-`exp_004_fused_stack_spill_criticality`，用未插桩 benchmark + NCU + lifetime/reorder 单变量实验验证
-122-word/lane stack roundtrip 是否来自 Gate accumulator 跨 Up 保活，以及它是否位于关键路径。
+区间增加可验证的语义边界，再决定是否扩展 CTA population。后续 `exp_004` 已定位两个 register
+spill 物理点：108-word first-pass accumulator 在第一段 FC1 收尾时逐步 spill 并跨完整第二段 FC1 保活，14-word mixed tail 在
+activation 入口 save/reuse/restore；源码 value 到 physical register/stack slot 的 compiler
+mapping 仍未闭合，因此当前没有合法的具体优化建议。
 
 ### Analyzer provenance
 

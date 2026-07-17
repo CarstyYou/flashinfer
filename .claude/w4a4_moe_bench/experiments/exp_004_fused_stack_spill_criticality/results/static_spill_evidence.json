@@ -4244,8 +4244,8 @@
       "stored_words_delta": -14
     }
   },
-  "evidence_sha256": "084a1104bdafc5ceccc65e9a77531b987dd7c1a96e914b6fadb3cc0bdc4f78c5",
-  "h108_boundary": "static program order supports a structural-lifetime model; formal attribution still requires the separately recorded IR/PTX/SASS def-use chain",
+  "evidence_sha256": "89da041f3f7314bf21814e3830a1d97b93e722626c217f694cbcdb4cafa65d95",
+  "h108_boundary": "static store/reload position and width do not identify a semantic value or source root cause; consume spill_localization_evidence.json for the verified producer/reuse/reload/consumer chains",
   "inputs": {
     "activation_in_place_gate": {
       "cubin": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/jit/activation_in_place_gate/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",

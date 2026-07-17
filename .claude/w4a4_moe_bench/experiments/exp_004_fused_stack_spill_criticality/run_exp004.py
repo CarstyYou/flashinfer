@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CPU-side coordinator for exp_004 arm preparation and paired timing."""
+"""Coordinator for exp_004 historical arms and current spill localization."""
 
 from __future__ import annotations
 
@@ -334,6 +334,43 @@ def correctness(args: argparse.Namespace) -> int:
     return 0 if payload["gate_pass"] else 2
 
 
+def localize(args: argparse.Namespace) -> int:
+    """Rebuild localization evidence, canonical manifest, and reader report."""
+    from build_result import main as build_result_main
+    from build_spill_localization_evidence import main as build_evidence_main
+
+    results = args.results.resolve()
+    source = (
+        args.source.resolve()
+        if args.source is not None
+        else args.flashinfer_root.resolve() / TARGET_RELATIVE_PATH
+    )
+    evidence_argv = [
+        "--baseline-sass",
+        str(args.baseline_sass.resolve()),
+        "--up-first-sass",
+        str(args.up_first_sass.resolve()),
+        "--baseline-mlir",
+        str(args.baseline_mlir.resolve()),
+        "--baseline-ptx",
+        str(args.baseline_ptx.resolve()),
+        "--up-first-ptx",
+        str(args.up_first_ptx.resolve()),
+        "--source",
+        str(source),
+        "--static-evidence",
+        str(results / "static_spill_evidence.json"),
+        "--ncu-evidence",
+        str(results / "ncu" / "spill_evidence.json"),
+        "--output",
+        str(results / "spill_localization_evidence.json"),
+    ]
+    evidence_status = build_evidence_main(evidence_argv)
+    if evidence_status != 0:
+        return evidence_status
+    return build_result_main(["--results", str(results)])
+
+
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--flashinfer-root", type=Path, default=Path.cwd())
@@ -361,9 +398,18 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     )
 
     correctness_parser = subparsers.add_parser("correctness")
-    correctness_parser.add_argument(
-        "--candidate", choices=ALL_ARMS[1:], required=True
+    correctness_parser.add_argument("--candidate", choices=ALL_ARMS[1:], required=True)
+
+    localization_parser = subparsers.add_parser(
+        "localize",
+        help="rebuild exact spill localization evidence and report",
     )
+    localization_parser.add_argument("--baseline-sass", type=Path, required=True)
+    localization_parser.add_argument("--up-first-sass", type=Path, required=True)
+    localization_parser.add_argument("--baseline-mlir", type=Path, required=True)
+    localization_parser.add_argument("--baseline-ptx", type=Path, required=True)
+    localization_parser.add_argument("--up-first-ptx", type=Path, required=True)
+    localization_parser.add_argument("--source", type=Path)
     return parser.parse_args(argv)
 
 
@@ -379,6 +425,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return collect_benchmark(args.results.resolve(), args.candidate)
     if args.command == "correctness":
         return correctness(args)
+    if args.command == "localize":
+        return localize(args)
     raise AssertionError(args.command)
 
 

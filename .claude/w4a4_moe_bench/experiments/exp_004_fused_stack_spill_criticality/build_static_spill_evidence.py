@@ -282,8 +282,9 @@ def compare_arms(facts: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
         "arms": facts,
         "deltas": deltas,
         "h108_boundary": (
-            "static program order supports a structural-lifetime model; "
-            "formal attribution still requires the separately recorded IR/PTX/SASS def-use chain"
+            "static store/reload position and width do not identify a semantic value or "
+            "source root cause; consume spill_localization_evidence.json for the verified "
+            "producer/reuse/reload/consumer chains"
         ),
     }
 

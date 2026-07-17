@@ -346,6 +346,7 @@ def summarize_paired_benchmark(rows: Sequence[Mapping[str, Any]]) -> dict[str, A
 
 def validate_manifest_schema(manifest: Mapping[str, Any]) -> list[str]:
     """Return schema violations without requiring the GPU artifacts to exist."""
+    schema = manifest.get("schema")
     required_top = {
         "schema",
         "status",
@@ -360,6 +361,16 @@ def validate_manifest_schema(manifest: Mapping[str, Any]) -> list[str]:
         "ncu",
         "decision",
     }
+    if schema == "exp004.validation-manifest.v2":
+        required_top.update(
+            {
+                "problem_point_localization",
+                "resource_cleanup",
+                "superseded_attribution_run",
+            }
+        )
+    elif schema != "exp004.validation-manifest.v1":
+        return [f"unsupported manifest schema: {schema!r}"]
     errors = [
         f"missing top-level field: {key}"
         for key in sorted(required_top - set(manifest))
@@ -376,17 +387,93 @@ def validate_manifest_schema(manifest: Mapping[str, Any]) -> list[str]:
         if case.get(key) != expected:
             errors.append(f"case.{key}: {case.get(key)!r} != {expected!r}")
     arms = manifest.get("arms", {})
-    if not isinstance(arms, Mapping) or "baseline" not in arms:
+    if not isinstance(arms, Mapping) or (
+        manifest.get("status") != "not_started" and "baseline" not in arms
+    ):
         errors.append("arms.baseline is required")
-    for name, arm in arms.items() if isinstance(arms, Mapping) else ():
-        for key in (
-            "overlay_sha256",
-            "jit_root",
-            "jit_artifact_set_sha256",
-            "cubin_sha256",
-        ):
-            if key not in arm:
-                errors.append(f"arms.{name}.{key} is required")
+    if schema == "exp004.validation-manifest.v1":
+        for name, arm in arms.items() if isinstance(arms, Mapping) else ():
+            for key in (
+                "overlay_sha256",
+                "jit_root",
+                "jit_artifact_set_sha256",
+                "cubin_sha256",
+            ):
+                if key not in arm:
+                    errors.append(f"arms.{name}.{key} is required")
+        return errors
+
+    if manifest.get("status") != "localization_partial":
+        errors.append("v2 status must be localization_partial")
+    expected_arms = {"baseline", "up_first_attribution"}
+    if not isinstance(arms, Mapping) or set(arms) != expected_arms:
+        errors.append(f"v2 arms must equal {sorted(expected_arms)}")
+
+    def valid_sha(value: Any) -> bool:
+        return (
+            isinstance(value, str)
+            and len(value) == 64
+            and all(character in "0123456789abcdef" for character in value)
+        )
+
+    arm_hash_fields = (
+        "preparation_sha256",
+        "jit_artifact_set_sha256",
+        "overlay_sha256",
+        "overlay_diff_sha256",
+        "cubin_sha256",
+        "ptx_sha256",
+        "mlir_sha256",
+        "ncu_trace_sha256",
+    )
+    if isinstance(arms, Mapping):
+        for name, arm in arms.items():
+            if not isinstance(arm, Mapping):
+                errors.append(f"arms.{name} must be an object")
+                continue
+            if not isinstance(arm.get("preparation"), str):
+                errors.append(f"arms.{name}.preparation is required")
+            for field in arm_hash_fields:
+                if not valid_sha(arm.get(field)):
+                    errors.append(f"arms.{name}.{field} must be a SHA-256")
+            launch = arm.get("launch", {})
+            if launch.get("grid") != list(EXPECTED_GRID):
+                errors.append(f"arms.{name}.launch.grid drift")
+            if launch.get("block") != list(EXPECTED_BLOCK):
+                errors.append(f"arms.{name}.launch.block drift")
+
+    for section in (
+        "static_spill",
+        "ncu",
+        "problem_point_localization",
+        "resource_cleanup",
+        "superseded_attribution_run",
+    ):
+        value = manifest.get(section, {})
+        if not isinstance(value, Mapping) or not isinstance(value.get("path"), str):
+            errors.append(f"{section}.path is required")
+        if not isinstance(value, Mapping) or not valid_sha(value.get("sha256")):
+            errors.append(f"{section}.sha256 must be a SHA-256")
+
+    decision = manifest.get("decision", {})
+    if decision.get("experiment_goal") != "spill_problem_point_localization":
+        errors.append("decision.experiment_goal drift")
+    if decision.get("severity") != "P0_hard_failure_by_project_policy":
+        errors.append("decision.severity drift")
+    if decision.get("physical_localization_status") != "mechanism_localized":
+        errors.append("decision.physical_localization_status drift")
+    if decision.get("optimization_recommendation_allowed") is not False:
+        errors.append("decision must not permit an optimization")
+    if decision.get("latency_causality") != "not_tested_and_not_required_for_P0":
+        errors.append("decision.latency_causality drift")
+    if decision.get("formal_experiment_closed") is not False:
+        errors.append("decision.formal_experiment_closed must be false")
+
+    if any(key in manifest for key in ("attribution", "candidate_gates")):
+        errors.append("v2 manifest contains active legacy attribution fields")
+    static_spill = manifest.get("static_spill", {})
+    if isinstance(static_spill, Mapping) and "candidate_gates" in static_spill:
+        errors.append("v2 static_spill contains legacy candidate gates")
     return errors
 
 

@@ -1,0 +1,3986 @@
+{
+  "cross_layer_semantics": {
+    "baseline_mlir": {
+      "internal_accumulator_def_use_closed": true,
+      "path": "/tmp/exp004_baseline_clean.mlir",
+      "semantic_lines": {
+        "gate_activation_load": 2726,
+        "gate_gemm": 1233,
+        "gate_rmem_alloc": 1015,
+        "up_activation_load": 2728,
+        "up_gemm": 2134,
+        "up_rmem_alloc": 1016
+      },
+      "sha256": "6b2eb91a3c2a57b479c436c1cf14bedaf37ddbe937eb3caabd03400c3d5ccf93",
+      "source_locations_present": false
+    },
+    "baseline_ptx": {
+      "internal_accumulator_def_use_closed": true,
+      "local_load_count": 0,
+      "local_store_count": 0,
+      "path": "/tmp/exp004_baseline.ptx",
+      "semantic_lines": {
+        "first_pass_activation_use": 5141,
+        "first_pass_mma_def": 2993,
+        "second_pass_activation_use": 5142,
+        "second_pass_mma_def": 4773
+      },
+      "sha256": "d4d848e3b34963584e63c3cde91acc57a61389898e3f3a157b62da4be5c147ff",
+      "source_locations_present": false
+    },
+    "compiler_certified_source_value_to_stack_slot_map": false,
+    "compiler_certified_virtual_to_physical_register_map": false,
+    "source": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+      "semantic_lines": {
+        "activation_call": 2205,
+        "gate_acc_alloc": 1651,
+        "gate_gemm_phase": 1901,
+        "up_acc_alloc": 1652,
+        "up_gemm_phase": 2037
+      },
+      "sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+    },
+    "up_first_ptx": {
+      "activation_operands_swapped": true,
+      "path": "/tmp/exp004_up_first.ptx",
+      "semantic_lines": {
+        "first_pass_activation_operand_second": 5142,
+        "second_pass_activation_operand_first": 5141
+      },
+      "sha256": "2f1f7c8351001e9c474ee3fdf618b6b0e33bf41c187e8207bd43872284ebbb8d"
+    }
+  },
+  "identity": {
+    "baseline_cubin_sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+    "baseline_ncu_sha256": "3367df71ef0c3b750c03c60436d100a994863271016995c76f21195dd9eaaea8",
+    "baseline_sass_sha256": "34b4c38161642a27ca6b4ec41ffad0bd70f6ff99fd8118997a4b2416c5e3abba",
+    "block": [
+      160,
+      1,
+      1
+    ],
+    "grid": [
+      1,
+      1,
+      110
+    ],
+    "identity_gates_pass": true,
+    "kernel": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+    "up_first_cubin_sha256": "691ca03362e2e1efd7a2ad1af2d9074a38e5b809f7f0d99a6239e41f4009fee6",
+    "up_first_ncu_sha256": "c4f6206912c74fdf51ef324f31995f05c7385f18823a950dacc90fc160f0c29b",
+    "up_first_sass_sha256": "b7b236276e27acb2f7e0908f01df5e864ff2863d9a817aea67720026e55a6f98"
+  },
+  "main_108_word_bundle": {
+    "ldl_reload_count": 108,
+    "mechanism": "during the first FC1 pass tail, 27 completed accumulator vectors are progressively spilled after their respective nearest OMMA producers and kept live across the complete second FC1 pass",
+    "omma_output_vector_count": 27,
+    "per_slot_reload_first_use": [
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R206, R206, UR12",
+          "pc": 51968,
+          "pc_hex": "0xcb00"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R206, [R1]",
+          "pc": 50944,
+          "pc_hex": "0xc700"
+        },
+        "stack_slot": 0,
+        "stack_slot_hex": "0x0"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R207, R207, UR12",
+          "pc": 52048,
+          "pc_hex": "0xcb50"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R207, [R1+0x4]",
+          "pc": 50960,
+          "pc_hex": "0xc710"
+        },
+        "stack_slot": 4,
+        "stack_slot_hex": "0x4"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R208, R208, UR12",
+          "pc": 52096,
+          "pc_hex": "0xcb80"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R208, [R1+0x8]",
+          "pc": 50976,
+          "pc_hex": "0xc720"
+        },
+        "stack_slot": 8,
+        "stack_slot_hex": "0x8"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R209, R209, UR12",
+          "pc": 52176,
+          "pc_hex": "0xcbd0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R209, [R1+0xc]",
+          "pc": 50992,
+          "pc_hex": "0xc730"
+        },
+        "stack_slot": 12,
+        "stack_slot_hex": "0xc"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R173, R173, UR12",
+          "pc": 52320,
+          "pc_hex": "0xcc60"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R173, [R1+0x10]",
+          "pc": 50496,
+          "pc_hex": "0xc540"
+        },
+        "stack_slot": 16,
+        "stack_slot_hex": "0x10"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R174, R174, UR12",
+          "pc": 57120,
+          "pc_hex": "0xdf20"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R174, [R1+0x14]",
+          "pc": 50512,
+          "pc_hex": "0xc550"
+        },
+        "stack_slot": 20,
+        "stack_slot_hex": "0x14"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R175, R175, UR12",
+          "pc": 57520,
+          "pc_hex": "0xe0b0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R175, [R1+0x18]",
+          "pc": 50528,
+          "pc_hex": "0xc560"
+        },
+        "stack_slot": 24,
+        "stack_slot_hex": "0x18"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R176, R176, UR12",
+          "pc": 57920,
+          "pc_hex": "0xe240"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R176, [R1+0x1c]",
+          "pc": 50544,
+          "pc_hex": "0xc570"
+        },
+        "stack_slot": 28,
+        "stack_slot_hex": "0x1c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R22, R22, UR12",
+          "pc": 58304,
+          "pc_hex": "0xe3c0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R22, [R1+0x20]",
+          "pc": 50048,
+          "pc_hex": "0xc380"
+        },
+        "stack_slot": 32,
+        "stack_slot_hex": "0x20"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R23, R23, UR12",
+          "pc": 58624,
+          "pc_hex": "0xe500"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R23, [R1+0x24]",
+          "pc": 50064,
+          "pc_hex": "0xc390"
+        },
+        "stack_slot": 36,
+        "stack_slot_hex": "0x24"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R28, R28, UR12",
+          "pc": 58928,
+          "pc_hex": "0xe630"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R28, [R1+0x28]",
+          "pc": 50080,
+          "pc_hex": "0xc3a0"
+        },
+        "stack_slot": 40,
+        "stack_slot_hex": "0x28"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R29, R29, UR12",
+          "pc": 59232,
+          "pc_hex": "0xe760"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R29, [R1+0x2c]",
+          "pc": 50096,
+          "pc_hex": "0xc3b0"
+        },
+        "stack_slot": 44,
+        "stack_slot_hex": "0x2c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R238, R238, UR12",
+          "pc": 60944,
+          "pc_hex": "0xee10"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R238, [R1+0x30]",
+          "pc": 60240,
+          "pc_hex": "0xeb50"
+        },
+        "stack_slot": 48,
+        "stack_slot_hex": "0x30"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R239, R239, UR12",
+          "pc": 61040,
+          "pc_hex": "0xee70"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R239, [R1+0x34]",
+          "pc": 60416,
+          "pc_hex": "0xec00"
+        },
+        "stack_slot": 52,
+        "stack_slot_hex": "0x34"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R244, R244, UR12",
+          "pc": 61136,
+          "pc_hex": "0xeed0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R244, [R1+0x38]",
+          "pc": 60448,
+          "pc_hex": "0xec20"
+        },
+        "stack_slot": 56,
+        "stack_slot_hex": "0x38"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R252, R252, UR12",
+          "pc": 61232,
+          "pc_hex": "0xef30"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R252, [R1+0x3c]",
+          "pc": 60464,
+          "pc_hex": "0xec30"
+        },
+        "stack_slot": 60,
+        "stack_slot_hex": "0x3c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R202, R202, UR12",
+          "pc": 51856,
+          "pc_hex": "0xca90"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R202, [R1+0x40]",
+          "pc": 50880,
+          "pc_hex": "0xc6c0"
+        },
+        "stack_slot": 64,
+        "stack_slot_hex": "0x40"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R203, R203, UR12",
+          "pc": 51872,
+          "pc_hex": "0xcaa0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R203, [R1+0x44]",
+          "pc": 50896,
+          "pc_hex": "0xc6d0"
+        },
+        "stack_slot": 68,
+        "stack_slot_hex": "0x44"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R204, R204, UR12",
+          "pc": 51888,
+          "pc_hex": "0xcab0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R204, [R1+0x48]",
+          "pc": 50912,
+          "pc_hex": "0xc6e0"
+        },
+        "stack_slot": 72,
+        "stack_slot_hex": "0x48"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R205, R205, UR12",
+          "pc": 51936,
+          "pc_hex": "0xcae0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R205, [R1+0x4c]",
+          "pc": 50928,
+          "pc_hex": "0xc6f0"
+        },
+        "stack_slot": 76,
+        "stack_slot_hex": "0x4c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R169, R169, UR12",
+          "pc": 51952,
+          "pc_hex": "0xcaf0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R169, [R1+0x50]",
+          "pc": 50432,
+          "pc_hex": "0xc500"
+        },
+        "stack_slot": 80,
+        "stack_slot_hex": "0x50"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R170, R170, UR12",
+          "pc": 52000,
+          "pc_hex": "0xcb20"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R170, [R1+0x54]",
+          "pc": 50448,
+          "pc_hex": "0xc510"
+        },
+        "stack_slot": 84,
+        "stack_slot_hex": "0x54"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R171, R171, UR12",
+          "pc": 52080,
+          "pc_hex": "0xcb70"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R171, [R1+0x58]",
+          "pc": 50464,
+          "pc_hex": "0xc520"
+        },
+        "stack_slot": 88,
+        "stack_slot_hex": "0x58"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R172, R172, UR12",
+          "pc": 52160,
+          "pc_hex": "0xcbc0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R172, [R1+0x5c]",
+          "pc": 50480,
+          "pc_hex": "0xc530"
+        },
+        "stack_slot": 92,
+        "stack_slot_hex": "0x5c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R18, R18, UR12",
+          "pc": 52304,
+          "pc_hex": "0xcc50"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R18, [R1+0x60]",
+          "pc": 49664,
+          "pc_hex": "0xc200"
+        },
+        "stack_slot": 96,
+        "stack_slot_hex": "0x60"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R19, R19, UR12",
+          "pc": 57104,
+          "pc_hex": "0xdf10"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R19, [R1+0x64]",
+          "pc": 49680,
+          "pc_hex": "0xc210"
+        },
+        "stack_slot": 100,
+        "stack_slot_hex": "0x64"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R20, R20, UR12",
+          "pc": 57504,
+          "pc_hex": "0xe0a0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R20, [R1+0x68]",
+          "pc": 49696,
+          "pc_hex": "0xc220"
+        },
+        "stack_slot": 104,
+        "stack_slot_hex": "0x68"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R21, R21, UR12",
+          "pc": 57904,
+          "pc_hex": "0xe230"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R21, [R1+0x6c]",
+          "pc": 49712,
+          "pc_hex": "0xc230"
+        },
+        "stack_slot": 108,
+        "stack_slot_hex": "0x6c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R234, R234, UR12",
+          "pc": 60560,
+          "pc_hex": "0xec90"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R234, [R1+0x70]",
+          "pc": 59344,
+          "pc_hex": "0xe7d0"
+        },
+        "stack_slot": 112,
+        "stack_slot_hex": "0x70"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R235, R235, UR12",
+          "pc": 60656,
+          "pc_hex": "0xecf0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R235, [R1+0x74]",
+          "pc": 59616,
+          "pc_hex": "0xe8e0"
+        },
+        "stack_slot": 116,
+        "stack_slot_hex": "0x74"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R236, R236, UR12",
+          "pc": 60752,
+          "pc_hex": "0xed50"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R236, [R1+0x78]",
+          "pc": 59824,
+          "pc_hex": "0xe9b0"
+        },
+        "stack_slot": 120,
+        "stack_slot_hex": "0x78"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R237, R237, UR12",
+          "pc": 60848,
+          "pc_hex": "0xedb0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R237, [R1+0x7c]",
+          "pc": 60032,
+          "pc_hex": "0xea80"
+        },
+        "stack_slot": 124,
+        "stack_slot_hex": "0x7c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R198, R198, UR12",
+          "pc": 51680,
+          "pc_hex": "0xc9e0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R198, [R1+0x80]",
+          "pc": 50816,
+          "pc_hex": "0xc680"
+        },
+        "stack_slot": 128,
+        "stack_slot_hex": "0x80"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R199, R199, UR12",
+          "pc": 51712,
+          "pc_hex": "0xca00"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R199, [R1+0x84]",
+          "pc": 50832,
+          "pc_hex": "0xc690"
+        },
+        "stack_slot": 132,
+        "stack_slot_hex": "0x84"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R200, R200, UR12",
+          "pc": 51776,
+          "pc_hex": "0xca40"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R200, [R1+0x88]",
+          "pc": 50848,
+          "pc_hex": "0xc6a0"
+        },
+        "stack_slot": 136,
+        "stack_slot_hex": "0x88"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R201, R201, UR12",
+          "pc": 51840,
+          "pc_hex": "0xca80"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R201, [R1+0x8c]",
+          "pc": 50864,
+          "pc_hex": "0xc6b0"
+        },
+        "stack_slot": 140,
+        "stack_slot_hex": "0x8c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R165, R165, UR12",
+          "pc": 51792,
+          "pc_hex": "0xca50"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R165, [R1+0x90]",
+          "pc": 50368,
+          "pc_hex": "0xc4c0"
+        },
+        "stack_slot": 144,
+        "stack_slot_hex": "0x90"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R166, R166, UR12",
+          "pc": 51808,
+          "pc_hex": "0xca60"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R166, [R1+0x94]",
+          "pc": 50384,
+          "pc_hex": "0xc4d0"
+        },
+        "stack_slot": 148,
+        "stack_slot_hex": "0x94"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R167, R167, UR12",
+          "pc": 51824,
+          "pc_hex": "0xca70"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R167, [R1+0x98]",
+          "pc": 50400,
+          "pc_hex": "0xc4e0"
+        },
+        "stack_slot": 152,
+        "stack_slot_hex": "0x98"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R168, R168, UR12",
+          "pc": 51920,
+          "pc_hex": "0xcad0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R168, [R1+0x9c]",
+          "pc": 50416,
+          "pc_hex": "0xc4f0"
+        },
+        "stack_slot": 156,
+        "stack_slot_hex": "0x9c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R11, R23, UR12",
+          "pc": 50000,
+          "pc_hex": "0xc350"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R23, [R1+0xa0]",
+          "pc": 48320,
+          "pc_hex": "0xbcc0"
+        },
+        "stack_slot": 160,
+        "stack_slot_hex": "0xa0"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R9, R22, UR12",
+          "pc": 50032,
+          "pc_hex": "0xc370"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R22, [R1+0xa4]",
+          "pc": 48336,
+          "pc_hex": "0xbcd0"
+        },
+        "stack_slot": 164,
+        "stack_slot_hex": "0xa4"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R16, R16, UR12",
+          "pc": 52064,
+          "pc_hex": "0xcb60"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R16, [R1+0xa8]",
+          "pc": 49440,
+          "pc_hex": "0xc120"
+        },
+        "stack_slot": 168,
+        "stack_slot_hex": "0xa8"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R17, R17, UR12",
+          "pc": 52144,
+          "pc_hex": "0xcbb0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R17, [R1+0xac]",
+          "pc": 49456,
+          "pc_hex": "0xc130"
+        },
+        "stack_slot": 172,
+        "stack_slot_hex": "0xac"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R230, R230, UR12",
+          "pc": 59856,
+          "pc_hex": "0xe9d0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R230, [R1+0xb0]",
+          "pc": 58064,
+          "pc_hex": "0xe2d0"
+        },
+        "stack_slot": 176,
+        "stack_slot_hex": "0xb0"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R231, R231, UR12",
+          "pc": 60048,
+          "pc_hex": "0xea90"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R231, [R1+0xb4]",
+          "pc": 58432,
+          "pc_hex": "0xe440"
+        },
+        "stack_slot": 180,
+        "stack_slot_hex": "0xb4"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R232, R232, UR12",
+          "pc": 60256,
+          "pc_hex": "0xeb60"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R232, [R1+0xb8]",
+          "pc": 58736,
+          "pc_hex": "0xe570"
+        },
+        "stack_slot": 184,
+        "stack_slot_hex": "0xb8"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R233, R233, UR12",
+          "pc": 60432,
+          "pc_hex": "0xec10"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R233, [R1+0xbc]",
+          "pc": 59040,
+          "pc_hex": "0xe6a0"
+        },
+        "stack_slot": 188,
+        "stack_slot_hex": "0xbc"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R222, R222, UR12",
+          "pc": 58768,
+          "pc_hex": "0xe590"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R222, [R1+0xc0]",
+          "pc": 52192,
+          "pc_hex": "0xcbe0"
+        },
+        "stack_slot": 192,
+        "stack_slot_hex": "0xc0"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R223, R223, UR12",
+          "pc": 59072,
+          "pc_hex": "0xe6c0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R223, [R1+0xc4]",
+          "pc": 52384,
+          "pc_hex": "0xcca0"
+        },
+        "stack_slot": 196,
+        "stack_slot_hex": "0xc4"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R228, R228, UR12",
+          "pc": 59376,
+          "pc_hex": "0xe7f0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R228, [R1+0xc8]",
+          "pc": 57264,
+          "pc_hex": "0xdfb0"
+        },
+        "stack_slot": 200,
+        "stack_slot_hex": "0xc8"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R229, R229, UR12",
+          "pc": 59648,
+          "pc_hex": "0xe900"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R229, [R1+0xcc]",
+          "pc": 57664,
+          "pc_hex": "0xe140"
+        },
+        "stack_slot": 204,
+        "stack_slot_hex": "0xcc"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R218, R218, UR12",
+          "pc": 57296,
+          "pc_hex": "0xdfd0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R218, [R1+0xd0]",
+          "pc": 51072,
+          "pc_hex": "0xc780"
+        },
+        "stack_slot": 208,
+        "stack_slot_hex": "0xd0"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R219, R219, UR12",
+          "pc": 57696,
+          "pc_hex": "0xe160"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R219, [R1+0xd4]",
+          "pc": 51104,
+          "pc_hex": "0xc7a0"
+        },
+        "stack_slot": 212,
+        "stack_slot_hex": "0xd4"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R220, R220, UR12",
+          "pc": 58096,
+          "pc_hex": "0xe2f0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R220, [R1+0xd8]",
+          "pc": 52016,
+          "pc_hex": "0xcb30"
+        },
+        "stack_slot": 216,
+        "stack_slot_hex": "0xd8"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R221, R221, UR12",
+          "pc": 58464,
+          "pc_hex": "0xe460"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R221, [R1+0xdc]",
+          "pc": 52128,
+          "pc_hex": "0xcba0"
+        },
+        "stack_slot": 220,
+        "stack_slot_hex": "0xdc"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R213, R213, UR12",
+          "pc": 52256,
+          "pc_hex": "0xcc20"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R213, [R1+0xe0]",
+          "pc": 51008,
+          "pc_hex": "0xc740"
+        },
+        "stack_slot": 224,
+        "stack_slot_hex": "0xe0"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R215, R215, UR12",
+          "pc": 52272,
+          "pc_hex": "0xcc30"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R215, [R1+0xe4]",
+          "pc": 51024,
+          "pc_hex": "0xc750"
+        },
+        "stack_slot": 228,
+        "stack_slot_hex": "0xe4"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R216, R216, UR12",
+          "pc": 52288,
+          "pc_hex": "0xcc40"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R216, [R1+0xe8]",
+          "pc": 51040,
+          "pc_hex": "0xc760"
+        },
+        "stack_slot": 232,
+        "stack_slot_hex": "0xe8"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R217, R217, UR12",
+          "pc": 56896,
+          "pc_hex": "0xde40"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R217, [R1+0xec]",
+          "pc": 51056,
+          "pc_hex": "0xc770"
+        },
+        "stack_slot": 236,
+        "stack_slot_hex": "0xec"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R194, R194, UR12",
+          "pc": 51568,
+          "pc_hex": "0xc970"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R194, [R1+0xf0]",
+          "pc": 50752,
+          "pc_hex": "0xc640"
+        },
+        "stack_slot": 240,
+        "stack_slot_hex": "0xf0"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R195, R195, UR12",
+          "pc": 51584,
+          "pc_hex": "0xc980"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R195, [R1+0xf4]",
+          "pc": 50768,
+          "pc_hex": "0xc650"
+        },
+        "stack_slot": 244,
+        "stack_slot_hex": "0xf4"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R196, R196, UR12",
+          "pc": 51600,
+          "pc_hex": "0xc990"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R196, [R1+0xf8]",
+          "pc": 50784,
+          "pc_hex": "0xc660"
+        },
+        "stack_slot": 248,
+        "stack_slot_hex": "0xf8"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R197, R197, UR12",
+          "pc": 51616,
+          "pc_hex": "0xc9a0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R197, [R1+0xfc]",
+          "pc": 50800,
+          "pc_hex": "0xc670"
+        },
+        "stack_slot": 252,
+        "stack_slot_hex": "0xfc"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R190, R190, UR12",
+          "pc": 51360,
+          "pc_hex": "0xc8a0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R190, [R1+0x100]",
+          "pc": 50688,
+          "pc_hex": "0xc600"
+        },
+        "stack_slot": 256,
+        "stack_slot_hex": "0x100"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R191, R191, UR12",
+          "pc": 51408,
+          "pc_hex": "0xc8d0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R191, [R1+0x104]",
+          "pc": 50704,
+          "pc_hex": "0xc610"
+        },
+        "stack_slot": 260,
+        "stack_slot_hex": "0x104"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R192, R192, UR12",
+          "pc": 51440,
+          "pc_hex": "0xc8f0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R192, [R1+0x108]",
+          "pc": 50720,
+          "pc_hex": "0xc620"
+        },
+        "stack_slot": 264,
+        "stack_slot_hex": "0x108"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R193, R193, UR12",
+          "pc": 51504,
+          "pc_hex": "0xc930"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R193, [R1+0x10c]",
+          "pc": 50736,
+          "pc_hex": "0xc630"
+        },
+        "stack_slot": 268,
+        "stack_slot_hex": "0x10c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R186, R186, UR12",
+          "pc": 51248,
+          "pc_hex": "0xc830"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R186, [R1+0x110]",
+          "pc": 50624,
+          "pc_hex": "0xc5c0"
+        },
+        "stack_slot": 272,
+        "stack_slot_hex": "0x110"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R187, R187, UR12",
+          "pc": 51312,
+          "pc_hex": "0xc870"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R187, [R1+0x114]",
+          "pc": 50640,
+          "pc_hex": "0xc5d0"
+        },
+        "stack_slot": 276,
+        "stack_slot_hex": "0x114"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R188, R188, UR12",
+          "pc": 51328,
+          "pc_hex": "0xc880"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R188, [R1+0x118]",
+          "pc": 50656,
+          "pc_hex": "0xc5e0"
+        },
+        "stack_slot": 280,
+        "stack_slot_hex": "0x118"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R189, R189, UR12",
+          "pc": 51344,
+          "pc_hex": "0xc890"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R189, [R1+0x11c]",
+          "pc": 50672,
+          "pc_hex": "0xc5f0"
+        },
+        "stack_slot": 284,
+        "stack_slot_hex": "0x11c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R180, R180, UR12",
+          "pc": 51120,
+          "pc_hex": "0xc7b0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R180, [R1+0x120]",
+          "pc": 50560,
+          "pc_hex": "0xc580"
+        },
+        "stack_slot": 288,
+        "stack_slot_hex": "0x120"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R183, R183, UR12",
+          "pc": 51136,
+          "pc_hex": "0xc7c0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R183, [R1+0x124]",
+          "pc": 50576,
+          "pc_hex": "0xc590"
+        },
+        "stack_slot": 292,
+        "stack_slot_hex": "0x124"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R184, R184, UR12",
+          "pc": 51168,
+          "pc_hex": "0xc7e0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R184, [R1+0x128]",
+          "pc": 50592,
+          "pc_hex": "0xc5a0"
+        },
+        "stack_slot": 296,
+        "stack_slot_hex": "0x128"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R185, R185, UR12",
+          "pc": 51184,
+          "pc_hex": "0xc7f0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R185, [R1+0x12c]",
+          "pc": 50608,
+          "pc_hex": "0xc5b0"
+        },
+        "stack_slot": 300,
+        "stack_slot_hex": "0x12c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R161, R161, UR12",
+          "pc": 51664,
+          "pc_hex": "0xc9d0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R161, [R1+0x130]",
+          "pc": 50304,
+          "pc_hex": "0xc480"
+        },
+        "stack_slot": 304,
+        "stack_slot_hex": "0x130"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R162, R162, UR12",
+          "pc": 51696,
+          "pc_hex": "0xc9f0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R162, [R1+0x134]",
+          "pc": 50320,
+          "pc_hex": "0xc490"
+        },
+        "stack_slot": 308,
+        "stack_slot_hex": "0x134"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R163, R163, UR12",
+          "pc": 51744,
+          "pc_hex": "0xca20"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R163, [R1+0x138]",
+          "pc": 50336,
+          "pc_hex": "0xc4a0"
+        },
+        "stack_slot": 312,
+        "stack_slot_hex": "0x138"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R164, R164, UR12",
+          "pc": 51760,
+          "pc_hex": "0xca30"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R164, [R1+0x13c]",
+          "pc": 50352,
+          "pc_hex": "0xc4b0"
+        },
+        "stack_slot": 316,
+        "stack_slot_hex": "0x13c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R69, R69, UR12",
+          "pc": 51488,
+          "pc_hex": "0xc920"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R69, [R1+0x140]",
+          "pc": 50240,
+          "pc_hex": "0xc440"
+        },
+        "stack_slot": 320,
+        "stack_slot_hex": "0x140"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R70, R70, UR12",
+          "pc": 51520,
+          "pc_hex": "0xc940"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R70, [R1+0x144]",
+          "pc": 50256,
+          "pc_hex": "0xc450"
+        },
+        "stack_slot": 324,
+        "stack_slot_hex": "0x144"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R71, R71, UR12",
+          "pc": 51536,
+          "pc_hex": "0xc950"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R71, [R1+0x148]",
+          "pc": 50272,
+          "pc_hex": "0xc460"
+        },
+        "stack_slot": 328,
+        "stack_slot_hex": "0x148"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R160, R160, UR12",
+          "pc": 51552,
+          "pc_hex": "0xc960"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R160, [R1+0x14c]",
+          "pc": 50288,
+          "pc_hex": "0xc470"
+        },
+        "stack_slot": 332,
+        "stack_slot_hex": "0x14c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R65, R65, UR12",
+          "pc": 51296,
+          "pc_hex": "0xc860"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R65, [R1+0x150]",
+          "pc": 50176,
+          "pc_hex": "0xc400"
+        },
+        "stack_slot": 336,
+        "stack_slot_hex": "0x150"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R66, R66, UR12",
+          "pc": 51392,
+          "pc_hex": "0xc8c0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R66, [R1+0x154]",
+          "pc": 50192,
+          "pc_hex": "0xc410"
+        },
+        "stack_slot": 340,
+        "stack_slot_hex": "0x154"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R67, R67, UR12",
+          "pc": 51424,
+          "pc_hex": "0xc8e0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R67, [R1+0x158]",
+          "pc": 50208,
+          "pc_hex": "0xc420"
+        },
+        "stack_slot": 344,
+        "stack_slot_hex": "0x158"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R68, R68, UR12",
+          "pc": 51472,
+          "pc_hex": "0xc910"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R68, [R1+0x15c]",
+          "pc": 50224,
+          "pc_hex": "0xc430"
+        },
+        "stack_slot": 348,
+        "stack_slot_hex": "0x15c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R37, R37, UR12",
+          "pc": 51216,
+          "pc_hex": "0xc810"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R37, [R1+0x160]",
+          "pc": 50112,
+          "pc_hex": "0xc3c0"
+        },
+        "stack_slot": 352,
+        "stack_slot_hex": "0x160"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R39, R39, UR12",
+          "pc": 51232,
+          "pc_hex": "0xc820"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R39, [R1+0x164]",
+          "pc": 50128,
+          "pc_hex": "0xc3d0"
+        },
+        "stack_slot": 356,
+        "stack_slot_hex": "0x164"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R60, R60, UR12",
+          "pc": 51264,
+          "pc_hex": "0xc840"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R60, [R1+0x168]",
+          "pc": 50144,
+          "pc_hex": "0xc3e0"
+        },
+        "stack_slot": 360,
+        "stack_slot_hex": "0x168"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R64, R64, UR12",
+          "pc": 51280,
+          "pc_hex": "0xc850"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R64, [R1+0x16c]",
+          "pc": 50160,
+          "pc_hex": "0xc3f0"
+        },
+        "stack_slot": 364,
+        "stack_slot_hex": "0x16c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R8, R203, UR12",
+          "pc": 48352,
+          "pc_hex": "0xbce0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R203, [R1+0x170]",
+          "pc": 47760,
+          "pc_hex": "0xba90"
+        },
+        "stack_slot": 368,
+        "stack_slot_hex": "0x170"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R9, R202, UR12",
+          "pc": 48384,
+          "pc_hex": "0xbd00"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R202, [R1+0x174]",
+          "pc": 47776,
+          "pc_hex": "0xbaa0"
+        },
+        "stack_slot": 372,
+        "stack_slot_hex": "0x174"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R8, R201, UR12",
+          "pc": 48560,
+          "pc_hex": "0xbdb0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R201, [R1+0x178]",
+          "pc": 47792,
+          "pc_hex": "0xbab0"
+        },
+        "stack_slot": 376,
+        "stack_slot_hex": "0x178"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R9, R200, UR12",
+          "pc": 48592,
+          "pc_hex": "0xbdd0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R200, [R1+0x17c]",
+          "pc": 47808,
+          "pc_hex": "0xbac0"
+        },
+        "stack_slot": 380,
+        "stack_slot_hex": "0x17c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R8, R199, UR12",
+          "pc": 48752,
+          "pc_hex": "0xbe70"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R199, [R1+0x180]",
+          "pc": 47824,
+          "pc_hex": "0xbad0"
+        },
+        "stack_slot": 384,
+        "stack_slot_hex": "0x180"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R9, R198, UR12",
+          "pc": 48848,
+          "pc_hex": "0xbed0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R198, [R1+0x184]",
+          "pc": 47840,
+          "pc_hex": "0xbae0"
+        },
+        "stack_slot": 388,
+        "stack_slot_hex": "0x184"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R8, R197, UR12",
+          "pc": 48944,
+          "pc_hex": "0xbf30"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R197, [R1+0x188]",
+          "pc": 47856,
+          "pc_hex": "0xbaf0"
+        },
+        "stack_slot": 392,
+        "stack_slot_hex": "0x188"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R9, R196, UR12",
+          "pc": 49040,
+          "pc_hex": "0xbf90"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R196, [R1+0x18c]",
+          "pc": 47904,
+          "pc_hex": "0xbb20"
+        },
+        "stack_slot": 396,
+        "stack_slot_hex": "0x18c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R8, R21, UR12",
+          "pc": 49136,
+          "pc_hex": "0xbff0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R21, [R1+0x190]",
+          "pc": 48192,
+          "pc_hex": "0xbc40"
+        },
+        "stack_slot": 400,
+        "stack_slot_hex": "0x190"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R9, R20, UR12",
+          "pc": 49232,
+          "pc_hex": "0xc050"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R20, [R1+0x194]",
+          "pc": 48208,
+          "pc_hex": "0xbc50"
+        },
+        "stack_slot": 404,
+        "stack_slot_hex": "0x194"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R8, R17, UR12",
+          "pc": 49328,
+          "pc_hex": "0xc0b0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R17, [R1+0x198]",
+          "pc": 48224,
+          "pc_hex": "0xbc60"
+        },
+        "stack_slot": 408,
+        "stack_slot_hex": "0x198"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R9, R16, UR12",
+          "pc": 49424,
+          "pc_hex": "0xc110"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R16, [R1+0x19c]",
+          "pc": 48240,
+          "pc_hex": "0xbc70"
+        },
+        "stack_slot": 412,
+        "stack_slot_hex": "0x19c"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R8, R19, UR12",
+          "pc": 49552,
+          "pc_hex": "0xc190"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R19, [R1+0x1a0]",
+          "pc": 48256,
+          "pc_hex": "0xbc80"
+        },
+        "stack_slot": 416,
+        "stack_slot_hex": "0x1a0"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R9, R18, UR12",
+          "pc": 49648,
+          "pc_hex": "0xc1f0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R18, [R1+0x1a4]",
+          "pc": 48272,
+          "pc_hex": "0xbc90"
+        },
+        "stack_slot": 420,
+        "stack_slot_hex": "0x1a4"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R8, R2, UR12",
+          "pc": 49808,
+          "pc_hex": "0xc290"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R2, [R1+0x1a8]",
+          "pc": 48288,
+          "pc_hex": "0xbca0"
+        },
+        "stack_slot": 424,
+        "stack_slot_hex": "0x1a8"
+      },
+      {
+        "first_use": {
+          "opcode": "FMUL",
+          "operands": "R9, R0, UR12",
+          "pc": 49904,
+          "pc_hex": "0xc2f0"
+        },
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R0, [R1+0x1ac]",
+          "pc": 48304,
+          "pc_hex": "0xbcb0"
+        },
+        "stack_slot": 428,
+        "stack_slot_hex": "0x1ac"
+      }
+    ],
+    "physical_chain_closed": true,
+    "producer_store_chain_count": 27,
+    "producer_store_chains": [
+      {
+        "output_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R12, R68, R84, R128, R24, R52, URZ",
+          "pc": 30736,
+          "pc_hex": "0x7810"
+        },
+        "stored_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x170], R12",
+            "pc": 30816,
+            "pc_hex": "0x7860"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x178], R14",
+            "pc": 30848,
+            "pc_hex": "0x7880"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R8, R64, R84, R124, R25, R52, URZ",
+          "pc": 31040,
+          "pc_hex": "0x7940"
+        },
+        "stored_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x180], R8",
+            "pc": 31120,
+            "pc_hex": "0x7990"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x188], R10",
+            "pc": 31152,
+            "pc_hex": "0x79b0"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R4, R56, R84, R120, R26, R52, URZ",
+          "pc": 31072,
+          "pc_hex": "0x7960"
+        },
+        "stored_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x190], R4",
+            "pc": 31200,
+            "pc_hex": "0x79e0"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x198], R6",
+            "pc": 31232,
+            "pc_hex": "0x7a00"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R12, R28, R84, R40, R27, R52, URZ",
+          "pc": 31136,
+          "pc_hex": "0x79a0"
+        },
+        "stored_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x1a0], R12",
+            "pc": 31280,
+            "pc_hex": "0x7a30"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x1a8], R14",
+            "pc": 31312,
+            "pc_hex": "0x7a50"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R8, R68, R100, R112, R24, R53, URZ",
+          "pc": 31216,
+          "pc_hex": "0x79f0"
+        },
+        "stored_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x160], R8",
+            "pc": 31360,
+            "pc_hex": "0x7a80"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x168], R10",
+            "pc": 31392,
+            "pc_hex": "0x7aa0"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R4, R64, R100, R108, R25, R53, URZ",
+          "pc": 31296,
+          "pc_hex": "0x7a40"
+        },
+        "stored_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x150], R4",
+            "pc": 31408,
+            "pc_hex": "0x7ab0"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x158], R6",
+            "pc": 31440,
+            "pc_hex": "0x7ad0"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R12, R56, R100.reuse, R104, R26, R53.reuse, URZ",
+          "pc": 31376,
+          "pc_hex": "0x7a90"
+        },
+        "stored_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x140], R12",
+            "pc": 31472,
+            "pc_hex": "0x7af0"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x148], R14",
+            "pc": 31504,
+            "pc_hex": "0x7b10"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R8, R28, R100, R48, R27, R53, URZ",
+          "pc": 31424,
+          "pc_hex": "0x7ac0"
+        },
+        "stored_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x130], R8",
+            "pc": 31520,
+            "pc_hex": "0x7b20"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x138], R10",
+            "pc": 31552,
+            "pc_hex": "0x7b40"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R4, R68, R116.reuse, R96, R24, R54.reuse, URZ",
+          "pc": 31488,
+          "pc_hex": "0x7b00"
+        },
+        "stored_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x120], R4",
+            "pc": 31568,
+            "pc_hex": "0x7b50"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x128], R6",
+            "pc": 31600,
+            "pc_hex": "0x7b70"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R12, R64, R116.reuse, R92, R25, R54.reuse, URZ",
+          "pc": 31536,
+          "pc_hex": "0x7b30"
+        },
+        "stored_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x110], R12",
+            "pc": 31616,
+            "pc_hex": "0x7b80"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x118], R14",
+            "pc": 31648,
+            "pc_hex": "0x7ba0"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R8, R56, R116.reuse, R88, R26, R54.reuse, URZ",
+          "pc": 31584,
+          "pc_hex": "0x7b60"
+        },
+        "stored_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x100], R8",
+            "pc": 31680,
+            "pc_hex": "0x7bc0"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x108], R10",
+            "pc": 31712,
+            "pc_hex": "0x7be0"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R4, R28, R116, R72, R27, R54, URZ",
+          "pc": 31632,
+          "pc_hex": "0x7b90"
+        },
+        "stored_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0xf0], R4",
+            "pc": 31728,
+            "pc_hex": "0x7bf0"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0xf8], R6",
+            "pc": 31760,
+            "pc_hex": "0x7c10"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R12, R68, R20.reuse, R80, R24, R55.reuse, URZ",
+          "pc": 31696,
+          "pc_hex": "0x7bd0"
+        },
+        "stored_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0xe0], R12",
+            "pc": 31776,
+            "pc_hex": "0x7c20"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0xe8], R14",
+            "pc": 31808,
+            "pc_hex": "0x7c40"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R8, R64, R20.reuse, R76, R25, R55.reuse, URZ",
+          "pc": 31744,
+          "pc_hex": "0x7c00"
+        },
+        "stored_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0xd0], R8",
+            "pc": 31856,
+            "pc_hex": "0x7c70"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0xd8], R10",
+            "pc": 31888,
+            "pc_hex": "0x7c90"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R4, R56, R20, R212, R26, R55, URZ",
+          "pc": 31792,
+          "pc_hex": "0x7c30"
+        },
+        "stored_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0xc0], R4",
+            "pc": 31936,
+            "pc_hex": "0x7cc0"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0xc8], R6",
+            "pc": 31984,
+            "pc_hex": "0x7cf0"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R12, R28, R20, R192, R27, R55, URZ",
+          "pc": 31872,
+          "pc_hex": "0x7c80"
+        },
+        "stored_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0xb0], R12",
+            "pc": 32032,
+            "pc_hex": "0x7d20"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0xb8], R14",
+            "pc": 32064,
+            "pc_hex": "0x7d40"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R8, R68, R86, R168, R24, R44, URZ",
+          "pc": 31968,
+          "pc_hex": "0x7ce0"
+        },
+        "stored_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0xa0], R8",
+            "pc": 32112,
+            "pc_hex": "0x7d70"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0xa8], R10",
+            "pc": 32144,
+            "pc_hex": "0x7d90"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R4, R68, R102, R172, R24, R45, URZ",
+          "pc": 32048,
+          "pc_hex": "0x7d30"
+        },
+        "stored_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x90], R4",
+            "pc": 32192,
+            "pc_hex": "0x7dc0"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x98], R6",
+            "pc": 32224,
+            "pc_hex": "0x7de0"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R12, R68, R118, R176, R24, R46, URZ",
+          "pc": 32128,
+          "pc_hex": "0x7d80"
+        },
+        "stored_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x80], R12",
+            "pc": 32240,
+            "pc_hex": "0x7df0"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x88], R14",
+            "pc": 32272,
+            "pc_hex": "0x7e10"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R8, R68, R22, R60, R24, R47, URZ",
+          "pc": 32208,
+          "pc_hex": "0x7dd0"
+        },
+        "stored_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x70], R8",
+            "pc": 32320,
+            "pc_hex": "0x7e40"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x78], R10",
+            "pc": 32352,
+            "pc_hex": "0x7e60"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R4, R64, R86, R204, R25, R44, URZ",
+          "pc": 32256,
+          "pc_hex": "0x7e00"
+        },
+        "stored_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x60], R4",
+            "pc": 32368,
+            "pc_hex": "0x7e70"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x68], R6",
+            "pc": 32400,
+            "pc_hex": "0x7e90"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R12, R64, R102, R200, R25, R45, URZ",
+          "pc": 32336,
+          "pc_hex": "0x7e50"
+        },
+        "stored_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x50], R12",
+            "pc": 32416,
+            "pc_hex": "0x7ea0"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x58], R14",
+            "pc": 32448,
+            "pc_hex": "0x7ec0"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R8, R64, R118, R196, R25, R46, URZ",
+          "pc": 32384,
+          "pc_hex": "0x7e80"
+        },
+        "stored_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x40], R8",
+            "pc": 32496,
+            "pc_hex": "0x7ef0"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x48], R10",
+            "pc": 32528,
+            "pc_hex": "0x7f10"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R4, R64, R22, R188, R25, R47, URZ",
+          "pc": 32432,
+          "pc_hex": "0x7eb0"
+        },
+        "stored_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x30], R4",
+            "pc": 32576,
+            "pc_hex": "0x7f40"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x38], R6",
+            "pc": 32608,
+            "pc_hex": "0x7f60"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R12, R56, R86, R184, R26, R44, URZ",
+          "pc": 32512,
+          "pc_hex": "0x7f00"
+        },
+        "stored_registers": [
+          "R12",
+          "R13",
+          "R14",
+          "R15"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x20], R12",
+            "pc": 32656,
+            "pc_hex": "0x7f90"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x28], R14",
+            "pc": 32688,
+            "pc_hex": "0x7fb0"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R8, R56, R102, R180, R26, R45, URZ",
+          "pc": 32592,
+          "pc_hex": "0x7f50"
+        },
+        "stored_registers": [
+          "R8",
+          "R9",
+          "R10",
+          "R11"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x10], R8",
+            "pc": 32736,
+            "pc_hex": "0x7fe0"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x18], R10",
+            "pc": 32752,
+            "pc_hex": "0x7ff0"
+          }
+        ]
+      },
+      {
+        "output_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R4, R56, R118, R132, R26, R46, URZ",
+          "pc": 32672,
+          "pc_hex": "0x7fa0"
+        },
+        "stored_registers": [
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "operands": "[R1], R4",
+            "pc": 32816,
+            "pc_hex": "0x8030"
+          },
+          {
+            "opcode": "STL.64",
+            "operands": "[R1+0x8], R6",
+            "pc": 32864,
+            "pc_hex": "0x8060"
+          }
+        ]
+      }
+    ],
+    "reload_first_use_is_scale_fmul_count": 108,
+    "reload_pc_range": [
+      "0xba90",
+      "0xec30"
+    ],
+    "reload_stack_slots": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28,
+      32,
+      36,
+      40,
+      44,
+      48,
+      52,
+      56,
+      60,
+      64,
+      68,
+      72,
+      76,
+      80,
+      84,
+      88,
+      92,
+      96,
+      100,
+      104,
+      108,
+      112,
+      116,
+      120,
+      124,
+      128,
+      132,
+      136,
+      140,
+      144,
+      148,
+      152,
+      156,
+      160,
+      164,
+      168,
+      172,
+      176,
+      180,
+      184,
+      188,
+      192,
+      196,
+      200,
+      204,
+      208,
+      212,
+      216,
+      220,
+      224,
+      228,
+      232,
+      236,
+      240,
+      244,
+      248,
+      252,
+      256,
+      260,
+      264,
+      268,
+      272,
+      276,
+      280,
+      284,
+      288,
+      292,
+      296,
+      300,
+      304,
+      308,
+      312,
+      316,
+      320,
+      324,
+      328,
+      332,
+      336,
+      340,
+      344,
+      348,
+      352,
+      356,
+      360,
+      364,
+      368,
+      372,
+      376,
+      380,
+      384,
+      388,
+      392,
+      396,
+      400,
+      404,
+      408,
+      412,
+      416,
+      420,
+      424,
+      428
+    ],
+    "representative_chain": [
+      {
+        "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+        "operands": "R12, R68, R84, R128, R24, R52, URZ",
+        "pc": 30736,
+        "pc_hex": "0x7810"
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x170], R12",
+        "pc": 30816,
+        "pc_hex": "0x7860"
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x178], R14",
+        "pc": 30848,
+        "pc_hex": "0x7880"
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R203, [R1+0x170]",
+        "pc": 47760,
+        "pc_hex": "0xba90"
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R202, [R1+0x174]",
+        "pc": 47776,
+        "pc_hex": "0xbaa0"
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R201, [R1+0x178]",
+        "pc": 47792,
+        "pc_hex": "0xbab0"
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R200, [R1+0x17c]",
+        "pc": 47808,
+        "pc_hex": "0xbac0"
+      },
+      {
+        "opcode": "FMUL",
+        "operands": "R8, R203, UR12",
+        "pc": 48352,
+        "pc_hex": "0xbce0"
+      },
+      {
+        "opcode": "FMUL",
+        "operands": "R9, R202, UR12",
+        "pc": 48384,
+        "pc_hex": "0xbd00"
+      },
+      {
+        "opcode": "FMUL",
+        "operands": "R8, R201, UR12",
+        "pc": 48560,
+        "pc_hex": "0xbdb0"
+      },
+      {
+        "opcode": "FMUL",
+        "operands": "R9, R200, UR12",
+        "pc": 48592,
+        "pc_hex": "0xbdd0"
+      },
+      {
+        "opcode": "FMUL",
+        "operands": "R10, R8, R10",
+        "pc": 48512,
+        "pc_hex": "0xbd80"
+      },
+      {
+        "opcode": "FMUL",
+        "operands": "R8, R60, UR12",
+        "pc": 48528,
+        "pc_hex": "0xbd90"
+      },
+      {
+        "opcode": "FMUL",
+        "operands": "R10, R8, R10",
+        "pc": 48544,
+        "pc_hex": "0xbda0"
+      }
+    ],
+    "stack_slot_range": [
+      "0x0",
+      "0x1ac"
+    ],
+    "stack_word_count": 108,
+    "stl64_instruction_count": 54,
+    "store_pc_range": [
+      "0x7860",
+      "0x8060"
+    ],
+    "store_stack_slots": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28,
+      32,
+      36,
+      40,
+      44,
+      48,
+      52,
+      56,
+      60,
+      64,
+      68,
+      72,
+      76,
+      80,
+      84,
+      88,
+      92,
+      96,
+      100,
+      104,
+      108,
+      112,
+      116,
+      120,
+      124,
+      128,
+      132,
+      136,
+      140,
+      144,
+      148,
+      152,
+      156,
+      160,
+      164,
+      168,
+      172,
+      176,
+      180,
+      184,
+      188,
+      192,
+      196,
+      200,
+      204,
+      208,
+      212,
+      216,
+      220,
+      224,
+      228,
+      232,
+      236,
+      240,
+      244,
+      248,
+      252,
+      256,
+      260,
+      264,
+      268,
+      272,
+      276,
+      280,
+      284,
+      288,
+      292,
+      296,
+      300,
+      304,
+      308,
+      312,
+      316,
+      320,
+      324,
+      328,
+      332,
+      336,
+      340,
+      344,
+      348,
+      352,
+      356,
+      360,
+      364,
+      368,
+      372,
+      376,
+      380,
+      384,
+      388,
+      392,
+      396,
+      400,
+      404,
+      408,
+      412,
+      416,
+      420,
+      424,
+      428
+    ],
+    "value_class": "first_pass_accumulator"
+  },
+  "next_evidence_only": "capture a backend register-allocation/liveness dump that maps backend SSA/PTX virtual registers to physical registers, stack slots, spill/reload PCs, live intervals, and source/MLIR locations",
+  "non_goals": [
+    "prove spill latency impact",
+    "report spill speedup",
+    "recommend a source or schedule optimization before source-value localization closes"
+  ],
+  "problem_point": {
+    "latency_causality_required_for_p0": false,
+    "latency_causality_tested": false,
+    "main_bundle_status": "mechanism_localized",
+    "optimization_recommendation_allowed": false,
+    "overall_status": "partially_mechanism_localized",
+    "p0_by_project_policy": true,
+    "physical_locations": {
+      "main_108_word_bundle": "during the first FC1 pass tail, 27 completed accumulator vectors are progressively spilled after their respective nearest OMMA producers; they are reloaded before/during activation after remaining live across the complete second FC1 pass",
+      "tail_14_word_bundle": "activation entry: baseline SASS stores 0xbb40..0xbc30; restores 0xf050..0xf3d0 before later consumers"
+    },
+    "physical_mechanisms": {
+      "main_108_word_bundle": "each completed first-pass accumulator vector is spilled after its own nearest OMMA producer during first-pass tail processing, remains live across the complete second FC1 pass, and is reloaded for activation",
+      "tail_14_word_bundle": "activation temporaries reuse physical registers holding five second-pass accumulators and nine index/address/control scalars; the allocator saves and restores those original values"
+    },
+    "tail_physical_status": "mechanism_localized",
+    "tail_source_value_status": "partially_semantic_localized"
+  },
+  "provenance": {
+    "input_files": {
+      "baseline_mlir": {
+        "path": "/tmp/exp004_baseline_clean.mlir",
+        "sha256": "6b2eb91a3c2a57b479c436c1cf14bedaf37ddbe937eb3caabd03400c3d5ccf93",
+        "size_bytes": 708043
+      },
+      "baseline_ptx": {
+        "path": "/tmp/exp004_baseline.ptx",
+        "sha256": "d4d848e3b34963584e63c3cde91acc57a61389898e3f3a157b62da4be5c147ff",
+        "size_bytes": 573766
+      },
+      "baseline_sass": {
+        "path": "/tmp/exp004_baseline.sass",
+        "sha256": "34b4c38161642a27ca6b4ec41ffad0bd70f6ff99fd8118997a4b2416c5e3abba",
+        "size_bytes": 517767
+      },
+      "ncu_evidence": {
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/ncu/spill_evidence.json",
+        "sha256": "0190f0a4793bee22ab07080cff6c35910f450d2a6ba6fd37deeb326159ee18a2",
+        "size_bytes": 9157
+      },
+      "source": {
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+        "sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+        "size_bytes": 124791
+      },
+      "static_evidence": {
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/static_spill_evidence.json",
+        "sha256": "5a36d3cf50614830cdaccbb07f93db4dd9506ba195a1326bf9abecaac473e945",
+        "size_bytes": 104787
+      },
+      "up_first_ptx": {
+        "path": "/tmp/exp004_up_first.ptx",
+        "sha256": "2f1f7c8351001e9c474ee3fdf618b6b0e33bf41c187e8207bd43872284ebbb8d",
+        "size_bytes": 573767
+      },
+      "up_first_sass": {
+        "path": "/tmp/exp004_up_first.sass",
+        "sha256": "b7b236276e27acb2f7e0908f01df5e864ff2863d9a817aea67720026e55a6f98",
+        "size_bytes": 515580
+      }
+    },
+    "invocation": {
+      "arguments": {
+        "--baseline-mlir": "/tmp/exp004_baseline_clean.mlir",
+        "--baseline-ptx": "/tmp/exp004_baseline.ptx",
+        "--baseline-sass": "/tmp/exp004_baseline.sass",
+        "--ncu-evidence": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/ncu/spill_evidence.json",
+        "--source": "/home/scratch.xiy_gpu/mega_inference/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+        "--static-evidence": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/static_spill_evidence.json",
+        "--up-first-ptx": "/tmp/exp004_up_first.ptx",
+        "--up-first-sass": "/tmp/exp004_up_first.sass"
+      },
+      "builder": {
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/build_spill_localization_evidence.py",
+        "sha256": "a70e7ef3d4155a41aa469a8546f0eb0b72256bea8e9f02d886edbcc1a051aba9",
+        "size_bytes": 42826
+      },
+      "python_executable": "/home/scratch.xiy_gpu/local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10"
+    },
+    "upstream_capture_inputs": {
+      "baseline": {
+        "ncu": {
+          "benchmark_cubin_identity_gate": true,
+          "command_text": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/baseline/command.txt",
+          "command_text_sha256": "346a7760b6743966ac9091bff0ca15602c14c219c2baa3d64b1f1aaf3bee8866",
+          "cubin": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/jit/baseline/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+          "cubin_sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+          "launch_json": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/baseline/veloq_launches.json",
+          "launch_json_sha256": "21bdb647ae4a1201e84831f26add34675fedcc5ef76fb588e880690af80cb343",
+          "native_csv": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/baseline/native_raw.csv",
+          "native_csv_sha256": "340bb2c65fc84cfbbfe59081c1e66540ccbd43970504c84965611b7e9d5d0290",
+          "profile_jit_artifact_identity_gate": true,
+          "profile_target": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/arms/baseline/profile_target.json",
+          "profile_target_sha256": "d341b77c11ad645701e0605c87747fe654c4cbdaee7ffc0b94c6059a74d58616",
+          "trace_rep": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/baseline/trace.ncu-rep",
+          "trace_rep_sha256": "3367df71ef0c3b750c03c60436d100a994863271016995c76f21195dd9eaaea8"
+        },
+        "static": {
+          "cubin": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/jit/baseline/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+          "cubin_sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+          "disassembly": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/static/baseline/target.sass",
+          "disassembly_kind": "nvdisasm_target_text",
+          "disassembly_sha256": "34b4c38161642a27ca6b4ec41ffad0bd70f6ff99fd8118997a4b2416c5e3abba",
+          "fresh_jit_artifact_identity_gate": true,
+          "resource_text": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/static/baseline/resource.txt",
+          "resource_text_sha256": "1d1049159ba3812731e8700736c6c70dbb332065bd269c18208a1cf1410c7d64"
+        }
+      },
+      "up_first_attribution": {
+        "ncu": {
+          "benchmark_cubin_identity_gate": true,
+          "command_text": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/up_first_attribution/command.txt",
+          "command_text_sha256": "52e851443f0d1af70ed272aa8764295d6473733490afa54659d8ea5408d7503f",
+          "cubin": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/jit/up_first_attribution/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+          "cubin_sha256": "691ca03362e2e1efd7a2ad1af2d9074a38e5b809f7f0d99a6239e41f4009fee6",
+          "launch_json": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/up_first_attribution/veloq_launches.json",
+          "launch_json_sha256": "b7059c25bc9a79e47d394707b0a362e9c645857016a1ad886885c7d271d49102",
+          "native_csv": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/up_first_attribution/native_raw.csv",
+          "native_csv_sha256": "d0fde10810df0813335f7b4bd6d44d6ab211c2df9bbc6996629340e48581d265",
+          "profile_jit_artifact_identity_gate": true,
+          "profile_target": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/arms/up_first_attribution/profile_target.json",
+          "profile_target_sha256": "6d9056486b831222e8acf6d82eb3a9e7416ec11ccdeb53077da07d6b311c978e",
+          "trace_rep": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/up_first_attribution/trace.ncu-rep",
+          "trace_rep_sha256": "c4f6206912c74fdf51ef324f31995f05c7385f18823a950dacc90fc160f0c29b"
+        },
+        "static": {
+          "cubin": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/jit/up_first_attribution/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+          "cubin_sha256": "691ca03362e2e1efd7a2ad1af2d9074a38e5b809f7f0d99a6239e41f4009fee6",
+          "disassembly": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/static/up_first_attribution/target.sass",
+          "disassembly_kind": "nvdisasm_target_text",
+          "disassembly_sha256": "b7b236276e27acb2f7e0908f01df5e864ff2863d9a817aea67720026e55a6f98",
+          "fresh_jit_artifact_identity_gate": true,
+          "resource_text": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/static/up_first_attribution/resource.txt",
+          "resource_text_sha256": "0c786a485ef7bedbedc08978248e4f7c6cd7b910995cd4dbd70e7bbcdba863b7"
+        }
+      }
+    }
+  },
+  "question": "where the fused-kernel register spill occurs and what live values are saved",
+  "schema": "exp004.spill-problem-point-evidence.v1",
+  "tail_14_word_bundle": {
+    "chains": [
+      {
+        "consumer_is_first_post_reload_reference": true,
+        "consumer_reads_reloaded_register": true,
+        "first_original_consumer": {
+          "opcode": "FMUL",
+          "operands": "R151, R151, UR12",
+          "pc": 70768,
+          "pc_hex": "0x11470"
+        },
+        "first_original_consumer_detail": "FMUL scale",
+        "first_original_consumer_pc": 70768,
+        "physical_chain_closed": true,
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R148, R68, R162, R148, R10, R23, URZ",
+          "pc": 47584,
+          "pc_hex": "0xb9e0"
+        },
+        "producer_detail": "OMMA R148..R151",
+        "producer_is_last_definition_before_store": true,
+        "producer_pc": 47584,
+        "register": "R151",
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R151, [R1+0x1e4]",
+          "pc": 61520,
+          "pc_hex": "0xf050"
+        },
+        "reload_pc": 61520,
+        "reuse_pcs_overwrite_physical_register": true,
+        "stack_slot": 484,
+        "stack_slot_hex": "0x1e4",
+        "store": {
+          "opcode": "STL",
+          "operands": "[R1+0x1e4], R151",
+          "pc": 47936,
+          "pc_hex": "0xbb40"
+        },
+        "store_pc": 47936,
+        "temporary_reuse": [
+          {
+            "opcode": "FMUL",
+            "operands": "R151, R9, R11",
+            "pc": 48576,
+            "pc_hex": "0xbdc0"
+          }
+        ],
+        "temporary_reuse_pcs": [
+          48576
+        ],
+        "unique_source_ssa_closed": null,
+        "value_class": "second_pass_accumulator"
+      },
+      {
+        "consumer_is_first_post_reload_reference": true,
+        "consumer_reads_reloaded_register": true,
+        "first_original_consumer": {
+          "opcode": "FMUL",
+          "operands": "R72, R72, UR12",
+          "pc": 66880,
+          "pc_hex": "0x10540"
+        },
+        "first_original_consumer_detail": "FMUL scale",
+        "first_original_consumer_pc": 66880,
+        "physical_chain_closed": true,
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R72, R176, R162, R72, R11, R23, URZ",
+          "pc": 47712,
+          "pc_hex": "0xba60"
+        },
+        "producer_detail": "OMMA R72..R75",
+        "producer_is_last_definition_before_store": true,
+        "producer_pc": 47712,
+        "register": "R72",
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R72, [R1+0x1e0]",
+          "pc": 61568,
+          "pc_hex": "0xf080"
+        },
+        "reload_pc": 61568,
+        "reuse_pcs_overwrite_physical_register": true,
+        "stack_slot": 480,
+        "stack_slot_hex": "0x1e0",
+        "store": {
+          "opcode": "STL",
+          "operands": "[R1+0x1e0], R72",
+          "pc": 47968,
+          "pc_hex": "0xbb60"
+        },
+        "store_pc": 47968,
+        "temporary_reuse": [
+          {
+            "opcode": "FMUL",
+            "operands": "R72, R8, R11",
+            "pc": 48672,
+            "pc_hex": "0xbe20"
+          }
+        ],
+        "temporary_reuse_pcs": [
+          48672
+        ],
+        "unique_source_ssa_closed": null,
+        "value_class": "second_pass_accumulator"
+      },
+      {
+        "consumer_is_first_post_reload_reference": true,
+        "consumer_reads_reloaded_register": true,
+        "first_original_consumer": {
+          "opcode": "FMUL",
+          "operands": "R73, R73, UR12",
+          "pc": 65408,
+          "pc_hex": "0xff80"
+        },
+        "first_original_consumer_detail": "FMUL scale",
+        "first_original_consumer_pc": 65408,
+        "physical_chain_closed": true,
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R72, R176, R162, R72, R11, R23, URZ",
+          "pc": 47712,
+          "pc_hex": "0xba60"
+        },
+        "producer_detail": "OMMA R72..R75",
+        "producer_is_last_definition_before_store": true,
+        "producer_pc": 47712,
+        "register": "R73",
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R73, [R1+0x1dc]",
+          "pc": 61584,
+          "pc_hex": "0xf090"
+        },
+        "reload_pc": 61584,
+        "reuse_pcs_overwrite_physical_register": true,
+        "stack_slot": 476,
+        "stack_slot_hex": "0x1dc",
+        "store": {
+          "opcode": "STL",
+          "operands": "[R1+0x1dc], R73",
+          "pc": 48000,
+          "pc_hex": "0xbb80"
+        },
+        "store_pc": 48000,
+        "temporary_reuse": [
+          {
+            "opcode": "FMUL",
+            "operands": "R73, R9, R11",
+            "pc": 48768,
+            "pc_hex": "0xbe80"
+          }
+        ],
+        "temporary_reuse_pcs": [
+          48768
+        ],
+        "unique_source_ssa_closed": null,
+        "value_class": "second_pass_accumulator"
+      },
+      {
+        "consumer_is_first_post_reload_reference": true,
+        "consumer_reads_reloaded_register": true,
+        "first_original_consumer": {
+          "opcode": "FMUL",
+          "operands": "R74, R74, UR12",
+          "pc": 64304,
+          "pc_hex": "0xfb30"
+        },
+        "first_original_consumer_detail": "FMUL scale",
+        "first_original_consumer_pc": 64304,
+        "physical_chain_closed": true,
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R72, R176, R162, R72, R11, R23, URZ",
+          "pc": 47712,
+          "pc_hex": "0xba60"
+        },
+        "producer_detail": "OMMA R72..R75",
+        "producer_is_last_definition_before_store": true,
+        "producer_pc": 47712,
+        "register": "R74",
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R74, [R1+0x1d8]",
+          "pc": 61616,
+          "pc_hex": "0xf0b0"
+        },
+        "reload_pc": 61616,
+        "reuse_pcs_overwrite_physical_register": true,
+        "stack_slot": 472,
+        "stack_slot_hex": "0x1d8",
+        "store": {
+          "opcode": "STL",
+          "operands": "[R1+0x1d8], R74",
+          "pc": 48016,
+          "pc_hex": "0xbb90"
+        },
+        "store_pc": 48016,
+        "temporary_reuse": [
+          {
+            "opcode": "FMUL",
+            "operands": "R74, R8, R11",
+            "pc": 48864,
+            "pc_hex": "0xbee0"
+          }
+        ],
+        "temporary_reuse_pcs": [
+          48864
+        ],
+        "unique_source_ssa_closed": null,
+        "value_class": "second_pass_accumulator"
+      },
+      {
+        "consumer_is_first_post_reload_reference": true,
+        "consumer_reads_reloaded_register": true,
+        "first_original_consumer": {
+          "opcode": "FMUL",
+          "operands": "R75, R75, UR12",
+          "pc": 68976,
+          "pc_hex": "0x10d70"
+        },
+        "first_original_consumer_detail": "FMUL scale",
+        "first_original_consumer_pc": 68976,
+        "physical_chain_closed": true,
+        "producer": {
+          "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+          "operands": "R72, R176, R162, R72, R11, R23, URZ",
+          "pc": 47712,
+          "pc_hex": "0xba60"
+        },
+        "producer_detail": "OMMA R72..R75",
+        "producer_is_last_definition_before_store": true,
+        "producer_pc": 47712,
+        "register": "R75",
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R75, [R1+0x1d4]",
+          "pc": 61808,
+          "pc_hex": "0xf170"
+        },
+        "reload_pc": 61808,
+        "reuse_pcs_overwrite_physical_register": true,
+        "stack_slot": 468,
+        "stack_slot_hex": "0x1d4",
+        "store": {
+          "opcode": "STL",
+          "operands": "[R1+0x1d4], R75",
+          "pc": 48032,
+          "pc_hex": "0xbba0"
+        },
+        "store_pc": 48032,
+        "temporary_reuse": [
+          {
+            "opcode": "FMUL",
+            "operands": "R75, R9, R11",
+            "pc": 48960,
+            "pc_hex": "0xbf40"
+          }
+        ],
+        "temporary_reuse_pcs": [
+          48960
+        ],
+        "unique_source_ssa_closed": null,
+        "value_class": "second_pass_accumulator"
+      },
+      {
+        "consumer_is_first_post_reload_reference": true,
+        "consumer_reads_reloaded_register": true,
+        "first_original_consumer": {
+          "opcode": "IMAD",
+          "operands": "R68, R251, 0x1fc0, R60.reuse",
+          "pc": 86336,
+          "pc_hex": "0x15140"
+        },
+        "first_original_consumer_detail": "IMAD address",
+        "first_original_consumer_pc": 86336,
+        "physical_chain_closed": true,
+        "producer": {
+          "opcode": "SHF.R.U32.HI",
+          "operands": "R251, RZ, 0x6, R251",
+          "pc": 14272,
+          "pc_hex": "0x37c0"
+        },
+        "producer_detail": "SHF index",
+        "producer_is_last_definition_before_store": true,
+        "producer_pc": 14272,
+        "register": "R251",
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R251, [R1+0x1d0]",
+          "pc": 62048,
+          "pc_hex": "0xf260"
+        },
+        "reload_pc": 62048,
+        "reuse_pcs_overwrite_physical_register": true,
+        "stack_slot": 464,
+        "stack_slot_hex": "0x1d0",
+        "store": {
+          "opcode": "STL",
+          "operands": "[R1+0x1d0], R251",
+          "pc": 48048,
+          "pc_hex": "0xbbb0"
+        },
+        "store_pc": 48048,
+        "temporary_reuse": [
+          {
+            "opcode": "FMUL",
+            "operands": "R251, R8, R11",
+            "pc": 49056,
+            "pc_hex": "0xbfa0"
+          }
+        ],
+        "temporary_reuse_pcs": [
+          49056
+        ],
+        "unique_source_ssa_closed": false,
+        "value_class": "index_address_scalar"
+      },
+      {
+        "consumer_is_first_post_reload_reference": true,
+        "consumer_reads_reloaded_register": true,
+        "first_original_consumer": {
+          "opcode": "IMAD",
+          "operands": "R70, R250, 0x1fc0, R60.reuse",
+          "pc": 86352,
+          "pc_hex": "0x15150"
+        },
+        "first_original_consumer_detail": "IMAD address",
+        "first_original_consumer_pc": 86352,
+        "physical_chain_closed": true,
+        "producer": {
+          "opcode": "SHF.R.U32.HI",
+          "operands": "R250, RZ, 0x6, R250",
+          "pc": 14288,
+          "pc_hex": "0x37d0"
+        },
+        "producer_detail": "SHF index",
+        "producer_is_last_definition_before_store": true,
+        "producer_pc": 14288,
+        "register": "R250",
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R250, [R1+0x1cc]",
+          "pc": 62112,
+          "pc_hex": "0xf2a0"
+        },
+        "reload_pc": 62112,
+        "reuse_pcs_overwrite_physical_register": true,
+        "stack_slot": 460,
+        "stack_slot_hex": "0x1cc",
+        "store": {
+          "opcode": "STL",
+          "operands": "[R1+0x1cc], R250",
+          "pc": 48064,
+          "pc_hex": "0xbbc0"
+        },
+        "store_pc": 48064,
+        "temporary_reuse": [
+          {
+            "opcode": "FMUL",
+            "operands": "R250, R9, R11",
+            "pc": 49152,
+            "pc_hex": "0xc000"
+          }
+        ],
+        "temporary_reuse_pcs": [
+          49152
+        ],
+        "unique_source_ssa_closed": false,
+        "value_class": "index_address_scalar"
+      },
+      {
+        "consumer_is_first_post_reload_reference": true,
+        "consumer_reads_reloaded_register": true,
+        "first_original_consumer": {
+          "opcode": "IMAD",
+          "operands": "R72, R249, 0x1fc0, R60.reuse",
+          "pc": 86368,
+          "pc_hex": "0x15160"
+        },
+        "first_original_consumer_detail": "IMAD address",
+        "first_original_consumer_pc": 86368,
+        "physical_chain_closed": true,
+        "producer": {
+          "opcode": "SHF.R.U32.HI",
+          "operands": "R249, RZ, 0x6, R249",
+          "pc": 14304,
+          "pc_hex": "0x37e0"
+        },
+        "producer_detail": "SHF index",
+        "producer_is_last_definition_before_store": true,
+        "producer_pc": 14304,
+        "register": "R249",
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R249, [R1+0x1c8]",
+          "pc": 62176,
+          "pc_hex": "0xf2e0"
+        },
+        "reload_pc": 62176,
+        "reuse_pcs_overwrite_physical_register": true,
+        "stack_slot": 456,
+        "stack_slot_hex": "0x1c8",
+        "store": {
+          "opcode": "STL",
+          "operands": "[R1+0x1c8], R249",
+          "pc": 48080,
+          "pc_hex": "0xbbd0"
+        },
+        "store_pc": 48080,
+        "temporary_reuse": [
+          {
+            "opcode": "FMUL",
+            "operands": "R249, R8, R11",
+            "pc": 49248,
+            "pc_hex": "0xc060"
+          }
+        ],
+        "temporary_reuse_pcs": [
+          49248
+        ],
+        "unique_source_ssa_closed": false,
+        "value_class": "index_address_scalar"
+      },
+      {
+        "consumer_is_first_post_reload_reference": true,
+        "consumer_reads_reloaded_register": true,
+        "first_original_consumer": {
+          "opcode": "IMAD",
+          "operands": "R74, R248, 0x1fc0, R60.reuse",
+          "pc": 86384,
+          "pc_hex": "0x15170"
+        },
+        "first_original_consumer_detail": "IMAD address",
+        "first_original_consumer_pc": 86384,
+        "physical_chain_closed": true,
+        "producer": {
+          "opcode": "SHF.R.U32.HI",
+          "operands": "R248, RZ, 0x6, R248",
+          "pc": 14320,
+          "pc_hex": "0x37f0"
+        },
+        "producer_detail": "SHF index",
+        "producer_is_last_definition_before_store": true,
+        "producer_pc": 14320,
+        "register": "R248",
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R248, [R1+0x1c4]",
+          "pc": 62240,
+          "pc_hex": "0xf320"
+        },
+        "reload_pc": 62240,
+        "reuse_pcs_overwrite_physical_register": true,
+        "stack_slot": 452,
+        "stack_slot_hex": "0x1c4",
+        "store": {
+          "opcode": "STL",
+          "operands": "[R1+0x1c4], R248",
+          "pc": 48096,
+          "pc_hex": "0xbbe0"
+        },
+        "store_pc": 48096,
+        "temporary_reuse": [
+          {
+            "opcode": "FMUL",
+            "operands": "R248, R9, R11",
+            "pc": 49344,
+            "pc_hex": "0xc0c0"
+          }
+        ],
+        "temporary_reuse_pcs": [
+          49344
+        ],
+        "unique_source_ssa_closed": false,
+        "value_class": "index_address_scalar"
+      },
+      {
+        "consumer_is_first_post_reload_reference": true,
+        "consumer_reads_reloaded_register": true,
+        "first_original_consumer": {
+          "opcode": "IMAD",
+          "operands": "R76, R247, 0x1fc0, R60",
+          "pc": 86400,
+          "pc_hex": "0x15180"
+        },
+        "first_original_consumer_detail": "IMAD address",
+        "first_original_consumer_pc": 86400,
+        "physical_chain_closed": true,
+        "producer": {
+          "opcode": "SHF.R.U32.HI",
+          "operands": "R247, RZ, 0x6, R247",
+          "pc": 14336,
+          "pc_hex": "0x3800"
+        },
+        "producer_detail": "SHF index",
+        "producer_is_last_definition_before_store": true,
+        "producer_pc": 14336,
+        "register": "R247",
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R247, [R1+0x1c0]",
+          "pc": 62304,
+          "pc_hex": "0xf360"
+        },
+        "reload_pc": 62304,
+        "reuse_pcs_overwrite_physical_register": true,
+        "stack_slot": 448,
+        "stack_slot_hex": "0x1c0",
+        "store": {
+          "opcode": "STL",
+          "operands": "[R1+0x1c0], R247",
+          "pc": 48112,
+          "pc_hex": "0xbbf0"
+        },
+        "store_pc": 48112,
+        "temporary_reuse": [
+          {
+            "opcode": "FMUL",
+            "operands": "R247, R8, R11",
+            "pc": 49472,
+            "pc_hex": "0xc140"
+          }
+        ],
+        "temporary_reuse_pcs": [
+          49472
+        ],
+        "unique_source_ssa_closed": false,
+        "value_class": "index_address_scalar"
+      },
+      {
+        "consumer_is_first_post_reload_reference": true,
+        "consumer_reads_reloaded_register": true,
+        "first_original_consumer": {
+          "opcode": "IMAD",
+          "operands": "R78, R246, 0x1fc0, R60.reuse",
+          "pc": 86416,
+          "pc_hex": "0x15190"
+        },
+        "first_original_consumer_detail": "IMAD address",
+        "first_original_consumer_pc": 86416,
+        "physical_chain_closed": true,
+        "producer": {
+          "opcode": "SHF.R.U32.HI",
+          "operands": "R246, RZ, 0x6, R246",
+          "pc": 14352,
+          "pc_hex": "0x3810"
+        },
+        "producer_detail": "SHF index",
+        "producer_is_last_definition_before_store": true,
+        "producer_pc": 14352,
+        "register": "R246",
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R246, [R1+0x1bc]",
+          "pc": 62352,
+          "pc_hex": "0xf390"
+        },
+        "reload_pc": 62352,
+        "reuse_pcs_overwrite_physical_register": true,
+        "stack_slot": 444,
+        "stack_slot_hex": "0x1bc",
+        "store": {
+          "opcode": "STL",
+          "operands": "[R1+0x1bc], R246",
+          "pc": 48128,
+          "pc_hex": "0xbc00"
+        },
+        "store_pc": 48128,
+        "temporary_reuse": [
+          {
+            "opcode": "FMUL",
+            "operands": "R246, R9, R11",
+            "pc": 49568,
+            "pc_hex": "0xc1a0"
+          }
+        ],
+        "temporary_reuse_pcs": [
+          49568
+        ],
+        "unique_source_ssa_closed": false,
+        "value_class": "index_address_scalar"
+      },
+      {
+        "consumer_is_first_post_reload_reference": true,
+        "consumer_reads_reloaded_register": true,
+        "first_original_consumer": {
+          "opcode": "IMAD",
+          "operands": "R82, R245, 0x1fc0, R60",
+          "pc": 86432,
+          "pc_hex": "0x151a0"
+        },
+        "first_original_consumer_detail": "IMAD address",
+        "first_original_consumer_pc": 86432,
+        "physical_chain_closed": true,
+        "producer": {
+          "opcode": "SHF.R.U32.HI",
+          "operands": "R245, RZ, 0x6, R245",
+          "pc": 14368,
+          "pc_hex": "0x3820"
+        },
+        "producer_detail": "SHF index",
+        "producer_is_last_definition_before_store": true,
+        "producer_pc": 14368,
+        "register": "R245",
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R245, [R1+0x1b8]",
+          "pc": 62384,
+          "pc_hex": "0xf3b0"
+        },
+        "reload_pc": 62384,
+        "reuse_pcs_overwrite_physical_register": true,
+        "stack_slot": 440,
+        "stack_slot_hex": "0x1b8",
+        "store": {
+          "opcode": "STL",
+          "operands": "[R1+0x1b8], R245",
+          "pc": 48144,
+          "pc_hex": "0xbc10"
+        },
+        "store_pc": 48144,
+        "temporary_reuse": [
+          {
+            "opcode": "FMUL",
+            "operands": "R245, R8, R11",
+            "pc": 49728,
+            "pc_hex": "0xc240"
+          }
+        ],
+        "temporary_reuse_pcs": [
+          49728
+        ],
+        "unique_source_ssa_closed": false,
+        "value_class": "index_address_scalar"
+      },
+      {
+        "consumer_is_first_post_reload_reference": true,
+        "consumer_reads_reloaded_register": true,
+        "first_original_consumer": {
+          "opcode": "FSETP.NEU.AND",
+          "operands": "P1, PT, R2, RZ, PT",
+          "pc": 73968,
+          "pc_hex": "0x120f0"
+        },
+        "first_original_consumer_detail": "FSETP control",
+        "first_original_consumer_pc": 73968,
+        "physical_chain_closed": true,
+        "producer": {
+          "opcode": "LDG.E",
+          "operands": "R2, desc[UR14][R2.64]",
+          "pc": 46672,
+          "pc_hex": "0xb650"
+        },
+        "producer_detail": "LDG.E scalar",
+        "producer_is_last_definition_before_store": true,
+        "producer_pc": 46672,
+        "register": "R2",
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R2, [R1+0x1b4]",
+          "pc": 62400,
+          "pc_hex": "0xf3c0"
+        },
+        "reload_pc": 62400,
+        "reuse_pcs_overwrite_physical_register": true,
+        "stack_slot": 436,
+        "stack_slot_hex": "0x1b4",
+        "store": {
+          "opcode": "STL",
+          "operands": "[R1+0x1b4], R2",
+          "pc": 48160,
+          "pc_hex": "0xbc20"
+        },
+        "store_pc": 48160,
+        "temporary_reuse": [
+          {
+            "opcode": "LDL.LU",
+            "operands": "R2, [R1+0x1a8]",
+            "pc": 48288,
+            "pc_hex": "0xbca0"
+          },
+          {
+            "opcode": "FMUL",
+            "operands": "R2, R9, R11",
+            "pc": 49824,
+            "pc_hex": "0xc2a0"
+          }
+        ],
+        "temporary_reuse_pcs": [
+          48288,
+          49824
+        ],
+        "unique_source_ssa_closed": false,
+        "value_class": "long_lived_control_scalar"
+      },
+      {
+        "consumer_is_first_post_reload_reference": true,
+        "consumer_reads_reloaded_register": true,
+        "first_original_consumer": {
+          "opcode": "IMAD",
+          "operands": "R60, R63.reuse, 0x40, R0",
+          "pc": 86512,
+          "pc_hex": "0x151f0"
+        },
+        "first_original_consumer_detail": "IMAD address",
+        "first_original_consumer_pc": 86512,
+        "physical_chain_closed": true,
+        "producer": {
+          "opcode": "IMAD",
+          "operands": "R0, R3, 0x1fc0, R0",
+          "pc": 14256,
+          "pc_hex": "0x37b0"
+        },
+        "producer_detail": "IMAD index",
+        "producer_is_last_definition_before_store": true,
+        "producer_pc": 14256,
+        "register": "R0",
+        "reload": {
+          "opcode": "LDL.LU",
+          "operands": "R0, [R1+0x1b0]",
+          "pc": 62416,
+          "pc_hex": "0xf3d0"
+        },
+        "reload_pc": 62416,
+        "reuse_pcs_overwrite_physical_register": true,
+        "stack_slot": 432,
+        "stack_slot_hex": "0x1b0",
+        "store": {
+          "opcode": "STL",
+          "operands": "[R1+0x1b0], R0",
+          "pc": 48176,
+          "pc_hex": "0xbc30"
+        },
+        "store_pc": 48176,
+        "temporary_reuse": [
+          {
+            "opcode": "LDL.LU",
+            "operands": "R0, [R1+0x1ac]",
+            "pc": 48304,
+            "pc_hex": "0xbcb0"
+          },
+          {
+            "opcode": "FMUL",
+            "operands": "R0, R8, R11",
+            "pc": 49920,
+            "pc_hex": "0xc300"
+          }
+        ],
+        "temporary_reuse_pcs": [
+          48304,
+          49920
+        ],
+        "unique_source_ssa_closed": false,
+        "value_class": "index_address_scalar"
+      }
+    ],
+    "homogeneous_accumulator_bundle": false,
+    "physical_mechanism": "activation-entry register live-range interference: original live values are saved, their physical registers are reused by activation temporaries, and the original values are restored before their later consumers",
+    "stack_bytes_per_thread": 56,
+    "stack_word_count": 14,
+    "value_class_counts": {
+      "index_address_scalar": 8,
+      "long_lived_control_scalar": 1,
+      "second_pass_accumulator": 5
+    }
+  },
+  "unresolved": [
+    "compiler-certified MLIR/PTX virtual value to SASS physical register and stack-slot mapping",
+    "unique source SSA/expression for the nine index/address/control scalars",
+    "a single source construct that causes the complete mixed 14-word tail"
+  ],
+  "up_first_observation": {
+    "executed_local_instruction_reduction_per_direction": 142016,
+    "interpretation": "corroborates the mixed activation-entry live-set mechanism; it does not identify one unique source construct as the cause",
+    "local_sector_reduction_per_direction": 568064,
+    "main_108_word_bundle_preserved": true,
+    "stack_byte_reduction": 56,
+    "stack_bytes_per_thread": [
+      488,
+      432
+    ],
+    "tail_14_word_bundle_eliminated": true,
+    "tensor_work_identity_pass": true
+  }
+}

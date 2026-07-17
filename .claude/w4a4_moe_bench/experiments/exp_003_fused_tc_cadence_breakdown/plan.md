@@ -12,8 +12,8 @@ orchestration。结论来自 assignment-aware sampled timeline 与完整 task po
 IKET 数值重建 NCU 的 `25.73%`。
 
 本实验是 instrumented breakdown，不重新比较 Fused 与 CUTLASS latency，也不把 IKET duration
-当作 production latency。`exp_002` 已确认的 stack/spill criticality 不并入本实验；`exp_003`
-收口后立即建立独立 `exp_004` 做 lifetime/reorder 单变量消融、未插桩 benchmark 与 NCU。
+当作 production latency。`exp_002` 已确认的 stack/local symptom 不并入本实验；后续独立
+`exp_004` 的职责是定位具体 spill PC、value class 与 live-range problem point，不预设 latency 归因。
 
 ## Hypothesis and Decision
 
@@ -205,8 +205,8 @@ trace overflow、目标 ranges 缺失、selected scope未声明、或无法把 P
 - 不在本实验修改 production kernel，不做性能优化 verdict。
 - 不做 stack/spill lifetime ablation，不用 IKET duration声称 spill cost。
 - 不做 FC2 scatter diagnostic-only 消融，也不做 ready-task/full-tile publish overlap 改动。
-- 本实验完成后建立 `exp_004_fused_stack_spill_criticality`，验证 122-word/lane stack roundtrip
-  是否来自 Gate accumulator 跨 Up 保活并位于关键路径。
+- 本实验完成后由 `exp_004_fused_stack_spill_criticality` 定位 122-word/lane stack roundtrip 的
+  exact PC/slot、semantic value class 与 producer/consumer live range；未定位前不提出优化。
 
 ## Plan Review
 

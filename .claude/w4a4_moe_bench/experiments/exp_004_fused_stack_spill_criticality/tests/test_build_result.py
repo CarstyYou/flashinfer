@@ -1,132 +1,139 @@
 from __future__ import annotations
 
-from build_result import decide, render_report, select_static_candidate
+import json
+from pathlib import Path
+import shutil
+
+import pytest
+
+from build_result import build_manifest, main, make_decision, render_report
+from exp004_common import read_json, validate_manifest_schema
 
 
-def inputs():
-    candidate = "activation_in_place_up"
-    static = {
-        "baseline_reproduction_pass": True,
-        "deltas": {
-            candidate: {
-                "complete_tail_removal_no_replacement": True,
-                "stack_bytes_delta": -56,
-                "stored_words_delta": -14,
-            }
-        },
-        "arms": {
-            "baseline": {
-                "resource": {"stack_bytes_per_thread": 488},
-                "local": {"stored_words": 122},
-            },
-            candidate: {
-                "resource": {"stack_bytes_per_thread": 432},
-                "local": {"stored_words": 108},
-            },
-        },
-    }
-    base_metrics = {
-        "local_load_sectors": 4_950_272,
-        "local_store_sectors": 4_950_272,
-        "executed_local_load_instructions": 1_000_000,
-        "executed_local_store_instructions": 500_000,
-        "achieved_occupancy_pct": 10.42,
-        "eligible_warps_per_cycle": 0.4,
-        "issue_active_pct": 20.0,
-        "tc_subpipe_active_pct": 25.0,
-        "stall_wait_pct": 20.0,
-        "stall_long_scoreboard_pct": 30.0,
-        "stall_short_scoreboard_pct": 3.0,
-        "stall_barrier_pct": 0.0,
-    }
-    candidate_metrics = dict(base_metrics)
-    candidate_metrics["local_load_sectors"] -= 568_064
-    candidate_metrics["local_store_sectors"] -= 568_064
-    ncu = {
-        "baseline_reproduction_pass": True,
-        "deltas": {
-            candidate: {
-                "dynamic_14_word_closure_pass": True,
-                "work_identity_pass": True,
-                "local_load_sector_reduction": 568_064,
-                "local_store_sector_reduction": 568_064,
-                "executed_local_load_instruction_reduction": 10,
-                "executed_local_store_instruction_reduction": 10,
-            }
-        },
-        "arms": {"baseline": base_metrics, candidate: candidate_metrics},
-    }
-    correctness = {"candidate": candidate, "gate_pass": True}
-    benchmark = {
-        "candidate": candidate,
-        "material_improvement": False,
-        "stable_le_5_percent": True,
-        "candidate_faster_pair_count": 5,
-        "speedup_fraction": 0.001,
-        "speedup_percent": 0.1,
-        "materiality_T_fraction": 0.002,
-        "arms": {
-            "baseline": {"median_us": 100.0, "spread_percent": 0.05},
-            "candidate": {"median_us": 99.9, "spread_percent": 0.05},
-        },
-    }
-    return static, ncu, correctness, benchmark
+ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_non_material_tail_is_closed_not_p0() -> None:
-    static, ncu, correctness, benchmark = inputs()
-    decision = decide(
-        static=static,
-        ncu=ncu,
-        correctness=correctness,
-        benchmark=benchmark,
-        def_use=None,
+def evidence():
+    return read_json(ROOT / "results" / "spill_localization_evidence.json")
+
+
+def copy_manifest_inputs(destination: Path) -> Path:
+    source = ROOT / "results"
+    relative_paths = (
+        "spill_localization_evidence.json",
+        "static_spill_evidence.json",
+        "ncu/spill_evidence.json",
+        "arms/baseline/preparation.json",
+        "arms/up_first_attribution/preparation.json",
+        "overlays/identity.json",
+        "resource_cleanup.json",
+        "attribution_evidence.json",
     )
-    assert decision["h14_attribution"] == "accepted"
-    assert decision["h14_criticality"] == "non_material"
-    assert decision["formal_experiment_closed"] is True
-    report = render_report(
-        static=static,
-        ncu=ncu,
-        correctness=correctness,
-        benchmark=benchmark,
-        decision=decision,
-        def_use=None,
+    for relative in relative_paths:
+        target = destination / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source / relative, target)
+    return destination
+
+
+def test_spill_is_p0_without_latency_claim() -> None:
+    decision = make_decision(evidence())
+    assert decision["severity"] == "P0_hard_failure_by_project_policy"
+    assert decision["latency_causality"] == "not_tested_and_not_required_for_P0"
+    assert decision["formal_experiment_closed"] is False
+
+
+def test_partial_source_localization_blocks_optimization() -> None:
+    decision = make_decision(evidence())
+    assert decision["physical_localization_status"] == "mechanism_localized"
+    assert decision["source_value_localization_status"] == (
+        "partially_semantic_localized"
     )
-    assert "H108 criticality" in report
-    assert "Local sectors" in report
+    assert decision["optimization_recommendation_allowed"] is False
 
 
-def test_failed_dynamic_closure_blocks_criticality() -> None:
-    static, ncu, correctness, benchmark = inputs()
-    ncu["deltas"]["activation_in_place_up"]["dynamic_14_word_closure_pass"] = False
-    decision = decide(
-        static=static,
-        ncu=ncu,
-        correctness=correctness,
-        benchmark=benchmark,
-        def_use=None,
-    )
-    assert decision["h14_attribution"] == "inconclusive"
-    assert decision["h14_criticality"].startswith("not_tested")
+def test_report_names_mixed_tail_and_exact_problem_point() -> None:
+    data = evidence()
+    report = render_report(data, make_decision(data))
+    assert "两个物理问题点已定位" in report
+    assert "第一段 FC1 收尾阶段" in report
+    assert "在各自 producer 后被逐步保存" in report
+    assert "activation 入口被保存" in report
+    assert "5` 个 second-pass accumulator" in report
+    assert "8` 个 index/address scalar" in report
+    assert "1` 个 control scalar" in report
+    assert "优化建议：无" in report
 
 
-def test_primary_then_fallback_static_selection() -> None:
-    static, _, _, _ = inputs()
-    static["deltas"]["activation_in_place_up"][
-        "selected_opcode_projection_equal_except_local"
-    ] = True
-    assert select_static_candidate(static) == "activation_in_place_up"
-    static["deltas"]["activation_in_place_up"][
-        "complete_tail_removal_no_replacement"
-    ] = False
-    static["deltas"]["activation_in_place_gate"] = {
-        "complete_tail_removal_no_replacement": True,
-        "selected_opcode_projection_equal_except_local": True,
+def test_report_rejects_superseded_criticality_story() -> None:
+    data = evidence()
+    report = render_report(data, make_decision(data))
+    assert "H14 criticality" not in report
+    assert "H108 criticality" not in report
+    assert "优先调查 FC1 pass order" not in report
+    assert "缩短双 FP32 accumulator overlap lifetime" not in report
+
+
+def test_compact_evidence_closes_every_physical_tail_chain() -> None:
+    data = evidence()
+    tail = data["tail_14_word_bundle"]
+    assert tail["stack_word_count"] == 14
+    assert tail["value_class_counts"] == {
+        "index_address_scalar": 8,
+        "long_lived_control_scalar": 1,
+        "second_pass_accumulator": 5,
     }
-    assert select_static_candidate(static) == "activation_in_place_gate"
+    assert all(row["physical_chain_closed"] for row in tail["chains"])
+    assert data["main_108_word_bundle"]["reload_first_use_is_scale_fmul_count"] == 108
 
 
-def test_no_qualified_static_arm_returns_none() -> None:
-    static, _, _, _ = inputs()
-    assert select_static_candidate(static) is None
+def test_decision_keeps_main_and_tail_problem_points_separate() -> None:
+    decision = make_decision(evidence())
+    assert set(decision["physical_problem_points"]) == {
+        "main_108_word_bundle",
+        "tail_14_word_bundle",
+    }
+    assert set(decision["physical_mechanisms"]) == {
+        "main_108_word_bundle",
+        "tail_14_word_bundle",
+    }
+
+
+def test_manifest_clean_rebuild_is_deterministic_and_has_no_active_legacy_gates(
+    tmp_path: Path,
+) -> None:
+    results = copy_manifest_inputs(tmp_path / "results")
+    data = read_json(results / "spill_localization_evidence.json")
+    decision = make_decision(data)
+    first = build_manifest(results, data, decision)
+    second = build_manifest(results, data, decision)
+    assert first == second
+    assert validate_manifest_schema(first) == []
+    assert "candidate_gates" not in first
+    assert "candidate_gates" not in first["static_spill"]
+    assert "attribution" not in first
+    assert set(first["arms"]) == {"baseline", "up_first_attribution"}
+
+
+def test_manifest_rejects_preparation_ncu_cubin_drift(tmp_path: Path) -> None:
+    results = copy_manifest_inputs(tmp_path / "results")
+    path = results / "ncu" / "spill_evidence.json"
+    ncu = read_json(path)
+    ncu["inputs"]["baseline"]["cubin_sha256"] = "0" * 64
+    path.write_text(json.dumps(ncu))
+    data = read_json(results / "spill_localization_evidence.json")
+    with pytest.raises(ValueError, match="preparation/NCU cubin identity drift"):
+        build_manifest(results, data, make_decision(data))
+
+
+def test_successful_partial_report_generation_exits_zero(tmp_path: Path) -> None:
+    results = copy_manifest_inputs(tmp_path / "results")
+    assert main(["--results", str(results)]) == 0
+    manifest = read_json(results / "validation.manifest.json")
+    assert manifest["status"] == "localization_partial"
+    assert manifest["decision"]["formal_experiment_closed"] is False
+    assert (
+        (results / "result.md")
+        .read_text()
+        .startswith("# exp_004：Fused Spill 问题点定位")
+    )
