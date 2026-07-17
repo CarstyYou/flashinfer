@@ -1,0 +1,47 @@
+{
+  "compiler_spill_refill": {
+    "annotation_count": 0,
+    "annotation_exactly_matches_local_sass": true,
+    "annotation_pcs": [],
+    "exact_full_stack_save_reload": true,
+    "instructions": [],
+    "loaded_32bit_slots_per_lane": 0,
+    "present": false,
+    "source_line_sections": [],
+    "source_lineinfo_present": false,
+    "static_load_instruction_count": 0,
+    "static_local_instruction_count": 0,
+    "static_local_opcode_counts": {},
+    "static_store_instruction_count": 0,
+    "stored_32bit_slots_per_lane": 0
+  },
+  "evidence_boundary": {
+    "dynamic_execution": "not established by static binary evidence",
+    "latency": "not established by static binary evidence",
+    "local": "LOCAL is static allocation outside the stack and does not negate a nonzero frame or annotated spill/refill",
+    "source_value": "unresolved without validated lineinfo and PTX/IR/source allocation mapping"
+  },
+  "evidence_sha256": "4f8a8e66824a3150cd0a1ebfd4b9136e172e6151166e14392d461e0ded615fff",
+  "identity": {
+    "cubin": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_005_8warp_spill_reduction/results/n64_temporal_replay/canonical_r2/raw/candidate_8warp_n64_temporal_replay_v0/m1024/canonical/jit/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+    "cubin_sha256": "089c69f5ea771777a80d274c7f3ea5e82911d77d8b749972ef895dfc16ad8217",
+    "function": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
+  },
+  "resource": {
+    "elf_frame_bytes_per_thread": 0,
+    "elf_minimum_stack_bytes_per_thread": 0,
+    "registers_per_thread": 146,
+    "shared_bytes_per_cta": 1024,
+    "stack_bytes_per_thread": 0,
+    "static_local_bytes_outside_stack": 0
+  },
+  "schema": "kdk.static-spill-evidence.v1",
+  "status": "complete",
+  "tools": {
+    "cuobjdump": "cuobjdump",
+    "cuobjdump_version": "cuobjdump: NVIDIA (R) fat binary listing tool\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "nvdisasm": "nvdisasm",
+    "nvdisasm_version": "nvdisasm: NVIDIA (R) CUDA disassembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:09:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0"
+  },
+  "zero_spill_static_gate": true
+}

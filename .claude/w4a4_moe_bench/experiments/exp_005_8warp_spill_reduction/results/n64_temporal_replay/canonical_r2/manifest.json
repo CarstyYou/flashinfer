@@ -1,0 +1,225 @@
+{
+  "arms": {
+    "candidate_8warp_n64_temporal_replay_v0": {
+      "1024": {
+        "cubin_sha256": [
+          "089c69f5ea771777a80d274c7f3ea5e82911d77d8b749972ef895dfc16ad8217"
+        ],
+        "jit_artifact_set_sha256": "5226b29603c4027c756cae5a43e9ca07eddf369c2ea6ab21590aae502a266bc1",
+        "launch_contract": {
+          "evidence_boundary": "expected geometry is a contract, not a source-derived observed launch; NCU/NSys artifact must populate observed fields",
+          "expected_block": [
+            288,
+            1,
+            1
+          ],
+          "expected_final_replay_kernel": "MoEDynamicKernel",
+          "expected_grid": [
+            1,
+            1,
+            110
+          ],
+          "max_active_clusters": 110,
+          "num_sms": 110,
+          "profiler_observed_block": null,
+          "profiler_observed_grid": null,
+          "profiler_observed_kernel": null,
+          "profiler_verification": "pending_external_profiler_artifact"
+        },
+        "overlay_sha256": "80aaa950853424247f5f3315797caa5e3151c9474d1aabce96a7a9d04a7d9fa3",
+        "preparation": "raw/candidate_8warp_n64_temporal_replay_v0/m1024/canonical/preparation.json"
+      },
+      "256": {
+        "cubin_sha256": [
+          "089c69f5ea771777a80d274c7f3ea5e82911d77d8b749972ef895dfc16ad8217"
+        ],
+        "jit_artifact_set_sha256": "e65477661a10d246ddfb91e083bf1f133998e24811f7da2d5d7e907e2bde3587",
+        "launch_contract": {
+          "evidence_boundary": "expected geometry is a contract, not a source-derived observed launch; NCU/NSys artifact must populate observed fields",
+          "expected_block": [
+            288,
+            1,
+            1
+          ],
+          "expected_final_replay_kernel": "MoEDynamicKernel",
+          "expected_grid": [
+            1,
+            1,
+            110
+          ],
+          "max_active_clusters": 110,
+          "num_sms": 110,
+          "profiler_observed_block": null,
+          "profiler_observed_grid": null,
+          "profiler_observed_kernel": null,
+          "profiler_verification": "pending_external_profiler_artifact"
+        },
+        "overlay_sha256": "80aaa950853424247f5f3315797caa5e3151c9474d1aabce96a7a9d04a7d9fa3",
+        "preparation": "raw/candidate_8warp_n64_temporal_replay_v0/m256/canonical/preparation.json"
+      },
+      "8192": {
+        "cubin_sha256": [
+          "089c69f5ea771777a80d274c7f3ea5e82911d77d8b749972ef895dfc16ad8217"
+        ],
+        "jit_artifact_set_sha256": "3729ff83f45abd832f132d927c677ef9b06f40655c7a6661bc2667b6333605d2",
+        "launch_contract": {
+          "evidence_boundary": "expected geometry is a contract, not a source-derived observed launch; NCU/NSys artifact must populate observed fields",
+          "expected_block": [
+            288,
+            1,
+            1
+          ],
+          "expected_final_replay_kernel": "MoEDynamicKernel",
+          "expected_grid": [
+            1,
+            1,
+            110
+          ],
+          "max_active_clusters": 110,
+          "num_sms": 110,
+          "profiler_observed_block": null,
+          "profiler_observed_grid": null,
+          "profiler_observed_kernel": null,
+          "profiler_verification": "pending_external_profiler_artifact"
+        },
+        "overlay_sha256": "80aaa950853424247f5f3315797caa5e3151c9474d1aabce96a7a9d04a7d9fa3",
+        "preparation": "raw/candidate_8warp_n64_temporal_replay_v0/m8192/canonical/preparation.json"
+      }
+    },
+    "candidate_8warp_serial_v0": {
+      "1024": {
+        "cubin_sha256": [
+          "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17"
+        ],
+        "jit_artifact_set_sha256": "1888c2a1cfc39a7a8cbb1e2be28cd2af3718d7bb0097005f18bb8d2702ab927d",
+        "launch_contract": {
+          "evidence_boundary": "expected geometry is a contract, not a source-derived observed launch; NCU/NSys artifact must populate observed fields",
+          "expected_block": [
+            288,
+            1,
+            1
+          ],
+          "expected_final_replay_kernel": "MoEDynamicKernel",
+          "expected_grid": [
+            1,
+            1,
+            110
+          ],
+          "max_active_clusters": 110,
+          "num_sms": 110,
+          "profiler_observed_block": null,
+          "profiler_observed_grid": null,
+          "profiler_observed_kernel": null,
+          "profiler_verification": "pending_external_profiler_artifact"
+        },
+        "overlay_sha256": "3e2bda4e09dc2c67d97abea4d392eb5fa117de9abdd80c49b0e89e1f2dd0b445",
+        "preparation": "raw/candidate_8warp_serial_v0/m1024/canonical/preparation.json"
+      },
+      "256": {
+        "cubin_sha256": [
+          "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17"
+        ],
+        "jit_artifact_set_sha256": "74c4e507bb2f40cc3d1c3dc848a465ac24b47f92c8eafd1b23db887382a4f3d0",
+        "launch_contract": {
+          "evidence_boundary": "expected geometry is a contract, not a source-derived observed launch; NCU/NSys artifact must populate observed fields",
+          "expected_block": [
+            288,
+            1,
+            1
+          ],
+          "expected_final_replay_kernel": "MoEDynamicKernel",
+          "expected_grid": [
+            1,
+            1,
+            110
+          ],
+          "max_active_clusters": 110,
+          "num_sms": 110,
+          "profiler_observed_block": null,
+          "profiler_observed_grid": null,
+          "profiler_observed_kernel": null,
+          "profiler_verification": "pending_external_profiler_artifact"
+        },
+        "overlay_sha256": "3e2bda4e09dc2c67d97abea4d392eb5fa117de9abdd80c49b0e89e1f2dd0b445",
+        "preparation": "raw/candidate_8warp_serial_v0/m256/canonical/preparation.json"
+      },
+      "8192": {
+        "cubin_sha256": [
+          "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17"
+        ],
+        "jit_artifact_set_sha256": "503c7bbd819654db62ebd59f1aa8e29af7b2049dfe2661c74d387eaf7c9f6589",
+        "launch_contract": {
+          "evidence_boundary": "expected geometry is a contract, not a source-derived observed launch; NCU/NSys artifact must populate observed fields",
+          "expected_block": [
+            288,
+            1,
+            1
+          ],
+          "expected_final_replay_kernel": "MoEDynamicKernel",
+          "expected_grid": [
+            1,
+            1,
+            110
+          ],
+          "max_active_clusters": 110,
+          "num_sms": 110,
+          "profiler_observed_block": null,
+          "profiler_observed_grid": null,
+          "profiler_observed_kernel": null,
+          "profiler_verification": "pending_external_profiler_artifact"
+        },
+        "overlay_sha256": "3e2bda4e09dc2c67d97abea4d392eb5fa117de9abdd80c49b0e89e1f2dd0b445",
+        "preparation": "raw/candidate_8warp_serial_v0/m8192/canonical/preparation.json"
+      }
+    }
+  },
+  "benchmark": {
+    "256": {
+      "path": "benchmark/m256_summary.json",
+      "verdict": "slower"
+    },
+    "8192": {
+      "path": "benchmark/m8192_summary.json",
+      "verdict": "slower"
+    }
+  },
+  "decision": "candidate_rejected_performance_regression",
+  "decision_reason": "The temporal-N64 subject passes the static zero-spill gate but is about 9.5% slower than the fresh 8-warp anchor at both valid benchmark cases, M256 and M8192.",
+  "comparison_registry": {
+    "path": "comparison_registry.r2.json",
+    "sha256": "7531a9e41560de8f91d3eae3fd1c75044851f12566c9056009fd91ebf8e7b04d"
+  },
+  "correctness": {
+    "1024": {
+      "gate_pass": false,
+      "path": "correctness/m1024.json"
+    },
+    "256": {
+      "gate_pass": true,
+      "path": "correctness/m256.json"
+    },
+    "8192": {
+      "gate_pass": true,
+      "path": "correctness/m8192.json"
+    }
+  },
+  "directed_fixtures": {
+    "gate_pass": true,
+    "path": "directed/summary.json"
+  },
+  "profiler_followup": {
+    "status": "not_run_after_reject",
+    "reason": "The user directed rejection if the candidate was slower. No dynamic-spill, TMA-traffic, cadence or stall claim is made for R2."
+  },
+  "relationship": "R2_temporal_n64_replay_vs_candidateA",
+  "schema": "exp005.temporal-n64-r2-manifest.v1",
+  "static_spill": {
+    "path": "static/summary.json",
+    "subject_zero_spill_gate": true
+  },
+  "status": "complete",
+  "work_identity": {
+    "path": "work_identity.json",
+    "static_omma_identity_gate": true
+  }
+}

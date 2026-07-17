@@ -1,0 +1,22 @@
+{
+  "schema": "exp005.temporal-n64-r2-work-identity.v1",
+  "relationship": "R2_temporal_n64_replay_vs_candidateA",
+  "tool": {
+    "name": "nvdisasm",
+    "version": "13.2.78"
+  },
+  "arms": {
+    "candidate_8warp_serial_v0": {
+      "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+      "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+      "static_omma_instruction_count": 448
+    },
+    "candidate_8warp_n64_temporal_replay_v0": {
+      "cubin_sha256": "089c69f5ea771777a80d274c7f3ea5e82911d77d8b749972ef895dfc16ad8217",
+      "opcode": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+      "static_omma_instruction_count": 448
+    }
+  },
+  "static_omma_identity_gate": true,
+  "evidence_boundary": "Static opcode identity establishes equal generated useful OMMA instruction count; no matched NCU dynamic-work claim is made for this rejected candidate."
+}

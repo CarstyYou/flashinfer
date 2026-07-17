@@ -41,7 +41,9 @@ EXPECTED_PYTHON_DEPS_SHA256 = (
 
 BASELINE = "baseline_4warp"
 CANDIDATE = "candidate_8warp_serial_v0"
+TEMPORAL_N64 = "candidate_8warp_n64_temporal_replay_v0"
 ALL_ARMS = (BASELINE, CANDIDATE)
+KNOWN_ARMS = ALL_ARMS + (TEMPORAL_N64,)
 M_VALUES = (256, 1024, 8192)
 E = 256
 H = 2048
@@ -53,6 +55,7 @@ EXPECTED_GRID = (1, 1, 110)
 EXPECTED_BLOCKS = {
     BASELINE: (160, 1, 1),
     CANDIDATE: (288, 1, 1),
+    TEMPORAL_N64: (288, 1, 1),
 }
 TILE_M = 128
 TILE_N = 128
@@ -123,7 +126,7 @@ def write_csv(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
 
 
 def require_arm_m(arm: str, m: int) -> None:
-    if arm not in ALL_ARMS:
+    if arm not in KNOWN_ARMS:
         raise ValueError(f"unknown exp_005 arm: {arm}")
     if m not in M_VALUES:
         raise ValueError(f"M must be one of {M_VALUES}, got {m}")

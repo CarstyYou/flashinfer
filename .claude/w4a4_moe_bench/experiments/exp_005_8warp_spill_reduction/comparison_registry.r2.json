@@ -1,0 +1,85 @@
+{
+  "schema": "kdk.kernel-dataflow-bottleneck.comparison-registry.v1",
+  "experiment": "exp_005_8warp_spill_reduction",
+  "accepted_at_utc": "2026-07-17T13:27:51Z",
+  "accepted_revision": "r2",
+  "source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+  "source_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+  "historical_registry": {
+    "path": "comparison_registry.json",
+    "accepted_revision": "r1",
+    "relationship": "R1_candidateA_v0_vs_baseline",
+    "status": "closed-and-immutable"
+  },
+  "relationships": [
+    {
+      "id": "R2_temporal_n64_replay_vs_candidateA",
+      "mode": "paired",
+      "component_scope": "complete fused MoE launch",
+      "canonical_status": "accepted-pre-capture",
+      "subjects": [
+        "candidate_8warp_n64_temporal_replay_v0"
+      ],
+      "anchor": "candidate_8warp_serial_v0",
+      "changed_bundle": {
+        "name": "8-warp temporal-N64 replay bundle",
+        "fields": [
+          "FC1 Gate/Up accumulator: M128xN128 -> one reusable M128xN64 half",
+          "schedule: Gate N128 -> Up N128 -> activation becomes two rounds of Gate N64(h) -> Up N64(h) -> activation-to-sC(h)",
+          "full-N128 FC1 TMA descriptors are replayed once per half",
+          "one CTA-wide half-complete barrier is added",
+          "Q1 is delayed until both BF16 sC halves are complete"
+        ],
+        "boundary": "inseparable temporal-replay design bundle; not a pure spill or accumulator-lifetime ablation"
+      },
+      "logical_work_boundary": "same E=256,H=2048,I_tp=512,topk=8 routed BF16-input/NVFP4-weight fused MoE with Gate->Up->SwiGLU/Q1->FC2/scatter",
+      "timed_boundary": "one final replay MoEDynamicKernel CUDA Graph node",
+      "controlled_invariants": [
+        "identical fixture and packed weights/scales",
+        "identical whole-task M128xN128xK128 FC1 and FC2 logical work",
+        "identical 8 compute warps plus W8 TMA, block 288 and atom_layout (4,2,1)",
+        "identical total useful Gate/Up/FC2 OMMA work",
+        "identical activation, quantization, routing and scatter semantics",
+        "identical compiler/container/dependency environment",
+        "identical GPU UUID, max_active_clusters=110, num_sms=110 and grid.z=110",
+        "identical CUDA Graph replay, cache-control and profiler protocol"
+      ],
+      "intentionally_changed_implementation_work": [
+        "Gate and Up full-tile FC1 TMA payload is replayed for each N64 half",
+        "additional half-complete CTA synchronization",
+        "different accumulator and activation live ranges",
+        "different static instruction/control-flow shape"
+      ],
+      "predeclared_allowed_consequence_fields": [
+        "per-thread registers and compiler stack/spill/refill",
+        "dynamic local traffic",
+        "FC1 physical TMA bytes, requests and producer work",
+        "barrier and pipeline wait work",
+        "dynamic instruction mix, stalls, issue cadence and whole-kernel duration",
+        "achieved occupancy and eligible/active warp scheduling"
+      ],
+      "allowed_attribution_path": "declared temporal-N64 replay bundle -> shorter accumulator lifetime plus extra TMA/synchronization -> resource, cadence and whole-kernel latency consequences",
+      "normalization_scope": "none; exact same end-to-end logical work is required",
+      "normalization_formula": null,
+      "denominator": "one complete fused MoE launch for the same routed fixture",
+      "fresh_evidence_namespace": "results/n64_temporal_replay/canonical_r2",
+      "allowed_claims": [
+        "whether the temporal-N64 replay subject is correct and eliminates compiler/dynamic spill",
+        "whether the complete subject bundle improves, preserves or regresses latency versus fresh Candidate A",
+        "which measured resource, TMA, synchronization and cadence consequences accompany the bundle"
+      ],
+      "prohibited_claims": [
+        "pure causal latency contribution of spill removal or Gate lifetime shortening",
+        "subject-versus-production or subject-versus-baseline performance claims",
+        "transitive claims derived from historical Candidate A evidence",
+        "additive or exact Gate/Up/FC2 phase times from whole-launch counters",
+        "performance claims after correctness, work, binary or launch identity failure"
+      ],
+      "pre_registry_diagnostic_exclusion": {
+        "namespace": "results/n64_temporal_replay/diagnostic_v0",
+        "reason": "source compile, M256 smoke correctness and static-spill feasibility only; captured before r2 acceptance and under an anchor arm alias",
+        "allowed_use": "implementation debugging only; never a canonical comparison or performance result"
+      }
+    }
+  ]
+}

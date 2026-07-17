@@ -1,0 +1,100 @@
+{
+  "anchor_self_drift": {
+    "cosine_loss": 0.0,
+    "max_abs": 0.0234375,
+    "relative_l2": 0.0065232873894274235,
+    "token_rel_l2_p99": 0.007609339896589518
+  },
+  "fixture_identity_pass": true,
+  "gate_pass": true,
+  "independent_reference_gate_pass": true,
+  "m": 8192,
+  "relationship": "R2_temporal_n64_replay_vs_candidateA",
+  "route_task_gate_pass": true,
+  "schema": "exp005.temporal-n64-r2-correctness.v1",
+  "strict_cross_arm_gate": {
+    "baseline_self_drift_within_caps": true,
+    "candidate_self_drift": {
+      "cosine_loss": 0.0,
+      "max_abs": 0.017578125,
+      "relative_l2": 0.0066140806302428246,
+      "token_rel_l2_p99": 0.007673519663512707
+    },
+    "candidate_stability_checks": {
+      "cosine_loss": true,
+      "max_abs": true,
+      "relative_l2": true,
+      "token_rel_l2_p99": true
+    },
+    "candidate_worst_vs_baseline": {
+      "cosine_loss": 0.0,
+      "max_abs": 0.0234375,
+      "relative_l2": 0.006732766982167959,
+      "token_rel_l2_p99": 0.007758724503219128
+    },
+    "cross_arm_checks": {
+      "cosine_loss": true,
+      "max_abs": true,
+      "relative_l2": true,
+      "token_rel_l2_p99": true
+    },
+    "formula": "min(cap, max(floor, 3 * baseline_self_drift))",
+    "gate_pass": true,
+    "specifications": {
+      "cosine_loss": {
+        "cap": 0.0001,
+        "floor": 1e-06
+      },
+      "max_abs": {
+        "cap": 0.1,
+        "floor": 0.02
+      },
+      "relative_l2": {
+        "cap": 0.03,
+        "floor": 0.005
+      },
+      "token_rel_l2_p99": {
+        "cap": 0.05,
+        "floor": 0.01
+      }
+    },
+    "thresholds": {
+      "cosine_loss": 1e-06,
+      "max_abs": 0.0703125,
+      "relative_l2": 0.01956986216828227,
+      "token_rel_l2_p99": 0.022828019689768553
+    }
+  },
+  "subject_self_drift": {
+    "cosine_loss": 0.0,
+    "max_abs": 0.017578125,
+    "relative_l2": 0.0066140806302428246,
+    "token_rel_l2_p99": 0.007673519663512707
+  },
+  "subject_vs_anchor": [
+    {
+      "cosine_loss": 0.0,
+      "max_abs": 0.01953125,
+      "relative_l2": 0.006732766982167959,
+      "token_rel_l2_p99": 0.007758724503219128
+    },
+    {
+      "cosine_loss": 0.0,
+      "max_abs": 0.01953125,
+      "relative_l2": 0.006686939392238855,
+      "token_rel_l2_p99": 0.007699578069150448
+    },
+    {
+      "cosine_loss": 0.0,
+      "max_abs": 0.015625,
+      "relative_l2": 0.006667202338576317,
+      "token_rel_l2_p99": 0.007691085338592529
+    },
+    {
+      "cosine_loss": 0.0,
+      "max_abs": 0.0234375,
+      "relative_l2": 0.0067031425423920155,
+      "token_rel_l2_p99": 0.00774033647030592
+    }
+  ]
+}

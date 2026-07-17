@@ -1,0 +1,73 @@
+{
+  "schema": "exp005.temporal-n64-r2-directed-summary.v1",
+  "relationship": "R2_temporal_n64_replay_vs_candidateA",
+  "m": 256,
+  "fixtures": {
+    "sparse_empty": {
+      "candidate_8warp_serial_v0": {
+        "path": "raw/candidate_8warp_serial_v0/m256/sparse_empty/preparation.json",
+        "sha256": "60f52da2efe42ac672dbdcec736050eff9ba04ba834210e6ec486ee785f566cf",
+        "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+        "independent_reference_gate_pass": true,
+        "route_task_gate_pass": true
+      },
+      "candidate_8warp_n64_temporal_replay_v0": {
+        "path": "raw/candidate_8warp_n64_temporal_replay_v0/m256/sparse_empty/preparation.json",
+        "sha256": "8ca740ef36c3b2004ca31ea2146b046ed5df52b9e76fd6d551a4b5ce248d7a15",
+        "cubin_sha256": "089c69f5ea771777a80d274c7f3ea5e82911d77d8b749972ef895dfc16ad8217",
+        "independent_reference_gate_pass": true,
+        "route_task_gate_pass": true
+      }
+    },
+    "exact_128": {
+      "candidate_8warp_serial_v0": {
+        "path": "raw/candidate_8warp_serial_v0/m256/exact_128/preparation.json",
+        "sha256": "d312310163fdca71efacb4525b0646cd305f7766699cb76411076d7c64e49740",
+        "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+        "independent_reference_gate_pass": true,
+        "route_task_gate_pass": true
+      },
+      "candidate_8warp_n64_temporal_replay_v0": {
+        "path": "raw/candidate_8warp_n64_temporal_replay_v0/m256/exact_128/preparation.json",
+        "sha256": "a070aa5449e578795a32d4e08d592daf7bbccf752a629f1ad52c3ccf894f181a",
+        "cubin_sha256": "089c69f5ea771777a80d274c7f3ea5e82911d77d8b749972ef895dfc16ad8217",
+        "independent_reference_gate_pass": true,
+        "route_task_gate_pass": true
+      }
+    },
+    "tail_129": {
+      "candidate_8warp_serial_v0": {
+        "path": "raw/candidate_8warp_serial_v0/m256/tail_129/preparation.json",
+        "sha256": "3b14a9c469e12ee967e177d9e58448a1622afd47156d7459b7c041dcbb818aef",
+        "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+        "independent_reference_gate_pass": true,
+        "route_task_gate_pass": true
+      },
+      "candidate_8warp_n64_temporal_replay_v0": {
+        "path": "raw/candidate_8warp_n64_temporal_replay_v0/m256/tail_129/preparation.json",
+        "sha256": "e75fc2922b37aaa878d9a8e19d2ce35489a086f8c8f11fdcd1570a312cb8bb61",
+        "cubin_sha256": "089c69f5ea771777a80d274c7f3ea5e82911d77d8b749972ef895dfc16ad8217",
+        "independent_reference_gate_pass": true,
+        "route_task_gate_pass": true
+      }
+    },
+    "hot_expert": {
+      "candidate_8warp_serial_v0": {
+        "path": "raw/candidate_8warp_serial_v0/m256/hot_expert/preparation.json",
+        "sha256": "1cea5ca53f600513cfa39abd5d8e81de9a162f4f9b41e724acd54c246dcc5684",
+        "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+        "independent_reference_gate_pass": true,
+        "route_task_gate_pass": true
+      },
+      "candidate_8warp_n64_temporal_replay_v0": {
+        "path": "raw/candidate_8warp_n64_temporal_replay_v0/m256/hot_expert/preparation.json",
+        "sha256": "46337db51ddbd970fa26b84b563c0f3063ed2fb9428dbbf7b3ade93297938b37",
+        "cubin_sha256": "089c69f5ea771777a80d274c7f3ea5e82911d77d8b749972ef895dfc16ad8217",
+        "independent_reference_gate_pass": true,
+        "route_task_gate_pass": true
+      }
+    }
+  },
+  "gate_pass": true,
+  "evidence_boundary": "Each preparation independently passed its reference and route/task replay gates; exact-once remains descriptor-multiset plus terminal-head evidence rather than a consumed bitmap."
+}

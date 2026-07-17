@@ -1,0 +1,1172 @@
+{
+  "compiler_spill_refill": {
+    "annotation_count": 84,
+    "annotation_exactly_matches_local_sass": true,
+    "annotation_pcs": [
+      "0x5fc0",
+      "0x5fe0",
+      "0x6000",
+      "0x6030",
+      "0x6070",
+      "0x6090",
+      "0x60a0",
+      "0x60c0",
+      "0x60f0",
+      "0x6110",
+      "0x6120",
+      "0x6140",
+      "0x6160",
+      "0x6190",
+      "0x61a0",
+      "0x61c0",
+      "0x61d0",
+      "0x61f0",
+      "0x6210",
+      "0x6240",
+      "0x6270",
+      "0x62b0",
+      "0x62e0",
+      "0x6300",
+      "0x6320",
+      "0x6340",
+      "0x6370",
+      "0x6390",
+      "0x86e0",
+      "0x86f0",
+      "0x8700",
+      "0x8710",
+      "0x8720",
+      "0x8730",
+      "0x8740",
+      "0x8750",
+      "0x8760",
+      "0x8770",
+      "0x8780",
+      "0x8790",
+      "0x87a0",
+      "0x87b0",
+      "0x87c0",
+      "0x87d0",
+      "0x87e0",
+      "0x87f0",
+      "0x8800",
+      "0x8810",
+      "0x8910",
+      "0x8930",
+      "0x8940",
+      "0x8950",
+      "0x8960",
+      "0x8970",
+      "0x8980",
+      "0x8990",
+      "0x89a0",
+      "0x89c0",
+      "0x89f0",
+      "0x8a10",
+      "0x8a20",
+      "0x8a40",
+      "0x8a50",
+      "0x8a60",
+      "0x8a80",
+      "0x8a90",
+      "0x8b80",
+      "0x8b90",
+      "0x8ba0",
+      "0x8bb0",
+      "0x8bc0",
+      "0x8bd0",
+      "0x8be0",
+      "0x8bf0",
+      "0x8c00",
+      "0x8c10",
+      "0x8c20",
+      "0x8d60",
+      "0x8e40",
+      "0x8f40",
+      "0x94c0",
+      "0x94d0",
+      "0x94f0",
+      "0x9510"
+    ],
+    "exact_full_stack_save_reload": true,
+    "instructions": [
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0xd0], R60",
+        "pc": 24512,
+        "pc_hex": "0x5fc0",
+        "stack_offset": 208,
+        "stack_offset_hex": "0xd0",
+        "stack_slots": [
+          "0xd0",
+          "0xd4"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0xd8], R62",
+        "pc": 24544,
+        "pc_hex": "0x5fe0",
+        "stack_offset": 216,
+        "stack_offset_hex": "0xd8",
+        "stack_slots": [
+          "0xd8",
+          "0xdc"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0xc0], R4",
+        "pc": 24576,
+        "pc_hex": "0x6000",
+        "stack_offset": 192,
+        "stack_offset_hex": "0xc0",
+        "stack_slots": [
+          "0xc0",
+          "0xc4"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0xc8], R6",
+        "pc": 24624,
+        "pc_hex": "0x6030",
+        "stack_offset": 200,
+        "stack_offset_hex": "0xc8",
+        "stack_slots": [
+          "0xc8",
+          "0xcc"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0xb0], R48",
+        "pc": 24688,
+        "pc_hex": "0x6070",
+        "stack_offset": 176,
+        "stack_offset_hex": "0xb0",
+        "stack_slots": [
+          "0xb0",
+          "0xb4"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0xb8], R50",
+        "pc": 24720,
+        "pc_hex": "0x6090",
+        "stack_offset": 184,
+        "stack_offset_hex": "0xb8",
+        "stack_slots": [
+          "0xb8",
+          "0xbc"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0xa0], R60",
+        "pc": 24736,
+        "pc_hex": "0x60a0",
+        "stack_offset": 160,
+        "stack_offset_hex": "0xa0",
+        "stack_slots": [
+          "0xa0",
+          "0xa4"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0xa8], R62",
+        "pc": 24768,
+        "pc_hex": "0x60c0",
+        "stack_offset": 168,
+        "stack_offset_hex": "0xa8",
+        "stack_slots": [
+          "0xa8",
+          "0xac"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x90], R4",
+        "pc": 24816,
+        "pc_hex": "0x60f0",
+        "stack_offset": 144,
+        "stack_offset_hex": "0x90",
+        "stack_slots": [
+          "0x90",
+          "0x94"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x98], R6",
+        "pc": 24848,
+        "pc_hex": "0x6110",
+        "stack_offset": 152,
+        "stack_offset_hex": "0x98",
+        "stack_slots": [
+          "0x98",
+          "0x9c"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x80], R48",
+        "pc": 24864,
+        "pc_hex": "0x6120",
+        "stack_offset": 128,
+        "stack_offset_hex": "0x80",
+        "stack_slots": [
+          "0x80",
+          "0x84"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x88], R50",
+        "pc": 24896,
+        "pc_hex": "0x6140",
+        "stack_offset": 136,
+        "stack_offset_hex": "0x88",
+        "stack_slots": [
+          "0x88",
+          "0x8c"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x70], R8",
+        "pc": 24928,
+        "pc_hex": "0x6160",
+        "stack_offset": 112,
+        "stack_offset_hex": "0x70",
+        "stack_slots": [
+          "0x70",
+          "0x74"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x78], R10",
+        "pc": 24976,
+        "pc_hex": "0x6190",
+        "stack_offset": 120,
+        "stack_offset_hex": "0x78",
+        "stack_slots": [
+          "0x78",
+          "0x7c"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x60], R4",
+        "pc": 24992,
+        "pc_hex": "0x61a0",
+        "stack_offset": 96,
+        "stack_offset_hex": "0x60",
+        "stack_slots": [
+          "0x60",
+          "0x64"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x68], R6",
+        "pc": 25024,
+        "pc_hex": "0x61c0",
+        "stack_offset": 104,
+        "stack_offset_hex": "0x68",
+        "stack_slots": [
+          "0x68",
+          "0x6c"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x50], R16",
+        "pc": 25040,
+        "pc_hex": "0x61d0",
+        "stack_offset": 80,
+        "stack_offset_hex": "0x50",
+        "stack_slots": [
+          "0x50",
+          "0x54"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x58], R18",
+        "pc": 25072,
+        "pc_hex": "0x61f0",
+        "stack_offset": 88,
+        "stack_offset_hex": "0x58",
+        "stack_slots": [
+          "0x58",
+          "0x5c"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x40], R8",
+        "pc": 25104,
+        "pc_hex": "0x6210",
+        "stack_offset": 64,
+        "stack_offset_hex": "0x40",
+        "stack_slots": [
+          "0x40",
+          "0x44"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x48], R10",
+        "pc": 25152,
+        "pc_hex": "0x6240",
+        "stack_offset": 72,
+        "stack_offset_hex": "0x48",
+        "stack_slots": [
+          "0x48",
+          "0x4c"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x30], R4",
+        "pc": 25200,
+        "pc_hex": "0x6270",
+        "stack_offset": 48,
+        "stack_offset_hex": "0x30",
+        "stack_slots": [
+          "0x30",
+          "0x34"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x38], R6",
+        "pc": 25264,
+        "pc_hex": "0x62b0",
+        "stack_offset": 56,
+        "stack_offset_hex": "0x38",
+        "stack_slots": [
+          "0x38",
+          "0x3c"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x20], R12",
+        "pc": 25312,
+        "pc_hex": "0x62e0",
+        "stack_offset": 32,
+        "stack_offset_hex": "0x20",
+        "stack_slots": [
+          "0x20",
+          "0x24"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x28], R14",
+        "pc": 25344,
+        "pc_hex": "0x6300",
+        "stack_offset": 40,
+        "stack_offset_hex": "0x28",
+        "stack_slots": [
+          "0x28",
+          "0x2c"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x10], R8",
+        "pc": 25376,
+        "pc_hex": "0x6320",
+        "stack_offset": 16,
+        "stack_offset_hex": "0x10",
+        "stack_slots": [
+          "0x10",
+          "0x14"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x18], R10",
+        "pc": 25408,
+        "pc_hex": "0x6340",
+        "stack_offset": 24,
+        "stack_offset_hex": "0x18",
+        "stack_slots": [
+          "0x18",
+          "0x1c"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1], R4",
+        "pc": 25456,
+        "pc_hex": "0x6370",
+        "stack_offset": 0,
+        "stack_offset_hex": "0x0",
+        "stack_slots": [
+          "0x0",
+          "0x4"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "STL.64",
+        "operands": "[R1+0x8], R6",
+        "pc": 25488,
+        "pc_hex": "0x6390",
+        "stack_offset": 8,
+        "stack_offset_hex": "0x8",
+        "stack_slots": [
+          "0x8",
+          "0xc"
+        ],
+        "width_bytes_per_lane": 8
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R129, [R1+0xd0]",
+        "pc": 34528,
+        "pc_hex": "0x86e0",
+        "stack_offset": 208,
+        "stack_offset_hex": "0xd0",
+        "stack_slots": [
+          "0xd0"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R128, [R1+0xd4]",
+        "pc": 34544,
+        "pc_hex": "0x86f0",
+        "stack_offset": 212,
+        "stack_offset_hex": "0xd4",
+        "stack_slots": [
+          "0xd4"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R127, [R1+0xd8]",
+        "pc": 34560,
+        "pc_hex": "0x8700",
+        "stack_offset": 216,
+        "stack_offset_hex": "0xd8",
+        "stack_slots": [
+          "0xd8"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R126, [R1+0xdc]",
+        "pc": 34576,
+        "pc_hex": "0x8710",
+        "stack_offset": 220,
+        "stack_offset_hex": "0xdc",
+        "stack_slots": [
+          "0xdc"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R115, [R1+0xc0]",
+        "pc": 34592,
+        "pc_hex": "0x8720",
+        "stack_offset": 192,
+        "stack_offset_hex": "0xc0",
+        "stack_slots": [
+          "0xc0"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R114, [R1+0xc4]",
+        "pc": 34608,
+        "pc_hex": "0x8730",
+        "stack_offset": 196,
+        "stack_offset_hex": "0xc4",
+        "stack_slots": [
+          "0xc4"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R113, [R1+0xc8]",
+        "pc": 34624,
+        "pc_hex": "0x8740",
+        "stack_offset": 200,
+        "stack_offset_hex": "0xc8",
+        "stack_slots": [
+          "0xc8"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R112, [R1+0xcc]",
+        "pc": 34640,
+        "pc_hex": "0x8750",
+        "stack_offset": 204,
+        "stack_offset_hex": "0xcc",
+        "stack_slots": [
+          "0xcc"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R111, [R1+0x50]",
+        "pc": 34656,
+        "pc_hex": "0x8760",
+        "stack_offset": 80,
+        "stack_offset_hex": "0x50",
+        "stack_slots": [
+          "0x50"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R110, [R1+0x54]",
+        "pc": 34672,
+        "pc_hex": "0x8770",
+        "stack_offset": 84,
+        "stack_offset_hex": "0x54",
+        "stack_slots": [
+          "0x54"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R109, [R1+0x58]",
+        "pc": 34688,
+        "pc_hex": "0x8780",
+        "stack_offset": 88,
+        "stack_offset_hex": "0x58",
+        "stack_slots": [
+          "0x58"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R108, [R1+0x5c]",
+        "pc": 34704,
+        "pc_hex": "0x8790",
+        "stack_offset": 92,
+        "stack_offset_hex": "0x5c",
+        "stack_slots": [
+          "0x5c"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R50, [R1+0x10]",
+        "pc": 34720,
+        "pc_hex": "0x87a0",
+        "stack_offset": 16,
+        "stack_offset_hex": "0x10",
+        "stack_slots": [
+          "0x10"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R56, [R1+0x14]",
+        "pc": 34736,
+        "pc_hex": "0x87b0",
+        "stack_offset": 20,
+        "stack_offset_hex": "0x14",
+        "stack_slots": [
+          "0x14"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R58, [R1+0x18]",
+        "pc": 34752,
+        "pc_hex": "0x87c0",
+        "stack_offset": 24,
+        "stack_offset_hex": "0x18",
+        "stack_slots": [
+          "0x18"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R76, [R1+0x1c]",
+        "pc": 34768,
+        "pc_hex": "0x87d0",
+        "stack_offset": 28,
+        "stack_offset_hex": "0x1c",
+        "stack_slots": [
+          "0x1c"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R78, [R1+0xb0]",
+        "pc": 34784,
+        "pc_hex": "0x87e0",
+        "stack_offset": 176,
+        "stack_offset_hex": "0xb0",
+        "stack_slots": [
+          "0xb0"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R80, [R1+0xb4]",
+        "pc": 34800,
+        "pc_hex": "0x87f0",
+        "stack_offset": 180,
+        "stack_offset_hex": "0xb4",
+        "stack_slots": [
+          "0xb4"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R82, [R1+0xb8]",
+        "pc": 34816,
+        "pc_hex": "0x8800",
+        "stack_offset": 184,
+        "stack_offset_hex": "0xb8",
+        "stack_slots": [
+          "0xb8"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R107, [R1+0xbc]",
+        "pc": 34832,
+        "pc_hex": "0x8810",
+        "stack_offset": 188,
+        "stack_offset_hex": "0xbc",
+        "stack_slots": [
+          "0xbc"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R111, [R1+0xa0]",
+        "pc": 35088,
+        "pc_hex": "0x8910",
+        "stack_offset": 160,
+        "stack_offset_hex": "0xa0",
+        "stack_slots": [
+          "0xa0"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R113, [R1+0xa4]",
+        "pc": 35120,
+        "pc_hex": "0x8930",
+        "stack_offset": 164,
+        "stack_offset_hex": "0xa4",
+        "stack_slots": [
+          "0xa4"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R110, [R1+0xa8]",
+        "pc": 35136,
+        "pc_hex": "0x8940",
+        "stack_offset": 168,
+        "stack_offset_hex": "0xa8",
+        "stack_slots": [
+          "0xa8"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R112, [R1+0xac]",
+        "pc": 35152,
+        "pc_hex": "0x8950",
+        "stack_offset": 172,
+        "stack_offset_hex": "0xac",
+        "stack_slots": [
+          "0xac"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R115, [R1+0x40]",
+        "pc": 35168,
+        "pc_hex": "0x8960",
+        "stack_offset": 64,
+        "stack_offset_hex": "0x40",
+        "stack_slots": [
+          "0x40"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R117, [R1+0x44]",
+        "pc": 35184,
+        "pc_hex": "0x8970",
+        "stack_offset": 68,
+        "stack_offset_hex": "0x44",
+        "stack_slots": [
+          "0x44"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R114, [R1+0x48]",
+        "pc": 35200,
+        "pc_hex": "0x8980",
+        "stack_offset": 72,
+        "stack_offset_hex": "0x48",
+        "stack_slots": [
+          "0x48"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R116, [R1+0x4c]",
+        "pc": 35216,
+        "pc_hex": "0x8990",
+        "stack_offset": 76,
+        "stack_offset_hex": "0x4c",
+        "stack_slots": [
+          "0x4c"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R131, [R1]",
+        "pc": 35232,
+        "pc_hex": "0x89a0",
+        "stack_offset": 0,
+        "stack_offset_hex": "0x0",
+        "stack_slots": [
+          "0x0"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R126, [R1+0x4]",
+        "pc": 35264,
+        "pc_hex": "0x89c0",
+        "stack_offset": 4,
+        "stack_offset_hex": "0x4",
+        "stack_slots": [
+          "0x4"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R122, [R1+0x8]",
+        "pc": 35312,
+        "pc_hex": "0x89f0",
+        "stack_offset": 8,
+        "stack_offset_hex": "0x8",
+        "stack_slots": [
+          "0x8"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R119, [R1+0xc]",
+        "pc": 35344,
+        "pc_hex": "0x8a10",
+        "stack_offset": 12,
+        "stack_offset_hex": "0xc",
+        "stack_slots": [
+          "0xc"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R128, [R1+0x90]",
+        "pc": 35360,
+        "pc_hex": "0x8a20",
+        "stack_offset": 144,
+        "stack_offset_hex": "0x90",
+        "stack_slots": [
+          "0x90"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R130, [R1+0x94]",
+        "pc": 35392,
+        "pc_hex": "0x8a40",
+        "stack_offset": 148,
+        "stack_offset_hex": "0x94",
+        "stack_slots": [
+          "0x94"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R127, [R1+0x98]",
+        "pc": 35408,
+        "pc_hex": "0x8a50",
+        "stack_offset": 152,
+        "stack_offset_hex": "0x98",
+        "stack_slots": [
+          "0x98"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R129, [R1+0x9c]",
+        "pc": 35424,
+        "pc_hex": "0x8a60",
+        "stack_offset": 156,
+        "stack_offset_hex": "0x9c",
+        "stack_slots": [
+          "0x9c"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R132, [R1+0x80]",
+        "pc": 35456,
+        "pc_hex": "0x8a80",
+        "stack_offset": 128,
+        "stack_offset_hex": "0x80",
+        "stack_slots": [
+          "0x80"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R135, [R1+0x84]",
+        "pc": 35472,
+        "pc_hex": "0x8a90",
+        "stack_offset": 132,
+        "stack_offset_hex": "0x84",
+        "stack_slots": [
+          "0x84"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R131, [R1+0x88]",
+        "pc": 35712,
+        "pc_hex": "0x8b80",
+        "stack_offset": 136,
+        "stack_offset_hex": "0x88",
+        "stack_slots": [
+          "0x88"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R134, [R1+0x8c]",
+        "pc": 35728,
+        "pc_hex": "0x8b90",
+        "stack_offset": 140,
+        "stack_offset_hex": "0x8c",
+        "stack_slots": [
+          "0x8c"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R138, [R1+0x30]",
+        "pc": 35744,
+        "pc_hex": "0x8ba0",
+        "stack_offset": 48,
+        "stack_offset_hex": "0x30",
+        "stack_slots": [
+          "0x30"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R133, [R1+0x34]",
+        "pc": 35760,
+        "pc_hex": "0x8bb0",
+        "stack_offset": 52,
+        "stack_offset_hex": "0x34",
+        "stack_slots": [
+          "0x34"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R137, [R1+0x38]",
+        "pc": 35776,
+        "pc_hex": "0x8bc0",
+        "stack_offset": 56,
+        "stack_offset_hex": "0x38",
+        "stack_slots": [
+          "0x38"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R136, [R1+0x3c]",
+        "pc": 35792,
+        "pc_hex": "0x8bd0",
+        "stack_offset": 60,
+        "stack_offset_hex": "0x3c",
+        "stack_slots": [
+          "0x3c"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R154, [R1+0x70]",
+        "pc": 35808,
+        "pc_hex": "0x8be0",
+        "stack_offset": 112,
+        "stack_offset_hex": "0x70",
+        "stack_slots": [
+          "0x70"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R142, [R1+0x74]",
+        "pc": 35824,
+        "pc_hex": "0x8bf0",
+        "stack_offset": 116,
+        "stack_offset_hex": "0x74",
+        "stack_slots": [
+          "0x74"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R141, [R1+0x78]",
+        "pc": 35840,
+        "pc_hex": "0x8c00",
+        "stack_offset": 120,
+        "stack_offset_hex": "0x78",
+        "stack_slots": [
+          "0x78"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R140, [R1+0x7c]",
+        "pc": 35856,
+        "pc_hex": "0x8c10",
+        "stack_offset": 124,
+        "stack_offset_hex": "0x7c",
+        "stack_slots": [
+          "0x7c"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R144, [R1+0x60]",
+        "pc": 35872,
+        "pc_hex": "0x8c20",
+        "stack_offset": 96,
+        "stack_offset_hex": "0x60",
+        "stack_slots": [
+          "0x60"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R153, [R1+0x64]",
+        "pc": 36192,
+        "pc_hex": "0x8d60",
+        "stack_offset": 100,
+        "stack_offset_hex": "0x64",
+        "stack_slots": [
+          "0x64"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R143, [R1+0x68]",
+        "pc": 36416,
+        "pc_hex": "0x8e40",
+        "stack_offset": 104,
+        "stack_offset_hex": "0x68",
+        "stack_slots": [
+          "0x68"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R145, [R1+0x6c]",
+        "pc": 36672,
+        "pc_hex": "0x8f40",
+        "stack_offset": 108,
+        "stack_offset_hex": "0x6c",
+        "stack_slots": [
+          "0x6c"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R154, [R1+0x2c]",
+        "pc": 38080,
+        "pc_hex": "0x94c0",
+        "stack_offset": 44,
+        "stack_offset_hex": "0x2c",
+        "stack_slots": [
+          "0x2c"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R165, [R1+0x24]",
+        "pc": 38096,
+        "pc_hex": "0x94d0",
+        "stack_offset": 36,
+        "stack_offset_hex": "0x24",
+        "stack_slots": [
+          "0x24"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R164, [R1+0x28]",
+        "pc": 38128,
+        "pc_hex": "0x94f0",
+        "stack_offset": 40,
+        "stack_offset_hex": "0x28",
+        "stack_slots": [
+          "0x28"
+        ],
+        "width_bytes_per_lane": 4
+      },
+      {
+        "opcode": "LDL.LU",
+        "operands": "R128, [R1+0x20]",
+        "pc": 38160,
+        "pc_hex": "0x9510",
+        "stack_offset": 32,
+        "stack_offset_hex": "0x20",
+        "stack_slots": [
+          "0x20"
+        ],
+        "width_bytes_per_lane": 4
+      }
+    ],
+    "loaded_32bit_slots_per_lane": 56,
+    "present": true,
+    "source_line_sections": [],
+    "source_lineinfo_present": false,
+    "static_load_instruction_count": 56,
+    "static_local_instruction_count": 84,
+    "static_local_opcode_counts": {
+      "LDL.LU": 56,
+      "STL.64": 28
+    },
+    "static_store_instruction_count": 28,
+    "stored_32bit_slots_per_lane": 56
+  },
+  "evidence_boundary": {
+    "dynamic_execution": "not established by static binary evidence",
+    "latency": "not established by static binary evidence",
+    "local": "LOCAL is static allocation outside the stack and does not negate a nonzero frame or annotated spill/refill",
+    "source_value": "unresolved without validated lineinfo and PTX/IR/source allocation mapping"
+  },
+  "evidence_sha256": "75714496ae738799e6e3098e8c7dbfa22f67491312b327bf0ea5018fa147e602",
+  "identity": {
+    "cubin": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_005_8warp_spill_reduction/results/n64_temporal_replay/canonical_r2/raw/candidate_8warp_serial_v0/m256/canonical/jit/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+    "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+    "function": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
+  },
+  "resource": {
+    "elf_frame_bytes_per_thread": 224,
+    "elf_minimum_stack_bytes_per_thread": 224,
+    "registers_per_thread": 168,
+    "shared_bytes_per_cta": 1024,
+    "stack_bytes_per_thread": 224,
+    "static_local_bytes_outside_stack": 0
+  },
+  "schema": "kdk.static-spill-evidence.v1",
+  "status": "complete",
+  "tools": {
+    "cuobjdump": "cuobjdump",
+    "cuobjdump_version": "cuobjdump: NVIDIA (R) fat binary listing tool\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "nvdisasm": "nvdisasm",
+    "nvdisasm_version": "nvdisasm: NVIDIA (R) CUDA disassembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:09:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0"
+  },
+  "zero_spill_static_gate": false
+}

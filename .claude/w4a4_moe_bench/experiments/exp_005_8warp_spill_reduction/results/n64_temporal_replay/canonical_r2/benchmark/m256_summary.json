@@ -1,0 +1,76 @@
+{
+  "arms": {
+    "candidate_8warp_n64_temporal_replay_v0": {
+      "count": 10,
+      "cv": 0.000519185775922841,
+      "mean_us": 590.8877447843552,
+      "median_us": 590.8252823352814,
+      "p10_us": 590.580608010292,
+      "p90_us": 591.299521446228
+    },
+    "candidate_8warp_serial_v0": {
+      "count": 10,
+      "cv": 0.00039557625476721646,
+      "mean_us": 534.3905282020569,
+      "median_us": 534.4012796878815,
+      "p10_us": 534.1462432146072,
+      "p90_us": 534.7095674276352
+    }
+  },
+  "clock_policy": "locked",
+  "declared_clock_policy": "locked",
+  "groups": [
+    {
+      "anchor_us": 534.2982387542725,
+      "group": 0,
+      "ratio": 0.9042141112246517,
+      "subject_us": 590.8979213237762
+    },
+    {
+      "anchor_us": 534.5945608615875,
+      "group": 1,
+      "ratio": 0.9048037919081755,
+      "subject_us": 590.8403187990189
+    },
+    {
+      "anchor_us": 534.4351994991302,
+      "group": 2,
+      "ratio": 0.904292612160431,
+      "subject_us": 590.9980821609497
+    },
+    {
+      "anchor_us": 534.4454419612885,
+      "group": 3,
+      "ratio": 0.9043133731232336,
+      "subject_us": 590.9958404302597
+    },
+    {
+      "anchor_us": 534.1791999340057,
+      "group": 4,
+      "ratio": 0.904305513116041,
+      "subject_us": 590.7065612077713
+    }
+  ],
+  "m": 256,
+  "median_ratio_anchor_over_subject": 0.9044996814889509,
+  "median_speedup_percent": -9.550031851104912,
+  "observed_applications_graphics_clock_mhz": [
+    "2377"
+  ],
+  "paired_bootstrap": {
+    "ratio_ci95": [
+      0.9042522425583696,
+      0.9046018971028403
+    ],
+    "samples": 10000,
+    "seed": 20260717
+  },
+  "predeclared_ratio_band": [
+    0.98,
+    1.02
+  ],
+  "relationship": "R2_temporal_n64_replay_vs_candidateA",
+  "schema": "exp005.temporal-n64-r2-paired-abba.v1",
+  "statistical_classification": "slower",
+  "verdict": "slower"
+}

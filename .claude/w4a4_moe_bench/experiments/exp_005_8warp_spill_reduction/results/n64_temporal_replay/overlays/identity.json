@@ -1,0 +1,55 @@
+{
+  "anchor": {
+    "name": "candidate_8warp_serial_v0",
+    "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_005_8warp_spill_reduction/results/n64_temporal_replay/overlays/candidate_8warp_serial_v0/moe_dynamic_kernel.py",
+    "sha256": "3e2bda4e09dc2c67d97abea4d392eb5fa117de9abdd80c49b0e89e1f2dd0b445",
+    "source": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_005_8warp_spill_reduction/results/overlays/candidate_8warp_serial_v0/moe_dynamic_kernel.py"
+  },
+  "diff": {
+    "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_005_8warp_spill_reduction/results/n64_temporal_replay/overlays/candidate_8warp_n64_temporal_replay_v0.diff",
+    "sha256": "841d11013efe3e0c93d4a89b1426d193af98d8a7e633fed33581f6848a0bb05b",
+    "size_bytes": 55196
+  },
+  "relationship": "R2_temporal_n64_replay_vs_candidateA",
+  "schema": "exp005.temporal-n64-overlay.v1",
+  "subject": {
+    "ast_parse": "pass",
+    "name": "candidate_8warp_n64_temporal_replay_v0",
+    "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_005_8warp_spill_reduction/results/n64_temporal_replay/overlays/candidate_8warp_n64_temporal_replay_v0/moe_dynamic_kernel.py",
+    "sha256": "80aaa950853424247f5f3315797caa5e3151c9474d1aabce96a7a9d04a7d9fa3",
+    "transforms": [
+      {
+        "kind": "exact-replacement",
+        "label": "fail closed outside the registered gated-activation scope"
+      },
+      {
+        "kind": "exact-replacement",
+        "label": "add CTA-wide half-complete barrier"
+      },
+      {
+        "kind": "exact-replacement",
+        "label": "materialize a real M128xN64 FC1 accumulator shape"
+      },
+      {
+        "kind": "exact-replacement",
+        "label": "add one-microtile activation scratch and preserve MMA tile geometry"
+      },
+      {
+        "kind": "exact-replacement",
+        "label": "declare full and half FC1 N ownership"
+      },
+      {
+        "kind": "bounded-structural-rewrite",
+        "label": "temporal Gate->Up->activation loop over two N64 halves"
+      },
+      {
+        "kind": "bounded-structural-rewrite",
+        "label": "move Q1 after both N64 halves"
+      },
+      {
+        "kind": "bounded-structural-rewrite",
+        "label": "replay full FC1 TMA producers for two temporal halves"
+      }
+    ]
+  }
+}

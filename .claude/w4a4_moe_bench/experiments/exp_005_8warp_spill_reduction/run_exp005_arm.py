@@ -27,7 +27,6 @@ from typing import Any, Callable, Sequence
 import torch
 
 from exp005_common import (
-    ALL_ARMS,
     ALL_FIXTURES,
     BASELINE,
     CANDIDATE,
@@ -42,6 +41,7 @@ from exp005_common import (
     EXPECTED_PYTHON_DEPS_SHA256,
     H,
     I,
+    KNOWN_ARMS,
     MAX_ACTIVE_CLUSTERS,
     M_VALUES,
     NUM_SMS,
@@ -713,7 +713,12 @@ def measure(args: argparse.Namespace, runtime: dict[str, Any]) -> int:
         "fixture_kind": args.fixture,
         "group": args.group,
         "position": args.position,
-        "order": [BASELINE, CANDIDATE, CANDIDATE, BASELINE],
+        "order": [
+            args.comparison_anchor,
+            args.comparison_subject,
+            args.comparison_subject,
+            args.comparison_anchor,
+        ],
         "declared_clock_policy": args.clock_policy,
         "sample_us": total_ms * 1000.0 / args.iters,
         "warmup": args.warmup,
@@ -793,7 +798,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--flashinfer-root", type=Path, required=True)
     parser.add_argument("--results", type=Path, default=DEFAULT_RESULTS)
-    parser.add_argument("--arm", choices=ALL_ARMS, required=True)
+    parser.add_argument("--arm", choices=KNOWN_ARMS, required=True)
     parser.add_argument("--m", type=int, choices=M_VALUES, required=True)
     parser.add_argument("--fixture", choices=ALL_FIXTURES, default=CANONICAL_FIXTURE)
     parser.add_argument("--overlay", type=Path, required=True)
@@ -801,6 +806,8 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--expected-gpu-uuid", required=True)
     parser.add_argument("--device-index", type=int, default=0, choices=[0])
     parser.add_argument("--seed", type=int, default=2026, choices=[2026])
+    parser.add_argument("--comparison-anchor", choices=KNOWN_ARMS, default=BASELINE)
+    parser.add_argument("--comparison-subject", choices=KNOWN_ARMS, default=CANDIDATE)
     subparsers = parser.add_subparsers(dest="command", required=True)
     subparsers.add_parser("prepare")
     measure_parser = subparsers.add_parser("measure")

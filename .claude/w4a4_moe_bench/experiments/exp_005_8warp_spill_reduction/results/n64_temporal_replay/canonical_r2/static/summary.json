@@ -1,0 +1,59 @@
+{
+  "records": {
+    "candidate_8warp_n64_temporal_replay_v0": {
+      "1024": {
+        "cubin_sha256": "089c69f5ea771777a80d274c7f3ea5e82911d77d8b749972ef895dfc16ad8217",
+        "path": "static/candidate_8warp_n64_temporal_replay_v0/m1024/evidence.json",
+        "registers_per_thread": 146,
+        "spill_refill_instruction_count": 0,
+        "stack_bytes_per_thread": 0,
+        "zero_spill_static_gate": true
+      },
+      "256": {
+        "cubin_sha256": "089c69f5ea771777a80d274c7f3ea5e82911d77d8b749972ef895dfc16ad8217",
+        "path": "static/candidate_8warp_n64_temporal_replay_v0/m256/evidence.json",
+        "registers_per_thread": 146,
+        "spill_refill_instruction_count": 0,
+        "stack_bytes_per_thread": 0,
+        "zero_spill_static_gate": true
+      },
+      "8192": {
+        "cubin_sha256": "089c69f5ea771777a80d274c7f3ea5e82911d77d8b749972ef895dfc16ad8217",
+        "path": "static/candidate_8warp_n64_temporal_replay_v0/m8192/evidence.json",
+        "registers_per_thread": 146,
+        "spill_refill_instruction_count": 0,
+        "stack_bytes_per_thread": 0,
+        "zero_spill_static_gate": true
+      }
+    },
+    "candidate_8warp_serial_v0": {
+      "1024": {
+        "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+        "path": "static/candidate_8warp_serial_v0/m1024/evidence.json",
+        "registers_per_thread": 168,
+        "spill_refill_instruction_count": 84,
+        "stack_bytes_per_thread": 224,
+        "zero_spill_static_gate": false
+      },
+      "256": {
+        "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+        "path": "static/candidate_8warp_serial_v0/m256/evidence.json",
+        "registers_per_thread": 168,
+        "spill_refill_instruction_count": 84,
+        "stack_bytes_per_thread": 224,
+        "zero_spill_static_gate": false
+      },
+      "8192": {
+        "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+        "path": "static/candidate_8warp_serial_v0/m8192/evidence.json",
+        "registers_per_thread": 168,
+        "spill_refill_instruction_count": 84,
+        "stack_bytes_per_thread": 224,
+        "zero_spill_static_gate": false
+      }
+    }
+  },
+  "relationship": "R2_temporal_n64_replay_vs_candidateA",
+  "schema": "exp005.temporal-n64-r2-static-summary.v1",
+  "subject_zero_spill_gate": true
+}

@@ -1,6 +1,6 @@
 # exp_005：8-Warp Gate/Up Spill Reduction
 
-Status: **completed / Candidate A rejected for residual spill (2026-07-17)**
+Status: **Candidate A completed/rejected；R2 temporal-N64 completed/rejected (2026-07-17)**
 
 ## 1. Goal
 
@@ -225,3 +225,62 @@ manifest 闭合后，才能把 exp_005 标为完成。
    与预声明 equivalence band。
 5. 原 decision tree 允许未定义的 candidate 修补并可能跨版本拼证据；现限定 Candidate A plumbing 修复范围，
    overlay immutable/versioned，final version 必须重跑 Gates A–E。
+
+## 7. R2 Follow-up：8-Warp Temporal N64 Replay
+
+Candidate A 已证明增加 compute warps 能把 stack 从 488 B/thread 降到 224 B/thread，但没有通过 zero-spill
+gate。R2 在同一实验目标内继续验证更短 Gate live range，不修改 production kernel，也不改写已闭合的 R1
+证据。
+
+正式比较关系锁定在 `comparison_registry.r2.json`：
+
+- accepted revision：`r2`
+- accepted content SHA-256：`7531a9e41560de8f91d3eae3fd1c75044851f12566c9056009fd91ebf8e7b04d`
+
+```text
+fresh Candidate A anchor
+  vs
+candidate_8warp_n64_temporal_replay_v0
+```
+
+subject 保持 8 compute warps、W8 TMA、block 288、`atom_layout=(4,2,1)` 与完整
+`M128×N128×K128` logical work。它真正分配一对可复用的 `M128×N64` Gate/Up accumulator，并执行：
+
+```text
+Gate N64(0) → Up N64(0) → SwiGLU 写 sC[:,0:64]
+→ Gate N64(1) → Up N64(1) → SwiGLU 写 sC[:,64:128]
+→ 一次 Q1(full sC) → FC2/scatter
+```
+
+v0 为了先判定 live-range 假设，复用并按 half replay 现有 full-N128 FC1 TMA descriptor；因此 FC1 physical
+TMA work 和同步也同时改变。任何 latency 结果只能归因于完整 temporal-replay bundle，不能声称是 spill removal
+的纯收益。
+
+R2 fresh artifacts 全部写入 `results/n64_temporal_replay/canonical_r2/`。执行顺序：
+
+1. fresh 构建 Candidate A 与 subject，校验 source/cubin/launch/OMMA work；
+2. 两臂 M256/M1024/M8192 independent reference、self-drift、cross-arm 与 directed route correctness；
+3. 对 subject 每个 distinct cubin 执行 KDK static zero-spill gate；非零即停止；
+4. 只有 correctness + static zero-spill 通过，才运行 fresh `A,B,B,A` benchmark；
+5. matched NCU 闭合 dynamic spill、TMA work、cadence 与 stalls。
+
+`results/n64_temporal_replay/diagnostic_v0/` 是 r2 接受前、借用 Candidate-A arm 名称完成的 source feasibility
+probe，只允许证明 compile、M256 smoke correctness 和 static-spill 方向可行；不得进入正式比较或性能结论。
+
+本 follow-up 不重复 Plan Review：本 exp 的 mandatory single review 已在启动 Candidate A 前完成；R2 的边界与
+风险另外经过多路只读设计审计，并由 accepted comparison registry 在 fresh capture 前锁定。
+
+### 7.1 R2 Execution Closure
+
+- Fresh Candidate A 与 Temporal N64 在 M256/M1024/M8192 均通过 independent reference 与 route/task；
+  M256/M8192 strict cross-arm gate 通过。M1024 两臂 cosine self-drift 均超过预注册 cap，保留为
+  protocol-inconclusive，不采性能。
+- 四类 directed fixture（empty/sparse、exact-128、129-tail、hot-expert）在两臂均通过。
+- 正式 cubin 的 useful OMMA 均为 448 条；Temporal N64 的 accumulator 为真实 N64 allocation。
+- Temporal N64 static frame 从 `224 B/thread` 降到 `0 B/thread`，compiler SpillRefill SASS 从 `84` 降到
+  `0`，通过 static zero-spill gate。
+- Paired ABBA：M256 为 `-9.55%`，M8192 为 `-9.49%`；两者均被预注册统计规则判为 slower。
+- 用户在看到性能结果后明确给出“更慢即 reject”的决策，因此 R2 在 latency gate 后停止，未追加 matched
+  NCU。结果只声明 static spill、static OMMA identity、correctness 与 latency；不声明 dynamic spill、TMA
+  traffic、TC cadence 或回退根因。
+- `candidate_8warp_n64_temporal_replay_v0` reject；production kernel 未修改。
