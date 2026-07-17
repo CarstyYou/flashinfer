@@ -1,0 +1,12 @@
+# Per-arm JIT trees, output tensors, profiler reports, and verbose logs stay on
+# the evidence host. Compact CSV/JSON evidence and result.md remain tracked.
+raw/
+generated_overlays/*.py
+generated/*.py
+overlays/*.py
+*.ncu-rep
+*.nsys-rep
+*.qdstrm
+*.sqlite
+_pqtdir/
+**/veloq/

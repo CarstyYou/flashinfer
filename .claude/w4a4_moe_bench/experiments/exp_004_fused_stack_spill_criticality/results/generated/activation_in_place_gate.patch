@@ -1,0 +1,44 @@
+--- production/moe_dynamic_kernel.py
++++ generated/activation_in_place_gate.py
+@@ -2196,12 +2196,15 @@
+                                     gate_slice = tRS_rGate[(None, mma_m, mma_n)]
+                                     if cutlass.const_expr(self.is_gated):
+                                         up_slice = tRS_rUp[(None, mma_m, mma_n)]
++                                        out_slice = tRS_rD_out[
++                                            (None, mma_m_in_epi, mma_n_in_epi)
++                                        ]
+                                         for elem_idx in cutlass.range_constexpr(
+-                                            cute.size(tRS_rD_slice)
++                                            cute.size(gate_slice)
+                                         ):
+                                             g = alpha_value * gate_slice[elem_idx]
+                                             u = alpha_value * up_slice[elem_idx]
+-                                            tRS_rD_slice[elem_idx] = (
++                                            gate_slice[elem_idx] = (
+                                                 gated_activation_f32(
+                                                     g,
+                                                     u,
+@@ -2212,6 +2215,9 @@
+                                                     fast_math=self.fast_math,
+                                                 )
+                                             )
++                                        out_slice.store(
++                                            gate_slice.load().to(cutlass.BFloat16)
++                                        )
+                                     else:
+                                         for elem_idx in cutlass.range_constexpr(
+                                             cute.size(tRS_rD_slice)
+@@ -2220,9 +2226,10 @@
+                                             relu_g = fmax_f32(g, cutlass.Float32(0.0))
+                                             tRS_rD_slice[elem_idx] = relu_g * relu_g
+ 
+-                            acc_vec = tRS_rD.load()
+-                            acc_vec = acc_vec.to(cutlass.BFloat16)
+-                            tRS_rD_out.store(acc_vec)
++                            if cutlass.const_expr(not self.is_gated):
++                                acc_vec = tRS_rD.load()
++                                acc_vec = acc_vec.to(cutlass.BFloat16)
++                                tRS_rD_out.store(acc_vec)
+                             cute.copy(
+                                 tiled_copy_r2s,
+                                 tRS_rD_out,

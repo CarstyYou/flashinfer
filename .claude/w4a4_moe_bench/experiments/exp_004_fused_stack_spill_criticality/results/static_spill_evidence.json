@@ -1,0 +1,4292 @@
+{
+  "arms": {
+    "activation_in_place_gate": {
+      "arm": "activation_in_place_gate",
+      "function": {
+        "cubin_sha256": "76f2e54d7b86148c2a3098e10b758a86a59133a9a294cc28932103b1f0c67f11",
+        "instruction_count": 7568,
+        "length": 121088,
+        "name": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "source_lineinfo_present": false,
+        "start": 0
+      },
+      "local": {
+        "all_stored_slots_have_later_ldl": true,
+        "load_instruction_count": 122,
+        "missing_later_ldl_slots": [],
+        "stack_slots": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          20,
+          24,
+          28,
+          32,
+          36,
+          40,
+          44,
+          48,
+          52,
+          56,
+          60,
+          64,
+          68,
+          72,
+          76,
+          80,
+          84,
+          88,
+          92,
+          96,
+          100,
+          104,
+          108,
+          112,
+          116,
+          120,
+          124,
+          128,
+          132,
+          136,
+          140,
+          144,
+          148,
+          152,
+          156,
+          160,
+          164,
+          168,
+          172,
+          176,
+          180,
+          184,
+          188,
+          192,
+          196,
+          200,
+          204,
+          208,
+          212,
+          216,
+          220,
+          224,
+          228,
+          232,
+          236,
+          240,
+          244,
+          248,
+          252,
+          256,
+          260,
+          264,
+          268,
+          272,
+          276,
+          280,
+          284,
+          288,
+          292,
+          296,
+          300,
+          304,
+          308,
+          312,
+          316,
+          320,
+          324,
+          328,
+          332,
+          336,
+          340,
+          344,
+          348,
+          352,
+          356,
+          360,
+          364,
+          368,
+          372,
+          376,
+          380,
+          384,
+          388,
+          392,
+          396,
+          400,
+          404,
+          408,
+          412,
+          416,
+          420,
+          424,
+          428,
+          432,
+          436,
+          440,
+          444,
+          448,
+          452,
+          456,
+          460,
+          464,
+          468,
+          472,
+          476,
+          480,
+          484
+        ],
+        "store_instruction_count": 68,
+        "store_opcode_counts": {
+          "STL": 14,
+          "STL.64": 54
+        },
+        "stored_words": 122,
+        "stored_words_by_opcode_width": {
+          "STL": 14,
+          "STL.64": 108
+        },
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "pc": 30816,
+            "pc_hex": "0x7860",
+            "slots": [
+              368,
+              372
+            ],
+            "stack_offset": 368,
+            "stack_offset_hex": "0x170",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 30848,
+            "pc_hex": "0x7880",
+            "slots": [
+              376,
+              380
+            ],
+            "stack_offset": 376,
+            "stack_offset_hex": "0x178",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31120,
+            "pc_hex": "0x7990",
+            "slots": [
+              384,
+              388
+            ],
+            "stack_offset": 384,
+            "stack_offset_hex": "0x180",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31152,
+            "pc_hex": "0x79b0",
+            "slots": [
+              392,
+              396
+            ],
+            "stack_offset": 392,
+            "stack_offset_hex": "0x188",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31200,
+            "pc_hex": "0x79e0",
+            "slots": [
+              400,
+              404
+            ],
+            "stack_offset": 400,
+            "stack_offset_hex": "0x190",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31232,
+            "pc_hex": "0x7a00",
+            "slots": [
+              408,
+              412
+            ],
+            "stack_offset": 408,
+            "stack_offset_hex": "0x198",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31280,
+            "pc_hex": "0x7a30",
+            "slots": [
+              416,
+              420
+            ],
+            "stack_offset": 416,
+            "stack_offset_hex": "0x1a0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31312,
+            "pc_hex": "0x7a50",
+            "slots": [
+              424,
+              428
+            ],
+            "stack_offset": 424,
+            "stack_offset_hex": "0x1a8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31360,
+            "pc_hex": "0x7a80",
+            "slots": [
+              352,
+              356
+            ],
+            "stack_offset": 352,
+            "stack_offset_hex": "0x160",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31392,
+            "pc_hex": "0x7aa0",
+            "slots": [
+              360,
+              364
+            ],
+            "stack_offset": 360,
+            "stack_offset_hex": "0x168",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31408,
+            "pc_hex": "0x7ab0",
+            "slots": [
+              336,
+              340
+            ],
+            "stack_offset": 336,
+            "stack_offset_hex": "0x150",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31440,
+            "pc_hex": "0x7ad0",
+            "slots": [
+              344,
+              348
+            ],
+            "stack_offset": 344,
+            "stack_offset_hex": "0x158",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31472,
+            "pc_hex": "0x7af0",
+            "slots": [
+              320,
+              324
+            ],
+            "stack_offset": 320,
+            "stack_offset_hex": "0x140",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31504,
+            "pc_hex": "0x7b10",
+            "slots": [
+              328,
+              332
+            ],
+            "stack_offset": 328,
+            "stack_offset_hex": "0x148",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31520,
+            "pc_hex": "0x7b20",
+            "slots": [
+              304,
+              308
+            ],
+            "stack_offset": 304,
+            "stack_offset_hex": "0x130",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31552,
+            "pc_hex": "0x7b40",
+            "slots": [
+              312,
+              316
+            ],
+            "stack_offset": 312,
+            "stack_offset_hex": "0x138",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31568,
+            "pc_hex": "0x7b50",
+            "slots": [
+              288,
+              292
+            ],
+            "stack_offset": 288,
+            "stack_offset_hex": "0x120",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31600,
+            "pc_hex": "0x7b70",
+            "slots": [
+              296,
+              300
+            ],
+            "stack_offset": 296,
+            "stack_offset_hex": "0x128",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31616,
+            "pc_hex": "0x7b80",
+            "slots": [
+              272,
+              276
+            ],
+            "stack_offset": 272,
+            "stack_offset_hex": "0x110",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31648,
+            "pc_hex": "0x7ba0",
+            "slots": [
+              280,
+              284
+            ],
+            "stack_offset": 280,
+            "stack_offset_hex": "0x118",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31680,
+            "pc_hex": "0x7bc0",
+            "slots": [
+              256,
+              260
+            ],
+            "stack_offset": 256,
+            "stack_offset_hex": "0x100",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31712,
+            "pc_hex": "0x7be0",
+            "slots": [
+              264,
+              268
+            ],
+            "stack_offset": 264,
+            "stack_offset_hex": "0x108",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31728,
+            "pc_hex": "0x7bf0",
+            "slots": [
+              240,
+              244
+            ],
+            "stack_offset": 240,
+            "stack_offset_hex": "0xf0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31760,
+            "pc_hex": "0x7c10",
+            "slots": [
+              248,
+              252
+            ],
+            "stack_offset": 248,
+            "stack_offset_hex": "0xf8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31776,
+            "pc_hex": "0x7c20",
+            "slots": [
+              224,
+              228
+            ],
+            "stack_offset": 224,
+            "stack_offset_hex": "0xe0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31808,
+            "pc_hex": "0x7c40",
+            "slots": [
+              232,
+              236
+            ],
+            "stack_offset": 232,
+            "stack_offset_hex": "0xe8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31856,
+            "pc_hex": "0x7c70",
+            "slots": [
+              208,
+              212
+            ],
+            "stack_offset": 208,
+            "stack_offset_hex": "0xd0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31888,
+            "pc_hex": "0x7c90",
+            "slots": [
+              216,
+              220
+            ],
+            "stack_offset": 216,
+            "stack_offset_hex": "0xd8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31936,
+            "pc_hex": "0x7cc0",
+            "slots": [
+              192,
+              196
+            ],
+            "stack_offset": 192,
+            "stack_offset_hex": "0xc0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31984,
+            "pc_hex": "0x7cf0",
+            "slots": [
+              200,
+              204
+            ],
+            "stack_offset": 200,
+            "stack_offset_hex": "0xc8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32032,
+            "pc_hex": "0x7d20",
+            "slots": [
+              176,
+              180
+            ],
+            "stack_offset": 176,
+            "stack_offset_hex": "0xb0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32064,
+            "pc_hex": "0x7d40",
+            "slots": [
+              184,
+              188
+            ],
+            "stack_offset": 184,
+            "stack_offset_hex": "0xb8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32112,
+            "pc_hex": "0x7d70",
+            "slots": [
+              160,
+              164
+            ],
+            "stack_offset": 160,
+            "stack_offset_hex": "0xa0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32144,
+            "pc_hex": "0x7d90",
+            "slots": [
+              168,
+              172
+            ],
+            "stack_offset": 168,
+            "stack_offset_hex": "0xa8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32192,
+            "pc_hex": "0x7dc0",
+            "slots": [
+              144,
+              148
+            ],
+            "stack_offset": 144,
+            "stack_offset_hex": "0x90",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32224,
+            "pc_hex": "0x7de0",
+            "slots": [
+              152,
+              156
+            ],
+            "stack_offset": 152,
+            "stack_offset_hex": "0x98",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32240,
+            "pc_hex": "0x7df0",
+            "slots": [
+              128,
+              132
+            ],
+            "stack_offset": 128,
+            "stack_offset_hex": "0x80",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32272,
+            "pc_hex": "0x7e10",
+            "slots": [
+              136,
+              140
+            ],
+            "stack_offset": 136,
+            "stack_offset_hex": "0x88",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32320,
+            "pc_hex": "0x7e40",
+            "slots": [
+              112,
+              116
+            ],
+            "stack_offset": 112,
+            "stack_offset_hex": "0x70",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32352,
+            "pc_hex": "0x7e60",
+            "slots": [
+              120,
+              124
+            ],
+            "stack_offset": 120,
+            "stack_offset_hex": "0x78",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32368,
+            "pc_hex": "0x7e70",
+            "slots": [
+              96,
+              100
+            ],
+            "stack_offset": 96,
+            "stack_offset_hex": "0x60",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32400,
+            "pc_hex": "0x7e90",
+            "slots": [
+              104,
+              108
+            ],
+            "stack_offset": 104,
+            "stack_offset_hex": "0x68",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32416,
+            "pc_hex": "0x7ea0",
+            "slots": [
+              80,
+              84
+            ],
+            "stack_offset": 80,
+            "stack_offset_hex": "0x50",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32448,
+            "pc_hex": "0x7ec0",
+            "slots": [
+              88,
+              92
+            ],
+            "stack_offset": 88,
+            "stack_offset_hex": "0x58",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32496,
+            "pc_hex": "0x7ef0",
+            "slots": [
+              64,
+              68
+            ],
+            "stack_offset": 64,
+            "stack_offset_hex": "0x40",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32528,
+            "pc_hex": "0x7f10",
+            "slots": [
+              72,
+              76
+            ],
+            "stack_offset": 72,
+            "stack_offset_hex": "0x48",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32576,
+            "pc_hex": "0x7f40",
+            "slots": [
+              48,
+              52
+            ],
+            "stack_offset": 48,
+            "stack_offset_hex": "0x30",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32608,
+            "pc_hex": "0x7f60",
+            "slots": [
+              56,
+              60
+            ],
+            "stack_offset": 56,
+            "stack_offset_hex": "0x38",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32656,
+            "pc_hex": "0x7f90",
+            "slots": [
+              32,
+              36
+            ],
+            "stack_offset": 32,
+            "stack_offset_hex": "0x20",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32688,
+            "pc_hex": "0x7fb0",
+            "slots": [
+              40,
+              44
+            ],
+            "stack_offset": 40,
+            "stack_offset_hex": "0x28",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32736,
+            "pc_hex": "0x7fe0",
+            "slots": [
+              16,
+              20
+            ],
+            "stack_offset": 16,
+            "stack_offset_hex": "0x10",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32752,
+            "pc_hex": "0x7ff0",
+            "slots": [
+              24,
+              28
+            ],
+            "stack_offset": 24,
+            "stack_offset_hex": "0x18",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32816,
+            "pc_hex": "0x8030",
+            "slots": [
+              0,
+              4
+            ],
+            "stack_offset": 0,
+            "stack_offset_hex": "0x0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32864,
+            "pc_hex": "0x8060",
+            "slots": [
+              8,
+              12
+            ],
+            "stack_offset": 8,
+            "stack_offset_hex": "0x8",
+            "words": 2
+          },
+          {
+            "opcode": "STL",
+            "pc": 47936,
+            "pc_hex": "0xbb40",
+            "slots": [
+              484
+            ],
+            "stack_offset": 484,
+            "stack_offset_hex": "0x1e4",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 47968,
+            "pc_hex": "0xbb60",
+            "slots": [
+              480
+            ],
+            "stack_offset": 480,
+            "stack_offset_hex": "0x1e0",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48000,
+            "pc_hex": "0xbb80",
+            "slots": [
+              476
+            ],
+            "stack_offset": 476,
+            "stack_offset_hex": "0x1dc",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48016,
+            "pc_hex": "0xbb90",
+            "slots": [
+              472
+            ],
+            "stack_offset": 472,
+            "stack_offset_hex": "0x1d8",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48032,
+            "pc_hex": "0xbba0",
+            "slots": [
+              468
+            ],
+            "stack_offset": 468,
+            "stack_offset_hex": "0x1d4",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48048,
+            "pc_hex": "0xbbb0",
+            "slots": [
+              464
+            ],
+            "stack_offset": 464,
+            "stack_offset_hex": "0x1d0",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48064,
+            "pc_hex": "0xbbc0",
+            "slots": [
+              460
+            ],
+            "stack_offset": 460,
+            "stack_offset_hex": "0x1cc",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48080,
+            "pc_hex": "0xbbd0",
+            "slots": [
+              456
+            ],
+            "stack_offset": 456,
+            "stack_offset_hex": "0x1c8",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48096,
+            "pc_hex": "0xbbe0",
+            "slots": [
+              452
+            ],
+            "stack_offset": 452,
+            "stack_offset_hex": "0x1c4",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48112,
+            "pc_hex": "0xbbf0",
+            "slots": [
+              448
+            ],
+            "stack_offset": 448,
+            "stack_offset_hex": "0x1c0",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48128,
+            "pc_hex": "0xbc00",
+            "slots": [
+              444
+            ],
+            "stack_offset": 444,
+            "stack_offset_hex": "0x1bc",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48144,
+            "pc_hex": "0xbc10",
+            "slots": [
+              440
+            ],
+            "stack_offset": 440,
+            "stack_offset_hex": "0x1b8",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48160,
+            "pc_hex": "0xbc20",
+            "slots": [
+              436
+            ],
+            "stack_offset": 436,
+            "stack_offset_hex": "0x1b4",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48176,
+            "pc_hex": "0xbc30",
+            "slots": [
+              432
+            ],
+            "stack_offset": 432,
+            "stack_offset_hex": "0x1b0",
+            "words": 1
+          }
+        ]
+      },
+      "opcode_counts": {
+        "ATOMG.E.ADD.S32.STRONG.GPU": 9,
+        "BAR.ARV": 2,
+        "BAR.SYNC.DEFER_BLOCKING": 32,
+        "BRA": 182,
+        "BRA.U": 12,
+        "BSSY.RECONVERGENT": 21,
+        "BSYNC.RECONVERGENT": 21,
+        "CCTL.IVALL": 17,
+        "CGAERRBAR": 12,
+        "ELECT": 18,
+        "ERRBAR": 12,
+        "EXIT": 2,
+        "F2FP.BF16.F32.PACK_AB": 320,
+        "F2FP.SATFINITE.BF16.F32.PACK_AB": 16,
+        "F2FP.SATFINITE.E2M1.F32.PACK_AB_MERGE_C": 16,
+        "F2FP.SATFINITE.E4M3.F32.PACK_AB_MERGE_C": 2,
+        "F2I.FTZ.U32.TRUNC.NTZ": 2,
+        "FADD": 128,
+        "FENCE.VIEW.ASYNC.S": 10,
+        "FFMA": 2,
+        "FLO.U32": 1,
+        "FMNMX": 34,
+        "FMUL": 1228,
+        "FSEL": 2,
+        "FSETP.GEU.AND": 2,
+        "FSETP.NEU.AND": 4,
+        "I2F.RP": 2,
+        "I2FP.F32.S32": 2,
+        "I2FP.F32.U32": 2,
+        "IABS": 5,
+        "IADD.64": 4,
+        "IADD3": 344,
+        "IMAD": 90,
+        "IMAD.HI.U32": 4,
+        "IMAD.SHL.U32": 47,
+        "IMAD.U32": 65,
+        "IMAD.WIDE": 42,
+        "IMAD.WIDE.U32": 6,
+        "ISETP.EQ.U32.AND": 1,
+        "ISETP.GE.AND": 13,
+        "ISETP.GE.U32.AND": 13,
+        "ISETP.GT.AND": 4,
+        "ISETP.GT.U32.AND": 6,
+        "ISETP.GT.U32.OR": 1,
+        "ISETP.LT.AND": 10,
+        "ISETP.NE.AND": 7,
+        "ISETP.NE.U32.AND": 33,
+        "ISETP.NE.U32.OR": 1,
+        "LDC": 6,
+        "LDC.64": 71,
+        "LDCU": 4,
+        "LDCU.64": 48,
+        "LDG.E": 26,
+        "LDG.E.STRONG.GPU": 11,
+        "LDG.E.U16": 16,
+        "LDL.LU": 122,
+        "LDS": 13,
+        "LDS.128": 79,
+        "LDS.64": 2,
+        "LDS.U16": 48,
+        "LDSM.16.M88.4": 200,
+        "LEA": 55,
+        "LEA.HI": 28,
+        "LEA.HI.SX32": 9,
+        "LEA.HI.X": 2,
+        "LOP3.LUT": 348,
+        "MEMBAR.ALL.CTA": 18,
+        "MEMBAR.ALL.GPU": 6,
+        "MEMBAR.SC.GPU": 6,
+        "MOV": 453,
+        "MOV.64": 151,
+        "MUFU.EX2": 130,
+        "MUFU.RCP": 134,
+        "NANOSLEEP.SYNCS": 32,
+        "NOP": 545,
+        "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X": 896,
+        "PLOP3.LUT": 2,
+        "POPC": 2,
+        "PRMT": 8,
+        "R2UR": 10,
+        "REDG.E.ADD.BF16": 4,
+        "S2R": 15,
+        "S2UR": 2,
+        "SHF.R.S32.HI": 14,
+        "SHF.R.U32.HI": 220,
+        "SHF.R.U64": 3,
+        "SHFL.IDX": 3,
+        "STG.E": 66,
+        "STG.E.128": 1,
+        "STG.E.64": 1,
+        "STG.E.STRONG.GPU": 6,
+        "STG.E.U8": 1,
+        "STL": 14,
+        "STL.64": 54,
+        "STS": 328,
+        "STS.64": 3,
+        "STS.U8": 9,
+        "SYNCS.ARRIVE.TRANS64": 12,
+        "SYNCS.ARRIVE.TRANS64.ART0": 14,
+        "SYNCS.EXCH.64": 12,
+        "SYNCS.PHASECHK.TRANS64": 32,
+        "SYNCS.PHASECHK.TRANS64.TRYWAIT": 77,
+        "UIADD3": 137,
+        "UIADD3.64": 46,
+        "UIMAD.WIDE": 3,
+        "UISETP.GE.AND": 3,
+        "UISETP.NE.U32.AND": 8,
+        "ULEA": 20,
+        "UMOV": 59,
+        "UPLOP3.LUT": 3,
+        "USHF.L.U32": 39,
+        "UTMACCTL.PF": 6,
+        "UTMALDG.2D": 8,
+        "UTMALDG.3D": 20,
+        "UTMALDG.4D": 12,
+        "UVIMNMX.S32": 4,
+        "VIMNMX.S32": 7,
+        "VIMNMX.U32": 1,
+        "VOTEU.ANY": 1,
+        "WARPSYNC.ALL": 5,
+        "YIELD": 5
+      },
+      "resource": {
+        "authority": "binary_REG_STACK_SHARED_LOCAL_tuple",
+        "nvdisasm_local_bytes": 0,
+        "registers_per_thread": 255,
+        "shared_bytes_per_cta": 1024,
+        "stack_bytes_per_thread": 488,
+        "static_spill_load_bytes": null,
+        "static_spill_store_bytes": null
+      },
+      "selected_opcode_projection": {
+        "atomic": 13,
+        "barrier": 88,
+        "global": 128,
+        "ldsm": 200,
+        "local": 190,
+        "tensor": 896,
+        "tma": 46
+      }
+    },
+    "activation_in_place_up": {
+      "arm": "activation_in_place_up",
+      "function": {
+        "cubin_sha256": "76f2e54d7b86148c2a3098e10b758a86a59133a9a294cc28932103b1f0c67f11",
+        "instruction_count": 7568,
+        "length": 121088,
+        "name": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "source_lineinfo_present": false,
+        "start": 0
+      },
+      "local": {
+        "all_stored_slots_have_later_ldl": true,
+        "load_instruction_count": 122,
+        "missing_later_ldl_slots": [],
+        "stack_slots": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          20,
+          24,
+          28,
+          32,
+          36,
+          40,
+          44,
+          48,
+          52,
+          56,
+          60,
+          64,
+          68,
+          72,
+          76,
+          80,
+          84,
+          88,
+          92,
+          96,
+          100,
+          104,
+          108,
+          112,
+          116,
+          120,
+          124,
+          128,
+          132,
+          136,
+          140,
+          144,
+          148,
+          152,
+          156,
+          160,
+          164,
+          168,
+          172,
+          176,
+          180,
+          184,
+          188,
+          192,
+          196,
+          200,
+          204,
+          208,
+          212,
+          216,
+          220,
+          224,
+          228,
+          232,
+          236,
+          240,
+          244,
+          248,
+          252,
+          256,
+          260,
+          264,
+          268,
+          272,
+          276,
+          280,
+          284,
+          288,
+          292,
+          296,
+          300,
+          304,
+          308,
+          312,
+          316,
+          320,
+          324,
+          328,
+          332,
+          336,
+          340,
+          344,
+          348,
+          352,
+          356,
+          360,
+          364,
+          368,
+          372,
+          376,
+          380,
+          384,
+          388,
+          392,
+          396,
+          400,
+          404,
+          408,
+          412,
+          416,
+          420,
+          424,
+          428,
+          432,
+          436,
+          440,
+          444,
+          448,
+          452,
+          456,
+          460,
+          464,
+          468,
+          472,
+          476,
+          480,
+          484
+        ],
+        "store_instruction_count": 68,
+        "store_opcode_counts": {
+          "STL": 14,
+          "STL.64": 54
+        },
+        "stored_words": 122,
+        "stored_words_by_opcode_width": {
+          "STL": 14,
+          "STL.64": 108
+        },
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "pc": 30816,
+            "pc_hex": "0x7860",
+            "slots": [
+              368,
+              372
+            ],
+            "stack_offset": 368,
+            "stack_offset_hex": "0x170",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 30848,
+            "pc_hex": "0x7880",
+            "slots": [
+              376,
+              380
+            ],
+            "stack_offset": 376,
+            "stack_offset_hex": "0x178",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31120,
+            "pc_hex": "0x7990",
+            "slots": [
+              384,
+              388
+            ],
+            "stack_offset": 384,
+            "stack_offset_hex": "0x180",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31152,
+            "pc_hex": "0x79b0",
+            "slots": [
+              392,
+              396
+            ],
+            "stack_offset": 392,
+            "stack_offset_hex": "0x188",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31200,
+            "pc_hex": "0x79e0",
+            "slots": [
+              400,
+              404
+            ],
+            "stack_offset": 400,
+            "stack_offset_hex": "0x190",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31232,
+            "pc_hex": "0x7a00",
+            "slots": [
+              408,
+              412
+            ],
+            "stack_offset": 408,
+            "stack_offset_hex": "0x198",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31280,
+            "pc_hex": "0x7a30",
+            "slots": [
+              416,
+              420
+            ],
+            "stack_offset": 416,
+            "stack_offset_hex": "0x1a0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31312,
+            "pc_hex": "0x7a50",
+            "slots": [
+              424,
+              428
+            ],
+            "stack_offset": 424,
+            "stack_offset_hex": "0x1a8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31360,
+            "pc_hex": "0x7a80",
+            "slots": [
+              352,
+              356
+            ],
+            "stack_offset": 352,
+            "stack_offset_hex": "0x160",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31392,
+            "pc_hex": "0x7aa0",
+            "slots": [
+              360,
+              364
+            ],
+            "stack_offset": 360,
+            "stack_offset_hex": "0x168",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31408,
+            "pc_hex": "0x7ab0",
+            "slots": [
+              336,
+              340
+            ],
+            "stack_offset": 336,
+            "stack_offset_hex": "0x150",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31440,
+            "pc_hex": "0x7ad0",
+            "slots": [
+              344,
+              348
+            ],
+            "stack_offset": 344,
+            "stack_offset_hex": "0x158",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31472,
+            "pc_hex": "0x7af0",
+            "slots": [
+              320,
+              324
+            ],
+            "stack_offset": 320,
+            "stack_offset_hex": "0x140",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31504,
+            "pc_hex": "0x7b10",
+            "slots": [
+              328,
+              332
+            ],
+            "stack_offset": 328,
+            "stack_offset_hex": "0x148",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31520,
+            "pc_hex": "0x7b20",
+            "slots": [
+              304,
+              308
+            ],
+            "stack_offset": 304,
+            "stack_offset_hex": "0x130",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31552,
+            "pc_hex": "0x7b40",
+            "slots": [
+              312,
+              316
+            ],
+            "stack_offset": 312,
+            "stack_offset_hex": "0x138",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31568,
+            "pc_hex": "0x7b50",
+            "slots": [
+              288,
+              292
+            ],
+            "stack_offset": 288,
+            "stack_offset_hex": "0x120",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31600,
+            "pc_hex": "0x7b70",
+            "slots": [
+              296,
+              300
+            ],
+            "stack_offset": 296,
+            "stack_offset_hex": "0x128",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31616,
+            "pc_hex": "0x7b80",
+            "slots": [
+              272,
+              276
+            ],
+            "stack_offset": 272,
+            "stack_offset_hex": "0x110",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31648,
+            "pc_hex": "0x7ba0",
+            "slots": [
+              280,
+              284
+            ],
+            "stack_offset": 280,
+            "stack_offset_hex": "0x118",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31680,
+            "pc_hex": "0x7bc0",
+            "slots": [
+              256,
+              260
+            ],
+            "stack_offset": 256,
+            "stack_offset_hex": "0x100",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31712,
+            "pc_hex": "0x7be0",
+            "slots": [
+              264,
+              268
+            ],
+            "stack_offset": 264,
+            "stack_offset_hex": "0x108",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31728,
+            "pc_hex": "0x7bf0",
+            "slots": [
+              240,
+              244
+            ],
+            "stack_offset": 240,
+            "stack_offset_hex": "0xf0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31760,
+            "pc_hex": "0x7c10",
+            "slots": [
+              248,
+              252
+            ],
+            "stack_offset": 248,
+            "stack_offset_hex": "0xf8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31776,
+            "pc_hex": "0x7c20",
+            "slots": [
+              224,
+              228
+            ],
+            "stack_offset": 224,
+            "stack_offset_hex": "0xe0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31808,
+            "pc_hex": "0x7c40",
+            "slots": [
+              232,
+              236
+            ],
+            "stack_offset": 232,
+            "stack_offset_hex": "0xe8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31856,
+            "pc_hex": "0x7c70",
+            "slots": [
+              208,
+              212
+            ],
+            "stack_offset": 208,
+            "stack_offset_hex": "0xd0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31888,
+            "pc_hex": "0x7c90",
+            "slots": [
+              216,
+              220
+            ],
+            "stack_offset": 216,
+            "stack_offset_hex": "0xd8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31936,
+            "pc_hex": "0x7cc0",
+            "slots": [
+              192,
+              196
+            ],
+            "stack_offset": 192,
+            "stack_offset_hex": "0xc0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31984,
+            "pc_hex": "0x7cf0",
+            "slots": [
+              200,
+              204
+            ],
+            "stack_offset": 200,
+            "stack_offset_hex": "0xc8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32032,
+            "pc_hex": "0x7d20",
+            "slots": [
+              176,
+              180
+            ],
+            "stack_offset": 176,
+            "stack_offset_hex": "0xb0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32064,
+            "pc_hex": "0x7d40",
+            "slots": [
+              184,
+              188
+            ],
+            "stack_offset": 184,
+            "stack_offset_hex": "0xb8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32112,
+            "pc_hex": "0x7d70",
+            "slots": [
+              160,
+              164
+            ],
+            "stack_offset": 160,
+            "stack_offset_hex": "0xa0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32144,
+            "pc_hex": "0x7d90",
+            "slots": [
+              168,
+              172
+            ],
+            "stack_offset": 168,
+            "stack_offset_hex": "0xa8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32192,
+            "pc_hex": "0x7dc0",
+            "slots": [
+              144,
+              148
+            ],
+            "stack_offset": 144,
+            "stack_offset_hex": "0x90",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32224,
+            "pc_hex": "0x7de0",
+            "slots": [
+              152,
+              156
+            ],
+            "stack_offset": 152,
+            "stack_offset_hex": "0x98",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32240,
+            "pc_hex": "0x7df0",
+            "slots": [
+              128,
+              132
+            ],
+            "stack_offset": 128,
+            "stack_offset_hex": "0x80",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32272,
+            "pc_hex": "0x7e10",
+            "slots": [
+              136,
+              140
+            ],
+            "stack_offset": 136,
+            "stack_offset_hex": "0x88",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32320,
+            "pc_hex": "0x7e40",
+            "slots": [
+              112,
+              116
+            ],
+            "stack_offset": 112,
+            "stack_offset_hex": "0x70",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32352,
+            "pc_hex": "0x7e60",
+            "slots": [
+              120,
+              124
+            ],
+            "stack_offset": 120,
+            "stack_offset_hex": "0x78",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32368,
+            "pc_hex": "0x7e70",
+            "slots": [
+              96,
+              100
+            ],
+            "stack_offset": 96,
+            "stack_offset_hex": "0x60",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32400,
+            "pc_hex": "0x7e90",
+            "slots": [
+              104,
+              108
+            ],
+            "stack_offset": 104,
+            "stack_offset_hex": "0x68",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32416,
+            "pc_hex": "0x7ea0",
+            "slots": [
+              80,
+              84
+            ],
+            "stack_offset": 80,
+            "stack_offset_hex": "0x50",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32448,
+            "pc_hex": "0x7ec0",
+            "slots": [
+              88,
+              92
+            ],
+            "stack_offset": 88,
+            "stack_offset_hex": "0x58",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32496,
+            "pc_hex": "0x7ef0",
+            "slots": [
+              64,
+              68
+            ],
+            "stack_offset": 64,
+            "stack_offset_hex": "0x40",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32528,
+            "pc_hex": "0x7f10",
+            "slots": [
+              72,
+              76
+            ],
+            "stack_offset": 72,
+            "stack_offset_hex": "0x48",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32576,
+            "pc_hex": "0x7f40",
+            "slots": [
+              48,
+              52
+            ],
+            "stack_offset": 48,
+            "stack_offset_hex": "0x30",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32608,
+            "pc_hex": "0x7f60",
+            "slots": [
+              56,
+              60
+            ],
+            "stack_offset": 56,
+            "stack_offset_hex": "0x38",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32656,
+            "pc_hex": "0x7f90",
+            "slots": [
+              32,
+              36
+            ],
+            "stack_offset": 32,
+            "stack_offset_hex": "0x20",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32688,
+            "pc_hex": "0x7fb0",
+            "slots": [
+              40,
+              44
+            ],
+            "stack_offset": 40,
+            "stack_offset_hex": "0x28",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32736,
+            "pc_hex": "0x7fe0",
+            "slots": [
+              16,
+              20
+            ],
+            "stack_offset": 16,
+            "stack_offset_hex": "0x10",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32752,
+            "pc_hex": "0x7ff0",
+            "slots": [
+              24,
+              28
+            ],
+            "stack_offset": 24,
+            "stack_offset_hex": "0x18",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32816,
+            "pc_hex": "0x8030",
+            "slots": [
+              0,
+              4
+            ],
+            "stack_offset": 0,
+            "stack_offset_hex": "0x0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32864,
+            "pc_hex": "0x8060",
+            "slots": [
+              8,
+              12
+            ],
+            "stack_offset": 8,
+            "stack_offset_hex": "0x8",
+            "words": 2
+          },
+          {
+            "opcode": "STL",
+            "pc": 47936,
+            "pc_hex": "0xbb40",
+            "slots": [
+              484
+            ],
+            "stack_offset": 484,
+            "stack_offset_hex": "0x1e4",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 47968,
+            "pc_hex": "0xbb60",
+            "slots": [
+              480
+            ],
+            "stack_offset": 480,
+            "stack_offset_hex": "0x1e0",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48000,
+            "pc_hex": "0xbb80",
+            "slots": [
+              476
+            ],
+            "stack_offset": 476,
+            "stack_offset_hex": "0x1dc",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48016,
+            "pc_hex": "0xbb90",
+            "slots": [
+              472
+            ],
+            "stack_offset": 472,
+            "stack_offset_hex": "0x1d8",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48032,
+            "pc_hex": "0xbba0",
+            "slots": [
+              468
+            ],
+            "stack_offset": 468,
+            "stack_offset_hex": "0x1d4",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48048,
+            "pc_hex": "0xbbb0",
+            "slots": [
+              464
+            ],
+            "stack_offset": 464,
+            "stack_offset_hex": "0x1d0",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48064,
+            "pc_hex": "0xbbc0",
+            "slots": [
+              460
+            ],
+            "stack_offset": 460,
+            "stack_offset_hex": "0x1cc",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48080,
+            "pc_hex": "0xbbd0",
+            "slots": [
+              456
+            ],
+            "stack_offset": 456,
+            "stack_offset_hex": "0x1c8",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48096,
+            "pc_hex": "0xbbe0",
+            "slots": [
+              452
+            ],
+            "stack_offset": 452,
+            "stack_offset_hex": "0x1c4",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48112,
+            "pc_hex": "0xbbf0",
+            "slots": [
+              448
+            ],
+            "stack_offset": 448,
+            "stack_offset_hex": "0x1c0",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48128,
+            "pc_hex": "0xbc00",
+            "slots": [
+              444
+            ],
+            "stack_offset": 444,
+            "stack_offset_hex": "0x1bc",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48144,
+            "pc_hex": "0xbc10",
+            "slots": [
+              440
+            ],
+            "stack_offset": 440,
+            "stack_offset_hex": "0x1b8",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48160,
+            "pc_hex": "0xbc20",
+            "slots": [
+              436
+            ],
+            "stack_offset": 436,
+            "stack_offset_hex": "0x1b4",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48176,
+            "pc_hex": "0xbc30",
+            "slots": [
+              432
+            ],
+            "stack_offset": 432,
+            "stack_offset_hex": "0x1b0",
+            "words": 1
+          }
+        ]
+      },
+      "opcode_counts": {
+        "ATOMG.E.ADD.S32.STRONG.GPU": 9,
+        "BAR.ARV": 2,
+        "BAR.SYNC.DEFER_BLOCKING": 32,
+        "BRA": 182,
+        "BRA.U": 12,
+        "BSSY.RECONVERGENT": 21,
+        "BSYNC.RECONVERGENT": 21,
+        "CCTL.IVALL": 17,
+        "CGAERRBAR": 12,
+        "ELECT": 18,
+        "ERRBAR": 12,
+        "EXIT": 2,
+        "F2FP.BF16.F32.PACK_AB": 320,
+        "F2FP.SATFINITE.BF16.F32.PACK_AB": 16,
+        "F2FP.SATFINITE.E2M1.F32.PACK_AB_MERGE_C": 16,
+        "F2FP.SATFINITE.E4M3.F32.PACK_AB_MERGE_C": 2,
+        "F2I.FTZ.U32.TRUNC.NTZ": 2,
+        "FADD": 128,
+        "FENCE.VIEW.ASYNC.S": 10,
+        "FFMA": 2,
+        "FLO.U32": 1,
+        "FMNMX": 34,
+        "FMUL": 1228,
+        "FSEL": 2,
+        "FSETP.GEU.AND": 2,
+        "FSETP.NEU.AND": 4,
+        "I2F.RP": 2,
+        "I2FP.F32.S32": 2,
+        "I2FP.F32.U32": 2,
+        "IABS": 5,
+        "IADD.64": 4,
+        "IADD3": 344,
+        "IMAD": 90,
+        "IMAD.HI.U32": 4,
+        "IMAD.SHL.U32": 47,
+        "IMAD.U32": 65,
+        "IMAD.WIDE": 42,
+        "IMAD.WIDE.U32": 6,
+        "ISETP.EQ.U32.AND": 1,
+        "ISETP.GE.AND": 13,
+        "ISETP.GE.U32.AND": 13,
+        "ISETP.GT.AND": 4,
+        "ISETP.GT.U32.AND": 6,
+        "ISETP.GT.U32.OR": 1,
+        "ISETP.LT.AND": 10,
+        "ISETP.NE.AND": 7,
+        "ISETP.NE.U32.AND": 33,
+        "ISETP.NE.U32.OR": 1,
+        "LDC": 6,
+        "LDC.64": 71,
+        "LDCU": 4,
+        "LDCU.64": 48,
+        "LDG.E": 26,
+        "LDG.E.STRONG.GPU": 11,
+        "LDG.E.U16": 16,
+        "LDL.LU": 122,
+        "LDS": 13,
+        "LDS.128": 79,
+        "LDS.64": 2,
+        "LDS.U16": 48,
+        "LDSM.16.M88.4": 200,
+        "LEA": 55,
+        "LEA.HI": 28,
+        "LEA.HI.SX32": 9,
+        "LEA.HI.X": 2,
+        "LOP3.LUT": 348,
+        "MEMBAR.ALL.CTA": 18,
+        "MEMBAR.ALL.GPU": 6,
+        "MEMBAR.SC.GPU": 6,
+        "MOV": 453,
+        "MOV.64": 151,
+        "MUFU.EX2": 130,
+        "MUFU.RCP": 134,
+        "NANOSLEEP.SYNCS": 32,
+        "NOP": 545,
+        "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X": 896,
+        "PLOP3.LUT": 2,
+        "POPC": 2,
+        "PRMT": 8,
+        "R2UR": 10,
+        "REDG.E.ADD.BF16": 4,
+        "S2R": 15,
+        "S2UR": 2,
+        "SHF.R.S32.HI": 14,
+        "SHF.R.U32.HI": 220,
+        "SHF.R.U64": 3,
+        "SHFL.IDX": 3,
+        "STG.E": 66,
+        "STG.E.128": 1,
+        "STG.E.64": 1,
+        "STG.E.STRONG.GPU": 6,
+        "STG.E.U8": 1,
+        "STL": 14,
+        "STL.64": 54,
+        "STS": 328,
+        "STS.64": 3,
+        "STS.U8": 9,
+        "SYNCS.ARRIVE.TRANS64": 12,
+        "SYNCS.ARRIVE.TRANS64.ART0": 14,
+        "SYNCS.EXCH.64": 12,
+        "SYNCS.PHASECHK.TRANS64": 32,
+        "SYNCS.PHASECHK.TRANS64.TRYWAIT": 77,
+        "UIADD3": 137,
+        "UIADD3.64": 46,
+        "UIMAD.WIDE": 3,
+        "UISETP.GE.AND": 3,
+        "UISETP.NE.U32.AND": 8,
+        "ULEA": 20,
+        "UMOV": 59,
+        "UPLOP3.LUT": 3,
+        "USHF.L.U32": 39,
+        "UTMACCTL.PF": 6,
+        "UTMALDG.2D": 8,
+        "UTMALDG.3D": 20,
+        "UTMALDG.4D": 12,
+        "UVIMNMX.S32": 4,
+        "VIMNMX.S32": 7,
+        "VIMNMX.U32": 1,
+        "VOTEU.ANY": 1,
+        "WARPSYNC.ALL": 5,
+        "YIELD": 5
+      },
+      "resource": {
+        "authority": "binary_REG_STACK_SHARED_LOCAL_tuple",
+        "nvdisasm_local_bytes": 0,
+        "registers_per_thread": 255,
+        "shared_bytes_per_cta": 1024,
+        "stack_bytes_per_thread": 488,
+        "static_spill_load_bytes": null,
+        "static_spill_store_bytes": null
+      },
+      "selected_opcode_projection": {
+        "atomic": 13,
+        "barrier": 88,
+        "global": 128,
+        "ldsm": 200,
+        "local": 190,
+        "tensor": 896,
+        "tma": 46
+      }
+    },
+    "baseline": {
+      "arm": "baseline",
+      "function": {
+        "cubin_sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+        "instruction_count": 7568,
+        "length": 121088,
+        "name": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "source_lineinfo_present": false,
+        "start": 0
+      },
+      "local": {
+        "all_stored_slots_have_later_ldl": true,
+        "load_instruction_count": 122,
+        "missing_later_ldl_slots": [],
+        "stack_slots": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          20,
+          24,
+          28,
+          32,
+          36,
+          40,
+          44,
+          48,
+          52,
+          56,
+          60,
+          64,
+          68,
+          72,
+          76,
+          80,
+          84,
+          88,
+          92,
+          96,
+          100,
+          104,
+          108,
+          112,
+          116,
+          120,
+          124,
+          128,
+          132,
+          136,
+          140,
+          144,
+          148,
+          152,
+          156,
+          160,
+          164,
+          168,
+          172,
+          176,
+          180,
+          184,
+          188,
+          192,
+          196,
+          200,
+          204,
+          208,
+          212,
+          216,
+          220,
+          224,
+          228,
+          232,
+          236,
+          240,
+          244,
+          248,
+          252,
+          256,
+          260,
+          264,
+          268,
+          272,
+          276,
+          280,
+          284,
+          288,
+          292,
+          296,
+          300,
+          304,
+          308,
+          312,
+          316,
+          320,
+          324,
+          328,
+          332,
+          336,
+          340,
+          344,
+          348,
+          352,
+          356,
+          360,
+          364,
+          368,
+          372,
+          376,
+          380,
+          384,
+          388,
+          392,
+          396,
+          400,
+          404,
+          408,
+          412,
+          416,
+          420,
+          424,
+          428,
+          432,
+          436,
+          440,
+          444,
+          448,
+          452,
+          456,
+          460,
+          464,
+          468,
+          472,
+          476,
+          480,
+          484
+        ],
+        "store_instruction_count": 68,
+        "store_opcode_counts": {
+          "STL": 14,
+          "STL.64": 54
+        },
+        "stored_words": 122,
+        "stored_words_by_opcode_width": {
+          "STL": 14,
+          "STL.64": 108
+        },
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "pc": 30816,
+            "pc_hex": "0x7860",
+            "slots": [
+              368,
+              372
+            ],
+            "stack_offset": 368,
+            "stack_offset_hex": "0x170",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 30848,
+            "pc_hex": "0x7880",
+            "slots": [
+              376,
+              380
+            ],
+            "stack_offset": 376,
+            "stack_offset_hex": "0x178",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31120,
+            "pc_hex": "0x7990",
+            "slots": [
+              384,
+              388
+            ],
+            "stack_offset": 384,
+            "stack_offset_hex": "0x180",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31152,
+            "pc_hex": "0x79b0",
+            "slots": [
+              392,
+              396
+            ],
+            "stack_offset": 392,
+            "stack_offset_hex": "0x188",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31200,
+            "pc_hex": "0x79e0",
+            "slots": [
+              400,
+              404
+            ],
+            "stack_offset": 400,
+            "stack_offset_hex": "0x190",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31232,
+            "pc_hex": "0x7a00",
+            "slots": [
+              408,
+              412
+            ],
+            "stack_offset": 408,
+            "stack_offset_hex": "0x198",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31280,
+            "pc_hex": "0x7a30",
+            "slots": [
+              416,
+              420
+            ],
+            "stack_offset": 416,
+            "stack_offset_hex": "0x1a0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31312,
+            "pc_hex": "0x7a50",
+            "slots": [
+              424,
+              428
+            ],
+            "stack_offset": 424,
+            "stack_offset_hex": "0x1a8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31360,
+            "pc_hex": "0x7a80",
+            "slots": [
+              352,
+              356
+            ],
+            "stack_offset": 352,
+            "stack_offset_hex": "0x160",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31392,
+            "pc_hex": "0x7aa0",
+            "slots": [
+              360,
+              364
+            ],
+            "stack_offset": 360,
+            "stack_offset_hex": "0x168",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31408,
+            "pc_hex": "0x7ab0",
+            "slots": [
+              336,
+              340
+            ],
+            "stack_offset": 336,
+            "stack_offset_hex": "0x150",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31440,
+            "pc_hex": "0x7ad0",
+            "slots": [
+              344,
+              348
+            ],
+            "stack_offset": 344,
+            "stack_offset_hex": "0x158",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31472,
+            "pc_hex": "0x7af0",
+            "slots": [
+              320,
+              324
+            ],
+            "stack_offset": 320,
+            "stack_offset_hex": "0x140",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31504,
+            "pc_hex": "0x7b10",
+            "slots": [
+              328,
+              332
+            ],
+            "stack_offset": 328,
+            "stack_offset_hex": "0x148",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31520,
+            "pc_hex": "0x7b20",
+            "slots": [
+              304,
+              308
+            ],
+            "stack_offset": 304,
+            "stack_offset_hex": "0x130",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31552,
+            "pc_hex": "0x7b40",
+            "slots": [
+              312,
+              316
+            ],
+            "stack_offset": 312,
+            "stack_offset_hex": "0x138",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31568,
+            "pc_hex": "0x7b50",
+            "slots": [
+              288,
+              292
+            ],
+            "stack_offset": 288,
+            "stack_offset_hex": "0x120",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31600,
+            "pc_hex": "0x7b70",
+            "slots": [
+              296,
+              300
+            ],
+            "stack_offset": 296,
+            "stack_offset_hex": "0x128",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31616,
+            "pc_hex": "0x7b80",
+            "slots": [
+              272,
+              276
+            ],
+            "stack_offset": 272,
+            "stack_offset_hex": "0x110",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31648,
+            "pc_hex": "0x7ba0",
+            "slots": [
+              280,
+              284
+            ],
+            "stack_offset": 280,
+            "stack_offset_hex": "0x118",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31680,
+            "pc_hex": "0x7bc0",
+            "slots": [
+              256,
+              260
+            ],
+            "stack_offset": 256,
+            "stack_offset_hex": "0x100",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31712,
+            "pc_hex": "0x7be0",
+            "slots": [
+              264,
+              268
+            ],
+            "stack_offset": 264,
+            "stack_offset_hex": "0x108",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31728,
+            "pc_hex": "0x7bf0",
+            "slots": [
+              240,
+              244
+            ],
+            "stack_offset": 240,
+            "stack_offset_hex": "0xf0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31760,
+            "pc_hex": "0x7c10",
+            "slots": [
+              248,
+              252
+            ],
+            "stack_offset": 248,
+            "stack_offset_hex": "0xf8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31776,
+            "pc_hex": "0x7c20",
+            "slots": [
+              224,
+              228
+            ],
+            "stack_offset": 224,
+            "stack_offset_hex": "0xe0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31808,
+            "pc_hex": "0x7c40",
+            "slots": [
+              232,
+              236
+            ],
+            "stack_offset": 232,
+            "stack_offset_hex": "0xe8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31856,
+            "pc_hex": "0x7c70",
+            "slots": [
+              208,
+              212
+            ],
+            "stack_offset": 208,
+            "stack_offset_hex": "0xd0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31888,
+            "pc_hex": "0x7c90",
+            "slots": [
+              216,
+              220
+            ],
+            "stack_offset": 216,
+            "stack_offset_hex": "0xd8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31936,
+            "pc_hex": "0x7cc0",
+            "slots": [
+              192,
+              196
+            ],
+            "stack_offset": 192,
+            "stack_offset_hex": "0xc0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31984,
+            "pc_hex": "0x7cf0",
+            "slots": [
+              200,
+              204
+            ],
+            "stack_offset": 200,
+            "stack_offset_hex": "0xc8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32032,
+            "pc_hex": "0x7d20",
+            "slots": [
+              176,
+              180
+            ],
+            "stack_offset": 176,
+            "stack_offset_hex": "0xb0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32064,
+            "pc_hex": "0x7d40",
+            "slots": [
+              184,
+              188
+            ],
+            "stack_offset": 184,
+            "stack_offset_hex": "0xb8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32112,
+            "pc_hex": "0x7d70",
+            "slots": [
+              160,
+              164
+            ],
+            "stack_offset": 160,
+            "stack_offset_hex": "0xa0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32144,
+            "pc_hex": "0x7d90",
+            "slots": [
+              168,
+              172
+            ],
+            "stack_offset": 168,
+            "stack_offset_hex": "0xa8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32192,
+            "pc_hex": "0x7dc0",
+            "slots": [
+              144,
+              148
+            ],
+            "stack_offset": 144,
+            "stack_offset_hex": "0x90",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32224,
+            "pc_hex": "0x7de0",
+            "slots": [
+              152,
+              156
+            ],
+            "stack_offset": 152,
+            "stack_offset_hex": "0x98",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32240,
+            "pc_hex": "0x7df0",
+            "slots": [
+              128,
+              132
+            ],
+            "stack_offset": 128,
+            "stack_offset_hex": "0x80",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32272,
+            "pc_hex": "0x7e10",
+            "slots": [
+              136,
+              140
+            ],
+            "stack_offset": 136,
+            "stack_offset_hex": "0x88",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32320,
+            "pc_hex": "0x7e40",
+            "slots": [
+              112,
+              116
+            ],
+            "stack_offset": 112,
+            "stack_offset_hex": "0x70",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32352,
+            "pc_hex": "0x7e60",
+            "slots": [
+              120,
+              124
+            ],
+            "stack_offset": 120,
+            "stack_offset_hex": "0x78",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32368,
+            "pc_hex": "0x7e70",
+            "slots": [
+              96,
+              100
+            ],
+            "stack_offset": 96,
+            "stack_offset_hex": "0x60",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32400,
+            "pc_hex": "0x7e90",
+            "slots": [
+              104,
+              108
+            ],
+            "stack_offset": 104,
+            "stack_offset_hex": "0x68",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32416,
+            "pc_hex": "0x7ea0",
+            "slots": [
+              80,
+              84
+            ],
+            "stack_offset": 80,
+            "stack_offset_hex": "0x50",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32448,
+            "pc_hex": "0x7ec0",
+            "slots": [
+              88,
+              92
+            ],
+            "stack_offset": 88,
+            "stack_offset_hex": "0x58",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32496,
+            "pc_hex": "0x7ef0",
+            "slots": [
+              64,
+              68
+            ],
+            "stack_offset": 64,
+            "stack_offset_hex": "0x40",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32528,
+            "pc_hex": "0x7f10",
+            "slots": [
+              72,
+              76
+            ],
+            "stack_offset": 72,
+            "stack_offset_hex": "0x48",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32576,
+            "pc_hex": "0x7f40",
+            "slots": [
+              48,
+              52
+            ],
+            "stack_offset": 48,
+            "stack_offset_hex": "0x30",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32608,
+            "pc_hex": "0x7f60",
+            "slots": [
+              56,
+              60
+            ],
+            "stack_offset": 56,
+            "stack_offset_hex": "0x38",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32656,
+            "pc_hex": "0x7f90",
+            "slots": [
+              32,
+              36
+            ],
+            "stack_offset": 32,
+            "stack_offset_hex": "0x20",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32688,
+            "pc_hex": "0x7fb0",
+            "slots": [
+              40,
+              44
+            ],
+            "stack_offset": 40,
+            "stack_offset_hex": "0x28",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32736,
+            "pc_hex": "0x7fe0",
+            "slots": [
+              16,
+              20
+            ],
+            "stack_offset": 16,
+            "stack_offset_hex": "0x10",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32752,
+            "pc_hex": "0x7ff0",
+            "slots": [
+              24,
+              28
+            ],
+            "stack_offset": 24,
+            "stack_offset_hex": "0x18",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32816,
+            "pc_hex": "0x8030",
+            "slots": [
+              0,
+              4
+            ],
+            "stack_offset": 0,
+            "stack_offset_hex": "0x0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32864,
+            "pc_hex": "0x8060",
+            "slots": [
+              8,
+              12
+            ],
+            "stack_offset": 8,
+            "stack_offset_hex": "0x8",
+            "words": 2
+          },
+          {
+            "opcode": "STL",
+            "pc": 47936,
+            "pc_hex": "0xbb40",
+            "slots": [
+              484
+            ],
+            "stack_offset": 484,
+            "stack_offset_hex": "0x1e4",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 47968,
+            "pc_hex": "0xbb60",
+            "slots": [
+              480
+            ],
+            "stack_offset": 480,
+            "stack_offset_hex": "0x1e0",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48000,
+            "pc_hex": "0xbb80",
+            "slots": [
+              476
+            ],
+            "stack_offset": 476,
+            "stack_offset_hex": "0x1dc",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48016,
+            "pc_hex": "0xbb90",
+            "slots": [
+              472
+            ],
+            "stack_offset": 472,
+            "stack_offset_hex": "0x1d8",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48032,
+            "pc_hex": "0xbba0",
+            "slots": [
+              468
+            ],
+            "stack_offset": 468,
+            "stack_offset_hex": "0x1d4",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48048,
+            "pc_hex": "0xbbb0",
+            "slots": [
+              464
+            ],
+            "stack_offset": 464,
+            "stack_offset_hex": "0x1d0",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48064,
+            "pc_hex": "0xbbc0",
+            "slots": [
+              460
+            ],
+            "stack_offset": 460,
+            "stack_offset_hex": "0x1cc",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48080,
+            "pc_hex": "0xbbd0",
+            "slots": [
+              456
+            ],
+            "stack_offset": 456,
+            "stack_offset_hex": "0x1c8",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48096,
+            "pc_hex": "0xbbe0",
+            "slots": [
+              452
+            ],
+            "stack_offset": 452,
+            "stack_offset_hex": "0x1c4",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48112,
+            "pc_hex": "0xbbf0",
+            "slots": [
+              448
+            ],
+            "stack_offset": 448,
+            "stack_offset_hex": "0x1c0",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48128,
+            "pc_hex": "0xbc00",
+            "slots": [
+              444
+            ],
+            "stack_offset": 444,
+            "stack_offset_hex": "0x1bc",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48144,
+            "pc_hex": "0xbc10",
+            "slots": [
+              440
+            ],
+            "stack_offset": 440,
+            "stack_offset_hex": "0x1b8",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48160,
+            "pc_hex": "0xbc20",
+            "slots": [
+              436
+            ],
+            "stack_offset": 436,
+            "stack_offset_hex": "0x1b4",
+            "words": 1
+          },
+          {
+            "opcode": "STL",
+            "pc": 48176,
+            "pc_hex": "0xbc30",
+            "slots": [
+              432
+            ],
+            "stack_offset": 432,
+            "stack_offset_hex": "0x1b0",
+            "words": 1
+          }
+        ]
+      },
+      "opcode_counts": {
+        "ATOMG.E.ADD.S32.STRONG.GPU": 9,
+        "BAR.ARV": 2,
+        "BAR.SYNC.DEFER_BLOCKING": 32,
+        "BRA": 182,
+        "BRA.U": 12,
+        "BSSY.RECONVERGENT": 21,
+        "BSYNC.RECONVERGENT": 21,
+        "CCTL.IVALL": 17,
+        "CGAERRBAR": 12,
+        "ELECT": 18,
+        "ERRBAR": 12,
+        "EXIT": 2,
+        "F2FP.BF16.F32.PACK_AB": 320,
+        "F2FP.SATFINITE.BF16.F32.PACK_AB": 16,
+        "F2FP.SATFINITE.E2M1.F32.PACK_AB_MERGE_C": 16,
+        "F2FP.SATFINITE.E4M3.F32.PACK_AB_MERGE_C": 2,
+        "F2I.FTZ.U32.TRUNC.NTZ": 2,
+        "FADD": 128,
+        "FENCE.VIEW.ASYNC.S": 10,
+        "FFMA": 2,
+        "FLO.U32": 1,
+        "FMNMX": 34,
+        "FMUL": 1228,
+        "FSEL": 2,
+        "FSETP.GEU.AND": 2,
+        "FSETP.NEU.AND": 4,
+        "I2F.RP": 2,
+        "I2FP.F32.S32": 2,
+        "I2FP.F32.U32": 2,
+        "IABS": 5,
+        "IADD.64": 4,
+        "IADD3": 344,
+        "IMAD": 90,
+        "IMAD.HI.U32": 4,
+        "IMAD.SHL.U32": 47,
+        "IMAD.U32": 65,
+        "IMAD.WIDE": 42,
+        "IMAD.WIDE.U32": 6,
+        "ISETP.EQ.U32.AND": 1,
+        "ISETP.GE.AND": 13,
+        "ISETP.GE.U32.AND": 13,
+        "ISETP.GT.AND": 4,
+        "ISETP.GT.U32.AND": 6,
+        "ISETP.GT.U32.OR": 1,
+        "ISETP.LT.AND": 10,
+        "ISETP.NE.AND": 7,
+        "ISETP.NE.U32.AND": 33,
+        "ISETP.NE.U32.OR": 1,
+        "LDC": 6,
+        "LDC.64": 71,
+        "LDCU": 4,
+        "LDCU.64": 48,
+        "LDG.E": 26,
+        "LDG.E.STRONG.GPU": 11,
+        "LDG.E.U16": 16,
+        "LDL.LU": 122,
+        "LDS": 13,
+        "LDS.128": 79,
+        "LDS.64": 2,
+        "LDS.U16": 48,
+        "LDSM.16.M88.4": 200,
+        "LEA": 55,
+        "LEA.HI": 28,
+        "LEA.HI.SX32": 9,
+        "LEA.HI.X": 2,
+        "LOP3.LUT": 348,
+        "MEMBAR.ALL.CTA": 18,
+        "MEMBAR.ALL.GPU": 6,
+        "MEMBAR.SC.GPU": 6,
+        "MOV": 453,
+        "MOV.64": 151,
+        "MUFU.EX2": 130,
+        "MUFU.RCP": 134,
+        "NANOSLEEP.SYNCS": 32,
+        "NOP": 545,
+        "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X": 896,
+        "PLOP3.LUT": 2,
+        "POPC": 2,
+        "PRMT": 8,
+        "R2UR": 10,
+        "REDG.E.ADD.BF16": 4,
+        "S2R": 15,
+        "S2UR": 2,
+        "SHF.R.S32.HI": 14,
+        "SHF.R.U32.HI": 220,
+        "SHF.R.U64": 3,
+        "SHFL.IDX": 3,
+        "STG.E": 66,
+        "STG.E.128": 1,
+        "STG.E.64": 1,
+        "STG.E.STRONG.GPU": 6,
+        "STG.E.U8": 1,
+        "STL": 14,
+        "STL.64": 54,
+        "STS": 328,
+        "STS.64": 3,
+        "STS.U8": 9,
+        "SYNCS.ARRIVE.TRANS64": 12,
+        "SYNCS.ARRIVE.TRANS64.ART0": 14,
+        "SYNCS.EXCH.64": 12,
+        "SYNCS.PHASECHK.TRANS64": 32,
+        "SYNCS.PHASECHK.TRANS64.TRYWAIT": 77,
+        "UIADD3": 137,
+        "UIADD3.64": 46,
+        "UIMAD.WIDE": 3,
+        "UISETP.GE.AND": 3,
+        "UISETP.NE.U32.AND": 8,
+        "ULEA": 20,
+        "UMOV": 59,
+        "UPLOP3.LUT": 3,
+        "USHF.L.U32": 39,
+        "UTMACCTL.PF": 6,
+        "UTMALDG.2D": 8,
+        "UTMALDG.3D": 20,
+        "UTMALDG.4D": 12,
+        "UVIMNMX.S32": 4,
+        "VIMNMX.S32": 7,
+        "VIMNMX.U32": 1,
+        "VOTEU.ANY": 1,
+        "WARPSYNC.ALL": 5,
+        "YIELD": 5
+      },
+      "resource": {
+        "authority": "binary_REG_STACK_SHARED_LOCAL_tuple",
+        "nvdisasm_local_bytes": 0,
+        "registers_per_thread": 255,
+        "shared_bytes_per_cta": 1024,
+        "stack_bytes_per_thread": 488,
+        "static_spill_load_bytes": null,
+        "static_spill_store_bytes": null
+      },
+      "selected_opcode_projection": {
+        "atomic": 13,
+        "barrier": 88,
+        "global": 128,
+        "ldsm": 200,
+        "local": 190,
+        "tensor": 896,
+        "tma": 46
+      }
+    },
+    "up_first_attribution": {
+      "arm": "up_first_attribution",
+      "function": {
+        "cubin_sha256": "691ca03362e2e1efd7a2ad1af2d9074a38e5b809f7f0d99a6239e41f4009fee6",
+        "instruction_count": 7544,
+        "length": 120704,
+        "name": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "source_lineinfo_present": false,
+        "start": 0
+      },
+      "local": {
+        "all_stored_slots_have_later_ldl": true,
+        "load_instruction_count": 108,
+        "missing_later_ldl_slots": [],
+        "stack_slots": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          20,
+          24,
+          28,
+          32,
+          36,
+          40,
+          44,
+          48,
+          52,
+          56,
+          60,
+          64,
+          68,
+          72,
+          76,
+          80,
+          84,
+          88,
+          92,
+          96,
+          100,
+          104,
+          108,
+          112,
+          116,
+          120,
+          124,
+          128,
+          132,
+          136,
+          140,
+          144,
+          148,
+          152,
+          156,
+          160,
+          164,
+          168,
+          172,
+          176,
+          180,
+          184,
+          188,
+          192,
+          196,
+          200,
+          204,
+          208,
+          212,
+          216,
+          220,
+          224,
+          228,
+          232,
+          236,
+          240,
+          244,
+          248,
+          252,
+          256,
+          260,
+          264,
+          268,
+          272,
+          276,
+          280,
+          284,
+          288,
+          292,
+          296,
+          300,
+          304,
+          308,
+          312,
+          316,
+          320,
+          324,
+          328,
+          332,
+          336,
+          340,
+          344,
+          348,
+          352,
+          356,
+          360,
+          364,
+          368,
+          372,
+          376,
+          380,
+          384,
+          388,
+          392,
+          396,
+          400,
+          404,
+          408,
+          412,
+          416,
+          420,
+          424,
+          428
+        ],
+        "store_instruction_count": 54,
+        "store_opcode_counts": {
+          "STL.64": 54
+        },
+        "stored_words": 108,
+        "stored_words_by_opcode_width": {
+          "STL.64": 108
+        },
+        "stores": [
+          {
+            "opcode": "STL.64",
+            "pc": 30816,
+            "pc_hex": "0x7860",
+            "slots": [
+              416,
+              420
+            ],
+            "stack_offset": 416,
+            "stack_offset_hex": "0x1a0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 30848,
+            "pc_hex": "0x7880",
+            "slots": [
+              424,
+              428
+            ],
+            "stack_offset": 424,
+            "stack_offset_hex": "0x1a8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31120,
+            "pc_hex": "0x7990",
+            "slots": [
+              400,
+              404
+            ],
+            "stack_offset": 400,
+            "stack_offset_hex": "0x190",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31152,
+            "pc_hex": "0x79b0",
+            "slots": [
+              408,
+              412
+            ],
+            "stack_offset": 408,
+            "stack_offset_hex": "0x198",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31200,
+            "pc_hex": "0x79e0",
+            "slots": [
+              384,
+              388
+            ],
+            "stack_offset": 384,
+            "stack_offset_hex": "0x180",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31232,
+            "pc_hex": "0x7a00",
+            "slots": [
+              392,
+              396
+            ],
+            "stack_offset": 392,
+            "stack_offset_hex": "0x188",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31280,
+            "pc_hex": "0x7a30",
+            "slots": [
+              368,
+              372
+            ],
+            "stack_offset": 368,
+            "stack_offset_hex": "0x170",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31312,
+            "pc_hex": "0x7a50",
+            "slots": [
+              376,
+              380
+            ],
+            "stack_offset": 376,
+            "stack_offset_hex": "0x178",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31360,
+            "pc_hex": "0x7a80",
+            "slots": [
+              352,
+              356
+            ],
+            "stack_offset": 352,
+            "stack_offset_hex": "0x160",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31392,
+            "pc_hex": "0x7aa0",
+            "slots": [
+              360,
+              364
+            ],
+            "stack_offset": 360,
+            "stack_offset_hex": "0x168",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31408,
+            "pc_hex": "0x7ab0",
+            "slots": [
+              336,
+              340
+            ],
+            "stack_offset": 336,
+            "stack_offset_hex": "0x150",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31440,
+            "pc_hex": "0x7ad0",
+            "slots": [
+              344,
+              348
+            ],
+            "stack_offset": 344,
+            "stack_offset_hex": "0x158",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31472,
+            "pc_hex": "0x7af0",
+            "slots": [
+              320,
+              324
+            ],
+            "stack_offset": 320,
+            "stack_offset_hex": "0x140",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31504,
+            "pc_hex": "0x7b10",
+            "slots": [
+              328,
+              332
+            ],
+            "stack_offset": 328,
+            "stack_offset_hex": "0x148",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31520,
+            "pc_hex": "0x7b20",
+            "slots": [
+              304,
+              308
+            ],
+            "stack_offset": 304,
+            "stack_offset_hex": "0x130",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31552,
+            "pc_hex": "0x7b40",
+            "slots": [
+              312,
+              316
+            ],
+            "stack_offset": 312,
+            "stack_offset_hex": "0x138",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31568,
+            "pc_hex": "0x7b50",
+            "slots": [
+              288,
+              292
+            ],
+            "stack_offset": 288,
+            "stack_offset_hex": "0x120",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31600,
+            "pc_hex": "0x7b70",
+            "slots": [
+              296,
+              300
+            ],
+            "stack_offset": 296,
+            "stack_offset_hex": "0x128",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31616,
+            "pc_hex": "0x7b80",
+            "slots": [
+              272,
+              276
+            ],
+            "stack_offset": 272,
+            "stack_offset_hex": "0x110",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31648,
+            "pc_hex": "0x7ba0",
+            "slots": [
+              280,
+              284
+            ],
+            "stack_offset": 280,
+            "stack_offset_hex": "0x118",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31680,
+            "pc_hex": "0x7bc0",
+            "slots": [
+              256,
+              260
+            ],
+            "stack_offset": 256,
+            "stack_offset_hex": "0x100",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31712,
+            "pc_hex": "0x7be0",
+            "slots": [
+              264,
+              268
+            ],
+            "stack_offset": 264,
+            "stack_offset_hex": "0x108",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31728,
+            "pc_hex": "0x7bf0",
+            "slots": [
+              240,
+              244
+            ],
+            "stack_offset": 240,
+            "stack_offset_hex": "0xf0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31760,
+            "pc_hex": "0x7c10",
+            "slots": [
+              248,
+              252
+            ],
+            "stack_offset": 248,
+            "stack_offset_hex": "0xf8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31776,
+            "pc_hex": "0x7c20",
+            "slots": [
+              224,
+              228
+            ],
+            "stack_offset": 224,
+            "stack_offset_hex": "0xe0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31808,
+            "pc_hex": "0x7c40",
+            "slots": [
+              232,
+              236
+            ],
+            "stack_offset": 232,
+            "stack_offset_hex": "0xe8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31856,
+            "pc_hex": "0x7c70",
+            "slots": [
+              208,
+              212
+            ],
+            "stack_offset": 208,
+            "stack_offset_hex": "0xd0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31888,
+            "pc_hex": "0x7c90",
+            "slots": [
+              216,
+              220
+            ],
+            "stack_offset": 216,
+            "stack_offset_hex": "0xd8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31936,
+            "pc_hex": "0x7cc0",
+            "slots": [
+              192,
+              196
+            ],
+            "stack_offset": 192,
+            "stack_offset_hex": "0xc0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 31984,
+            "pc_hex": "0x7cf0",
+            "slots": [
+              200,
+              204
+            ],
+            "stack_offset": 200,
+            "stack_offset_hex": "0xc8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32032,
+            "pc_hex": "0x7d20",
+            "slots": [
+              176,
+              180
+            ],
+            "stack_offset": 176,
+            "stack_offset_hex": "0xb0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32064,
+            "pc_hex": "0x7d40",
+            "slots": [
+              184,
+              188
+            ],
+            "stack_offset": 184,
+            "stack_offset_hex": "0xb8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32112,
+            "pc_hex": "0x7d70",
+            "slots": [
+              160,
+              164
+            ],
+            "stack_offset": 160,
+            "stack_offset_hex": "0xa0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32144,
+            "pc_hex": "0x7d90",
+            "slots": [
+              168,
+              172
+            ],
+            "stack_offset": 168,
+            "stack_offset_hex": "0xa8",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32192,
+            "pc_hex": "0x7dc0",
+            "slots": [
+              144,
+              148
+            ],
+            "stack_offset": 144,
+            "stack_offset_hex": "0x90",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32224,
+            "pc_hex": "0x7de0",
+            "slots": [
+              152,
+              156
+            ],
+            "stack_offset": 152,
+            "stack_offset_hex": "0x98",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32240,
+            "pc_hex": "0x7df0",
+            "slots": [
+              128,
+              132
+            ],
+            "stack_offset": 128,
+            "stack_offset_hex": "0x80",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32272,
+            "pc_hex": "0x7e10",
+            "slots": [
+              136,
+              140
+            ],
+            "stack_offset": 136,
+            "stack_offset_hex": "0x88",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32320,
+            "pc_hex": "0x7e40",
+            "slots": [
+              112,
+              116
+            ],
+            "stack_offset": 112,
+            "stack_offset_hex": "0x70",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32352,
+            "pc_hex": "0x7e60",
+            "slots": [
+              120,
+              124
+            ],
+            "stack_offset": 120,
+            "stack_offset_hex": "0x78",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32368,
+            "pc_hex": "0x7e70",
+            "slots": [
+              96,
+              100
+            ],
+            "stack_offset": 96,
+            "stack_offset_hex": "0x60",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32400,
+            "pc_hex": "0x7e90",
+            "slots": [
+              104,
+              108
+            ],
+            "stack_offset": 104,
+            "stack_offset_hex": "0x68",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32416,
+            "pc_hex": "0x7ea0",
+            "slots": [
+              80,
+              84
+            ],
+            "stack_offset": 80,
+            "stack_offset_hex": "0x50",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32448,
+            "pc_hex": "0x7ec0",
+            "slots": [
+              88,
+              92
+            ],
+            "stack_offset": 88,
+            "stack_offset_hex": "0x58",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32496,
+            "pc_hex": "0x7ef0",
+            "slots": [
+              64,
+              68
+            ],
+            "stack_offset": 64,
+            "stack_offset_hex": "0x40",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32528,
+            "pc_hex": "0x7f10",
+            "slots": [
+              72,
+              76
+            ],
+            "stack_offset": 72,
+            "stack_offset_hex": "0x48",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32576,
+            "pc_hex": "0x7f40",
+            "slots": [
+              48,
+              52
+            ],
+            "stack_offset": 48,
+            "stack_offset_hex": "0x30",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32608,
+            "pc_hex": "0x7f60",
+            "slots": [
+              56,
+              60
+            ],
+            "stack_offset": 56,
+            "stack_offset_hex": "0x38",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32656,
+            "pc_hex": "0x7f90",
+            "slots": [
+              32,
+              36
+            ],
+            "stack_offset": 32,
+            "stack_offset_hex": "0x20",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32688,
+            "pc_hex": "0x7fb0",
+            "slots": [
+              40,
+              44
+            ],
+            "stack_offset": 40,
+            "stack_offset_hex": "0x28",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32736,
+            "pc_hex": "0x7fe0",
+            "slots": [
+              16,
+              20
+            ],
+            "stack_offset": 16,
+            "stack_offset_hex": "0x10",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32752,
+            "pc_hex": "0x7ff0",
+            "slots": [
+              24,
+              28
+            ],
+            "stack_offset": 24,
+            "stack_offset_hex": "0x18",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32816,
+            "pc_hex": "0x8030",
+            "slots": [
+              0,
+              4
+            ],
+            "stack_offset": 0,
+            "stack_offset_hex": "0x0",
+            "words": 2
+          },
+          {
+            "opcode": "STL.64",
+            "pc": 32864,
+            "pc_hex": "0x8060",
+            "slots": [
+              8,
+              12
+            ],
+            "stack_offset": 8,
+            "stack_offset_hex": "0x8",
+            "words": 2
+          }
+        ]
+      },
+      "opcode_counts": {
+        "ATOMG.E.ADD.S32.STRONG.GPU": 9,
+        "BAR.ARV": 2,
+        "BAR.SYNC.DEFER_BLOCKING": 32,
+        "BRA": 182,
+        "BRA.U": 12,
+        "BSSY.RECONVERGENT": 21,
+        "BSYNC.RECONVERGENT": 21,
+        "CCTL.IVALL": 17,
+        "CGAERRBAR": 12,
+        "ELECT": 18,
+        "ERRBAR": 12,
+        "EXIT": 2,
+        "F2FP.BF16.F32.PACK_AB": 320,
+        "F2FP.SATFINITE.BF16.F32.PACK_AB": 16,
+        "F2FP.SATFINITE.E2M1.F32.PACK_AB_MERGE_C": 16,
+        "F2FP.SATFINITE.E4M3.F32.PACK_AB_MERGE_C": 2,
+        "F2I.FTZ.U32.TRUNC.NTZ": 2,
+        "FADD": 128,
+        "FENCE.VIEW.ASYNC.S": 10,
+        "FFMA": 2,
+        "FLO.U32": 1,
+        "FMNMX": 34,
+        "FMUL": 1228,
+        "FSEL": 2,
+        "FSETP.GEU.AND": 2,
+        "FSETP.NEU.AND": 4,
+        "I2F.RP": 2,
+        "I2FP.F32.S32": 2,
+        "I2FP.F32.U32": 2,
+        "IABS": 5,
+        "IADD.64": 4,
+        "IADD3": 344,
+        "IMAD": 90,
+        "IMAD.HI.U32": 4,
+        "IMAD.SHL.U32": 45,
+        "IMAD.U32": 65,
+        "IMAD.WIDE": 42,
+        "IMAD.WIDE.U32": 6,
+        "ISETP.EQ.U32.AND": 1,
+        "ISETP.GE.AND": 13,
+        "ISETP.GE.U32.AND": 13,
+        "ISETP.GT.AND": 4,
+        "ISETP.GT.U32.AND": 6,
+        "ISETP.GT.U32.OR": 1,
+        "ISETP.LT.AND": 10,
+        "ISETP.NE.AND": 7,
+        "ISETP.NE.U32.AND": 33,
+        "ISETP.NE.U32.OR": 1,
+        "LDC": 6,
+        "LDC.64": 71,
+        "LDCU": 4,
+        "LDCU.64": 48,
+        "LDG.E": 26,
+        "LDG.E.STRONG.GPU": 11,
+        "LDG.E.U16": 16,
+        "LDL.LU": 108,
+        "LDS": 13,
+        "LDS.128": 79,
+        "LDS.64": 2,
+        "LDS.U16": 48,
+        "LDSM.16.M88.4": 200,
+        "LEA": 55,
+        "LEA.HI": 28,
+        "LEA.HI.SX32": 9,
+        "LEA.HI.X": 2,
+        "LOP3.LUT": 348,
+        "MEMBAR.ALL.CTA": 18,
+        "MEMBAR.ALL.GPU": 6,
+        "MEMBAR.SC.GPU": 6,
+        "MOV": 453,
+        "MOV.64": 151,
+        "MUFU.EX2": 130,
+        "MUFU.RCP": 134,
+        "NANOSLEEP.SYNCS": 32,
+        "NOP": 552,
+        "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X": 896,
+        "PLOP3.LUT": 2,
+        "POPC": 2,
+        "PRMT": 8,
+        "R2UR": 10,
+        "REDG.E.ADD.BF16": 4,
+        "S2R": 14,
+        "S2UR": 2,
+        "SHF.R.S32.HI": 14,
+        "SHF.R.U32.HI": 220,
+        "SHF.R.U64": 3,
+        "SHFL.IDX": 3,
+        "STG.E": 66,
+        "STG.E.128": 1,
+        "STG.E.64": 1,
+        "STG.E.STRONG.GPU": 6,
+        "STG.E.U8": 1,
+        "STL.64": 54,
+        "STS": 328,
+        "STS.64": 3,
+        "STS.U8": 9,
+        "SYNCS.ARRIVE.TRANS64": 12,
+        "SYNCS.ARRIVE.TRANS64.ART0": 14,
+        "SYNCS.EXCH.64": 12,
+        "SYNCS.PHASECHK.TRANS64": 32,
+        "SYNCS.PHASECHK.TRANS64.TRYWAIT": 77,
+        "UIADD3": 137,
+        "UIADD3.64": 46,
+        "UIMAD.WIDE": 3,
+        "UISETP.GE.AND": 3,
+        "UISETP.NE.U32.AND": 8,
+        "ULEA": 20,
+        "UMOV": 59,
+        "UPLOP3.LUT": 3,
+        "USHF.L.U32": 39,
+        "UTMACCTL.PF": 6,
+        "UTMALDG.2D": 8,
+        "UTMALDG.3D": 20,
+        "UTMALDG.4D": 12,
+        "UVIMNMX.S32": 4,
+        "VIMNMX.S32": 7,
+        "VIMNMX.U32": 1,
+        "VOTEU.ANY": 1,
+        "WARPSYNC.ALL": 5,
+        "YIELD": 5
+      },
+      "resource": {
+        "authority": "binary_REG_STACK_SHARED_LOCAL_tuple",
+        "nvdisasm_local_bytes": 0,
+        "registers_per_thread": 255,
+        "shared_bytes_per_cta": 1024,
+        "stack_bytes_per_thread": 432,
+        "static_spill_load_bytes": null,
+        "static_spill_store_bytes": null
+      },
+      "selected_opcode_projection": {
+        "atomic": 13,
+        "barrier": 88,
+        "global": 128,
+        "ldsm": 200,
+        "local": 162,
+        "tensor": 896,
+        "tma": 46
+      }
+    }
+  },
+  "baseline_reproduction": {
+    "all_slots_roundtrip": true,
+    "main_108_words": true,
+    "stack_bytes_488": true,
+    "stored_words_122": true,
+    "tail_14_words": true
+  },
+  "baseline_reproduction_pass": true,
+  "deltas": {
+    "activation_in_place_gate": {
+      "complete_tail_removal_no_replacement": false,
+      "removed_words": 0,
+      "replacement_words": 14,
+      "selected_opcode_projection_equal_except_local": true,
+      "stack_bytes_delta": 0,
+      "stored_words_delta": 0
+    },
+    "activation_in_place_up": {
+      "complete_tail_removal_no_replacement": false,
+      "removed_words": 0,
+      "replacement_words": 14,
+      "selected_opcode_projection_equal_except_local": true,
+      "stack_bytes_delta": 0,
+      "stored_words_delta": 0
+    },
+    "up_first_attribution": {
+      "complete_tail_removal_no_replacement": true,
+      "removed_words": 14,
+      "replacement_words": 0,
+      "selected_opcode_projection_equal_except_local": true,
+      "stack_bytes_delta": -56,
+      "stored_words_delta": -14
+    }
+  },
+  "evidence_sha256": "084a1104bdafc5ceccc65e9a77531b987dd7c1a96e914b6fadb3cc0bdc4f78c5",
+  "h108_boundary": "static program order supports a structural-lifetime model; formal attribution still requires the separately recorded IR/PTX/SASS def-use chain",
+  "inputs": {
+    "activation_in_place_gate": {
+      "cubin": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/jit/activation_in_place_gate/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+      "cubin_sha256": "76f2e54d7b86148c2a3098e10b758a86a59133a9a294cc28932103b1f0c67f11",
+      "disassembly": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/static/activation_in_place_gate/target.sass",
+      "disassembly_kind": "nvdisasm_target_text",
+      "disassembly_sha256": "f02e98bde8a9ba0850e5e568a3d3d0fd89aa8fa7aad7b07e0469d4f79c13709e",
+      "fresh_jit_artifact_identity_gate": true,
+      "resource_text": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/static/activation_in_place_gate/resource.txt",
+      "resource_text_sha256": "1d1049159ba3812731e8700736c6c70dbb332065bd269c18208a1cf1410c7d64"
+    },
+    "activation_in_place_up": {
+      "cubin": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/jit/activation_in_place_up/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+      "cubin_sha256": "76f2e54d7b86148c2a3098e10b758a86a59133a9a294cc28932103b1f0c67f11",
+      "disassembly": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/static/activation_in_place_up/target.sass",
+      "disassembly_kind": "nvdisasm_target_text",
+      "disassembly_sha256": "f02e98bde8a9ba0850e5e568a3d3d0fd89aa8fa7aad7b07e0469d4f79c13709e",
+      "fresh_jit_artifact_identity_gate": true,
+      "resource_text": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/static/activation_in_place_up/resource.txt",
+      "resource_text_sha256": "1d1049159ba3812731e8700736c6c70dbb332065bd269c18208a1cf1410c7d64"
+    },
+    "baseline": {
+      "cubin": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/jit/baseline/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+      "cubin_sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+      "disassembly": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/static/baseline/target.sass",
+      "disassembly_kind": "nvdisasm_target_text",
+      "disassembly_sha256": "34b4c38161642a27ca6b4ec41ffad0bd70f6ff99fd8118997a4b2416c5e3abba",
+      "fresh_jit_artifact_identity_gate": true,
+      "resource_text": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/static/baseline/resource.txt",
+      "resource_text_sha256": "1d1049159ba3812731e8700736c6c70dbb332065bd269c18208a1cf1410c7d64"
+    },
+    "up_first_attribution": {
+      "cubin": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/jit/up_first_attribution/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+      "cubin_sha256": "691ca03362e2e1efd7a2ad1af2d9074a38e5b809f7f0d99a6239e41f4009fee6",
+      "disassembly": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/static/up_first_attribution/target.sass",
+      "disassembly_kind": "nvdisasm_target_text",
+      "disassembly_sha256": "b7b236276e27acb2f7e0908f01df5e864ff2863d9a817aea67720026e55a6f98",
+      "fresh_jit_artifact_identity_gate": true,
+      "resource_text": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/static/up_first_attribution/resource.txt",
+      "resource_text_sha256": "0c786a485ef7bedbedc08978248e4f7c6cd7b910995cd4dbd70e7bbcdba863b7"
+    }
+  },
+  "schema": "exp004.static-spill-evidence.v1"
+}

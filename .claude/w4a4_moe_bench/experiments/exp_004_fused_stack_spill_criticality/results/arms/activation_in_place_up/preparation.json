@@ -1,0 +1,203 @@
+{
+  "arm": "activation_in_place_up",
+  "case": {
+    "experts": 256,
+    "hidden": 2048,
+    "intermediate_tp": 512,
+    "m": 8192,
+    "topk": 8
+  },
+  "fixture": {
+    "duplicate_expert_ids": 0,
+    "fixture_kind": "deterministic_synthetic_random_logits",
+    "m": 8192,
+    "occupancy_max": 302,
+    "occupancy_min": 217,
+    "occupancy_p50": 256.0,
+    "occupancy_p95": 281.0,
+    "occupancy_sha256": "5e937225d3ac21770218000ebdedcb62cc211c4444bb260d0838656ca41260bc",
+    "predicted_cutlass_route_branch": "three_step_large_prefix_candidate",
+    "seed": 10218,
+    "shape": {
+      "experts": 256,
+      "hidden": 2048,
+      "intermediate_tp": 512,
+      "topk": 8
+    },
+    "topk_ids_sha256": "f9b3c632d767e754837a14016f5a2ea3c3fccfefef1adee4f9b7b966c68e2f7a",
+    "topk_weights_sha256": "ee885b45d94eee54d3c9114669492419003c914ea3bd1d29dbd58ad765fccb9d",
+    "weight_sum_max_abs_error": 2.384185791015625e-07,
+    "x_sha256": "6c95ae4406b2fc7ad4544936781b71288d98f496a60c58f5695e6dbf868864b4",
+    "zero_token_experts": 0
+  },
+  "jit_artifact_set_sha256": "1c68853ff22f1509958a440f1f6667fb98d5e59b90e8f9d6bf103ae930a2ce37",
+  "jit_artifacts": [
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/cached_ops/fp4_quantization_120f/fp4_quantization_120f.so",
+      "sha256": "a1953cbff01fc4a94991e82de4563dda6d4be5baa7cbd84af77e0c508afb19b1",
+      "size": 2975168
+    },
+    {
+      "path": "dump/cute_dsl_cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe_clean.mlir",
+      "sha256": "80c4a5f0f943ca4812db034ea6b721d30a1d125087570dfae00a53992ea841a7",
+      "size": 716851
+    },
+    {
+      "path": "dump/cute_dsl_cutlass__host_function_cutlassutilshardware_infoHardwareInfo_object_at__clean.mlir",
+      "sha256": "cb21a8e4c69cb69d280b3396e0ab95085a4a408db366201f46793f5b855dad27",
+      "size": 1999
+    },
+    {
+      "path": "dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+      "sha256": "76f2e54d7b86148c2a3098e10b758a86a59133a9a294cc28932103b1f0c67f11",
+      "size": 190616
+    },
+    {
+      "path": "dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.ptx",
+      "sha256": "14da12adf616a18a8f9673c661c3b2fce4633cc35db8ce20ba0710a2ed76686f",
+      "size": 573766
+    }
+  ],
+  "launch": {
+    "block": [
+      160,
+      1,
+      1
+    ],
+    "grid": [
+      1,
+      1,
+      110
+    ]
+  },
+  "outputs": [
+    {
+      "actual_mean": 1.7795737221604213e-05,
+      "actual_std": 0.1647980958223343,
+      "actual_to_reference_l2_ratio": 0.9999291300773621,
+      "cosine": 0.999914824962616,
+      "dtype": "bfloat16",
+      "finite": true,
+      "formal_magnitude_atol": 0.2472146674990654,
+      "formal_magnitude_rtol": 0.5,
+      "formal_pass": true,
+      "formal_percent_threshold": 97.0,
+      "formal_percent_within": 100.0,
+      "least_squares_actual_gain": 0.9998437762260437,
+      "max_abs_error": 0.062139347195625305,
+      "mean_abs_error": 0.0011442257091403008,
+      "nonzero": true,
+      "output_sha256": "cd3c2380b580a51e3ead9af49f70adb470f1e82277a2f62539e7c94e84a4874b",
+      "path": "raw/activation_in_place_up/output_0.pt",
+      "percent_within_rtol_0.2_atol_0.2": 100.0,
+      "reference_mean": 1.752144453348592e-05,
+      "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+      "reference_std": 0.16480977833271027,
+      "relative_l2": 0.01305378507822752,
+      "shape": [
+        8192,
+        2048
+      ],
+      "strict_rtol_0.2_atol_0.2_allclose": true
+    },
+    {
+      "actual_mean": 1.7632577510084957e-05,
+      "actual_std": 0.1647980511188507,
+      "actual_to_reference_l2_ratio": 0.9999288320541382,
+      "cosine": 0.9999149441719055,
+      "dtype": "bfloat16",
+      "finite": true,
+      "formal_magnitude_atol": 0.2472146674990654,
+      "formal_magnitude_rtol": 0.5,
+      "formal_pass": true,
+      "formal_percent_threshold": 97.0,
+      "formal_percent_within": 100.0,
+      "least_squares_actual_gain": 0.9998436570167542,
+      "max_abs_error": 0.060186222195625305,
+      "mean_abs_error": 0.001144183799624443,
+      "nonzero": true,
+      "output_sha256": "11c80cbfc6e59f27d5b215f1e37dfa86d15ae581ad48b13a618999f171b95de7",
+      "path": "raw/activation_in_place_up/output_1.pt",
+      "percent_within_rtol_0.2_atol_0.2": 100.0,
+      "reference_mean": 1.752144453348592e-05,
+      "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+      "reference_std": 0.16480977833271027,
+      "relative_l2": 0.013051851652562618,
+      "shape": [
+        8192,
+        2048
+      ],
+      "strict_rtol_0.2_atol_0.2_allclose": true
+    }
+  ],
+  "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+  "runtime": {
+    "cuda_runtime": "13.2",
+    "driver": "580.95.05",
+    "gpu": {
+      "compute_capability": [
+        12,
+        0
+      ],
+      "name": "NVIDIA Graphics Device",
+      "uuid": "GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12"
+    },
+    "hostname": "ab40a57b9e00",
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "imports": {
+      "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py",
+      "target_module": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/overlays/activation_in_place_up.py"
+    },
+    "jit_root": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/jit/activation_in_place_up",
+    "lease_id": "exp004-20260717T024900Z-codex",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "pid": 274,
+    "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+    "source": {
+      "checkout_head": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "locked_source_commit": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+      "overlay": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/overlays/activation_in_place_up.py",
+      "overlay_diff": "ERROR: Command '['diff', '-u', '/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py', '/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/overlays/activation_in_place_up.py']' returned non-zero exit status 1.",
+      "overlay_sha256": "39ba4d7e79adc701ab20eda4c8c68469b3c86cd67d40af796562d47bab7ddd06",
+      "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+      "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+    },
+    "timestamp_unix": 1784257415.459213,
+    "torch": "2.12.0a0+5aff3928d8.nv26.05"
+  },
+  "schema": "exp004.arm-preparation.v1",
+  "status": "complete",
+  "weights": {
+    "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+    "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+    "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+    "seed": 2026,
+    "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+    "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+    "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+    "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+    "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+    "w1_packed_shape": [
+      256,
+      1024,
+      1024
+    ],
+    "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+    "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+    "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+    "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+    "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+    "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+    "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+    "w2_packed_shape": [
+      256,
+      2048,
+      256
+    ],
+    "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+    "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "arm": "up_first_attribution",
+  "event_elapsed_us": 687156.25,
+  "jit_artifact_set_sha256": "a0e460ad23625ad455dcc4eb6ab8d107a7b014b97e6fbb4daff4fa0c0500a41e",
+  "nvtx_range": "exp004_up_first_attribution_fused_main",
+  "output_sha256": "48eaf2e318a849a2dc9edf44b5aef49a54f72d0581c0a14905f68902b4fbc71a",
+  "runtime": {
+    "cuda_runtime": "13.2",
+    "driver": "580.95.05",
+    "gpu": {
+      "compute_capability": [
+        12,
+        0
+      ],
+      "name": "NVIDIA Graphics Device",
+      "uuid": "GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12"
+    },
+    "hostname": "376be280f87c",
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "imports": {
+      "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py",
+      "target_module": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/overlays/up_first_attribution.py"
+    },
+    "jit_root": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/jit/up_first_attribution",
+    "lease_id": "exp004-20260717T024900Z-codex",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "pid": 263,
+    "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+    "source": {
+      "checkout_head": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "locked_source_commit": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+      "overlay": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/overlays/up_first_attribution.py",
+      "overlay_diff": "ERROR: Command '['diff', '-u', '/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py', '/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/overlays/up_first_attribution.py']' returned non-zero exit status 1.",
+      "overlay_sha256": "fd1cfa5a36434efeaefe0e2be5e827ea0d7f365463520ab233d0d88400155fd5",
+      "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+      "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+    },
+    "timestamp_unix": 1784258202.4925225,
+    "torch": "2.12.0a0+5aff3928d8.nv26.05"
+  },
+  "schema": "exp004.profile-target.v1",
+  "status": "complete"
+}

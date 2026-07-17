@@ -1,0 +1,75 @@
+{
+  "arm": "up_first_attribution",
+  "checks": {
+    "ir_ptx_sass_physical_def_use_bridge": false,
+    "main_108_word_bundle_preserved": true,
+    "non_local_opcode_projection_preserved": true,
+    "quant_aware_oracle_pass": true,
+    "semantic_order_overlay_is_distinct": true,
+    "strict_cross_arm_correctness_pass": false,
+    "tail_dynamic_delta_closed": true,
+    "tensor_work_identity": true
+  },
+  "compiler_artifacts": {
+    "baseline": [
+      {
+        "path": "dump/cute_dsl_cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe_clean.mlir",
+        "sha256": "6b2eb91a3c2a57b479c436c1cf14bedaf37ddbe937eb3caabd03400c3d5ccf93",
+        "size": 708043
+      },
+      {
+        "path": "dump/cute_dsl_cutlass__host_function_cutlassutilshardware_infoHardwareInfo_object_at__clean.mlir",
+        "sha256": "cb21a8e4c69cb69d280b3396e0ab95085a4a408db366201f46793f5b855dad27",
+        "size": 1999
+      },
+      {
+        "path": "dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+        "sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+        "size": 190616
+      },
+      {
+        "path": "dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.ptx",
+        "sha256": "d4d848e3b34963584e63c3cde91acc57a61389898e3f3a157b62da4be5c147ff",
+        "size": 573766
+      }
+    ],
+    "up_first_attribution": [
+      {
+        "path": "dump/cute_dsl_cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe_clean.mlir",
+        "sha256": "4b79ee39ec36e83d910d9ff7858711449fade25f72aab037c54f99ac97a81dbf",
+        "size": 708043
+      },
+      {
+        "path": "dump/cute_dsl_cutlass__host_function_cutlassutilshardware_infoHardwareInfo_object_at__clean.mlir",
+        "sha256": "cb21a8e4c69cb69d280b3396e0ab95085a4a408db366201f46793f5b855dad27",
+        "size": 1999
+      },
+      {
+        "path": "dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+        "sha256": "691ca03362e2e1efd7a2ad1af2d9074a38e5b809f7f0d99a6239e41f4009fee6",
+        "size": 188456
+      },
+      {
+        "path": "dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.ptx",
+        "sha256": "2f1f7c8351001e9c474ee3fdf618b6b0e33bf41c187e8207bd43872284ebbb8d",
+        "size": 573767
+      }
+    ]
+  },
+  "formal_verdict": "source_and_program_order_inference_only",
+  "gate_pass": false,
+  "observed_tail_effect": {
+    "executed_local_instruction_reduction_per_direction": 142016,
+    "local_sector_reduction_per_direction": 568064,
+    "stack_bytes_per_thread": [
+      488,
+      432
+    ],
+    "stored_words_per_lane": [
+      122,
+      108
+    ]
+  },
+  "reason": "static and dynamic evidence preserve the 108-word bundle and exact work, but no compiler artifact bridges semantic accumulator SSA to the physical STL/LDL register chain; strict cross-arm correctness is also invalid because baseline replay self-drift exceeds the pre-registered hard cap",
+  "schema": "exp004.attribution-evidence.v1"
+}

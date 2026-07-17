@@ -1,6 +1,8 @@
 # Experiment 004 Plan: Fused Stack/Spill Criticality
 
-Status: **reviewed / gaps fixed / ready for implementation**. 本文底部记录了 exp_004 唯一一次
+Status: **executed / closed inconclusive (2026-07-16)**. Primary 与唯一 fallback 均未命中
+14-word static gate，因此未进入 paired benchmark；attribution-only arm 的 static + NCU 已闭合。
+完整结论见 [results/result.md](results/result.md)。本文底部记录了 exp_004 唯一一次
 `Plan Review`；所有重大缺口已一次性修正，不再进行第二轮 review。本实验与 exp_003 分开；任何
 IKET marker 都不会进入 production timing 或 NCU binary。
 

@@ -1,0 +1,13 @@
+{
+  "gpu_host": "R6KD-CX8aaS-GPU-16",
+  "gpu_uuid": "GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12",
+  "lease_absent_after_release": true,
+  "lease_id": "exp004-20260717T024900Z-codex",
+  "memory_used_mib_after": 102,
+  "memory_used_mib_before": 102,
+  "owned_compute_process_absent": true,
+  "owned_container_absent": true,
+  "released_at_utc": "2026-07-17T03:32:30Z",
+  "utilization_gpu_percent_after": 0,
+  "utilization_gpu_percent_before": 0
+}

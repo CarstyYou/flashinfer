@@ -1,0 +1,27 @@
+{
+  "arms": {
+    "activation_in_place_gate": {
+      "overlay": "activation_in_place_gate.py",
+      "overlay_sha256": "21ce4c9bec49bc22db82abab703f2a967aa53775e66ff20eccf4b7d62cc71499",
+      "patch": "activation_in_place_gate.patch",
+      "patch_sha256": "c877b3f9bce7f706def69209b3e8704e906ff6bbe85385f20dbc57dd414a432d"
+    },
+    "activation_in_place_up": {
+      "overlay": "activation_in_place_up.py",
+      "overlay_sha256": "39ba4d7e79adc701ab20eda4c8c68469b3c86cd67d40af796562d47bab7ddd06",
+      "patch": "activation_in_place_up.patch",
+      "patch_sha256": "6d12e44b5900c1184a4a24f9c22b2fa2479690f82d9a64f105fcb0a36f518c8e"
+    },
+    "up_first_attribution": {
+      "overlay": "up_first_attribution.py",
+      "overlay_sha256": "fd1cfa5a36434efeaefe0e2be5e827ea0d7f365463520ab233d0d88400155fd5",
+      "patch": "up_first_attribution.patch",
+      "patch_sha256": "1f6cc4edf1f8428117584f7d15d1ed1e68c9cfd0bc367d1ea5ce360f5e8564eb"
+    }
+  },
+  "production": {
+    "path": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+    "sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+  },
+  "schema": "exp004.generated-overlays.v1"
+}

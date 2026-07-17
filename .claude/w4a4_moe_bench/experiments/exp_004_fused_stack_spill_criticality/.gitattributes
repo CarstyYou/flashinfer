@@ -1,0 +1,4 @@
+# Unified-diff context encodes an empty line as one literal space.  Preserve
+# these evidence files byte-for-byte without treating that syntax as an EOL bug.
+results/generated/*.patch -whitespace
+results/overlays/*.diff -whitespace

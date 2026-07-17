@@ -1,0 +1,46 @@
+{
+  "arm": "baseline",
+  "event_elapsed_us": 727963.623046875,
+  "jit_artifact_set_sha256": "5f5e8db6093c85a56a3e13c9b5505a04ba962dfb022f4e2a1391e6978b152b23",
+  "nvtx_range": "exp004_baseline_fused_main",
+  "output_sha256": "8edb48ea99c4ba7adeb066a2dd5e2320e66761d9e4f0344bc5854f6d4a563a48",
+  "runtime": {
+    "cuda_runtime": "13.2",
+    "driver": "580.95.05",
+    "gpu": {
+      "compute_capability": [
+        12,
+        0
+      ],
+      "name": "NVIDIA Graphics Device",
+      "uuid": "GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12"
+    },
+    "hostname": "376be280f87c",
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "imports": {
+      "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py",
+      "target_module": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/overlays/baseline.py"
+    },
+    "jit_root": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/jit/baseline",
+    "lease_id": "exp004-20260717T024900Z-codex",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "pid": 136,
+    "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+    "source": {
+      "checkout_head": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "locked_source_commit": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+      "overlay": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/overlays/baseline.py",
+      "overlay_diff": "",
+      "overlay_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+      "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+      "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+    },
+    "timestamp_unix": 1784258184.668131,
+    "torch": "2.12.0a0+5aff3928d8.nv26.05"
+  },
+  "schema": "exp004.profile-target.v1",
+  "status": "complete"
+}

@@ -1,0 +1,178 @@
+{
+  "arms": {
+    "baseline": {
+      "achieved_occupancy_pct": 10.42,
+      "configured_stack_limit_bytes": 1024.0,
+      "duration_ns": 1891264.0,
+      "eligible_warps_per_cycle": 0.2,
+      "executed_local_load_instructions": 1237568.0,
+      "executed_local_store_instructions": 689792.0,
+      "fp4_tensor_ops": 510564237312.0,
+      "issue_active_pct": 19.99,
+      "local_load_footprint_bytes": 158408704.0,
+      "local_load_sectors": 4950272.0,
+      "local_store_footprint_bytes": 158408704.0,
+      "local_store_sectors": 4950272.0,
+      "registers_per_thread": 255.0,
+      "shared_bytes_per_cta": 92160.0,
+      "stall_barrier_pct": 5.67,
+      "stall_long_scoreboard_pct": 18.91,
+      "stall_short_scoreboard_pct": 9.77,
+      "stall_wait_pct": 29.26,
+      "tc_subpipe_active_pct": 25.74,
+      "tensor_instructions": 31162368.0
+    },
+    "up_first_attribution": {
+      "achieved_occupancy_pct": 10.42,
+      "configured_stack_limit_bytes": 1024.0,
+      "duration_ns": 1878112.0,
+      "eligible_warps_per_cycle": 0.2,
+      "executed_local_load_instructions": 1095552.0,
+      "executed_local_store_instructions": 547776.0,
+      "fp4_tensor_ops": 510564237312.0,
+      "issue_active_pct": 20.12,
+      "local_load_footprint_bytes": 140230656.0,
+      "local_load_sectors": 4382208.0,
+      "local_store_footprint_bytes": 140230656.0,
+      "local_store_sectors": 4382208.0,
+      "registers_per_thread": 255.0,
+      "shared_bytes_per_cta": 92160.0,
+      "stall_barrier_pct": 5.75,
+      "stall_long_scoreboard_pct": 19.01,
+      "stall_short_scoreboard_pct": 9.43,
+      "stall_wait_pct": 29.1,
+      "tc_subpipe_active_pct": 25.91,
+      "tensor_instructions": 31162368.0
+    }
+  },
+  "baseline_reproduction": {
+    "block_expected": true,
+    "fp4_tensor_ops_equal_baseline": true,
+    "fp4_tensor_ops_expected": true,
+    "grid_expected": true,
+    "local_load_sectors": true,
+    "local_store_sectors": true,
+    "single_fused_main_launch": true,
+    "tensor_instructions_equal_baseline": true,
+    "tensor_instructions_expected": true
+  },
+  "baseline_reproduction_pass": true,
+  "deltas": {
+    "up_first_attribution": {
+      "dynamic_14_word_closure_pass": true,
+      "executed_local_load_instruction_reduction": 142016,
+      "executed_local_store_instruction_reduction": 142016,
+      "expected_14_word_sector_reduction": 568064,
+      "local_load_sector_reduction": 568064,
+      "local_store_sector_reduction": 568064,
+      "work_identity_checks": {
+        "block_equal_baseline": true,
+        "fp4_tensor_ops_equal_baseline": true,
+        "fp4_tensor_ops_expected": true,
+        "grid_equal_baseline": true,
+        "single_fused_main_launch": true,
+        "tensor_instructions_equal_baseline": true,
+        "tensor_instructions_expected": true
+      },
+      "work_identity_pass": true
+    }
+  },
+  "inputs": {
+    "baseline": {
+      "benchmark_cubin_identity_gate": true,
+      "command_text": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/baseline/command.txt",
+      "command_text_sha256": "346a7760b6743966ac9091bff0ca15602c14c219c2baa3d64b1f1aaf3bee8866",
+      "cubin": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/jit/baseline/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+      "cubin_sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+      "launch_json": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/baseline/veloq_launches.json",
+      "launch_json_sha256": "21bdb647ae4a1201e84831f26add34675fedcc5ef76fb588e880690af80cb343",
+      "native_csv": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/baseline/native_raw.csv",
+      "native_csv_sha256": "340bb2c65fc84cfbbfe59081c1e66540ccbd43970504c84965611b7e9d5d0290",
+      "profile_jit_artifact_identity_gate": true,
+      "profile_target": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/arms/baseline/profile_target.json",
+      "profile_target_sha256": "d341b77c11ad645701e0605c87747fe654c4cbdaee7ffc0b94c6059a74d58616",
+      "trace_rep": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/baseline/trace.ncu-rep",
+      "trace_rep_sha256": "3367df71ef0c3b750c03c60436d100a994863271016995c76f21195dd9eaaea8"
+    },
+    "up_first_attribution": {
+      "benchmark_cubin_identity_gate": true,
+      "command_text": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/up_first_attribution/command.txt",
+      "command_text_sha256": "52e851443f0d1af70ed272aa8764295d6473733490afa54659d8ea5408d7503f",
+      "cubin": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/jit/up_first_attribution/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+      "cubin_sha256": "691ca03362e2e1efd7a2ad1af2d9074a38e5b809f7f0d99a6239e41f4009fee6",
+      "launch_json": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/up_first_attribution/veloq_launches.json",
+      "launch_json_sha256": "b7059c25bc9a79e47d394707b0a362e9c645857016a1ad886885c7d271d49102",
+      "native_csv": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/up_first_attribution/native_raw.csv",
+      "native_csv_sha256": "d0fde10810df0813335f7b4bd6d44d6ab211c2df9bbc6996629340e48581d265",
+      "profile_jit_artifact_identity_gate": true,
+      "profile_target": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/arms/up_first_attribution/profile_target.json",
+      "profile_target_sha256": "6d9056486b831222e8acf6d82eb3a9e7416ec11ccdeb53077da07d6b311c978e",
+      "trace_rep": "/lustre/raplab/client/xiy/workspace/flashinfer_exp002_074d93e/.claude/w4a4_moe_bench/experiments/exp_004_fused_stack_spill_criticality/results/raw/ncu/up_first_attribution/trace.ncu-rep",
+      "trace_rep_sha256": "c4f6206912c74fdf51ef324f31995f05c7385f18823a950dacc90fc160f0c29b"
+    }
+  },
+  "launches": {
+    "baseline": {
+      "block": [
+        160,
+        1,
+        1
+      ],
+      "context_id": 1,
+      "grid": [
+        1,
+        1,
+        110
+      ],
+      "kernel": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+      "launch_count": 1,
+      "row_id": "launch:0",
+      "stream_id": 7
+    },
+    "up_first_attribution": {
+      "block": [
+        160,
+        1,
+        1
+      ],
+      "context_id": 1,
+      "grid": [
+        1,
+        1,
+        110
+      ],
+      "kernel": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+      "launch_count": 1,
+      "row_id": "launch:0",
+      "stream_id": 7
+    }
+  },
+  "raw_units": {
+    "achieved_occupancy_pct": "%",
+    "configured_stack_limit_bytes": "",
+    "duration_ns": "ns",
+    "eligible_warps_per_cycle": "warp",
+    "executed_local_load_instructions": "inst",
+    "executed_local_store_instructions": "inst",
+    "fp4_tensor_ops": "",
+    "issue_active_pct": "%",
+    "local_load_sectors": "sector",
+    "local_store_sectors": "sector",
+    "registers_per_thread": "register/thread",
+    "shared_bytes_per_cta": "byte/block",
+    "stall_barrier_pct": "%",
+    "stall_long_scoreboard_pct": "%",
+    "stall_short_scoreboard_pct": "%",
+    "stall_wait_pct": "%",
+    "tc_subpipe_active_pct": "%",
+    "tensor_instructions": "inst"
+  },
+  "schema": "exp004.ncu-spill-evidence.v1",
+  "task_count_contract": 2536,
+  "units": {
+    "executed_local_instructions": "warp instructions; classified as spill/refill only after static SASS proves the target has no other local operations",
+    "local_sectors": "32-byte local-address-space sectors; not DRAM bytes",
+    "stall": "percent of active-warp cycles",
+    "utilization": "percent of active cycles where metric ID says pct_of_peak_sustained_active"
+  }
+}

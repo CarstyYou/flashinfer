@@ -1,0 +1,108 @@
+--- production/moe_dynamic_kernel.py
++++ overlays/up_first_attribution.py
+@@ -1901,7 +1901,7 @@
+                     # Gate GEMM (inlined to avoid @cute.jit pass-by-value for acc)
+                     fz_crSFA = cute.filter_zeros(crSFA)
+                     fz_crSFB = cute.filter_zeros(crSFB)
+-                    gate_acc.fill(0.0)
++                    up_acc.fill(0.0)
+                     cons_state.reset_count()
+                     peek = ml_pipeline.consumer_try_wait(cons_state)
+                     ml_pipeline.consumer_wait(cons_state, peek)
+@@ -1953,10 +1953,10 @@
+                                     )
+                                     cute.gemm(
+                                         mma_atom,
+-                                        gate_acc[None, _mt, _nt],
++                                        up_acc[None, _mt, _nt],
+                                         tCrA[None, _mt, k_block_idx],
+                                         tCrB[None, _nt, k_block_idx],
+-                                        gate_acc[None, _mt, _nt],
++                                        up_acc[None, _mt, _nt],
+                                     )
+                             cute.copy(
+                                 smem_copy_A,
+@@ -2024,10 +2024,10 @@
+                                 )
+                                 cute.gemm(
+                                     mma_atom,
+-                                    gate_acc[None, _mt, _nt],
++                                    up_acc[None, _mt, _nt],
+                                     tCrA[None, _mt, k_block_idx],
+                                     tCrB[None, _nt, k_block_idx],
+-                                    gate_acc[None, _mt, _nt],
++                                    up_acc[None, _mt, _nt],
+                                 )
+                     # Signal FC1 gate/only completion before the DMA warp
+                     # reuses the shared A/gate buffers for the next pass.
+@@ -2035,7 +2035,7 @@
+ 
+                     if cutlass.const_expr(self.is_gated):
+                         # Up GEMM (inlined, same pattern)
+-                        up_acc.fill(0.0)
++                        gate_acc.fill(0.0)
+                         up_cons_state.reset_count()
+                         peek = up_pipeline.consumer_try_wait(up_cons_state)
+                         up_pipeline.consumer_wait(up_cons_state, peek)
+@@ -2093,10 +2093,10 @@
+                                         )
+                                         cute.gemm(
+                                             mma_atom,
+-                                            up_acc[None, _mt, _nt],
++                                            gate_acc[None, _mt, _nt],
+                                             tCrA[None, _mt, k_block_idx],
+                                             tCrB[None, _nt, k_block_idx],
+-                                            up_acc[None, _mt, _nt],
++                                            gate_acc[None, _mt, _nt],
+                                         )
+                                 cute.copy(
+                                     smem_copy_A,
+@@ -2160,10 +2160,10 @@
+                                     )
+                                     cute.gemm(
+                                         mma_atom,
+-                                        up_acc[None, _mt, _nt],
++                                        gate_acc[None, _mt, _nt],
+                                         tCrA[None, _mt, k_block_idx],
+                                         tCrB[None, _nt, k_block_idx],
+-                                        up_acc[None, _mt, _nt],
++                                        gate_acc[None, _mt, _nt],
+                                     )
+                     # Activation + quant into sA
+                     sA_u8 = cute.recast_tensor(sA[None, None, 0], cutlass.Uint8)
+@@ -2592,7 +2592,7 @@
+                         )
+                         cute.copy(
+                             tma_b_w13,
+-                            tBgB_w13_gate_nk[(None, k_tile)],
++                            tBgB_w13_up_nk[(None, k_tile)],
+                             tBsB_w13[(None, prod_state.index)],
+                             tma_bar_ptr=ml_pipeline.producer_get_barrier(prod_state),
+                         )
+@@ -2604,7 +2604,7 @@
+                         )
+                         cute.copy(
+                             tma_sfb_w13,
+-                            tBgSFB_w13_gate_nk[(None, k_tile)],
++                            tBgSFB_w13_up_nk[(None, k_tile)],
+                             tBsSFB_w13[(None, prod_state.index)],
+                             tma_bar_ptr=ml_pipeline.producer_get_barrier(prod_state),
+                         )
+@@ -2630,7 +2630,7 @@
+                             )
+                             cute.copy(
+                                 tma_b_w13,
+-                                tBgB_w13_up_nk[(None, k_tile)],
++                                tBgB_w13_gate_nk[(None, k_tile)],
+                                 tBsB_w13_up[(None, up_prod_state.index)],
+                                 tma_bar_ptr=up_pipeline.producer_get_barrier(
+                                     up_prod_state
+@@ -2646,7 +2646,7 @@
+                             )
+                             cute.copy(
+                                 tma_sfb_w13,
+-                                tBgSFB_w13_up_nk[(None, k_tile)],
++                                tBgSFB_w13_gate_nk[(None, k_tile)],
+                                 tBsSFB_w13_up[(None, up_prod_state.index)],
+                                 tma_bar_ptr=up_pipeline.producer_get_barrier(
+                                     up_prod_state
