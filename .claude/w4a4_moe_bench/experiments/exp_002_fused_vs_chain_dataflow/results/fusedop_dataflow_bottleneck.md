@@ -265,20 +265,20 @@ LSU 与 TMA 指标并不同向；因此不能用单个“global traffic”数字
 
 | 优先级 | Fused bottleneck / 疑点 | 直接证据 | 优化方向 |
 |---|---|---|---|
-| P0 | Resource pressure 与 register spill | 255 Registers/thread、92,160 B SMEM/CTA、488 B/thread stack frame；122 words/lane 的静态 stack roundtrip 与动态 local sectors 精确闭合。exp_004 定位出两个物理点：108-word first-pass accumulator 在第一段 FC1 收尾时随 producer 逐步保存并跨完整第二段 FC1 保活；14-word mixed tail 在 activation 入口保存/复用/恢复 | 无（source-value 问题点未闭合）；只补 compiler register-allocation/liveness 映射 |
+| P0 | Resource pressure 与 register spill | 255 Registers/thread、92,160 B SMEM/CTA、488 B/thread stack frame；122 words/lane 的静态 stack roundtrip 与动态 local sectors 精确闭合。exp_003 已闭合物理形成机制：108-word Main 是 first-pass accumulator 跨完整 second pass 保活；14-word Tail 是 activation temporary reuse 时保存的 5 个 second-pass accumulator register values 与 9 个 index/address/control scalar。Baseline source order 将 first/second pass 高置信解释为 Gate/Up，但无 compiler-certified SSA→physical-slot map | 构造 correctness-equivalent 的 reduced/no-spill arm，先验证 spill 对 latency 与 TC cadence 的因果影响；暂不下 production optimization 结论 |
 | P1 | Whole-kernel TC activity 低，原因未闭合 | Fused TC subpipe active `25.73%`，但该 launch 同时包含 P0–P4、T3 和 scatter 等必要 non-TC 工作；不能直接解释成 TC starvation | 用 phase/warp-role breakdown 区分 planned TC-off 与 T1/T2/T4 内真实 producer、barrier 或同 warp critical-path starvation |
 | P1 | FC2 atomic scatter / barrier 候选 | Fused 独有 `1073.742 MB` LSU global reduction footprint；每个 I128 slice 的 FC2 tile 都执行 epilogue、同步和 route-weighted atomic scatter | 定位 QMMA 到下一次 QMMA 之间的 scatter/barrier gap，再用受门禁的 diagnostic-only 消融界定成本上界 |
 | P1 | P0–P4 串行化，未利用 route/compute overlap | `full_tile_publish_enabled=0`；route/pack 与 task publication 完成并经过 5 个 resident-grid barrier 后，P5 compute 才开始 | 验证 ready-task/full-tile publish 是否产生真实 overlap，并以未插桩 latency 判断收益 |
 | 排除项 | Launch/bubble 不是当前主要瓶颈 | Material kernel count 已从 `9→2`；Chain 内部没有明显 idle gap，而 Fused 主 kernel 占自身 wall 的 `99.92%`，M8192 仍慢 `6.55%` | 优先优化 Fused 主 kernel 内部，不继续压缩 graph launch 数量 |
 
-当前第一优先级是定位并消除 register spill；P0 来自项目的 no-spill 工程约束，不依赖 latency
-criticality 证明。具体源码优化必须等 source value 与 allocator live interval 闭合后再设计。
+当前第一优先级是围绕 exp_003 已闭合的形成机制构造 reduced/no-spill counterfactual；P0 来自项目的
+no-spill 工程约束，不依赖 latency criticality 证明。“spill 是 TC cadence 偏低的主要贡献者”仍是假设。
 
 ## 4. 下一步调查与优化（Next To Do）
 
 | 优先级 | 可证伪问题 | 最小调查 | 必须保持 | 接受 / 推翻条件 |
 |---|---|---|---|---|
-| P0 | Whole-kernel TC inactive time 中，多少是必要 non-TC phase，多少是 T1/T2/T4 内真实 TC starvation？ | IKET phase/warp-role timeline + PC/SASS；观察 QMMA-to-QMMA gap、TMA producer/consumer wait 与 epilog barrier | 相同 case、task/dispatch 与 Tensor work；instrumented duration 不作性能时间 | 只有 T1/T2/T4 内 gap 与 wait/scoreboard/barrier 对齐才接受 starvation；否则归为 planned TC-off |
-| P0 | 哪些 source/IR values 与 live intervals 分别形成跨第二段 FC1 的 108-word 主块和 activation 入口的 14-word mixed tail？ | 同一编译身份的 backend register-allocation/liveness dump，闭合 virtual value→physical register→stack slot/PC→producer/consumer live interval→source location | Cubin、compiler mode、case、tile/task schedule 与 launch geometry | 全部 spill slots 都有唯一 source/IR value 与 live interval 才进入优化设计；未闭合时优化方向为无 |
+| P0 | Register spill 是否是 TC cadence 偏低的主要贡献者？ | 基于 exp_003 Main live-range 机制构造 correctness-equivalent 的 reduced/no-spill arm；比较 stack/local traffic、latency、TC subpipe active、Issue Active 与 warp stalls | Tensor work、launch topology、task schedule、输出正确性与 timing protocol；禁止 measurement-only instrumentation 改变 resource/SASS | 只有 spill 明确减少/消除，且 TC cadence 与 latency 在 matched counterfactual 中同向改善，才接受主要贡献；否则推翻或降级 |
+| P1 | 控制 spill 后，剩余 TC inactive time 中多少是必要 non-TC phase，多少是真实 TC starvation？ | 若 reduced/no-spill arm 仍有明显 TC cadence 问题，再用通过 resource/SASS identity gate 的 IKET phase/warp-role timeline | 相同 case、task/dispatch 与 Tensor work；instrumented duration 不作性能时间；marker 不得改变 stack/register/SASS work | 只有 T1/T2/T4 内 gap 与 wait/scoreboard/barrier 对齐才接受 starvation；否则归为 planned TC-off |
 | P1 | FC2 atomic scatter + epilog barrier 是否打断 TC cadence？ | IKET 展开每个 T4 tile 的 QMMA→epilogue→barrier→atomic scatter→barrier→next QMMA；必要时加入 diagnostic-only scatter bundle 消融 | Tensor work、task schedule与phase coverage；数值无效变体必须标记 diagnostic-only | Gap 集中在 scatter/barrier，且消融给出稳定 latency 上界才接受 |
 | P1 | P0–P4 串行化是否能通过 ready-task/full-tile publish 转化为 route/compute overlap？ | 只改变 publish/consume 时序；用 NSys/IKET 验证 overlap，并用未插桩 benchmark 验证性能 | Logical work、正确性、task count、Tensor instructions 与 timing boundary | Trace 中出现真实 overlap且 latency 改善超过 repeat spread，同时无 work/resource regression 才接受 |

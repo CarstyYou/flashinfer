@@ -1,0 +1,217 @@
+{
+  "arms": {
+    "baseline": {
+      "cubin_sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+      "jit_artifact_set_sha256": "5f5e8db6093c85a56a3e13c9b5505a04ba962dfb022f4e2a1391e6978b152b23",
+      "launch": {
+        "block": [
+          160,
+          1,
+          1
+        ],
+        "grid": [
+          1,
+          1,
+          110
+        ]
+      },
+      "mlir_sha256": "6b2eb91a3c2a57b479c436c1cf14bedaf37ddbe937eb3caabd03400c3d5ccf93",
+      "ncu_trace_sha256": "3367df71ef0c3b750c03c60436d100a994863271016995c76f21195dd9eaaea8",
+      "overlay_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "overlay_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+      "preparation": "arms/baseline/preparation.json",
+      "preparation_sha256": "594eb8e81feb8845869847cc1a48adbd2a70aa2f84d568264e3f140e35fc31a5",
+      "ptx_sha256": "d4d848e3b34963584e63c3cde91acc57a61389898e3f3a157b62da4be5c147ff"
+    },
+    "up_first_attribution": {
+      "cubin_sha256": "691ca03362e2e1efd7a2ad1af2d9074a38e5b809f7f0d99a6239e41f4009fee6",
+      "jit_artifact_set_sha256": "a0e460ad23625ad455dcc4eb6ab8d107a7b014b97e6fbb4daff4fa0c0500a41e",
+      "launch": {
+        "block": [
+          160,
+          1,
+          1
+        ],
+        "grid": [
+          1,
+          1,
+          110
+        ]
+      },
+      "mlir_sha256": "4b79ee39ec36e83d910d9ff7858711449fade25f72aab037c54f99ac97a81dbf",
+      "ncu_trace_sha256": "c4f6206912c74fdf51ef324f31995f05c7385f18823a950dacc90fc160f0c29b",
+      "overlay_diff_sha256": "de89ff68a597e6926c08595efc9efdd6cc6f83eb7b3492c0c3f244e2ce4b352d",
+      "overlay_sha256": "fd1cfa5a36434efeaefe0e2be5e827ea0d7f365463520ab233d0d88400155fd5",
+      "preparation": "arms/up_first_attribution/preparation.json",
+      "preparation_sha256": "7193be764bd476ae073fc3dc9851df2d4664b26e191a63ef913144e105fd705c",
+      "ptx_sha256": "2f1f7c8351001e9c474ee3fdf618b6b0e33bf41c187e8207bd43872284ebbb8d"
+    }
+  },
+  "benchmark": {
+    "reason": "exp_003 closes the spill formation-mechanism goal; project policy marks register spill P0 without a latency proof",
+    "status": "not_part_of_current_question"
+  },
+  "capture_provenance": {
+    "capture_family": "renumbered_exp004",
+    "consumed_capture_schemas": [
+      "exp004.arm-preparation.v1",
+      "exp004.attribution-evidence.v1",
+      "exp004.correctness.v1",
+      "exp004.ncu-spill-evidence.v1",
+      "exp004.overlays.v1",
+      "exp004.static-spill-evidence.v1"
+    ],
+    "legacy_dangling_references": [
+      {
+        "artifact": "static_spill_evidence.json:h108_boundary",
+        "canonical_replacement": "spill_root_cause_evidence.json",
+        "historical_target": "spill_localization_evidence.json",
+        "reason": "historical derived artifact retained byte-for-byte"
+      }
+    ],
+    "legacy_experiment_id": "exp004",
+    "policy": "retained capture schemas, paths, lease IDs, commands, and hashes are historical identities and are not rewritten during renumbering"
+  },
+  "case": {
+    "experts": 256,
+    "hidden": 2048,
+    "intermediate_tp": 512,
+    "m": 8192,
+    "topk": 8
+  },
+  "correctness": {
+    "baseline_self_drift_within_hard_caps": false,
+    "fixture_identity_pass": true,
+    "path": "correctness/up_first_attribution.json",
+    "quant_aware_oracle_pass": true,
+    "scope": "structural source/program-order attribution only; not formal equivalence, not latency evidence",
+    "sha256": "665368a0b6e71d323819094a57d3f47ccd3b115f5d6b7001cec7a81c9bf574f9",
+    "status": "diagnostic_only_strict_cross_arm_invalid",
+    "strict_cross_arm_gate_pass": false
+  },
+  "decision": {
+    "closure_kind": "physical_formation_mechanisms_closed_with_source_attribution_limits",
+    "experiment_goal": "spill_root_cause_analysis",
+    "followup_experiment_allowed": true,
+    "followup_scope": "main_108_live_range_mechanism",
+    "formal_experiment_closed": true,
+    "formation_causes": {
+      "main_108_word_bundle": "the first-pass FP32 accumulator remains live across the complete second FC1 pass until activation. Its live range overlaps the second-pass accumulator and other live working state; under the observed 255-register allocation, completed first-pass vectors are saved to local memory and reloaded for activation",
+      "tail_14_word_bundle": "at activation entry, five live second-pass accumulator register values plus nine long-lived index/address/control scalars overlap activation temporaries. The allocator saves those values, reuses their physical registers for activation, and restores them before later consumers"
+    },
+    "latency_causality": "not_tested_and_not_required_for_P0",
+    "main_108_status": "physical_formation_mechanism_closed",
+    "overall_root_cause_status": "formation_mechanism_closed_source_attribution_inferred",
+    "physical_mechanism_status": "all_bundles_closed",
+    "physical_mechanisms": {
+      "main_108_word_bundle": "each completed first-pass accumulator vector is spilled after its own nearest OMMA producer during first-pass tail processing, remains live across the complete second FC1 pass, and is reloaded for activation",
+      "tail_14_word_bundle": "activation temporaries reuse physical registers holding five second-pass accumulator register values and nine index/address/control scalars; the allocator saves and restores those original values"
+    },
+    "physical_problem_points": {
+      "main_108_word_bundle": "during the first FC1 pass tail, 27 completed accumulator vectors are progressively spilled after their respective nearest OMMA producers; they are reloaded before/during activation after remaining live across the complete second FC1 pass",
+      "tail_14_word_bundle": "activation entry: baseline SASS stores 0xbb40..0xbc30; restores 0xf050..0xf3d0 before later consumers"
+    },
+    "production_optimization_recommendation_allowed": false,
+    "severity": "P0_hard_failure_by_project_policy",
+    "source_attribution_status": "high_confidence_program_order_inference_not_compiler_certified",
+    "source_interpretation": {
+      "main_108_word_bundle": "production source/IR program order identifies the first pass as Gate and the second pass as Up, so the first-pass bundle is attributed to gate_acc; no compiler-certified SSA-to-physical-slot map is available",
+      "tail_14_word_bundle": "production source/IR program order identifies the second-pass accumulator as Up; the nine scalar values do not have unique source SSA identities"
+    },
+    "tail_14_disposition": "deferred_reprofile_after_main_change",
+    "tail_14_status": "physical_formation_mechanism_closed_source_identity_partial",
+    "tc_cadence_hypothesis": "unverified_spill_may_be_primary_contributor"
+  },
+  "environment": {
+    "cuda_runtime": "13.2",
+    "driver": "580.95.05",
+    "gpu": {
+      "compute_capability": [
+        12,
+        0
+      ],
+      "name": "NVIDIA Graphics Device",
+      "uuid": "GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12"
+    },
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74"
+  },
+  "fixture": {
+    "duplicate_expert_ids": 0,
+    "fixture_kind": "deterministic_synthetic_random_logits",
+    "m": 8192,
+    "occupancy_max": 302,
+    "occupancy_min": 217,
+    "occupancy_p50": 256.0,
+    "occupancy_p95": 281.0,
+    "occupancy_sha256": "5e937225d3ac21770218000ebdedcb62cc211c4444bb260d0838656ca41260bc",
+    "predicted_cutlass_route_branch": "three_step_large_prefix_candidate",
+    "seed": 10218,
+    "shape": {
+      "experts": 256,
+      "hidden": 2048,
+      "intermediate_tp": 512,
+      "topk": 8
+    },
+    "topk_ids_sha256": "f9b3c632d767e754837a14016f5a2ea3c3fccfefef1adee4f9b7b966c68e2f7a",
+    "topk_weights_sha256": "ee885b45d94eee54d3c9114669492419003c914ea3bd1d29dbd58ad765fccb9d",
+    "weight_sum_max_abs_error": 2.384185791015625e-07,
+    "x_sha256": "6c95ae4406b2fc7ad4544936781b71288d98f496a60c58f5695e6dbf868864b4",
+    "zero_token_experts": 0
+  },
+  "ncu": {
+    "path": "ncu/spill_evidence.json",
+    "sha256": "0190f0a4793bee22ab07080cff6c35910f450d2a6ba6fd37deeb326159ee18a2"
+  },
+  "resource_cleanup": {
+    "gate_pass": true,
+    "path": "resource_cleanup.json",
+    "sha256": "b579ca85eebc888c3f81c3a4c93af26135f69cede349b95115a0e57d39bde173"
+  },
+  "retained_attribution_evidence": {
+    "formal_verdict": "source_and_program_order_inference_only",
+    "gate_pass": false,
+    "path": "attribution_evidence.json",
+    "sha256": "15077fa4945f16a720d8e0a420346208bb07993435d3b2abc670139baeaf80a5",
+    "status": "diagnostic_only"
+  },
+  "root_cause_evidence": {
+    "formation_causes": {
+      "main_108_word_bundle": "the first-pass FP32 accumulator remains live across the complete second FC1 pass until activation. Its live range overlaps the second-pass accumulator and other live working state; under the observed 255-register allocation, completed first-pass vectors are saved to local memory and reloaded for activation",
+      "tail_14_word_bundle": "at activation entry, five live second-pass accumulator register values plus nine long-lived index/address/control scalars overlap activation temporaries. The allocator saves those values, reuses their physical registers for activation, and restores them before later consumers"
+    },
+    "overall_status": "formation_mechanism_closed_source_attribution_inferred",
+    "path": "spill_root_cause_evidence.json",
+    "physical_locations": {
+      "main_108_word_bundle": "during the first FC1 pass tail, 27 completed accumulator vectors are progressively spilled after their respective nearest OMMA producers; they are reloaded before/during activation after remaining live across the complete second FC1 pass",
+      "tail_14_word_bundle": "activation entry: baseline SASS stores 0xbb40..0xbc30; restores 0xf050..0xf3d0 before later consumers"
+    },
+    "physical_mechanisms": {
+      "main_108_word_bundle": "each completed first-pass accumulator vector is spilled after its own nearest OMMA producer during first-pass tail processing, remains live across the complete second FC1 pass, and is reloaded for activation",
+      "tail_14_word_bundle": "activation temporaries reuse physical registers holding five second-pass accumulator register values and nine index/address/control scalars; the allocator saves and restores those original values"
+    },
+    "sha256": "6e6f756da546a2b33bb35856a2d4d4f9719775820c5cc5d4a522e87d5db71c6c",
+    "source_attribution_status": "high_confidence_program_order_inference_not_compiler_certified",
+    "source_interpretation": {
+      "main_108_word_bundle": "production source/IR program order identifies the first pass as Gate and the second pass as Up, so the first-pass bundle is attributed to gate_acc; no compiler-certified SSA-to-physical-slot map is available",
+      "tail_14_word_bundle": "production source/IR program order identifies the second-pass accumulator as Up; the nine scalar values do not have unique source SSA identities"
+    }
+  },
+  "schema": "exp003.spill-root-cause.validation-manifest.v1",
+  "source": {
+    "checkout_head": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+    "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+    "locked_source_commit": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+    "overlay_identity": "overlays/identity.json",
+    "overlay_identity_sha256": "27ae51c5975546efcc8bebb930152da747385b37c64ec6c048f93cd992acf0f7",
+    "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+  },
+  "static_spill": {
+    "path": "static_spill_evidence.json",
+    "sha256": "5a36d3cf50614830cdaccbb07f93db4dd9506ba195a1326bf9abecaac473e945"
+  },
+  "status": "formation_mechanism_closed"
+}
