@@ -1,0 +1,27 @@
+# Large/reproducible runtime payloads remain in the experiment workspace.
+raw/
+failed_attempts/**/canonical/
+*.ncu-rep
+*.nsys-rep
+*.qdstrm
+*.sqlite
+*.pt
+*.cubin
+*.ptx
+*_clean.mlir
+_pqtdir/
+**/*.veloq/
+
+# VeloQ query caches and verbose projections are reproducible from the report.
+# Compact NCU evidence.json/metrics.csv and native_raw.csv remain reviewable.
+ncu/**/veloq/
+ncu/**/canonical_v0/
+
+# Runtime launch wrappers are tracked; transient host/process logs are not.
+runtime/*.log
+runtime/*.csv
+runtime/*.txt
+runtime/lease.metadata
+
+__pycache__/
+.pytest_cache/

@@ -1,0 +1,99 @@
+{
+  "baseline_self_drift": {
+    "cosine_loss": 0.0,
+    "max_abs": 0.015625,
+    "relative_l2": 0.006560744252055883,
+    "token_rel_l2_p99": 0.007666554301977158
+  },
+  "candidate_self_drift": {
+    "cosine_loss": 0.0,
+    "max_abs": 0.0234375,
+    "relative_l2": 0.006458271760493517,
+    "token_rel_l2_p99": 0.007568159140646458
+  },
+  "candidate_vs_baseline": [
+    {
+      "cosine_loss": 0.0,
+      "max_abs": 0.015625,
+      "relative_l2": 0.006585443392395973,
+      "token_rel_l2_p99": 0.007678958587348461
+    },
+    {
+      "cosine_loss": 0.0,
+      "max_abs": 0.015625,
+      "relative_l2": 0.006595680024474859,
+      "token_rel_l2_p99": 0.007674423046410084
+    },
+    {
+      "cosine_loss": 0.0,
+      "max_abs": 0.015625,
+      "relative_l2": 0.0066107530146837234,
+      "token_rel_l2_p99": 0.0076710861176252365
+    },
+    {
+      "cosine_loss": 0.0,
+      "max_abs": 0.015625,
+      "relative_l2": 0.006590338423848152,
+      "token_rel_l2_p99": 0.007639932446181774
+    }
+  ],
+  "fixture_identity_pass": true,
+  "gate_pass": true,
+  "independent_reference_gate_pass": true,
+  "m": 8192,
+  "route_task_gate_pass": true,
+  "schema": "exp005.correctness.v1",
+  "strict_cross_arm_gate": {
+    "baseline_self_drift_within_caps": true,
+    "candidate_self_drift": {
+      "cosine_loss": 0.0,
+      "max_abs": 0.0234375,
+      "relative_l2": 0.006458271760493517,
+      "token_rel_l2_p99": 0.007568159140646458
+    },
+    "candidate_stability_checks": {
+      "cosine_loss": true,
+      "max_abs": true,
+      "relative_l2": true,
+      "token_rel_l2_p99": true
+    },
+    "candidate_worst_vs_baseline": {
+      "cosine_loss": 0.0,
+      "max_abs": 0.015625,
+      "relative_l2": 0.0066107530146837234,
+      "token_rel_l2_p99": 0.007678958587348461
+    },
+    "cross_arm_checks": {
+      "cosine_loss": true,
+      "max_abs": true,
+      "relative_l2": true,
+      "token_rel_l2_p99": true
+    },
+    "formula": "min(cap, max(floor, 3 * baseline_self_drift))",
+    "gate_pass": true,
+    "specifications": {
+      "cosine_loss": {
+        "cap": 0.0001,
+        "floor": 1e-06
+      },
+      "max_abs": {
+        "cap": 0.1,
+        "floor": 0.02
+      },
+      "relative_l2": {
+        "cap": 0.03,
+        "floor": 0.005
+      },
+      "token_rel_l2_p99": {
+        "cap": 0.05,
+        "floor": 0.01
+      }
+    },
+    "thresholds": {
+      "cosine_loss": 1e-06,
+      "max_abs": 0.046875,
+      "relative_l2": 0.01968223275616765,
+      "token_rel_l2_p99": 0.022999662905931473
+    }
+  }
+}

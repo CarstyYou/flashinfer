@@ -1,0 +1,1 @@
+ncu --import /workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_005_8warp_spill_reduction/results/ncu/baseline_4warp/m8192/.canonical_v1.in-progress.1/trace.ncu-rep --csv --page raw --print-units base

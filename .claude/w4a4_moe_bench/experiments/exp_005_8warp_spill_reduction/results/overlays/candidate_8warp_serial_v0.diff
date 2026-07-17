@@ -1,0 +1,20 @@
+--- production/moe_dynamic_kernel.py
++++ candidate_8warp_serial_v0/moe_dynamic_kernel.py
+@@ -301,7 +301,7 @@
+         self.cluster_shape_mn = (1, 1)
+         self.epi_tile = (mma_tiler_mn[0], mma_tiler_mn[1])
+         self.occupancy = 1
+-        self.num_mma_warps = 4
++        self.num_mma_warps = 8
+         self.tma_load_warp_id = self.num_mma_warps
+         self.num_threads_per_warp = 32
+         self.threads_per_cta = (self.num_mma_warps + 1) * self.num_threads_per_warp
+@@ -345,7 +345,7 @@
+             self.acc_dtype,
+             self.sf_dtype,
+         )
+-        atom_layout = cute.make_layout((2, 2, 1))
++        atom_layout = cute.make_layout((4, 2, 1))
+         permutation_mnk = sm120_utils.get_permutation_mnk(
+             self.tile_shape_mnk,
+             self.sf_vec_size,

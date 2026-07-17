@@ -1,0 +1,63 @@
+{
+  "schema": "kdk.kernel-dataflow-bottleneck.comparison-registry.v1",
+  "experiment": "exp_005_8warp_spill_reduction",
+  "accepted_at_utc": "2026-07-17T09:31:00Z",
+  "accepted_revision": "r1",
+  "source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+  "source_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+  "relationships": [
+    {
+      "id": "R1_candidateA_v0_vs_baseline",
+      "mode": "paired",
+      "component_scope": "complete fused MoE launch",
+      "canonical_status": "accepted-pre-capture",
+      "subjects": [
+        "candidate_8warp_serial_v0"
+      ],
+      "anchor": "baseline_4warp",
+      "changed_bundle": {
+        "name": "Candidate A 8-warp MMA ownership bundle",
+        "fields": [
+          "num_mma_warps: 4 -> 8",
+          "atom_layout: (2,2,1) -> (4,2,1)"
+        ],
+        "boundary": "inseparable whole-kernel design bundle; not a pure spill ablation"
+      },
+      "logical_work_boundary": "same E=256,H=2048,I_tp=512,topk=8 routed BF16-input/NVFP4-weight fused MoE with Gate->Up->SwiGLU/Q1->FC2/scatter",
+      "timed_boundary": "one final replay MoEDynamicKernel CUDA Graph node",
+      "controlled_invariants": [
+        "identical fixture and packed weights/scales",
+        "identical M128xN128xK128 logical tile and Gate->Up serial order",
+        "identical activation, quantization, routing and scatter semantics",
+        "identical production source except the two exact Candidate A transforms",
+        "identical compiler/container/dependency environment",
+        "identical GPU UUID, max_active_clusters=110, num_sms=110 and grid.z=110",
+        "identical CUDA Graph replay, cache-control and profiler protocol"
+      ],
+      "predeclared_allowed_consequence_fields": [
+        "block threads and warp roles",
+        "per-thread registers and compiler stack/spill/refill",
+        "static/dynamic shared-memory footprint",
+        "achieved occupancy and eligible/active warp scheduling",
+        "barrier and pipeline participant counts",
+        "route/pack/Q1/scatter work distribution across threads",
+        "dynamic instruction mix, stalls, issue cadence and whole-kernel duration"
+      ],
+      "allowed_attribution_path": "declared 8-warp layout/ownership bundle -> resource and schedule consequences -> cadence/post-compute behavior -> whole-kernel latency",
+      "normalization_scope": "none; exact same end-to-end logical work is required",
+      "normalization_formula": null,
+      "denominator": "one complete fused MoE launch for the same routed fixture",
+      "allowed_claims": [
+        "whether Candidate A is correct and eliminates compiler/dynamic spill",
+        "whether the complete Candidate A bundle improves, preserves or regresses latency",
+        "which measured resource/schedule/cadence consequences accompany the bundle"
+      ],
+      "prohibited_claims": [
+        "pure causal latency contribution of spill removal",
+        "additive or exact Gate/Up/FC2 phase times from whole-launch NCU",
+        "claims about Candidate B, subtile or SMEM-handoff designs",
+        "performance claims after correctness, work, binary or launch identity failure"
+      ]
+    }
+  ]
+}

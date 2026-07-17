@@ -1,0 +1,93 @@
+{
+  "arms": {
+    "baseline_4warp": {
+      "count": 10,
+      "cv": 0.0004168394147536327,
+      "mean_us": 539.6499203443527,
+      "median_us": 539.654723405838,
+      "p10_us": 539.3427211046219,
+      "p90_us": 539.9216009378433
+    },
+    "candidate_8warp_serial_v0": {
+      "count": 10,
+      "cv": 0.00025072739117161665,
+      "mean_us": 532.3474558591843,
+      "median_us": 532.3484814167023,
+      "p10_us": 532.1962250471115,
+      "p90_us": 532.5083509683609
+    }
+  },
+  "clock_gate": {
+    "current_clock_note": "current clocks may enter the idle P-state between paired processes; the gate is the fixed NVIDIA application clock setting",
+    "declared": "locked",
+    "observed_applications_graphics_clock_mhz": [
+      "2377"
+    ],
+    "observed_graphics_clock_mhz": [
+      "1830",
+      "2370",
+      "345",
+      "555",
+      "562",
+      "592",
+      "600",
+      "615",
+      "652",
+      "660",
+      "675",
+      "682"
+    ],
+    "stable_single_application_clock": true
+  },
+  "clock_policy": "locked",
+  "groups": [
+    {
+      "baseline_us": 539.6851199865341,
+      "candidate_us": 532.3078411817551,
+      "group": 0,
+      "ratio": 1.0138590459017118
+    },
+    {
+      "baseline_us": 539.8160004615784,
+      "candidate_us": 532.2595196962357,
+      "group": 1,
+      "ratio": 1.0141969856540194
+    },
+    {
+      "baseline_us": 539.5151990652084,
+      "candidate_us": 532.4345588684082,
+      "group": 2,
+      "ratio": 1.0132986112168392
+    },
+    {
+      "baseline_us": 539.7481578588486,
+      "candidate_us": 532.297278046608,
+      "group": 3,
+      "ratio": 1.0139975914203119
+    },
+    {
+      "baseline_us": 539.4851243495941,
+      "candidate_us": 532.4380815029144,
+      "group": 4,
+      "ratio": 1.0132354222800668
+    }
+  ],
+  "m": 256,
+  "median_ratio_baseline_over_candidate": 1.01372454744248,
+  "median_speedup_percent": 1.3724547442480084,
+  "paired_bootstrap": {
+    "ratio_ci95": [
+      1.0133853996369464,
+      1.0140496350727404
+    ],
+    "samples": 10000,
+    "seed": 20260717
+  },
+  "predeclared_ratio_band": [
+    0.98,
+    1.02
+  ],
+  "schema": "exp005.paired-abba.v1",
+  "statistical_classification": "equivalent",
+  "verdict": "equivalent"
+}

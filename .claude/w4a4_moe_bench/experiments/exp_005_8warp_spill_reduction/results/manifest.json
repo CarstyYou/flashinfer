@@ -1,0 +1,322 @@
+{
+  "arms": {
+    "baseline_4warp": {
+      "1024": {
+        "cubin_sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+        "expected_block": [
+          160,
+          1,
+          1
+        ],
+        "expected_grid": [
+          1,
+          1,
+          110
+        ],
+        "jit_artifact_set_sha256": "101fd451c425c40880c4260bae7c27c83af62bedd86df6b0856138b59e7098f5",
+        "path": "raw/baseline_4warp/m1024/canonical/preparation.json",
+        "sha256": "a143d7fdc15d1c6ff02fd2f7eee186792ee0bf5bb7459120ad1f9ffcd42b4876",
+        "size_bytes": 13188
+      },
+      "256": {
+        "cubin_sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+        "expected_block": [
+          160,
+          1,
+          1
+        ],
+        "expected_grid": [
+          1,
+          1,
+          110
+        ],
+        "jit_artifact_set_sha256": "4a4b2aafc209e6bc884113e1494509b9d98fd5de31eb1e98bf020f38806ea61d",
+        "path": "raw/baseline_4warp/m256/canonical/preparation.json",
+        "sha256": "2c0da496aa3081fe14ff3c1ef59901f93490690d626812d659140194bc85e7e2",
+        "size_bytes": 13163
+      },
+      "8192": {
+        "cubin_sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+        "expected_block": [
+          160,
+          1,
+          1
+        ],
+        "expected_grid": [
+          1,
+          1,
+          110
+        ],
+        "jit_artifact_set_sha256": "90c1c10aaa752d3bfec066222b46cbac574f8f4088b6cf249608b4453d318f52",
+        "path": "raw/baseline_4warp/m8192/canonical/preparation.json",
+        "sha256": "c2a663465f7e67a47b713e9eaf25528eb35833920d9c74e6ab21426992ec54bc",
+        "size_bytes": 13165
+      }
+    },
+    "candidate_8warp_serial_v0": {
+      "1024": {
+        "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+        "expected_block": [
+          288,
+          1,
+          1
+        ],
+        "expected_grid": [
+          1,
+          1,
+          110
+        ],
+        "jit_artifact_set_sha256": "24d90ce50c4cb53870fa6e28ec253d75f5a68e2fbf38cac78d26ec479ddd08fb",
+        "path": "raw/candidate_8warp_serial_v0/m1024/canonical/preparation.json",
+        "sha256": "d3ad156acdbcb0a7f28613ebc5cdc0e2bdb82600222317e7f4b199d7cff4e5b4",
+        "size_bytes": 13237
+      },
+      "256": {
+        "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+        "expected_block": [
+          288,
+          1,
+          1
+        ],
+        "expected_grid": [
+          1,
+          1,
+          110
+        ],
+        "jit_artifact_set_sha256": "74c4e507bb2f40cc3d1c3dc848a465ac24b47f92c8eafd1b23db887382a4f3d0",
+        "path": "raw/candidate_8warp_serial_v0/m256/canonical/preparation.json",
+        "sha256": "cf35aa34de5e18e8f1989fa85afaa6558ef5ea6e5cd47fc0adbab3b18f455141",
+        "size_bytes": 13209
+      },
+      "8192": {
+        "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+        "expected_block": [
+          288,
+          1,
+          1
+        ],
+        "expected_grid": [
+          1,
+          1,
+          110
+        ],
+        "jit_artifact_set_sha256": "b5b4b9ca6e5fe46800b3c0fa03b73a162613739cea889038c6c97b6f40141a09",
+        "path": "raw/candidate_8warp_serial_v0/m8192/canonical/preparation.json",
+        "sha256": "155e4de8ddcab9cab225d84dd1d2e8d43df14f1cc1c1bd66cdb6afba02b701cd",
+        "size_bytes": 13210
+      }
+    }
+  },
+  "benchmark": {
+    "256": {
+      "baseline_median_us": 539.654723405838,
+      "candidate_median_us": 532.3484814167023,
+      "ratio_ci95": [
+        1.0133853996369464,
+        1.0140496350727404
+      ],
+      "raw": {
+        "path": "benchmark/m256_raw.csv",
+        "sha256": "f3140d7dc92c132fb02ed6d2864338e2ca8d5af59850de41e0d8ddd49c5470c0",
+        "size_bytes": 3764
+      },
+      "speedup_percent": 1.3724547442480084,
+      "summary": {
+        "path": "benchmark/m256_summary.json",
+        "sha256": "dddf45d127e29511396ba5fd3c6d36c404d4a250e80de11126d4eda1c0a1338c",
+        "size_bytes": 2211
+      },
+      "verdict": "equivalent"
+    },
+    "8192": {
+      "baseline_median_us": 1787.283195257187,
+      "candidate_median_us": 1628.536640405655,
+      "ratio_ci95": [
+        1.097123147285729,
+        1.0977709036647356
+      ],
+      "raw": {
+        "path": "benchmark/m8192_raw.csv",
+        "sha256": "777f2a929cd305d36c688cb7bb52940764f8c23884311432bcd22a9cb7147ae8",
+        "size_bytes": 3804
+      },
+      "speedup_percent": 9.747803697679757,
+      "summary": {
+        "path": "benchmark/m8192_summary.json",
+        "sha256": "1a80d93b3c2b5062f7e7b5f58a720bb0d95ce918c2f85ec08ebb6d28dcc02431",
+        "size_bytes": 2200
+      },
+      "verdict": "faster"
+    },
+    "provenance_log": {
+      "path": "runtime/paired_abba_m256_m8192.stdout.log",
+      "sha256": "88a18641da6a82b40372c5177a34d6c572eefebd549d273e13a0b25a2eae4667",
+      "size_bytes": 123003
+    }
+  },
+  "correctness": {
+    "1024": {
+      "classification": "strict_comparison_failed_self_drift_inconclusive",
+      "independent_reference_gate_pass": true,
+      "path": "correctness/m1024.json",
+      "route_task_gate_pass": true,
+      "sha256": "ad8737819ea72cbcb00a91a670717132b40d9ed99056210251d89d4f01f81b14",
+      "size_bytes": 2673,
+      "strict_cross_arm_gate_pass": false
+    },
+    "256": {
+      "classification": "pass",
+      "independent_reference_gate_pass": true,
+      "path": "correctness/m256.json",
+      "route_task_gate_pass": true,
+      "sha256": "906259c24d6fa8406f4abc4b4352d8f59fb53722dac830493311ab7d1ed69e80",
+      "size_bytes": 2666,
+      "strict_cross_arm_gate_pass": true
+    },
+    "8192": {
+      "classification": "pass",
+      "independent_reference_gate_pass": true,
+      "path": "correctness/m8192.json",
+      "route_task_gate_pass": true,
+      "sha256": "263e55c6b3ced1d03768049cac3972ed84e32828a966824dc6bf5e36eb93d61c",
+      "size_bytes": 2508,
+      "strict_cross_arm_gate_pass": true
+    }
+  },
+  "decision": "candidate_rejected_residual_spill",
+  "decision_reason": "Candidate A improves M8192 latency but fails both static and dynamic zero-spill gates; M1024 strict comparison is inconclusive.",
+  "directed_fixtures": {
+    "exact_128": {
+      "baseline_4warp": {
+        "gate_pass": true,
+        "path": "raw/baseline_4warp/m256/exact_128/preparation.json",
+        "sha256": "b78ebb6334eee093e48da3836a2b6f7d5d9bce2f2b1d7f01a75e2d04e36c82fd",
+        "size_bytes": 13012
+      },
+      "candidate_8warp_serial_v0": {
+        "gate_pass": true,
+        "path": "raw/candidate_8warp_serial_v0/m256/exact_128/preparation.json",
+        "sha256": "d3dffbba5273d013ed218ce6f4fbd6267e74c7224d32041f98a334746be2129f",
+        "size_bytes": 13055
+      }
+    },
+    "hot_expert": {
+      "baseline_4warp": {
+        "gate_pass": true,
+        "path": "raw/baseline_4warp/m256/hot_expert/preparation.json",
+        "sha256": "b15a9b0e566998b8f8187211fdcb1f0ad037cd8a2f1f638fdea2c3e95e91b4d5",
+        "size_bytes": 13010
+      },
+      "candidate_8warp_serial_v0": {
+        "gate_pass": true,
+        "path": "raw/candidate_8warp_serial_v0/m256/hot_expert/preparation.json",
+        "sha256": "bbbaf82f7fa32120b7cc28cdc395afcc3cc94ae135fd2416537ba02cb3fdfefc",
+        "size_bytes": 13062
+      }
+    },
+    "sparse_empty": {
+      "baseline_4warp": {
+        "gate_pass": true,
+        "path": "raw/baseline_4warp/m256/sparse_empty/preparation.json",
+        "sha256": "70099a7029dcf0ac3dc06318f72e4503f2b497f459c85a2da6fa2a8860ec6c94",
+        "size_bytes": 13015
+      },
+      "candidate_8warp_serial_v0": {
+        "gate_pass": true,
+        "path": "raw/candidate_8warp_serial_v0/m256/sparse_empty/preparation.json",
+        "sha256": "aab0c0cbba1c418c8dcfa3ddf9fd741f93637f656b73c7edac8c9f135845b795",
+        "size_bytes": 13053
+      }
+    },
+    "tail_129": {
+      "baseline_4warp": {
+        "gate_pass": true,
+        "path": "raw/baseline_4warp/m256/tail_129/preparation.json",
+        "sha256": "9e694f40bfe39ea8ccf7aedeadd076eafc95176492f78eed6d2d095c9673e80c",
+        "size_bytes": 13006
+      },
+      "candidate_8warp_serial_v0": {
+        "gate_pass": true,
+        "path": "raw/candidate_8warp_serial_v0/m256/tail_129/preparation.json",
+        "sha256": "0df6756ebfcb225ef75c2d013dc244a83f6081ecc9ebc7d0f32014dabeba3f66",
+        "size_bytes": 13055
+      }
+    }
+  },
+  "environment": {
+    "container_image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "cuda_runtime": "13.2",
+    "cutlass_python_version": "4.6.0",
+    "gpu": {
+      "compute_capability": [
+        12,
+        0
+      ],
+      "driver": "580.95.05",
+      "foreign_processes_before_cuda_context": [],
+      "graphics_clock_mhz": "2370",
+      "max_graphics_clock_mhz": "3090",
+      "name": "NVIDIA Graphics Device",
+      "pci_bus_id": "00000000:79:00.0",
+      "power_draw_w": "63.80",
+      "sm_count": 110,
+      "uuid": "GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12"
+    },
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+    "source": {
+      "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+      "overlay": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_005_8warp_spill_reduction/results/overlays/baseline_4warp/moe_dynamic_kernel.py",
+      "overlay_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+      "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+      "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+    },
+    "torch": "2.12.0a0+5aff3928d8.nv26.05"
+  },
+  "evidence_boundaries": [
+    "The 8-warp/layout change is an inseparable whole-kernel bundle, not a pure spill ablation.",
+    "M1024 strict comparison failed because both arms exceed the preregistered cosine self-drift cap.",
+    "Static program order supports investigating gate_acc first but does not provide SSA/source-line attribution.",
+    "launch__stack_size is a runtime configured limit and is not the cubin static frame."
+  ],
+  "invalidated_capture": {
+    "reason": "missing section-derived compiler spill metrics",
+    "record": "failed_attempts/attempt_01_ncu_metric_whitelist_missing_spill_derived/README.md",
+    "revision": "canonical_v0"
+  },
+  "manifest_sha256": "3f92d5197395f256b6204c15e634fd2a25d6bb9b76eb148fb1bcf164b71936ab",
+  "ncu_evidence": {
+    "candidate_zero_spill_gate_pass": false,
+    "canonical_capture_revision": "canonical_v1",
+    "identity_gate_pass": true,
+    "path": "ncu/evidence.json",
+    "sha256": "d68465e34205db16644d80f67c335905adcc151f321baaf9b3342601a88ba905",
+    "size_bytes": 18864,
+    "work_identity_gate_pass": true
+  },
+  "result": {
+    "path": "result.md",
+    "sha256": "e37a15b335c394801ab676f10c8729c584f0eabbe1381dd3c2f2f17a149e3cea",
+    "size_bytes": 5030
+  },
+  "schema": "exp005.final-manifest.v1",
+  "source": {
+    "candidate_overlay_sha256": "3e2bda4e09dc2c67d97abea4d392eb5fa117de9abdd80c49b0e89e1f2dd0b445",
+    "comparison_registry": {
+      "path": "../comparison_registry.json",
+      "sha256": "d31095521339d30ead54fd9fbe10407d6585728f477b01989cb3c457d2f39c8f"
+    },
+    "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+  },
+  "static_spill_evidence": {
+    "candidate_zero_spill_static_gate": false,
+    "path": "static_spill_evidence.json",
+    "sha256": "7f6001a89ad2f039b4c2e5bbffa23d7e50909a7ab921902baf300ba0244d3aa8",
+    "size_bytes": 278183
+  },
+  "status": "complete"
+}
