@@ -1,0 +1,107 @@
+{
+  "schema": "exp004.probe-zero-write-diagnosis.v1",
+  "classification": "diagnostic-causal-narrowing",
+  "evidence_host": {
+    "host": "10.6.142.16",
+    "root": "/lustre/raplab/client/xiy/workspace/flashinfer_exp004_rough_324272d/.claude/w4a4_moe_bench/experiments/exp_004_fused_phase_timing_breakdown/results/diagnostic_phase_followup"
+  },
+  "common_contract": {
+    "expected_tick_writes": 776016,
+    "task_capacity": 3068,
+    "task_tail": 2536,
+    "dispatch_sha256": "77c31a068c1ba6df31057e446971ecc70e22f5b05604943c5711a874bd515c84"
+  },
+  "ablation": [
+    {
+      "arm": "original_probe",
+      "kernel_sha256": "d782181afa5a85dcf7dcd1098d4352097f7b5329c63e542c952ecdca41580832",
+      "capture": "captures/probe_original/capture.json",
+      "capture_sha256": "603a3103df2c1e7f75ae6fc8a5088d1e439832905f020344f2cfca0ba41077a1",
+      "eager_tick_writes": 0,
+      "graph_run0_tick_writes": 0,
+      "event_gate_pass": false
+    },
+    {
+      "arm": "runtime_entry_and_consumer_canary",
+      "kernel_sha256": "570435e9e71c873d27a53c985b0f9a0495211c6ece71185db6e767d8bc894689",
+      "capture": "captures/runtime_canary/capture.json",
+      "capture_sha256": "fde983b4d8980378fb81cd20fb226a1dfcb7b33f901c6218ef90be1619783e32",
+      "eager_timing_tensor": {
+        "path": "captures/runtime_canary/eager_timing.pt",
+        "sha256": "76c7fc2092472c93d1660e6fc12321630b55efa3bae969236a3c885b0cc867de",
+        "timing_tail": [-1, -1, 67125253, 67125252],
+        "cta_tail": [-1, -1, 16389, 16388]
+      },
+      "graph_run0_timing_tensor": {
+        "path": "captures/runtime_canary/timing_0.pt",
+        "sha256": "1a62f2e259d924de562db76af73793c93cb0c26903d9f3b186239489cf581809",
+        "timing_tail": [-1, -1, 67125253, 67125252],
+        "cta_tail": [-1, -1, 16389, 16388]
+      },
+      "interpretation": "kernel-entry and consumer-branch constants wrote in eager and graph while phase slots remained empty"
+    },
+    {
+      "arm": "direct_store_helper",
+      "kernel_sha256": "2385047819dfd6e6c3c19af980238b67f28124d71fca0ce71bf8bdb691dbeb17",
+      "capture": "captures/direct_store_probe/capture.json",
+      "capture_sha256": "9745d9126c00d6063ab9b225f9c142b4a9eee4ef9a2dde5ba38f925a92b5653b",
+      "eager_tick_writes": 0,
+      "graph_run0_tick_writes": 0,
+      "event_gate_pass": false
+    },
+    {
+      "arm": "inline_global_stores_nonvolatile_slot",
+      "kernel_sha256": "3a508b2872b016fe28756472bb1df8172293a455d7b962dad86db29e7433c7ca",
+      "identity": "overlays/inline_store_probe/identity.json",
+      "identity_sha256": "6e963f927262969521914233d7546cd5a2a3302c8d236e30a6cd60f868d77e70",
+      "capture": "captures/inline_store_probe/capture.json",
+      "capture_sha256": "0c5198347a8e9cb483d42339e432064d6fc988d36de7f3215e7d0d85e5f08912",
+      "eager_tick_writes": 0,
+      "graph_run0_tick_writes": 0,
+      "event_gate_pass": false
+    },
+    {
+      "arm": "clock_and_index_canary",
+      "kernel_sha256": "ca10f8ae7cbac3fbb34c2fee04a78b907412f1afb1f0bcd3cbb210a134f52db2",
+      "capture": "captures/clock_value_canary/capture.json",
+      "capture_sha256": "5e7fdded420014c39f363e558b6db53f230e7af41e3d9e50218cadfdae866c88",
+      "eager_timing_tensor": {
+        "path": "captures/clock_value_canary/eager_timing.pt",
+        "sha256": "ff28fff78a2446798943b4e68df50be48e5ec6e2c01f917f82daeeca6af6e0a6",
+        "clock_value": 133654015891878,
+        "post_clock_constant": 67125254,
+        "observed_task_slot": 65790,
+        "computed_event_index": 19473840
+      },
+      "graph_run0_timing_tensor": {
+        "path": "captures/clock_value_canary/timing_0.pt",
+        "sha256": "a0b82b0331d083f8a7b5397cb4be3b2c0c22f74f246ddc9e3a6e7bc0e5c1ae0b",
+        "clock_value": 133707729569814,
+        "post_clock_constant": 67125254,
+        "observed_task_slot": 65860,
+        "computed_event_index": 19494560
+      },
+      "interpretation": "clock and following stores executed, but the task-slot value used for indexing exceeded task_capacity"
+    },
+    {
+      "arm": "inline_stores_volatile_slot",
+      "kernel_sha256": "dd81840cba51fb6f35eae24e4bf3a5123364857b99c57a0e9778998b2ee06055",
+      "parent_kernel_sha256": "3a508b2872b016fe28756472bb1df8172293a455d7b962dad86db29e7433c7ca",
+      "changed_from_parent": "two claimed-slot loads use ld.volatile.shared.s32; phase and CTA stores remain inline",
+      "identity": "overlays/volatile_slot_probe/identity.json",
+      "identity_sha256": "2a51f61d20f98335fd904c6c434a9a394c5efd12a8d84c63aae7c8a1d2bf1cfb",
+      "kernel_diff_sha256": "26c911e20236f6b9e4870e1128ecc44e03e4b1b2d4ad4e80dc715275bad52820",
+      "capture": "captures/volatile_slot_probe_canonical/capture.json",
+      "capture_sha256": "789a7e65636c4bb751148476b84acc7413e71f4c026385b4ec42422193315206",
+      "eager_tick_writes": 776016,
+      "graph_replay_tick_writes": [776016, 776016, 776016, 776016, 776016],
+      "event_gate_pass": true,
+      "correctness_gate_pass": true
+    }
+  ],
+  "verdict": {
+    "fact": "the original zero-write was caused by an out-of-range task-slot value on the probe indexing path; explicit stores alone did not fix it, while a volatile task-slot reload did",
+    "compiler_mechanism": "inference: has_side_effects=False on the original shared-load helper allowed an invalid reuse or motion of the control-slot load",
+    "not_claimed": "the retained evidence does not identify the exact compiler pass or transformation"
+  }
+}

@@ -2,6 +2,8 @@
 # derived CSV/JSON evidence and result.md may be reviewed/committed later.
 raw/*
 !raw/blocked_preflight.json
+!raw/diagnostic_control_capture.json
+!raw/diagnostic_probe_capture.json
 overlays/*
 !overlays/identity.json
 *.ncu-rep

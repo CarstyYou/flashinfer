@@ -1,0 +1,399 @@
+{
+  "arm": "normal_no_marker",
+  "classification": "control",
+  "eager_correctness": {
+    "cosine": 0.9999147967788785,
+    "cosine_loss": 8.520322112148815e-05,
+    "max_abs": 0.062139347195625305,
+    "relative_l2": 0.013041429221630096,
+    "token_rel_l2_p99": 0.06023087352514267
+  },
+  "eager_probe": null,
+  "foreign_processes_after": [],
+  "jit_artifact_set_sha256": "a909ea5e0d761b6bfc81b1107ccecfe3f603f5beb3b43ee2c8bbb99f9282c4eb",
+  "jit_artifacts": [
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/cached_ops/fp4_quantization_120f/fp4_quantization_120f.so",
+      "sha256": "aa029c2f1b5e93c18546b6557cf582a38b1da19c2339e55d15572c92e495cb96",
+      "size": 2979496
+    }
+  ],
+  "latency_us": {
+    "max": 1807.4560165405273,
+    "median": 1798.975944519043,
+    "min": 1791.4559841156006,
+    "samples": 5
+  },
+  "pointer_identity": {},
+  "runs": [
+    {
+      "correctness": {
+        "cosine": 0.9999147945042202,
+        "cosine_loss": 8.520549577983871e-05,
+        "max_abs": 0.060186222195625305,
+        "relative_l2": 0.0130416015163064,
+        "token_rel_l2_p99": 0.06042541190981865
+      },
+      "correctness_gate": {
+        "checks": {
+          "cosine": true,
+          "max_abs": true,
+          "relative_l2": true
+        },
+        "gate_pass": true
+      },
+      "event_elapsed_us": 1791.4559841156006,
+      "output_contract": {
+        "checks": {
+          "dtype_bfloat16": true,
+          "every_token_nonzero": true,
+          "finite": true,
+          "shape": true
+        },
+        "dtype": "torch.bfloat16",
+        "gate_pass": true,
+        "shape": [
+          8192,
+          2048
+        ]
+      },
+      "output_sha256": "89084ba49cbd63ad48206bf989f7855dfa41da8032ccf54e9d4741440ca7c942",
+      "run_id": "run_0",
+      "workspace_gate": {
+        "checks": {
+          "all_work_published": true,
+          "expert_tile_base": true,
+          "expert_write_rows": true,
+          "pair_head": true,
+          "routed_row_sum": true,
+          "row_counts": true,
+          "task_descriptor_multiset": true,
+          "task_head": true,
+          "task_tail": true
+        },
+        "gate_pass": true,
+        "missing_task_descriptors": [],
+        "task_descriptor_multiset_sha256": "8feb61c0096ab8de89136687efc88064ac465d2cf84f66e7783c18787fcb7330",
+        "task_descriptor_order_sha256": "8feb61c0096ab8de89136687efc88064ac465d2cf84f66e7783c18787fcb7330",
+        "unexpected_task_descriptors": []
+      }
+    },
+    {
+      "correctness": {
+        "cosine": 0.999914821294902,
+        "cosine_loss": 8.517870509805459e-05,
+        "max_abs": 0.062139347195625305,
+        "relative_l2": 0.013039584271609783,
+        "token_rel_l2_p99": 0.06026533991098404
+      },
+      "correctness_gate": {
+        "checks": {
+          "cosine": true,
+          "max_abs": true,
+          "relative_l2": true
+        },
+        "gate_pass": true
+      },
+      "event_elapsed_us": 1807.4560165405273,
+      "output_contract": {
+        "checks": {
+          "dtype_bfloat16": true,
+          "every_token_nonzero": true,
+          "finite": true,
+          "shape": true
+        },
+        "dtype": "torch.bfloat16",
+        "gate_pass": true,
+        "shape": [
+          8192,
+          2048
+        ]
+      },
+      "output_sha256": "3a7292c45b6171d0a1f5d67b50799bfbc8725ea9c81a6c32c0b4444281ee7707",
+      "run_id": "run_1",
+      "workspace_gate": {
+        "checks": {
+          "all_work_published": true,
+          "expert_tile_base": true,
+          "expert_write_rows": true,
+          "pair_head": true,
+          "routed_row_sum": true,
+          "row_counts": true,
+          "task_descriptor_multiset": true,
+          "task_head": true,
+          "task_tail": true
+        },
+        "gate_pass": true,
+        "missing_task_descriptors": [],
+        "task_descriptor_multiset_sha256": "8feb61c0096ab8de89136687efc88064ac465d2cf84f66e7783c18787fcb7330",
+        "task_descriptor_order_sha256": "8feb61c0096ab8de89136687efc88064ac465d2cf84f66e7783c18787fcb7330",
+        "unexpected_task_descriptors": []
+      }
+    },
+    {
+      "correctness": {
+        "cosine": 0.9999148253143364,
+        "cosine_loss": 8.517468566360265e-05,
+        "max_abs": 0.062139347195625305,
+        "relative_l2": 0.01303923036903143,
+        "token_rel_l2_p99": 0.06030695140361786
+      },
+      "correctness_gate": {
+        "checks": {
+          "cosine": true,
+          "max_abs": true,
+          "relative_l2": true
+        },
+        "gate_pass": true
+      },
+      "event_elapsed_us": 1795.7119941711426,
+      "output_contract": {
+        "checks": {
+          "dtype_bfloat16": true,
+          "every_token_nonzero": true,
+          "finite": true,
+          "shape": true
+        },
+        "dtype": "torch.bfloat16",
+        "gate_pass": true,
+        "shape": [
+          8192,
+          2048
+        ]
+      },
+      "output_sha256": "af917fc5e1c2ef8d98d82cd63f617c5d00f5bd9c4d80166583ca3b1c466c1549",
+      "run_id": "run_2",
+      "workspace_gate": {
+        "checks": {
+          "all_work_published": true,
+          "expert_tile_base": true,
+          "expert_write_rows": true,
+          "pair_head": true,
+          "routed_row_sum": true,
+          "row_counts": true,
+          "task_descriptor_multiset": true,
+          "task_head": true,
+          "task_tail": true
+        },
+        "gate_pass": true,
+        "missing_task_descriptors": [],
+        "task_descriptor_multiset_sha256": "8feb61c0096ab8de89136687efc88064ac465d2cf84f66e7783c18787fcb7330",
+        "task_descriptor_order_sha256": "8feb61c0096ab8de89136687efc88064ac465d2cf84f66e7783c18787fcb7330",
+        "unexpected_task_descriptors": []
+      }
+    },
+    {
+      "correctness": {
+        "cosine": 0.9999148316534079,
+        "cosine_loss": 8.51683465921127e-05,
+        "max_abs": 0.060186222195625305,
+        "relative_l2": 0.013038813136518002,
+        "token_rel_l2_p99": 0.060288332402706146
+      },
+      "correctness_gate": {
+        "checks": {
+          "cosine": true,
+          "max_abs": true,
+          "relative_l2": true
+        },
+        "gate_pass": true
+      },
+      "event_elapsed_us": 1798.975944519043,
+      "output_contract": {
+        "checks": {
+          "dtype_bfloat16": true,
+          "every_token_nonzero": true,
+          "finite": true,
+          "shape": true
+        },
+        "dtype": "torch.bfloat16",
+        "gate_pass": true,
+        "shape": [
+          8192,
+          2048
+        ]
+      },
+      "output_sha256": "8954a0d0fd85103e425ee3722eeb9d36df8b5828c0d487e1f76139b997d77600",
+      "run_id": "run_3",
+      "workspace_gate": {
+        "checks": {
+          "all_work_published": true,
+          "expert_tile_base": true,
+          "expert_write_rows": true,
+          "pair_head": true,
+          "routed_row_sum": true,
+          "row_counts": true,
+          "task_descriptor_multiset": true,
+          "task_head": true,
+          "task_tail": true
+        },
+        "gate_pass": true,
+        "missing_task_descriptors": [],
+        "task_descriptor_multiset_sha256": "8feb61c0096ab8de89136687efc88064ac465d2cf84f66e7783c18787fcb7330",
+        "task_descriptor_order_sha256": "8feb61c0096ab8de89136687efc88064ac465d2cf84f66e7783c18787fcb7330",
+        "unexpected_task_descriptors": []
+      }
+    },
+    {
+      "correctness": {
+        "cosine": 0.9999147942827701,
+        "cosine_loss": 8.520571722991921e-05,
+        "max_abs": 0.062139347195625305,
+        "relative_l2": 0.013041655533015728,
+        "token_rel_l2_p99": 0.06024622172117233
+      },
+      "correctness_gate": {
+        "checks": {
+          "cosine": true,
+          "max_abs": true,
+          "relative_l2": true
+        },
+        "gate_pass": true
+      },
+      "event_elapsed_us": 1804.4159412384033,
+      "output_contract": {
+        "checks": {
+          "dtype_bfloat16": true,
+          "every_token_nonzero": true,
+          "finite": true,
+          "shape": true
+        },
+        "dtype": "torch.bfloat16",
+        "gate_pass": true,
+        "shape": [
+          8192,
+          2048
+        ]
+      },
+      "output_sha256": "219d71e781deac4a38c529878c0b248dbff27ccef7e1c5368de6ddc2a0f63628",
+      "run_id": "run_4",
+      "workspace_gate": {
+        "checks": {
+          "all_work_published": true,
+          "expert_tile_base": true,
+          "expert_write_rows": true,
+          "pair_head": true,
+          "routed_row_sum": true,
+          "row_counts": true,
+          "task_descriptor_multiset": true,
+          "task_head": true,
+          "task_tail": true
+        },
+        "gate_pass": true,
+        "missing_task_descriptors": [],
+        "task_descriptor_multiset_sha256": "8feb61c0096ab8de89136687efc88064ac465d2cf84f66e7783c18787fcb7330",
+        "task_descriptor_order_sha256": "8feb61c0096ab8de89136687efc88064ac465d2cf84f66e7783c18787fcb7330",
+        "unexpected_task_descriptors": []
+      }
+    }
+  ],
+  "runtime": {
+    "cuda_runtime": "13.2",
+    "cuda_visible_devices": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "gpu": {
+      "applications_graphics_clock_mhz": "2377",
+      "compute_capability": [
+        12,
+        0
+      ],
+      "driver": "580.95.05",
+      "foreign_processes_before_cuda_context": [],
+      "graphics_clock_mhz": "2370",
+      "max_graphics_clock_mhz": "3090",
+      "name": "NVIDIA Graphics Device",
+      "pci_bus_id": "00000000:76:00.0",
+      "power_draw_w": "60.35",
+      "sm_count": 110,
+      "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+    },
+    "hardware_gate": {
+      "checks": {
+        "compute_capability": true,
+        "name": true,
+        "not_rtx_pro_6000": true,
+        "pci_bus_id": true,
+        "sm_count": true,
+        "uuid": true
+      },
+      "gate_pass": true
+    },
+    "hostname": "9f71436083a5",
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "imports": {
+      "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+      "cutlass_python_version": "4.6.0",
+      "dispatch_module": "/lustre/raplab/client/xiy/workspace/flashinfer_exp004_rough_324272d/.claude/w4a4_moe_bench/experiments/exp_004_fused_phase_timing_breakdown/results/overlays/normal_no_marker/moe_dispatch.py",
+      "flashinfer": "/lustre/raplab/client/xiy/workspace/flashinfer_exp004_rough_324272d/flashinfer/__init__.py",
+      "kernel_module": "/lustre/raplab/client/xiy/workspace/flashinfer_exp004_rough_324272d/.claude/w4a4_moe_bench/experiments/exp_004_fused_phase_timing_breakdown/results/overlays/normal_no_marker/moe_dynamic_kernel.py"
+    },
+    "jit_root": "/workspace/jit",
+    "lease_gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "lease_id": "exp004-rough-20260718T053529Z-6493",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "pid": 1,
+    "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+    "source": {
+      "checkout_head": "324272d6fd0113bc5a1ed879d1838b2d47fa2849",
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+      "overlays": {
+        "dispatch": {
+          "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp004_rough_324272d/.claude/w4a4_moe_bench/experiments/exp_004_fused_phase_timing_breakdown/results/overlays/normal_no_marker/moe_dispatch.py",
+          "sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4"
+        },
+        "kernel": {
+          "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp004_rough_324272d/.claude/w4a4_moe_bench/experiments/exp_004_fused_phase_timing_breakdown/results/overlays/normal_no_marker/moe_dynamic_kernel.py",
+          "sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+        }
+      },
+      "production": {
+        "dispatch": {
+          "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp004_rough_324272d/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dispatch.py",
+          "sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4"
+        },
+        "kernel": {
+          "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp004_rough_324272d/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+          "sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+        },
+        "wrapper": {
+          "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp004_rough_324272d/flashinfer/fused_moe/cute_dsl/b12x_moe.py",
+          "sha256": "bcac806795c035decd0773f4f801d477e7ebf14c1d67c3e49eee42ee0579c0a4"
+        }
+      }
+    },
+    "timestamp_unix": 1784354239.3080227,
+    "torch": "2.12.0a0+5aff3928d8.nv26.05"
+  },
+  "schema": "exp004.diagnostic-phase-capture.v1",
+  "source": {
+    "checkout_head": "324272d6fd0113bc5a1ed879d1838b2d47fa2849",
+    "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+    "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+    "overlays": {
+      "dispatch": {
+        "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp004_rough_324272d/.claude/w4a4_moe_bench/experiments/exp_004_fused_phase_timing_breakdown/results/overlays/normal_no_marker/moe_dispatch.py",
+        "sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4"
+      },
+      "kernel": {
+        "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp004_rough_324272d/.claude/w4a4_moe_bench/experiments/exp_004_fused_phase_timing_breakdown/results/overlays/normal_no_marker/moe_dynamic_kernel.py",
+        "sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+      }
+    },
+    "production": {
+      "dispatch": {
+        "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp004_rough_324272d/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dispatch.py",
+        "sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4"
+      },
+      "kernel": {
+        "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp004_rough_324272d/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+        "sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+      },
+      "wrapper": {
+        "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp004_rough_324272d/flashinfer/fused_moe/cute_dsl/b12x_moe.py",
+        "sha256": "bcac806795c035decd0773f4f801d477e7ebf14c1d67c3e49eee42ee0579c0a4"
+      }
+    }
+  }
+}

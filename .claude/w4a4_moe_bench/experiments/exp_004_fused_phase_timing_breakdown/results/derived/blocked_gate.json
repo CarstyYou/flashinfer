@@ -107,7 +107,7 @@
   },
   "evidence": {
     "blocked_preflight": "raw/blocked_preflight.json",
-    "blocked_preflight_sha256": "93eb3a850e742cd8a5043b6f39cb81d47ff000814b60c213e20ffef4465c0de7",
+    "blocked_preflight_sha256": "7814c387d7220441bd2ea5a88c2e04e01e4fac7229745da80068c36543504acb",
     "iket_preflight": "iket_fallback_preflight.json",
     "iket_preflight_sha256": "358f05a6ff7c2bec4c25a93b499b58bf21953609018ab5fb7ba178daf0ffe18b"
   },
@@ -142,7 +142,7 @@
       "torch": "2.12.0a0+5aff3928d8.nv26.05"
     }
   },
-  "evidence_sha256": "e683ea00a68a7297f71e1b3575e23c336f79271930bd0fc7bca6dfee5fa40d49",
+  "evidence_sha256": "bb634dc9fd60900fa951d338196ac73f89c1abe9830e503feb093873be723f8d",
   "fallback": {
     "available": false,
     "observed_version": null,
@@ -173,7 +173,23 @@
   "probe_lowering": {
     "instrumentation_present": true,
     "ptx_clock64_count": 28,
-    "ptx_probe_store_count": 1,
+    "ptx_global_store_opcode_counts": {
+      "normal_no_marker": {
+        "b32": 58,
+        "b64": 0,
+        "u64": 1
+      },
+      "probe_candidate": {
+        "b32": 59,
+        "b64": 36,
+        "u64": 1
+      },
+      "probe_minus_normal": {
+        "b32": 1,
+        "b64": 36,
+        "u64": 0
+      }
+    },
     "runtime_zero_write_cause": "unresolved"
   },
   "probe_preparation_gates": {

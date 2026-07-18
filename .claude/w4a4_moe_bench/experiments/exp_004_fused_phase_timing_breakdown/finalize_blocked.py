@@ -342,11 +342,59 @@ def build_blocked_gate(
         lowering.get("ptx_clock64_count"),
         label="probe_lowering.ptx_clock64_count",
     )
-    ptx_probe_store_count = _integer(
-        lowering.get("ptx_probe_store_count"),
-        label="probe_lowering.ptx_probe_store_count",
-    )
-    instrumentation_present = ptx_clock64_count > 0 and ptx_probe_store_count > 0
+    store_counts_raw = lowering.get("ptx_global_store_opcode_counts")
+    if store_counts_raw is not None:
+        store_counts = _mapping(
+            store_counts_raw,
+            label="probe_lowering.ptx_global_store_opcode_counts",
+        )
+        normal_store_counts = _mapping(
+            store_counts.get("normal_no_marker"),
+            label="probe lowering normal store counts",
+        )
+        probe_store_counts = _mapping(
+            store_counts.get("probe_candidate"),
+            label="probe lowering probe store counts",
+        )
+        added_store_counts = _mapping(
+            store_counts.get("probe_minus_normal"),
+            label="probe lowering differential store counts",
+        )
+        normalized_store_counts = {
+            arm: {
+                opcode: _integer(
+                    values.get(opcode),
+                    label=f"probe lowering {arm} st.global.{opcode}",
+                )
+                for opcode in ("b64", "b32", "u64")
+            }
+            for arm, values in (
+                ("normal_no_marker", normal_store_counts),
+                ("probe_candidate", probe_store_counts),
+                ("probe_minus_normal", added_store_counts),
+            )
+        }
+        instrumentation_present = (
+            ptx_clock64_count > 0
+            and normalized_store_counts["probe_minus_normal"]["b64"] > 0
+            and normalized_store_counts["probe_minus_normal"]["b32"] > 0
+        )
+        lowering_summary: dict[str, Any] = {
+            "ptx_clock64_count": ptx_clock64_count,
+            "ptx_global_store_opcode_counts": normalized_store_counts,
+            "instrumentation_present": instrumentation_present,
+        }
+    else:
+        legacy_store_count = _integer(
+            lowering.get("ptx_probe_store_count"),
+            label="probe_lowering.ptx_probe_store_count",
+        )
+        instrumentation_present = ptx_clock64_count > 0 and legacy_store_count > 0
+        lowering_summary = {
+            "ptx_clock64_count": ptx_clock64_count,
+            "legacy_ptx_u64_store_count": legacy_store_count,
+            "instrumentation_present": instrumentation_present,
+        }
 
     preparation = _mapping(
         blocked.get("probe_preparation_gates"), label="probe_preparation_gates"
@@ -432,9 +480,7 @@ def build_blocked_gate(
             "observed_task_cta_writes": observed_cta,
         },
         "probe_lowering": {
-            "ptx_clock64_count": ptx_clock64_count,
-            "ptx_probe_store_count": ptx_probe_store_count,
-            "instrumentation_present": instrumentation_present,
+            **lowering_summary,
             "runtime_zero_write_cause": "unresolved",
         },
         "probe_preparation_gates": {
@@ -526,15 +572,29 @@ def render_blocked_result(gate: Mapping[str, Any]) -> str:
             f"{local['ldl_instruction_count']} | "
             f"{local['spill_annotation_count']} |"
         )
+    store_counts = lowering.get("ptx_global_store_opcode_counts")
+    if isinstance(store_counts, Mapping):
+        added = _mapping(
+            store_counts.get("probe_minus_normal"),
+            label="render differential store counts",
+        )
+        lowering_line = (
+            f"- Probe PTX 相对 no-marker 新增 `{added['b64']}` 个 `st.global.b64` "
+            f"与 `{added['b32']}` 个 `st.global.b32`，并检出 "
+            f"`{lowering['ptx_clock64_count']}` 个 clock64 occurrence；"
+            "`st.global.u64` 不作为 probe-store 证据。"
+        )
+    else:
+        lowering_line = (
+            f"- Legacy PTX 记录检出 `{lowering['ptx_clock64_count']}` 个 clock64 occurrence；"
+            "旧 `st.global.u64` 计数不能识别 probe store。"
+        )
     lines.extend(
         [
             "",
             "## 解释边界",
             "",
-            (
-                f"- Probe PTX 文本中检出 `{lowering['ptx_clock64_count']}` 个 clock64 occurrence 与 "
-                f"`{lowering['ptx_probe_store_count']}` 条静态 probe-store 指令；这只证明插桩已 lowering。"
-            ),
+            lowering_line,
             "- 运行时 0-write 的具体原因尚未定位；不归因于 cache、pointer、CUDA Graph 或其他机制。",
             "- Immediate-stop 后不继续 cross-arm correctness、phase capture、calibration 或 NCU；没有合法的 phase timing 数据可解释。",
             "",

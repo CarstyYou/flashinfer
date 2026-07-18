@@ -100,7 +100,7 @@
   "blocked_gate": {
     "closure_gate_pass": true,
     "path": "derived/blocked_gate.json",
-    "sha256": "f2b1c8995708448623109f9300523fb28a130b677c24985ca44defd1ac791613"
+    "sha256": "9cc10f6e0fbbcb2aab71222580a20b175129be0e5a737ae2fa3fd719befe02f5"
   },
   "correctness": {
     "probe_preparation_gates": {
@@ -151,21 +151,46 @@
     "path": "iket_fallback_preflight.json",
     "sha256": "358f05a6ff7c2bec4c25a93b499b58bf21953609018ab5fb7ba178daf0ffe18b"
   },
-  "manifest_payload_sha256": "cb54042c752979267e0c8c5b23a06cdff5daf2346430a2d0845f5eb77d9d0d73",
+  "formal_status": "blocked_by_measurement_gate",
+  "manifest_payload_sha256": "ab7963c40cdf7859bbd5aaea6b49a28a33e3c27e1387cb21002d50b3332be64d",
   "overlay_identity": {
     "path": "overlays/identity.json",
     "sha256": "a205e087d76aca318e754afef0ae745697adf37fd5a044a997ad77eca2d7e723"
   },
-  "phase_captures": {},
+  "phase_captures": {
+    "diagnostic_followup": {
+      "classification": "diagnostic-only",
+      "control_capture": {
+        "path": "raw/diagnostic_control_capture.json",
+        "sha256": "830a6676bb47cef0a0ab903c3882381d14c257f6e7ce092675ca5155af114641"
+      },
+      "correctness_passes": 5,
+      "event_gate_passes": 5,
+      "probe_capture": {
+        "path": "raw/diagnostic_probe_capture.json",
+        "sha256": "789a7e65636c4bb751148476b84acc7413e71f4c026385b4ec42422193315206"
+      },
+      "probe_latency_overhead_pct": 1.889078348122819,
+      "summary": {
+        "path": "derived/diagnostic_phase_summary.json",
+        "sha256": "33c776f8264ae221fc6895e48fb6827884f15dada6fbfb039424096cd534e6a9"
+      },
+      "zero_write_diagnosis": {
+        "path": "derived/probe_zero_write_diagnosis.json",
+        "sha256": "5955dc5b78e3f8fd591c3f38e326b86f5ca0606b64360e3d3d69df3a8dcd2cb5"
+      }
+    }
+  },
   "profiles": {},
   "raw_preflight": {
     "path": "raw/blocked_preflight.json",
-    "sha256": "93eb3a850e742cd8a5043b6f39cb81d47ff000814b60c213e20ffef4465c0de7"
+    "sha256": "7814c387d7220441bd2ea5a88c2e04e01e4fac7229745da80068c36543504acb"
   },
   "result": {
+    "diagnostic_phase_share_published": true,
+    "formal_phase_share_published": false,
     "path": "result.md",
-    "phase_share_published": false,
-    "sha256": "816f07443a1509bf372648f37eeb8ea081fe0323629ac81ccd062fe21817e787"
+    "sha256": "9590c8683cec91bec81b3c9bf613e303ee0aab6feb410cb3564e04eb85a0b392"
   },
   "runtime_observations": {
     "measurement_no_marker": {
@@ -193,7 +218,7 @@
       "power_draw_w": "59.19"
     }
   },
-  "schema": "exp004.run-manifest.v1",
-  "status": "blocked_by_measurement_gate",
+  "schema": "exp004.run-manifest.v2",
+  "status": "closed_with_diagnostic_estimate",
   "verdict": "measurement_perturbation_prevented_formal_timing"
 }

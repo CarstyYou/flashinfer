@@ -1,18 +1,19 @@
 # exp_004：Fused Phase Timing Breakdown Plan
 
-Status: **closed — `measurement perturbation prevented formal timing`**
+Status: **closed — formal timing blocked；diagnostic estimate published**
 
 本实验只测量 `MoEDynamicKernel` 内部 phase 的时间分布，不修改 production kernel，不做性能优化。
 所有测量代码必须位于 experiment-owned overlay；任何插桩若改变 production 的 resource、spill 或
 semantic work，实验立即降级或停止。
 
-## Execution Closure — 2026-07-17
+## Execution Closure — 2026-07-17/18
 
 - 目标 5KP identity 已闭合：`GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522`，SM12.0，110 SM。
 - `normal_no_marker` 与 `measurement_no_marker` 均保持 `REG=255 / STACK=488 B/thread` 和相同 local SASS / semantic projection。
 - `probe_candidate` 变为 `REG=255 / STACK=456 B/thread`，local SASS 也漂移；probe replay reference correctness 失败，timing/CTA 写回为 `0/776016` 与 `0/2536`。
-- PTX 中能确认 clock/store lowering，但 0-write 的具体原因未定位；IKET audited provider 不可用。
-- 按预注册 immediate-stop 收口，不发布 phase share，不继续 phase capture、calibration 或 NCU。
+- Formal probe 按预注册 immediate-stop 收口，不能发布 production-representative phase timing；IKET audited provider 不可用。
+- Diagnostic follow-up 将 0-write 直接原因收敛到 probe indexing path 使用了越界 task-slot 值；保持 inline stores 不变并改为 volatile reload 后，eager 与 5/5 graph replay exact-fill 且 correctness PASS。`has_side_effects=False` 导致 load reuse/motion 只保留为 compiler-mechanism inference。
+- 用户接受 relaxed boundary 后发布 W0–W3 consumer task-cycle 近似占比；probe 相对 fresh no-marker 的 latency perturbation 为 `+1.89%`。该结果不升级 formal verdict，也不解释为 production wall-time 可加贡献。
 
 ## 1. Goal
 

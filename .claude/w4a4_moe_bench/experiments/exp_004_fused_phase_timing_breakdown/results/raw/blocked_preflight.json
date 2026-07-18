@@ -140,7 +140,7 @@
       "torch": "2.12.0a0+5aff3928d8.nv26.05"
     }
   },
-  "evidence_sha256": "6f93a6abae9a6ec4a5e2fcd7b9bc44b72db47cc0ed6cd6961670b0b2408135d5",
+  "evidence_sha256": "d59b207811a319ef50a418bf03215af9dbcd6285c21ac4853be14115f8ac75fa",
   "failed_probe_preparation": {
     "path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_phase_timing_breakdown/results/raw/probe_failure_replay_v3/raw/preparation/probe_candidate/preparation_failure.json",
     "runtime_zero_write_cause": "unresolved",
@@ -154,7 +154,23 @@
   },
   "probe_lowering": {
     "ptx_clock64_count": 28,
-    "ptx_probe_store_count": 1
+    "ptx_global_store_opcode_counts": {
+      "normal_no_marker": {
+        "b32": 58,
+        "b64": 0,
+        "u64": 1
+      },
+      "probe_candidate": {
+        "b32": 59,
+        "b64": 36,
+        "u64": 1
+      },
+      "probe_minus_normal": {
+        "b32": 1,
+        "b64": 36,
+        "u64": 0
+      }
+    }
   },
   "probe_preparation_gates": {
     "output_contract": true,

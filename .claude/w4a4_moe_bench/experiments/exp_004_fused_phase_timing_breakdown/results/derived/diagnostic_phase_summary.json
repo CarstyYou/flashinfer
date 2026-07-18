@@ -1,0 +1,123 @@
+{
+  "schema": "exp004.diagnostic-phase-summary.v1",
+  "classification": "diagnostic-only",
+  "case": {
+    "M": 8192,
+    "E": 256,
+    "H": 2048,
+    "I_tp": 512,
+    "topk": 8,
+    "task_tail": 2536,
+    "consumer_warps": 4
+  },
+  "identity": {
+    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "gpu_name": "NVIDIA Graphics Device",
+    "compute_capability": [12, 0],
+    "sm_count": 110,
+    "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+    "production_dispatch_sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4",
+    "diagnostic_kernel_sha256": "dd81840cba51fb6f35eae24e4bf3a5123364857b99c57a0e9778998b2ee06055",
+    "diagnostic_dispatch_sha256": "77c31a068c1ba6df31057e446971ecc70e22f5b05604943c5711a874bd515c84",
+    "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+    "cutlass_dsl_version": "4.6.0",
+    "cuda_toolchain": "13.2.78",
+    "container_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba"
+  },
+  "source_evidence": {
+    "probe_capture": {
+      "path": "raw/diagnostic_probe_capture.json",
+      "sha256": "789a7e65636c4bb751148476b84acc7413e71f4c026385b4ec42422193315206"
+    },
+    "control_capture": {
+      "path": "raw/diagnostic_control_capture.json",
+      "sha256": "830a6676bb47cef0a0ab903c3882381d14c257f6e7ce092675ca5155af114641"
+    }
+  },
+  "runtime_gates": {
+    "eager_event_gate_pass": true,
+    "graph_replay_event_gate_passes": 5,
+    "graph_replays": 5,
+    "expected_tick_writes_per_replay": 776016,
+    "observed_tick_writes_per_replay": 776016,
+    "event_errors": 0,
+    "correctness_passes": 5,
+    "probe_relative_l2_range": [0.0130397267639637, 0.013041230849921703],
+    "probe_cosine_range": [0.9999147996872884, 0.9999148185373702]
+  },
+  "latency_us": {
+    "control": {
+      "median": 1798.975944519043,
+      "min": 1791.4559841156006,
+      "max": 1807.4560165405273,
+      "samples": 5
+    },
+    "diagnostic_probe": {
+      "median": 1832.9600095748901,
+      "min": 1830.016016960144,
+      "max": 1834.3679904937744,
+      "samples": 5
+    },
+    "probe_overhead_us": 33.98406505584717,
+    "probe_overhead_pct": 1.889078348122819
+  },
+  "consumer_task_cycle_share": {
+    "denominator_ticks": 7649555952,
+    "replays": 5,
+    "phases": [
+      {
+        "phase": "fc1_gate",
+        "share_pct": 17.11435450913609,
+        "run_min_pct": 17.10325366038759,
+        "run_max_pct": 17.126972735491634
+      },
+      {
+        "phase": "fc1_up",
+        "share_pct": 16.930733079498363,
+        "run_min_pct": 16.90851176965679,
+        "run_max_pct": 16.960947755460165
+      },
+      {
+        "phase": "swiglu_q1",
+        "share_pct": 8.196480736062469,
+        "run_min_pct": 8.170281525505832,
+        "run_max_pct": 8.215134539208925
+      },
+      {
+        "phase": "fc2_setup",
+        "share_pct": 0.05603441594383412,
+        "run_min_pct": 0.054093761664171874,
+        "run_max_pct": 0.056878106453330045
+      },
+      {
+        "phase": "fc2_gemm",
+        "share_pct": 13.440236419621131,
+        "run_min_pct": 13.425302504069448,
+        "run_max_pct": 13.446589609284867
+      },
+      {
+        "phase": "fc2_epilogue_scatter",
+        "share_pct": 41.08672335651412,
+        "run_min_pct": 41.05532164025378,
+        "run_max_pct": 41.11640627979897
+      },
+      {
+        "phase": "residual_task_control",
+        "share_pct": 3.1754374832239876,
+        "run_min_pct": 3.1715055841888,
+        "run_max_pct": 3.179717713357521
+      }
+    ],
+    "grouped": {
+      "fc1_gate_plus_up_pct": 34.04508758863445,
+      "all_gemm_pct": 47.48532400825558,
+      "fc2_total_pct": 54.582994192079084,
+      "fc2_epilogue_scatter_within_fc2_pct": 75.2738539991573
+    }
+  },
+  "interpretation_boundary": [
+    "Shares are summed W0-W3 MMA-consumer warp-task elapsed cycles.",
+    "Shares are not additive contributions to production kernel wall time.",
+    "The successful diagnostic probe is a different binary from production and has no retained final cubin resource audit."
+  ]
+}

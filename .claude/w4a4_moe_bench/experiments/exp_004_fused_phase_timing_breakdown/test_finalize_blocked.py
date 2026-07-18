@@ -108,7 +108,11 @@ def _blocked_preflight():
         },
         "probe_lowering": {
             "ptx_clock64_count": 28,
-            "ptx_probe_store_count": 37,
+            "ptx_global_store_opcode_counts": {
+                "normal_no_marker": {"b64": 0, "b32": 58, "u64": 1},
+                "probe_candidate": {"b64": 36, "b32": 59, "u64": 1},
+                "probe_minus_normal": {"b64": 36, "b32": 1, "u64": 0},
+            },
         },
         "probe_preparation_gates": {
             "reference_correctness": False,
@@ -175,6 +179,8 @@ def test_finalize_blocked_writes_compact_closed_artifacts(tmp_path):
     assert "measurement perturbation prevented formal timing" in report
     assert "MMA consumer phase share" not in report
     assert "具体原因尚未定位" in report
+    assert "新增 `36` 个 `st.global.b64`" in report
+    assert "`st.global.u64` 不作为 probe-store 证据" in report
     assert "Probe reference correctness" in report
     assert not manifest["result"]["phase_share_published"]
     assert manifest["phase_captures"] == {}

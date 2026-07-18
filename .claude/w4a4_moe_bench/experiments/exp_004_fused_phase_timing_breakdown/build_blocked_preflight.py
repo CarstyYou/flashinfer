@@ -61,6 +61,7 @@ GPU_FIELDS = (
     "sm_count",
 )
 SEMANTIC_FIELDS = ("omma", "utmaldg", "ldsm", "bar", "atomg", "redg", "ldg")
+PTX_GLOBAL_STORE_OPCODES = ("b64", "b32", "u64")
 
 
 def _single_ptx(preparation: Mapping[str, Any]) -> Path:
@@ -73,6 +74,12 @@ def _single_ptx(preparation: Mapping[str, Any]) -> Path:
     if len(candidates) != 1:
         raise ValueError(f"expected one target PTX, got {len(candidates)}")
     return candidates[0]
+
+
+def _ptx_global_store_counts(ptx: str) -> dict[str, int]:
+    return {
+        opcode: ptx.count(f"st.global.{opcode}") for opcode in PTX_GLOBAL_STORE_OPCODES
+    }
 
 
 def _artifact_hashes(
@@ -224,7 +231,10 @@ def build(
     failed_output = failure["outputs"][failed_replay]
     failed_workspace = failure["workspace_gates"][failed_replay]
 
+    normal_ptx = ptx_paths[NORMAL].read_text(errors="replace")
     probe_ptx = ptx_paths[PROBE].read_text(errors="replace")
+    normal_store_counts = _ptx_global_store_counts(normal_ptx)
+    probe_store_counts = _ptx_global_store_counts(probe_ptx)
     compact_arms = {
         arm: _compact_arm(analyses[arm], ptx_paths[arm], preparations[arm])
         for arm in ALL_ARMS
@@ -288,7 +298,14 @@ def build(
         },
         "probe_lowering": {
             "ptx_clock64_count": probe_ptx.count("clock64"),
-            "ptx_probe_store_count": probe_ptx.count("st.global.u64"),
+            "ptx_global_store_opcode_counts": {
+                "normal_no_marker": normal_store_counts,
+                "probe_candidate": probe_store_counts,
+                "probe_minus_normal": {
+                    opcode: probe_store_counts[opcode] - normal_store_counts[opcode]
+                    for opcode in PTX_GLOBAL_STORE_OPCODES
+                },
+            },
         },
         "probe_preparation_gates": {
             "reference_correctness": bool(failed_output["gate"]["gate_pass"]),
