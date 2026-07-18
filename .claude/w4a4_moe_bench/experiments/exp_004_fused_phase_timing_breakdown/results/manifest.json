@@ -1,224 +1,265 @@
 {
-  "arms": {
-    "measurement_no_marker": {
-      "artifact_hashes": {
-        "cubin": "e2a923e0e3f85d83afc1e229de8e4d429b177b5ffef93ef2eaf316ca3748f04e",
-        "elf_dump": "1533fd3ad87a72779f3f036986f49ff8e862b695f863b31f69e0064be39ca5b3",
-        "jit_artifact_set": "4bf44d1d6b203875609c1eaa137e9fef1b5f3b4dfb1207965d20a89eb27c33b8",
-        "ptx": "6db8b83065e6f52922d1c0f4804f8c1457392dbe8108fabd56c4f18612c74b7d",
-        "resource_dump": "a46cba341c7d0e76d28653d8327f2e3971c51768296ed90cee1f853f4b7bebce",
-        "sass": "34b4c38161642a27ca6b4ec41ffad0bd70f6ff99fd8118997a4b2416c5e3abba"
+  "accepted_artifacts": {
+    "capture_summary": {
+      "path": "results/derived/whole_kernel_capture_summary.json",
+      "sha256": "67405fe0ecfa226eec7e578488ea0c7e295b399813cec7abea8fd229d171fdd1",
+      "size_bytes": 9930
+    },
+    "plan": {
+      "path": "plan.md",
+      "sha256": "6622fb0e1eba277dd3b55c113fc28f59b45dbcccca7f706ccef3439a31a8cd44",
+      "size_bytes": 4198
+    },
+    "result": {
+      "path": "results/result.md",
+      "sha256": "089568209544f3bc7de822126bcceb0842d2a277b6a0411a3bc971dad87836ae",
+      "size_bytes": 4656
+    },
+    "runbook": {
+      "path": "runbook.md",
+      "sha256": "1b396565bb599add7e528336258c9c4120199c423dc59ee0e9867def787248d3",
+      "size_bytes": 2301
+    },
+    "scripts": {
+      "analyze_whole_kernel_timing.py": {
+        "path": "analyze_whole_kernel_timing.py",
+        "sha256": "0d75e61d6ae790837245296d3cf8a89cdf71e0b22d7e7c3564c41901b0f3f841",
+        "size_bytes": 19822
       },
-      "cubin_sha256": "e2a923e0e3f85d83afc1e229de8e4d429b177b5ffef93ef2eaf316ca3748f04e",
-      "local_sass": {
-        "ldl_instruction_count": 122,
-        "spill_annotation_count": 190,
-        "stl_instruction_count": 68
+      "build_whole_kernel_probe.py": {
+        "path": "build_whole_kernel_probe.py",
+        "sha256": "bf87ee93e8f1cf66309fb802f0786fee44b9160353703e36a92c815fa3255a4f",
+        "size_bytes": 31362
       },
-      "resource": {
-        "registers_per_thread": 255,
-        "stack_bytes_per_thread": 488,
-        "static_local_bytes_outside_stack": 0,
-        "static_shared_bytes_per_cta": 1024
+      "finalize_whole_kernel.py": {
+        "path": "finalize_whole_kernel.py",
+        "sha256": "1300a7a175a9b8671bf34a5d1b2bfe41f359c720d836f4134387119f0f81210d",
+        "size_bytes": 18736
       },
-      "sass_sha256": "34b4c38161642a27ca6b4ec41ffad0bd70f6ff99fd8118997a4b2416c5e3abba",
-      "semantic_projection": {
-        "atomg": 9,
-        "bar": 34,
-        "ldg": 53,
-        "ldsm": 200,
-        "omma": 896,
-        "redg": 4,
-        "utmaldg": 40
+      "run_exp004.py": {
+        "path": "run_exp004.py",
+        "sha256": "bd346a0a141684c4badf4912e9fe2eab24e1b062a415bc036e6d37f415a495e2",
+        "size_bytes": 14603
+      },
+      "run_whole_kernel_capture.py": {
+        "path": "run_whole_kernel_capture.py",
+        "sha256": "e563d00dcf4f3931863bd70939bb870bc530b20b795cf0e696a99d819a47d246",
+        "size_bytes": 10526
+      },
+      "test_analyze_whole_kernel_timing.py": {
+        "path": "test_analyze_whole_kernel_timing.py",
+        "sha256": "e8d32c5a43e56cbaee89aba8a7b888a3314cfb1734b0a51af2c792ef52e2023b",
+        "size_bytes": 5511
       }
     },
-    "normal_no_marker": {
-      "artifact_hashes": {
-        "cubin": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
-        "elf_dump": "ef168f380e15817765a9b35cd309ca9a29ae02f1ade794094963c490e69cd055",
-        "jit_artifact_set": "4a4b2aafc209e6bc884113e1494509b9d98fd5de31eb1e98bf020f38806ea61d",
-        "ptx": "d4d848e3b34963584e63c3cde91acc57a61389898e3f3a157b62da4be5c147ff",
-        "resource_dump": "1d1049159ba3812731e8700736c6c70dbb332065bd269c18208a1cf1410c7d64",
-        "sass": "34b4c38161642a27ca6b4ec41ffad0bd70f6ff99fd8118997a4b2416c5e3abba"
-      },
-      "cubin_sha256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
-      "local_sass": {
-        "ldl_instruction_count": 122,
-        "spill_annotation_count": 190,
-        "stl_instruction_count": 68
-      },
-      "resource": {
-        "registers_per_thread": 255,
-        "stack_bytes_per_thread": 488,
-        "static_local_bytes_outside_stack": 0,
-        "static_shared_bytes_per_cta": 1024
-      },
-      "sass_sha256": "34b4c38161642a27ca6b4ec41ffad0bd70f6ff99fd8118997a4b2416c5e3abba",
-      "semantic_projection": {
-        "atomg": 9,
-        "bar": 34,
-        "ldg": 53,
-        "ldsm": 200,
-        "omma": 896,
-        "redg": 4,
-        "utmaldg": 40
-      }
-    },
-    "probe_candidate": {
-      "artifact_hashes": {
-        "cubin": "430d6049d67287e6e0c41e5e0e833c7e0529b520c875dd26e783afeb84aef5df",
-        "elf_dump": "6b391d486447c0f2829bf3de1dcfea8098b575b3fb71e5a2877aada02bf612e1",
-        "jit_artifact_set": "5c4be3b1455783b95808be23e37b23adf03a9e208bad7eb6079013cb422d3d65",
-        "ptx": "d71c92caeb21b59ed9a45bd37742a0e834632050b46889f050e48306444dc2dd",
-        "resource_dump": "7ac23639df4f03f859fccfe2e26523aa6c7995e7784ffd671b17fd9ea7342351",
-        "sass": "2fa52b9b9405ed019939f65cec766a088651fa593a1089ee119c8bfa36b6f795"
-      },
-      "cubin_sha256": "430d6049d67287e6e0c41e5e0e833c7e0529b520c875dd26e783afeb84aef5df",
-      "local_sass": {
-        "ldl_instruction_count": 132,
-        "spill_annotation_count": 196,
-        "stl_instruction_count": 64
-      },
-      "resource": {
-        "registers_per_thread": 255,
-        "stack_bytes_per_thread": 456,
-        "static_local_bytes_outside_stack": 0,
-        "static_shared_bytes_per_cta": 1024
-      },
-      "sass_sha256": "2fa52b9b9405ed019939f65cec766a088651fa593a1089ee119c8bfa36b6f795",
-      "semantic_projection": {
-        "atomg": 9,
-        "bar": 34,
-        "ldg": 53,
-        "ldsm": 200,
-        "omma": 896,
-        "redg": 4,
-        "utmaldg": 40
-      }
+    "whole_kernel_timing": {
+      "path": "results/whole_kernel_timing.json",
+      "sha256": "5aa67faffebcc90c364e0b8b6e533828b68dc7f2c63ebb3959890bb4f3ba3eec",
+      "size_bytes": 32289
     }
   },
-  "blocked_gate": {
-    "closure_gate_pass": true,
-    "path": "derived/blocked_gate.json",
-    "sha256": "9cc10f6e0fbbcb2aab71222580a20b175129be0e5a737ae2fa3fd719befe02f5"
+  "classification": "diagnostic-only",
+  "coverage": {
+    "complete_entry_to_return": true,
+    "consumer_marker": "W0 lane0 records representative CTA consumer phase boundaries; not a W0-W3 instruction-time sum or exact warp-union attribution",
+    "p3_interleaved_combined": true,
+    "phase_order": [
+      "launch_skew/early_finish_idle",
+      "prologue",
+      "P0",
+      "P1",
+      "P2",
+      "P3",
+      "P4",
+      "compute_setup",
+      "T0_claim",
+      "T0_cache_setup",
+      "Gate",
+      "Up",
+      "SwiGLU_Q1",
+      "FC2_setup",
+      "FC2_gemm",
+      "FC2_epilogue_scatter",
+      "task_control_final_drain"
+    ],
+    "residual": "task_control_final_drain includes inter-task gaps, final no-task claim/exit, and W4 producer tail",
+    "w4_overlap_non_additive": true
   },
-  "correctness": {
-    "probe_preparation_gates": {
-      "output_contract": true,
-      "reference_correctness": false,
-      "reference_metrics": {
-        "cosine": 0.9970622475927143,
-        "max_abs": 0.8690239191055298,
-        "relative_l2": 0.07654395699501038,
-        "token_rel_l2_p99": 0.30527544021606445
+  "denominator": {
+    "aggregate_ns": 1004280640,
+    "average_equivalent_wall_us": 1825.9648,
+    "closure_delta_ns": 0,
+    "closure_pass": true,
+    "definition": "grid_z * (max CTA final globaltimer - min CTA entry globaltimer)",
+    "name": "SM-equivalent wall",
+    "replays": 5,
+    "timestamp_unit": "globaltimer_ns"
+  },
+  "historical_attempts": {
+    "accepted_for_current_phase_share": false,
+    "scope": "consumer-only clock64/306-tick probes and zero-write diagnostics",
+    "status": "superseded"
+  },
+  "identity": {
+    "binary": {
+      "control": {
+        "cubin_sha256": "b1e068ec8eeb0988a84ad7b62e1958f5623e0911d233a45f080364491d7ee47f",
+        "dispatch_overlay_sha256": "6bd97d4155e0694be1c10ba51bceb7dcab97849a8f155ce4173372b0ddfc9550",
+        "kernel_overlay_sha256": "c4be5f2d27ed62baa8fcde0b7b2235eb3019e98e2c023bad748c6b6db864fb3e",
+        "ldl_instructions": 122,
+        "ptx_sha256": "aa77354b7f569678b395d765f0e4bcc388dc21fc243e9bf8103b874aaf7e00cf",
+        "registers_per_thread": 255,
+        "sass_sha256": "34b4c38161642a27ca6b4ec41ffad0bd70f6ff99fd8118997a4b2416c5e3abba",
+        "stack_bytes_per_thread": 488,
+        "static_shared_bytes_per_cta": 1024,
+        "stl_instructions": 68
       },
-      "workspace_contract": true
+      "diagnostic_reason": "probe changes stack allocation and local-memory SASS",
+      "probe": {
+        "cubin_sha256": "cee6018f1f9dad9ad71c96f2814c8efe41c4a28e09c02e98332498b51678aa6b",
+        "dispatch_overlay_sha256": "bafa8111c774503543a396edc1ac46299d68bf73f8864ff4eba624dce368ef05",
+        "kernel_overlay_sha256": "c4be5f2d27ed62baa8fcde0b7b2235eb3019e98e2c023bad748c6b6db864fb3e",
+        "ldl_instructions": 135,
+        "ptx_sha256": "3a25de6cb7ede491701e0aaa4179dcc3c93c83e98fea9a2d98b0fd0dec33037b",
+        "registers_per_thread": 255,
+        "sass_sha256": "b199511ade4a998f6dd8748b09f3299c7207e567abc51e91b91b074fa7c3d786",
+        "stack_bytes_per_thread": 464,
+        "static_shared_bytes_per_cta": 1024,
+        "stl_instructions": 64
+      },
+      "resource_identity_pass": false
     },
-    "status": "probe_preparation_failed_before_cross_arm_correctness"
-  },
-  "evidence_identity": {
-    "gpu": {
+    "runtime": {
+      "applications_graphics_clock_mhz": 2377,
+      "capture_checkout_head": "fe9b17f345f02106f9c2c29000152e4bfb85c9df",
       "compute_capability": [
         12,
         0
       ],
-      "driver": "580.95.05",
-      "name": "NVIDIA Graphics Device",
-      "pci_bus_id": "00000000:76:00.0",
-      "sm_count": 110,
-      "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
-    },
-    "source": {
-      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
-      "dispatch_sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4",
-      "flashinfer_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
-      "kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
-      "wrapper_sha256": "bcac806795c035decd0773f4f801d477e7ebf14c1d67c3e49eee42ee0579c0a4"
-    },
-    "toolchain": {
+      "container_image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+      "control_jit_artifact_set_sha256": "b0995b47b07bbe13a52e8c2e529833572ee786eb8885e108ba48b84ef557a8e1",
       "cuda_runtime": "13.2",
-      "cutlass_dsl_module": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
-      "cutlass_dsl_version": "4.6.0",
-      "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "cutlass_dsl": "4.6.0",
+      "cutlass_module_path": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+      "driver": "580.95.05",
+      "gpu_name": "NVIDIA Graphics Device",
+      "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+      "lease_id": "exp004-whole-20260718T065011Z-28330",
+      "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
       "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+      "pci_bus_id": "00000000:76:00.0",
+      "probe_jit_artifact_set_sha256": "89d99031a6f41ebb9f577c304f1587a1e867445c98dce4cc1bccaa98c6bef865",
+      "production_dispatch_sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4",
+      "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+      "production_wrapper_sha256": "bcac806795c035decd0773f4f801d477e7ebf14c1d67c3e49eee42ee0579c0a4",
       "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
       "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
       "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+      "sm_count": 110,
       "torch": "2.12.0a0+5aff3928d8.nv26.05"
     }
   },
-  "iket_preflight": {
-    "path": "iket_fallback_preflight.json",
-    "sha256": "358f05a6ff7c2bec4c25a93b499b58bf21953609018ab5fb7ba178daf0ffe18b"
-  },
-  "formal_status": "blocked_by_measurement_gate",
-  "manifest_payload_sha256": "ab7963c40cdf7859bbd5aaea6b49a28a33e3c27e1387cb21002d50b3332be64d",
-  "overlay_identity": {
-    "path": "overlays/identity.json",
-    "sha256": "a205e087d76aca318e754afef0ae745697adf37fd5a044a997ad77eca2d7e723"
-  },
-  "phase_captures": {
-    "diagnostic_followup": {
-      "classification": "diagnostic-only",
-      "control_capture": {
-        "path": "raw/diagnostic_control_capture.json",
-        "sha256": "830a6676bb47cef0a0ab903c3882381d14c257f6e7ce092675ca5155af114641"
+  "manifest_payload_sha256": "584f46572f51a480ca251debd9f11aa84edde0e1cf429f18a4078e3eec38ea4d",
+  "raw_evidence": {
+    "control_capture": {
+      "path": "raw/whole_kernel_control/capture.json",
+      "sha256": "35f99d0a4ca69def2b6fb4474d22be5ee5c293147f9d8097f93451f9739c4e40",
+      "size_bytes": 17494
+    },
+    "evidence_host_results_root": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_004_fused_phase_timing_breakdown/results",
+    "probe_capture": {
+      "path": "raw/whole_kernel_probe/capture.json",
+      "sha256": "419dd6815e4c2ddd7cbe70442ff8208bfa45389ed6e0a8829fd84cbc1011bb18",
+      "size_bytes": 18499
+    },
+    "static_artifacts": {
+      "whole_kernel_control": {
+        "kernel.cubin": {
+          "path": "raw/whole_kernel_static/whole_kernel_control/kernel.cubin",
+          "sha256": "b1e068ec8eeb0988a84ad7b62e1958f5623e0911d233a45f080364491d7ee47f",
+          "size_bytes": 190712
+        },
+        "kernel.ptx": {
+          "path": "raw/whole_kernel_static/whole_kernel_control/kernel.ptx",
+          "sha256": "aa77354b7f569678b395d765f0e4bcc388dc21fc243e9bf8103b874aaf7e00cf",
+          "size_bytes": 574440
+        },
+        "kernel.sass": {
+          "path": "raw/whole_kernel_static/whole_kernel_control/kernel.sass",
+          "sha256": "34b4c38161642a27ca6b4ec41ffad0bd70f6ff99fd8118997a4b2416c5e3abba",
+          "size_bytes": 517767
+        },
+        "resource_usage.txt": {
+          "path": "raw/whole_kernel_static/whole_kernel_control/resource_usage.txt",
+          "sha256": "070351cb7a4c7117c7962c3b986af3d3f510f04343954d76d5a642dde6b13f09",
+          "size_bytes": 325
+        }
       },
-      "correctness_passes": 5,
-      "event_gate_passes": 5,
-      "probe_capture": {
-        "path": "raw/diagnostic_probe_capture.json",
-        "sha256": "789a7e65636c4bb751148476b84acc7413e71f4c026385b4ec42422193315206"
-      },
-      "probe_latency_overhead_pct": 1.889078348122819,
-      "summary": {
-        "path": "derived/diagnostic_phase_summary.json",
-        "sha256": "33c776f8264ae221fc6895e48fb6827884f15dada6fbfb039424096cd534e6a9"
-      },
-      "zero_write_diagnosis": {
-        "path": "derived/probe_zero_write_diagnosis.json",
-        "sha256": "5955dc5b78e3f8fd591c3f38e326b86f5ca0606b64360e3d3d69df3a8dcd2cb5"
+      "whole_kernel_probe": {
+        "kernel.cubin": {
+          "path": "raw/whole_kernel_static/whole_kernel_probe/kernel.cubin",
+          "sha256": "cee6018f1f9dad9ad71c96f2814c8efe41c4a28e09c02e98332498b51678aa6b",
+          "size_bytes": 201664
+        },
+        "kernel.ptx": {
+          "path": "raw/whole_kernel_static/whole_kernel_probe/kernel.ptx",
+          "sha256": "3a25de6cb7ede491701e0aaa4179dcc3c93c83e98fea9a2d98b0fd0dec33037b",
+          "size_bytes": 590545
+        },
+        "kernel.sass": {
+          "path": "raw/whole_kernel_static/whole_kernel_probe/kernel.sass",
+          "sha256": "b199511ade4a998f6dd8748b09f3299c7207e567abc51e91b91b074fa7c3d786",
+          "size_bytes": 542402
+        },
+        "resource_usage.txt": {
+          "path": "raw/whole_kernel_static/whole_kernel_probe/resource_usage.txt",
+          "sha256": "e2c19bb072e230e67dcafa26826335e80cf07a62452d7535fa1e06ea07f6dfd1",
+          "size_bytes": 325
+        }
       }
-    }
-  },
-  "profiles": {},
-  "raw_preflight": {
-    "path": "raw/blocked_preflight.json",
-    "sha256": "7814c387d7220441bd2ea5a88c2e04e01e4fac7229745da80068c36543504acb"
-  },
-  "result": {
-    "diagnostic_phase_share_published": true,
-    "formal_phase_share_published": false,
-    "path": "result.md",
-    "sha256": "9590c8683cec91bec81b3c9bf613e303ee0aab6feb410cb3564e04eb85a0b392"
-  },
-  "runtime_observations": {
-    "measurement_no_marker": {
-      "applications_graphics_clock_mhz": "2377",
-      "graphics_clock_mhz": "2370",
-      "jit_artifact_set_sha256": "4bf44d1d6b203875609c1eaa137e9fef1b5f3b4dfb1207965d20a89eb27c33b8",
-      "lease_id": "exp004-phase-20260717T140751Z-902614",
-      "max_graphics_clock_mhz": "3090",
-      "power_draw_w": "59.65"
     },
-    "normal_no_marker": {
-      "applications_graphics_clock_mhz": "2377",
-      "graphics_clock_mhz": "2370",
-      "jit_artifact_set_sha256": "4a4b2aafc209e6bc884113e1494509b9d98fd5de31eb1e98bf020f38806ea61d",
-      "lease_id": "exp004-phase-20260717T140751Z-902614",
-      "max_graphics_clock_mhz": "3090",
-      "power_draw_w": "58.75"
-    },
-    "probe_candidate": {
-      "applications_graphics_clock_mhz": "2377",
-      "graphics_clock_mhz": "2370",
-      "jit_artifact_set_sha256": "5c4be3b1455783b95808be23e37b23adf03a9e208bad7eb6079013cb422d3d65",
-      "lease_id": "exp004-phase-20260717T140751Z-902614",
-      "max_graphics_clock_mhz": "3090",
-      "power_draw_w": "59.19"
-    }
+    "timing_inputs": [
+      {
+        "path": "raw/whole_kernel_probe/timing_0.pt",
+        "sha256": "a1da15e00be6662b00040376c7fc3ae3394feff6fdfd2797076db5a0376acbba",
+        "size_bytes": 1621994
+      },
+      {
+        "path": "raw/whole_kernel_probe/timing_1.pt",
+        "sha256": "b15e437a922191225ab5325bd3d2a9bb0d98acf899a16b29dad661f573b9d9be",
+        "size_bytes": 1621994
+      },
+      {
+        "path": "raw/whole_kernel_probe/timing_2.pt",
+        "sha256": "785d2eeb39c9826152001fdad3aea33e728707fef27c0f49386f23f2fe6c1271",
+        "size_bytes": 1621994
+      },
+      {
+        "path": "raw/whole_kernel_probe/timing_3.pt",
+        "sha256": "083cdcf8c7283bd38867b00e72fbcad30719f08497a4619643afb692bfdbebed",
+        "size_bytes": 1621994
+      },
+      {
+        "path": "raw/whole_kernel_probe/timing_4.pt",
+        "sha256": "73d52a4d0cd60b4e4a8f444ede9ecc22666cd0ff8c495f04cf29baacbe0ef0d2",
+        "size_bytes": 1621994
+      }
+    ]
   },
-  "schema": "exp004.run-manifest.v2",
-  "status": "closed_with_diagnostic_estimate",
-  "verdict": "measurement_perturbation_prevented_formal_timing"
+  "schema": "exp004.run-manifest.v3",
+  "status": "closed",
+  "validation": {
+    "binary_resource_identity": "FAIL_EXPECTED_DIAGNOSTIC_ONLY",
+    "correctness_and_event_gate": "PASS_5_OF_5",
+    "data_audit": "PASS_WITH_DIAGNOSTIC_BOUNDARY",
+    "denominator_closure": {
+      "delta_ns": 0,
+      "denominator_ns": 1004280640,
+      "pass": true,
+      "phase_sum_ns": 1004280640
+    },
+    "unsupported_causal_claims": false
+  },
+  "verdict": "whole_fused_kernel_phase_breakdown_closed"
 }

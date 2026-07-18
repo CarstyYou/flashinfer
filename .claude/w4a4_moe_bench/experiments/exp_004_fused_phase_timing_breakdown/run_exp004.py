@@ -135,6 +135,20 @@ def _formal_pair_gate(metrics: Mapping[str, float]) -> bool:
 
 
 def refresh_manifest(results: Path) -> None:
+    whole_timing = results / "whole_kernel_timing.json"
+    whole_summary = results / "derived" / "whole_kernel_capture_summary.json"
+    if whole_timing.is_file() and whole_summary.is_file():
+        from finalize_whole_kernel import RESULTS as WHOLE_RESULTS
+        from finalize_whole_kernel import finalize as finalize_whole_kernel
+
+        if results.resolve() != WHOLE_RESULTS.resolve():
+            raise RuntimeError(
+                "whole-kernel manifest finalization only accepts the canonical "
+                f"results root: {WHOLE_RESULTS}"
+            )
+        finalize_whole_kernel(check=False)
+        return
+
     blocked_gate = results / "derived" / "blocked_gate.json"
     blocked_result = results / "result.md"
     if blocked_gate.is_file() and blocked_result.is_file():
