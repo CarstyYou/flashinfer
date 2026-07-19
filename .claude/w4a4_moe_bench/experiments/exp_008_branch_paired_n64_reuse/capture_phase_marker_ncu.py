@@ -65,9 +65,7 @@ def build_contract(args: argparse.Namespace) -> dict[str, Any]:
         )
 
     capture = read_json(args.timing_capture)
-    timing_gate = _timing_capture_gate(
-        capture, version=args.version, arm=args.arm
-    )
+    timing_gate = _timing_capture_gate(capture, version=args.version, arm=args.arm)
     if not timing_gate["gate_pass"]:
         raise RuntimeError(f"timing capture prerequisite failed: {timing_gate}")
     if capture.get("runtime", {}).get("gpu", {}).get("uuid") != args.expected_gpu_uuid:
@@ -214,12 +212,8 @@ def capture(args: argparse.Namespace) -> dict[str, Any]:
     report_base = temporary / "trace"
     target_path = temporary / "target.json"
     command = list(contract["command"])
-    _replace_once(
-        command, str(contract["planned_report_base"]), str(report_base)
-    )
-    _replace_once(
-        command, str(contract["planned_target_path"]), str(target_path)
-    )
+    _replace_once(command, str(contract["planned_report_base"]), str(report_base))
+    _replace_once(command, str(contract["planned_target_path"]), str(target_path))
     try:
         (temporary / "command.txt").write_text(shlex.join(command) + "\n")
         with (
@@ -277,9 +271,9 @@ def capture(args: argparse.Namespace) -> dict[str, Any]:
             "arm": args.arm,
             "timing_capture_path": str(args.timing_capture),
             "timing_capture_sha256": sha256_file(args.timing_capture),
-            "timing_jit_artifact_set_sha256": contract["capture"][
-                "jit_identity_gate"
-            ]["artifact_set_sha256"],
+            "timing_jit_artifact_set_sha256": contract["capture"]["jit_identity_gate"][
+                "artifact_set_sha256"
+            ],
             "timing_cubin_path": str(contract["timing_cubin"]),
             "timing_cubin_sha256": timing_hash,
             "profile_jit_root": str(args.profile_jit_root),

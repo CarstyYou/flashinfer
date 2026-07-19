@@ -199,9 +199,7 @@ def _event_gate(timing: Mapping[str, Any], *, arm: str) -> dict[str, Any]:
 
 def _calibration_summary(timing: Mapping[str, Any]) -> dict[str, Any]:
     rows = timing["cta_ticks"].tolist()
-    deltas = [
-        int(row[CTA_CALIBRATION + 1]) - int(row[CTA_CALIBRATION]) for row in rows
-    ]
+    deltas = [int(row[CTA_CALIBRATION + 1]) - int(row[CTA_CALIBRATION]) for row in rows]
     return {
         "kind": "consecutive %globaltimer + st.global.u64 events",
         "unit": "ns",
@@ -229,7 +227,9 @@ def _tensor_hashes(worker: Any, timing: Mapping[str, Any]) -> dict[str, str]:
     }
 
 
-def _artifact_gate(worker: Any, jit_root: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def _artifact_gate(
+    worker: Any, jit_root: Path
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     artifacts = worker.artifact_manifest(jit_root)
     suffix_counts = {
         suffix: sum(str(item.get("path", "")).endswith(suffix) for item in artifacts)
@@ -276,7 +276,9 @@ def capture(args: argparse.Namespace) -> dict[str, Any]:
         f".{final_output.name}.in-progress.{os.getpid()}"
     )
     if temporary_output.exists():
-        raise FileExistsError(f"stale capture staging output exists: {temporary_output}")
+        raise FileExistsError(
+            f"stale capture staging output exists: {temporary_output}"
+        )
     args.output = temporary_output
     worker.require_empty_directory(args.jit_root)
     root, kernel, dispatch = _overlay_paths(args)

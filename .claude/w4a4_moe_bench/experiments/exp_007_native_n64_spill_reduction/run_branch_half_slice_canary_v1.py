@@ -25,17 +25,13 @@ def install_scaled_weights() -> None:
 
     def build_canary_weights(fixture_module, weights, branch):
         value = original(fixture_module, weights, branch)
-        w2_global_scale = torch.full_like(
-            value.w2_global_scale, W2_GLOBAL_SCALE
-        )
+        w2_global_scale = torch.full_like(value.w2_global_scale, W2_GLOBAL_SCALE)
         manifest = dict(value.manifest)
         manifest.update(
             {
                 "canary_revision": "v1_output_amplitude_corrected",
                 "w2_global_scale_value": W2_GLOBAL_SCALE,
-                "w2_global_scale_sha256": fixture_module.tensor_sha256(
-                    w2_global_scale
-                ),
+                "w2_global_scale_sha256": fixture_module.tensor_sha256(w2_global_scale),
                 "strict_thresholds_changed": False,
             }
         )

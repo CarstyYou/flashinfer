@@ -36,11 +36,15 @@ def source_region(source: str, start: str, end: str) -> str:
     return source[start_at:end_at]
 
 
-def region_identity(anchor: str, candidate: str, start: str, end: str) -> dict[str, Any]:
+def region_identity(
+    anchor: str, candidate: str, start: str, end: str
+) -> dict[str, Any]:
     anchor_region = source_region(anchor, start, end)
     candidate_region = source_region(candidate, start, end)
     anchor_executable = "\n".join(
-        line for line in anchor_region.splitlines() if line.strip() and not line.lstrip().startswith("#")
+        line
+        for line in anchor_region.splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
     )
     candidate_executable = "\n".join(
         line
@@ -85,9 +89,7 @@ def build_descriptor_rows() -> list[dict[str, Any]]:
                         "half": half,
                         "global_n_range": [n_begin, n_begin + NATIVE_N],
                         "b_n64_tile_index": n_begin // NATIVE_N,
-                        "sfb_n128_tile_index": (
-                            branch_base + logical_slice * LOGICAL_N
-                        )
+                        "sfb_n128_tile_index": (branch_base + logical_slice * LOGICAL_N)
                         // LOGICAL_N,
                         "k_trips": per_pass["k_trips"],
                         "bytes": {
@@ -150,7 +152,9 @@ def source_temporal_contract(candidate: str) -> dict[str, Any]:
             and "gated_activation_f32(" in consumer
         ),
         "q1_occurs_once_after_both_halves": (
-            candidate.count("sA_u8 = cute.recast_tensor(sA[None, None, 0], cutlass.Uint8)")
+            candidate.count(
+                "sA_u8 = cute.recast_tensor(sA[None, None, 0], cutlass.Uint8)"
+            )
             == 1
             and candidate.index(
                 "sA_u8 = cute.recast_tensor(sA[None, None, 0], cutlass.Uint8)"
@@ -161,8 +165,7 @@ def source_temporal_contract(candidate: str) -> dict[str, Any]:
             "intermediate_slice*Int32(2)+Int32(fc1_half)" in compact
         ),
         "producer_gate_native_n64_coordinate": (
-            "(intermediate_slice+gate_tile_cnt)*Int32(2)+Int32(fc1_half)"
-            in compact
+            "(intermediate_slice+gate_tile_cnt)*Int32(2)+Int32(fc1_half)" in compact
         ),
         "physical_sfb_n128_rounding_explicit": (
             "max(128,self.fc1_tile_shape_mnk[1])" in compact
@@ -212,9 +215,7 @@ def main() -> int:
     }
     observed_ranges = {
         branch: sorted(
-            tuple(row["global_n_range"])
-            for row in rows
-            if row["branch"] == branch
+            tuple(row["global_n_range"]) for row in rows if row["branch"] == branch
         )
         for branch in expected_ranges
     }
@@ -223,8 +224,7 @@ def main() -> int:
         "up_n64_ranges_exact_once": observed_ranges["up"] == expected_ranges["up"],
         "gate_n64_ranges_exact_once": observed_ranges["gate"]
         == expected_ranges["gate"],
-        "candidate_b_bytes_equal_anchor": candidate_totals["b"]
-        == expected_anchor["b"],
+        "candidate_b_bytes_equal_anchor": candidate_totals["b"] == expected_anchor["b"],
         "candidate_a_replay_is_2x_anchor": candidate_totals["a"]
         == 2 * expected_anchor["a"],
         "candidate_sfa_replay_is_2x_anchor": candidate_totals["sfa"]
@@ -250,9 +250,7 @@ def main() -> int:
     checks["scheduler_executable_source_identical"] = source_identity["scheduler"][
         "executable_identical"
     ]
-    checks["fc2_scatter_executable_source_identical"] = source_identity[
-        "fc2_scatter"
-    ][
+    checks["fc2_scatter_executable_source_identical"] = source_identity["fc2_scatter"][
         "executable_identical"
     ]
     temporal_contract = source_temporal_contract(candidate)
@@ -291,7 +289,11 @@ def main() -> int:
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
-    print(json.dumps({"gate_pass": payload["gate_pass"], "checks": checks}, sort_keys=True))
+    print(
+        json.dumps(
+            {"gate_pass": payload["gate_pass"], "checks": checks}, sort_keys=True
+        )
+    )
     return 0 if payload["gate_pass"] else 2
 
 

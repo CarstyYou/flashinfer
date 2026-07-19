@@ -14,12 +14,8 @@ from typing import Any
 REQUIRED_DYNAMIC_METRICS = {
     "spill_refill_instructions": "sass__inst_executed_register_spilling_op_read",
     "spill_store_instructions": "sass__inst_executed_register_spilling_op_write",
-    "spill_refill_bytes": (
-        "sass__inst_executed_register_spilling_mem_local_op_read"
-    ),
-    "spill_store_bytes": (
-        "sass__inst_executed_register_spilling_mem_local_op_write"
-    ),
+    "spill_refill_bytes": ("sass__inst_executed_register_spilling_mem_local_op_read"),
+    "spill_store_bytes": ("sass__inst_executed_register_spilling_mem_local_op_write"),
 }
 
 
@@ -39,7 +35,9 @@ def sha256_strings(values: list[str]) -> str:
     return hashlib.sha256(("\n".join(values) + "\n").encode()).hexdigest()
 
 
-def build_arm(results: Path, arm: str, static: dict[str, Any], identity: dict[str, Any]) -> dict[str, Any]:
+def build_arm(
+    results: Path, arm: str, static: dict[str, Any], identity: dict[str, Any]
+) -> dict[str, Any]:
     capture = results / "ncu" / arm / "m8192" / "canonical_v0"
     dynamic_path = capture / "dynamic_spill.json"
     source_path = capture / "veloq" / "source_spill_by_sass.json"
@@ -186,8 +184,7 @@ def main() -> None:
         "arms": arms,
         "verdict": {
             "loaded_cubin_identity_pass": all(
-                arm["identity"]["loaded_cubin_matches_static"]
-                for arm in arms.values()
+                arm["identity"]["loaded_cubin_matches_static"] for arm in arms.values()
             ),
             "anchor_dynamic_pc_to_static_pc_relation_closed": False,
             "candidate_static_and_aggregate_dynamic_zero_spill": (

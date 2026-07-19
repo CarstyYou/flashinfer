@@ -55,7 +55,12 @@ def tool_identity(name: str) -> dict[str, str]:
     version = run([str(path), "--version"]).decode(errors="replace").strip()
     if not version:
         raise ValueError(f"{path} returned an empty version")
-    return {"requested": name, "resolved_path": str(path), "sha256": sha256(path), "version": version}
+    return {
+        "requested": name,
+        "resolved_path": str(path),
+        "sha256": sha256(path),
+        "version": version,
+    }
 
 
 def main() -> int:

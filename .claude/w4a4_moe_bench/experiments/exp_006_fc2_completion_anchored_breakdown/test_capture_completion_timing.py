@@ -43,7 +43,22 @@ def _valid_probe_fixture():
     task_ticks = [row, [SENTINEL] * TASK_TICKS]
     task_cta = [0, SENTINEL]
     cta = [
-        [10, 20, 30, 40, 50, 60, 70, 80, tick + 10, tick + 11, tick + 12, tick + 13, tick + 14, tick + 15]
+        [
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            tick + 10,
+            tick + 11,
+            tick + 12,
+            tick + 13,
+            tick + 14,
+            tick + 15,
+        ]
     ]
     descriptors = {
         "task_expert": [3],

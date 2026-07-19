@@ -125,9 +125,7 @@ class MarkerBufferTests(unittest.TestCase):
         return row
 
     @staticmethod
-    def _task(
-        claim: int, cache: int, fc1_act: int, q1: int, done: int
-    ) -> list[int]:
+    def _task(claim: int, cache: int, fc1_act: int, q1: int, done: int) -> list[int]:
         row = [SENTINEL] * TASK_TICKS
         main = (cache, fc1_act, q1, done)
         for event, base in enumerate(main):

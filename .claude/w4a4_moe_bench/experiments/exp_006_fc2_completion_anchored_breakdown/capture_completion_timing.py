@@ -58,7 +58,9 @@ def _load_gpu_modules():
     try:
         import torch
     except ImportError as error:  # pragma: no cover - exercised only on bad GPU image
-        raise RuntimeError("capture requires the locked Torch/CUDA environment") from error
+        raise RuntimeError(
+            "capture requires the locked Torch/CUDA environment"
+        ) from error
     import run_exp004_arm as worker
 
     return torch, worker
@@ -73,8 +75,14 @@ def _as_list(value: Any) -> list[Any]:
 def _descriptor_payload(
     workspace_tensors: Mapping[str, Any],
 ) -> tuple[dict[str, Any], dict[str, list[int]], str]:
-    tensors = {name: workspace_tensors[name].detach().cpu().clone() for name in DESCRIPTOR_NAMES}
-    plain = {name: [int(value) for value in _as_list(tensor)] for name, tensor in tensors.items()}
+    tensors = {
+        name: workspace_tensors[name].detach().cpu().clone()
+        for name in DESCRIPTOR_NAMES
+    }
+    plain = {
+        name: [int(value) for value in _as_list(tensor)]
+        for name, tensor in tensors.items()
+    }
     digest = descriptor_order_sha256(plain)
     return tensors, plain, digest
 
@@ -303,7 +311,8 @@ def capture(args: argparse.Namespace) -> dict[str, Any]:
         arm, eager_workspace_tensors
     )
     eager_descriptor_gate = validate_descriptors(
-        eager_descriptors, task_tail=int(arm.wrapper._dynamic_workspace.task_tail.item())
+        eager_descriptors,
+        task_tail=int(arm.wrapper._dynamic_workspace.task_tail.item()),
     )
     eager_event_gate = _event_gate(
         eager_timing,
@@ -400,9 +409,7 @@ def capture(args: argparse.Namespace) -> dict[str, Any]:
                     "jit_artifacts": artifact_manifest(args.jit_root),
                 },
             )
-            raise RuntimeError(
-                f"run_{replay} gates failed: {run['failed_gates']}"
-            )
+            raise RuntimeError(f"run_{replay} gates failed: {run['failed_gates']}")
 
     artifacts = artifact_manifest(args.jit_root)
     jit_gate = _jit_identity_gate(artifacts)

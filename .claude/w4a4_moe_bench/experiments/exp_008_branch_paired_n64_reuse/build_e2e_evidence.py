@@ -109,9 +109,7 @@ def file_sha256(path):
 
 
 def canonical_sha256(value):
-    encoded = json.dumps(value, sort_keys=True, separators=(",", ":")).encode(
-        "utf-8"
-    )
+    encoded = json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()
 
 
@@ -144,10 +142,11 @@ def finite_positive(value, label):
     try:
         converted = float(value)
     except (TypeError, ValueError) as error:
-        raise EvidenceError(
-            "{} is not numeric: {!r}".format(label, value)
-        ) from error
-    require(math.isfinite(converted) and converted > 0.0, "invalid {}: {}".format(label, converted))
+        raise EvidenceError("{} is not numeric: {!r}".format(label, value)) from error
+    require(
+        math.isfinite(converted) and converted > 0.0,
+        "invalid {}: {}".format(label, converted),
+    )
     return converted
 
 
@@ -174,7 +173,9 @@ def runtime_gpu(runtime, label):
         ),
     )
     foreign = gpu.get("foreign_processes_before_cuda_context")
-    require(foreign == [], "{} recorded foreign GPU processes: {!r}".format(label, foreign))
+    require(
+        foreign == [], "{} recorded foreign GPU processes: {!r}".format(label, foreign)
+    )
     return gpu
 
 
@@ -182,8 +183,12 @@ def runtime_comparison_identity(runtime, label):
     require(isinstance(runtime, dict), "{} runtime is not an object".format(label))
     source = runtime.get("source")
     imports = runtime.get("imports")
-    require(isinstance(source, dict), "{} runtime.source is not an object".format(label))
-    require(isinstance(imports, dict), "{} runtime.imports is not an object".format(label))
+    require(
+        isinstance(source, dict), "{} runtime.source is not an object".format(label)
+    )
+    require(
+        isinstance(imports, dict), "{} runtime.imports is not an object".format(label)
+    )
     required_source = (
         "locked_source_commit",
         "checkout_head",
@@ -206,11 +211,17 @@ def runtime_comparison_identity(runtime, label):
         "cutlass_python_version",
     )
     for field in required_source:
-        require(source.get(field) is not None, "{} missing source.{}".format(label, field))
+        require(
+            source.get(field) is not None, "{} missing source.{}".format(label, field)
+        )
     for field in required_runtime:
-        require(runtime.get(field) is not None, "{} missing runtime.{}".format(label, field))
+        require(
+            runtime.get(field) is not None, "{} missing runtime.{}".format(label, field)
+        )
     for field in required_imports:
-        require(imports.get(field) is not None, "{} missing imports.{}".format(label, field))
+        require(
+            imports.get(field) is not None, "{} missing imports.{}".format(label, field)
+        )
     return {
         "source": {field: source[field] for field in required_source},
         "runtime": {field: runtime[field] for field in required_runtime},
@@ -243,31 +254,52 @@ def validate_preparation(results, pair_name, external_arm, m):
     pair_path = results / "e2e" / pair_name / external_arm / relative
     canonical_sha = file_sha256(canonical_path) if canonical_path.is_file() else None
     pair_sha = file_sha256(pair_path) if pair_path.is_file() else None
-    require(canonical_sha is not None, "missing canonical preparation: {}".format(canonical_path))
+    require(
+        canonical_sha is not None,
+        "missing canonical preparation: {}".format(canonical_path),
+    )
     require(pair_sha is not None, "missing pair preparation: {}".format(pair_path))
     require(
         canonical_sha == pair_sha,
-        "pair preparation is not the canonical byte-identical copy: {}".format(pair_path),
+        "pair preparation is not the canonical byte-identical copy: {}".format(
+            pair_path
+        ),
     )
     canonical = read_json(canonical_path)
     pair_value = read_json(pair_path)
-    require(canonical == pair_value, "pair preparation JSON differs from canonical: {}".format(pair_path))
+    require(
+        canonical == pair_value,
+        "pair preparation JSON differs from canonical: {}".format(pair_path),
+    )
     label = "{}/{}/m{} preparation".format(pair_name, external_arm, m)
-    require(canonical.get("schema") == "exp005.arm-preparation.v1", "{} schema drift".format(label))
+    require(
+        canonical.get("schema") == "exp005.arm-preparation.v1",
+        "{} schema drift".format(label),
+    )
     require(canonical.get("status") == "complete", "{} is incomplete".format(label))
-    require(canonical.get("arm") == arm_spec["internal_arm"], "{} internal arm drift".format(label))
+    require(
+        canonical.get("arm") == arm_spec["internal_arm"],
+        "{} internal arm drift".format(label),
+    )
     exact_int(canonical.get("m"), m, "{} M".format(label))
-    require(canonical.get("fixture_kind") == "canonical", "{} fixture drift".format(label))
+    require(
+        canonical.get("fixture_kind") == "canonical", "{} fixture drift".format(label)
+    )
     runtime = canonical.get("runtime")
     runtime_gpu(runtime, label)
     source = runtime.get("source") if isinstance(runtime, dict) else None
-    require(isinstance(source, dict), "{} runtime.source is not an object".format(label))
+    require(
+        isinstance(source, dict), "{} runtime.source is not an object".format(label)
+    )
     require(
         source.get("overlay_sha256") == arm_spec["overlay_sha256"],
         "{} overlay SHA drift".format(label),
     )
     jit_hash = canonical.get("jit_artifact_set_sha256")
-    require(isinstance(jit_hash, str) and len(jit_hash) == 64, "{} invalid JIT hash".format(label))
+    require(
+        isinstance(jit_hash, str) and len(jit_hash) == 64,
+        "{} invalid JIT hash".format(label),
+    )
     cubins = canonical.get("cubin_sha256")
     require(
         isinstance(cubins, list)
@@ -325,22 +357,24 @@ def validate_measurement(
     preparation,
 ):
     value = read_json(path)
-    label = "{}/m{}/g{}/p{}/{}".format(
-        pair_name, m, group, position, external_arm
-    )
+    label = "{}/m{}/g{}/p{}/{}".format(pair_name, m, group, position, external_arm)
     arm_spec = EXTERNAL_ARMS[external_arm]
-    require(value.get("schema") == "exp005.arm-measurement.v1", "{} schema drift".format(label))
+    require(
+        value.get("schema") == "exp005.arm-measurement.v1",
+        "{} schema drift".format(label),
+    )
     require(value.get("status") == "complete", "{} is incomplete".format(label))
-    require(value.get("arm") == arm_spec["internal_arm"], "{} internal arm drift".format(label))
+    require(
+        value.get("arm") == arm_spec["internal_arm"],
+        "{} internal arm drift".format(label),
+    )
     exact_int(value.get("m"), m, "{} M".format(label))
     require(value.get("fixture_kind") == "canonical", "{} fixture drift".format(label))
     exact_int(value.get("group"), group, "{} group".format(label))
     exact_int(value.get("position"), position, "{} position".format(label))
     exact_int(value.get("warmup"), WARMUP, "{} warmup".format(label))
     exact_int(value.get("iters"), ITERS, "{} iters".format(label))
-    exact_int(
-        value.get("l2_flush_bytes"), L2_FLUSH_BYTES, "{} L2 flush".format(label)
-    )
+    exact_int(value.get("l2_flush_bytes"), L2_FLUSH_BYTES, "{} L2 flush".format(label))
     require(
         value.get("declared_clock_policy") == "locked",
         "{} clock policy is not locked".format(label),
@@ -357,14 +391,15 @@ def validate_measurement(
     runtime = value.get("runtime")
     gpu = runtime_gpu(runtime, label)
     source = runtime.get("source") if isinstance(runtime, dict) else None
-    require(isinstance(source, dict), "{} runtime.source is not an object".format(label))
+    require(
+        isinstance(source, dict), "{} runtime.source is not an object".format(label)
+    )
     require(
         source.get("overlay_sha256") == arm_spec["overlay_sha256"],
         "{} overlay SHA drift".format(label),
     )
     require(
-        value.get("jit_artifact_set_sha256")
-        == preparation["jit_artifact_set_sha256"],
+        value.get("jit_artifact_set_sha256") == preparation["jit_artifact_set_sha256"],
         "{} JIT artifact hash differs from canonical preparation".format(label),
     )
     require(
@@ -391,15 +426,11 @@ def validate_measurement(
         "l2_flush_bytes": value["l2_flush_bytes"],
         "declared_clock_policy": value["declared_clock_policy"],
         "gpu_uuid": gpu["uuid"],
-        "applications_graphics_clock_mhz": str(
-            gpu["applications_graphics_clock_mhz"]
-        ),
+        "applications_graphics_clock_mhz": str(gpu["applications_graphics_clock_mhz"]),
         "overlay_sha256": source["overlay_sha256"],
         "jit_artifact_set_sha256": value["jit_artifact_set_sha256"],
         "cubin_sha256": json.dumps(preparation["cubin_sha256"], sort_keys=True),
-        "canonical_preparation_sha256": preparation[
-            "canonical_preparation_sha256"
-        ],
+        "canonical_preparation_sha256": preparation["canonical_preparation_sha256"],
         "pair_preparation_sha256": preparation["pair_preparation_sha256"],
         "measurement_sha256": file_sha256(path),
         "measurement_path": str(path.relative_to(results)),
@@ -485,7 +516,10 @@ def summarize_case(pair_name, pair_spec, m, rows):
     }
     for row in rows:
         key = (int(row["group"]), int(row["position"]))
-        require(key not in by_key, "duplicate sample key {}/m{} {}".format(pair_name, m, key))
+        require(
+            key not in by_key,
+            "duplicate sample key {}/m{} {}".format(pair_name, m, key),
+        )
         expected_external = pair_spec["external_abba_order"][key[1]]
         require(
             row["external_arm"] == expected_external,
@@ -494,7 +528,10 @@ def summarize_case(pair_name, pair_spec, m, rows):
         by_key[key] = row
         by_arm[row["external_arm"]].append(float(row["sample_us"]))
     expected_keys = {(group, position) for group in GROUPS for position in POSITIONS}
-    require(set(by_key) == expected_keys, "{}/m{} has incomplete ABBA keys".format(pair_name, m))
+    require(
+        set(by_key) == expected_keys,
+        "{}/m{} has incomplete ABBA keys".format(pair_name, m),
+    )
 
     groups = []
     for group in GROUPS:
@@ -586,9 +623,7 @@ def collect(results):
         preparation_by_arm_m = {}
         for external_arm in (pair_spec["baseline"], pair_spec["candidate"]):
             for m in M_VALUES:
-                identity = validate_preparation(
-                    results, pair_name, external_arm, m
-                )
+                identity = validate_preparation(results, pair_name, external_arm, m)
                 preparation_by_arm_m[(external_arm, m)] = identity
                 preparations.append(identity)
         for m in M_VALUES:
@@ -630,9 +665,7 @@ def collect(results):
         pair_summaries[pair_name] = {
             "baseline_external_arm": pair_spec["baseline"],
             "candidate_external_arm": pair_spec["candidate"],
-            "registered_external_abba_order": list(
-                pair_spec["external_abba_order"]
-            ),
+            "registered_external_abba_order": list(pair_spec["external_abba_order"]),
             "cases": pair_cases,
         }
     require(len(raw_rows) == 120, "exp_008 E2E evidence requires exactly 120 samples")
@@ -673,9 +706,7 @@ def collect(results):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results", type=Path, default=RESULTS)
-    parser.add_argument(
-        "--raw-csv", type=Path, default=RESULTS / "e2e" / "raw.csv"
-    )
+    parser.add_argument("--raw-csv", type=Path, default=RESULTS / "e2e" / "raw.csv")
     parser.add_argument(
         "--summary", type=Path, default=RESULTS / "e2e" / "summary.json"
     )

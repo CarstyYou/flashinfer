@@ -141,7 +141,11 @@ def call_name(node):
 
 def calls_named(node, name):
     return sorted(
-        [item for item in ast.walk(node) if isinstance(item, ast.Call) and call_name(item) == name],
+        [
+            item
+            for item in ast.walk(node)
+            if isinstance(item, ast.Call) and call_name(item) == name
+        ],
         key=lambda item: (item.lineno, item.col_offset),
     )
 
@@ -160,7 +164,9 @@ def assignments_named(node, name):
 def unique_assignment(node, name):
     matches = assignments_named(node, name)
     if len(matches) != 1:
-        raise ValueError("expected one assignment to {}, found {}".format(name, len(matches)))
+        raise ValueError(
+            "expected one assignment to {}, found {}".format(name, len(matches))
+        )
     return matches[0]
 
 
@@ -239,21 +245,19 @@ def build_stage_groups():
                             "b_bytes_per_k": b_per_branch_per_k,
                             "b_bytes_total": b_per_branch_per_k * K_TRIPS,
                             "sfb_physical_bytes_per_k": sfb_per_branch_per_k,
-                            "sfb_physical_bytes_total": sfb_per_branch_per_k
-                            * K_TRIPS,
+                            "sfb_physical_bytes_total": sfb_per_branch_per_k * K_TRIPS,
                             "smem_backing": ["sB_up", "sSFB_up"],
                         },
                         "gate": {
                             "global_n_range": [gate_n_begin, gate_n_begin + NATIVE_N],
-                            "b_n64_tile_index": 2 * (logical_slice + LOGICAL_SLICE_COUNT)
+                            "b_n64_tile_index": 2
+                            * (logical_slice + LOGICAL_SLICE_COUNT)
                             + half,
-                            "sfb_n128_tile_index": logical_slice
-                            + LOGICAL_SLICE_COUNT,
+                            "sfb_n128_tile_index": logical_slice + LOGICAL_SLICE_COUNT,
                             "b_bytes_per_k": b_per_branch_per_k,
                             "b_bytes_total": b_per_branch_per_k * K_TRIPS,
                             "sfb_physical_bytes_per_k": sfb_per_branch_per_k,
-                            "sfb_physical_bytes_total": sfb_per_branch_per_k
-                            * K_TRIPS,
+                            "sfb_physical_bytes_total": sfb_per_branch_per_k * K_TRIPS,
                             "smem_backing": ["sB", "sSFB"],
                         },
                     },
@@ -313,9 +317,7 @@ def build_source_identity(anchor, v0, v1):
         "                    # Both disjoint N64 activations are now durable",
         "                    # PHASE B: Sweep ALL FC2 output tiles",
     )
-    result["q1"] = {
-        "v0_vs_v1": region_identity(v0, v1, q1_markers[0], q1_markers[1])
-    }
+    result["q1"] = {"v0_vs_v1": region_identity(v0, v1, q1_markers[0], q1_markers[1])}
     return result
 
 
@@ -365,9 +367,7 @@ def build_v1_source_contract(source):
     gate_index = assignment_value(
         unique_assignment(producer_half, "native_gate_slice_idx")
     )
-    sfb_gate = assignment_value(
-        unique_assignment(producer_half, "tBgSFB_w13_gate_nk")
-    )
+    sfb_gate = assignment_value(unique_assignment(producer_half, "tBgSFB_w13_gate_nk"))
     sfb_up = assignment_value(unique_assignment(producer_half, "tBgSFB_w13_up_nk"))
     sfb_gate_elements = subscript_elements(sfb_gate)
     sfb_up_elements = subscript_elements(sfb_up)
@@ -388,11 +388,15 @@ def build_v1_source_contract(source):
     )
 
     ml_pipeline_value = assignment_value(unique_assignment(tree, "ml_pipeline"))
-    ml_tx_keywords = [
-        keyword.value
-        for keyword in ml_pipeline_value.keywords
-        if keyword.arg == "tx_count"
-    ] if isinstance(ml_pipeline_value, ast.Call) else []
+    ml_tx_keywords = (
+        [
+            keyword.value
+            for keyword in ml_pipeline_value.keywords
+            if keyword.arg == "tx_count"
+        ]
+        if isinstance(ml_pipeline_value, ast.Call)
+        else []
+    )
 
     storage_classes = [
         node
@@ -470,7 +474,9 @@ def build_v1_source_contract(source):
             ["sfb", "tCrSFB_up_fc1_half"],
             ["gemm", "up_acc"],
         ]
-        loop_ok = observed_gemms == expected_gemms and relevant_sequence == expected_sequence
+        loop_ok = (
+            observed_gemms == expected_gemms and relevant_sequence == expected_sequence
+        )
         k_loop_pairs_ok = k_loop_pairs_ok and loop_ok
         k_loop_evidence.append(
             {
@@ -492,7 +498,9 @@ def build_v1_source_contract(source):
             and root_name(call.args[2]) == "fc1_tRS_sD"
         ):
             stores.append(call)
-    gemm_lines = [call.lineno for loop in k_block_loops for call in calls_named(loop, "cute.gemm")]
+    gemm_lines = [
+        call.lineno for loop in k_block_loops for call in calls_named(loop, "cute.gemm")
+    ]
     immediate_activation_store = (
         len(activations) == 1
         and len(stores) == 1
@@ -550,17 +558,12 @@ def build_v1_source_contract(source):
         "pipeline_uses_fc1_tx_count": len(ml_tx_keywords) == 1
         and isinstance(ml_tx_keywords[0], ast.Name)
         and ml_tx_keywords[0].id == "fc1_tma_copy_bytes",
-        "independent_up_smem_backings": {"sB_up", "sSFB_up"}.issubset(
-            storage_fields
-        ),
+        "independent_up_smem_backings": {"sB_up", "sSFB_up"}.issubset(storage_fields),
         "independent_up_tma_partitions": source.count(
             "tBsB_w13_up, _tBgB_w13_up = cpasync.tma_partition("
         )
         == 1
-        and source.count(
-            "tBsSFB_w13_up, _tBgSFB_w13_up = cpasync.tma_partition("
-        )
-        == 1,
+        and source.count("tBsSFB_w13_up, _tBgSFB_w13_up = cpasync.tma_partition(") == 1,
         "consumer_one_half_loop": len(consumer_half_loops) == 1,
         "consumer_two_k_loop_bodies": len(k_block_loops) == 2,
         "consumer_gate_up_paired_in_each_k_loop": k_loop_pairs_ok,
@@ -588,9 +591,7 @@ def build_v1_source_contract(source):
     }
     return {
         "producer_region_sha256": sha256_bytes(producer_region.encode("utf-8")),
-        "consumer_q1_region_sha256": sha256_bytes(
-            consumer_region.encode("utf-8")
-        ),
+        "consumer_q1_region_sha256": sha256_bytes(consumer_region.encode("utf-8")),
         "producer_copy_multiset": {
             "{} -> {}".format(key[0], key[1]): value
             for key, value in sorted(copy_pairs.items())
@@ -642,9 +643,7 @@ def build_payload(paths):
         tuple(group["branches"]["gate"]["global_n_range"]) for group in groups
     )
     expected_up_ranges = [(n, n + NATIVE_N) for n in range(0, I, NATIVE_N)]
-    expected_gate_ranges = [
-        (n, n + NATIVE_N) for n in range(I, 2 * I, NATIVE_N)
-    ]
+    expected_gate_ranges = [(n, n + NATIVE_N) for n in range(I, 2 * I, NATIVE_N)]
     stage_keys = [(group["logical_slice"], group["half"]) for group in groups]
     source_identity_checks = {}
     for name, comparisons in source_identity.items():
@@ -667,8 +666,7 @@ def build_payload(paths):
         "each_stage_tx_count_is_19456": all(
             group["tx_bytes_per_k"] == 19456 for group in groups
         ),
-        "v1_traffic_totals_exact": v1_totals
-        == EXPECTED_TOTALS["branch_paired_n64_v1"],
+        "v1_traffic_totals_exact": v1_totals == EXPECTED_TOTALS["branch_paired_n64_v1"],
         "v1_a_sfa_equal_anchor": all(
             v1_totals[name] == EXPECTED_TOTALS["anchor_8warp_n128"][name]
             for name in ("a", "sfa")
@@ -747,9 +745,7 @@ def main():
         type=Path,
         default=RESULTS / "overlays/branch_paired_n64_v1/moe_dynamic_kernel.py",
     )
-    parser.add_argument(
-        "--output", type=Path, default=RESULTS / "work_ledger.json"
-    )
+    parser.add_argument("--output", type=Path, default=RESULTS / "work_ledger.json")
     args = parser.parse_args()
     paths = {
         "anchor_8warp_n128": args.anchor_n128.resolve(),
@@ -769,7 +765,12 @@ def main():
         print(json.dumps(payload, sort_keys=True))
         return 2
     write_payload(args.output.resolve(), payload)
-    print(json.dumps({"gate_pass": payload["gate_pass"], "checks": payload["checks"]}, sort_keys=True))
+    print(
+        json.dumps(
+            {"gate_pass": payload["gate_pass"], "checks": payload["checks"]},
+            sort_keys=True,
+        )
+    )
     return 0 if payload["gate_pass"] else 2
 
 

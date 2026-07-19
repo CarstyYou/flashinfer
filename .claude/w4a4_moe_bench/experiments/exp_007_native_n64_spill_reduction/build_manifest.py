@@ -83,9 +83,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             "path": str(source_diff.relative_to(experiment)),
             "sha256": sha256_file(source_diff),
         },
-        "production_kernel_sha256": static_anchor["identity"]["preparation"][
-            "source"
-        ]["production_kernel_sha256"],
+        "production_kernel_sha256": static_anchor["identity"]["preparation"]["source"][
+            "production_kernel_sha256"
+        ],
         "flashinfer_commit": static_anchor["identity"]["preparation"]["source"][
             "checkout_head"
         ],
@@ -96,17 +96,14 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     useful_work_equal = (
         static["cross_case_checks"]["anchor_candidate_same_static_omma_count"]
-        and static["cross_case_checks"][
-            "anchor_candidate_same_static_omma_histogram"
-        ]
+        and static["cross_case_checks"]["anchor_candidate_same_static_omma_histogram"]
         and metric_value(dynamic["anchor"], "tensor_instructions")
         == metric_value(dynamic["candidate"], "tensor_instructions")
         and metric_value(dynamic["anchor"], "fp4_tensor_ops")
         == metric_value(dynamic["candidate"], "fp4_tensor_ops")
     )
     loaded_cubins_match = all(
-        veloq["arms"][arm]["loaded_cubin_sha256"]
-        == captures[arm]["cubin_sha256"]
+        veloq["arms"][arm]["loaded_cubin_sha256"] == captures[arm]["cubin_sha256"]
         for arm in ("anchor", "candidate")
     )
     anchor_static_nonzero = not static_anchor["gates"]["zero_spill_static_gate"]
@@ -145,9 +142,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "binary_identity": {
             arm: {
                 "cubin_sha256": captures[arm]["cubin_sha256"],
-                "loaded_cubin_sha256": veloq["arms"][arm][
-                    "loaded_cubin_sha256"
-                ],
+                "loaded_cubin_sha256": veloq["arms"][arm]["loaded_cubin_sha256"],
                 "kernel": veloq["arms"][arm]["kernel"],
                 "grid": veloq["arms"][arm]["grid"],
                 "block": veloq["arms"][arm]["block"],
@@ -176,9 +171,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "stack_bytes_per_thread": static_anchor["resource"][
                     "stack_bytes_per_thread"
                 ],
-                "spill_refill_annotations": static_anchor[
-                    "compiler_spill_refill"
-                ]["annotation_count"],
+                "spill_refill_annotations": static_anchor["compiler_spill_refill"][
+                    "annotation_count"
+                ],
             },
             "candidate": {
                 "registers_per_thread": static_candidate["resource"][
@@ -187,9 +182,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "stack_bytes_per_thread": static_candidate["resource"][
                     "stack_bytes_per_thread"
                 ],
-                "spill_refill_annotations": static_candidate[
-                    "compiler_spill_refill"
-                ]["annotation_count"],
+                "spill_refill_annotations": static_candidate["compiler_spill_refill"][
+                    "annotation_count"
+                ],
             },
             "static_omma_count_each": static_anchor["tensor_core_work"][
                 "omma_static_instruction_count"

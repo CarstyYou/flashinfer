@@ -93,7 +93,9 @@ def tensor_error(actual: torch.Tensor, expected: torch.Tensor) -> dict[str, floa
         raise ValueError(f"tensor shape mismatch: {actual.shape} != {expected.shape}")
     if actual.dtype != expected.dtype:
         raise ValueError(f"tensor dtype mismatch: {actual.dtype} != {expected.dtype}")
-    if not bool(torch.isfinite(actual).all()) or not bool(torch.isfinite(expected).all()):
+    if not bool(torch.isfinite(actual).all()) or not bool(
+        torch.isfinite(expected).all()
+    ):
         raise ValueError("non-finite tensor in correctness evidence")
 
     actual_f = actual.float()
@@ -155,12 +157,10 @@ def validate_preparation(
         "harness_arm": preparation.get("arm") == HARNESS_ARM,
         "m": preparation.get("m") == spec.m
         and preparation.get("case", {}).get("m") == spec.m,
-        "harness_fixture": preparation.get("fixture_kind")
-        == spec.harness_fixture,
+        "harness_fixture": preparation.get("fixture_kind") == spec.harness_fixture,
         "semantic_fixture": preparation.get("fixture", {}).get("fixture_kind")
         == spec.semantic_fixture,
-        "source_sha256": source.get("overlay_sha256")
-        == EXPECTED_SOURCE[logical_arm],
+        "source_sha256": source.get("overlay_sha256") == EXPECTED_SOURCE[logical_arm],
         "cubin_sha256": preparation.get("cubin_sha256")
         == [EXPECTED_CUBIN[logical_arm]],
         "cubin_artifact_identity": len(cubin_artifacts) == 1,
@@ -210,9 +210,7 @@ def arm_payload(
     preparation_path = directory / "preparation.json"
     preparation = read_json(preparation_path)
     outputs, output_sha256 = load_outputs(directory)
-    checks = validate_preparation(
-        preparation, logical_arm=logical_arm, spec=spec
-    )
+    checks = validate_preparation(preparation, logical_arm=logical_arm, spec=spec)
     return (
         {
             "directory": evidence_path(directory),
@@ -263,8 +261,7 @@ def build_case(spec: CaseSpec) -> tuple[dict[str, Any], dict[str, Any]]:
         "replay_0_dtype": v0_outputs[0].dtype == v1_outputs[0].dtype,
         "replay_1_dtype": v0_outputs[1].dtype == v1_outputs[1].dtype,
         "all_outputs_finite": all(
-            bool(torch.isfinite(value).all())
-            for value in (*v0_outputs, *v1_outputs)
+            bool(torch.isfinite(value).all()) for value in (*v0_outputs, *v1_outputs)
         ),
     }
     output_contract_gate = all(output_contract.values())
@@ -281,8 +278,7 @@ def build_case(spec: CaseSpec) -> tuple[dict[str, Any], dict[str, Any]]:
                 }
             )
     candidate_worst = {
-        metric: max(value[metric] for value in comparisons)
-        for metric in v0_self_drift
+        metric: max(value[metric] for value in comparisons) for metric in v0_self_drift
     }
     strict = evaluate_cross_arm_correctness(
         v0_self_drift, v1_self_drift, candidate_worst
@@ -334,9 +330,7 @@ def build_case(spec: CaseSpec) -> tuple[dict[str, Any], dict[str, Any]]:
         "v1_vs_v0_worst_relative_l2": candidate_worst["relative_l2"],
         "v1_vs_v0_worst_max_abs": candidate_worst["max_abs"],
         "v1_vs_v0_worst_cosine_loss": candidate_worst["cosine_loss"],
-        "v1_vs_v0_worst_token_rel_l2_p99": candidate_worst[
-            "token_rel_l2_p99"
-        ],
+        "v1_vs_v0_worst_token_rel_l2_p99": candidate_worst["token_rel_l2_p99"],
         "preparation_gate": preparation_gate,
         "identity_gate": identity_gate,
         "output_contract_gate": output_contract_gate,

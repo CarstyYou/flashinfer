@@ -245,9 +245,7 @@ def _add_kernel_abi(source: str) -> str:
     )
     text = _replace_exact(
         text,
-        "            token_map,\n"
-        "            token_weights,\n"
-        "        ).launch(\n",
+        "            token_map,\n            token_weights,\n        ).launch(\n",
         "            token_map,\n"
         "            token_weights,\n"
         "            exp008_timing_ticks,\n"
@@ -294,9 +292,7 @@ def _instrument_kernel(source: str) -> str:
         + _cta_store(f"Int32({CTA_ENTRY}) + warp_idx", indent=20)
         + "\n        if warp_idx == 0:\n"
     )
-    text = _replace_exact(
-        text, entry_anchor, entry_marker, label="W0-W7 kernel entry"
-    )
+    text = _replace_exact(text, entry_anchor, entry_marker, label="W0-W7 kernel entry")
 
     loop_anchor = (
         "        consumer_live = Int32(1)\n"
@@ -330,8 +326,7 @@ def _instrument_kernel(source: str) -> str:
         "            is_done = _ld_shared_i32(ctrl_base_addr + Int32(4))\n"
     )
     claim_marker = (
-        claim_anchor
-        + "            if cutlass.const_expr(self.phase_probe_enabled):\n"
+        claim_anchor + "            if cutlass.const_expr(self.phase_probe_enabled):\n"
         "                if has_task > Int32(0):\n"
         "                    if is_cta_leader > Int32(0):\n"
         + _reload_task_slot(indent=24)
@@ -362,9 +357,7 @@ def _instrument_kernel(source: str) -> str:
         "                    if warp_idx < Int32(_EXP008_COMPUTE_WARPS):\n"
         "                        if exp008_lane_id == Int32(0):\n"
         + _reload_task_slot(indent=28)
-        + _task_store(
-            f"Int32({TASK_MAIN}) + warp_idx", indent=28
-        )
+        + _task_store(f"Int32({TASK_MAIN}) + warp_idx", indent=28)
     )
     text = _replace_exact(
         text, cache_anchor, cache_marker, label="collective cache-ready boundary"
@@ -398,9 +391,7 @@ def _instrument_kernel(source: str) -> str:
         )
         + pair_end_anchor
     )
-    text = _replace_exact(
-        text, pair_end_anchor, pair_end_marker, label="half FC1 end"
-    )
+    text = _replace_exact(text, pair_end_anchor, pair_end_marker, label="half FC1 end")
 
     activation_end_anchor = (
         "                                    ],\n"
@@ -429,20 +420,18 @@ def _instrument_kernel(source: str) -> str:
 
     fc1_collective_anchor = (
         "                    # N128 sC tile before the single Q1 pass reads them.\n"
-        "                    cute.arch.fence_proxy(\"async.shared\", space=\"cta\")\n"
+        '                    cute.arch.fence_proxy("async.shared", space="cta")\n'
         "                    self.epilog_sync_barrier.arrive_and_wait()\n\n"
         "                    # Q1 runs exactly once after both N64 halves.  sA remains\n"
     )
     fc1_collective_marker = (
         "                    # N128 sC tile before the single Q1 pass reads them.\n"
-        "                    cute.arch.fence_proxy(\"async.shared\", space=\"cta\")\n"
+        '                    cute.arch.fence_proxy("async.shared", space="cta")\n'
         "                    self.epilog_sync_barrier.arrive_and_wait()\n"
         "                    if cutlass.const_expr(self.phase_probe_enabled):\n"
         "                        if exp008_lane_id == Int32(0):\n"
         + _reload_task_slot(indent=28)
-        + _task_store(
-            f"Int32({TASK_MAIN + COMPUTE_WARPS}) + warp_idx", indent=28
-        )
+        + _task_store(f"Int32({TASK_MAIN + COMPUTE_WARPS}) + warp_idx", indent=28)
         + "\n                    # Q1 runs exactly once after both N64 halves.  sA remains\n"
     )
     text = _replace_exact(
@@ -453,20 +442,18 @@ def _instrument_kernel(source: str) -> str:
     )
 
     q1_anchor = (
-        "                    cute.arch.fence_proxy(\"async.shared\", space=\"cta\")\n"
+        '                    cute.arch.fence_proxy("async.shared", space="cta")\n'
         "                    self.epilog_sync_barrier.arrive_and_wait()\n\n"
         "                    # ============================================================\n"
         "                    # PHASE B: Sweep ALL FC2 output tiles using cached sA\n"
     )
     q1_marker = (
-        "                    cute.arch.fence_proxy(\"async.shared\", space=\"cta\")\n"
+        '                    cute.arch.fence_proxy("async.shared", space="cta")\n'
         "                    self.epilog_sync_barrier.arrive_and_wait()\n"
         "                    if cutlass.const_expr(self.phase_probe_enabled):\n"
         "                        if exp008_lane_id == Int32(0):\n"
         + _reload_task_slot(indent=28)
-        + _task_store(
-            f"Int32({TASK_MAIN + 2 * COMPUTE_WARPS}) + warp_idx", indent=28
-        )
+        + _task_store(f"Int32({TASK_MAIN + 2 * COMPUTE_WARPS}) + warp_idx", indent=28)
         + "                            _st_shared_i32(\n"
         "                                route_phys_rows_addr + Int32(8)\n"
         "                                + warp_idx * Int32(4),\n"
@@ -489,9 +476,7 @@ def _instrument_kernel(source: str) -> str:
         # W0 starting the next scheduler loop; the dead route scratch offsets
         # are warp-private and are not touched by the next task's claim stamp.
         + _reload_warp_saved_task_slot(indent=28)
-        + _task_store(
-            f"Int32({TASK_MAIN + 3 * COMPUTE_WARPS}) + warp_idx", indent=28
-        )
+        + _task_store(f"Int32({TASK_MAIN + 3 * COMPUTE_WARPS}) + warp_idx", indent=28)
         + "                    slice_idx += Int32(1)\n"
     )
     text = _replace_exact(
@@ -695,8 +680,7 @@ def build_all(repo: Path, output_root: Path) -> dict[str, Any]:
     output_root.mkdir(parents=True)
     try:
         versions = {
-            version: build_version(repo, output_root, version)
-            for version in VERSIONS
+            version: build_version(repo, output_root, version) for version in VERSIONS
         }
     except Exception:
         shutil.rmtree(output_root)

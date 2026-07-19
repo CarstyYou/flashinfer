@@ -168,9 +168,7 @@ def build_contract(args: argparse.Namespace) -> dict[str, Any]:
     internal = str(arm["internal"])
     canonical = results / "canonical" / args.arm
     overlay = results / "overlays" / str(arm["overlay"]) / "moe_dynamic_kernel.py"
-    preparation_path = (
-        canonical / "raw" / internal / "m8192/canonical/preparation.json"
-    )
+    preparation_path = canonical / "raw" / internal / "m8192/canonical/preparation.json"
     preparation = read_json(preparation_path)
     if not (
         preparation.get("status") == "complete"
@@ -186,7 +184,9 @@ def build_contract(args: argparse.Namespace) -> dict[str, Any]:
         raise RuntimeError("overlay hash drift from preparation")
     expected_cubin_hashes = preparation.get("cubin_sha256", [])
     if len(expected_cubin_hashes) != 1:
-        raise RuntimeError(f"expected one preparation cubin SHA: {expected_cubin_hashes}")
+        raise RuntimeError(
+            f"expected one preparation cubin SHA: {expected_cubin_hashes}"
+        )
     cubin = find_exact_cubin(args.jit_root.resolve(), expected_cubin_hashes[0])
 
     static_path = results / "static_spill_evidence.json"
@@ -290,15 +290,16 @@ def build_contract(args: argparse.Namespace) -> dict[str, Any]:
 
 
 def validate_profile_target(
-    *, contract: dict[str, Any], target_payload: dict[str, Any], args: argparse.Namespace
+    *,
+    contract: dict[str, Any],
+    target_payload: dict[str, Any],
+    args: argparse.Namespace,
 ) -> dict[str, bool]:
     preparation = contract["preparation"]
     runtime = target_payload.get("runtime", {})
     gpu = runtime.get("gpu", {})
     source = runtime.get("source", {})
-    expected_nvtx = (
-        f"exp005_{contract['internal_arm']}_m8192_final_replay"
-    )
+    expected_nvtx = f"exp005_{contract['internal_arm']}_m8192_final_replay"
     return {
         "status_complete": target_payload.get("status") == "complete",
         "arm": target_payload.get("arm") == contract["internal_arm"],
@@ -309,8 +310,7 @@ def validate_profile_target(
         == {"grid": [1, 1, 110], "block": [288, 1, 1], "kernel": "MoEDynamicKernel"},
         "jit_artifact_set_sha256": target_payload.get("jit_artifact_set_sha256")
         == preparation.get("jit_artifact_set_sha256"),
-        "overlay_sha256": source.get("overlay_sha256")
-        == contract["overlay_sha256"],
+        "overlay_sha256": source.get("overlay_sha256") == contract["overlay_sha256"],
         "gpu_uuid": gpu.get("uuid") == args.expected_gpu_uuid,
         "application_graphics_clock_mhz": int(
             gpu.get("applications_graphics_clock_mhz", -1)
@@ -395,9 +395,7 @@ def capture(args: argparse.Namespace) -> None:
         if not all(target_checks.values()):
             raise RuntimeError(f"profile target identity drift: {target_checks}")
 
-        spill_values = {
-            name: metrics[name]["value"] for name in SPILL_METRICS
-        }
+        spill_values = {name: metrics[name]["value"] for name in SPILL_METRICS}
         dynamic_zero_spill = all(value == 0 for value in spill_values.values())
         evidence = {
             "schema": "exp008.dynamic-ncu.v1",

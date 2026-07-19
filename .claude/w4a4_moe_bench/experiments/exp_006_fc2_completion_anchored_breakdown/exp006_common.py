@@ -58,10 +58,7 @@ def canonical_sha256(value: Any) -> str:
 
 def descriptor_order_sha256(descriptors: Mapping[str, Sequence[int]]) -> str:
     return canonical_sha256(
-        [
-            [int(value) for value in descriptors[name]]
-            for name in DESCRIPTOR_NAMES
-        ]
+        [[int(value) for value in descriptors[name]] for name in DESCRIPTOR_NAMES]
     )
 
 
@@ -75,7 +72,9 @@ def _flat(values: Sequence[Any]) -> list[int]:
     return result
 
 
-def _rows(values: Sequence[Any], *, width: int, rows: int, label: str) -> list[list[int]]:
+def _rows(
+    values: Sequence[Any], *, width: int, rows: int, label: str
+) -> list[list[int]]:
     flat = _flat(values)
     expected = width * rows
     if len(flat) != expected:
@@ -106,7 +105,9 @@ def validate_descriptors(
     }
     lengths = {name: len(values) for name, values in normalized.items()}
     if any(length != task_tail for length in lengths.values()):
-        errors.append(f"descriptor lengths {lengths} do not equal task_tail {task_tail}")
+        errors.append(
+            f"descriptor lengths {lengths} do not equal task_tail {task_tail}"
+        )
 
     if not errors:
         for slot in range(task_tail):
@@ -212,9 +213,7 @@ def validate_probe_events(
 
     errors: list[str] = []
     expected_task_writes = task_tail * TASK_TICKS
-    actual_task_writes = sum(
-        value != SENTINEL for row in task_rows for value in row
-    )
+    actual_task_writes = sum(value != SENTINEL for row in task_rows for value in row)
     expected_cta_writes = grid_z * CTA_TICKS
     actual_cta_writes = sum(value != SENTINEL for row in cta_rows for value in row)
 
@@ -236,8 +235,7 @@ def validate_probe_events(
     if not errors:
         for cta, row in enumerate(cta_rows):
             if any(
-                right < left
-                for left, right in zip(row[:7], row[1:8], strict=False)
+                right < left for left, right in zip(row[:7], row[1:8], strict=False)
             ):
                 errors.append(f"CTA {cta} launch timeline is non-monotonic")
                 break
@@ -253,8 +251,7 @@ def validate_probe_events(
             row = task_rows[task]
             cta = task_cta[task]
             if any(
-                right < left
-                for left, right in zip(row[:5], row[1:6], strict=False)
+                right < left for left, right in zip(row[:5], row[1:6], strict=False)
             ):
                 errors.append(f"task {task} base consumer timeline is non-monotonic")
                 break
@@ -283,9 +280,7 @@ def validate_probe_events(
                         if current_a < prior_f
                     ]
                     if bad_cross_tile_warps:
-                        bad = ", ".join(
-                            f"W{warp}" for warp in bad_cross_tile_warps
-                        )
+                        bad = ", ".join(f"W{warp}" for warp in bad_cross_tile_warps)
                         errors.append(
                             f"task {task} tile {tile} same-warp cross-tile "
                             f"F-to-A edge invalid: {bad}"
@@ -302,7 +297,10 @@ def validate_probe_events(
                 bad_warps = [
                     warp
                     for warp, values in enumerate(same_warp_edges)
-                    if any(right < left for left, right in zip(values, values[1:]))
+                    if any(
+                        right < left
+                        for left, right in zip(values, values[1:], strict=False)
+                    )
                 ]
                 if bad_warps:
                     bad = ", ".join(f"A/C/D/E/F W{warp}" for warp in bad_warps)
@@ -318,8 +316,7 @@ def validate_probe_events(
                     break
                 if max(f_values) < max(e_values):
                     errors.append(
-                        f"task {task} tile {tile} max(F0..F3) precedes "
-                        "max(E0..E3)"
+                        f"task {task} tile {tile} max(F0..F3) precedes max(E0..E3)"
                     )
                     break
                 prior_completion = max(f_values)

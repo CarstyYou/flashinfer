@@ -125,10 +125,16 @@ def _instrument_kernel(source: str) -> str:
     # exp_004 records A/C only on W0.  exp_006 needs same-warp A/C/D/E/F
     # edges so no representative warp is used as another warp's boundary.
     for name, old_event, new_event in (
-        ("A", "Int32(7) + output_tile_idx * Int32(3)",
-         "Int32(9) + output_tile_idx * Int32(20) + warp_idx"),
-        ("C", "Int32(8) + output_tile_idx * Int32(3)",
-         "Int32(13) + output_tile_idx * Int32(20) + warp_idx"),
+        (
+            "A",
+            "Int32(7) + output_tile_idx * Int32(3)",
+            "Int32(9) + output_tile_idx * Int32(20) + warp_idx",
+        ),
+        (
+            "C",
+            "Int32(8) + output_tile_idx * Int32(3)",
+            "Int32(13) + output_tile_idx * Int32(20) + warp_idx",
+        ),
     ):
         old_block = (
             "                        if cutlass.const_expr(self.phase_probe_enabled):\n"
@@ -155,16 +161,12 @@ def _instrument_kernel(source: str) -> str:
         "                        if cutlass.const_expr(self.phase_probe_enabled):\n"
         "                            if warp_idx == Int32(0):\n"
         "                                if lane_id == Int32(0):\n"
-        + _task_store(
-            "Int32(9) + output_tile_idx * Int32(3)", indent=36
-        )
+        + _task_store("Int32(9) + output_tile_idx * Int32(3)", indent=36)
     )
     new_f_block = (
         "                        if cutlass.const_expr(self.phase_probe_enabled):\n"
         "                            if lane_id == Int32(0):\n"
-        + _task_store(
-            "Int32(25) + output_tile_idx * Int32(20) + warp_idx", indent=32
-        )
+        + _task_store("Int32(25) + output_tile_idx * Int32(20) + warp_idx", indent=32)
     )
     text = _replace_exact(
         text,
@@ -203,9 +205,7 @@ def _instrument_kernel(source: str) -> str:
         "                            self.epilog_sync_barrier.arrive_and_wait()\n"
         "                            if cutlass.const_expr(self.phase_probe_enabled):\n"
         "                                if lane_id == Int32(0):\n"
-        + _task_store(
-            "Int32(17) + output_tile_idx * Int32(20) + warp_idx", indent=36
-        )
+        + _task_store("Int32(17) + output_tile_idx * Int32(20) + warp_idx", indent=36)
         + "                            rows_offset = Int32(epi_m) * Int32(self.epi_tile[0])\n"
     )
     text = _replace_exact(
@@ -225,9 +225,7 @@ def _instrument_kernel(source: str) -> str:
         "                                vec_idx += Int32(self.num_threads_per_warp)\n\n"
         "                            if cutlass.const_expr(self.phase_probe_enabled):\n"
         "                                if lane_id == Int32(0):\n"
-        + _task_store(
-            "Int32(21) + output_tile_idx * Int32(20) + warp_idx", indent=36
-        )
+        + _task_store("Int32(21) + output_tile_idx * Int32(20) + warp_idx", indent=36)
         + "\n"
         "                            # Post-scatter barrier: needed to ensure all warps\n"
     )
@@ -266,11 +264,11 @@ def _instrument_dispatch(source: str, *, enabled: bool) -> str:
         "    exp006_locked_case = (E, m, k, n, num_topk)\n"
         "    if exp006_locked_case != (256, 8192, 2048, 512, 8):\n"
         "        raise RuntimeError(\n"
-        "            f\"exp006 locked-case drift: {exp006_locked_case}\"\n"
+        '            f"exp006 locked-case drift: {exp006_locked_case}"\n'
         "        )\n"
         "    if mma_tiler_mn != (128, 128) or k // mma_tiler_mn[1] != 16:\n"
         "        raise RuntimeError(\n"
-        "            f\"exp006 tile ABI drift: tiler={mma_tiler_mn}, hidden={k}\"\n"
+        '            f"exp006 tile ABI drift: tiler={mma_tiler_mn}, hidden={k}"\n'
         "        )\n\n"
         "    cache_key = (\n"
     )

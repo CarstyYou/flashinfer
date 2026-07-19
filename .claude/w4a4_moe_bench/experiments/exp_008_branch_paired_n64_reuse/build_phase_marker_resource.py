@@ -140,9 +140,7 @@ def _opcode_bytes(opcode: str) -> int:
     return max(int(width) for width in widths) // 8
 
 
-def _static_spill_site_footprint(
-    histogram: Mapping[str, int]
-) -> tuple[int, int]:
+def _static_spill_site_footprint(histogram: Mapping[str, int]) -> tuple[int, int]:
     loads = sum(
         int(count) * _opcode_bytes(opcode)
         for opcode, count in histogram.items()
@@ -185,9 +183,7 @@ def build(
 
     cubin_artifact = _unique_capture_artifact(capture, suffix=".cubin")
     cubin_path = _artifact_path(timing_jit_root, cubin_artifact)
-    binary = parse_binary(
-        cubin_path=cubin_path, cuobjdump=cuobjdump, nvdisasm=nvdisasm
-    )
+    binary = parse_binary(cubin_path=cubin_path, cuobjdump=cuobjdump, nvdisasm=nvdisasm)
     kernel_symbol = str(binary["kernel_symbol"])
     static_resource = binary["resource"]
     spill = binary["compiler_spill_refill"]
@@ -212,9 +208,7 @@ def build(
         "arm": ncu_identity.get("arm") == target.get("arm") == arm,
         "timing_capture_sha256": ncu_identity.get("timing_capture_sha256")
         == sha256_file(timing_capture_path),
-        "timing_artifact_set": ncu_identity.get(
-            "timing_jit_artifact_set_sha256"
-        )
+        "timing_artifact_set": ncu_identity.get("timing_jit_artifact_set_sha256")
         == capture["jit_identity_gate"]["artifact_set_sha256"],
         "timing_cubin": ncu_identity.get("timing_cubin_sha256")
         == cubin_artifact["sha256"]
@@ -230,8 +224,7 @@ def build(
         "gpu_uuid": ncu_identity.get("expected_gpu_uuid")
         == target.get("runtime", {}).get("gpu", {}).get("uuid")
         == gpu_uuid,
-        "target_hash": ncu_identity.get("target_sha256")
-        == sha256_file(target_path),
+        "target_hash": ncu_identity.get("target_sha256") == sha256_file(target_path),
         "native_hash": ncu_identity.get("native_raw_sha256")
         == sha256_file(native_path),
         "target_gate": target.get("gate_pass") is True,
@@ -248,9 +241,7 @@ def build(
         == float(static_resource["registers_per_thread"]),
         "shared_memory_numeric": metrics["smem_bytes"]["value"]
         >= float(static_resource["static_shared_bytes_per_cta"]),
-        "compiler_annotation_closure": spill[
-            "annotation_exactly_matches_local_sass"
-        ]
+        "compiler_annotation_closure": spill["annotation_exactly_matches_local_sass"]
         is True,
     }
     gate_pass = all(checks.values())

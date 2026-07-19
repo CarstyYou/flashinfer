@@ -33,9 +33,7 @@ RESOURCE_RE = re.compile(
 FRAME_RE = re.compile(r"frame size:\s*0x([0-9a-fA-F]+)")
 MIN_STACK_RE = re.compile(r"min stack size:\s*0x([0-9a-fA-F]+)")
 ELF_FUNCTION_RE = re.compile(r"function:\s*(\S+?)\(0x[0-9a-fA-F]+\)")
-SPILL_ANNOTATION_RE = re.compile(
-    r"SpillRefill\s*:\s*Offset\s*:\s*0x([0-9a-fA-F]+)"
-)
+SPILL_ANNOTATION_RE = re.compile(r"SpillRefill\s*:\s*Offset\s*:\s*0x([0-9a-fA-F]+)")
 SASS_INSTRUCTION_RE = re.compile(
     r"/\*\s*([0-9a-fA-F]+)\s*\*/\s+"
     r"(?:@[!A-Za-z0-9.]+\s+)?([A-Z][A-Z0-9_.]*)\s*(.*?)\s*;"
@@ -151,8 +149,7 @@ def parse_dynamic_smem(mlir_text: str, kernel_symbol: str) -> dict[str, Any]:
         raise ValueError("SMEM struct has no parsed fields")
     fields_by_offset = sorted(fields, key=lambda value: value["offset_bytes"])
     no_overlap = all(
-        current["offset_bytes"]
-        >= previous["offset_bytes"] + previous["size_bytes"]
+        current["offset_bytes"] >= previous["offset_bytes"] + previous["size_bytes"]
         for previous, current in zip(
             fields_by_offset, fields_by_offset[1:], strict=False
         )
@@ -174,9 +171,7 @@ def parse_dynamic_smem(mlir_text: str, kernel_symbol: str) -> dict[str, Any]:
     }
 
 
-def parse_binary(
-    *, cubin_path: Path, cuobjdump: str, nvdisasm: str
-) -> dict[str, Any]:
+def parse_binary(*, cubin_path: Path, cuobjdump: str, nvdisasm: str) -> dict[str, Any]:
     resource_run = run_checked([cuobjdump, "--dump-resource-usage", str(cubin_path)])
     elf_run = run_checked([cuobjdump, "--dump-elf", str(cubin_path)])
     sass_run = run_checked([nvdisasm, "-c", str(cubin_path)])
@@ -219,14 +214,10 @@ def parse_binary(
         raise ValueError(f"duplicate SASS PCs in {cubin_path}")
 
     local_instructions = [
-        item
-        for item in instructions
-        if str(item["opcode"]).startswith(("LDL", "STL"))
+        item for item in instructions if str(item["opcode"]).startswith(("LDL", "STL"))
     ]
     local_pcs = {int(item["pc"]) for item in local_instructions}
-    annotation_pcs = {
-        int(value, 16) for value in SPILL_ANNOTATION_RE.findall(elf_text)
-    }
+    annotation_pcs = {int(value, 16) for value in SPILL_ANNOTATION_RE.findall(elf_text)}
     if annotation_pcs != local_pcs:
         raise ValueError("compiler SpillRefill annotations != local SASS PCs")
 
@@ -311,8 +302,7 @@ def analyze_case(
         .get("overlay_sha256")
         == EXPECTED_SOURCE[spec.arm]
         == overlay_sha256,
-        "cubin_sha256": preparation.get("cubin_sha256")
-        == [EXPECTED_CUBIN[spec.arm]]
+        "cubin_sha256": preparation.get("cubin_sha256") == [EXPECTED_CUBIN[spec.arm]]
         and cubin_artifact.get("sha256") == EXPECTED_CUBIN[spec.arm]
         and cubin_sha256 == EXPECTED_CUBIN[spec.arm],
         "cubin_size": cubin_path.stat().st_size == cubin_artifact.get("size"),
@@ -330,14 +320,11 @@ def analyze_case(
     dynamic_smem = parse_dynamic_smem(mlir_text, binary["kernel_symbol"])
     resource = dict(binary["resource"])
     total_shared = (
-        resource["static_shared_bytes_per_cta"]
-        + dynamic_smem["struct_extent_bytes"]
+        resource["static_shared_bytes_per_cta"] + dynamic_smem["struct_extent_bytes"]
     )
     resource.update(
         {
-            "dynamic_shared_struct_extent_bytes": dynamic_smem[
-                "struct_extent_bytes"
-            ],
+            "dynamic_shared_struct_extent_bytes": dynamic_smem["struct_extent_bytes"],
             "total_shared_bytes_per_cta": total_shared,
             "total_shared_formula": "cuobjdump SHARED + MLIR dynamic struct extent",
         }
@@ -354,9 +341,7 @@ def analyze_case(
         "kernel_symbol_locked_across_resource_elf_sass": all(
             binary["symbol_checks"].values()
         ),
-        "compiler_annotation_closure": spill[
-            "annotation_exactly_matches_local_sass"
-        ],
+        "compiler_annotation_closure": spill["annotation_exactly_matches_local_sass"],
         "dynamic_smem_layout_valid": dynamic_smem["first_field_starts_at_zero"]
         and dynamic_smem["fields_do_not_overlap"]
         and dynamic_smem["extent_is_1024_byte_aligned"]
@@ -415,8 +400,7 @@ def cross_case_checks(cases: dict[str, dict[str, Any]]) -> dict[str, bool]:
             pair[0]["resource"] == pair[1]["resource"]
         )
         checks[f"{arm}_m256_m8192_same_spill_sass"] = (
-            pair[0]["compiler_spill_refill"]
-            == pair[1]["compiler_spill_refill"]
+            pair[0]["compiler_spill_refill"] == pair[1]["compiler_spill_refill"]
         )
         checks[f"{arm}_m256_m8192_same_omma_histogram"] = (
             pair[0]["tensor_core_work"] == pair[1]["tensor_core_work"]
@@ -495,9 +479,7 @@ def write_csv(path: Path, cases: dict[str, dict[str, Any]]) -> None:
                             "elf_minimum_stack_bytes_per_thread",
                         )
                     },
-                    "compiler_spill_refill_annotation_count": spill[
-                        "annotation_count"
-                    ],
+                    "compiler_spill_refill_annotation_count": spill["annotation_count"],
                     "local_sass_instruction_count": spill[
                         "local_sass_instruction_count"
                     ],
@@ -579,7 +561,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         "gate_pass": gate,
     }
     payload["evidence_sha256"] = canonical_sha256(payload)
-    args.output.resolve().write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+    args.output.resolve().write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n"
+    )
     write_csv(args.csv.resolve(), cases)
     print(
         json.dumps(

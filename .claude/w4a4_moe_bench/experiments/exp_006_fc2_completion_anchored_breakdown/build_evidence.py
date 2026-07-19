@@ -44,40 +44,60 @@ SASS_RE = re.compile(
 # allowed to delay a timestamp store while preserving the CS2R boundary.
 BOUNDARY_PCS = (
     {
-        "A": 0x130C0, "A_store": 0x131A0,
-        "C": 0x13B50, "C_store": 0x15850,
+        "A": 0x130C0,
+        "A_store": 0x131A0,
+        "C": 0x13B50,
+        "C_store": 0x15850,
         "pre_barrier": 0x15860,
-        "D": 0x15870, "D_store": 0x15960,
-        "E": 0x16000, "E_store": 0x16070,
+        "D": 0x15870,
+        "D_store": 0x15960,
+        "E": 0x16000,
+        "E_store": 0x16070,
         "post_barrier": 0x16080,
-        "F": 0x16090, "F_store": 0x16100,
+        "F": 0x16090,
+        "F_store": 0x16100,
     },
     {
-        "A": 0x16110, "A_store": 0x16180,
-        "C": 0x16A90, "C_store": 0x17060,
+        "A": 0x16110,
+        "A_store": 0x16180,
+        "C": 0x16A90,
+        "C_store": 0x17060,
         "pre_barrier": 0x17B30,
-        "D": 0x17B40, "D_store": 0x17BC0,
-        "E": 0x18290, "E_store": 0x18300,
+        "D": 0x17B40,
+        "D_store": 0x17BC0,
+        "E": 0x18290,
+        "E_store": 0x18300,
         "post_barrier": 0x18310,
-        "F": 0x18320, "F_store": 0x18390,
+        "F": 0x18320,
+        "F_store": 0x18390,
     },
     {
-        "A": 0x183A0, "A_store": 0x18420,
-        "C": 0x18D30, "C_store": 0x19300,
+        "A": 0x183A0,
+        "A_store": 0x18420,
+        "C": 0x18D30,
+        "C_store": 0x19300,
         "pre_barrier": 0x19DD0,
-        "D": 0x19DE0, "D_store": 0x19E60,
-        "E": 0x1A530, "E_store": 0x1A5A0,
+        "D": 0x19DE0,
+        "D_store": 0x19E60,
+        "E": 0x1A530,
+        "E_store": 0x1A5A0,
         "post_barrier": 0x1A5B0,
-        "F": 0x1A5C0, "F_store": 0x1A630,
+        "F": 0x1A5C0,
+        "F_store": 0x1A630,
     },
     {
-        "A": 0x1A640, "A_store": 0x1A6C0,
-        "C": 0x1AFD0, "C_store": 0x1C060,
+        "A": 0x1A640,
+        "A_store": 0x1A6C0,
+        "C": 0x1AFD0,
+        "C_store": 0x1C060,
         "pre_barrier": 0x1C070,
-        "D": 0x1C080, "D_store": 0x1C100,
-        "E": 0x1C7D0, "E_store": 0x1C840,
+        "D": 0x1C080,
+        "D_store": 0x1C100,
+        "E": 0x1C7D0,
+        "E_store": 0x1C840,
         "post_barrier": 0x1C850,
-        "F": 0x1C860, "F_store": 0x1C8F0,
+        "F": 0x1C860,
+        "F_store": 0x1C8F0,
     },
 )
 
@@ -102,8 +122,7 @@ READER_PHASE_SPECS = (
             "FC2_completion_materialize_pre_sync",
         ),
         "aggregation_formula": (
-            "sum_tasks_tiles[(max(C0..C3)-max(A0..A3)) + "
-            "(min(D0..D3)-max(C0..C3))]"
+            "sum_tasks_tiles[(max(C0..C3)-max(A0..A3)) + (min(D0..D3)-max(C0..C3))]"
         ),
         "included_work": (
             "pipeline wait/load",
@@ -152,8 +171,7 @@ READER_PHASE_SPECS = (
             "FC2_post_scatter_sync",
         ),
         "aggregation_formula": (
-            "sum_tasks_tiles[(max(E0..E3)-min(D0..D3)) + "
-            "(max(F0..F3)-max(E0..E3))]"
+            "sum_tasks_tiles[(max(E0..E3)-min(D0..D3)) + (max(F0..F3)-max(E0..E3))]"
         ),
         "included_work": (
             "atomic scatter loop",
@@ -209,7 +227,10 @@ def artifact_hash(capture: dict[str, Any], suffix: str) -> str:
 
 
 def capture_gate(capture: dict[str, Any], arm: str) -> dict[str, Any]:
-    if capture.get("arm") != arm or capture.get("schema") != "exp006.completion-capture.v1":
+    if (
+        capture.get("arm") != arm
+        or capture.get("schema") != "exp006.completion-capture.v1"
+    ):
         raise ValueError(f"{arm}: capture identity mismatch")
     runs = capture.get("runs", [])
     eager = capture.get("eager", {})
@@ -271,8 +292,12 @@ def parse_static(root: Path, arm: str, capture: dict[str, Any]) -> dict[str, Any
         for match in SASS_RE.finditer(sass.read_text())
     ]
     counts = Counter(row["opcode"] for row in instructions)
-    local_load = sum(value for opcode, value in counts.items() if opcode.startswith("LDL"))
-    local_store = sum(value for opcode, value in counts.items() if opcode.startswith("STL"))
+    local_load = sum(
+        value for opcode, value in counts.items() if opcode.startswith("LDL")
+    )
+    local_store = sum(
+        value for opcode, value in counts.items() if opcode.startswith("STL")
+    )
     omma = sum(value for opcode, value in counts.items() if opcode.startswith("OMMA"))
     cs2r = sum(value for opcode, value in counts.items() if opcode.startswith("CS2R"))
     spill_annotations = elf.read_text().count("SpillRefill")
@@ -285,7 +310,9 @@ def parse_static(root: Path, arm: str, capture: dict[str, Any]) -> dict[str, Any
         "elf": sha256(elf),
     }
     tool_checks = {
-        name: bool(tool.get("resolved_path") and tool.get("sha256") and tool.get("version"))
+        name: bool(
+            tool.get("resolved_path") and tool.get("sha256") and tool.get("version")
+        )
         for name, tool in provenance.get("tools", {}).items()
     }
     checks = {
@@ -293,8 +320,7 @@ def parse_static(root: Path, arm: str, capture: dict[str, Any]) -> dict[str, Any
         "ptx_matches_capture": ptx_hash == expected_ptx,
         "sass_has_kernel": "MoEDynamicKernel" in sass.read_text(),
         "spill_annotation_closure": spill_annotations == local_load + local_store,
-        "provenance_schema": provenance.get("schema")
-        == "exp006.static-provenance.v1",
+        "provenance_schema": provenance.get("schema") == "exp006.static-provenance.v1",
         "provenance_arm": provenance.get("arm") == arm,
         "provenance_capture": provenance.get("capture_json", {}).get("sha256")
         == sha256(root / "raw" / arm / "capture.json"),
@@ -308,8 +334,7 @@ def parse_static(root: Path, arm: str, capture: dict[str, Any]) -> dict[str, Any
         .get("ptx", {})
         .get("sha256")
         == expected_ptx,
-        "provenance_derived_artifacts": provenance.get("artifacts")
-        == derived_hashes,
+        "provenance_derived_artifacts": provenance.get("artifacts") == derived_hashes,
         "provenance_tools": set(tool_checks) == {"nvdisasm", "cuobjdump"}
         and all(tool_checks.values()),
         "provenance_commands": set(provenance.get("commands", {}))
@@ -341,7 +366,9 @@ def parse_static(root: Path, arm: str, capture: dict[str, Any]) -> dict[str, Any
 
 
 def _store_offset_bytes(row: dict[str, Any]) -> int | None:
-    match = re.search(r"desc\[UR22\]\[[^\]]*?(?:\+0x([0-9a-fA-F]+))?\]", row["operands"])
+    match = re.search(
+        r"desc\[UR22\]\[[^\]]*?(?:\+0x([0-9a-fA-F]+))?\]", row["operands"]
+    )
     if match is None:
         return None
     return int(match.group(1), 16) if match.group(1) else 0
@@ -351,14 +378,11 @@ def _has_affine_event_address(rows: list[dict[str, Any]]) -> bool:
     operands = [row["operands"] for row in rows]
     return (
         any(
-            row["opcode"] == "UIMAD"
-            and "UR11, 0x153, UR7" in row["operands"]
+            row["opcode"] == "UIMAD" and "UR11, 0x153, UR7" in row["operands"]
             for row in rows
         )
         and any(
-            row["opcode"] == "UIMAD"
-            and "UR5, 0x14" in row["operands"]
-            for row in rows
+            row["opcode"] == "UIMAD" and "UR5, 0x14" in row["operands"] for row in rows
         )
         and any(
             row["opcode"].startswith("IADD3") and ", 0x9," in row["operands"]
@@ -383,8 +407,7 @@ def boundary_proof(static: dict[str, Any]) -> dict[str, Any]:
         "compute_warp_range_w0_w3": by_pc.get(0x3F00, {}).get("opcode")
         == "UISETP.GT.AND"
         and "UR7, 0x3" in by_pc.get(0x3F00, {}).get("operands", ""),
-        "lane0_predicate_definition": by_pc.get(0x130B0, {}).get("opcode")
-        == "LOP3.LUT"
+        "lane0_predicate_definition": by_pc.get(0x130B0, {}).get("opcode") == "LOP3.LUT"
         and by_pc.get(0x130B0, {}).get("operands", "").startswith("P1,"),
         "lane0_predicate_stable_through_fc2": not any(
             row["operands"].startswith("P1,")
@@ -419,7 +442,9 @@ def boundary_proof(static: dict[str, Any]) -> dict[str, Any]:
         for name in marker_names:
             timer = by_pc[sealed[name]]
             store = by_pc[sealed[f"{name}_store"]]
-            address_rows = instructions[index[sealed[name]] : index[sealed[f"{name}_store"]] + 1]
+            address_rows = instructions[
+                index[sealed[name]] : index[sealed[f"{name}_store"]] + 1
+            ]
             timer_register = timer["operands"].split(",", 1)[0]
             marker_checks[name] = {
                 "timer_is_lane0_globaltimer": timer["opcode"] == "CS2R"
@@ -440,17 +465,11 @@ def boundary_proof(static: dict[str, Any]) -> dict[str, Any]:
                 "warp_indexed_affine_address": _has_affine_event_address(
                     address_rows
                     if name != "C"
-                    else instructions[
-                        index[sealed["A"]] : index[sealed["A_store"]] + 1
-                    ]
+                    else instructions[index[sealed["A"]] : index[sealed["A_store"]] + 1]
                 ),
             }
-        issue_omma_count = sum(
-            row["opcode"].startswith("OMMA") for row in issue
-        )
-        materialize_sts_count = sum(
-            row["opcode"].startswith("STS") for row in before_d
-        )
+        issue_omma_count = sum(row["opcode"].startswith("OMMA") for row in issue)
+        materialize_sts_count = sum(row["opcode"].startswith("STS") for row in before_d)
         scatter_reduction_count = sum(
             row["opcode"].startswith(("REDG", "ATOMG")) for row in scatter
         )
@@ -463,9 +482,9 @@ def boundary_proof(static: dict[str, Any]) -> dict[str, Any]:
                 and by_pc[ordered_pcs[index[sealed["A_store"]] + 1]][
                     "opcode"
                 ].startswith("SYNCS.PHASECHK")
-                and by_pc[ordered_pcs[index[sealed["A_store"]] + 1]][
-                    "opcode"
-                ].endswith("TRYWAIT")
+                and by_pc[ordered_pcs[index[sealed["A_store"]] + 1]]["opcode"].endswith(
+                    "TRYWAIT"
+                )
             ),
             "issue_has_64_omma": issue_omma_count == 64,
             "c_after_last_omma_issue": previous >= 0
@@ -503,10 +522,17 @@ def boundary_proof(static: dict[str, Any]) -> dict[str, Any]:
             "f_immediately_after_post_barrier": index[f_pc] == index[post_bar_pc] + 1
             and by_pc[f_pc]["opcode"] == "CS2R",
             "ordered": (
-                index[a_pc] < index[sealed["A_store"]] < index[c_pc]
-                < index[sealed["C_store"]] < index[pre_bar_pc] < index[d_pc]
-                < index[sealed["D_store"]] < index[e_pc]
-                < index[sealed["E_store"]] < index[post_bar_pc] < index[f_pc]
+                index[a_pc]
+                < index[sealed["A_store"]]
+                < index[c_pc]
+                < index[sealed["C_store"]]
+                < index[pre_bar_pc]
+                < index[d_pc]
+                < index[sealed["D_store"]]
+                < index[e_pc]
+                < index[sealed["E_store"]]
+                < index[post_bar_pc]
+                < index[f_pc]
                 < index[sealed["F_store"]]
             ),
         }
@@ -522,8 +548,7 @@ def boundary_proof(static: dict[str, Any]) -> dict[str, Any]:
                     "post_barrier": hex(post_bar_pc),
                     "F": hex(f_pc),
                     "stores": {
-                        name: hex(sealed[f"{name}_store"])
-                        for name in marker_names
+                        name: hex(sealed[f"{name}_store"]) for name in marker_names
                     },
                 },
                 "event_address": {
@@ -644,9 +669,7 @@ def build_phase_ownership_audit(
     markers_by_phase = {row["phase"]: row for row in marker_interval_rows}
     proof_records = proof.get("records", [])
     expected_components = [
-        component
-        for spec in READER_PHASE_SPECS
-        for component in spec["components"]
+        component for spec in READER_PHASE_SPECS for component in spec["components"]
     ]
     closure = aggregate["fc2_envelope_closure"]
     required_static_hashes = ("cubin", "ptx", "sass", "resource", "elf", "provenance")
@@ -676,7 +699,9 @@ def build_phase_ownership_audit(
         )
         required_sass_checks = {
             name: len(proof_records) == 4
-            and all(record.get("checks", {}).get(name) is True for record in proof_records)
+            and all(
+                record.get("checks", {}).get(name) is True for record in proof_records
+            )
             for name in spec["required_sass_checks"]
         }
         checks = {
@@ -703,9 +728,7 @@ def build_phase_ownership_audit(
             "component_gates_pass": row.get("component_gates_pass") is True
             and all(
                 markers_by_phase.get(component, {}).get("marker_cost_gate_pass")
-                and markers_by_phase.get(component, {}).get(
-                    "replay_share_cv_gate_pass"
-                )
+                and markers_by_phase.get(component, {}).get("replay_share_cv_gate_pass")
                 for component in spec["components"]
             ),
             "required_source_sass_coverage": all(source_sass_checks.values())
@@ -793,22 +816,19 @@ def main() -> int:
     if output.exists():
         raise FileExistsError(f"immutable evidence output exists: {output}")
 
-    captures = {
-        arm: read_json(results / "raw" / arm / "capture.json") for arm in ARMS
-    }
+    captures = {arm: read_json(results / "raw" / arm / "capture.json") for arm in ARMS}
     capture_gates = {arm: capture_gate(captures[arm], arm) for arm in ARMS}
     if not all(gate["gate_pass"] for gate in capture_gates.values()):
         raise ValueError(f"capture gate failed: {capture_gates}")
-    if captures[ARMS[0]]["descriptor_order_sha256"] != captures[ARMS[1]][
-        "descriptor_order_sha256"
-    ]:
+    if (
+        captures[ARMS[0]]["descriptor_order_sha256"]
+        != captures[ARMS[1]]["descriptor_order_sha256"]
+    ):
         raise ValueError("cross-arm descriptor order mismatch")
     if captures[ARMS[0]]["reference_sha256"] != captures[ARMS[1]]["reference_sha256"]:
         raise ValueError("cross-arm reference mismatch")
 
-    static = {
-        arm: parse_static(results, arm, captures[arm]) for arm in ARMS
-    }
+    static = {arm: parse_static(results, arm, captures[arm]) for arm in ARMS}
     if not all(item["gate_pass"] for item in static.values()):
         raise ValueError("static identity gate failed")
     proof = boundary_proof(static["completion_anchored_probe"])
@@ -816,8 +836,7 @@ def main() -> int:
         raise ValueError("SASS boundary proof failed")
 
     ncu = {
-        arm: ncu_row(results / "raw" / "ncu" / arm / "native_raw.csv")
-        for arm in ARMS
+        arm: ncu_row(results / "raw" / "ncu" / arm / "native_raw.csv") for arm in ARMS
     }
     ncu_capture_hashes = {}
     ncu_capture_gates = {}
@@ -842,8 +861,7 @@ def main() -> int:
             raise ValueError(f"{arm}: NCU/timing capture identity mismatch")
         ncu_capture_hashes[arm] = artifact_hash(profile_capture, ".cubin")
         if (
-            ncu_capture_hashes[arm]
-            != artifact_hash(captures[arm], ".cubin")
+            ncu_capture_hashes[arm] != artifact_hash(captures[arm], ".cubin")
             or ncu_capture_hashes[arm] != EXPECTED_CUBINS[arm]
         ):
             raise ValueError(f"{arm}: NCU cubin differs from timing cubin")
@@ -890,7 +908,8 @@ def main() -> int:
         "ncu_launch_smem_unchanged": ncu_launch[ARMS[0]]["shared_mem_per_block_bytes"]
         == ncu_launch[ARMS[1]]["shared_mem_per_block_bytes"],
         "ncu_launch_shape_unchanged": (
-            ncu_launch[ARMS[0]]["grid_z"], ncu_launch[ARMS[0]]["block_threads"]
+            ncu_launch[ARMS[0]]["grid_z"],
+            ncu_launch[ARMS[0]]["block_threads"],
         )
         == (ncu_launch[ARMS[1]]["grid_z"], ncu_launch[ARMS[1]]["block_threads"]),
         "stack_abs_drift_le_25pct": abs(stack_drift) <= 0.25,
@@ -905,7 +924,9 @@ def main() -> int:
         timing, captures["completion_anchored_probe"], results
     )
     if not sealed_timing_gate["gate_pass"]:
-        raise ValueError(f"completion timing identity gate failed: {sealed_timing_gate}")
+        raise ValueError(
+            f"completion timing identity gate failed: {sealed_timing_gate}"
+        )
     aggregate = timing["aggregate"]
     replay_count = int(aggregate["replays"])
     marker_interval_rows = []
@@ -940,18 +961,17 @@ def main() -> int:
             "FC2_post_scatter_sync",
         ).index(row["phase"])
     )
-    marker_phase_gate = all(
-        row["marker_cost_gate_pass"] and row["replay_share_cv_gate_pass"]
-        for row in marker_interval_rows
-    ) and aggregate["fc2_envelope_closure"]["pass"]
+    marker_phase_gate = (
+        all(
+            row["marker_cost_gate_pass"] and row["replay_share_cv_gate_pass"]
+            for row in marker_interval_rows
+        )
+        and aggregate["fc2_envelope_closure"]["pass"]
+    )
     reader_phase_rows = []
-    aggregate_additive_ns = aggregate["fc2_envelope_closure"][
-        "additive_phase_sum_ns"
-    ]
+    aggregate_additive_ns = aggregate["fc2_envelope_closure"]["additive_phase_sum_ns"]
     aggregate_denominator_ns = aggregate["sm_equivalent_denominator_ns"]
-    marker_rows_by_phase = {
-        row["phase"]: row for row in marker_interval_rows
-    }
+    marker_rows_by_phase = {row["phase"]: row for row in marker_interval_rows}
     for spec in READER_PHASE_SPECS:
         components = spec["components"]
         duration_ns = sum(aggregate["phase_totals_ns"][name] for name in components)
@@ -962,12 +982,8 @@ def main() -> int:
                 "components": list(components),
                 "includes": ", ".join(spec["included_work"]),
                 "aggregate_duration_ns": duration_ns,
-                "wall_equivalent_us": duration_ns
-                / (replay_count * GRID_Z)
-                / 1000.0,
-                "fc2_additive_share_pct": duration_ns
-                / aggregate_additive_ns
-                * 100.0,
+                "wall_equivalent_us": duration_ns / (replay_count * GRID_Z) / 1000.0,
+                "fc2_additive_share_pct": duration_ns / aggregate_additive_ns * 100.0,
                 "sm_equivalent_share_pct": duration_ns
                 / aggregate_denominator_ns
                 * 100.0,
@@ -1001,9 +1017,7 @@ def main() -> int:
         "provider": "%globaltimer explicit timestamp probe",
         "timestamp_unit": "globaltimer_ns",
         "rollup": "SM-equivalent additive time",
-        "formula": (
-            "sum_replays[grid_z * (max(all CTA final) - min(all CTA entry))]"
-        ),
+        "formula": ("sum_replays[grid_z * (max(all CTA final) - min(all CTA entry))]"),
         "grid_z": GRID_Z,
         "replay_count": replay_count,
         "per_replay_global_wall_ns": per_replay_global_wall_ns,
@@ -1027,7 +1041,9 @@ def main() -> int:
 
     closure = aggregate["fc2_envelope_closure"]
     additive_wall_us = sum(row["wall_equivalent_us"] for row in reader_phase_rows)
-    residual_wall_us = closure["intertile_residual_ns"] / (replay_count * GRID_Z) / 1000.0
+    residual_wall_us = (
+        closure["intertile_residual_ns"] / (replay_count * GRID_Z) / 1000.0
+    )
     envelope_wall_us = closure["envelope_sum_ns"] / (replay_count * GRID_Z) / 1000.0
     denominator_ns = float(aggregate["sm_equivalent_denominator_ns"])
     additive_sm_share = closure["additive_phase_sum_ns"] / denominator_ns * 100.0
@@ -1042,10 +1058,16 @@ def main() -> int:
             "native_csv": arm_root / "native_raw.csv",
             "capture_json": arm_root / "capture" / "capture.json",
         }
-        if any(not path.is_file() or path.stat().st_size == 0 for path in paths.values()):
+        if any(
+            not path.is_file() or path.stat().st_size == 0 for path in paths.values()
+        ):
             raise ValueError(f"{arm}: incomplete NCU artifact set")
         ncu_artifacts[arm] = {
-            name: {"path": str(path), "sha256": sha256(path), "size": path.stat().st_size}
+            name: {
+                "path": str(path),
+                "sha256": sha256(path),
+                "size": path.stat().st_size,
+            }
             for name, path in paths.items()
         }
 

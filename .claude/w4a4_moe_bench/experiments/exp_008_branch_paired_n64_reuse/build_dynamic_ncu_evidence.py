@@ -164,9 +164,7 @@ def validate_prerequisites() -> dict[str, Any]:
             "source_sha256": source["overlay_sha256"],
             "cubin_sha256": preparation["cubin_sha256"][0],
             "kernel_symbol": static_case["identity"]["kernel_symbol"],
-            "registers_per_thread": static_case["resource"][
-                "registers_per_thread"
-            ],
+            "registers_per_thread": static_case["resource"]["registers_per_thread"],
             "total_shared_bytes_per_cta": static_case["resource"][
                 "total_shared_bytes_per_cta"
             ],
@@ -187,7 +185,9 @@ def validate_prerequisites() -> dict[str, Any]:
     }
 
 
-def analyze_arm(arm: str, prerequisite: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
+def analyze_arm(
+    arm: str, prerequisite: dict[str, Any]
+) -> tuple[dict[str, Any], dict[str, Any]]:
     root = capture_root(arm)
     report = root / "trace.ncu-rep"
     native_csv = root / "native_raw.csv"
@@ -196,8 +196,7 @@ def analyze_arm(arm: str, prerequisite: dict[str, Any]) -> tuple[dict[str, Any],
     identity = read_json(identity_path)
     dynamic = read_json(dynamic_path)
     api = {
-        name: validate_veloq_envelope(root / "veloq_api" / name)
-        for name in VELOQ_FILES
+        name: validate_veloq_envelope(root / "veloq_api" / name) for name in VELOQ_FILES
     }
 
     metrics = dynamic.get("metrics", {})
@@ -219,8 +218,7 @@ def analyze_arm(arm: str, prerequisite: dict[str, Any]) -> tuple[dict[str, Any],
         "m8192": dynamic.get("m") == 8192,
         "canonical_fixture": dynamic.get("fixture") == "canonical",
         "metric_ids": all(metric_id_checks.values()),
-        "kernel_symbol": observed.get("kernel_symbol")
-        == prerequisite["kernel_symbol"],
+        "kernel_symbol": observed.get("kernel_symbol") == prerequisite["kernel_symbol"],
         "grid": observed.get("grid") == [1, 1, 110],
         "block": observed.get("block") == [288, 1, 1],
         "registers_match_static": native_values["registers_per_thread"]
@@ -243,8 +241,7 @@ def analyze_arm(arm: str, prerequisite: dict[str, Any]) -> tuple[dict[str, Any],
         "internal_arm": identity.get("internal_arm") == HARNESS_ARM[arm],
         "overlay_sha256": identity.get("overlay_sha256")
         == prerequisite["source_sha256"],
-        "cubin_sha256": identity.get("cubin_sha256")
-        == prerequisite["cubin_sha256"],
+        "cubin_sha256": identity.get("cubin_sha256") == prerequisite["cubin_sha256"],
         "kernel_symbol": identity.get("expected_kernel_symbol")
         == prerequisite["kernel_symbol"],
         "gpu_uuid": identity.get("expected_gpu_uuid") == prerequisite["gpu_uuid"],
@@ -321,8 +318,10 @@ def analyze_arm(arm: str, prerequisite: dict[str, Any]) -> tuple[dict[str, Any],
     }
     veloq_checks["metric_values_match_native"] = veloq_values == native_by_metric_id
 
-    gate = all(native_checks.values()) and all(identity_checks.values()) and all(
-        veloq_checks.values()
+    gate = (
+        all(native_checks.values())
+        and all(identity_checks.values())
+        and all(veloq_checks.values())
     )
     spill_values = {label: native_values[label] for label in SPILL_METRICS}
     payload = {
@@ -380,9 +379,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--output", type=Path, default=RESULTS / "dynamic_ncu_evidence.json"
     )
-    parser.add_argument(
-        "--csv", type=Path, default=RESULTS / "dynamic_ncu_summary.csv"
-    )
+    parser.add_argument("--csv", type=Path, default=RESULTS / "dynamic_ncu_summary.csv")
     args = parser.parse_args(argv)
 
     prerequisites = validate_prerequisites()
@@ -408,14 +405,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         payload, row = analyze_arm(arm, prerequisites["arms"][arm])
         cases[arm] = payload
         rows.append(row)
-    tensor_equal = len(
-        {
-            cases[arm]["metrics"]["tensor_instructions"]["value"] for arm in ARMS
-        }
-    ) == 1
-    fp4_equal = len(
-        {cases[arm]["metrics"]["fp4_tensor_ops"]["value"] for arm in ARMS}
-    ) == 1
+    tensor_equal = (
+        len({cases[arm]["metrics"]["tensor_instructions"]["value"] for arm in ARMS})
+        == 1
+    )
+    fp4_equal = (
+        len({cases[arm]["metrics"]["fp4_tensor_ops"]["value"] for arm in ARMS}) == 1
+    )
     cross_checks = {
         "all_arm_evidence_gates": all(cases[arm]["gate_pass"] for arm in ARMS),
         "all_arms_same_executed_tensor_instructions": tensor_equal,
@@ -445,7 +441,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             "per arm. They do not establish end-to-end latency or run-to-run variance."
         ),
     }
-    args.output.resolve().write_text(json.dumps(output, indent=2, sort_keys=True) + "\n")
+    args.output.resolve().write_text(
+        json.dumps(output, indent=2, sort_keys=True) + "\n"
+    )
     write_summary(rows, args.csv.resolve())
     print(json.dumps({"arm_count": len(cases), "gate_pass": gate}, sort_keys=True))
     return 0 if gate else 2

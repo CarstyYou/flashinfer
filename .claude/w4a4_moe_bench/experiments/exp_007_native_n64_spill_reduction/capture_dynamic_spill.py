@@ -39,12 +39,8 @@ SECTION_IDS = (
 SPILL_METRICS = {
     "spill_refill_instructions": "sass__inst_executed_register_spilling_op_read",
     "spill_store_instructions": "sass__inst_executed_register_spilling_op_write",
-    "spill_refill_bytes": (
-        "sass__inst_executed_register_spilling_mem_local_op_read"
-    ),
-    "spill_store_bytes": (
-        "sass__inst_executed_register_spilling_mem_local_op_write"
-    ),
+    "spill_refill_bytes": ("sass__inst_executed_register_spilling_mem_local_op_read"),
+    "spill_store_bytes": ("sass__inst_executed_register_spilling_mem_local_op_write"),
 }
 
 CUSTOM_METRICS = {
@@ -57,9 +53,7 @@ CUSTOM_METRICS = {
     "shared_mem_per_block_bytes": "launch__shared_mem_per_block",
     # Runtime configured limit; this is deliberately not used as static STACK.
     "configured_stack_limit_bytes": "launch__stack_size",
-    "achieved_occupancy_pct": (
-        "sm__warps_active.avg.pct_of_peak_sustained_active"
-    ),
+    "achieved_occupancy_pct": ("sm__warps_active.avg.pct_of_peak_sustained_active"),
 }
 
 ALL_METRICS = {**SPILL_METRICS, **CUSTOM_METRICS}
@@ -279,11 +273,11 @@ def capture(args: argparse.Namespace) -> None:
         if observed["grid"] != [1, 1, 110] or observed["block"] != [288, 1, 1]:
             raise RuntimeError(f"profiled launch geometry drift: {observed}")
 
-        spill_values = {
-            name: metrics[name]["value"] for name in SPILL_METRICS
-        }
+        spill_values = {name: metrics[name]["value"] for name in SPILL_METRICS}
         dynamic_zero_spill = all(value == 0 for value in spill_values.values())
-        profile_target = canonical / "profile_targets" / internal / "m8192" / "target.json"
+        profile_target = (
+            canonical / "profile_targets" / internal / "m8192" / "target.json"
+        )
         target_payload = read_json(profile_target)
         if target_payload.get("jit_artifact_set_sha256") != preparation.get(
             "jit_artifact_set_sha256"

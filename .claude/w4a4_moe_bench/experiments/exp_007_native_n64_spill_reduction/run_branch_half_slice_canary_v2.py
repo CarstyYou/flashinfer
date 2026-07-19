@@ -27,17 +27,13 @@ def install_scaled_route_weights() -> None:
 
         def make_case(args):
             fixture_module, fixture, weights = original_make_case(args)
-            topk_weights = (
-                fixture.topk_weights * SCATTER_OUTPUT_SCALE
-            ).contiguous()
+            topk_weights = (fixture.topk_weights * SCATTER_OUTPUT_SCALE).contiguous()
             manifest = dict(fixture.manifest)
             manifest.update(
                 {
                     "canary_revision": "v2_final_scatter_scale",
                     "scatter_output_scale": SCATTER_OUTPUT_SCALE,
-                    "topk_weights_sha256": fixture_module.tensor_sha256(
-                        topk_weights
-                    ),
+                    "topk_weights_sha256": fixture_module.tensor_sha256(topk_weights),
                     "topk_weight_sum": float(topk_weights[0].sum().item()),
                     "strict_thresholds_changed": False,
                     "kernel_compute_payload_changed_from_v0": False,

@@ -319,9 +319,7 @@ def test_regressions_use_cta_max_tail_and_all_same_warp_durations() -> None:
     assert per_warp["sample_count"] == 128
     assert per_warp["warps"] == ["W0", "W1", "W2", "W3"]
     assert per_warp["same_warp_edge"] == "Ei-Di"
-    assert per_warp["fit"]["slope_ns_per_row"] == pytest.approx(
-        1.0369318181818181
-    )
+    assert per_warp["fit"]["slope_ns_per_row"] == pytest.approx(1.0369318181818181)
     assert "warp_scatter_task_total_vs_actual_rows" not in regressions
 
     fit = linear_regression([1, 2, 3], [3, 5, 7])

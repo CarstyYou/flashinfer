@@ -68,7 +68,9 @@ def load_case(
     directory = case_path(root, arm, m, fixture)
     preparation = read_json(directory / "preparation.json")
     outputs = [
-        torch.load(directory / f"output_{replay}.pt", map_location="cpu", weights_only=True)
+        torch.load(
+            directory / f"output_{replay}.pt", map_location="cpu", weights_only=True
+        )
         for replay in range(2)
     ]
     return preparation, outputs
@@ -126,8 +128,7 @@ def build_case(
         for anchor in outputs[ANCHOR]
     ]
     candidate_worst = {
-        metric: max(value[metric] for value in comparisons)
-        for metric in anchor_drift
+        metric: max(value[metric] for value in comparisons) for metric in anchor_drift
     }
     strict = evaluate_cross_arm_correctness(
         anchor_drift, candidate_drift, candidate_worst

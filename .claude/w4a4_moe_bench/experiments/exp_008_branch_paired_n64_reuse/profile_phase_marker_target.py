@@ -48,9 +48,7 @@ from exp008_marker_common import (  # noqa: E402
 WARMUPS = 5
 
 
-def _artifact_hashes(
-    artifacts: Sequence[Mapping[str, Any]], suffix: str
-) -> list[str]:
+def _artifact_hashes(artifacts: Sequence[Mapping[str, Any]], suffix: str) -> list[str]:
     values = [
         str(item.get("sha256"))
         for item in artifacts
@@ -203,8 +201,7 @@ def profile(args: argparse.Namespace) -> dict[str, Any]:
     }
     if not all(binary_checks.values()):
         raise RuntimeError(
-            "profile binary/PTX identity != standalone timing capture: "
-            f"{binary_checks}"
+            f"profile binary/PTX identity != standalone timing capture: {binary_checks}"
         )
 
     payload = {
@@ -225,9 +222,9 @@ def profile(args: argparse.Namespace) -> dict[str, Any]:
             "kernel": "MoEDynamicKernel",
         },
         "standalone_timing_capture": str(args.timing_capture.resolve()),
-        "standalone_timing_artifact_set_sha256": timing_capture[
-            "jit_identity_gate"
-        ]["artifact_set_sha256"],
+        "standalone_timing_artifact_set_sha256": timing_capture["jit_identity_gate"][
+            "artifact_set_sha256"
+        ],
         "profile_jit_artifact_set_sha256": artifact_gate["artifact_set_sha256"],
         "profile_jit_artifacts": artifacts,
         "binary_identity_checks": binary_checks,

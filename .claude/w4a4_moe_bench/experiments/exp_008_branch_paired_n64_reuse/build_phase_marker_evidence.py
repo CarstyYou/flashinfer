@@ -243,7 +243,7 @@ def _paired_capture_identity_gate(
 
 
 def _cross_version_identity_gate(
-    captures: Mapping[str, Mapping[str, Mapping[str, Any]]]
+    captures: Mapping[str, Mapping[str, Mapping[str, Any]]],
 ) -> dict[str, Any]:
     v0 = captures["v0"][PROBE]
     v1 = captures["v1"][PROBE]
@@ -261,10 +261,8 @@ def _cross_version_identity_gate(
     ]
     checks = {
         "event_abi": v0.get("event_abi") == v1.get("event_abi") == EVENT_ABI,
-        "fixture": canonical_sha256(v0["fixture"])
-        == canonical_sha256(v1["fixture"]),
-        "weights": canonical_sha256(v0["weights"])
-        == canonical_sha256(v1["weights"]),
+        "fixture": canonical_sha256(v0["fixture"]) == canonical_sha256(v1["fixture"]),
+        "weights": canonical_sha256(v0["weights"]) == canonical_sha256(v1["weights"]),
         "reference": v0.get("reference_sha256") == v1.get("reference_sha256"),
         "runtime": all(
             v0_runtime.get(field) == v1_runtime.get(field)
@@ -272,8 +270,7 @@ def _cross_version_identity_gate(
             for field in RUNTIME_IDENTITY_FIELDS
         ),
         "gpu": all(
-            v0_runtime.get("gpu", {}).get(field)
-            == v1_runtime.get("gpu", {}).get(field)
+            v0_runtime.get("gpu", {}).get(field) == v1_runtime.get("gpu", {}).get(field)
             and v0_runtime.get("gpu", {}).get(field) is not None
             for field in GPU_IDENTITY_FIELDS
         ),
@@ -283,9 +280,7 @@ def _cross_version_identity_gate(
         == v1_manifest["base"].get("wrapper_sha256"),
         "probe_dispatch": v0["source"].get("dispatch_sha256")
         == v1["source"].get("dispatch_sha256"),
-        "normalized_dispatch": v0_manifest["overlay"].get(
-            "normalized_dispatch_sha256"
-        )
+        "normalized_dispatch": v0_manifest["overlay"].get("normalized_dispatch_sha256")
         == v1_manifest["overlay"].get("normalized_dispatch_sha256"),
         "four_independent_jit_namespaces": all(
             all(namespace) for namespace in all_jit_namespaces
@@ -349,16 +344,14 @@ def _resource_capture_identity_gate(
         if str(artifact.get("path", "")).endswith(".cubin")
     }
     checks = {
-        "kernel_source": identity["kernel_source_sha256"]
-        == source["kernel_sha256"],
+        "kernel_source": identity["kernel_source_sha256"] == source["kernel_sha256"],
         "dispatch_source": identity["dispatch_source_sha256"]
         == source["dispatch_sha256"],
         "jit_artifact_set": identity["jit_artifact_set_sha256"]
         == capture["jit_identity_gate"].get("artifact_set_sha256"),
         "gpu_uuid": identity["gpu_uuid"]
         == capture["runtime"].get("gpu", {}).get("uuid"),
-        "cubin_in_capture_jit_artifacts": identity["cubin_sha256"]
-        in capture_cubins,
+        "cubin_in_capture_jit_artifacts": identity["cubin_sha256"] in capture_cubins,
         "kernel_symbol_static_ncu_exact": identity["kernel_symbol"]
         == identity["static_kernel_symbol"]
         == identity["ncu_kernel_symbol"],
@@ -427,9 +420,7 @@ def _phase_gates(probe: Mapping[str, Any]) -> dict[str, Any]:
             ratio = math.inf if per_unit <= 0 else 100.0 * calibration / per_unit
             marker_cost_pct.setdefault(phase, []).append(ratio)
     phase_cv = {phase: _cv_pct(values) for phase, values in samples.items()}
-    cost_max = {
-        phase: max(values) for phase, values in marker_cost_pct.items()
-    }
+    cost_max = {phase: max(values) for phase, values in marker_cost_pct.items()}
     if len(grid_sizes) != 1 or next(iter(grid_sizes), 0) <= 0:
         raise PerturbationContractError(
             f"phase replay grid_z drift: {sorted(grid_sizes)}"
@@ -515,11 +506,11 @@ def evaluate_version(
     phase_gates = _phase_gates(probe_capture)
 
     hard_stop = (
-        perturbation_pct > 10.0
-        or not occupancy_same
-        or max_resource_drift > 50.0
+        perturbation_pct > 10.0 or not occupancy_same or max_resource_drift > 50.0
     )
-    spill_transition = control_zero != probe_zero or not all(exact_spill_identity.values())
+    spill_transition = control_zero != probe_zero or not all(
+        exact_spill_identity.values()
+    )
     quantitative = (
         not hard_stop
         and perturbation_pct <= 5.0
@@ -564,9 +555,7 @@ def evaluate_version(
     }
 
 
-def build(
-    capture_root: Path, resource_root: Path, output: Path
-) -> dict[str, Any]:
+def build(capture_root: Path, resource_root: Path, output: Path) -> dict[str, Any]:
     versions = {}
     all_captures: dict[str, dict[str, Mapping[str, Any]]] = {}
     for version in VERSIONS:

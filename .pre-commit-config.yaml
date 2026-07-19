@@ -57,6 +57,11 @@ repos:
     hooks:
       # Run the linter.
       - id: ruff-check
+        # These files are immutable source-identity artifacts tied to measured
+        # cubins, or the canonical working copy used to create those artifacts.
+        # Reformatting them would invalidate their recorded SHA-256 identities.
+        exclude: ^\.claude/w4a4_moe_bench/(moe_dynamic_kernel[^/]*\.py|experiments/[^/]+/results/(overlays|marker_overlays)/.*\.py)$
       # Run the formatter.
       - id: ruff-format
         types_or: [ python, pyi ]
+        exclude: ^\.claude/w4a4_moe_bench/(moe_dynamic_kernel[^/]*\.py|experiments/[^/]+/results/(overlays|marker_overlays)/.*\.py)$

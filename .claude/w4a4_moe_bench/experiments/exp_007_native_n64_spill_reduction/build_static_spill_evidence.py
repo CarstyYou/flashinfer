@@ -37,9 +37,7 @@ RESOURCE_RE = re.compile(
 FRAME_RE = re.compile(r"frame size:\s*0x([0-9a-fA-F]+)")
 MIN_STACK_RE = re.compile(r"min stack size:\s*0x([0-9a-fA-F]+)")
 ELF_FUNCTION_RE = re.compile(r"function:\s*(\S+?)\(0x[0-9a-fA-F]+\)")
-SPILL_ANNOTATION_RE = re.compile(
-    r"SpillRefill\s*:\s*Offset\s*:\s*0x([0-9a-fA-F]+)"
-)
+SPILL_ANNOTATION_RE = re.compile(r"SpillRefill\s*:\s*Offset\s*:\s*0x([0-9a-fA-F]+)")
 SASS_INSTRUCTION_RE = re.compile(
     r"/\*\s*([0-9a-fA-F]+)\s*\*/\s+"
     r"(?:@[!A-Za-z0-9.]+\s+)?([A-Z][A-Z0-9_.]*)\s*(.*?)\s*;"
@@ -127,7 +125,17 @@ class RemoteReader:
 
     def find_one_cubin(self, directory: str) -> str:
         output = self._ssh(
-            ["find", directory, "-maxdepth", "1", "-type", "f", "-name", "*.cubin", "-print"]
+            [
+                "find",
+                directory,
+                "-maxdepth",
+                "1",
+                "-type",
+                "f",
+                "-name",
+                "*.cubin",
+                "-print",
+            ]
         ).stdout.decode()
         matches = [line for line in output.splitlines() if line]
         if len(matches) != 1:
@@ -262,14 +270,10 @@ def analyze_case(
         raise ValueError(f"{spec.label}: duplicate SASS PCs")
 
     local_instructions = [
-        item
-        for item in instructions
-        if str(item["opcode"]).startswith(("LDL", "STL"))
+        item for item in instructions if str(item["opcode"]).startswith(("LDL", "STL"))
     ]
     local_pcs = {int(item["pc"]) for item in local_instructions}
-    annotation_pcs = {
-        int(value, 16) for value in SPILL_ANNOTATION_RE.findall(elf_text)
-    }
+    annotation_pcs = {int(value, 16) for value in SPILL_ANNOTATION_RE.findall(elf_text)}
     annotation_closure = annotation_pcs == local_pcs
     if not annotation_closure:
         raise ValueError(
@@ -394,11 +398,15 @@ def write_csv(path: Path, cases: dict[str, dict[str, Any]]) -> None:
                     "kernel_symbol": identity["kernel_symbol"],
                     **resource,
                     "compiler_spill_refill_annotation_count": spill["annotation_count"],
-                    "local_sass_instruction_count": spill["local_sass_instruction_count"],
+                    "local_sass_instruction_count": spill[
+                        "local_sass_instruction_count"
+                    ],
                     "local_sass_opcode_histogram": json.dumps(
                         spill["local_sass_opcode_histogram"], sort_keys=True
                     ),
-                    "omma_static_instruction_count": omma["omma_static_instruction_count"],
+                    "omma_static_instruction_count": omma[
+                        "omma_static_instruction_count"
+                    ],
                     "omma_static_opcode_histogram": json.dumps(
                         omma["omma_static_opcode_histogram"], sort_keys=True
                     ),
@@ -454,19 +462,21 @@ def main(argv: Sequence[str] | None = None) -> int:
             "remote": args.remote,
             "image": args.image,
             "commands_are_binary_read_only": True,
-            "cuobjdump_version": (
-                cuobjdump_version.stdout + cuobjdump_version.stderr
-            ).decode(errors="replace").strip(),
-            "nvdisasm_version": (
-                nvdisasm_version.stdout + nvdisasm_version.stderr
-            ).decode(errors="replace").strip(),
+            "cuobjdump_version": (cuobjdump_version.stdout + cuobjdump_version.stderr)
+            .decode(errors="replace")
+            .strip(),
+            "nvdisasm_version": (nvdisasm_version.stdout + nvdisasm_version.stderr)
+            .decode(errors="replace")
+            .strip(),
         },
         "cases": cases,
         "cross_case_checks": build_cross_case_checks(cases),
     }
     payload["evidence_sha256"] = canonical_sha256(payload)
     args.output.resolve().parent.mkdir(parents=True, exist_ok=True)
-    args.output.resolve().write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+    args.output.resolve().write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n"
+    )
     write_csv(args.csv.resolve(), cases)
     return 0
 

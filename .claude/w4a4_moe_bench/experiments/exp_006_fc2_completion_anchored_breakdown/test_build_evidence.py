@@ -55,8 +55,7 @@ def _fixture():
         "schema": "exp006.sass-boundary-proof.v2",
         "gate_pass": True,
         "records": [
-            {"checks": dict(all_required_checks), "gate_pass": True}
-            for _ in range(4)
+            {"checks": dict(all_required_checks), "gate_pass": True} for _ in range(4)
         ],
     }
     aggregate = {
@@ -70,12 +69,8 @@ def _fixture():
         },
     }
     source = {
-        "production": {
-            "kernel": {"path": "kernel.py", "sha256": "source-hash"}
-        },
-        "overlays": {
-            "kernel": {"path": "probe-kernel.py", "sha256": "overlay-hash"}
-        },
+        "production": {"kernel": {"path": "kernel.py", "sha256": "source-hash"}},
+        "overlays": {"kernel": {"path": "probe-kernel.py", "sha256": "overlay-hash"}},
     }
     static_hashes = {
         name: f"{name}-hash"
