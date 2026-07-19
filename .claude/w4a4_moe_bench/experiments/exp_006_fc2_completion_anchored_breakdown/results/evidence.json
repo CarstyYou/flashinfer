@@ -1,0 +1,1241 @@
+{
+  "capture_gates": {
+    "completion_anchored_probe": {
+      "checks": {
+        "all_run_contract_gates": true,
+        "all_run_gates": true,
+        "eager_all_contract_gates": true,
+        "eager_no_failed_gates": true,
+        "event_abi_exact": true,
+        "five_replays": true,
+        "jit_identity_gate": true,
+        "no_foreign_process_after": true,
+        "overlay_gate": true
+      },
+      "gate_pass": true
+    },
+    "measurement_no_marker": {
+      "checks": {
+        "all_run_contract_gates": true,
+        "all_run_gates": true,
+        "eager_all_contract_gates": true,
+        "eager_no_failed_gates": true,
+        "event_abi_exact": true,
+        "five_replays": true,
+        "jit_identity_gate": true,
+        "no_foreign_process_after": true,
+        "overlay_gate": true
+      },
+      "gate_pass": true
+    }
+  },
+  "case": {
+    "duplicate_expert_ids": 0,
+    "fixture_kind": "deterministic_synthetic_random_logits",
+    "m": 8192,
+    "occupancy_max": 302,
+    "occupancy_min": 217,
+    "occupancy_p50": 256.0,
+    "occupancy_p95": 281.0,
+    "occupancy_sha256": "5e937225d3ac21770218000ebdedcb62cc211c4444bb260d0838656ca41260bc",
+    "predicted_cutlass_route_branch": "three_step_large_prefix_candidate",
+    "seed": 10218,
+    "shape": {
+      "experts": 256,
+      "hidden": 2048,
+      "intermediate_tp": 512,
+      "topk": 8
+    },
+    "topk_ids_sha256": "f9b3c632d767e754837a14016f5a2ea3c3fccfefef1adee4f9b7b966c68e2f7a",
+    "topk_weights_sha256": "ee885b45d94eee54d3c9114669492419003c914ea3bd1d29dbd58ad765fccb9d",
+    "weight_sum_max_abs_error": 2.384185791015625e-07,
+    "x_sha256": "6c95ae4406b2fc7ad4544936781b71288d98f496a60c58f5695e6dbf868864b4",
+    "zero_token_experts": 0
+  },
+  "classification": "diagnostic_estimate",
+  "event_abi": {
+    "base_consumer": [
+      0,
+      6
+    ],
+    "calibration": [
+      7,
+      8
+    ],
+    "collective_boundaries": {
+      "issue_end": "max(C0..C3)",
+      "scatter_end": "max(E0..E3)",
+      "scatter_start": "min(D0..D3)",
+      "tile_completion": "max(F0..F3)",
+      "tile_start": "max(A0..A3)"
+    },
+    "cta_ticks": 14,
+    "output_tiles": 16,
+    "task_ticks": 339,
+    "tile_base": 9,
+    "tile_completion": "max(F0..F3)",
+    "tile_offsets": {
+      "A0": 0,
+      "A1": 1,
+      "A2": 2,
+      "A3": 3,
+      "C0": 4,
+      "C1": 5,
+      "C2": 6,
+      "C3": 7,
+      "D0": 8,
+      "D1": 9,
+      "D2": 10,
+      "D3": 11,
+      "E0": 12,
+      "E1": 13,
+      "E2": 14,
+      "E3": 15,
+      "F0": 16,
+      "F1": 17,
+      "F2": 18,
+      "F3": 19
+    },
+    "tile_stride": 20,
+    "w4": [
+      329,
+      338
+    ]
+  },
+  "gate_pass": true,
+  "identity": {
+    "capture_json_sha256": {
+      "completion_anchored_probe": "099befe8701e06545e3163ef4cfe15954d62fe6006cc4d09c8bb8766a04c6dc3",
+      "measurement_no_marker": "6fda01c863c5ccc13076b02bb3d90acf0a86be20a7b2a2204c9111c6a33de816"
+    },
+    "completion_timing_sha256": "3c8d64d7d692f339b0ec0d9ac849ca857d0decfadcc9fca801364d541e79200e",
+    "container_image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "descriptor_order_sha256": "36edb9dfbc8133dae05560ad4747f687e1e5ff385150457e78a151c24a740bf4",
+    "gpu_capture_snapshots": {
+      "completion_anchored_probe": {
+        "applications_graphics_clock_mhz": "2377",
+        "compute_capability": [
+          12,
+          0
+        ],
+        "driver": "580.95.05",
+        "foreign_processes_before_cuda_context": [],
+        "graphics_clock_mhz": "2370",
+        "max_graphics_clock_mhz": "3090",
+        "name": "NVIDIA Graphics Device",
+        "pci_bus_id": "00000000:76:00.0",
+        "power_draw_w": "59.39",
+        "sm_count": 110,
+        "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+      },
+      "measurement_no_marker": {
+        "applications_graphics_clock_mhz": "2377",
+        "compute_capability": [
+          12,
+          0
+        ],
+        "driver": "580.95.05",
+        "foreign_processes_before_cuda_context": [],
+        "graphics_clock_mhz": "2370",
+        "max_graphics_clock_mhz": "3090",
+        "name": "NVIDIA Graphics Device",
+        "pci_bus_id": "00000000:76:00.0",
+        "power_draw_w": "58.52",
+        "sm_count": 110,
+        "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+      }
+    },
+    "gpu_identity": {
+      "compute_capability": [
+        12,
+        0
+      ],
+      "driver": "580.95.05",
+      "name": "NVIDIA Graphics Device",
+      "pci_bus_id": "00000000:76:00.0",
+      "sm_count": 110,
+      "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+    },
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "production_source": {
+      "dispatch": {
+        "path": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dispatch.py",
+        "sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4"
+      },
+      "kernel": {
+        "path": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+        "sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+      },
+      "wrapper": {
+        "path": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/b12x_moe.py",
+        "sha256": "bcac806795c035decd0773f4f801d477e7ebf14c1d67c3e49eee42ee0579c0a4"
+      }
+    },
+    "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e"
+  },
+  "latency": {
+    "control_median_us": 1806.3360452651978,
+    "probe_median_us": 1844.864010810852,
+    "probe_overhead_pct": 2.1329345470708194
+  },
+  "phase_timing": {
+    "closure": {
+      "additive_phase_sum_ns": 433192928,
+      "delta_ns": 0,
+      "envelope_sum_ns": 438532736,
+      "intertile_residual_ns": 5339808,
+      "pass": true
+    },
+    "fc2_additive_phase_sm_equivalent_share_pct": 42.90022962891131,
+    "fc2_additive_phase_wall_equivalent_us": 787.6235054545455,
+    "fc2_envelope_sm_equivalent_share_pct": 43.42904479316602,
+    "fc2_envelope_wall_equivalent_us": 797.3322472727273,
+    "fc2_intertile_residual_sm_equivalent_share_pct": 0.5288151642547074,
+    "fc2_intertile_residual_wall_equivalent_us": 9.708741818181817,
+    "gate_pass": true,
+    "marker_intervals": [
+      {
+        "aggregate_duration_ns": 101702560,
+        "duration_replay_cv": 0.002741306199582535,
+        "fc2_additive_share_pct": 23.477428514253123,
+        "marker_cost_gate_pass": true,
+        "phase": "FC2_issue_path",
+        "replay_share_cv_gate_pass": true,
+        "reporting_class": "diagnostic_estimate",
+        "sm_equivalent_share_pct": 10.071870743578092,
+        "wall_equivalent_us": 184.91374545454545
+      },
+      {
+        "aggregate_duration_ns": 48806432,
+        "duration_replay_cv": 0.0034304571379357193,
+        "fc2_additive_share_pct": 11.266673310049974,
+        "marker_cost_gate_pass": true,
+        "phase": "FC2_completion_materialize_pre_sync",
+        "replay_share_cv_gate_pass": true,
+        "reporting_class": "diagnostic_estimate",
+        "sm_equivalent_share_pct": 4.8334287215507015,
+        "wall_equivalent_us": 88.73896727272727
+      },
+      {
+        "aggregate_duration_ns": 278622016,
+        "duration_replay_cv": 0.0026436434459149428,
+        "fc2_additive_share_pct": 64.31822820523976,
+        "marker_cost_gate_pass": true,
+        "phase": "FC2_atomic_scatter_body",
+        "replay_share_cv_gate_pass": true,
+        "reporting_class": "diagnostic_estimate",
+        "sm_equivalent_share_pct": 27.59266759329506,
+        "wall_equivalent_us": 506.5854836363636
+      },
+      {
+        "aggregate_duration_ns": 4061920,
+        "duration_replay_cv": 0.006447834428613505,
+        "fc2_additive_share_pct": 0.9376699704571355,
+        "marker_cost_gate_pass": true,
+        "phase": "FC2_post_scatter_sync",
+        "replay_share_cv_gate_pass": true,
+        "reporting_class": "diagnostic_estimate",
+        "sm_equivalent_share_pct": 0.402262570487456,
+        "wall_equivalent_us": 7.38530909090909
+      }
+    ],
+    "phase_ownership_boundary_data_audit": {
+      "checks": {
+        "all_phase_audits_pass": true,
+        "fine_marker_set_exact": true,
+        "no_component_double_count": true,
+        "reader_additive_sum_closes": true,
+        "reader_phase_set_exact": true,
+        "residual_closes_envelope": true,
+        "source_sass_coverage_pass": true,
+        "timing_authority_bound": true
+      },
+      "closure": {
+        "envelope_sum_ns": 438532736,
+        "intertile_residual_ns": 5339808,
+        "reader_additive_sum_ns": 433192928,
+        "residual_scope": "inter-tile control gap outside both reader phases but inside the A-to-F tile-sweep envelope"
+      },
+      "phases": [
+        {
+          "checks": {
+            "component_gates_pass": true,
+            "downstream_ready_condition_bound": true,
+            "end_data_state_bound": true,
+            "fine_marker_aggregation_closes": true,
+            "reader_boundary_matches_spec": true,
+            "reader_components_match_spec": true,
+            "required_source_sass_coverage": true,
+            "semantic_owner_bound": true,
+            "share_denominator_recomputes": true,
+            "start_data_state_bound": true
+          },
+          "downstream_ready_condition": "the materialized FC2 tile is safe for W0-W3 to consume in scatter",
+          "end_boundary": "min(D0..D3)",
+          "end_data_state": "epilogue scale/cast and accumulator R-to-S are complete with CTA visibility, and all W0-W3 have passed the pre-scatter barrier",
+          "excluded_work": [
+            "FC2 setup before A",
+            "atomic scatter loop",
+            "post-scatter sync",
+            "final handoff after F"
+          ],
+          "fine_marker_aggregation": {
+            "component_duration_ns": 150508992,
+            "components": [
+              "FC2_issue_path",
+              "FC2_completion_materialize_pre_sync"
+            ],
+            "formula": "sum_tasks_tiles[(max(C0..C3)-max(A0..A3)) + (min(D0..D3)-max(C0..C3))]",
+            "reader_duration_ns": 150508992
+          },
+          "included_work": [
+            "pipeline wait/load",
+            "accumulator clear",
+            "warp-level OMMA",
+            "epilogue scale/cast",
+            "accumulator R-to-S",
+            "CTA visibility fence",
+            "pre-scatter sync"
+          ],
+          "phase": "FC2_GEMM",
+          "semantic_owner": "FC2 GEMM producer",
+          "source_sass_coverage": {
+            "artifact_hashes": {
+              "cubin": "eed241ee29120468f2d72b690874784da502649964a46b3e337e3987d53fcc25",
+              "elf": "aae4e234e878953a19755f01622395a6f783741c99c18b03fba5a07b88af33f9",
+              "provenance": "a785c4eacf9dbc131f5192cdce9365c217cb3d0922d238a04b1a14b44960b886",
+              "ptx": "e671370dea05e46acc2f7aa047935034664b5285a26ebd4e2628a48ef602d1b9",
+              "resource": "e1c08cc57f66bab3820754e295ad8e576957869ca61a400e86cab70271d0499d",
+              "sass": "985669c71a8c2da2b5fb0dd4b4196dbc4f40fcf0a3f824f4d86f554b06f99e3e"
+            },
+            "probe_overlay_kernel": {
+              "path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_006_fc2_completion_anchored_breakdown/results/overlays/completion_anchored_probe/moe_dynamic_kernel.py",
+              "sha256": "3551b525ef629921a3cd9578e8fd6890afd5e6f3a0492ac5fd1f1dd1b94f2012"
+            },
+            "production_kernel": {
+              "path": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+              "sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+            },
+            "proof_schema": "exp006.sass-boundary-proof.v2",
+            "required_sass_checks": {
+              "a_store_immediately_before_consumer_trywait": true,
+              "c_after_last_omma_issue": true,
+              "cta_visibility_before_d": true,
+              "d_immediately_after_pre_barrier": true,
+              "issue_has_64_omma": true,
+              "materialization_before_d": true,
+              "no_omma_between_c_and_d": true,
+              "pre_barrier": true
+            },
+            "unrolled_body_count": 4
+          },
+          "start_boundary": "max(A0..A3)",
+          "start_data_state": "all W0-W3 have reached the per-tile pre-consumer-wait edge; the FC2 output tile has not been produced",
+          "verdict": "PASS"
+        },
+        {
+          "checks": {
+            "component_gates_pass": true,
+            "downstream_ready_condition_bound": true,
+            "end_data_state_bound": true,
+            "fine_marker_aggregation_closes": true,
+            "reader_boundary_matches_spec": true,
+            "reader_components_match_spec": true,
+            "required_source_sass_coverage": true,
+            "semantic_owner_bound": true,
+            "share_denominator_recomputes": true,
+            "start_data_state_bound": true
+          },
+          "downstream_ready_condition": "the CTA may advance beyond this tile's scatter stage; final operator handoff after F remains outside this interval",
+          "end_boundary": "max(F0..F3)",
+          "end_data_state": "all W0-W3 have completed the scatter loop and passed the post-scatter barrier",
+          "excluded_work": [
+            "FC2 setup before A",
+            "OMMA",
+            "epilogue scale/cast",
+            "accumulator R-to-S",
+            "pre-scatter sync",
+            "final handoff after F"
+          ],
+          "fine_marker_aggregation": {
+            "component_duration_ns": 282683936,
+            "components": [
+              "FC2_atomic_scatter_body",
+              "FC2_post_scatter_sync"
+            ],
+            "formula": "sum_tasks_tiles[(max(E0..E3)-min(D0..D3)) + (max(F0..F3)-max(E0..E3))]",
+            "reader_duration_ns": 282683936
+          },
+          "included_work": [
+            "atomic scatter loop",
+            "route-weight math and addressing",
+            "post-scatter sync"
+          ],
+          "phase": "FC2_atomic_scatter",
+          "semantic_owner": "FC2 scatter/output-reduction consumer-producer",
+          "source_sass_coverage": {
+            "artifact_hashes": {
+              "cubin": "eed241ee29120468f2d72b690874784da502649964a46b3e337e3987d53fcc25",
+              "elf": "aae4e234e878953a19755f01622395a6f783741c99c18b03fba5a07b88af33f9",
+              "provenance": "a785c4eacf9dbc131f5192cdce9365c217cb3d0922d238a04b1a14b44960b886",
+              "ptx": "e671370dea05e46acc2f7aa047935034664b5285a26ebd4e2628a48ef602d1b9",
+              "resource": "e1c08cc57f66bab3820754e295ad8e576957869ca61a400e86cab70271d0499d",
+              "sass": "985669c71a8c2da2b5fb0dd4b4196dbc4f40fcf0a3f824f4d86f554b06f99e3e"
+            },
+            "probe_overlay_kernel": {
+              "path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_006_fc2_completion_anchored_breakdown/results/overlays/completion_anchored_probe/moe_dynamic_kernel.py",
+              "sha256": "3551b525ef629921a3cd9578e8fd6890afd5e6f3a0492ac5fd1f1dd1b94f2012"
+            },
+            "production_kernel": {
+              "path": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+              "sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+            },
+            "proof_schema": "exp006.sass-boundary-proof.v2",
+            "required_sass_checks": {
+              "e_is_timer": true,
+              "f_immediately_after_post_barrier": true,
+              "no_accumulator_smem_store_after_d_before_e": true,
+              "no_omma_after_d_before_e": true,
+              "no_scatter_after_e_before_post_barrier": true,
+              "no_tma_after_d_before_e": true,
+              "post_barrier": true,
+              "scatter_has_global_reduction": true
+            },
+            "unrolled_body_count": 4
+          },
+          "start_boundary": "min(D0..D3)",
+          "start_data_state": "the FC2 tile is materialized R-to-S with CTA visibility and the pre-scatter barrier has released W0-W3",
+          "verdict": "PASS"
+        }
+      ],
+      "schema": "exp006.phase-ownership-boundary-data-audit.v1",
+      "timing_authority": {
+        "checks": {
+          "five_replays_bound": true,
+          "provider_is_globaltimer": true,
+          "same_warp_cross_tile_f_to_a": true,
+          "sm_equivalent_denominator_recomputes": true
+        },
+        "formula": "sum_replays[grid_z * (max(all CTA final) - min(all CTA entry))]",
+        "gate_pass": true,
+        "grid_z": 110,
+        "not_timing_authority": "control/probe CUDA-event medians and uninstrumented benchmark latency",
+        "per_replay_global_wall_ns": [
+          1838784,
+          1837248,
+          1834784,
+          1837600,
+          1831296
+        ],
+        "provider": "%globaltimer explicit timestamp probe",
+        "replay_count": 5,
+        "rollup": "SM-equivalent additive time",
+        "sm_equivalent_denominator_ns": 1009768320,
+        "timestamp_unit": "globaltimer_ns"
+      },
+      "verdict": "PASS"
+    },
+    "phases": [
+      {
+        "aggregate_duration_ns": 150508992,
+        "boundary": "max(A0..A3)-to-min(D0..D3)",
+        "component_gates_pass": true,
+        "components": [
+          "FC2_issue_path",
+          "FC2_completion_materialize_pre_sync"
+        ],
+        "fc2_additive_share_pct": 34.7441018243031,
+        "includes": "pipeline wait/load, accumulator clear, warp-level OMMA, epilogue scale/cast, accumulator R-to-S, CTA visibility fence, pre-scatter sync",
+        "phase": "FC2_GEMM",
+        "reporting_class": "diagnostic_estimate",
+        "sm_equivalent_share_pct": 14.905299465128794,
+        "wall_equivalent_us": 273.65271272727273
+      },
+      {
+        "aggregate_duration_ns": 282683936,
+        "boundary": "min(D0..D3)-to-max(F0..F3)",
+        "component_gates_pass": true,
+        "components": [
+          "FC2_atomic_scatter_body",
+          "FC2_post_scatter_sync"
+        ],
+        "fc2_additive_share_pct": 65.2558981756969,
+        "includes": "atomic scatter loop, route-weight math and addressing, post-scatter sync",
+        "phase": "FC2_atomic_scatter",
+        "reporting_class": "diagnostic_estimate",
+        "sm_equivalent_share_pct": 27.994930163782524,
+        "wall_equivalent_us": 513.9707927272727
+      }
+    ],
+    "regressions": {
+      "cta_scatter_task_total_vs_valid_rows": {
+        "count": 12680,
+        "degenerate": null,
+        "intercept_ns": 3811.5915435245224,
+        "pearson_r": 0.9916353461085116,
+        "r_squared": 0.9833406596517476,
+        "slope_ns_per_row": 175.69811647652364,
+        "x_mean": 103.36908517350157,
+        "y_mean_ns": 21973.345110410093
+      },
+      "per_warp_scatter_tile_vs_actual_rows": {
+        "fit": {
+          "count": 811520,
+          "degenerate": null,
+          "intercept_ns": 63.71930182396591,
+          "pearson_r": 0.9846679635889768,
+          "r_squared": 0.9695709985184625,
+          "slope_ns_per_row": 23.92932548961199,
+          "x_mean": 51.68454258675079,
+          "y_mean_ns": 1300.495544164038
+        },
+        "same_warp_edge": "Ei-Di",
+        "sample_count": 811520,
+        "warps": [
+          "W0",
+          "W1",
+          "W2",
+          "W3"
+        ]
+      }
+    },
+    "timing_authority": {
+      "checks": {
+        "five_replays_bound": true,
+        "provider_is_globaltimer": true,
+        "same_warp_cross_tile_f_to_a": true,
+        "sm_equivalent_denominator_recomputes": true
+      },
+      "formula": "sum_replays[grid_z * (max(all CTA final) - min(all CTA entry))]",
+      "gate_pass": true,
+      "grid_z": 110,
+      "not_timing_authority": "control/probe CUDA-event medians and uninstrumented benchmark latency",
+      "per_replay_global_wall_ns": [
+        1838784,
+        1837248,
+        1834784,
+        1837600,
+        1831296
+      ],
+      "provider": "%globaltimer explicit timestamp probe",
+      "replay_count": 5,
+      "rollup": "SM-equivalent additive time",
+      "sm_equivalent_denominator_ns": 1009768320,
+      "timestamp_unit": "globaltimer_ns"
+    }
+  },
+  "resource_drift": {
+    "achieved_occupancy_pct": {
+      "completion_anchored_probe": 10.42,
+      "measurement_no_marker": 10.42
+    },
+    "arms": {
+      "completion_anchored_probe": {
+        "actual_compiler_stack_bytes": 480,
+        "compiler_spill_refill_annotations": 199,
+        "instruction_count": 8056,
+        "registers_per_thread": 255,
+        "static_ldl": 133,
+        "static_local_bytes_outside_stack": 0,
+        "static_omma": 896,
+        "static_shared_bytes": 1024,
+        "static_stl": 66,
+        "timer_reads": 49
+      },
+      "measurement_no_marker": {
+        "actual_compiler_stack_bytes": 488,
+        "compiler_spill_refill_annotations": 190,
+        "instruction_count": 7568,
+        "registers_per_thread": 255,
+        "static_ldl": 122,
+        "static_local_bytes_outside_stack": 0,
+        "static_omma": 896,
+        "static_shared_bytes": 1024,
+        "static_stl": 68,
+        "timer_reads": 0
+      }
+    },
+    "checks": {
+      "achieved_occupancy_unchanged": true,
+      "ldl_abs_drift_le_25pct": true,
+      "ncu_launch_registers_unchanged": true,
+      "ncu_launch_shape_unchanged": true,
+      "ncu_launch_smem_unchanged": true,
+      "registers_unchanged": true,
+      "stack_abs_drift_le_25pct": true,
+      "stl_abs_drift_le_25pct": true,
+      "useful_omma_unchanged": true,
+      "whole_launch_overhead_le_5pct": true
+    },
+    "gate_pass": true,
+    "ldl_relative_drift_pct": 9.016393442622949,
+    "local_sass_relative_drift_pct": 4.73684210526315,
+    "ncu_artifacts": {
+      "completion_anchored_probe": {
+        "capture_json": {
+          "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_006_fc2_completion_anchored_breakdown/results/raw/ncu/completion_anchored_probe/capture/capture.json",
+          "sha256": "f87d1066e3ad466399a3239bb131c6041f0783ed4abcd084906a15f49d12c8bb",
+          "size": 40573
+        },
+        "native_csv": {
+          "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_006_fc2_completion_anchored_breakdown/results/raw/ncu/completion_anchored_probe/native_raw.csv",
+          "sha256": "83acc9c7a756799f9168c62fcf6cc385294068b1cbc16df7b21ca83b136a9404",
+          "size": 14819
+        },
+        "report": {
+          "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_006_fc2_completion_anchored_breakdown/results/raw/ncu/completion_anchored_probe/trace.ncu-rep",
+          "sha256": "f52b91004059d2bf61d1401e0baf58628fe26c5c09197d884bdcb0374f789fee",
+          "size": 235972
+        }
+      },
+      "measurement_no_marker": {
+        "capture_json": {
+          "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_006_fc2_completion_anchored_breakdown/results/raw/ncu/measurement_no_marker/capture/capture.json",
+          "sha256": "46a333d5215a57bed2608aa217cb574c888d47a8c37885d936150a754bb9d8d6",
+          "size": 41125
+        },
+        "native_csv": {
+          "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_006_fc2_completion_anchored_breakdown/results/raw/ncu/measurement_no_marker/native_raw.csv",
+          "sha256": "b52fd3fdeb9442f9c3de0d24d081392ff975b1e9d530c9a0ddb922003b3eadbe",
+          "size": 14819
+        },
+        "report": {
+          "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_006_fc2_completion_anchored_breakdown/results/raw/ncu/measurement_no_marker/trace.ncu-rep",
+          "sha256": "ecc3b5c3b90e99165bcb7f40f58039c47f56ab5bdf6e583da8ce3ac39be32cd6",
+          "size": 223272
+        }
+      }
+    },
+    "ncu_capture_gates": {
+      "completion_anchored_probe": {
+        "checks": {
+          "all_run_contract_gates": true,
+          "all_run_gates": true,
+          "eager_all_contract_gates": true,
+          "eager_no_failed_gates": true,
+          "event_abi_exact": true,
+          "five_replays": true,
+          "jit_identity_gate": true,
+          "no_foreign_process_after": true,
+          "overlay_gate": true
+        },
+        "gate_pass": true
+      },
+      "measurement_no_marker": {
+        "checks": {
+          "all_run_contract_gates": true,
+          "all_run_gates": true,
+          "eager_all_contract_gates": true,
+          "eager_no_failed_gates": true,
+          "event_abi_exact": true,
+          "five_replays": true,
+          "jit_identity_gate": true,
+          "no_foreign_process_after": true,
+          "overlay_gate": true
+        },
+        "gate_pass": true
+      }
+    },
+    "ncu_cubin_sha256": {
+      "completion_anchored_probe": "eed241ee29120468f2d72b690874784da502649964a46b3e337e3987d53fcc25",
+      "measurement_no_marker": "b1e068ec8eeb0988a84ad7b62e1958f5623e0911d233a45f080364491d7ee47f"
+    },
+    "ncu_launch": {
+      "completion_anchored_probe": {
+        "block_threads": 160,
+        "configured_stack_bytes": 1024,
+        "grid_z": 110,
+        "registers_per_thread": 255,
+        "shared_mem_per_block_bytes": 92160
+      },
+      "measurement_no_marker": {
+        "block_threads": 160,
+        "configured_stack_bytes": 1024,
+        "grid_z": 110,
+        "registers_per_thread": 255,
+        "shared_mem_per_block_bytes": 92160
+      }
+    },
+    "stack_relative_drift_pct": -1.6393442622950838,
+    "stl_relative_drift_pct": -2.941176470588236
+  },
+  "sass_boundary_proof": {
+    "gate_pass": true,
+    "records": [
+      {
+        "checks": {
+          "a_store_immediately_before_consumer_trywait": true,
+          "all_marker_store_contracts": true,
+          "c_after_last_omma_issue": true,
+          "cta_visibility_before_d": true,
+          "d_immediately_after_pre_barrier": true,
+          "e_is_timer": true,
+          "f_immediately_after_post_barrier": true,
+          "issue_has_64_omma": true,
+          "materialization_before_d": true,
+          "no_accumulator_smem_store_after_d_before_e": true,
+          "no_omma_after_d_before_e": true,
+          "no_omma_between_c_and_d": true,
+          "no_scatter_after_e_before_post_barrier": true,
+          "no_tma_after_d_before_e": true,
+          "ordered": true,
+          "post_barrier": true,
+          "pre_barrier": true,
+          "scatter_has_global_reduction": true
+        },
+        "event_address": {
+          "byte_offsets_within_four_body_unroll": {
+            "A": 0,
+            "C": 32,
+            "D": 64,
+            "E": 96,
+            "F": 128
+          },
+          "formula_slots": "339*task + 20*tile + warp_idx + {9,13,17,21,25}",
+          "marker_checks": {
+            "A": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "C": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "D": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "E": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "F": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            }
+          }
+        },
+        "gate_pass": true,
+        "pcs_hex": {
+          "A": "0x130c0",
+          "C": "0x13b50",
+          "D": "0x15870",
+          "E": "0x16000",
+          "F": "0x16090",
+          "post_barrier": "0x16080",
+          "pre_barrier": "0x15860",
+          "stores": {
+            "A": "0x131a0",
+            "C": "0x15850",
+            "D": "0x15960",
+            "E": "0x16070",
+            "F": "0x16100"
+          }
+        },
+        "static_counts": {
+          "completion_materialize_sts": 64,
+          "issue_omma": 64,
+          "scatter_reduction_loop_instruction": 1
+        },
+        "unrolled_body": 0
+      },
+      {
+        "checks": {
+          "a_store_immediately_before_consumer_trywait": true,
+          "all_marker_store_contracts": true,
+          "c_after_last_omma_issue": true,
+          "cta_visibility_before_d": true,
+          "d_immediately_after_pre_barrier": true,
+          "e_is_timer": true,
+          "f_immediately_after_post_barrier": true,
+          "issue_has_64_omma": true,
+          "materialization_before_d": true,
+          "no_accumulator_smem_store_after_d_before_e": true,
+          "no_omma_after_d_before_e": true,
+          "no_omma_between_c_and_d": true,
+          "no_scatter_after_e_before_post_barrier": true,
+          "no_tma_after_d_before_e": true,
+          "ordered": true,
+          "post_barrier": true,
+          "pre_barrier": true,
+          "scatter_has_global_reduction": true
+        },
+        "event_address": {
+          "byte_offsets_within_four_body_unroll": {
+            "A": 160,
+            "C": 192,
+            "D": 224,
+            "E": 256,
+            "F": 288
+          },
+          "formula_slots": "339*task + 20*tile + warp_idx + {9,13,17,21,25}",
+          "marker_checks": {
+            "A": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "C": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "D": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "E": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "F": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            }
+          }
+        },
+        "gate_pass": true,
+        "pcs_hex": {
+          "A": "0x16110",
+          "C": "0x16a90",
+          "D": "0x17b40",
+          "E": "0x18290",
+          "F": "0x18320",
+          "post_barrier": "0x18310",
+          "pre_barrier": "0x17b30",
+          "stores": {
+            "A": "0x16180",
+            "C": "0x17060",
+            "D": "0x17bc0",
+            "E": "0x18300",
+            "F": "0x18390"
+          }
+        },
+        "static_counts": {
+          "completion_materialize_sts": 64,
+          "issue_omma": 64,
+          "scatter_reduction_loop_instruction": 1
+        },
+        "unrolled_body": 1
+      },
+      {
+        "checks": {
+          "a_store_immediately_before_consumer_trywait": true,
+          "all_marker_store_contracts": true,
+          "c_after_last_omma_issue": true,
+          "cta_visibility_before_d": true,
+          "d_immediately_after_pre_barrier": true,
+          "e_is_timer": true,
+          "f_immediately_after_post_barrier": true,
+          "issue_has_64_omma": true,
+          "materialization_before_d": true,
+          "no_accumulator_smem_store_after_d_before_e": true,
+          "no_omma_after_d_before_e": true,
+          "no_omma_between_c_and_d": true,
+          "no_scatter_after_e_before_post_barrier": true,
+          "no_tma_after_d_before_e": true,
+          "ordered": true,
+          "post_barrier": true,
+          "pre_barrier": true,
+          "scatter_has_global_reduction": true
+        },
+        "event_address": {
+          "byte_offsets_within_four_body_unroll": {
+            "A": 320,
+            "C": 352,
+            "D": 384,
+            "E": 416,
+            "F": 448
+          },
+          "formula_slots": "339*task + 20*tile + warp_idx + {9,13,17,21,25}",
+          "marker_checks": {
+            "A": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "C": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "D": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "E": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "F": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            }
+          }
+        },
+        "gate_pass": true,
+        "pcs_hex": {
+          "A": "0x183a0",
+          "C": "0x18d30",
+          "D": "0x19de0",
+          "E": "0x1a530",
+          "F": "0x1a5c0",
+          "post_barrier": "0x1a5b0",
+          "pre_barrier": "0x19dd0",
+          "stores": {
+            "A": "0x18420",
+            "C": "0x19300",
+            "D": "0x19e60",
+            "E": "0x1a5a0",
+            "F": "0x1a630"
+          }
+        },
+        "static_counts": {
+          "completion_materialize_sts": 64,
+          "issue_omma": 64,
+          "scatter_reduction_loop_instruction": 1
+        },
+        "unrolled_body": 2
+      },
+      {
+        "checks": {
+          "a_store_immediately_before_consumer_trywait": true,
+          "all_marker_store_contracts": true,
+          "c_after_last_omma_issue": true,
+          "cta_visibility_before_d": true,
+          "d_immediately_after_pre_barrier": true,
+          "e_is_timer": true,
+          "f_immediately_after_post_barrier": true,
+          "issue_has_64_omma": true,
+          "materialization_before_d": true,
+          "no_accumulator_smem_store_after_d_before_e": true,
+          "no_omma_after_d_before_e": true,
+          "no_omma_between_c_and_d": true,
+          "no_scatter_after_e_before_post_barrier": true,
+          "no_tma_after_d_before_e": true,
+          "ordered": true,
+          "post_barrier": true,
+          "pre_barrier": true,
+          "scatter_has_global_reduction": true
+        },
+        "event_address": {
+          "byte_offsets_within_four_body_unroll": {
+            "A": 480,
+            "C": 512,
+            "D": 544,
+            "E": 576,
+            "F": 608
+          },
+          "formula_slots": "339*task + 20*tile + warp_idx + {9,13,17,21,25}",
+          "marker_checks": {
+            "A": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "C": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "D": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "E": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            },
+            "F": {
+              "store_is_same_lane_and_value": true,
+              "store_offset_matches_20_slot_abi": true,
+              "timer_is_lane0_globaltimer": true,
+              "timer_value_not_overwritten_before_store": true,
+              "warp_indexed_affine_address": true
+            }
+          }
+        },
+        "gate_pass": true,
+        "pcs_hex": {
+          "A": "0x1a640",
+          "C": "0x1afd0",
+          "D": "0x1c080",
+          "E": "0x1c7d0",
+          "F": "0x1c860",
+          "post_barrier": "0x1c850",
+          "pre_barrier": "0x1c070",
+          "stores": {
+            "A": "0x1a6c0",
+            "C": "0x1c060",
+            "D": "0x1c100",
+            "E": "0x1c840",
+            "F": "0x1c8f0"
+          }
+        },
+        "static_counts": {
+          "completion_materialize_sts": 64,
+          "issue_omma": 64,
+          "scatter_reduction_loop_instruction": 1
+        },
+        "unrolled_body": 3
+      }
+    ],
+    "schema": "exp006.sass-boundary-proof.v2",
+    "scope": "four compile-time-unrolled FC2 tile bodies",
+    "warp_slot_identity": {
+      "checks": {
+        "compute_warp_range_w0_w3": true,
+        "lane0_predicate_definition": true,
+        "lane0_predicate_stable_through_fc2": true,
+        "tid_read": true,
+        "warp_index_shift": true,
+        "warp_index_to_ur7": true
+      },
+      "formula_slots": "339*task + 20*tile + warp_idx + {9,13,17,21,25}",
+      "gate_pass": true
+    }
+  },
+  "schema": "exp006.evidence.v4",
+  "static": {
+    "completion_anchored_probe": {
+      "artifact_hashes": {
+        "cubin": "eed241ee29120468f2d72b690874784da502649964a46b3e337e3987d53fcc25",
+        "elf": "aae4e234e878953a19755f01622395a6f783741c99c18b03fba5a07b88af33f9",
+        "provenance": "a785c4eacf9dbc131f5192cdce9365c217cb3d0922d238a04b1a14b44960b886",
+        "ptx": "e671370dea05e46acc2f7aa047935034664b5285a26ebd4e2628a48ef602d1b9",
+        "resource": "e1c08cc57f66bab3820754e295ad8e576957869ca61a400e86cab70271d0499d",
+        "sass": "985669c71a8c2da2b5fb0dd4b4196dbc4f40fcf0a3f824f4d86f554b06f99e3e"
+      },
+      "checks": {
+        "cubin_matches_capture": true,
+        "provenance_arm": true,
+        "provenance_capture": true,
+        "provenance_commands": true,
+        "provenance_container": true,
+        "provenance_derived_artifacts": true,
+        "provenance_provider_cubin": true,
+        "provenance_provider_ptx": true,
+        "provenance_schema": true,
+        "provenance_tools": true,
+        "ptx_matches_capture": true,
+        "sass_has_kernel": true,
+        "spill_annotation_closure": true
+      },
+      "gate_pass": true,
+      "provenance": {
+        "commands": {
+          "elf": [
+            "/usr/local/cuda-13.2/bin/cuobjdump",
+            "--dump-elf",
+            "/workspace/jit/cutedsl_dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin"
+          ],
+          "resource": [
+            "/usr/local/cuda-13.2/bin/cuobjdump",
+            "--dump-resource-usage",
+            "/workspace/jit/cutedsl_dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin"
+          ],
+          "sass": [
+            "/usr/local/cuda-13.2/bin/nvdisasm",
+            "-c",
+            "/workspace/jit/cutedsl_dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin"
+          ]
+        },
+        "provider": {
+          "cubin": {
+            "path": "/workspace/jit/cutedsl_dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+            "relative_path": "cutedsl_dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+            "sha256": "eed241ee29120468f2d72b690874784da502649964a46b3e337e3987d53fcc25",
+            "size": 203392
+          },
+          "jit_root": "/workspace/jit",
+          "ptx": {
+            "path": "/workspace/jit/cutedsl_dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.ptx",
+            "relative_path": "cutedsl_dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.ptx",
+            "sha256": "e671370dea05e46acc2f7aa047935034664b5285a26ebd4e2628a48ef602d1b9",
+            "size": 594536
+          }
+        },
+        "tools": {
+          "cuobjdump": {
+            "requested": "cuobjdump",
+            "resolved_path": "/usr/local/cuda-13.2/bin/cuobjdump",
+            "sha256": "6e42c259d17b63f4f829248e1bcdde40572fe845453672f429d98bd8982dab20",
+            "version": "cuobjdump: NVIDIA (R) fat binary listing tool\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0"
+          },
+          "nvdisasm": {
+            "requested": "nvdisasm",
+            "resolved_path": "/usr/local/cuda-13.2/bin/nvdisasm",
+            "sha256": "69b72119d112b04b76af340cad187f3f1bced1f425e62cac4b664c4e3699d363",
+            "version": "nvdisasm: NVIDIA (R) CUDA disassembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:09:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0"
+          }
+        }
+      },
+      "resource": {
+        "actual_compiler_stack_bytes": 480,
+        "compiler_spill_refill_annotations": 199,
+        "instruction_count": 8056,
+        "registers_per_thread": 255,
+        "static_ldl": 133,
+        "static_local_bytes_outside_stack": 0,
+        "static_omma": 896,
+        "static_shared_bytes": 1024,
+        "static_stl": 66,
+        "timer_reads": 49
+      }
+    },
+    "measurement_no_marker": {
+      "artifact_hashes": {
+        "cubin": "b1e068ec8eeb0988a84ad7b62e1958f5623e0911d233a45f080364491d7ee47f",
+        "elf": "a66dee33fff676a961e79cbdad207f04110ba73fb754ca9b414014bdae732130",
+        "provenance": "ce85069e76659235cd493e3145bac223763216b7d5640adbd995644c6e4e4a2e",
+        "ptx": "aa77354b7f569678b395d765f0e4bcc388dc21fc243e9bf8103b874aaf7e00cf",
+        "resource": "070351cb7a4c7117c7962c3b986af3d3f510f04343954d76d5a642dde6b13f09",
+        "sass": "34b4c38161642a27ca6b4ec41ffad0bd70f6ff99fd8118997a4b2416c5e3abba"
+      },
+      "checks": {
+        "cubin_matches_capture": true,
+        "provenance_arm": true,
+        "provenance_capture": true,
+        "provenance_commands": true,
+        "provenance_container": true,
+        "provenance_derived_artifacts": true,
+        "provenance_provider_cubin": true,
+        "provenance_provider_ptx": true,
+        "provenance_schema": true,
+        "provenance_tools": true,
+        "ptx_matches_capture": true,
+        "sass_has_kernel": true,
+        "spill_annotation_closure": true
+      },
+      "gate_pass": true,
+      "provenance": {
+        "commands": {
+          "elf": [
+            "/usr/local/cuda-13.2/bin/cuobjdump",
+            "--dump-elf",
+            "/workspace/jit/cutedsl_dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin"
+          ],
+          "resource": [
+            "/usr/local/cuda-13.2/bin/cuobjdump",
+            "--dump-resource-usage",
+            "/workspace/jit/cutedsl_dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin"
+          ],
+          "sass": [
+            "/usr/local/cuda-13.2/bin/nvdisasm",
+            "-c",
+            "/workspace/jit/cutedsl_dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin"
+          ]
+        },
+        "provider": {
+          "cubin": {
+            "path": "/workspace/jit/cutedsl_dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+            "relative_path": "cutedsl_dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+            "sha256": "b1e068ec8eeb0988a84ad7b62e1958f5623e0911d233a45f080364491d7ee47f",
+            "size": 190712
+          },
+          "jit_root": "/workspace/jit",
+          "ptx": {
+            "path": "/workspace/jit/cutedsl_dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.ptx",
+            "relative_path": "cutedsl_dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.ptx",
+            "sha256": "aa77354b7f569678b395d765f0e4bcc388dc21fc243e9bf8103b874aaf7e00cf",
+            "size": 574440
+          }
+        },
+        "tools": {
+          "cuobjdump": {
+            "requested": "cuobjdump",
+            "resolved_path": "/usr/local/cuda-13.2/bin/cuobjdump",
+            "sha256": "6e42c259d17b63f4f829248e1bcdde40572fe845453672f429d98bd8982dab20",
+            "version": "cuobjdump: NVIDIA (R) fat binary listing tool\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0"
+          },
+          "nvdisasm": {
+            "requested": "nvdisasm",
+            "resolved_path": "/usr/local/cuda-13.2/bin/nvdisasm",
+            "sha256": "69b72119d112b04b76af340cad187f3f1bced1f425e62cac4b664c4e3699d363",
+            "version": "nvdisasm: NVIDIA (R) CUDA disassembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:09:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0"
+          }
+        }
+      },
+      "resource": {
+        "actual_compiler_stack_bytes": 488,
+        "compiler_spill_refill_annotations": 190,
+        "instruction_count": 7568,
+        "registers_per_thread": 255,
+        "static_ldl": 122,
+        "static_local_bytes_outside_stack": 0,
+        "static_omma": 896,
+        "static_shared_bytes": 1024,
+        "static_stl": 68,
+        "timer_reads": 0
+      }
+    }
+  },
+  "timing_gate": {
+    "checks": {
+      "all_replay_validation": true,
+      "descriptor_identity": true,
+      "event_abi_exact": true,
+      "fc2_closure": true,
+      "five_bound_inputs": true,
+      "five_replays": true,
+      "phase_set": true,
+      "same_warp_cross_tile_f_to_a": true,
+      "schema": true,
+      "whole_kernel_closure": true
+    },
+    "gate_pass": true,
+    "same_warp_cross_tile_edge_count": 760800
+  }
+}

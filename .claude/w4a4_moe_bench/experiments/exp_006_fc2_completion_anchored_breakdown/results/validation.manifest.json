@@ -1,0 +1,51 @@
+{
+  "schema": "exp006.validation-manifest.v3",
+  "status": "PASS",
+  "classification": "diagnostic_estimate",
+  "locked_source": {
+    "flashinfer_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+    "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+    "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+  },
+  "canonical_outputs": {
+    "evidence.json": "43c34571a178fc7ebed187a8cd9b85808c17a0b6f1ef7731264149fce8d6cc87",
+    "data_audit.json": "49c3d03b3feb4836fe552549f53654f3c076356567107ae6c72981c12f5ddc68",
+    "result.md": "a9e7cffea56d69abbaf90ee55ec91a4f69748dd5c0b9afb21a98ab15b5ce772b"
+  },
+  "implementation": {
+    "exp006_common.py": "bfb1d6d56ebfb19e1eee90384a74113a3a2ba0c3524260926b985eaf4fa178e1",
+    "build_completion_probe.py": "f7e7c5dbb07db00378e29727f4fe908d9468637cef626ec1d2fd4b82bada299a",
+    "capture_completion_timing.py": "070349c45809a4ac3492f824908db77c65b25b09faa17bc56074af8bb6b43308",
+    "analyze_completion_timing.py": "9312b8c9f2bcd021558ab406fe45a59dfd2603f4757f6565b02ff8c01bdc6b52",
+    "build_evidence.py": "b0bf5343cf80ff98ceca32bcfe02f244438cf37f34ece5768aceab77f36106fe",
+    "test_build_completion_probe.py": "4b8d2d1d40f2d251c9b07e23be3a2f270a4e9d691c7cb700d420383cc90d279b",
+    "test_capture_completion_timing.py": "c1b25f5db47e66bd3137a6a7c4482dc1b24caeacd38564d5b2b6fa0f6d51e25b",
+    "test_build_evidence.py": "7ce21050bf118be9a405739fa0c8a1379fff04397a89fdf3b62c5187a2c0bcc8",
+    "test_analyze_completion_timing.py": "c78cea83bd94d7d2ffb88a711fb2c01f24e948780c4d86228f64c569f469a553"
+  },
+  "gates": {
+    "cpu_tests": "32 passed",
+    "capture_and_static_evidence": true,
+    "ncu_resource_drift": true,
+    "tile_task_replay_aggregate_closure": true,
+    "two_reader_phase_closure": true,
+    "phase_ownership_boundary_data_audit": true,
+    "phase_share_denominator_bound": true,
+    "independent_data_audit": true,
+    "gpu_lease_released": true
+  },
+  "phase_ownership_boundary_data_audit": {
+    "artifact": "evidence.json#/phase_timing/phase_ownership_boundary_data_audit",
+    "artifact_sha256": "43c34571a178fc7ebed187a8cd9b85808c17a0b6f1ef7731264149fce8d6cc87",
+    "schema": "exp006.phase-ownership-boundary-data-audit.v1",
+    "verdict": "PASS"
+  },
+  "prohibited_conclusions": [
+    "OMMA has an asynchronous issue-to-completion interval",
+    "A-to-C is complete GEMM latency",
+    "D-to-F is pure atomic instruction latency",
+    "atomic scatter exceeds 30 percent of fused whole-wall",
+    "A-to-F tile-sweep envelope is complete FC2 operator latency",
+    "FC2 fused-vs-chain speedup without a common semantic start"
+  ]
+}

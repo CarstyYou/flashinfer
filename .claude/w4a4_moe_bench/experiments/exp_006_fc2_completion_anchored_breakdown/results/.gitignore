@@ -1,0 +1,9 @@
+raw/
+overlays/
+completion_timing.json
+runtime/*.csv
+runtime/*.log
+runtime/*.txt
+*.pt
+*.ncu-rep
+*.nsys-rep

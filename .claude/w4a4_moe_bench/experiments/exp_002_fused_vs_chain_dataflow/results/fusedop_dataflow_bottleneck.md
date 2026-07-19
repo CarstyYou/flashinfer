@@ -77,12 +77,14 @@ Route + Q0 + Pack（14.78%）、SwiGLU + Q1（13.94%）和 Finalize（13.41%）�
 
 ### 2.3 Fused 主 kernel phase 耗时与占比分布
 
-本节用例为 M8192，证据等级为 `diagnostic estimate`：probe 相对 matched no-marker control 的 median
-latency 扰动为 `+1.74%`，仅接受用于 phase 排序；表中时间为 raw、unadjusted probe 值，未按 control
-delta 校正。Fused 主 kernel 没有可供 NSys 独立计时的内部 kernel 边界，因此这里补充 exp_004 的
-`%globaltimer` 诊断插桩。分母是 5 次 replay 的 SM-equivalent wall：
-`Σ 110 × (max CTA final - min CTA entry) = 1,004,280,640 ns`；等效 wall 是
-`Σ CTA phase time / (5 × 110)`。下表各行互斥，严格合计为 100%。
+本节用例为 M8192，证据等级为 `diagnostic estimate`。非 FC2 phase 沿用 exp_004 的 whole-kernel
+probe（相对 control `+1.74%`）；FC2 阶段使用 exp_006 的边界 probe（相对 control
+`+2.133%`）。两者只用于内部时间归因和调查排序，不替代未插桩 benchmark。
+
+两个 probe 的 whole-wall 分母略有不同，因此下表是跨 probe 的诊断投影，不能把所有行重新相加并宣称
+严格等于 100%。exp_006 的 FC2 phase share 分母为 5 replay × 110 CTA 聚合的 `%globaltimer`
+SM-equivalent denominator（1,009,768,320 ns），不是 CUDA-event median。计时闭合审计保留在
+[`exp_006 result`](../../exp_006_fc2_completion_anchored_breakdown/results/result.md)。
 
 | Fused 主 kernel phase | 占 SM-equivalent wall | 等效 wall |
 |---|---:|---:|
@@ -100,18 +102,19 @@ delta 校正。Fused 主 kernel 没有可供 NSys 独立计时的内部 kernel �
 | FC1 Up | **12.68%** | **231.57 us** |
 | SwiGLU + Q1 | **6.17%** | **112.61 us** |
 | FC2 setup | 0.12% | 2.19 us |
-| FC2 GEMM | **10.20%** | **186.34 us** |
-| FC2 epilogue + scatter | **32.43%** | **592.11 us** |
+| FC2 GEMM（A→D；含 epilogue / scale-cast / R2S / pre-sync） | **14.905%** | **273.653 us** |
+| Atomic scatter（D→F；含 post-scatter sync） | **27.995%** | **513.971 us** |
+| FC2 inter-tile residual | 0.529% | 9.709 us |
 | Task control / final drain / producer tail | 0.84% | 15.41 us |
-| **合计** | **100.00%** | **1825.96 us** |
 
 ### 2.4 按 Chain op 对齐的横向语义对比
 
-本节用例为 M8192。Speedup 统一按 `Chain / Fused - 1` 计算，正值表示 Fused 更快。Phase 行使用
-raw diagnostic phase time 与 NSys op time，`≈` 只描述时间差，不作纯 fusion 因果归因；完整算子行
-使用未插桩 benchmark 作为性能真值。组合值按未四舍五入的原始值计算。
+本节用例为 M8192。Phase 行的“诊断时间比”按 `Chain / Fused - 1` 计算，正值表示 Fused
+该可见区间更快；它使用 instrumented SM-equivalent phase time 与 NSys op wall，只用于观察时间
+搬移，不是正式 speedup。只有完整算子行使用未插桩 benchmark 作为性能真值并报告 speedup。
+组合值按未四舍五入的原始值计算。
 
-| 逻辑位置 | CuteDSL Fused phase（等效 wall / phase share） | CUTLASS Chain op（NSys duration / arm wall share） | Fused 相对 Chain |
+| 逻辑位置 | CuteDSL Fused phase（等效 wall / phase share） | CUTLASS Chain op（NSys duration / arm wall share） | 时间差 / 诊断时间比 |
 |---|---:|---:|---:|
 | FC2 scale 准备 | scale 广播 helper：1.120 us（0.06% arm wall，主 kernel 外） |  | — |
 | Launch / entry | Launch skew + Entry：33.52 us（1.84%） |  | — |
@@ -120,10 +123,15 @@ raw diagnostic phase time 与 NSys op time，`≈` 只描述时间差，不作�
 | GEMM metadata / task setup | Compute setup + T0 Claim + T0 Cache：31.919 us（1.75%） | stride metadata：2.048 us（0.12%） | ≈ 慢 29.871 us；**−93.6%** |
 | FC1 | Gate + Up：466.513 us（25.55%） | grouped GEMM1：510.175 us（30.69%） | ≈ 快 43.662 us；**+9.4%** |
 | SwiGLU + Q1 | 112.612 us（6.17%） | activation/requant：231.647 us（13.94%） | ≈ 快 119.035 us；**+105.7%** |
-| FC2 compute | FC2 setup + GEMM：188.528 us（10.32%） | grouped GEMM2：408.255 us（24.56%，含中间输出 epilogue） | ≈ 快 219.727 us；**+116.5%** |
-| 最终输出就绪 | FC2 epilogue + scatter：592.108 us（32.43%） | finalize：222.944 us（13.41%） | ≈ 慢 369.164 us；**−62.3%** |
+| FC2 GEMM | A→D：273.653 us（14.905%） | grouped GEMM2：408.255 us（24.56%，含自身 epilogue） | ≈ 快 134.602 us；**+49.2%** |
+| Atomic scatter / 输出归并 | D→F：513.971 us（27.995%，含 post-sync） | finalize：222.944 us（13.41%） | ≈ 慢 291.027 us；**−56.6%** |
+| FC2 inter-tile residual | 9.709 us（0.529%） |  | — |
 | Task drain / producer tail | 15.41 us（0.84%） |  | — |
 | **完整算子（未插桩 benchmark）** | **1782.547 us** | **1665.779 us** | **慢 116.767 us；−6.55%** |
+
+横向表按功能责任对齐：Fused `FC2 GEMM` 把 epilogue/R2S 算入 GEMM，`Atomic scatter`
+包含 scatter loop 和 post-sync；Chain 分别使用 grouped GEMM2 和 finalize。这些 phase 差值是诊断投影，
+只用于判断时间搬到了哪里；完整算子行是唯一正式性能 speedup。
 
 ## 3. NCU 证据展示
 
@@ -295,8 +303,8 @@ LSU 与 TMA 指标并不同向；因此不能用单个“global traffic”数字
 | 优先级 | Fused bottleneck / 疑点 | 直接证据 | 优化方向 |
 |---|---|---|---|
 | P0 | Resource pressure 与 register spill | 255 Registers/thread、92,160 B SMEM/CTA、488 B/thread stack frame；122 words/lane 的静态 stack roundtrip 与动态 local sectors 精确闭合。exp_003 已闭合物理形成机制：108-word Main 是 first-pass accumulator 跨完整 second pass 保活；14-word Tail 是 activation temporary reuse 时保存的 5 个 second-pass accumulator register values 与 9 个 index/address/control scalar。Baseline source order 将 first/second pass 高置信解释为 Gate/Up，但无 compiler-certified SSA→physical-slot map | 构造 correctness-equivalent 的 reduced/no-spill arm，先验证 spill 对 latency 与 TC cadence 的因果影响；暂不下 production optimization 结论 |
-| P1 | Whole-kernel TC activity 低，原因未闭合 | Fused TC subpipe active `25.73%`；内部时间图同时显示 P3 占 19.10%、FC2 epilogue + scatter 占 32.43%，证明 whole-launch average 混入大量 non-TC phase，但不能直接解释成 TC starvation | 在高时间权重 phase 内进一步区分 planned TC-off 与 T1/T2/T4 的 producer、barrier 或同 warp critical-path starvation |
-| P1 | FC2 epilogue + scatter 是最大 phase，内部机制未拆分 | Diagnostic phase share 为 `32.43%`；Fused 完整 range 独有 `1073.742 MB` LSU global reduction footprint；源码显示 epilogue、同步和 route-weighted atomic scatter，但现有证据不能把整段时间归因给 atomic | 定位每个 FC2 tile 的 GEMM→epilogue→barrier→atomic scatter→下一次 GEMM 边界，再用受门禁的 counterfactual 界定各部分成本 |
+| P1 | Whole-kernel TC activity 低，原因未闭合 | Fused TC subpipe active `25.73%`；P3 占 19.10%，Atomic scatter 阶段占 27.995%，证明 whole-launch average 混入大量 planned TC-off work，但不能直接解释成 TC starvation | 在高时间权重 phase 内进一步区分 planned TC-off 与 T1/T2/T4 的 producer、barrier 或同 warp critical-path starvation |
+| P1 | Atomic scatter 是最大已隔离阶段 | D→F 为 `513.971 us`，占 FC2 additive time `65.256%`、whole wall `27.995%`；其中 D→E scatter body 为 `506.585 us`，精确 SASS 证明有 `REDG`、无 OMMA、accumulator STS 或 TMA；但 D→F 不是纯 REDG latency | 用 matched counterfactual 分别调查 atomic reduction multiplicity、ownership、contention 与访问合并；在此之前不把相关性写成具体因果机制 |
 | P1 | P3 Route + Q0 + Pack 时间权重高且与 compute 串行 | Diagnostic phase share 为 `19.10%`；`full_tile_publish_enabled=0`，P3/P4 完成并经过 resident-grid barrier 后 compute 才开始；P3 内三个操作交错，当前不能继续拆分 | 先定位 P3 内部重心，再验证 ready-task/full-tile publish 是否产生真实 route/compute overlap；收益只看未插桩 latency |
 | 排除项 | Launch/bubble 不是当前主要瓶颈 | Material kernel count 已从 `9→2`；Chain 内部没有明显 idle gap，而 Fused 主 kernel 占自身 wall 的 `99.92%`，M8192 仍慢 `6.55%` | 优先优化 Fused 主 kernel 内部，不继续压缩 graph launch 数量 |
 
@@ -305,9 +313,12 @@ no-spill 工程约束，不依赖 latency criticality 证明。“spill 是 TC c
 
 ## 4. 下一步调查与优化（Next To Do）
 
-| 优先级 | 可证伪问题 | 最小调查 | 必须保持 | 接受 / 推翻条件 |
-|---|---|---|---|---|
-| P0 | Register spill 是否是 TC cadence 偏低的主要贡献者？ | 基于 exp_003 Main live-range 机制构造 correctness-equivalent 的 reduced/no-spill arm；比较 stack/local traffic、latency、TC subpipe active、Issue Active 与 warp stalls | Tensor work、launch topology、task schedule、输出正确性与 timing protocol；禁止 measurement-only instrumentation 改变 resource/SASS | 只有 spill 明确减少/消除，且 TC cadence 与 latency 在 matched counterfactual 中同向改善，才接受主要贡献；否则推翻或降级 |
-| P1 | 控制 spill 后，剩余 TC inactive time 中多少是必要 non-TC phase，多少是真实 TC starvation？ | 若 reduced/no-spill arm 仍有明显 TC cadence 问题，再用通过 resource/SASS identity gate 的 IKET phase/warp-role timeline | 相同 case、task/dispatch 与 Tensor work；instrumented duration 不作性能时间；marker 不得改变 stack/register/SASS work | 只有 T1/T2/T4 内 gap 与 wait/scoreboard/barrier 对齐才接受 starvation；否则归为 planned TC-off |
-| P1 | FC2 epilogue + scatter 的 32.43% 主要花在哪里？ | 展开每个 T4 tile 的 GEMM→epilogue→barrier→atomic scatter→barrier→next GEMM；必要时加入 diagnostic-only 的受控 bundle 消融 | Tensor work、task schedule 与 phase coverage；数值无效变体必须标记 diagnostic-only | 只有 phase-local timing 与 counterfactual 同时支持，才把成本归因给具体 epilogue/scatter 子机制 |
-| P1 | P3 Route + Q0 + Pack 的 19.10% 哪里可优化，能否与 compute overlap？ | 先为交错的 Route/Q0/Pack 建立不伪造独立 wall 的内部证据，再只改变 publish/consume 时序验证 overlap | Logical work、正确性、task count、Tensor instructions 与 timing boundary | 定位到稳定内部重心，并且真实 overlap 使未插桩 latency 改善超过 repeat spread，才接受对应优化方向 |
+主线先消除 spill；只有 spill 受控后 TC cadence 仍低，才启动 IKET。Atomic scatter 与
+Route + Q0 + Pack 不依赖 spill 结论，资源允许时现在即可并行调查。
+
+| 顺序 | 下一步方向 | 为什么现在做 | 什么结果说明值得继续 |
+|---|---|---|---|
+| 主线 1（现在） | 构造 reduced/no-spill 对照 | Spill 已定位到形成机制，而且 kernel 以 no-spill 为工程约束 | Spill 消除即满足工程约束；若 latency 与 TC cadence 也改善，则确认其性能因果，否则停止该性能归因 |
+| 主线 2（条件触发） | 用 IKET 区分 planned TC-off 与真实 TC starvation | 仅当 spill 受控后 TC cadence 仍低时启动 | FC1/FC2 compute phase 的等待与具体 stall 对齐；否则停止该方向 |
+| 可立即并行 P1 | 调查 Atomic scatter | 它是当前最大已隔离阶段：`513.971 us`，占 whole wall `27.995%` | 单变量对照同时降低 scatter phase 与未插桩 latency |
+| 可立即并行 P1 | 调查 Route + Q0 + Pack 及其 overlap | P3 占 `19.10%`，且当前与 compute 串行 | 找到稳定内部重心，并使未插桩 latency 改善超过 repeat spread |

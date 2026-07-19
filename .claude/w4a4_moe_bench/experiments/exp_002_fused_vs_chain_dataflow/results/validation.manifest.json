@@ -1,5 +1,5 @@
 {
-  "schema": "exp002.agent-validation-manifest.v1",
+  "schema": "exp002.agent-validation-manifest.v3",
   "reader_facing": false,
   "purpose": "Agent-only entry point for validating comparison identity, toolchain provenance, correctness, measurement protocol, benchmark stability, and profiler provenance before accepting report claims.",
   "comparison_group_id": "exp002_cutedsl_vs_cutlass_bf16",
@@ -14,7 +14,13 @@
     "prohibited_claims": [
       "compiler causality",
       "cross-build reuse",
-      "mixing with the superseded CuteDSL 4.5.2 run"
+      "mixing with the superseded CuteDSL 4.5.2 run",
+      "OMMA has an asynchronous issue-to-completion interval",
+      "atomic scatter exceeds 30 percent of fused whole-wall",
+      "D-to-F is pure atomic instruction latency",
+      "A-to-F is complete FC2 operator latency",
+      "phase diagnostic time ratio is a formal speedup",
+      "phase share without an explicit timing authority and denominator"
     ]
   },
   "canonical_inputs": {
@@ -109,6 +115,18 @@
     "operator_ncu_comparison": {
       "path": "ncu/operator_comparison_v2.csv",
       "file_sha256": "0ce4e28c2709ae24cbe2f46be4c887ae1dd16b49258dd173b06bee7fa2985a3c"
+    },
+    "fc2_phase_evidence": {
+      "path": "../../exp_006_fc2_completion_anchored_breakdown/results/evidence.json",
+      "file_sha256": "43c34571a178fc7ebed187a8cd9b85808c17a0b6f1ef7731264149fce8d6cc87",
+      "required_schema": "exp006.evidence.v4",
+      "required_phase_audit_schema": "exp006.phase-ownership-boundary-data-audit.v1",
+      "required_phase_audit_verdict": "PASS"
+    },
+    "fc2_phase_data_audit": {
+      "path": "../../exp_006_fc2_completion_anchored_breakdown/results/data_audit.json",
+      "file_sha256": "49c3d03b3feb4836fe552549f53654f3c076356567107ae6c72981c12f5ddc68",
+      "required_status": "PASS"
     }
   },
   "required_assertions": [
@@ -135,6 +153,10 @@
     {
       "id": "profiler-scope-binding",
       "check": "all consumed NSys and NCU profile manifests match the canonical comparison/rerun/environment/protocol/artifact identity before their data is used"
+    },
+    {
+      "id": "fc2-phase-boundary-binding",
+      "check": "exp006 evidence and audit hashes match; structured phase-ownership audit verdict is PASS; reader phases are FC2_GEMM A-to-D and FC2_atomic_scatter D-to-F; their additive total plus inter-tile residual closes the A-to-F envelope; every phase share recomputes from the explicit %globaltimer SM-equivalent denominator"
     }
   ],
   "profile_manifest_globs": [

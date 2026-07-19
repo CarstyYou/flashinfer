@@ -1,0 +1,55 @@
+{
+  "schema": "exp006.data-audit.v3",
+  "status": "PASS",
+  "audited_evidence": {
+    "path": "evidence.json",
+    "sha256": "43c34571a178fc7ebed187a8cd9b85808c17a0b6f1ef7731264149fce8d6cc87"
+  },
+  "phase_ownership_boundary_data_audit": {
+    "artifact": "evidence.json#/phase_timing/phase_ownership_boundary_data_audit",
+    "artifact_sha256": "43c34571a178fc7ebed187a8cd9b85808c17a0b6f1ef7731264149fce8d6cc87",
+    "schema": "exp006.phase-ownership-boundary-data-audit.v1",
+    "verdict": "PASS"
+  },
+  "vetted": [
+    "ABI339 and all 26 bound capture, timing, NCU, and static artifacts pass SHA-256 reconstruction",
+    "811520 same-warp A/C/D/E/F edges pass ordering and collective handoff gates",
+    "FC2 GEMM A-to-D aggregates 150508992 ns to 273.652713 us, 34.744102 percent of FC2 additive time and 14.905299 percent of fused whole-wall",
+    "Atomic scatter D-to-F aggregates 282683936 ns to 513.970793 us, 65.255898 percent of FC2 additive time and 27.994930 percent of fused whole-wall",
+    "the two reader phases sum to 433192928 ns; adding the 5339808 ns inter-tile residual exactly closes the 438532736 ns A-to-F envelope",
+    "both reader phases pass the structured ownership audit: semantic owner, start/end data state, downstream-ready handoff, fine-marker aggregation, and exact source/SASS coverage are bound",
+    "phase shares recompute from the explicit 1009768320 ns %globaltimer SM-equivalent denominator across 5 replays and 110 CTAs",
+    "boundary proof binds both the production kernel source and exact completion-anchored probe overlay source before matching the loaded probe cubin/SASS",
+    "SASS proves each A marker store immediately precedes the consumer TRYWAIT, and 760800 serialized same-warp cross-tile F-to-A edges are monotonic",
+    "all four unrolled bodies contain 64 OMMA before C, zero OMMA and 64 accumulator STS between C and D, and REDG scatter between D and E",
+    "control/probe perturbation and NCU resource drift pass the preregistered diagnostic-estimate gates"
+  ],
+  "claim_verdicts": [
+    {
+      "claim": "Atomic scatter itself exceeds 30 percent of fused whole-wall",
+      "verdict": "REJECT",
+      "reason": "the corrected D-to-F scatter-stage boundary is 27.994930 percent; the older greater-than-30-percent interval included FC2 epilogue and R2S"
+    },
+    {
+      "claim": "The scatter stage is a large FC2 cost center",
+      "verdict": "VETTED",
+      "reason": "D-to-F is 65.255898 percent of FC2 additive time and 27.994930 percent of fused whole-wall"
+    },
+    {
+      "claim": "The measured D-to-F time is pure REDG instruction latency",
+      "verdict": "REJECT",
+      "reason": "the interval also contains SMEM loads, route-weight math, addressing and loop control, workload imbalance, and post-scatter synchronization"
+    }
+  ],
+  "required_report_qualifications": [
+    "phase timing is a diagnostic estimate with 2.13 percent probe overhead",
+    "phase share denominator is %globaltimer SM-equivalent additive time, not the control/probe CUDA-event median",
+    "wall-equivalent is SM-equivalent additive time rather than one serial CTA wall timeline",
+    "FC2 GEMM A-to-D includes wait/load, warp-level OMMA, epilogue, scale/cast, R-to-S, and pre-scatter sync, but excludes setup before A",
+    "Atomic scatter D-to-F includes the scatter loop and post-scatter sync and is not pure atomic-instruction latency",
+    "the D-to-E scatter body excluding post-sync is 506.585484 us and 27.592668 percent of fused whole-wall",
+    "the A-to-F FC2 tile-sweep envelope excludes setup before A and final handoff after F"
+  ],
+  "remaining_warnings": [],
+  "remaining_blockers": []
+}

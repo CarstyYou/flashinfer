@@ -223,6 +223,24 @@ selected CTA 推广为 full grid。
 若现有证据只能定位 phase 而不能支持动作，结论必须是 `尚不能选择优化点`，并只保留能改变
 该判断的最小下一实验。不得把更长的 profiler 摘要当作完成。
 
+### Agent-facing 后续实验约束
+
+读者报告第 4 章只展示方向、顺序和继续投入的判据；以下控制项由执行 agent 使用，不渲染到报告：
+
+- **Spill（P0）**：基于 exp_003 Main live-range 机制构造 correctness-equivalent 的
+  reduced/no-spill arm。固定 Tensor work、launch topology、task schedule、正确性与 timing protocol；
+  measurement-only instrumentation 不得改变 resource/SASS。只有 spill/local traffic 明确下降，且
+  未插桩 latency 与 TC cadence 同向改善，才接受 spill 是低 cadence 的主要贡献者。
+- **IKET（条件触发）**：只在 spill 受控后仍有明显 TC cadence 问题时启动。固定 case、dispatch、
+  Tensor work 与 task schedule，并通过 stack/register/SASS identity gate；instrumented duration 不能作为
+  性能真值。只有 T1/T2/T4 内等待与 scoreboard/barrier stall 对齐，才接受真实 starvation。
+- **Atomic scatter（P1）**：matched counterfactual 逐项改变 atomic multiplicity、warp ownership 或
+  输出聚合，固定 FC2 GEMM A→D、valid rows、task schedule、数值语义和 measurement protocol。只有
+  scatter phase 与未插桩 latency 同时下降，才接受对应机制。
+- **Route + Q0 + Pack（P1）**：先建立不会伪造独立 wall 的内部证据，再单独改变 publish/consume
+  时序。固定 logical work、task count、Tensor instructions、正确性与 timing boundary；只有稳定内部重心
+  与未插桩 latency 超过 repeat spread 的改善同时出现，才接受该优化方向。
+
 判定分支固定如下：
 
 - setup identity 或任一 oracle gate 失败：formal paired result invalid；只保留 capability/topology；
