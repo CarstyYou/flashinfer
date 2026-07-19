@@ -8,7 +8,7 @@
         <mxCell id="title" value="SM120 Dynamic W4A4 Fused MoE — Warp/Hardware Dataflow Overview" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=0;strokeColor=none;fillColor=none;fontSize=22;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="30" y="18" width="1740" height="38" as="geometry"/>
         </mxCell>
-        <mxCell id="subtitle" value="Logical order, not measured duration · CTA = 5 warps · tile = 128×128×128" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=0;strokeColor=none;fillColor=none;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+        <mxCell id="subtitle" value="SOURCE-DERIVED · logical order, not measured duration · CTA = 5 warps · tile = 128×128×128" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=0;strokeColor=none;fillColor=none;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
           <mxGeometry x="30" y="55" width="1740" height="28" as="geometry"/>
         </mxCell>
         <mxCell id="leg_g" value="[G] GMEM data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;fontSize=12;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
@@ -131,7 +131,7 @@
         <mxCell id="pf_label" value="pass_final" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#444444;fontSize=16;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="32" y="2708" width="138" height="38" as="geometry"/>
         </mxCell>
-        <mxCell id="footer" value="Arrow labels name source/API movement; LDG/LDS/STG/STS denote logical spaces, not asserted SASS. [PTX] quotes inline PTX; emitted SASS lowering is still pending.&lt;br&gt;* Source construct/API and address space confirmed; exact SASS pending. LdMatrix/StMatrix-derived mappings are source-confirmed; LDSM/STSM need disassembly. · Evidence: w4a4_moe_fused_overview_box.md · Source: flashinfer 517cca9c2e7d91f524fcb5f078370c056308d461" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=0;strokeColor=none;fillColor=none;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
+        <mxCell id="footer" value="Arrow labels name source/API movement; LDG/LDS/STG/STS denote logical spaces, not asserted SASS. [PTX] quotes inline PTX; exact arrow lowering remains unresolved.&lt;br&gt;* Source construct/API and address space confirmed. Current canonical exp_002 binary separately confirms [SASS] OMMA.SF for MMA; LdMatrix/StMatrix-derived mappings are source-confirmed, while LDSM/STSM need disassembly. · Evidence: kernel_design.md · Source: flashinfer 748ad45594f5e701cbbdca59c60335f39d1c3b2f" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=0;strokeColor=none;fillColor=none;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
           <mxGeometry x="30" y="2750" width="1740" height="65" as="geometry"/>
         </mxCell>
         <mxCell id="rail_start" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1D4ED8;strokeColor=#1D4ED8;fontSize=12;fontColor=#333333;" vertex="1" parent="1">
@@ -296,16 +296,16 @@
         <mxCell id="t1_r_w3" value="[R] A/B/SF frags" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=11;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="1132" y="1080" width="276" height="32" as="geometry"/>
         </mxCell>
-        <mxCell id="t1_tc_w0" value="MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="t1_tc_w0" value="[API] MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="202" y="1138" width="276" height="34" as="geometry"/>
         </mxCell>
-        <mxCell id="t1_tc_w1" value="MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="t1_tc_w1" value="[API] MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="512" y="1138" width="276" height="34" as="geometry"/>
         </mxCell>
-        <mxCell id="t1_tc_w2" value="MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="t1_tc_w2" value="[API] MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="822" y="1138" width="276" height="34" as="geometry"/>
         </mxCell>
-        <mxCell id="t1_tc_w3" value="MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="t1_tc_w3" value="[API] MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="1132" y="1138" width="276" height="34" as="geometry"/>
         </mxCell>
         <mxCell id="t1_acc_w0" value="[R] gate_acc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=11;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
@@ -344,16 +344,16 @@
         <mxCell id="t2_r_w3" value="[R] A/B/SF frags" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=11;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="1132" y="1385" width="276" height="32" as="geometry"/>
         </mxCell>
-        <mxCell id="t2_tc_w0" value="MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="t2_tc_w0" value="[API] MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="202" y="1443" width="276" height="34" as="geometry"/>
         </mxCell>
-        <mxCell id="t2_tc_w1" value="MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="t2_tc_w1" value="[API] MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="512" y="1443" width="276" height="34" as="geometry"/>
         </mxCell>
-        <mxCell id="t2_tc_w2" value="MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="t2_tc_w2" value="[API] MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="822" y="1443" width="276" height="34" as="geometry"/>
         </mxCell>
-        <mxCell id="t2_tc_w3" value="MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="t2_tc_w3" value="[API] MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="1132" y="1443" width="276" height="34" as="geometry"/>
         </mxCell>
         <mxCell id="t2_acc_w0" value="[R] up_acc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=11;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
@@ -482,16 +482,16 @@
         <mxCell id="t4_ab_w3" value="[R] A(reused)+B/SF" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=11;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="1132" y="2177" width="276" height="34" as="geometry"/>
         </mxCell>
-        <mxCell id="t4_tc_w0" value="MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="t4_tc_w0" value="[API] MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="202" y="2236" width="276" height="36" as="geometry"/>
         </mxCell>
-        <mxCell id="t4_tc_w1" value="MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="t4_tc_w1" value="[API] MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="512" y="2236" width="276" height="36" as="geometry"/>
         </mxCell>
-        <mxCell id="t4_tc_w2" value="MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="t4_tc_w2" value="[API] MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="822" y="2236" width="276" height="36" as="geometry"/>
         </mxCell>
-        <mxCell id="t4_tc_w3" value="MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="t4_tc_w3" value="[API] MmaMXF4NVF4Op&lt;br&gt;tiled-MMA member W3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#166534;fontSize=9;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="1132" y="2236" width="276" height="36" as="geometry"/>
         </mxCell>
         <mxCell id="t4_acc_w0" value="[R] down_acc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=11;fontColor=#333333;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">

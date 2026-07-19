@@ -207,7 +207,7 @@ def build_spec() -> None:
         55,
         1740,
         28,
-        "Logical order, not measured duration · CTA = 5 warps · tile = 128×128×128",
+        "SOURCE-DERIVED · logical order, not measured duration · CTA = 5 warps · tile = 128×128×128",
         "text",
         font_size=13,
         background=True,
@@ -534,7 +534,7 @@ def build_spec() -> None:
         "t1_tc",
         1138,
         34,
-        [f"MmaMXF4NVF4Op\ntiled-MMA member W{w}" for w in range(4)],
+        [f"[API] MmaMXF4NVF4Op\ntiled-MMA member W{w}" for w in range(4)],
         "tc",
         font_size=9,
     )
@@ -583,7 +583,7 @@ def build_spec() -> None:
         "t2_tc",
         1443,
         34,
-        [f"MmaMXF4NVF4Op\ntiled-MMA member W{w}" for w in range(4)],
+        [f"[API] MmaMXF4NVF4Op\ntiled-MMA member W{w}" for w in range(4)],
         "tc",
         font_size=9,
     )
@@ -696,7 +696,7 @@ def build_spec() -> None:
     add_edge("e_t3_dgt", "t3_down_g", "t3_down_tma", "", "tma")
     add_edge("e_t3_dts", "t3_down_tma", "t3_down_s", "TMA", "tma", width=3)
 
-    # T4: A hoist, per-tile B supply, lane-local QMMA/epilogue/scatter.
+    # T4: A hoist, per-tile B supply, lane-local MMA/epilogue/scatter.
     phase("t4", "T4 · FC2/scatter", 1960, 730)
     add_node(
         "t4_sa",
@@ -741,7 +741,7 @@ def build_spec() -> None:
         "t4_tc",
         2236,
         36,
-        [f"MmaMXF4NVF4Op\ntiled-MMA member W{w}" for w in range(4)],
+        [f"[API] MmaMXF4NVF4Op\ntiled-MMA member W{w}" for w in range(4)],
         "tc",
         font_size=9,
     )
@@ -927,7 +927,7 @@ def build_spec() -> None:
         2750,
         1740,
         65,
-        "Arrow labels name source/API movement; LDG/LDS/STG/STS denote logical spaces, not asserted SASS. [PTX] quotes inline PTX; emitted SASS lowering is still pending.\n* Source construct/API and address space confirmed; exact SASS pending. LdMatrix/StMatrix-derived mappings are source-confirmed; LDSM/STSM need disassembly. · Evidence: w4a4_moe_fused_overview_box.md · Source: flashinfer 517cca9c2e7d91f524fcb5f078370c056308d461",
+        "Arrow labels name source/API movement; LDG/LDS/STG/STS denote logical spaces, not asserted SASS. [PTX] quotes inline PTX; exact arrow lowering remains unresolved.\n* Source construct/API and address space confirmed. Current canonical exp_002 binary separately confirms [SASS] OMMA.SF for MMA; LdMatrix/StMatrix-derived mappings are source-confirmed, while LDSM/STSM need disassembly. · Evidence: kernel_design.md · Source: flashinfer 748ad45594f5e701cbbdca59c60335f39d1c3b2f",
         "text",
         font_size=11,
         background=True,
