@@ -1,0 +1,29 @@
+{
+  "schema": "exp010.reused-ncu-evidence.v1",
+  "source": "../../exp_002_fused_vs_chain_dataflow/results/ncu/deep_launch_metrics.csv",
+  "source_sha256": "40d6a4bedb433188c2d6a4f51f80fe326025e3f4cc5025e4931db910853840d8",
+  "capture_gpu_uuid": "GPU-4a286357-c999-9547-3a04-25961b1ffd08",
+  "exp010_gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+  "hardware_relation": "same 5KP model, different physical GPU",
+  "scope_note": "Fused counters cover the whole MoEDynamicKernel and cannot be projected onto Scatter. Finalize counters cover its standalone CUTLASS launch.",
+  "m8192": {
+    "fused_whole_launch": {
+      "registers_per_thread": 255,
+      "dynamic_shared_memory_bytes": 91136,
+      "achieved_occupancy_pct": 10.416062030671572,
+      "issue_active_pct": 19.977303024354487,
+      "global_reduction_footprint_bytes": 1073741824,
+      "local_load_store_footprint_bytes": 316817408
+    },
+    "chain_finalize": {
+      "registers_per_thread": 48,
+      "achieved_occupancy_pct": 79.0138328971828,
+      "issue_active_pct": 25.612267901461703,
+      "global_load_footprint_bytes": 1124073472,
+      "global_store_footprint_bytes": 134217728,
+      "global_reduction_footprint_bytes": 0,
+      "local_load_store_footprint_bytes": 0,
+      "stall_long_scoreboard_pct": 89.66836505561179
+    }
+  }
+}

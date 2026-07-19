@@ -1,0 +1,26 @@
+{
+  "schema": "exp010.production-phase-summary.v2",
+  "arm": "completion_anchored_probe",
+  "replays": 5,
+  "task_count": 2536,
+  "grid_ctas": 110,
+  "statistic": "per-replay additive ticks divided by 110 SM-equivalent denominator, then median across 5 replays; individual subphase entries are their own p50",
+  "phase_us": {
+    "scatter_body_d_to_e": 504.7342545454545,
+    "post_sync_e_to_f": 7.373672727272727,
+    "scatter_d_to_f": 512.1547636363637
+  },
+  "scatter_d_to_f_replay_us": [
+    510.9687272727273,
+    510.7330909090909,
+    512.1547636363637,
+    514.4858181818182,
+    514.4503272727272
+  ],
+  "whole_event_us": {
+    "probe_median": 1842.08,
+    "no_marker_control_median": 1803.84,
+    "probe_perturbation_pct": 2.119921944296621
+  },
+  "source_raw_sha256": "f82021f3b9b8a4a971ab1057cd7b1a9380e2d2a7829a3e019ce05b5cc6fbe8dc"
+}

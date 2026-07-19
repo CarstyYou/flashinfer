@@ -1,0 +1,6 @@
+raw/
+runtime/
+production_completion_timing.json
+derived/extension_sass.txt
+*.sqlite
+*_pqtdir/

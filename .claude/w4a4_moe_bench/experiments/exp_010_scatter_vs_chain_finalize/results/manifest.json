@@ -1,0 +1,56 @@
+{
+  "schema": "exp010.manifest.v1",
+  "experiment": "exp_010_scatter_vs_chain_finalize",
+  "status": "closed_with_fidelity_failure",
+  "case": {
+    "m": 8192,
+    "experts": 256,
+    "hidden": 2048,
+    "intermediate_tp": 512,
+    "topk": 8,
+    "activation": "SwiGLU"
+  },
+  "hardware": {
+    "host": "R6KD-CX8aaS-GPU-16",
+    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "gpu_label": "5KP / NVIDIA Graphics Device",
+    "application_clock_mhz": 2377,
+    "compute_capability": "12.0"
+  },
+  "software": {
+    "flashinfer_commit": "986928e82a01d4cb5dce8f291faba9e70ae93ebf",
+    "branch": "w4a4_moe_bench",
+    "production_source_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+    "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+    "container_image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+    "torch": "2.12.0a0+5aff3928d8.nv26.05",
+    "cuda": "13.2",
+    "nvcc": "13.2.78",
+    "nsys": "2026.2.1",
+    "veloq": "0.2.2"
+  },
+  "artifacts": {
+    "production_raw_summary_sha256": "f82021f3b9b8a4a971ab1057cd7b1a9380e2d2a7829a3e019ce05b5cc6fbe8dc",
+    "standalone_capture_sha256": "db71f4f8b07fac60b62ad7bbb13925a27ce7ce85275725b58b18eeb5bb6a44b9",
+    "standalone_capture_script_sha256": "d020fe2af0bc4c591b44d7891fe82801fd30c09f5f64d05ffac5040718eeeda1",
+    "committed_standalone_script_sha256": "c21ff4c8f5e1ed5c17c9139561d6d25ed9f1498806096ad3e6680bb3fbfbdbfc",
+    "committed_extension_source_sha256": "88c22d3ea342fcf89ee2a2958be70b1e50f570ada3ef744566475d53c774e247",
+    "committed_production_anchor_script_sha256": "23348b7ffc31e1bb26f0a44a4515263272e371ddc934ba3e3053c5dfb0e5b4ea",
+    "committed_actual_chain_script_sha256": "97729e90917fadc0dc16cee04bb51a8651e3388e9a5ec53efa45b89bec33cb4a",
+    "result_sha256": "f41145103caeed19da2abba17521bccf49c05ea4b1f64fd5ff2e4f4436b038d8",
+    "standalone_extension_so_sha256": "958a3ece0486cfac46544cb7226d7fce4d2108224b239d75fc541f77b1b3514b",
+    "actual_chain_nsys_sha256": "ae023689cd928cd1224a7a7367d49b031a01650d71ecea55004f834b294b163d",
+    "actual_chain_kernel_csv_sha256": "9f253f1e0b5676f0b927c0a829d91373b9127d33cf93bbb31b9f49a1fb7b5050",
+    "reused_ncu_csv_sha256": "40d6a4bedb433188c2d6a4f51f80fe326025e3f4cc5025e4931db910853840d8",
+    "production_scatter_sass_sha256": "985669c71a8c2da2b5fb0dd4b4196dbc4f40fcf0a3f824f4d86f554b06f99e3e",
+    "standalone_sass_sha256": "18c5104f6a5001001d87c3d938d45e56c70b85125af6cd74d38677a3f64c614a"
+  },
+  "comparison_contract": {
+    "production_vs_standalone": "diagnostic fidelity only",
+    "fused_component_vs_chain_finalize": "descriptive component reference only",
+    "strict_speedup_allowed": false,
+    "reason": "physical contribution representation, rounding boundary, SMEM layout and resource envelope differ",
+    "script_provenance_note": "capture-time script hash is preserved; committed script only adds formatting and explicit closure binding for lint/replay safety, without regenerating performance evidence"
+  }
+}

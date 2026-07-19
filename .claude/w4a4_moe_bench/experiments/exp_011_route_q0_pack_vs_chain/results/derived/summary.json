@@ -1,0 +1,698 @@
+{
+  "actual_chain": {
+    "comparison_class": "fresh exact actual graph timing anchor; stage responsibility is not identical to Fused P1+P2+P3",
+    "kernels": [
+      {
+        "duration_ns": 33728,
+        "row_id": "kernel:1",
+        "short_name": "blockExpertPrefixSumKernel",
+        "start_ns": 9764010
+      },
+      {
+        "duration_ns": 1984,
+        "row_id": "kernel:2",
+        "short_name": "globalExpertPrefixSumLargeKernel",
+        "start_ns": 9797674
+      },
+      {
+        "duration_ns": 12544,
+        "row_id": "kernel:3",
+        "short_name": "mergeExpertPrefixSumKernel",
+        "start_ns": 9799594
+      },
+      {
+        "block": [
+          256,
+          1,
+          1
+        ],
+        "duration_ns": 250847,
+        "grid": [
+          880,
+          1,
+          1
+        ],
+        "row_id": "kernel:4",
+        "short_name": "expandInputRowsKernel<BF16,NVFP4,non-prequant>",
+        "start_ns": 9811786
+      }
+    ],
+    "ncu": {
+      "comparison_note": "independent Expand launch; whole-Fused counters cannot be projected to P3",
+      "counters": {
+        "gpu__time_duration.sum": 271840.0,
+        "l1tex__t_bytes_pipe_lsu_mem_local_op_ld.sum": 0.0,
+        "l1tex__t_bytes_pipe_lsu_mem_local_op_st.sum": 0.0,
+        "l1tex__t_requests_pipe_lsu_mem_global_op_atom.sum": 0.0,
+        "l1tex__t_requests_pipe_lsu_mem_global_op_red.sum": 0.0,
+        "l1tex__t_sectors_pipe_lsu_mem_global_op_atom.sum": 0.0,
+        "launch__registers_per_thread": 48,
+        "launch__stack_size": 1024.0,
+        "sm__inst_executed.sum": 168335712.0,
+        "smsp__sass_thread_inst_executed_op_bit_pred_on.sum": 302311968.0,
+        "smsp__sass_thread_inst_executed_op_conversion_pred_on.sum": 134217728.0,
+        "smsp__sass_thread_inst_executed_op_integer_pred_on.sum": 2890573312.0,
+        "smsp__sass_thread_inst_executed_op_memory_pred_on.sum": 472372480.0
+      },
+      "launch": {
+        "block": [
+          256,
+          1,
+          1
+        ],
+        "grid": [
+          880,
+          1,
+          1
+        ],
+        "row_id": "launch:0"
+      },
+      "trace_sha256": "c501812289b6cbf0ac68a236840ad4f2c02c580ed1899a9328e1d6aac8a402d8",
+      "version": "2026.1.1"
+    },
+    "pdl_overlap_ns": 480,
+    "prefix3_expand_interval_ns": 298623,
+    "schema": "exp011.actual-chain-route-q0-anchor.v1",
+    "source": {
+      "experiment": "exp_010_scatter_vs_chain_finalize",
+      "nvtx_range": "exp010_actual_cutlass_chain_m8192",
+      "same_fixture_and_session": true,
+      "same_gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+      "trace_sha256": "ae023689cd928cd1224a7a7367d49b031a01650d71ecea55004f834b294b163d"
+    },
+    "sum_kernel_duration_ns": 299103
+  },
+  "arms": {
+    "identity": {
+      "arm_contract": {
+        "gate_pass": true,
+        "input_transform": "none",
+        "topk_ids_sha256": "f9b3c632d767e754837a14016f5a2ea3c3fccfefef1adee4f9b7b966c68e2f7a",
+        "variant": "identity"
+      },
+      "binary_identity": {
+        "no_marker_cubin_sha256": "b1e068ec8eeb0988a84ad7b62e1958f5623e0911d233a45f080364491d7ee47f",
+        "probe_cubin_sha256": "cee6018f1f9dad9ad71c96f2814c8efe41c4a28e09c02e98332498b51678aa6b",
+        "probe_equals_no_marker": false
+      },
+      "correctness_and_workspace_gates": "pass",
+      "ncu": {
+        "counters": {
+          "gpu__time_duration.sum": 1891040.0,
+          "l1tex__t_bytes_pipe_lsu_mem_local_op_ld.sum": 158408704.0,
+          "l1tex__t_bytes_pipe_lsu_mem_local_op_st.sum": 158408704.0,
+          "l1tex__t_requests_pipe_lsu_mem_global_op_atom.sum": 77444.0,
+          "l1tex__t_requests_pipe_lsu_mem_global_op_red.sum": 2109696.0,
+          "l1tex__t_sectors_pipe_lsu_mem_global_op_atom.sum": 121153.0,
+          "launch__registers_per_thread": 255,
+          "launch__stack_size": 1024.0,
+          "sm__inst_executed.sum": 386625438.0,
+          "smsp__sass_thread_inst_executed_op_bit_pred_on.sum": 29765888.0,
+          "smsp__sass_thread_inst_executed_op_conversion_pred_on.sum": 741181824.0,
+          "smsp__sass_thread_inst_executed_op_integer_pred_on.sum": 5113567762.0,
+          "smsp__sass_thread_inst_executed_op_memory_pred_on.sum": 1783835283.0
+        },
+        "cubin_sha256": "b1e068ec8eeb0988a84ad7b62e1958f5623e0911d233a45f080364491d7ee47f",
+        "launch": {
+          "block": [
+            160,
+            1,
+            1
+          ],
+          "grid": [
+            1,
+            1,
+            110
+          ],
+          "row_id": "launch:0"
+        },
+        "same_cubin_as_no_marker_timing": true,
+        "trace_sha256": "2939e16d2bd6fa074c964b24f273dca3bba25b9eaf70491927bf3b31b1f82439",
+        "version": "2026.1.1"
+      },
+      "no_marker_event_us": {
+        "max": 1804.4480085372925,
+        "min": 1797.8559732437134,
+        "p50": 1799.0399599075317,
+        "rMAD": 0.0009757307602368786,
+        "samples": [
+          1797.8559732437134,
+          1798.975944519043,
+          1802.3359775543213,
+          1799.0399599075317,
+          1804.4480085372925
+        ]
+      },
+      "p1_p2_p3_stage_us": {
+        "max": 370.1012363636363,
+        "min": 368.7793454545454,
+        "p50": 369.5674181818182,
+        "rMAD": 0.0007562451786382331,
+        "samples": [
+          370.1012363636363,
+          369.75592727272726,
+          368.7793454545454,
+          369.3867636363636,
+          369.5674181818182
+        ]
+      },
+      "phase_us": {
+        "P1": {
+          "max": 7.165090909090909,
+          "min": 7.040290909090909,
+          "p50": 7.091490909090909,
+          "rMAD": 0.005777864380358404,
+          "samples": [
+            7.165090909090909,
+            7.040290909090909,
+            7.063854545454546,
+            7.091490909090909,
+            7.109236363636364
+          ]
+        },
+        "P2": {
+          "max": 13.705018181818183,
+          "min": 13.607854545454545,
+          "p50": 13.644218181818182,
+          "rMAD": 0.00079026480747095,
+          "samples": [
+            13.705018181818183,
+            13.65149090909091,
+            13.644218181818182,
+            13.607854545454545,
+            13.642472727272727
+          ]
+        },
+        "P3": {
+          "max": 349.23112727272724,
+          "min": 348.0712727272727,
+          "p50": 348.8157090909091,
+          "rMAD": 0.0010559494401419557,
+          "samples": [
+            349.23112727272724,
+            349.06414545454544,
+            348.0712727272727,
+            348.68741818181815,
+            348.8157090909091
+          ]
+        }
+      },
+      "probe_event_us": {
+        "max": 1837.4719619750977,
+        "min": 1825.984001159668,
+        "p50": 1834.9119424819946,
+        "rMAD": 0.002068483403808786,
+        "samples": [
+          1825.984001159668,
+          1834.9119424819946,
+          1837.4719619750977,
+          1831.3599824905396,
+          1835.8720541000366
+        ]
+      },
+      "relative_to_identity_pct": {
+        "P3": 0.0,
+        "no_marker_event": 0.0
+      }
+    },
+    "precomputed_phys_row": {
+      "arm_contract": {
+        "constructed_outside_timed_boundary": true,
+        "decoded_topk_sha256": "f9b3c632d767e754837a14016f5a2ea3c3fccfefef1adee4f9b7b966c68e2f7a",
+        "encoded_topk_sha256": "d1de2a02ede5aedf3ecded046170108c4628b513fca2ec1d237ac4366c141ae3",
+        "encoding": "(expert_occurrence_rank << 8) | expert_id",
+        "expected_expert_write_rows": 0,
+        "expert_bits": 8,
+        "gate_pass": true,
+        "input_transform": "precomputed stable per-expert physical-row rank",
+        "rank_histogram_sha256": "5e937225d3ac21770218000ebdedcb62cc211c4444bb260d0838656ca41260bc",
+        "rank_max": 301,
+        "variant": "precomputed_phys_row"
+      },
+      "binary_identity": {
+        "no_marker_cubin_sha256": "a64d9eaff8111e5f7c12ded5d465aa3562d9089e1284dff2d9d1dd49b3fc61a0",
+        "probe_cubin_sha256": "9387cd81690a9fc6a12bd37ca560441eebca89bdc0b801f6fff508348d00893e",
+        "probe_equals_no_marker": false
+      },
+      "correctness_and_workspace_gates": "pass",
+      "ncu": {
+        "counters": {
+          "gpu__time_duration.sum": 1892384.0,
+          "l1tex__t_bytes_pipe_lsu_mem_local_op_ld.sum": 158408704.0,
+          "l1tex__t_bytes_pipe_lsu_mem_local_op_st.sum": 158408704.0,
+          "l1tex__t_requests_pipe_lsu_mem_global_op_atom.sum": 11908.0,
+          "l1tex__t_requests_pipe_lsu_mem_global_op_red.sum": 2109696.0,
+          "l1tex__t_sectors_pipe_lsu_mem_global_op_atom.sum": 55737.0,
+          "launch__registers_per_thread": 255,
+          "launch__stack_size": 1024.0,
+          "sm__inst_executed.sum": 385914268.0,
+          "smsp__sass_thread_inst_executed_op_bit_pred_on.sum": 29765888.0,
+          "smsp__sass_thread_inst_executed_op_conversion_pred_on.sum": 741181824.0,
+          "smsp__sass_thread_inst_executed_op_integer_pred_on.sum": 5115400403.0,
+          "smsp__sass_thread_inst_executed_op_memory_pred_on.sum": 1783699477.0
+        },
+        "cubin_sha256": "a64d9eaff8111e5f7c12ded5d465aa3562d9089e1284dff2d9d1dd49b3fc61a0",
+        "launch": {
+          "block": [
+            160,
+            1,
+            1
+          ],
+          "grid": [
+            1,
+            1,
+            110
+          ],
+          "row_id": "launch:0"
+        },
+        "same_cubin_as_no_marker_timing": true,
+        "trace_sha256": "3a028d7b909dac47526094d9f40a3b0c1ecf4f88b0972eb0f40cd81d842dbfff",
+        "version": "2026.1.1"
+      },
+      "no_marker_event_us": {
+        "max": 1810.304045677185,
+        "min": 1800.2879619598389,
+        "p50": 1801.9200563430786,
+        "rMAD": 0.0013428693043697037,
+        "samples": [
+          1804.9919605255127,
+          1810.304045677185,
+          1800.2879619598389,
+          1801.9200563430786,
+          1800.8639812469482
+        ]
+      },
+      "p1_p2_p3_stage_us": {
+        "max": 372.62603636363633,
+        "min": 370.3272727272727,
+        "p50": 370.8104727272727,
+        "rMAD": 0.001931963557369414,
+        "samples": [
+          371.9045818181818,
+          372.62603636363633,
+          370.3272727272727,
+          370.8104727272727,
+          370.58647272727274
+        ]
+      },
+      "phase_us": {
+        "P1": {
+          "max": 13.587200000000001,
+          "min": 13.562763636363636,
+          "p50": 13.574399999999999,
+          "rMAD": 0.0012709270927092017,
+          "samples": [
+            13.586036363636364,
+            13.574399999999999,
+            13.587200000000001,
+            13.562763636363636,
+            13.562763636363636
+          ]
+        },
+        "P2": {
+          "max": 13.758254545454545,
+          "min": 13.616290909090909,
+          "p50": 13.684072727272728,
+          "rMAD": 0.006461298071812687,
+          "samples": [
+            13.74370909090909,
+            13.640145454545454,
+            13.684072727272728,
+            13.758254545454545,
+            13.616290909090909
+          ]
+        },
+        "P3": {
+          "max": 345.4114909090909,
+          "min": 343.056,
+          "p50": 343.4894545454545,
+          "rMAD": 0.001870915396635142,
+          "samples": [
+            344.57483636363634,
+            345.4114909090909,
+            343.056,
+            343.4894545454545,
+            343.4074181818182
+          ]
+        }
+      },
+      "probe_event_us": {
+        "max": 1841.7600393295288,
+        "min": 1832.319974899292,
+        "p50": 1834.6240520477295,
+        "rMAD": 0.0018619753602710132,
+        "samples": [
+          1832.41605758667,
+          1839.743971824646,
+          1841.7600393295288,
+          1834.6240520477295,
+          1832.319974899292
+        ]
+      },
+      "relative_to_identity_pct": {
+        "P3": -1.52695374853844,
+        "no_marker_event": 0.16009074282568037
+      }
+    },
+    "shared_equal_scale": {
+      "arm_contract": {
+        "bitwise_equal_across_experts": true,
+        "compute_w1_alpha_shape": [
+          256
+        ],
+        "expected_productive_claims": 1639,
+        "expected_share_input_specialization": true,
+        "expected_terminal_pair_head": 8745,
+        "gate_pass": true,
+        "input_and_compute_scale_roles_separated": true,
+        "input_transform": "bitwise-equal per-expert W1 alpha normalized to scalar",
+        "original_w1_alpha_shape": [
+          256
+        ],
+        "runtime_w1_alpha_shape": [
+          1
+        ],
+        "variant": "shared_equal_scale"
+      },
+      "binary_identity": {
+        "no_marker_cubin_sha256": "aa627761a35c87dce08f4427f3cadf4bfdcab3aba87724c8f68f09d29155da18",
+        "probe_cubin_sha256": "a2b94be7de6cb75e91eb67a58ab65b2b3ecfceda1deb02012a56ed95cf6484e5",
+        "probe_equals_no_marker": false
+      },
+      "correctness_and_workspace_gates": "pass",
+      "ncu": {
+        "counters": {
+          "gpu__time_duration.sum": 1643360.0,
+          "l1tex__t_bytes_pipe_lsu_mem_local_op_ld.sum": 159707136.0,
+          "l1tex__t_bytes_pipe_lsu_mem_local_op_st.sum": 159707136.0,
+          "l1tex__t_requests_pipe_lsu_mem_global_op_atom.sum": 72529.0,
+          "l1tex__t_requests_pipe_lsu_mem_global_op_red.sum": 2109696.0,
+          "l1tex__t_sectors_pipe_lsu_mem_global_op_atom.sum": 116238.0,
+          "launch__registers_per_thread": 255,
+          "launch__stack_size": 1024.0,
+          "sm__inst_executed.sum": 356017748.0,
+          "smsp__sass_thread_inst_executed_op_bit_pred_on.sum": 15085824.0,
+          "smsp__sass_thread_inst_executed_op_conversion_pred_on.sum": 656247168.0,
+          "smsp__sass_thread_inst_executed_op_integer_pred_on.sum": 4891169895.0,
+          "smsp__sass_thread_inst_executed_op_memory_pred_on.sum": 1644484836.0
+        },
+        "cubin_sha256": "aa627761a35c87dce08f4427f3cadf4bfdcab3aba87724c8f68f09d29155da18",
+        "launch": {
+          "block": [
+            160,
+            1,
+            1
+          ],
+          "grid": [
+            1,
+            1,
+            110
+          ],
+          "row_id": "launch:0"
+        },
+        "same_cubin_as_no_marker_timing": true,
+        "trace_sha256": "a1ee0f7a1ee6b8828c088f99ad8f1f2f04adb321c7ee3c5463b15032443b2000",
+        "version": "2026.1.1"
+      },
+      "no_marker_event_us": {
+        "max": 1568.4479475021362,
+        "min": 1560.4480504989624,
+        "p50": 1565.824031829834,
+        "rMAD": 0.0015149851496952741,
+        "samples": [
+          1560.4480504989624,
+          1568.4479475021362,
+          1565.824031829834,
+          1565.3120279312134,
+          1567.4240589141846
+        ]
+      },
+      "p1_p2_p3_stage_us": {
+        "max": 126.78196363636364,
+        "min": 125.77541818181818,
+        "p50": 126.12101818181819,
+        "rMAD": 0.0023698838172166482,
+        "samples": [
+          126.32261818181817,
+          126.78196363636364,
+          125.77541818181818,
+          125.95054545454545,
+          126.12101818181819
+        ]
+      },
+      "phase_us": {
+        "P1": {
+          "max": 7.148218181818182,
+          "min": 7.047854545454546,
+          "p50": 7.133672727272727,
+          "rMAD": 0.0030229997553217714,
+          "samples": [
+            7.136872727272728,
+            7.047854545454546,
+            7.088581818181819,
+            7.148218181818182,
+            7.133672727272727
+          ]
+        },
+        "P2": {
+          "max": 13.728872727272726,
+          "min": 13.51970909090909,
+          "p50": 13.630836363636362,
+          "rMAD": 0.003259087416766413,
+          "samples": [
+            13.728872727272726,
+            13.6608,
+            13.620945454545454,
+            13.51970909090909,
+            13.630836363636362
+          ]
+        },
+        "P3": {
+          "max": 106.07330909090909,
+          "min": 105.06589090909091,
+          "p50": 105.3565090909091,
+          "rMAD": 0.0014123391953345325,
+          "samples": [
+            105.45687272727272,
+            106.07330909090909,
+            105.06589090909091,
+            105.28261818181818,
+            105.3565090909091
+          ]
+        }
+      },
+      "probe_event_us": {
+        "max": 1595.744013786316,
+        "min": 1584.8000049591064,
+        "p50": 1591.5199518203735,
+        "rMAD": 0.002384817668250586,
+        "samples": [
+          1584.8000049591064,
+          1595.744013786316,
+          1594.0799713134766,
+          1590.3680324554443,
+          1591.5199518203735
+        ]
+      },
+      "relative_to_identity_pct": {
+        "P3": -69.79593913201573,
+        "no_marker_event": -12.963354526582316
+      }
+    },
+    "static_schedule": {
+      "arm_contract": {
+        "gate_pass": true,
+        "input_transform": "none",
+        "topk_ids_sha256": "f9b3c632d767e754837a14016f5a2ea3c3fccfefef1adee4f9b7b966c68e2f7a",
+        "variant": "static_schedule"
+      },
+      "binary_identity": {
+        "no_marker_cubin_sha256": "9b2c6d5058d0022638e0fe6fec6f52f757586b5ca8ac018fc0a853f1ba0c0872",
+        "probe_cubin_sha256": "f327437854711d7b91fb4a84700ca33eaafe3e1f67eb510d89707bb9cbc097d2",
+        "probe_equals_no_marker": false
+      },
+      "correctness_and_workspace_gates": "pass",
+      "ncu": {
+        "counters": {
+          "gpu__time_duration.sum": 1892128.0,
+          "l1tex__t_bytes_pipe_lsu_mem_local_op_ld.sum": 158408704.0,
+          "l1tex__t_bytes_pipe_lsu_mem_local_op_st.sum": 158408704.0,
+          "l1tex__t_requests_pipe_lsu_mem_global_op_atom.sum": 70780.0,
+          "l1tex__t_requests_pipe_lsu_mem_global_op_red.sum": 2109696.0,
+          "l1tex__t_sectors_pipe_lsu_mem_global_op_atom.sum": 114489.0,
+          "launch__registers_per_thread": 255,
+          "launch__stack_size": 1024.0,
+          "sm__inst_executed.sum": 386640693.0,
+          "smsp__sass_thread_inst_executed_op_bit_pred_on.sum": 29765888.0,
+          "smsp__sass_thread_inst_executed_op_conversion_pred_on.sum": 741181824.0,
+          "smsp__sass_thread_inst_executed_op_integer_pred_on.sum": 5113785241.0,
+          "smsp__sass_thread_inst_executed_op_memory_pred_on.sum": 1784230257.0
+        },
+        "cubin_sha256": "9b2c6d5058d0022638e0fe6fec6f52f757586b5ca8ac018fc0a853f1ba0c0872",
+        "launch": {
+          "block": [
+            160,
+            1,
+            1
+          ],
+          "grid": [
+            1,
+            1,
+            110
+          ],
+          "row_id": "launch:0"
+        },
+        "same_cubin_as_no_marker_timing": true,
+        "trace_sha256": "470c6274a4da0dac2531b496bb03d4e8e99e758cc364c2ea4216bd9169421c47",
+        "version": "2026.1.1"
+      },
+      "no_marker_event_us": {
+        "max": 1804.57603931427,
+        "min": 1801.1200428009033,
+        "p50": 1802.4640083312988,
+        "rMAD": 0.001105466342825382,
+        "samples": [
+          1801.1200428009033,
+          1804.57603931427,
+          1802.4640083312988,
+          1804.57603931427,
+          1802.4319410324097
+        ]
+      },
+      "p1_p2_p3_stage_us": {
+        "max": 371.1802181818182,
+        "min": 369.70385454545453,
+        "p50": 370.55243636363633,
+        "rMAD": 0.0015282568179287393,
+        "samples": [
+          370.93440000000004,
+          371.1802181818182,
+          369.70385454545453,
+          370.55243636363633,
+          370.40116363636366
+        ]
+      },
+      "phase_us": {
+        "P1": {
+          "max": 7.1994181818181815,
+          "min": 7.059781818181818,
+          "p50": 7.131345454545454,
+          "rMAD": 0.013668418046830152,
+          "samples": [
+            7.1994181818181815,
+            7.144145454545455,
+            7.059781818181818,
+            7.065600000000001,
+            7.131345454545454
+          ]
+        },
+        "P2": {
+          "max": 13.824581818181818,
+          "min": 13.588072727272728,
+          "p50": 13.678545454545453,
+          "rMAD": 0.0026486261165461216,
+          "samples": [
+            13.824581818181818,
+            13.65410909090909,
+            13.70210909090909,
+            13.678545454545453,
+            13.588072727272728
+          ]
+        },
+        "P3": {
+          "max": 350.38196363636365,
+          "min": 348.9419636363636,
+          "p50": 349.8082909090909,
+          "rMAD": 0.0005363403206408839,
+          "samples": [
+            349.91040000000004,
+            350.38196363636365,
+            348.9419636363636,
+            349.8082909090909,
+            349.6817454545455
+          ]
+        }
+      },
+      "probe_event_us": {
+        "max": 1844.704031944275,
+        "min": 1826.367974281311,
+        "p50": 1835.7759714126587,
+        "rMAD": 0.0025585133514788205,
+        "samples": [
+          1835.7759714126587,
+          1844.704031944275,
+          1834.8480463027954,
+          1838.9439582824707,
+          1826.367974281311
+        ]
+      },
+      "relative_to_identity_pct": {
+        "P3": 0.2845576596216537,
+        "no_marker_event": 0.19032642409695377
+      }
+    }
+  },
+  "case": {
+    "E": 256,
+    "H": 2048,
+    "M": 8192,
+    "topk": 8
+  },
+  "fidelity": {
+    "all_correctness_workspace_gates_pass": true,
+    "event_acceptance_pct": 1.0,
+    "event_drift_pct": 0.26610121144160503,
+    "event_gate_pass": true,
+    "fresh_identity_no_marker_event_us": 1799.0399599075317,
+    "fresh_probe_event_us": 1834.9119424819946,
+    "fresh_probe_p3_replay_p50_us": 348.8157090909091,
+    "legacy_capture_p3_replay_us": {
+      "max": 349.6026181818182,
+      "min": 348.35810909090907,
+      "p50": 348.5314909090909,
+      "rMAD": 0.0007375399077021762,
+      "samples": [
+        349.6026181818182,
+        349.0490181818182,
+        348.35810909090907,
+        348.5314909090909,
+        348.4605090909091
+      ]
+    },
+    "legacy_published_p3_aggregate_mean_us": 348.80034909090904,
+    "p3_classification": "diagnostic phase anchor; not production-exact timing",
+    "p3_replay_p50_delta_pct": 0.08154734628909033,
+    "p3_statistic_comparable": true,
+    "phase_estimate_classification": "full-kernel diagnostic probe; no-marker event is the production-fidelity wall control",
+    "probe_equals_no_marker_cubin": false,
+    "probe_vs_no_marker_perturbation_pct": 1.9939514059658103,
+    "production_control_event_us": 1803.84
+  },
+  "input_hashes": {
+    "derived/actual_chain_anchor.json": "ed5d9e25c81b1726f20c1e499f8763e29d8a3de2ac72a3f3bd65459ff3ab7892",
+    "exp_004_fused_phase_timing_breakdown/results/whole_kernel_timing.json": "5aa67faffebcc90c364e0b8b6e533828b68dc7f2c63ebb3959890bb4f3ba3eec",
+    "exp_010_scatter_vs_chain_finalize/results/derived/production_phase_summary.json": "3e05939032488b4e4341ae4200f4f728869b99e94b513db4ba45120aba3d8015",
+    "raw/identity_no_marker/capture.json": "16009ba8130efb912cda9bc78793a31dabc8d08d783b9c04263f1e6ed5800345",
+    "raw/identity_probe/capture.json": "4627266611d0d4628ddd0c74dfe15df12522f9fe9a06e932c677d2d55431c38c",
+    "raw/identity_probe/timing_summary.json": "9129829cedf2c7665f7450a8b33e26bda5c84dd543b3c371ae393c202d6de5e5",
+    "raw/ncu/chain_expand/trace.ncu-rep": "c501812289b6cbf0ac68a236840ad4f2c02c580ed1899a9328e1d6aac8a402d8",
+    "raw/ncu/identity/kernel.cubin": "b1e068ec8eeb0988a84ad7b62e1958f5623e0911d233a45f080364491d7ee47f",
+    "raw/ncu/identity/trace.ncu-rep": "2939e16d2bd6fa074c964b24f273dca3bba25b9eaf70491927bf3b31b1f82439",
+    "raw/ncu/precomputed_phys_row/kernel.cubin": "a64d9eaff8111e5f7c12ded5d465aa3562d9089e1284dff2d9d1dd49b3fc61a0",
+    "raw/ncu/precomputed_phys_row/trace.ncu-rep": "3a028d7b909dac47526094d9f40a3b0c1ecf4f88b0972eb0f40cd81d842dbfff",
+    "raw/ncu/shared_equal_scale/kernel.cubin": "aa627761a35c87dce08f4427f3cadf4bfdcab3aba87724c8f68f09d29155da18",
+    "raw/ncu/shared_equal_scale/trace.ncu-rep": "a1ee0f7a1ee6b8828c088f99ad8f1f2f04adb321c7ee3c5463b15032443b2000",
+    "raw/ncu/static_schedule/kernel.cubin": "9b2c6d5058d0022638e0fe6fec6f52f757586b5ca8ac018fc0a853f1ba0c0872",
+    "raw/ncu/static_schedule/trace.ncu-rep": "470c6274a4da0dac2531b496bb03d4e8e99e758cc364c2ea4216bd9169421c47",
+    "raw/precomputed_phys_row_no_marker/capture.json": "ba4e2dd4c5aa627de7edb1b438eb831536f037696662e24cd85420d57aac3fa7",
+    "raw/precomputed_phys_row_probe/capture.json": "5eb34557698f1d7ba9d765f291786e3840a6fbb05105a2130e3c0fd89783ba38",
+    "raw/precomputed_phys_row_probe/timing_summary.json": "1e4ac22261a3dc3f03d31e2c7ca002cf09bfaae6cb096b75bb36485a454f1e02",
+    "raw/shared_equal_scale_no_marker/capture.json": "1083794cc9ea715262253c183cf6ba6dacb8ec0d3198cc6a720591c34fe8e2e5",
+    "raw/shared_equal_scale_probe/capture.json": "c5c56af3f5b3f3289751614125877b271c235c72f01f9ffdde8265aca90b7c31",
+    "raw/shared_equal_scale_probe/timing_summary.json": "9bc89cbad7d46eb367536162142540129fafe0c8709616eb37924a5ece33608b",
+    "raw/static_schedule_no_marker/capture.json": "2978821cb0f31c600b0d044e8ae1f4ffad7196c2fd3bb6f4bef627fcf007ddd2",
+    "raw/static_schedule_probe/capture.json": "e2ad4cfcbc3bcc754d9f6ba40f2719e5051ee73a931d8c7d6ac3d16ae5572f95",
+    "raw/static_schedule_probe/timing_summary.json": "2501c0c5787eeec42b259d83963217e87f32783b1fc52ef0565dcadaf37b0d0f"
+  },
+  "schema": "exp011.route-q0-pack-summary.v1"
+}

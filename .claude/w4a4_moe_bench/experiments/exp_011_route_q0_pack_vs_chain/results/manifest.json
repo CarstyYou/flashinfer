@@ -1,0 +1,79 @@
+{
+  "schema": "exp011.manifest.v1",
+  "experiment": "exp_011_route_q0_pack_vs_chain",
+  "status": "closed_with_scoped_caveats",
+  "case": {
+    "m": 8192,
+    "experts": 256,
+    "hidden": 2048,
+    "intermediate_tp": 512,
+    "topk": 8,
+    "activation": "SwiGLU"
+  },
+  "hardware": {
+    "host": "R6KD-CX8aaS-GPU-16",
+    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "gpu_label": "5KP / NVIDIA Graphics Device",
+    "sm_count": 110,
+    "compute_capability": "12.0",
+    "application_clock_mhz": 2377,
+    "driver": "580.95.05"
+  },
+  "software": {
+    "reporting_checkout_head": "986928e82a01d4cb5dce8f291faba9e70ae93ebf",
+    "capture_checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+    "branch": "w4a4_moe_bench",
+    "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+    "production_dispatch_sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4",
+    "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+    "container_image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+    "torch": "2.12.0a0+5aff3928d8.nv26.05",
+    "cuda": "13.2",
+    "nvcc": "13.2.78",
+    "ptxas": "13.2.78",
+    "ncu": "2026.1.1",
+    "nsys": "2026.2.1",
+    "veloq": "0.2.2"
+  },
+  "protocol": {
+    "phase_timer": "%globaltimer additive ticks / 110",
+    "phase_replays": 5,
+    "whole_kernel_timer": "CUDA event",
+    "whole_kernel_replays": 5,
+    "ncu_launches_per_arm": 1,
+    "ncu_scope": "one uninstrumented full Fused launch per control; one actual Chain Expand launch",
+    "correctness_before_timing": true
+  },
+  "comparison_contract": {
+    "identity_no_marker_vs_production_control": "production-fidelity wall only",
+    "instrumented_probe_phase": "diagnostic estimate only; probe/no-marker cubins differ",
+    "controls_vs_identity": "diagnostic-only matched full-kernel counterfactual",
+    "fused_p3_vs_chain_expand": "descriptive component reference; no strict speedup",
+    "fused_p1_p2_p3_vs_chain_prefix_expand": "stage-context raw time only; no ratio"
+  },
+  "artifacts": {
+    "plan_sha256": "43afd6a6d9025b973ee1b962d43fa4b0f7f86e10f2c12affc672bcd1798544ca",
+    "build_overlays_sha256": "23f06c56d0438bf74792a90d27c7666b0b44698527a64a7d0c7a9f61f5f84e99",
+    "capture_arm_sha256": "6ba3057a4d95790b9c45e896e9d2ecd4693134a5590ee89f58ed28d397ee02f2",
+    "profile_arm_sha256": "80d6bdbd263d9c2e8d2c2718d8a062404a684eb707c6c870cfbda7f1d9113573",
+    "build_summary_sha256": "a8f3fe39adc443b2c4eef7623c3caee4ae374c420f90ee1cf466c494f1865c59",
+    "run_remote_sha256": "b26a83c799f2083c228b94e21e054908fe0d9ffbd1c2246ac3601ad13fde2eb2",
+    "summary_sha256": "37f97d84f9216612e1fa9175518230272505d8152b9666c017d046a789c079c6",
+    "result_sha256": "8b82d51b0560f287aed288262c5e95be0f71d43a91473914f1d37fe028320744",
+    "exp004_whole_kernel_timing_sha256": "5aa67faffebcc90c364e0b8b6e533828b68dc7f2c63ebb3959890bb4f3ba3eec",
+    "actual_chain_anchor_sha256": "ed5d9e25c81b1726f20c1e499f8763e29d8a3de2ac72a3f3bd65459ff3ab7892",
+    "overlay_identity_sha256": "101e0d69b73a95f176c016b1489e65cb0da4f62d76382977c18d606731713662",
+    "identity_probe_capture_sha256": "4627266611d0d4628ddd0c74dfe15df12522f9fe9a06e932c677d2d55431c38c",
+    "identity_no_marker_capture_sha256": "16009ba8130efb912cda9bc78793a31dabc8d08d783b9c04263f1e6ed5800345",
+    "ncu_identity_sha256": "2939e16d2bd6fa074c964b24f273dca3bba25b9eaf70491927bf3b31b1f82439",
+    "ncu_shared_equal_scale_sha256": "a1ee0f7a1ee6b8828c088f99ad8f1f2f04adb321c7ee3c5463b15032443b2000",
+    "ncu_static_schedule_sha256": "470c6274a4da0dac2531b496bb03d4e8e99e758cc364c2ea4216bd9169421c47",
+    "ncu_precomputed_phys_row_sha256": "3a028d7b909dac47526094d9f40a3b0c1ecf4f88b0972eb0f40cd81d842dbfff",
+    "ncu_actual_chain_expand_sha256": "c501812289b6cbf0ac68a236840ad4f2c02c580ed1899a9328e1d6aac8a402d8"
+  },
+  "audit": {
+    "data_audit": "pass_with_scoped_caveats",
+    "causal_review": "pass_with_scoped_caveats"
+  }
+}

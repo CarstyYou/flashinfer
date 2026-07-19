@@ -1,0 +1,22 @@
+
+Fatbin elf code:
+================
+arch = sm_120a
+code version = [1,8]
+host = linux
+compile_size = 64bit
+identifier = /workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_010_scatter_vs_chain_finalize/scatter_finalize_ext.cu
+
+Resource usage:
+ Common:
+  GLOBAL:46 CONSTANT[4]:368
+ Function _ZN56_GLOBAL__N__5b63b8eb_23_scatter_finalize_ext_cu_db67dbd521chain_finalize_kernelEPK13__nv_bfloat16PKiPKfPS0_i:
+  REG:40 STACK:0 SHARED:1024 LOCAL:0 CONSTANT[0]:932 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN56_GLOBAL__N__5b63b8eb_23_scatter_finalize_ext_cu_db67dbd514scatter_kernelEPK13__nv_bfloat16PKiPKfS4_S4_S4_S4_S4_S4_PKlPS0_Pliiiiii:
+  REG:40 STACK:0 SHARED:1024 LOCAL:0 CONSTANT[0]:1016 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN56_GLOBAL__N__5b63b8eb_23_scatter_finalize_ext_cu_db67dbd521fill_full_rows_kernelEP13__nv_bfloat16l:
+  REG:26 STACK:0 SHARED:1024 LOCAL:0 CONSTANT[0]:912 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN56_GLOBAL__N__5b63b8eb_23_scatter_finalize_ext_cu_db67dbd520fill_partials_kernelEP13__nv_bfloat16l:
+  REG:22 STACK:0 SHARED:1024 LOCAL:0 CONSTANT[0]:912 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN3cub17_V_300200_SM_12006detail11EmptyKernelIvEEvv:
+  REG:4 STACK:0 SHARED:1024 LOCAL:0 CONSTANT[0]:896 TEXTURE:0 SURFACE:0 SAMPLER:0

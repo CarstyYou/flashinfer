@@ -1,0 +1,43 @@
+{
+  "schema": "exp010.static-fidelity.v1",
+  "production": {
+    "source": "../../../exp_006_fc2_completion_anchored_breakdown/results/raw/static/completion_anchored_probe/kernel.sass",
+    "sass_sha256": "985669c71a8c2da2b5fb0dd4b4196dbc4f40fcf0a3f824f4d86f554b06f99e3e",
+    "cubin_sha256": "eed241ee29120468f2d72b690874784da502649964a46b3e337e3987d53fcc25",
+    "scatter_basic_block_pc": "0x1c460-0x1c7a0",
+    "instruction_counts": {
+      "LDS.U16": 8,
+      "LDS_32bit_metadata": 2,
+      "FMUL": 8,
+      "FMUL.FTZ": 0,
+      "REDG.E.ADD.BF16x8": 1
+    },
+    "key_instructions": [
+      "0x1c460 LDS.U16 R9, [R9]",
+      "0x1c530 LDS R7, [R6+0x580]",
+      "0x1c590 LDS R6, [R6+0x780]",
+      "0x1c690 FMUL R9, R6.reuse, R9",
+      "0x1c7a0 REDG.E.ADD.BF16x8.RN.STRONG.GPU"
+    ]
+  },
+  "standalone": {
+    "source_raw_sha256": "18c5104f6a5001001d87c3d938d45e56c70b85125af6cd74d38677a3f64c614a",
+    "extension_so_sha256": "958a3ece0486cfac46544cb7226d7fce4d2108224b239d75fc541f77b1b3514b",
+    "scatter_basic_block_pc": "0x1a00-0x1e30",
+    "instruction_counts": {
+      "LDS.128": 1,
+      "LDS_32bit_metadata": 2,
+      "FMUL": 0,
+      "FMUL.FTZ": 8,
+      "REDG.E.ADD.BF16x8": 1
+    },
+    "key_instructions": [
+      "0x1a00 LDS R26, [R23+0x8000]",
+      "0x1c30 LDS.128 R8, [R22]",
+      "0x1c50 LDS R23, [R23+0x8200]",
+      "0x1cf0 FMUL.FTZ R11, R23.reuse, R34",
+      "0x1e30 REDG.E.ADD.BF16x8.RN.STRONG.GPU"
+    ]
+  },
+  "verdict": "machine_dataflow_mismatch"
+}

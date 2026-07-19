@@ -1,0 +1,23 @@
+{
+  "schema": "exp010.actual-chain-finalize-veloq.v1",
+  "tool": "veloq 0.2.2",
+  "source_trace_sha256": "ae023689cd928cd1224a7a7367d49b031a01650d71ecea55004f834b294b163d",
+  "nvtx_range": "exp010_actual_cutlass_chain_m8192",
+  "correlation_id": 4,
+  "kernel": {
+    "row_id": "kernel:9",
+    "short_name": "finalizeMoeRoutingKernel",
+    "duration_ns": 223072,
+    "grid": [8192, 1, 1],
+    "block": [256, 1, 1],
+    "registers_per_thread": 48,
+    "static_shared_memory_bytes": 0,
+    "dynamic_shared_memory_bytes": 0,
+    "stream_id": 141
+  },
+  "launch": {
+    "runtime_api": "cudaGraphLaunch_v10000",
+    "enable_pdl": true,
+    "graph_event_count": 9
+  }
+}

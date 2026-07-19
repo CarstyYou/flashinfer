@@ -1,0 +1,9 @@
+raw/
+runtime/
+overlays/
+*.ncu-rep
+*.nsys-rep
+*_pqtdir/
+derived/ncu_*_summary.json
+derived/ncu_*_launches.json
+derived/ncu_*_metrics.json

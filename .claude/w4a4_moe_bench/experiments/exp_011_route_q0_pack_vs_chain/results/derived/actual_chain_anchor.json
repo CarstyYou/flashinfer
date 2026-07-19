@@ -1,0 +1,42 @@
+{
+  "schema": "exp011.actual-chain-route-q0-anchor.v1",
+  "source": {
+    "experiment": "exp_010_scatter_vs_chain_finalize",
+    "trace_sha256": "ae023689cd928cd1224a7a7367d49b031a01650d71ecea55004f834b294b163d",
+    "nvtx_range": "exp010_actual_cutlass_chain_m8192",
+    "same_gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "same_fixture_and_session": true
+  },
+  "kernels": [
+    {
+      "row_id": "kernel:1",
+      "short_name": "blockExpertPrefixSumKernel",
+      "start_ns": 9764010,
+      "duration_ns": 33728
+    },
+    {
+      "row_id": "kernel:2",
+      "short_name": "globalExpertPrefixSumLargeKernel",
+      "start_ns": 9797674,
+      "duration_ns": 1984
+    },
+    {
+      "row_id": "kernel:3",
+      "short_name": "mergeExpertPrefixSumKernel",
+      "start_ns": 9799594,
+      "duration_ns": 12544
+    },
+    {
+      "row_id": "kernel:4",
+      "short_name": "expandInputRowsKernel<BF16,NVFP4,non-prequant>",
+      "start_ns": 9811786,
+      "duration_ns": 250847,
+      "grid": [880, 1, 1],
+      "block": [256, 1, 1]
+    }
+  ],
+  "prefix3_expand_interval_ns": 298623,
+  "sum_kernel_duration_ns": 299103,
+  "pdl_overlap_ns": 480,
+  "comparison_class": "fresh exact actual graph timing anchor; stage responsibility is not identical to Fused P1+P2+P3"
+}
