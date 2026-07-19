@@ -2,7 +2,11 @@
 
 ## 状态
 
-Plan Review 已完成并一次性修正。允许实现与 capture；不再进行第二轮 Plan Review。
+已收口（2026-07-19）：identity/no-marker fidelity、8 组 capture correctness/workspace/event
+gate、actual Chain anchor、NCU identity 与 source hash 均闭合。接受 equal-scale
+shared-input composite benefit 和 `pair_head` 低优先级；row-allocation atomic 独立贡献、
+shared 内部收益拆分及 baseline Fused-vs-Chain 原因保持 unresolved。数据审计与轻量因果审计
+均已完成，结论见 `results/result.md`。Plan Review 只执行了约定的一轮。
 
 ## 目标
 
