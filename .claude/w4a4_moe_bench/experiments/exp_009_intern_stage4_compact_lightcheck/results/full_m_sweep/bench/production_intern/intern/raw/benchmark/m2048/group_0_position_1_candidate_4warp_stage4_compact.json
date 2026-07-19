@@ -1,0 +1,67 @@
+{
+  "arm": "candidate_4warp_stage4_compact",
+  "declared_clock_policy": "locked",
+  "fixture_kind": "canonical",
+  "group": 0,
+  "iters": 50,
+  "jit_artifact_set_sha256": "985f525753e30ae0256d19a635f0164b342a478a04772b5159c8797fbc24f074",
+  "l2_flush_bytes": 201326592,
+  "m": 2048,
+  "order": [
+    "baseline_4warp",
+    "candidate_4warp_stage4_compact",
+    "candidate_4warp_stage4_compact",
+    "baseline_4warp"
+  ],
+  "position": 1,
+  "runtime": {
+    "cuda_runtime": "13.2",
+    "gpu": {
+      "applications_graphics_clock_mhz": "2377",
+      "compute_capability": [
+        12,
+        0
+      ],
+      "driver": "580.95.05",
+      "foreign_processes_before_cuda_context": [],
+      "graphics_clock_mhz": "2370",
+      "max_graphics_clock_mhz": "3090",
+      "name": "NVIDIA Graphics Device",
+      "pci_bus_id": "00000000:76:00.0",
+      "power_draw_w": "60.31",
+      "sm_count": 110,
+      "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+    },
+    "hostname": "688cb617bec5",
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "imports": {
+      "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+      "cutlass_python_version": "4.6.0",
+      "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py",
+      "target_module": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_009_intern_stage4_compact_lightcheck/results/overlays/intern_stage4_compact/moe_dynamic_kernel.py"
+    },
+    "jit_root": "/workspace/jit",
+    "lease_id": "exp009-msweep-20260719T154624Z-carstydev",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "pid": 1,
+    "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+    "source": {
+      "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+      "overlay": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_009_intern_stage4_compact_lightcheck/results/overlays/intern_stage4_compact/moe_dynamic_kernel.py",
+      "overlay_sha256": "42ca8d40e18b5d0f001236b09b85cbc0aa30e6010f0954efd538d8b9a2fb57d2",
+      "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+      "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+    },
+    "timestamp_unix": 1784478908.9620786,
+    "torch": "2.12.0a0+5aff3928d8.nv26.05"
+  },
+  "sample_us": 583.2454371452332,
+  "schema": "exp005.arm-measurement.v1",
+  "status": "complete",
+  "timing": "outer CUDA graph with external CUDA events",
+  "warmup": 5
+}

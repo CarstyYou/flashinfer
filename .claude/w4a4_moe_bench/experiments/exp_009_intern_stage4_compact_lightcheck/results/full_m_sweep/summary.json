@@ -1,0 +1,251 @@
+{
+  "gate_pass": true,
+  "protocol": {
+    "invalid_policy": "failed correctness is retained and never benchmarked",
+    "iters": 50,
+    "l2_flush_bytes": 201326592,
+    "sample_aggregation": "50 timed CUDA Graph replays",
+    "samples_per_arm_m": 1,
+    "timing": "outer CUDA graph with external CUDA events",
+    "warmup": 5
+  },
+  "rows": [
+    {
+      "correctness": {
+        "exp008": {
+          "path": "canonical/exp008/raw/candidate_8warp_n64_temporal_replay_v0/m256/canonical/preparation.json",
+          "sha256": "6353e77000e1d495784fb86abfdf390cf0d140b05d5f7feed07b74fb3b8ba759",
+          "status": "passed"
+        },
+        "intern": {
+          "path": "canonical/intern/raw/candidate_4warp_stage4_compact/m256/canonical/preparation.json",
+          "sha256": "0b1882293ae0fb4095f8b12da89339abdae17006befe0db22506c2457d83e0da",
+          "status": "passed"
+        },
+        "production": {
+          "path": "canonical/production/raw/baseline_4warp/m256/canonical/preparation.json",
+          "sha256": "25b0e4b25c0c68c3d24bbc7af19669167ee1242863d09af1efe6aa31ea67f149",
+          "status": "passed"
+        }
+      },
+      "exp008": {
+        "latency_us": 519.224317073822,
+        "path": "bench/production_exp008/exp008/raw/benchmark/m256/group_0_position_1_candidate_8warp_n64_temporal_replay_v0.json",
+        "sha256": "1457915befdc802db8aef1cae9f7a24b3ba4a6baa0e6afe12a745ecca852ee19"
+      },
+      "exp008_speedup_percent": 4.2677822094832285,
+      "intern": {
+        "latency_us": 490.0409597158432,
+        "path": "bench/production_intern/intern/raw/benchmark/m256/group_0_position_1_candidate_4warp_stage4_compact.json",
+        "sha256": "f8648ad4d90055c0908bf83ad07834890910b501cfa402b5091ef9875f5ef25c"
+      },
+      "intern_speedup_percent": 10.477230397054548,
+      "intern_speedup_vs_exp008_percent": 5.955289405787867,
+      "m": 256,
+      "production": {
+        "latency_us": 541.3836801052094,
+        "path": "bench/production_intern/production/raw/benchmark/m256/group_0_position_0_baseline_4warp.json",
+        "sha256": "20218ec8483007a81e0ffc8c2ac731cd3bdba552037f0c213fd51203a903dd3e"
+      }
+    },
+    {
+      "correctness": {
+        "exp008": {
+          "path": "canonical/exp008/raw/candidate_8warp_n64_temporal_replay_v0/m512/canonical/preparation.json",
+          "sha256": "c5aaba35229c5b039a5e8302692ecf4e44dc27bff863ac490011f0f6eeeb9524",
+          "status": "passed"
+        },
+        "intern": {
+          "path": "canonical/intern/raw/candidate_4warp_stage4_compact/m512/canonical/preparation.json",
+          "sha256": "e7432ab913ce020eba235f950343a0911cf6889976b1261b365a8f0f7eb23a84",
+          "status": "passed"
+        },
+        "production": {
+          "path": "canonical/production/raw/baseline_4warp/m512/canonical/preparation.json",
+          "sha256": "01b58e044fa447e8cf754ad558dbde202073327c2ffee63bdeb9d45e22d68a91",
+          "status": "passed"
+        }
+      },
+      "exp008": {
+        "latency_us": 535.9948790073395,
+        "path": "bench/production_exp008/exp008/raw/benchmark/m512/group_0_position_1_candidate_8warp_n64_temporal_replay_v0.json",
+        "sha256": "0ed57b3a0a09a1a96af5ff2e455dba7ed8a0561e3a976dbf03a9256f10161ea5"
+      },
+      "exp008_speedup_percent": 5.953967297817164,
+      "intern": {
+        "latency_us": 491.0764801502228,
+        "path": "bench/production_intern/intern/raw/benchmark/m512/group_0_position_1_candidate_4warp_stage4_compact.json",
+        "sha256": "922d8c7b2fd1af423af692777c02594a07a09a66f3fef722e18fd5ab30990b27"
+      },
+      "intern_speedup_percent": 15.645497550134202,
+      "intern_speedup_vs_exp008_percent": 9.14692531056993,
+      "m": 512,
+      "production": {
+        "latency_us": 567.9078388214111,
+        "path": "bench/production_intern/production/raw/benchmark/m512/group_0_position_0_baseline_4warp.json",
+        "sha256": "bf48249f1bbc1b2f927cd5a26fe7007d7e76ff3561f478e077e32edd24385e56"
+      }
+    },
+    {
+      "correctness": {
+        "exp008": {
+          "path": "canonical/exp008/raw/candidate_8warp_n64_temporal_replay_v0/m1024/canonical/preparation.json",
+          "sha256": "b41f66175b0cb96d13bb798846208991d21f00a35874b1281b6b41910e99bb0f",
+          "status": "passed"
+        },
+        "intern": {
+          "path": "canonical/intern/raw/candidate_4warp_stage4_compact/m1024/canonical/preparation.json",
+          "sha256": "5c2eda4a9a4f2c337b9fd349a042a836f695c72b681f7980bfc466fca7675200",
+          "status": "passed"
+        },
+        "production": {
+          "path": "canonical/production/raw/baseline_4warp/m1024/canonical/preparation.json",
+          "sha256": "570a3d9c0583cadf6dad1bb362abb799c2cf9e7741d161f903ff99b2fcc1c451",
+          "status": "passed"
+        }
+      },
+      "exp008": {
+        "latency_us": 578.5510361194611,
+        "path": "bench/production_exp008/exp008/raw/benchmark/m1024/group_0_position_1_candidate_8warp_n64_temporal_replay_v0.json",
+        "sha256": "ce296ca8503fbd6c757465ce834ec7daf303805dfbf11abe517af5d9c8ce3110"
+      },
+      "exp008_speedup_percent": 7.200775869659881,
+      "intern": {
+        "latency_us": 504.6124792098999,
+        "path": "bench/production_intern/intern/raw/benchmark/m1024/group_0_position_1_candidate_4warp_stage4_compact.json",
+        "sha256": "6b18d19be5e56fd998ce9589277cec53fdddee365f6417431af60c7a163dfe33"
+      },
+      "intern_speedup_percent": 22.908414887621873,
+      "intern_speedup_vs_exp008_percent": 14.652542288555948,
+      "m": 1024,
+      "production": {
+        "latency_us": 620.2111995220184,
+        "path": "bench/production_intern/production/raw/benchmark/m1024/group_0_position_0_baseline_4warp.json",
+        "sha256": "81165e1b9c8d1e70023b46313f1327f79066c3a4843d57fa69322f1cf24d8eb0"
+      }
+    },
+    {
+      "correctness": {
+        "exp008": {
+          "path": "canonical/exp008/raw/candidate_8warp_n64_temporal_replay_v0/m2048/canonical/preparation.json",
+          "sha256": "7962d58cb2950227e46316b3a219b83af400b6a7a231eeeaef8d8b6d8348078a",
+          "status": "passed"
+        },
+        "intern": {
+          "path": "canonical/intern/raw/candidate_4warp_stage4_compact/m2048/canonical/preparation.json",
+          "sha256": "c298b7dd1e4dee047f487971af6b9d9393a3a5e61e901012cdd97f03e7f8703c",
+          "status": "passed"
+        },
+        "production": {
+          "path": "canonical/production/raw/baseline_4warp/m2048/canonical/preparation.json",
+          "sha256": "39c83386c1e337ece9b0a01b54636a6ae5e16a2ba14e0888f91c9ea6529e987d",
+          "status": "passed"
+        }
+      },
+      "exp008": {
+        "latency_us": 691.2166380882263,
+        "path": "bench/production_exp008/exp008/raw/benchmark/m2048/group_0_position_1_candidate_8warp_n64_temporal_replay_v0.json",
+        "sha256": "9e3300f93249e8ea83d14eae3a8e9396328daf3586153f8646dcbf6008b299ba"
+      },
+      "exp008_speedup_percent": 9.334868497710168,
+      "intern": {
+        "latency_us": 583.2454371452332,
+        "path": "bench/production_intern/intern/raw/benchmark/m2048/group_0_position_1_candidate_4warp_stage4_compact.json",
+        "sha256": "9f05d0aff06596a93852c7787ad481a7fe69b383f761830c488a1c7188bddbe3"
+      },
+      "intern_speedup_percent": 29.575090374838098,
+      "intern_speedup_vs_exp008_percent": 18.512138126870138,
+      "m": 2048,
+      "production": {
+        "latency_us": 755.7408022880554,
+        "path": "bench/production_intern/production/raw/benchmark/m2048/group_0_position_0_baseline_4warp.json",
+        "sha256": "79e1db343e9af1f50de4613bcff4e28ba149e4fb774d92767d3606d2a447d173"
+      }
+    },
+    {
+      "correctness": {
+        "exp008": {
+          "path": "canonical/exp008/raw/candidate_8warp_n64_temporal_replay_v0/m4096/canonical/preparation.json",
+          "sha256": "25af56cc88f80d0c3766c948fedd1a1e292b66e9a8bc5e9d1cdf1e8463f7c310",
+          "status": "passed"
+        },
+        "intern": {
+          "classification": "numerical_accuracy_failure",
+          "diagnostic_path": "diagnostics/intern/m4096.json",
+          "diagnostic_sha256": "3eb3f2ac7dc6c6e59b3e173bb406ce43551163f4c64befb789cf621cf96cf4c9",
+          "failure_path": "canonical/intern/raw/candidate_4warp_stage4_compact/m4096/canonical/failure.json",
+          "failure_sha256": "dbd2443ee39f27fe3f97575b7a6ea2df96e4c7e7837c59ce6d561b33cdd70ecb",
+          "status": "invalid",
+          "zero_rows": [
+            1124,
+            1125,
+            1125
+          ]
+        },
+        "production": {
+          "path": "canonical/production/raw/baseline_4warp/m4096/canonical/preparation.json",
+          "sha256": "6476d6a52e971e8d7f94e7b9867bb9f204fe8a745e673fd5cc215c21712eb608",
+          "status": "passed"
+        }
+      },
+      "exp008": {
+        "latency_us": 921.5916788578033,
+        "path": "bench/production_exp008/exp008/raw/benchmark/m4096/group_0_position_1_candidate_8warp_n64_temporal_replay_v0.json",
+        "sha256": "1c500b0036b541f4a08f68c2d1d9d6c9db40995c5a69bee2f73c01b9954f055f"
+      },
+      "exp008_speedup_percent": 13.234633540330831,
+      "intern": null,
+      "intern_speedup_percent": null,
+      "intern_speedup_vs_exp008_percent": null,
+      "m": 4096,
+      "production": {
+        "latency_us": 1043.5609602928162,
+        "path": "bench/production_exp008/production/raw/benchmark/m4096/group_0_position_0_baseline_4warp.json",
+        "sha256": "f8ae928c1e4f6aa2dfa9ebf4ccab7094a91236fc1c75b56b66682469c62a6376"
+      }
+    },
+    {
+      "correctness": {
+        "exp008": {
+          "path": "canonical/exp008/raw/candidate_8warp_n64_temporal_replay_v0/m8192/canonical/preparation.json",
+          "sha256": "53a9908546d9e1d694722212531eee8bcb4304b6e256985945a30c52482a90c5",
+          "status": "passed"
+        },
+        "intern": {
+          "classification": "numerical_accuracy_failure",
+          "diagnostic_path": "diagnostics/intern/m8192.json",
+          "diagnostic_sha256": "9d9dcaaf8f7c093975c0d80da5c7f7d06432326b9f9b1b72e2a79a0a5b396089",
+          "failure_path": "canonical/intern/raw/candidate_4warp_stage4_compact/m8192/canonical/failure.json",
+          "failure_sha256": "dc34fa25c2b0026597cd5bfb872884d3bf4a5114f22322eaedce9b81942a6d28",
+          "status": "invalid",
+          "zero_rows": [
+            1806,
+            1805,
+            1803
+          ]
+        },
+        "production": {
+          "path": "canonical/production/raw/baseline_4warp/m8192/canonical/preparation.json",
+          "sha256": "bb84f332fb6146f496dd1ee8343ae2df7edd36a43087639a5e69348a41592e80",
+          "status": "passed"
+        }
+      },
+      "exp008": {
+        "latency_us": 1568.1471967697144,
+        "path": "bench/production_exp008/exp008/raw/benchmark/m8192/group_0_position_1_candidate_8warp_n64_temporal_replay_v0.json",
+        "sha256": "702d852dadda3c9894a656518e933835ae1f4fda0efc282ad89e228a7d7783fa"
+      },
+      "exp008_speedup_percent": 15.11217424531479,
+      "intern": null,
+      "intern_speedup_percent": null,
+      "intern_speedup_vs_exp008_percent": null,
+      "m": 8192,
+      "production": {
+        "latency_us": 1805.128333568573,
+        "path": "bench/production_exp008/production/raw/benchmark/m8192/group_0_position_0_baseline_4warp.json",
+        "sha256": "a113b62b09db210172ba2a46ef1bc15d5121079c0cf30db3e1be8f1fdc914c6e"
+      }
+    }
+  ],
+  "schema": "exp009.quick-full-m-sweep.v1"
+}

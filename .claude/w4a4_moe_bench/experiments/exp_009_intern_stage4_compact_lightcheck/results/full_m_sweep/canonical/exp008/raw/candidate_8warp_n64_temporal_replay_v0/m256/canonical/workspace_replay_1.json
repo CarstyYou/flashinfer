@@ -1,0 +1,57 @@
+{
+  "expected_row_counts_sha256": "7649e92fe10f6ca1e80de716b58d6ed5520b563094950bdf01075414c38d1c5d",
+  "scalars": {
+    "all_work_published": 1,
+    "barrier_count": 0,
+    "barrier_epoch": 20,
+    "pair_head": 4032,
+    "producers_done_count": 0,
+    "task_head": 1134,
+    "task_tail": 1024
+  },
+  "schema": "exp005.workspace-route-task-evidence.v1",
+  "tensor_sha256": {
+    "expert_tile_base": "951b384ff2bc4ea8a36148acd7813193070a46404c3499be49ad5d54a4f281ff",
+    "expert_write_rows": "e4fa1a64e9de9328b7fe34f8be37334c9b0df5aeaea9dba27562e456a57654ad",
+    "row_counts": "e4fa1a64e9de9328b7fe34f8be37334c9b0df5aeaea9dba27562e456a57654ad",
+    "task_expert": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+    "task_m_tile": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+    "task_ready": "b4f44543b34288e32f86e04e4c4d882efc49c232331c5d1fc71e5bbd3ee18cb6",
+    "task_slice_begin": "5895cbef74dd8a56a0aa98b2cbba4a5d384581ff79efd0301adde9c827898ad9",
+    "task_slice_count": "c1e2f6bdf9e484395dd93b568a2b96fcf0d8a620a575521c2fe2e16f06a03423",
+    "task_valid_rows": "490b739fdb4feb55d95d0fe057938ffe0eca94db1db3b81c8e9baa8290a458bd",
+    "tile_write_count": "e494148d475e1e68ee34de40653431fcc10beb50fc808c0cd67d7918c9eef73a"
+  },
+  "verification": {
+    "checks": {
+      "all_work_published": true,
+      "atomic_head_terminal_state": true,
+      "expert_tile_base": true,
+      "expert_write_rows": true,
+      "pair_head_terminal_state": true,
+      "routed_row_sum": true,
+      "row_counts": true,
+      "task_descriptor_multiset": true,
+      "task_tail": true
+    },
+    "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+    "expected_pair_head": 4032,
+    "expected_task_count": 1024,
+    "gate_pass": true,
+    "missing_task_descriptors": [],
+    "observed_pair_head": 4032,
+    "observed_task_head": 1134,
+    "observed_task_tail": 1024,
+    "producer_claim_count": 18,
+    "task_descriptor_multiset_sha256": "43eab66e5d4895a4d004340a03c5f245fc812b7928e66933f7a50606d024b1f6",
+    "task_descriptor_order_sha256": "43eab66e5d4895a4d004340a03c5f245fc812b7928e66933f7a50606d024b1f6",
+    "terminal_head_overshoot": 110,
+    "unexpected_task_descriptors": []
+  },
+  "workspace_capacity": {
+    "physical_tiles": 271,
+    "routed_rows": 2048,
+    "tasks": 1084
+  },
+  "workspace_type": "Sm120DynamicMoEWorkspace"
+}

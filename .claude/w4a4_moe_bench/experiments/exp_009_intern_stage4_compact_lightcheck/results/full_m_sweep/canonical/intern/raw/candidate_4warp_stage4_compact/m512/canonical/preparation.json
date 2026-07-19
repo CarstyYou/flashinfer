@@ -1,0 +1,303 @@
+{
+  "arm": "candidate_4warp_stage4_compact",
+  "case": {
+    "experts": 256,
+    "hidden": 2048,
+    "intermediate_tp": 512,
+    "m": 512,
+    "topk": 8
+  },
+  "compile_identity": {
+    "compiled_max_active_clusters": [
+      110
+    ],
+    "compiled_object_types": [
+      "TVMFFIJitCompiledFunctionWithKwargs"
+    ],
+    "dynamic_cache_entries": 1
+  },
+  "cubin_sha256": [
+    "1732f1de50bea28391e07ea12b71512addc8e87b72b5d761cd8de5227ed66df0"
+  ],
+  "fixture": {
+    "duplicate_expert_ids": 0,
+    "fixture_kind": "deterministic_synthetic_random_logits",
+    "m": 512,
+    "occupancy_max": 30,
+    "occupancy_min": 6,
+    "occupancy_p50": 16.0,
+    "occupancy_p95": 23.0,
+    "occupancy_sha256": "8956bc95ca4091e93e36daeaee39c6d8e419ae0145f289f5a797ebb34a080b70",
+    "predicted_cutlass_route_branch": "three_step_route_prefix_variant_unresolved",
+    "seed": 2538,
+    "shape": {
+      "experts": 256,
+      "hidden": 2048,
+      "intermediate_tp": 512,
+      "topk": 8
+    },
+    "topk_ids_sha256": "8358118e053f142d94ecedd2614c16f2a01574ad33137397e7abeb7e790e3c37",
+    "topk_weights_sha256": "5c27ccfd8a6a6c320b6647a08efc3a01fb9f77d3caa970c68279d4ff5980612c",
+    "weight_sum_max_abs_error": 1.1920928955078125e-07,
+    "x_sha256": "5b441dce2eace47d88c1e194a4a3c525fb667723fb18b0bffabeab135231c334",
+    "zero_token_experts": 0
+  },
+  "fixture_kind": "canonical",
+  "jit_artifact_set_sha256": "002a720c2276f1a365ca139e85cfd6e23cda03afe56ecbc42a1dc41a252f2aa2",
+  "jit_artifacts": [
+    {
+      "path": ".cache/flashinfer/0.0.0+unknown/120f/cached_ops/fp4_quantization_120f/fp4_quantization_120f.so",
+      "sha256": "44233ede32d1dd8c0ae9787f252655f570280c7f2924d2280592ee13bc9badaa",
+      "size": 2979496
+    },
+    {
+      "path": "dump/cute_dsl_cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe_clean.mlir",
+      "sha256": "33201c97a29d965cd4905a1c648f1fa67512f8c3d58eb56876814d2875aa210e",
+      "size": 904591
+    },
+    {
+      "path": "dump/cute_dsl_cutlass__host_function_cutlassutilshardware_infoHardwareInfo_object_at__clean.mlir",
+      "sha256": "cb21a8e4c69cb69d280b3396e0ab95085a4a408db366201f46793f5b855dad27",
+      "size": 1999
+    },
+    {
+      "path": "dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+      "sha256": "1732f1de50bea28391e07ea12b71512addc8e87b72b5d761cd8de5227ed66df0",
+      "size": 141848
+    },
+    {
+      "path": "dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.ptx",
+      "sha256": "3222f4edd1f96d1319fac466b4e49d6c97c9b82521dc8b14b9dc07083417e65a",
+      "size": 568493
+    }
+  ],
+  "launch_contract": {
+    "evidence_boundary": "expected geometry is a contract, not a source-derived observed launch; NCU/NSys artifact must populate observed fields",
+    "expected_block": [
+      160,
+      1,
+      1
+    ],
+    "expected_final_replay_kernel": "MoEDynamicKernel",
+    "expected_grid": [
+      1,
+      1,
+      110
+    ],
+    "max_active_clusters": 110,
+    "num_sms": 110,
+    "profiler_observed_block": null,
+    "profiler_observed_grid": null,
+    "profiler_observed_kernel": null,
+    "profiler_verification": "pending_external_profiler_artifact"
+  },
+  "m": 512,
+  "output_stability": {
+    "cosine_loss": 0.00010764598846435547,
+    "max_abs": 0.013671875,
+    "relative_l2": 0.007003155071288347,
+    "token_rel_l2_p99": 0.00800303928554058
+  },
+  "outputs": [
+    {
+      "actual_mean": -0.00011664999328786507,
+      "actual_std": 0.16498568654060364,
+      "actual_to_reference_l2_ratio": 0.9999514222145081,
+      "cosine": 0.9999213814735413,
+      "dtype": "bfloat16",
+      "event_elapsed_us": 481.440007686615,
+      "finite": true,
+      "formal_magnitude_atol": 0.24749057739973068,
+      "formal_magnitude_rtol": 0.5,
+      "formal_pass": true,
+      "formal_percent_threshold": 97.0,
+      "formal_percent_within": 100.0,
+      "least_squares_actual_gain": 0.9998727440834045,
+      "max_abs_error": 0.0543365478515625,
+      "mean_abs_error": 0.0011195868719369173,
+      "nonzero": true,
+      "output_sha256": "7a1a05fdda6517bb06876a88054fe07086ec14b677242446ef85a557c3d39350",
+      "percent_within_rtol_0.2_atol_0.2": 100.0,
+      "reference_mean": -0.00012018711277050897,
+      "reference_sha256": "310efbc732fcafcd69b3e6e1ea25c1c4f16c410c5685ff327623380d67d3cc0d",
+      "reference_std": 0.16499371826648712,
+      "relative_l2": 0.01253705658018589,
+      "sentinel_nan_remaining": 0,
+      "shape": [
+        512,
+        2048
+      ],
+      "strict_rtol_0.2_atol_0.2_allclose": true
+    },
+    {
+      "actual_mean": -0.00011658287257887423,
+      "actual_std": 0.1649864912033081,
+      "actual_to_reference_l2_ratio": 0.9999561905860901,
+      "cosine": 0.9999215602874756,
+      "dtype": "bfloat16",
+      "event_elapsed_us": 486.9759976863861,
+      "finite": true,
+      "formal_magnitude_atol": 0.24749057739973068,
+      "formal_magnitude_rtol": 0.5,
+      "formal_pass": true,
+      "formal_percent_threshold": 97.0,
+      "formal_percent_within": 100.0,
+      "least_squares_actual_gain": 0.9998778104782104,
+      "max_abs_error": 0.0543365478515625,
+      "mean_abs_error": 0.0011195980478078127,
+      "nonzero": true,
+      "output_sha256": "8a1391e9047dbdcd3569feea7830796e48f0edae134bc489ef50e8a76001005f",
+      "percent_within_rtol_0.2_atol_0.2": 100.0,
+      "reference_mean": -0.00012018711277050897,
+      "reference_sha256": "310efbc732fcafcd69b3e6e1ea25c1c4f16c410c5685ff327623380d67d3cc0d",
+      "reference_std": 0.16499371826648712,
+      "relative_l2": 0.012526411563158035,
+      "sentinel_nan_remaining": 0,
+      "shape": [
+        512,
+        2048
+      ],
+      "strict_rtol_0.2_atol_0.2_allclose": true
+    }
+  ],
+  "reference_sha256": "310efbc732fcafcd69b3e6e1ea25c1c4f16c410c5685ff327623380d67d3cc0d",
+  "route_task_evidence": [
+    {
+      "json": "workspace_replay_0.json",
+      "pt": "workspace_replay_0.pt",
+      "verification": {
+        "checks": {
+          "all_work_published": true,
+          "atomic_head_terminal_state": true,
+          "expert_tile_base": true,
+          "expert_write_rows": true,
+          "pair_head_terminal_state": true,
+          "routed_row_sum": true,
+          "row_counts": true,
+          "task_descriptor_multiset": true,
+          "task_tail": true
+        },
+        "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+        "expected_pair_head": 5200,
+        "expected_task_count": 1024,
+        "gate_pass": true,
+        "missing_task_descriptors": [],
+        "observed_pair_head": 5200,
+        "observed_task_head": 1134,
+        "observed_task_tail": 1024,
+        "producer_claim_count": 10,
+        "task_descriptor_multiset_sha256": "d010bb4ddc6647fb27b70e39d17dbe7534239ffe5e05ffa9b4991224fea7578c",
+        "task_descriptor_order_sha256": "d010bb4ddc6647fb27b70e39d17dbe7534239ffe5e05ffa9b4991224fea7578c",
+        "terminal_head_overshoot": 110,
+        "unexpected_task_descriptors": []
+      }
+    },
+    {
+      "json": "workspace_replay_1.json",
+      "pt": "workspace_replay_1.pt",
+      "verification": {
+        "checks": {
+          "all_work_published": true,
+          "atomic_head_terminal_state": true,
+          "expert_tile_base": true,
+          "expert_write_rows": true,
+          "pair_head_terminal_state": true,
+          "routed_row_sum": true,
+          "row_counts": true,
+          "task_descriptor_multiset": true,
+          "task_tail": true
+        },
+        "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+        "expected_pair_head": 5200,
+        "expected_task_count": 1024,
+        "gate_pass": true,
+        "missing_task_descriptors": [],
+        "observed_pair_head": 5200,
+        "observed_task_head": 1134,
+        "observed_task_tail": 1024,
+        "producer_claim_count": 10,
+        "task_descriptor_multiset_sha256": "d010bb4ddc6647fb27b70e39d17dbe7534239ffe5e05ffa9b4991224fea7578c",
+        "task_descriptor_order_sha256": "d010bb4ddc6647fb27b70e39d17dbe7534239ffe5e05ffa9b4991224fea7578c",
+        "terminal_head_overshoot": 110,
+        "unexpected_task_descriptors": []
+      }
+    }
+  ],
+  "runtime": {
+    "cuda_runtime": "13.2",
+    "gpu": {
+      "applications_graphics_clock_mhz": "2377",
+      "compute_capability": [
+        12,
+        0
+      ],
+      "driver": "580.95.05",
+      "foreign_processes_before_cuda_context": [],
+      "graphics_clock_mhz": "2370",
+      "max_graphics_clock_mhz": "3090",
+      "name": "NVIDIA Graphics Device",
+      "pci_bus_id": "00000000:76:00.0",
+      "power_draw_w": "59.79",
+      "sm_count": 110,
+      "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+    },
+    "hostname": "d637249d0527",
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "imports": {
+      "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+      "cutlass_python_version": "4.6.0",
+      "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py",
+      "target_module": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_009_intern_stage4_compact_lightcheck/results/overlays/intern_stage4_compact/moe_dynamic_kernel.py"
+    },
+    "jit_root": "/workspace/jit",
+    "lease_id": "exp009-msweep-20260719T154624Z-carstydev",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "pid": 1,
+    "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+    "source": {
+      "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+      "overlay": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_009_intern_stage4_compact_lightcheck/results/overlays/intern_stage4_compact/moe_dynamic_kernel.py",
+      "overlay_sha256": "42ca8d40e18b5d0f001236b09b85cbc0aa30e6010f0954efd538d8b9a2fb57d2",
+      "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+      "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+    },
+    "timestamp_unix": 1784476971.8745196,
+    "torch": "2.12.0a0+5aff3928d8.nv26.05"
+  },
+  "schema": "exp005.arm-preparation.v1",
+  "status": "complete",
+  "weights": {
+    "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+    "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+    "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+    "seed": 2026,
+    "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+    "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+    "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+    "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+    "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+    "w1_packed_shape": [
+      256,
+      1024,
+      1024
+    ],
+    "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+    "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+    "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+    "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+    "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+    "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+    "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+    "w2_packed_shape": [
+      256,
+      2048,
+      256
+    ],
+    "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+    "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+  }
+}

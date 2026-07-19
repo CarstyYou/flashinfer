@@ -1,0 +1,24 @@
+{
+  "schema": "exp009.intern-stage4-static-spill.v1",
+  "status": "complete",
+  "scope": "exact candidate cubin shared by the M256 and M8192 preparations",
+  "cubin_sha256": "1732f1de50bea28391e07ea12b71512addc8e87b72b5d761cd8de5227ed66df0",
+  "sass_sha256": "bf7f446e306c62d751ca75b6179b3637f4a50f6455ea1eeadf8927f26c528b85",
+  "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+  "resource": {
+    "registers_per_thread": 224,
+    "stack_bytes": 0,
+    "static_shared_bytes": 1024,
+    "local_bytes": 0
+  },
+  "sass_scan": {
+    "compiler_spill_refill_annotations": 0,
+    "ldl_instructions": 0,
+    "stl_instructions": 0
+  },
+  "tools": {
+    "cuobjdump": "CUDA 13.2 V13.2.78",
+    "nvdisasm": "CUDA 13.2 V13.2.78"
+  },
+  "verdict": "no static spill evidence in this exact cubin"
+}

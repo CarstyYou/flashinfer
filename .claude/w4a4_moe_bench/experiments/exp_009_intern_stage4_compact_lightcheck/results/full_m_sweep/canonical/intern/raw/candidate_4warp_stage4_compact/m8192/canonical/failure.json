@@ -1,0 +1,118 @@
+{
+  "arm": "candidate_4warp_stage4_compact",
+  "classification": "numerical_accuracy_failure",
+  "error": "correctness/sentinel gate failed on replay 0",
+  "error_type": "RuntimeError",
+  "fixture_kind": "canonical",
+  "m": 8192,
+  "outputs": [
+    {
+      "actual_mean": -1.5442805306520313e-05,
+      "actual_std": 0.11931171268224716,
+      "actual_to_reference_l2_ratio": 0.7239359021186829,
+      "cosine": 0.7240381240844727,
+      "dtype": "bfloat16",
+      "event_elapsed_us": 1430.8799505233765,
+      "finite": true,
+      "formal_magnitude_atol": 0.2472146674990654,
+      "formal_magnitude_rtol": 0.5,
+      "formal_pass": false,
+      "formal_percent_threshold": 97.0,
+      "formal_percent_within": 94.57837343215942,
+      "least_squares_actual_gain": 0.5241571664810181,
+      "max_abs_error": 1.0985902547836304,
+      "mean_abs_error": 0.07176589965820312,
+      "nonzero": true,
+      "output_sha256": "6c26a288dcbd86907e56519f8e9bddc9469a44ec0bc82d75d2c2302b389870ea",
+      "percent_within_rtol_0.2_atol_0.2": 94.67777609825134,
+      "reference_mean": 1.752144453348592e-05,
+      "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+      "reference_std": 0.16480977833271027,
+      "relative_l2": 0.6897599697113037,
+      "sentinel_nan_remaining": 0,
+      "shape": [
+        8192,
+        2048
+      ],
+      "strict_rtol_0.2_atol_0.2_allclose": false
+    }
+  ],
+  "runtime": {
+    "cuda_runtime": "13.2",
+    "gpu": {
+      "applications_graphics_clock_mhz": "2377",
+      "compute_capability": [
+        12,
+        0
+      ],
+      "driver": "580.95.05",
+      "foreign_processes_before_cuda_context": [],
+      "graphics_clock_mhz": "2370",
+      "max_graphics_clock_mhz": "3090",
+      "name": "NVIDIA Graphics Device",
+      "pci_bus_id": "00000000:76:00.0",
+      "power_draw_w": "59.72",
+      "sm_count": 110,
+      "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+    },
+    "hostname": "313e85a41d58",
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "imports": {
+      "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+      "cutlass_python_version": "4.6.0",
+      "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py",
+      "target_module": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_009_intern_stage4_compact_lightcheck/results/overlays/intern_stage4_compact/moe_dynamic_kernel.py"
+    },
+    "jit_root": "/workspace/jit",
+    "lease_id": "exp009-msweep-20260719T154624Z-carstydev",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "pid": 1,
+    "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+    "source": {
+      "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+      "overlay": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_009_intern_stage4_compact_lightcheck/results/overlays/intern_stage4_compact/moe_dynamic_kernel.py",
+      "overlay_sha256": "42ca8d40e18b5d0f001236b09b85cbc0aa30e6010f0954efd538d8b9a2fb57d2",
+      "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+      "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+    },
+    "timestamp_unix": 1784477681.4513226,
+    "torch": "2.12.0a0+5aff3928d8.nv26.05"
+  },
+  "schema": "exp009.arm-preparation-failure.v1",
+  "status": "failed",
+  "workspace_replays": [
+    {
+      "path": "workspace_replay_0.json",
+      "verification": {
+        "checks": {
+          "all_work_published": true,
+          "atomic_head_terminal_state": true,
+          "expert_tile_base": true,
+          "expert_write_rows": true,
+          "pair_head_terminal_state": true,
+          "routed_row_sum": true,
+          "row_counts": true,
+          "task_descriptor_multiset": true,
+          "task_tail": true
+        },
+        "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+        "expected_pair_head": 66640,
+        "expected_task_count": 2536,
+        "gate_pass": true,
+        "missing_task_descriptors": [],
+        "observed_pair_head": 66640,
+        "observed_task_head": 2646,
+        "observed_task_tail": 2536,
+        "producer_claim_count": 10,
+        "task_descriptor_multiset_sha256": "8feb61c0096ab8de89136687efc88064ac465d2cf84f66e7783c18787fcb7330",
+        "task_descriptor_order_sha256": "8feb61c0096ab8de89136687efc88064ac465d2cf84f66e7783c18787fcb7330",
+        "terminal_head_overshoot": 110,
+        "unexpected_task_descriptors": []
+      }
+    }
+  ]
+}

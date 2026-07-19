@@ -1,0 +1,130 @@
+{
+  "arm": "candidate_4warp_stage4_compact",
+  "artifacts": {
+    "command_sha256": "a595f6d3c94522b302134b318614bb18c801dedcca45fbacdb249727d8092f1d",
+    "native_raw_sha256": "ace20bdb5a15872fad35cf772121ccf76d282a756c16ee0875782d688e7d60b5",
+    "ncu_report_sha256": "e368bc322d6c11e2fad9ceba616da6385341758c0ddb0e0d0191d1c4090f795a"
+  },
+  "collection": {
+    "clock_control": "none",
+    "cuobjdump_version": "cuobjdump: NVIDIA (R) fat binary listing tool\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "explicit_launch_metric_ids": [
+      "launch__registers_per_thread",
+      "launch__shared_mem_per_block"
+    ],
+    "graph_profiling": "node",
+    "launch_count": 1,
+    "ncu_version": "NVIDIA (R) Nsight Compute Command Line Profiler\nCopyright (c) 2018-2026 NVIDIA Corporation\nVersion 2026.1.1.0 (build 37634170) (public-release)",
+    "section_ids": [
+      "InstructionStats",
+      "SourceCounters",
+      "LaunchStats"
+    ],
+    "spill_metric_ids": [
+      "sass__inst_executed_register_spilling_op_read",
+      "sass__inst_executed_register_spilling_op_write",
+      "sass__inst_executed_register_spilling_mem_local_op_read",
+      "sass__inst_executed_register_spilling_mem_local_op_write"
+    ]
+  },
+  "correctness_checks": {
+    "candidate_arm": true,
+    "canonical_fixture": true,
+    "canonical_shape": true,
+    "expected_launch_contract": true,
+    "m256": true,
+    "status_complete": true,
+    "two_correct_replays": true,
+    "two_route_task_gates": true
+  },
+  "dynamic_zero_spill": true,
+  "evidence_boundary": "Dynamic spill/refill counts and launch resources apply only to one correctness-gated candidate M256 CUDA Graph node.",
+  "fixture": "canonical",
+  "identity": {
+    "cubin_path": "/workspace/jit/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+    "cubin_sha256": "1732f1de50bea28391e07ea12b71512addc8e87b72b5d761cd8de5227ed66df0",
+    "cuobjdump_resource_sha256": "12487eb33238224a038ea7bdce0a5c6b8c1ceb4f2934dac26b1a2c9d340a9c74",
+    "expected_application_graphics_clock_mhz": 2377,
+    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+    "observed_launch": {
+      "block": [
+        160,
+        1,
+        1
+      ],
+      "context_id": 1,
+      "device_id": 0,
+      "grid": [
+        1,
+        1,
+        110
+      ],
+      "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+      "row_id": 0,
+      "stream_id": 7
+    },
+    "overlay_identity_path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_009_intern_stage4_compact_lightcheck/results/overlays/intern_stage4_compact/identity.json",
+    "overlay_path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_009_intern_stage4_compact_lightcheck/results/overlays/intern_stage4_compact/moe_dynamic_kernel.py",
+    "overlay_sha256": "42ca8d40e18b5d0f001236b09b85cbc0aa30e6010f0954efd538d8b9a2fb57d2",
+    "preparation_path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_009_intern_stage4_compact_lightcheck/results/canonical/raw/candidate_4warp_stage4_compact/m256/canonical/preparation.json",
+    "preparation_sha256": "8858d97a8877b05de0597bd69e517232fe985a5dba68dff99e5c0a5107d10832",
+    "profile_target_path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_009_intern_stage4_compact_lightcheck/results/canonical/profile_targets/candidate_4warp_stage4_compact/m256/target.json",
+    "profile_target_sha256": "068569728a7ce684e5e74c1e84b791c34b9f4b10f8f2529a970f91641069db5e"
+  },
+  "identity_checks": {
+    "all_required_metrics_present_and_numeric": true,
+    "application_graphics_clock_mhz": true,
+    "exact_cubin_kernel_symbol": true,
+    "gpu_uuid": true,
+    "observed_launch_geometry": true,
+    "overlay_hash": true,
+    "overlay_identity_schema": true,
+    "profile_target_application_graphics_clock_mhz": true,
+    "profile_target_candidate_arm": true,
+    "profile_target_canonical_fixture": true,
+    "profile_target_expected_launch": true,
+    "profile_target_final_replay_nvtx": true,
+    "profile_target_gpu_uuid": true,
+    "profile_target_jit_artifact_set": true,
+    "profile_target_m256": true,
+    "profile_target_overlay_hash": true,
+    "profile_target_status_complete": true,
+    "single_profiled_graph_node": true
+  },
+  "m": 256,
+  "metrics": {
+    "registers_per_thread": {
+      "metric_id": "launch__registers_per_thread",
+      "unit": "register/thread",
+      "value": 224.0
+    },
+    "shared_mem_per_block_bytes": {
+      "metric_id": "launch__shared_mem_per_block",
+      "unit": "byte/block",
+      "value": 94208.0
+    },
+    "spill_refill_bytes": {
+      "metric_id": "sass__inst_executed_register_spilling_mem_local_op_read",
+      "unit": "byte",
+      "value": 0.0
+    },
+    "spill_refill_instructions": {
+      "metric_id": "sass__inst_executed_register_spilling_op_read",
+      "unit": "inst",
+      "value": 0.0
+    },
+    "spill_store_bytes": {
+      "metric_id": "sass__inst_executed_register_spilling_mem_local_op_write",
+      "unit": "byte",
+      "value": 0.0
+    },
+    "spill_store_instructions": {
+      "metric_id": "sass__inst_executed_register_spilling_op_write",
+      "unit": "inst",
+      "value": 0.0
+    }
+  },
+  "schema": "exp009.candidate-m256-minimal-dynamic-spill.v1",
+  "status": "complete"
+}

@@ -1,0 +1,423 @@
+{
+  "arm": "candidate_4warp_stage4_compact",
+  "cross_replay_stability": {
+    "all_replays_formal_pass": false,
+    "all_replays_overall_pass": false,
+    "all_replays_sentinel_pass": true,
+    "all_replays_workspace_pass": true,
+    "exact_output_hash_stable": false,
+    "output_hashes": [
+      "04c8824f92e436c100d2e8276ecac60bcdbeafd63925b60da63bd13b8a4121a8",
+      "aa77c91c7cc5ab3ce52ced4ba2d3b5761b4590ce07bfb85b6bfffa4564bcedac",
+      "38655f0cc610173415cf1c0ab1faf5828f11d259b18db1dcbe9f155256d1c18f"
+    ],
+    "pairwise_output_drift": [
+      {
+        "first_replay": 0,
+        "metrics": {
+          "cosine_loss": 0.0034080147743225098,
+          "max_abs": 0.6370849609375,
+          "relative_l2": 0.08564069867134094,
+          "token_rel_l2_p99": 0.7116239070892334
+        },
+        "second_replay": 1
+      },
+      {
+        "first_replay": 0,
+        "metrics": {
+          "cosine_loss": 0.002675950527191162,
+          "max_abs": 0.6409912109375,
+          "relative_l2": 0.07657869160175323,
+          "token_rel_l2_p99": 0.6204144954681396
+        },
+        "second_replay": 2
+      },
+      {
+        "first_replay": 1,
+        "metrics": {
+          "cosine_loss": 0.0019095540046691895,
+          "max_abs": 0.4781494140625,
+          "relative_l2": 0.06582620739936829,
+          "token_rel_l2_p99": 0.5279232859611511
+        },
+        "second_replay": 2
+      }
+    ],
+    "replay_count": 3,
+    "unique_output_hashes": [
+      "04c8824f92e436c100d2e8276ecac60bcdbeafd63925b60da63bd13b8a4121a8",
+      "38655f0cc610173415cf1c0ab1faf5828f11d259b18db1dcbe9f155256d1c18f",
+      "aa77c91c7cc5ab3ce52ced4ba2d3b5761b4590ce07bfb85b6bfffa4564bcedac"
+    ],
+    "workspace_descriptor_multiset_hashes": [
+      "b00baa23d3d3144e3dc17e52eded674f95cfeb5a82d4061dc06bee0650531fc8",
+      "b00baa23d3d3144e3dc17e52eded674f95cfeb5a82d4061dc06bee0650531fc8",
+      "b00baa23d3d3144e3dc17e52eded674f95cfeb5a82d4061dc06bee0650531fc8"
+    ],
+    "workspace_descriptor_multiset_stable": true,
+    "worst_pairwise_output_drift": {
+      "cosine_loss": 0.0034080147743225098,
+      "max_abs": 0.6409912109375,
+      "relative_l2": 0.08564069867134094,
+      "token_rel_l2_p99": 0.7116239070892334
+    },
+    "zero_row_counts": [
+      1124,
+      1125,
+      1125
+    ]
+  },
+  "cubin_sha256": [
+    "1732f1de50bea28391e07ea12b71512addc8e87b72b5d761cd8de5227ed66df0"
+  ],
+  "failure_evidence_sha256": "dbd2443ee39f27fe3f97575b7a6ea2df96e4c7e7837c59ce6d561b33cdd70ecb",
+  "fixture_kind": "canonical",
+  "jit_artifact_set_sha256": "0187df1f3b00413082afe6ac55a4dd2259b2a8f0b804ae033588e3275204f202",
+  "m": 4096,
+  "observed_classification": "numerical_accuracy_failure",
+  "original_failure_classification": "numerical_accuracy_failure",
+  "replay_count": 3,
+  "replays": [
+    {
+      "event_elapsed_us_diagnostic_only": 827.7119994163513,
+      "formal_metrics": {
+        "actual_mean": -5.0409747927915305e-05,
+        "actual_std": 0.12045422941446304,
+        "actual_to_reference_l2_ratio": 0.7323640584945679,
+        "cosine": 0.7324157357215881,
+        "dtype": "bfloat16",
+        "finite": true,
+        "formal_magnitude_atol": 0.24670976400375366,
+        "formal_magnitude_rtol": 0.5,
+        "formal_pass": false,
+        "formal_percent_threshold": 97.0,
+        "formal_percent_within": 94.43578720092773,
+        "least_squares_actual_gain": 0.5363949537277222,
+        "max_abs_error": 1.003150224685669,
+        "mean_abs_error": 0.06674660742282867,
+        "nonzero": true,
+        "output_sha256": "04c8824f92e436c100d2e8276ecac60bcdbeafd63925b60da63bd13b8a4121a8",
+        "percent_within_rtol_0.2_atol_0.2": 94.5990800857544,
+        "reference_mean": -3.6842913686996326e-05,
+        "reference_sha256": "b27ee0cafca5f7c189514a3956e3415b39bb670b86346c86c90516b15e6dc928",
+        "reference_std": 0.16447317600250244,
+        "relative_l2": 0.6808576583862305,
+        "shape": [
+          4096,
+          2048
+        ],
+        "strict_rtol_0.2_atol_0.2_allclose": false
+      },
+      "gates": {
+        "formal_pass": false,
+        "overall_pass": false,
+        "sentinel_pass": true,
+        "workspace_pass": true
+      },
+      "output_sha256": "04c8824f92e436c100d2e8276ecac60bcdbeafd63925b60da63bd13b8a4121a8",
+      "replay": 0,
+      "sentinel": {
+        "inf_count": 0,
+        "nan_remaining": 0
+      },
+      "workspace": {
+        "checks": {
+          "all_work_published": true,
+          "atomic_head_terminal_state": true,
+          "expert_tile_base": true,
+          "expert_write_rows": true,
+          "pair_head_terminal_state": true,
+          "routed_row_sum": true,
+          "row_counts": true,
+          "task_descriptor_multiset": true,
+          "task_tail": true
+        },
+        "gate_pass": true,
+        "task_descriptor_multiset_sha256": "b00baa23d3d3144e3dc17e52eded674f95cfeb5a82d4061dc06bee0650531fc8",
+        "tensor_sha256": {
+          "expert_tile_base": "2888128e1f049c00d92ba1f26a20adccff250b5b541c7c910a742faf398f432b",
+          "expert_write_rows": "abfa6a5e18ab98f7f79c16fe040a2868cf89828dc0eaddf5381d99f26a2d9bbc",
+          "row_counts": "abfa6a5e18ab98f7f79c16fe040a2868cf89828dc0eaddf5381d99f26a2d9bbc",
+          "task_expert": "611cf6140a10a81f47a8563646fb13fd15028e4ec50b5f5738c5bf44240c1a61",
+          "task_m_tile": "5de61e6283625f8b69a78c45532c0f1c9f5cb0b92df84a8aa02cefc2b6b576fe",
+          "task_ready": "77e373a51a2ecdc9d3726346fa36f536453493b784a61d5adbc29e3c4eb44fcb",
+          "task_slice_begin": "b3f1fd6a4e5f671cc4171430d854e92f47cc80e56832b722100347f6732f9133",
+          "task_slice_count": "a780c7894298e4f12631ae5a48fbc5d65a25dc5605546c47f6c9e68a93a704b3",
+          "task_valid_rows": "15ff095fb1152fba62780162c153348d7e363683a6a93b185d8ba459574a467d",
+          "tile_write_count": "07ab8f69edd4256ee0f2e9caff23708626214fcdf073048d5a50c67c95c07c65"
+        },
+        "verification": {
+          "checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "pair_head_terminal_state": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+          "expected_pair_head": 33870,
+          "expected_task_count": 1516,
+          "gate_pass": true,
+          "missing_task_descriptors": [],
+          "observed_pair_head": 33870,
+          "observed_task_head": 1626,
+          "observed_task_tail": 1516,
+          "producer_claim_count": 10,
+          "task_descriptor_multiset_sha256": "6e3db60b11c64ef35811a0b85416471d8dfa6c01834df7c175750b522b32d2a2",
+          "task_descriptor_order_sha256": "6e3db60b11c64ef35811a0b85416471d8dfa6c01834df7c175750b522b32d2a2",
+          "terminal_head_overshoot": 110,
+          "unexpected_task_descriptors": []
+        }
+      },
+      "zero_elements": 2304390,
+      "zero_rows": 1124
+    },
+    {
+      "event_elapsed_us_diagnostic_only": 835.9040021896362,
+      "formal_metrics": {
+        "actual_mean": -5.229499947745353e-05,
+        "actual_std": 0.12048736959695816,
+        "actual_to_reference_l2_ratio": 0.7325655221939087,
+        "cosine": 0.7325989007949829,
+        "dtype": "bfloat16",
+        "finite": true,
+        "formal_magnitude_atol": 0.24670976400375366,
+        "formal_magnitude_rtol": 0.5,
+        "formal_pass": false,
+        "formal_percent_threshold": 97.0,
+        "formal_percent_within": 94.43624019622803,
+        "least_squares_actual_gain": 0.5366767048835754,
+        "max_abs_error": 1.003028154373169,
+        "mean_abs_error": 0.06669758260250092,
+        "nonzero": true,
+        "output_sha256": "aa77c91c7cc5ab3ce52ced4ba2d3b5761b4590ce07bfb85b6bfffa4564bcedac",
+        "percent_within_rtol_0.2_atol_0.2": 94.60064172744751,
+        "reference_mean": -3.6842913686996326e-05,
+        "reference_sha256": "b27ee0cafca5f7c189514a3956e3415b39bb670b86346c86c90516b15e6dc928",
+        "reference_std": 0.16447317600250244,
+        "relative_l2": 0.6806605458259583,
+        "shape": [
+          4096,
+          2048
+        ],
+        "strict_rtol_0.2_atol_0.2_allclose": false
+      },
+      "gates": {
+        "formal_pass": false,
+        "overall_pass": false,
+        "sentinel_pass": true,
+        "workspace_pass": true
+      },
+      "output_sha256": "aa77c91c7cc5ab3ce52ced4ba2d3b5761b4590ce07bfb85b6bfffa4564bcedac",
+      "replay": 1,
+      "sentinel": {
+        "inf_count": 0,
+        "nan_remaining": 0
+      },
+      "workspace": {
+        "checks": {
+          "all_work_published": true,
+          "atomic_head_terminal_state": true,
+          "expert_tile_base": true,
+          "expert_write_rows": true,
+          "pair_head_terminal_state": true,
+          "routed_row_sum": true,
+          "row_counts": true,
+          "task_descriptor_multiset": true,
+          "task_tail": true
+        },
+        "gate_pass": true,
+        "task_descriptor_multiset_sha256": "b00baa23d3d3144e3dc17e52eded674f95cfeb5a82d4061dc06bee0650531fc8",
+        "tensor_sha256": {
+          "expert_tile_base": "2888128e1f049c00d92ba1f26a20adccff250b5b541c7c910a742faf398f432b",
+          "expert_write_rows": "abfa6a5e18ab98f7f79c16fe040a2868cf89828dc0eaddf5381d99f26a2d9bbc",
+          "row_counts": "abfa6a5e18ab98f7f79c16fe040a2868cf89828dc0eaddf5381d99f26a2d9bbc",
+          "task_expert": "611cf6140a10a81f47a8563646fb13fd15028e4ec50b5f5738c5bf44240c1a61",
+          "task_m_tile": "5de61e6283625f8b69a78c45532c0f1c9f5cb0b92df84a8aa02cefc2b6b576fe",
+          "task_ready": "77e373a51a2ecdc9d3726346fa36f536453493b784a61d5adbc29e3c4eb44fcb",
+          "task_slice_begin": "b3f1fd6a4e5f671cc4171430d854e92f47cc80e56832b722100347f6732f9133",
+          "task_slice_count": "a780c7894298e4f12631ae5a48fbc5d65a25dc5605546c47f6c9e68a93a704b3",
+          "task_valid_rows": "15ff095fb1152fba62780162c153348d7e363683a6a93b185d8ba459574a467d",
+          "tile_write_count": "07ab8f69edd4256ee0f2e9caff23708626214fcdf073048d5a50c67c95c07c65"
+        },
+        "verification": {
+          "checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "pair_head_terminal_state": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+          "expected_pair_head": 33870,
+          "expected_task_count": 1516,
+          "gate_pass": true,
+          "missing_task_descriptors": [],
+          "observed_pair_head": 33870,
+          "observed_task_head": 1626,
+          "observed_task_tail": 1516,
+          "producer_claim_count": 10,
+          "task_descriptor_multiset_sha256": "6e3db60b11c64ef35811a0b85416471d8dfa6c01834df7c175750b522b32d2a2",
+          "task_descriptor_order_sha256": "6e3db60b11c64ef35811a0b85416471d8dfa6c01834df7c175750b522b32d2a2",
+          "terminal_head_overshoot": 110,
+          "unexpected_task_descriptors": []
+        }
+      },
+      "zero_elements": 2306403,
+      "zero_rows": 1125
+    },
+    {
+      "event_elapsed_us_diagnostic_only": 829.9520015716553,
+      "formal_metrics": {
+        "actual_mean": -5.321704156813212e-05,
+        "actual_std": 0.12046471983194351,
+        "actual_to_reference_l2_ratio": 0.7324277758598328,
+        "cosine": 0.7324777245521545,
+        "dtype": "bfloat16",
+        "finite": true,
+        "formal_magnitude_atol": 0.24670976400375366,
+        "formal_magnitude_rtol": 0.5,
+        "formal_pass": false,
+        "formal_percent_threshold": 97.0,
+        "formal_percent_within": 94.43674087524414,
+        "least_squares_actual_gain": 0.5364870429039001,
+        "max_abs_error": 1.003150224685669,
+        "mean_abs_error": 0.06673011183738708,
+        "nonzero": true,
+        "output_sha256": "38655f0cc610173415cf1c0ab1faf5828f11d259b18db1dcbe9f155256d1c18f",
+        "percent_within_rtol_0.2_atol_0.2": 94.60000991821289,
+        "reference_mean": -3.6842913686996326e-05,
+        "reference_sha256": "b27ee0cafca5f7c189514a3956e3415b39bb670b86346c86c90516b15e6dc928",
+        "reference_std": 0.16447317600250244,
+        "relative_l2": 0.6807909607887268,
+        "shape": [
+          4096,
+          2048
+        ],
+        "strict_rtol_0.2_atol_0.2_allclose": false
+      },
+      "gates": {
+        "formal_pass": false,
+        "overall_pass": false,
+        "sentinel_pass": true,
+        "workspace_pass": true
+      },
+      "output_sha256": "38655f0cc610173415cf1c0ab1faf5828f11d259b18db1dcbe9f155256d1c18f",
+      "replay": 2,
+      "sentinel": {
+        "inf_count": 0,
+        "nan_remaining": 0
+      },
+      "workspace": {
+        "checks": {
+          "all_work_published": true,
+          "atomic_head_terminal_state": true,
+          "expert_tile_base": true,
+          "expert_write_rows": true,
+          "pair_head_terminal_state": true,
+          "routed_row_sum": true,
+          "row_counts": true,
+          "task_descriptor_multiset": true,
+          "task_tail": true
+        },
+        "gate_pass": true,
+        "task_descriptor_multiset_sha256": "b00baa23d3d3144e3dc17e52eded674f95cfeb5a82d4061dc06bee0650531fc8",
+        "tensor_sha256": {
+          "expert_tile_base": "2888128e1f049c00d92ba1f26a20adccff250b5b541c7c910a742faf398f432b",
+          "expert_write_rows": "abfa6a5e18ab98f7f79c16fe040a2868cf89828dc0eaddf5381d99f26a2d9bbc",
+          "row_counts": "abfa6a5e18ab98f7f79c16fe040a2868cf89828dc0eaddf5381d99f26a2d9bbc",
+          "task_expert": "611cf6140a10a81f47a8563646fb13fd15028e4ec50b5f5738c5bf44240c1a61",
+          "task_m_tile": "5de61e6283625f8b69a78c45532c0f1c9f5cb0b92df84a8aa02cefc2b6b576fe",
+          "task_ready": "77e373a51a2ecdc9d3726346fa36f536453493b784a61d5adbc29e3c4eb44fcb",
+          "task_slice_begin": "b3f1fd6a4e5f671cc4171430d854e92f47cc80e56832b722100347f6732f9133",
+          "task_slice_count": "a780c7894298e4f12631ae5a48fbc5d65a25dc5605546c47f6c9e68a93a704b3",
+          "task_valid_rows": "15ff095fb1152fba62780162c153348d7e363683a6a93b185d8ba459574a467d",
+          "tile_write_count": "07ab8f69edd4256ee0f2e9caff23708626214fcdf073048d5a50c67c95c07c65"
+        },
+        "verification": {
+          "checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "pair_head_terminal_state": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+          "expected_pair_head": 33870,
+          "expected_task_count": 1516,
+          "gate_pass": true,
+          "missing_task_descriptors": [],
+          "observed_pair_head": 33870,
+          "observed_task_head": 1626,
+          "observed_task_tail": 1516,
+          "producer_claim_count": 10,
+          "task_descriptor_multiset_sha256": "6e3db60b11c64ef35811a0b85416471d8dfa6c01834df7c175750b522b32d2a2",
+          "task_descriptor_order_sha256": "6e3db60b11c64ef35811a0b85416471d8dfa6c01834df7c175750b522b32d2a2",
+          "terminal_head_overshoot": 110,
+          "unexpected_task_descriptors": []
+        }
+      },
+      "zero_elements": 2306350,
+      "zero_rows": 1125
+    }
+  ],
+  "runtime": {
+    "cuda_runtime": "13.2",
+    "gpu": {
+      "applications_graphics_clock_mhz": "2377",
+      "compute_capability": [
+        12,
+        0
+      ],
+      "driver": "580.95.05",
+      "foreign_processes_before_cuda_context": [],
+      "graphics_clock_mhz": "2370",
+      "max_graphics_clock_mhz": "3090",
+      "name": "NVIDIA Graphics Device",
+      "pci_bus_id": "00000000:76:00.0",
+      "power_draw_w": "59.66",
+      "sm_count": 110,
+      "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+    },
+    "hostname": "53acb61b7db7",
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "imports": {
+      "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+      "cutlass_python_version": "4.6.0",
+      "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py",
+      "target_module": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_009_intern_stage4_compact_lightcheck/results/overlays/intern_stage4_compact/moe_dynamic_kernel.py"
+    },
+    "jit_root": "/workspace/jit",
+    "lease_id": "exp009-msweep-20260719T154624Z-carstydev",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "pid": 1,
+    "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+    "source": {
+      "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+      "overlay": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_009_intern_stage4_compact_lightcheck/results/overlays/intern_stage4_compact/moe_dynamic_kernel.py",
+      "overlay_sha256": "42ca8d40e18b5d0f001236b09b85cbc0aa30e6010f0954efd538d8b9a2fb57d2",
+      "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+      "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+    },
+    "timestamp_unix": 1784477549.769208,
+    "torch": "2.12.0a0+5aff3928d8.nv26.05"
+  },
+  "schema": "exp009.intern-failure-diagnostic.v1",
+  "status": "complete"
+}

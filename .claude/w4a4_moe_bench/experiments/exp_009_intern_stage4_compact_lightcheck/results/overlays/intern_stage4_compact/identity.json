@@ -1,0 +1,34 @@
+{
+  "activation_scope": {
+    "broader_activation_compatibility_claimed": false,
+    "new_keywords_are_unused_by_intern_kernel_body": true,
+    "validated_case": "silu"
+  },
+  "adapter": {
+    "path": "moe_dynamic_kernel.py",
+    "sha256": "42ca8d40e18b5d0f001236b09b85cbc0aa30e6010f0954efd538d8b9a2fb57d2",
+    "size_bytes": 124174
+  },
+  "diff": {
+    "path": "adapter.diff",
+    "sha256": "7da06d07dae8b171d073b3206f597a2a5dbfdada810d33b27e955a66db58dfe6",
+    "size_bytes": 437
+  },
+  "original": {
+    "path": "moe_dyanmice_kernel_ab_stage4_compact.py",
+    "sha256": "91034c7cd3b3b9fe8cbde6dbf1bb2c8c13e4261ff9e9e7d642f3ce9d83788768",
+    "size_bytes": 124060
+  },
+  "schema": "exp009.intern-stage4-adapter-identity.v1",
+  "transformation": {
+    "ast_equal_after_removing_keywords": true,
+    "inserted_keywords": [
+      "swiglu_alpha",
+      "swiglu_beta",
+      "swiglu_limit"
+    ],
+    "kind": "constructor-keyword-compatibility-only",
+    "unified_diff_additions": 3,
+    "unified_diff_deletions": 0
+  }
+}

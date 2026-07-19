@@ -1,0 +1,12 @@
+--- moe_dyanmice_kernel_ab_stage4_compact.py
++++ moe_dynamic_kernel.py
+@@ -276,6 +276,9 @@
+         input_scales_are_reciprocal: bool = False,
+         fast_math: bool = False,
+         activation: str = "silu",
++        swiglu_alpha: float = 1.702,
++        swiglu_beta: float = 1.0,
++        swiglu_limit: float | None = None,
+         share_input_across_experts: bool = False,
+     ):
+         if activation not in {"silu", "relu2"}:
