@@ -1,0 +1,27 @@
+# Per-case/per-process payloads stay in the experiment workspace.  Commit the
+# compact evidence/summary files at results/ instead of hundreds of replay,
+# preparation, profiler and marker-capture artifacts.
+baseline_v0/
+canonical/
+canary/
+e2e/primary/
+e2e/secondary/
+e2e/production/
+ncu/
+marker_overlays/
+phase_markers/captures/
+phase_markers/resources/
+
+*.pt
+*.cubin
+*.ptx
+*_clean.mlir
+
+# Keep compact CSV/JSON evidence, not profiler reports or projections.
+*.ncu-rep
+*.ncu-rep.veloq/
+**/veloq/
+
+runtime/
+__pycache__/
+.pytest_cache/

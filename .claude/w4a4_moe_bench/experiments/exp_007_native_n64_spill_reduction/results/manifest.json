@@ -1,0 +1,273 @@
+{
+  "binary_identity": {
+    "anchor": {
+      "block": [
+        288,
+        1,
+        1
+      ],
+      "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+      "grid": [
+        1,
+        1,
+        110
+      ],
+      "kernel": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+      "loaded_cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17"
+    },
+    "candidate": {
+      "block": [
+        288,
+        1,
+        1
+      ],
+      "cubin_sha256": "a9557634cf3d1bff59ca93739e75a1acd1187707222255fead78e2e6e8a73af9",
+      "grid": [
+        1,
+        1,
+        110
+      ],
+      "kernel": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+      "loaded_cubin_sha256": "a9557634cf3d1bff59ca93739e75a1acd1187707222255fead78e2e6e8a73af9"
+    }
+  },
+  "correctness": {
+    "gate_pass": true,
+    "known_failed_diagnostic_cases": [
+      "canary_up_v0",
+      "canary_gate_v0"
+    ],
+    "known_failed_fixture_attempts": [
+      {
+        "name": "canary_up_v1",
+        "reason": "Changing w2_global_scale was not a valid final-output-only amplitude control for this harness; the fixture was rejected without changing thresholds.",
+        "stage": "independent_reference_replay_0"
+      }
+    ],
+    "required_cases": [
+      "canary_gate_v2",
+      "canary_up_v2",
+      "canonical_m256",
+      "canonical_m8192",
+      "exact_128",
+      "hot_expert",
+      "sparse_empty",
+      "tail_129"
+    ]
+  },
+  "dynamic_spill": {
+    "anchor": {
+      "achieved_occupancy_pct": {
+        "metric_id": "sm__warps_active.avg.pct_of_peak_sustained_active",
+        "unit": "%",
+        "value": 18.75
+      },
+      "allocated_registers_per_thread": {
+        "metric_id": "launch__registers_per_thread_allocated",
+        "unit": "register/thread",
+        "value": 168.0
+      },
+      "fp4_tensor_ops": {
+        "metric_id": "sm__ops_path_tensor_src_fp4_dst_fp32.sum",
+        "unit": "",
+        "value": 510564237312.0
+      },
+      "local_load_bytes": {
+        "metric_id": "l1tex__t_bytes_pipe_lsu_mem_local_op_ld.sum",
+        "unit": "byte",
+        "value": 145424384.0
+      },
+      "local_store_bytes": {
+        "metric_id": "l1tex__t_bytes_pipe_lsu_mem_local_op_st.sum",
+        "unit": "byte",
+        "value": 145424384.0
+      },
+      "registers_per_thread": {
+        "metric_id": "launch__registers_per_thread",
+        "unit": "register/thread",
+        "value": 168.0
+      },
+      "spill_refill_bytes": {
+        "metric_id": "sass__inst_executed_register_spilling_mem_local_op_read",
+        "unit": "byte",
+        "value": 1136128.0
+      },
+      "spill_refill_instructions": {
+        "metric_id": "sass__inst_executed_register_spilling_op_read",
+        "unit": "inst",
+        "value": 1136128.0
+      },
+      "spill_store_bytes": {
+        "metric_id": "sass__inst_executed_register_spilling_mem_local_op_write",
+        "unit": "byte",
+        "value": 568064.0
+      },
+      "spill_store_instructions": {
+        "metric_id": "sass__inst_executed_register_spilling_op_write",
+        "unit": "inst",
+        "value": 568064.0
+      },
+      "tensor_instructions": {
+        "metric_id": "sm__inst_executed_pipe_tensor_subpipe_hmma.sum",
+        "unit": "inst",
+        "value": 31162368.0
+      }
+    },
+    "candidate": {
+      "achieved_occupancy_pct": {
+        "metric_id": "sm__warps_active.avg.pct_of_peak_sustained_active",
+        "unit": "%",
+        "value": 18.75
+      },
+      "allocated_registers_per_thread": {
+        "metric_id": "launch__registers_per_thread_allocated",
+        "unit": "register/thread",
+        "value": 152.0
+      },
+      "fp4_tensor_ops": {
+        "metric_id": "sm__ops_path_tensor_src_fp4_dst_fp32.sum",
+        "unit": "",
+        "value": 510564237312.0
+      },
+      "local_load_bytes": {
+        "metric_id": "l1tex__t_bytes_pipe_lsu_mem_local_op_ld.sum",
+        "unit": "byte",
+        "value": 0.0
+      },
+      "local_store_bytes": {
+        "metric_id": "l1tex__t_bytes_pipe_lsu_mem_local_op_st.sum",
+        "unit": "byte",
+        "value": 0.0
+      },
+      "registers_per_thread": {
+        "metric_id": "launch__registers_per_thread",
+        "unit": "register/thread",
+        "value": 146.0
+      },
+      "spill_refill_bytes": {
+        "metric_id": "sass__inst_executed_register_spilling_mem_local_op_read",
+        "unit": "byte",
+        "value": 0.0
+      },
+      "spill_refill_instructions": {
+        "metric_id": "sass__inst_executed_register_spilling_op_read",
+        "unit": "inst",
+        "value": 0.0
+      },
+      "spill_store_bytes": {
+        "metric_id": "sass__inst_executed_register_spilling_mem_local_op_write",
+        "unit": "byte",
+        "value": 0.0
+      },
+      "spill_store_instructions": {
+        "metric_id": "sass__inst_executed_register_spilling_op_write",
+        "unit": "inst",
+        "value": 0.0
+      },
+      "tensor_instructions": {
+        "metric_id": "sm__inst_executed_pipe_tensor_subpipe_hmma.sum",
+        "unit": "inst",
+        "value": 31162368.0
+      }
+    }
+  },
+  "environment": {
+    "gpu": {
+      "applications_graphics_clock_mhz": "2377",
+      "compute_capability": [
+        12,
+        0
+      ],
+      "driver": "580.95.05",
+      "foreign_processes_before_cuda_context": [],
+      "graphics_clock_mhz": "2017",
+      "max_graphics_clock_mhz": "3090",
+      "name": "NVIDIA Graphics Device",
+      "pci_bus_id": "00000000:76:00.0",
+      "power_draw_w": "58.38",
+      "sm_count": 110,
+      "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+    },
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "ncu": "NVIDIA (R) Nsight Compute Command Line Profiler\nCopyright (c) 2018-2026 NVIDIA Corporation\nVersion 2026.1.1.0 (build 37634170) (public-release)",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0"
+  },
+  "evidence_boundaries": [
+    "The accepted claim is scoped to the complete immutable candidate bundle, not N64 alone.",
+    "Source ordering proves intended immediate consumption; zero static/dynamic spill proves the compiled outcome, but does not isolate one compiler live-range cause.",
+    "No latency or performance claim is made in exp_007.",
+    "Scheduler exact-once remains descriptor-multiset plus terminal-head inference, not a consumed bitmap.",
+    "A/SFA and physical-N128 SFB replay are accepted candidate consequences and are recorded in work_ledger.json.",
+    "The spill counters are launch aggregates rather than source counters, so dynamic spill cannot be attributed to individual SASS PCs.",
+    "canary_v2 inherited a stale weight_sum_max_abs_error metadata field; that field is rejected from evidence, while the explicit topk_weight_sum, tensor hashes, independent reference, and unchanged thresholds are retained."
+  ],
+  "failed_attempts": [
+    {
+      "effect": "failed before JIT; excluded from canonical evidence",
+      "name": "anchor_m256_attempt0_missing_cutlass_gitdir_mount"
+    },
+    {
+      "effect": "8-block relative gates passed, but strict max_abs 0.25 exceeded the fixed 0.1 cap; retained as a failed diagnostic case.",
+      "name": "canary_v0_output_amplitude_mismatch"
+    },
+    {
+      "effect": "failed independent-reference replay 0; rejected before the final v2 scatter-only scale fixture, with thresholds unchanged.",
+      "name": "canary_up_v1_invalid_w2_global_scale_control"
+    }
+  ],
+  "gates": {
+    "candidate_dynamic_zero_spill": true,
+    "candidate_static_zero_spill": true,
+    "correctness_required_cases": true,
+    "descriptor_work_ledger": true,
+    "fresh_anchor_residual_spill_reproduced_dynamic": true,
+    "fresh_anchor_residual_spill_reproduced_static": true,
+    "ncu_loaded_cubins_match_static_evidence": true,
+    "useful_tensor_work_equal": true
+  },
+  "objective": "Test whether an 8-warp temporal dual-N64 FC1 bundle, with each Gate/Up accumulator pair consumed immediately by SwiGLU, can remove the anchor's residual register spill without changing useful Tensor work.",
+  "overall_gate_pass": true,
+  "schema": "exp007.manifest.v1",
+  "source_identity": {
+    "anchor": {
+      "path": "results/overlays/anchor_8warp_n128/moe_dynamic_kernel.py",
+      "sha256": "3cd9e6a26056d9221f59ea6749cd601c25cbef017cf6e7349efe0925180407c1"
+    },
+    "candidate": {
+      "path": "results/overlays/candidate_8warp_native_n64_v0/moe_dynamic_kernel.py",
+      "sha256": "1953cbb7717cda4461a4f199d05f370a4bdb35b4b8ef7556443caf36b0b12ec2"
+    },
+    "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+    "flashinfer_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+    "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+    "unified_diff": {
+      "path": "results/overlays/anchor_vs_candidate.diff",
+      "sha256": "748b166068a73a5a881559ccf17f7482b5a308038554d0c44b98127de0b555db"
+    }
+  },
+  "spill_pc_attribution": {
+    "evidence_sha256": "08ade9b440dc170732d3aa1debb3b3e41c188f7f6a71e0ea3c50e3630636556e",
+    "verdict": {
+      "anchor_dynamic_pc_to_static_pc_relation_closed": false,
+      "candidate_static_and_aggregate_dynamic_zero_spill": true,
+      "loaded_cubin_identity_pass": true,
+      "per_sass_spill_pc_closure": "not_supported_by_capture_counters",
+      "statement": "Candidate has zero static spill/local SASS and all four required dynamic spill aggregates are numeric zero. Per-SASS source attribution is unavailable for both arms, so anchor dynamic spill PCs cannot be tested as a subset of the static compiler SpillRefill/local SASS PCs; empty source rows are not treated as zero evidence."
+    }
+  },
+  "static_spill": {
+    "anchor": {
+      "registers_per_thread": 168,
+      "spill_refill_annotations": 84,
+      "stack_bytes_per_thread": 224
+    },
+    "candidate": {
+      "registers_per_thread": 146,
+      "spill_refill_annotations": 0,
+      "stack_bytes_per_thread": 0
+    },
+    "static_omma_count_each": 448
+  },
+  "status": "complete"
+}

@@ -1,0 +1,96 @@
+{
+  "arm": "anchor",
+  "evidence_boundary": "Dynamic counts apply only to the one identity-locked final CUDA Graph replay node; configured stack limit is not static STACK.",
+  "fixture": "canonical",
+  "gates": {
+    "all_required_metrics_present_and_numeric": true,
+    "dynamic_zero_spill": false
+  },
+  "internal_arm": "candidate_8warp_serial_v0",
+  "m": 8192,
+  "metrics": {
+    "achieved_occupancy_pct": {
+      "metric_id": "sm__warps_active.avg.pct_of_peak_sustained_active",
+      "unit": "%",
+      "value": 18.75
+    },
+    "allocated_registers_per_thread": {
+      "metric_id": "launch__registers_per_thread_allocated",
+      "unit": "register/thread",
+      "value": 168.0
+    },
+    "configured_stack_limit_bytes": {
+      "metric_id": "launch__stack_size",
+      "unit": "",
+      "value": 1024.0
+    },
+    "fp4_tensor_ops": {
+      "metric_id": "sm__ops_path_tensor_src_fp4_dst_fp32.sum",
+      "unit": "",
+      "value": 510564237312.0
+    },
+    "local_load_bytes": {
+      "metric_id": "l1tex__t_bytes_pipe_lsu_mem_local_op_ld.sum",
+      "unit": "byte",
+      "value": 145424384.0
+    },
+    "local_store_bytes": {
+      "metric_id": "l1tex__t_bytes_pipe_lsu_mem_local_op_st.sum",
+      "unit": "byte",
+      "value": 145424384.0
+    },
+    "registers_per_thread": {
+      "metric_id": "launch__registers_per_thread",
+      "unit": "register/thread",
+      "value": 168.0
+    },
+    "shared_mem_per_block_bytes": {
+      "metric_id": "launch__shared_mem_per_block",
+      "unit": "byte/block",
+      "value": 93184.0
+    },
+    "spill_refill_bytes": {
+      "metric_id": "sass__inst_executed_register_spilling_mem_local_op_read",
+      "unit": "byte",
+      "value": 1136128.0
+    },
+    "spill_refill_instructions": {
+      "metric_id": "sass__inst_executed_register_spilling_op_read",
+      "unit": "inst",
+      "value": 1136128.0
+    },
+    "spill_store_bytes": {
+      "metric_id": "sass__inst_executed_register_spilling_mem_local_op_write",
+      "unit": "byte",
+      "value": 568064.0
+    },
+    "spill_store_instructions": {
+      "metric_id": "sass__inst_executed_register_spilling_op_write",
+      "unit": "inst",
+      "value": 568064.0
+    },
+    "tensor_instructions": {
+      "metric_id": "sm__inst_executed_pipe_tensor_subpipe_hmma.sum",
+      "unit": "inst",
+      "value": 31162368.0
+    }
+  },
+  "observed_launch": {
+    "block": [
+      288,
+      1,
+      1
+    ],
+    "context_id": 1,
+    "device_id": 0,
+    "grid": [
+      1,
+      1,
+      110
+    ],
+    "kernel": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+    "row_id": 0,
+    "stream_id": 7
+  },
+  "schema": "exp007.dynamic-spill.v1"
+}

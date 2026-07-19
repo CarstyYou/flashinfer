@@ -1,0 +1,2070 @@
+{
+  "evidence_boundary": [
+    "Each JSON sample is one independent process position containing 50 timed graph replays; the 50 replays are not treated as independent samples.",
+    "Bootstrap resampling unit is one complete ABBA group.",
+    "Positive speedup means the registered candidate external arm is faster."
+  ],
+  "evidence_sha256": "3a40b75127fdc5f2a7f8ca04bd0552861688f72f3e2454af85214b43bff65a45",
+  "external_arm_registry": {
+    "n128": {
+      "internal_arm": "candidate_8warp_serial_v0",
+      "overlay_sha256": "3cd9e6a26056d9221f59ea6749cd601c25cbef017cf6e7349efe0925180407c1"
+    },
+    "production": {
+      "internal_arm": "baseline_4warp",
+      "overlay_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+    },
+    "v0": {
+      "internal_arm": "candidate_8warp_n64_temporal_replay_v0",
+      "overlay_sha256": "1953cbb7717cda4461a4f199d05f370a4bdb35b4b8ef7556443caf36b0b12ec2"
+    },
+    "v1": {
+      "internal_arm": "candidate_8warp_n64_temporal_replay_v0",
+      "overlay_sha256": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971"
+    }
+  },
+  "gate_pass": true,
+  "identity_authority": "external result root + registered external ABBA order; internal arm is validation-only",
+  "pairs": {
+    "primary": {
+      "baseline_external_arm": "v0",
+      "candidate_external_arm": "v1",
+      "cases": {
+        "m256": {
+          "aggregate_baseline_us": 571.745279788971,
+          "aggregate_candidate_us": 519.2350734472275,
+          "aggregate_ratio_baseline_over_candidate": 1.1011299294424115,
+          "arms": {
+            "v0": {
+              "count": 10,
+              "cv": 0.00033643436011430674,
+              "mean_us": 571.745279788971,
+              "median_us": 571.719360947609,
+              "p10_us": 571.4952974319458,
+              "p90_us": 571.9559689760208
+            },
+            "v1": {
+              "count": 10,
+              "cv": 0.0002033092659788414,
+              "mean_us": 519.2350734472275,
+              "median_us": 519.2387223243713,
+              "p10_us": 519.1069481372833,
+              "p90_us": 519.3242874145508
+            }
+          },
+          "baseline_external_arm": "v0",
+          "candidate_external_arm": "v1",
+          "classification": "faster",
+          "equivalence_band_percent": [
+            -2.0,
+            2.0
+          ],
+          "group_bootstrap": {
+            "ratio_ci95": [
+              1.1009471960095727,
+              1.101312687202957
+            ],
+            "samples": 10000,
+            "seed": 20260975,
+            "speedup_percent_ci95": [
+              10.09471960095727,
+              10.131268720295704
+            ],
+            "unit": "one complete ABBA group"
+          },
+          "groups": [
+            {
+              "baseline_mean_us": 571.6713607311249,
+              "baseline_position_samples_us": [
+                571.6947221755981,
+                571.6479992866516
+              ],
+              "candidate_mean_us": 519.2633628845215,
+              "candidate_position_samples_us": [
+                519.2620813846588,
+                519.2646443843842
+              ],
+              "group": 0,
+              "paired_ratio_baseline_over_candidate": 1.1009275862550278,
+              "paired_speedup_percent": 10.092758625502785
+            },
+            {
+              "baseline_mean_us": 571.6121608018875,
+              "baseline_position_samples_us": [
+                571.5059220790863,
+                571.7183995246887
+              ],
+              "candidate_mean_us": 519.2486429214478,
+              "candidate_position_samples_us": [
+                519.2819225788116,
+                519.2153632640839
+              ],
+              "group": 1,
+              "paired_ratio_baseline_over_candidate": 1.100844785237814,
+              "paired_speedup_percent": 10.084478523781403
+            },
+            {
+              "baseline_mean_us": 571.7359977960587,
+              "baseline_position_samples_us": [
+                571.3996756076813,
+                572.072319984436
+              ],
+              "candidate_mean_us": 519.1008007526398,
+              "candidate_position_samples_us": [
+                519.0931165218353,
+                519.1084849834442
+              ],
+              "group": 2,
+              "paired_ratio_baseline_over_candidate": 1.1013968712186604,
+              "paired_speedup_percent": 10.139687121866036
+            },
+            {
+              "baseline_mean_us": 571.831681728363,
+              "baseline_position_samples_us": [
+                571.7203223705292,
+                571.9430410861969
+              ],
+              "candidate_mean_us": 519.2383992671967,
+              "candidate_position_samples_us": [
+                519.1692793369293,
+                519.307519197464
+              ],
+              "group": 3,
+              "paired_ratio_baseline_over_candidate": 1.1012892777872196,
+              "paired_speedup_percent": 10.128927778721962
+            },
+            {
+              "baseline_mean_us": 571.8751978874207,
+              "baseline_position_samples_us": [
+                571.8815982341766,
+                571.8687975406647
+              ],
+              "candidate_mean_us": 519.3241614103317,
+              "candidate_position_samples_us": [
+                519.4752013683319,
+                519.1731214523315
+              ],
+              "group": 4,
+              "paired_ratio_baseline_over_candidate": 1.1011912026861523,
+              "paired_speedup_percent": 10.119120268615234
+            }
+          ],
+          "m": 256,
+          "ratio_band": [
+            0.98,
+            1.02
+          ],
+          "speedup_percent": 10.11299294424115
+        },
+        "m8192": {
+          "aggregate_baseline_us": 1807.4227848052979,
+          "aggregate_candidate_us": 1567.8189442157745,
+          "aggregate_ratio_baseline_over_candidate": 1.1528262185333993,
+          "arms": {
+            "v0": {
+              "count": 10,
+              "cv": 0.00072115770191495,
+              "mean_us": 1807.4227848052979,
+              "median_us": 1807.2985649108887,
+              "p10_us": 1805.8070542812347,
+              "p90_us": 1808.6749382019043
+            },
+            "v1": {
+              "count": 10,
+              "cv": 0.0003438914047904007,
+              "mean_us": 1567.8189442157745,
+              "median_us": 1567.993277311325,
+              "p10_us": 1567.1266632080078,
+              "p90_us": 1568.3908429145813
+            }
+          },
+          "baseline_external_arm": "v0",
+          "candidate_external_arm": "v1",
+          "classification": "faster",
+          "equivalence_band_percent": [
+            -2.0,
+            2.0
+          ],
+          "group_bootstrap": {
+            "ratio_ci95": [
+              1.152308074310737,
+              1.1532332818413271
+            ],
+            "samples": 10000,
+            "seed": 20268911,
+            "speedup_percent_ci95": [
+              15.2308074310737,
+              15.323328184132713
+            ],
+            "unit": "one complete ABBA group"
+          },
+          "groups": [
+            {
+              "baseline_mean_us": 1809.0796768665314,
+              "baseline_position_samples_us": [
+                1808.5190391540527,
+                1809.64031457901
+              ],
+              "candidate_mean_us": 1568.4259152412415,
+              "candidate_position_samples_us": [
+                1568.4697556495667,
+                1568.3820748329163
+              ],
+              "group": 0,
+              "paired_ratio_baseline_over_candidate": 1.1534364864076316,
+              "paired_speedup_percent": 15.343648640763163
+            },
+            {
+              "baseline_mean_us": 1808.1510424613953,
+              "baseline_position_samples_us": [
+                1808.4729599952698,
+                1807.8291249275208
+              ],
+              "candidate_mean_us": 1568.0988812446594,
+              "candidate_position_samples_us": [
+                1567.9481601715088,
+                1568.24960231781
+              ],
+              "group": 1,
+              "paired_ratio_baseline_over_candidate": 1.1530848367331257,
+              "paired_speedup_percent": 15.308483673312567
+            },
+            {
+              "baseline_mean_us": 1807.0073568820953,
+              "baseline_position_samples_us": [
+                1808.5676741600037,
+                1805.447039604187
+              ],
+              "candidate_mean_us": 1567.4412834644318,
+              "candidate_position_samples_us": [
+                1567.4822473526,
+                1567.4003195762634
+              ],
+              "group": 2,
+              "paired_ratio_baseline_over_candidate": 1.152838945831619,
+              "paired_speedup_percent": 15.283894583161906
+            },
+            {
+              "baseline_mean_us": 1806.6233611106873,
+              "baseline_position_samples_us": [
+                1806.7680048942566,
+                1806.478717327118
+              ],
+              "candidate_mean_us": 1566.9868850708008,
+              "candidate_position_samples_us": [
+                1566.812162399292,
+                1567.1616077423096
+              ],
+              "group": 3,
+              "paired_ratio_baseline_over_candidate": 1.1529281950748802,
+              "paired_speedup_percent": 15.29281950748802
+            },
+            {
+              "baseline_mean_us": 1806.25248670578,
+              "baseline_position_samples_us": [
+                1806.6579174995422,
+                1805.8470559120178
+              ],
+              "candidate_mean_us": 1568.1417560577393,
+              "candidate_position_samples_us": [
+                1568.0383944511414,
+                1568.2451176643372
+              ],
+              "group": 4,
+              "paired_ratio_baseline_over_candidate": 1.1518426058921127,
+              "paired_speedup_percent": 15.184260589211274
+            }
+          ],
+          "m": 8192,
+          "ratio_band": [
+            0.98,
+            1.02
+          ],
+          "speedup_percent": 15.28262185333993
+        }
+      },
+      "registered_external_abba_order": [
+        "v0",
+        "v1",
+        "v1",
+        "v0"
+      ]
+    },
+    "production": {
+      "baseline_external_arm": "production",
+      "candidate_external_arm": "v1",
+      "cases": {
+        "m256": {
+          "aggregate_baseline_us": 541.6252796649933,
+          "aggregate_candidate_us": 519.0743684768677,
+          "aggregate_ratio_baseline_over_candidate": 1.0434444706917378,
+          "arms": {
+            "production": {
+              "count": 10,
+              "cv": 0.00033708513265222735,
+              "mean_us": 541.6252796649933,
+              "median_us": 541.5606409311295,
+              "p10_us": 541.4085747003555,
+              "p90_us": 541.8013460636139
+            },
+            "v1": {
+              "count": 10,
+              "cv": 0.00040827243125982705,
+              "mean_us": 519.0743684768677,
+              "median_us": 519.1446399688721,
+              "p10_us": 518.8645763397217,
+              "p90_us": 519.3004148006439
+            }
+          },
+          "baseline_external_arm": "production",
+          "candidate_external_arm": "v1",
+          "classification": "faster",
+          "equivalence_band_percent": [
+            -2.0,
+            2.0
+          ],
+          "group_bootstrap": {
+            "ratio_ci95": [
+              1.043290690028296,
+              1.0436429600326669
+            ],
+            "samples": 10000,
+            "seed": 20460975,
+            "speedup_percent_ci95": [
+              4.329069002829611,
+              4.364296003266688
+            ],
+            "unit": "one complete ABBA group"
+          },
+          "groups": [
+            {
+              "baseline_mean_us": 541.6508769989014,
+              "baseline_position_samples_us": [
+                541.5532803535461,
+                541.7484736442566
+              ],
+              "candidate_mean_us": 519.2166435718536,
+              "candidate_position_samples_us": [
+                519.2403280735016,
+                519.1929590702057
+              ],
+              "group": 0,
+              "paired_ratio_baseline_over_candidate": 1.0432078472537314,
+              "paired_speedup_percent": 4.320784725373139
+            },
+            {
+              "baseline_mean_us": 541.6662389039993,
+              "baseline_position_samples_us": [
+                541.7644762992859,
+                541.5680015087128
+              ],
+              "candidate_mean_us": 518.9305591583252,
+              "candidate_position_samples_us": [
+                518.9184010028839,
+                518.9427173137665
+              ],
+              "group": 1,
+              "paired_ratio_baseline_over_candidate": 1.0438125667190425,
+              "paired_speedup_percent": 4.3812566719042545
+            },
+            {
+              "baseline_mean_us": 541.7689597606659,
+              "baseline_position_samples_us": [
+                541.5372788906097,
+                542.000640630722
+              ],
+              "candidate_mean_us": 519.2134404182434,
+              "candidate_position_samples_us": [
+                519.2953586578369,
+                519.1315221786499
+              ],
+              "group": 2,
+              "paired_ratio_baseline_over_candidate": 1.0434417092983057,
+              "paired_speedup_percent": 4.344170929830571
+            },
+            {
+              "baseline_mean_us": 541.3980799913406,
+              "baseline_position_samples_us": [
+                541.384961605072,
+                541.4111983776093
+              ],
+              "candidate_mean_us": 518.8927990198135,
+              "candidate_position_samples_us": [
+                519.1577577590942,
+                518.6278402805328
+              ],
+              "group": 3,
+              "paired_ratio_baseline_over_candidate": 1.0433717349981335,
+              "paired_speedup_percent": 4.3371734998133515
+            },
+            {
+              "baseline_mean_us": 541.6422426700592,
+              "baseline_position_samples_us": [
+                541.5052831172943,
+                541.7792022228241
+              ],
+              "candidate_mean_us": 519.1184002161026,
+              "candidate_position_samples_us": [
+                519.345920085907,
+                518.8908803462982
+              ],
+              "group": 4,
+              "paired_ratio_baseline_over_candidate": 1.0433886420604244,
+              "paired_speedup_percent": 4.3388642060424365
+            }
+          ],
+          "m": 256,
+          "ratio_band": [
+            0.98,
+            1.02
+          ],
+          "speedup_percent": 4.344447069173785
+        },
+        "m8192": {
+          "aggregate_baseline_us": 1804.154625415802,
+          "aggregate_candidate_us": 1567.9498229026794,
+          "aggregate_ratio_baseline_over_candidate": 1.1506456386951507,
+          "arms": {
+            "production": {
+              "count": 10,
+              "cv": 0.00020325498810232795,
+              "mean_us": 1804.154625415802,
+              "median_us": 1804.272323846817,
+              "p10_us": 1803.8040974140167,
+              "p90_us": 1804.5151989459991
+            },
+            "v1": {
+              "count": 10,
+              "cv": 0.00038277267843674025,
+              "mean_us": 1567.9498229026794,
+              "median_us": 1568.0227220058441,
+              "p10_us": 1567.2378294467926,
+              "p90_us": 1568.6191277503967
+            }
+          },
+          "baseline_external_arm": "production",
+          "candidate_external_arm": "v1",
+          "classification": "faster",
+          "equivalence_band_percent": [
+            -2.0,
+            2.0
+          ],
+          "group_bootstrap": {
+            "ratio_ci95": [
+              1.1502930411458592,
+              1.1509812759278208
+            ],
+            "samples": 10000,
+            "seed": 20468911,
+            "speedup_percent_ci95": [
+              15.029304114585917,
+              15.098127592782085
+            ],
+            "unit": "one complete ABBA group"
+          },
+          "groups": [
+            {
+              "baseline_mean_us": 1804.5536005496979,
+              "baseline_position_samples_us": [
+                1804.5055985450745,
+                1804.6016025543213
+              ],
+              "candidate_mean_us": 1568.2380759716034,
+              "candidate_position_samples_us": [
+                1568.6847925186157,
+                1567.791359424591
+              ],
+              "group": 0,
+              "paired_ratio_baseline_over_candidate": 1.150688551820606,
+              "paired_speedup_percent": 15.068855182060602
+            },
+            {
+              "baseline_mean_us": 1804.0588819980621,
+              "baseline_position_samples_us": [
+                1804.2284750938416,
+                1803.8892889022827
+              ],
+              "candidate_mean_us": 1568.1712019443512,
+              "candidate_position_samples_us": [
+                1567.8336095809937,
+                1568.5087943077087
+              ],
+              "group": 1,
+              "paired_ratio_baseline_over_candidate": 1.1504221476336496,
+              "paired_speedup_percent": 15.042214763364958
+            },
+            {
+              "baseline_mean_us": 1804.0912008285522,
+              "baseline_position_samples_us": [
+                1804.319360256195,
+                1803.8630414009094
+              ],
+              "candidate_mean_us": 1567.1423971652985,
+              "candidate_position_samples_us": [
+                1566.7142343521118,
+                1567.570559978485
+              ],
+              "group": 2,
+              "paired_ratio_baseline_over_candidate": 1.1511980047836463,
+              "paired_speedup_percent": 15.119800478364631
+            },
+            {
+              "baseline_mean_us": 1804.3132817745209,
+              "baseline_position_samples_us": [
+                1804.3059253692627,
+                1804.320638179779
+              ],
+              "candidate_mean_us": 1567.7539205551147,
+              "candidate_position_samples_us": [
+                1568.2118344306946,
+                1567.296006679535
+              ],
+              "group": 3,
+              "paired_ratio_baseline_over_candidate": 1.150890620088926,
+              "paired_speedup_percent": 15.089062008892595
+            },
+            {
+              "baseline_mean_us": 1803.7561619281769,
+              "baseline_position_samples_us": [
+                1804.2387223243713,
+                1803.2736015319824
+              ],
+              "candidate_mean_us": 1568.4435188770294,
+              "candidate_position_samples_us": [
+                1568.611831665039,
+                1568.2752060890198
+              ],
+              "group": 4,
+              "paired_ratio_baseline_over_candidate": 1.1500294019000608,
+              "paired_speedup_percent": 15.002940190006075
+            }
+          ],
+          "m": 8192,
+          "ratio_band": [
+            0.98,
+            1.02
+          ],
+          "speedup_percent": 15.06456386951507
+        }
+      },
+      "registered_external_abba_order": [
+        "production",
+        "v1",
+        "v1",
+        "production"
+      ]
+    },
+    "secondary": {
+      "baseline_external_arm": "n128",
+      "candidate_external_arm": "v1",
+      "cases": {
+        "m256": {
+          "aggregate_baseline_us": 533.9834883213043,
+          "aggregate_candidate_us": 519.056382894516,
+          "aggregate_ratio_baseline_over_candidate": 1.0287581579163854,
+          "arms": {
+            "n128": {
+              "count": 10,
+              "cv": 0.0002997426481150012,
+              "mean_us": 533.9834883213043,
+              "median_us": 533.9513611793518,
+              "p10_us": 533.8126698732376,
+              "p90_us": 534.1888664960861
+            },
+            "v1": {
+              "count": 10,
+              "cv": 0.00024374965303378368,
+              "mean_us": 519.056382894516,
+              "median_us": 519.0608006715775,
+              "p10_us": 518.9205121994019,
+              "p90_us": 519.1987811326981
+            }
+          },
+          "baseline_external_arm": "n128",
+          "candidate_external_arm": "v1",
+          "classification": "faster",
+          "equivalence_band_percent": [
+            -2.0,
+            2.0
+          ],
+          "group_bootstrap": {
+            "ratio_ci95": [
+              1.0286385288334547,
+              1.0288468212862325
+            ],
+            "samples": 10000,
+            "seed": 20360975,
+            "speedup_percent_ci95": [
+              2.8638528833454746,
+              2.8846821286232505
+            ],
+            "unit": "one complete ABBA group"
+          },
+          "groups": [
+            {
+              "baseline_mean_us": 534.1094416379929,
+              "baseline_position_samples_us": [
+                534.2585599422455,
+                533.9603233337402
+              ],
+              "candidate_mean_us": 519.1743993759155,
+              "candidate_position_samples_us": [
+                519.1494393348694,
+                519.1993594169617
+              ],
+              "group": 0,
+              "paired_ratio_baseline_over_candidate": 1.0287669081526947,
+              "paired_speedup_percent": 2.876690815269467
+            },
+            {
+              "baseline_mean_us": 534.0985602140427,
+              "baseline_position_samples_us": [
+                534.0748846530914,
+                534.1222357749939
+              ],
+              "candidate_mean_us": 519.1446387767792,
+              "candidate_position_samples_us": [
+                519.198716878891,
+                519.0905606746674
+              ],
+              "group": 1,
+              "paired_ratio_baseline_over_candidate": 1.0288049231761274,
+              "paired_speedup_percent": 2.8804923176127373
+            },
+            {
+              "baseline_mean_us": 533.9689600467682,
+              "baseline_position_samples_us": [
+                533.7567973136902,
+                534.1811227798462
+              ],
+              "candidate_mean_us": 519.0201580524445,
+              "candidate_position_samples_us": [
+                519.0092754364014,
+                519.0310406684875
+              ],
+              "group": 2,
+              "paired_ratio_baseline_over_candidate": 1.0288019680206972,
+              "paired_speedup_percent": 2.8801968020697233
+            },
+            {
+              "baseline_mean_us": 533.8806384801865,
+              "baseline_position_samples_us": [
+                533.9423990249634,
+                533.8188779354095
+              ],
+              "candidate_mean_us": 518.891196846962,
+              "candidate_position_samples_us": [
+                518.7782371044159,
+                519.004156589508
+              ],
+              "group": 3,
+              "paired_ratio_baseline_over_candidate": 1.0288874463939794,
+              "paired_speedup_percent": 2.8887446393979443
+            },
+            {
+              "baseline_mean_us": 533.8598412275314,
+              "baseline_position_samples_us": [
+                533.8956809043884,
+                533.8240015506744
+              ],
+              "candidate_mean_us": 519.0515214204788,
+              "candidate_position_samples_us": [
+                518.9363205432892,
+                519.1667222976685
+              ],
+              "group": 4,
+              "paired_ratio_baseline_over_candidate": 1.0285295759591013,
+              "paired_speedup_percent": 2.8529575959101328
+            }
+          ],
+          "m": 256,
+          "ratio_band": [
+            0.98,
+            1.02
+          ],
+          "speedup_percent": 2.8758157916385363
+        },
+        "m8192": {
+          "aggregate_baseline_us": 1642.558399438858,
+          "aggregate_candidate_us": 1567.696320772171,
+          "aggregate_ratio_baseline_over_candidate": 1.0477529210694414,
+          "arms": {
+            "n128": {
+              "count": 10,
+              "cv": 0.0004104557010800706,
+              "mean_us": 1642.558399438858,
+              "median_us": 1642.3699188232422,
+              "p10_us": 1641.7777938842773,
+              "p90_us": 1643.4332830905914
+            },
+            "v1": {
+              "count": 10,
+              "cv": 0.00038090164109923246,
+              "mean_us": 1567.696320772171,
+              "median_us": 1567.7526438236237,
+              "p10_us": 1567.0403757095337,
+              "p90_us": 1568.351817369461
+            }
+          },
+          "baseline_external_arm": "n128",
+          "candidate_external_arm": "v1",
+          "classification": "faster",
+          "equivalence_band_percent": [
+            -2.0,
+            2.0
+          ],
+          "group_bootstrap": {
+            "ratio_ci95": [
+              1.0474103483997557,
+              1.048096872057089
+            ],
+            "samples": 10000,
+            "seed": 20368911,
+            "speedup_percent_ci95": [
+              4.741034839975566,
+              4.80968720570889
+            ],
+            "unit": "one complete ABBA group"
+          },
+          "groups": [
+            {
+              "baseline_mean_us": 1643.534404039383,
+              "baseline_position_samples_us": [
+                1643.4080028533936,
+                1643.6608052253723
+              ],
+              "candidate_mean_us": 1567.7526438236237,
+              "candidate_position_samples_us": [
+                1567.9027247428894,
+                1567.602562904358
+              ],
+              "group": 0,
+              "paired_ratio_baseline_over_candidate": 1.048337829640608,
+              "paired_speedup_percent": 4.8337829640608065
+            },
+            {
+              "baseline_mean_us": 1642.5516760349274,
+              "baseline_position_samples_us": [
+                1642.2399973869324,
+                1642.8633546829224
+              ],
+              "candidate_mean_us": 1567.492481470108,
+              "candidate_position_samples_us": [
+                1566.6233587265015,
+                1568.3616042137146
+              ],
+              "group": 1,
+              "paired_ratio_baseline_over_candidate": 1.0478848833102048,
+              "paired_speedup_percent": 4.7884883310204795
+            },
+            {
+              "baseline_mean_us": 1641.6467189788818,
+              "baseline_position_samples_us": [
+                1641.8105626106262,
+                1641.4828753471375
+              ],
+              "candidate_mean_us": 1567.7328050136566,
+              "candidate_position_samples_us": [
+                1568.3507299423218,
+                1567.1148800849915
+              ],
+              "group": 2,
+              "paired_ratio_baseline_over_candidate": 1.0471470098277247,
+              "paired_speedup_percent": 4.714700982772468
+            },
+            {
+              "baseline_mean_us": 1642.2416031360626,
+              "baseline_position_samples_us": [
+                1642.1459245681763,
+                1642.337281703949
+              ],
+              "candidate_mean_us": 1567.6438331604004,
+              "candidate_position_samples_us": [
+                1568.2009553909302,
+                1567.0867109298706
+              ],
+              "group": 3,
+              "paired_ratio_baseline_over_candidate": 1.0475859174116557,
+              "paired_speedup_percent": 4.758591741165574
+            },
+            {
+              "baseline_mean_us": 1642.8175950050354,
+              "baseline_position_samples_us": [
+                1642.4025559425354,
+                1643.2326340675354
+              ],
+              "candidate_mean_us": 1567.8598403930664,
+              "candidate_position_samples_us": [
+                1568.3468794822693,
+                1567.3728013038635
+              ],
+              "group": 4,
+              "paired_ratio_baseline_over_candidate": 1.0478089639652846,
+              "paired_speedup_percent": 4.780896396528456
+            }
+          ],
+          "m": 8192,
+          "ratio_band": [
+            0.98,
+            1.02
+          ],
+          "speedup_percent": 4.77529210694414
+        }
+      },
+      "registered_external_abba_order": [
+        "n128",
+        "v1",
+        "v1",
+        "n128"
+      ]
+    }
+  },
+  "preparation_identity": [
+    {
+      "canonical_preparation_path": "canonical/v0/raw/candidate_8warp_n64_temporal_replay_v0/m256/canonical/preparation.json",
+      "canonical_preparation_sha256": "b7590af7a7d9892ac5fa00c0bfb50b769c2d9e0e10c2d20ec685343a78b1dc3a",
+      "comparison_identity": {
+        "case": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "m": 256,
+          "topk": 8
+        },
+        "fixture": {
+          "duplicate_expert_ids": 0,
+          "fixture_kind": "deterministic_synthetic_random_logits",
+          "m": 256,
+          "occupancy_max": 18,
+          "occupancy_min": 1,
+          "occupancy_p50": 8.0,
+          "occupancy_p95": 13.0,
+          "occupancy_sha256": "7649e92fe10f6ca1e80de716b58d6ed5520b563094950bdf01075414c38d1c5d",
+          "predicted_cutlass_route_branch": "fused_route_candidate",
+          "seed": 2282,
+          "shape": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "topk": 8
+          },
+          "topk_ids_sha256": "a48c21b54f47265e7b98261363b94dc58a53e9858b79ffba4deda51128a8e108",
+          "topk_weights_sha256": "9791d0835e68b2cb438358d714a4446eed3fa3ae7224c47e80aa0cb70748bf0c",
+          "weight_sum_max_abs_error": 1.1920928955078125e-07,
+          "x_sha256": "2cd5ab903e8e9118cd70c7432c025040b3336e3db3e9840020c6eb8421ad80fb",
+          "zero_token_experts": 0
+        },
+        "reference_sha256": "4685b1aad24f7c6d18656b108dbba4f3913f24e4061da1eb31712e340afe0aff",
+        "runtime": {
+          "imports": {
+            "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py"
+          },
+          "runtime": {
+            "cuda_runtime": "13.2",
+            "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+            "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+            "torch": "2.12.0a0+5aff3928d8.nv26.05"
+          },
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        },
+        "weights": {
+          "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+          "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+          "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+          "seed": 2026,
+          "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+          "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+          "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+          "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+          "w1_packed_shape": [
+            256,
+            1024,
+            1024
+          ],
+          "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+          "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+          "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+          "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+          "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+          "w2_packed_shape": [
+            256,
+            2048,
+            256
+          ],
+          "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+        }
+      },
+      "cubin_sha256": [
+        "a9557634cf3d1bff59ca93739e75a1acd1187707222255fead78e2e6e8a73af9"
+      ],
+      "external_arm": "v0",
+      "internal_arm": "candidate_8warp_n64_temporal_replay_v0",
+      "jit_artifact_set_sha256": "29022d8c3f6fc5ed65923140a82ca33b59eba807a9395679a1a960a6f5183f8e",
+      "jit_root": "/workspace/jit",
+      "m": 256,
+      "overlay_sha256": "1953cbb7717cda4461a4f199d05f370a4bdb35b4b8ef7556443caf36b0b12ec2",
+      "pair": "primary",
+      "pair_preparation_path": "e2e/primary/v0/raw/candidate_8warp_n64_temporal_replay_v0/m256/canonical/preparation.json",
+      "pair_preparation_sha256": "b7590af7a7d9892ac5fa00c0bfb50b769c2d9e0e10c2d20ec685343a78b1dc3a"
+    },
+    {
+      "canonical_preparation_path": "canonical/v0/raw/candidate_8warp_n64_temporal_replay_v0/m8192/canonical/preparation.json",
+      "canonical_preparation_sha256": "254298966ded96fbfe5078e5d903f25dd30db633d80b1f514bf41ebaa89bbbd6",
+      "comparison_identity": {
+        "case": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "m": 8192,
+          "topk": 8
+        },
+        "fixture": {
+          "duplicate_expert_ids": 0,
+          "fixture_kind": "deterministic_synthetic_random_logits",
+          "m": 8192,
+          "occupancy_max": 302,
+          "occupancy_min": 217,
+          "occupancy_p50": 256.0,
+          "occupancy_p95": 281.0,
+          "occupancy_sha256": "5e937225d3ac21770218000ebdedcb62cc211c4444bb260d0838656ca41260bc",
+          "predicted_cutlass_route_branch": "three_step_large_prefix_candidate",
+          "seed": 10218,
+          "shape": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "topk": 8
+          },
+          "topk_ids_sha256": "f9b3c632d767e754837a14016f5a2ea3c3fccfefef1adee4f9b7b966c68e2f7a",
+          "topk_weights_sha256": "ee885b45d94eee54d3c9114669492419003c914ea3bd1d29dbd58ad765fccb9d",
+          "weight_sum_max_abs_error": 2.384185791015625e-07,
+          "x_sha256": "6c95ae4406b2fc7ad4544936781b71288d98f496a60c58f5695e6dbf868864b4",
+          "zero_token_experts": 0
+        },
+        "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+        "runtime": {
+          "imports": {
+            "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py"
+          },
+          "runtime": {
+            "cuda_runtime": "13.2",
+            "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+            "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+            "torch": "2.12.0a0+5aff3928d8.nv26.05"
+          },
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        },
+        "weights": {
+          "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+          "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+          "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+          "seed": 2026,
+          "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+          "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+          "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+          "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+          "w1_packed_shape": [
+            256,
+            1024,
+            1024
+          ],
+          "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+          "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+          "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+          "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+          "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+          "w2_packed_shape": [
+            256,
+            2048,
+            256
+          ],
+          "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+        }
+      },
+      "cubin_sha256": [
+        "a9557634cf3d1bff59ca93739e75a1acd1187707222255fead78e2e6e8a73af9"
+      ],
+      "external_arm": "v0",
+      "internal_arm": "candidate_8warp_n64_temporal_replay_v0",
+      "jit_artifact_set_sha256": "29022d8c3f6fc5ed65923140a82ca33b59eba807a9395679a1a960a6f5183f8e",
+      "jit_root": "/workspace/jit",
+      "m": 8192,
+      "overlay_sha256": "1953cbb7717cda4461a4f199d05f370a4bdb35b4b8ef7556443caf36b0b12ec2",
+      "pair": "primary",
+      "pair_preparation_path": "e2e/primary/v0/raw/candidate_8warp_n64_temporal_replay_v0/m8192/canonical/preparation.json",
+      "pair_preparation_sha256": "254298966ded96fbfe5078e5d903f25dd30db633d80b1f514bf41ebaa89bbbd6"
+    },
+    {
+      "canonical_preparation_path": "canonical/v1/raw/candidate_8warp_n64_temporal_replay_v0/m256/canonical/preparation.json",
+      "canonical_preparation_sha256": "04abfe65cc56d040e5ae2c11f57a782bac9774f4619a034ec9c304c18b0e5c52",
+      "comparison_identity": {
+        "case": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "m": 256,
+          "topk": 8
+        },
+        "fixture": {
+          "duplicate_expert_ids": 0,
+          "fixture_kind": "deterministic_synthetic_random_logits",
+          "m": 256,
+          "occupancy_max": 18,
+          "occupancy_min": 1,
+          "occupancy_p50": 8.0,
+          "occupancy_p95": 13.0,
+          "occupancy_sha256": "7649e92fe10f6ca1e80de716b58d6ed5520b563094950bdf01075414c38d1c5d",
+          "predicted_cutlass_route_branch": "fused_route_candidate",
+          "seed": 2282,
+          "shape": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "topk": 8
+          },
+          "topk_ids_sha256": "a48c21b54f47265e7b98261363b94dc58a53e9858b79ffba4deda51128a8e108",
+          "topk_weights_sha256": "9791d0835e68b2cb438358d714a4446eed3fa3ae7224c47e80aa0cb70748bf0c",
+          "weight_sum_max_abs_error": 1.1920928955078125e-07,
+          "x_sha256": "2cd5ab903e8e9118cd70c7432c025040b3336e3db3e9840020c6eb8421ad80fb",
+          "zero_token_experts": 0
+        },
+        "reference_sha256": "4685b1aad24f7c6d18656b108dbba4f3913f24e4061da1eb31712e340afe0aff",
+        "runtime": {
+          "imports": {
+            "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py"
+          },
+          "runtime": {
+            "cuda_runtime": "13.2",
+            "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+            "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+            "torch": "2.12.0a0+5aff3928d8.nv26.05"
+          },
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        },
+        "weights": {
+          "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+          "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+          "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+          "seed": 2026,
+          "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+          "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+          "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+          "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+          "w1_packed_shape": [
+            256,
+            1024,
+            1024
+          ],
+          "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+          "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+          "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+          "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+          "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+          "w2_packed_shape": [
+            256,
+            2048,
+            256
+          ],
+          "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+        }
+      },
+      "cubin_sha256": [
+        "4b835aa8ce91a4dd12b4dc4f43508c205c117aaeb193995fff57dd3ddbeb7725"
+      ],
+      "external_arm": "v1",
+      "internal_arm": "candidate_8warp_n64_temporal_replay_v0",
+      "jit_artifact_set_sha256": "c22a5449113ba7c1c9a40bf02e14698cc84f1e90c56232718eba29d5a06de486",
+      "jit_root": "/workspace/jit",
+      "m": 256,
+      "overlay_sha256": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971",
+      "pair": "primary",
+      "pair_preparation_path": "e2e/primary/v1/raw/candidate_8warp_n64_temporal_replay_v0/m256/canonical/preparation.json",
+      "pair_preparation_sha256": "04abfe65cc56d040e5ae2c11f57a782bac9774f4619a034ec9c304c18b0e5c52"
+    },
+    {
+      "canonical_preparation_path": "canonical/v1/raw/candidate_8warp_n64_temporal_replay_v0/m8192/canonical/preparation.json",
+      "canonical_preparation_sha256": "f214d1c15b71ef61a250347b4cb15abcdbd01b6495c0d17449b9bd7908f4a51c",
+      "comparison_identity": {
+        "case": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "m": 8192,
+          "topk": 8
+        },
+        "fixture": {
+          "duplicate_expert_ids": 0,
+          "fixture_kind": "deterministic_synthetic_random_logits",
+          "m": 8192,
+          "occupancy_max": 302,
+          "occupancy_min": 217,
+          "occupancy_p50": 256.0,
+          "occupancy_p95": 281.0,
+          "occupancy_sha256": "5e937225d3ac21770218000ebdedcb62cc211c4444bb260d0838656ca41260bc",
+          "predicted_cutlass_route_branch": "three_step_large_prefix_candidate",
+          "seed": 10218,
+          "shape": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "topk": 8
+          },
+          "topk_ids_sha256": "f9b3c632d767e754837a14016f5a2ea3c3fccfefef1adee4f9b7b966c68e2f7a",
+          "topk_weights_sha256": "ee885b45d94eee54d3c9114669492419003c914ea3bd1d29dbd58ad765fccb9d",
+          "weight_sum_max_abs_error": 2.384185791015625e-07,
+          "x_sha256": "6c95ae4406b2fc7ad4544936781b71288d98f496a60c58f5695e6dbf868864b4",
+          "zero_token_experts": 0
+        },
+        "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+        "runtime": {
+          "imports": {
+            "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py"
+          },
+          "runtime": {
+            "cuda_runtime": "13.2",
+            "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+            "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+            "torch": "2.12.0a0+5aff3928d8.nv26.05"
+          },
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        },
+        "weights": {
+          "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+          "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+          "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+          "seed": 2026,
+          "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+          "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+          "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+          "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+          "w1_packed_shape": [
+            256,
+            1024,
+            1024
+          ],
+          "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+          "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+          "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+          "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+          "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+          "w2_packed_shape": [
+            256,
+            2048,
+            256
+          ],
+          "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+        }
+      },
+      "cubin_sha256": [
+        "4b835aa8ce91a4dd12b4dc4f43508c205c117aaeb193995fff57dd3ddbeb7725"
+      ],
+      "external_arm": "v1",
+      "internal_arm": "candidate_8warp_n64_temporal_replay_v0",
+      "jit_artifact_set_sha256": "b65aa8bbed434a49fc5de13528f01cc2b840aa449045f5b9e0dbd6326f633b04",
+      "jit_root": "/workspace/jit",
+      "m": 8192,
+      "overlay_sha256": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971",
+      "pair": "primary",
+      "pair_preparation_path": "e2e/primary/v1/raw/candidate_8warp_n64_temporal_replay_v0/m8192/canonical/preparation.json",
+      "pair_preparation_sha256": "f214d1c15b71ef61a250347b4cb15abcdbd01b6495c0d17449b9bd7908f4a51c"
+    },
+    {
+      "canonical_preparation_path": "canonical/n128/raw/candidate_8warp_serial_v0/m256/canonical/preparation.json",
+      "canonical_preparation_sha256": "3cc6acacdee52ddaa5bb43e17bb73b013ee9b91829194e1ba56673ec8262011f",
+      "comparison_identity": {
+        "case": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "m": 256,
+          "topk": 8
+        },
+        "fixture": {
+          "duplicate_expert_ids": 0,
+          "fixture_kind": "deterministic_synthetic_random_logits",
+          "m": 256,
+          "occupancy_max": 18,
+          "occupancy_min": 1,
+          "occupancy_p50": 8.0,
+          "occupancy_p95": 13.0,
+          "occupancy_sha256": "7649e92fe10f6ca1e80de716b58d6ed5520b563094950bdf01075414c38d1c5d",
+          "predicted_cutlass_route_branch": "fused_route_candidate",
+          "seed": 2282,
+          "shape": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "topk": 8
+          },
+          "topk_ids_sha256": "a48c21b54f47265e7b98261363b94dc58a53e9858b79ffba4deda51128a8e108",
+          "topk_weights_sha256": "9791d0835e68b2cb438358d714a4446eed3fa3ae7224c47e80aa0cb70748bf0c",
+          "weight_sum_max_abs_error": 1.1920928955078125e-07,
+          "x_sha256": "2cd5ab903e8e9118cd70c7432c025040b3336e3db3e9840020c6eb8421ad80fb",
+          "zero_token_experts": 0
+        },
+        "reference_sha256": "4685b1aad24f7c6d18656b108dbba4f3913f24e4061da1eb31712e340afe0aff",
+        "runtime": {
+          "imports": {
+            "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py"
+          },
+          "runtime": {
+            "cuda_runtime": "13.2",
+            "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+            "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+            "torch": "2.12.0a0+5aff3928d8.nv26.05"
+          },
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        },
+        "weights": {
+          "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+          "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+          "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+          "seed": 2026,
+          "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+          "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+          "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+          "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+          "w1_packed_shape": [
+            256,
+            1024,
+            1024
+          ],
+          "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+          "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+          "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+          "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+          "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+          "w2_packed_shape": [
+            256,
+            2048,
+            256
+          ],
+          "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+        }
+      },
+      "cubin_sha256": [
+        "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17"
+      ],
+      "external_arm": "n128",
+      "internal_arm": "candidate_8warp_serial_v0",
+      "jit_artifact_set_sha256": "9c928d442125a682d74ff533874dbc903ae01d70be81236ce988e7221040edba",
+      "jit_root": "/workspace/jit",
+      "m": 256,
+      "overlay_sha256": "3cd9e6a26056d9221f59ea6749cd601c25cbef017cf6e7349efe0925180407c1",
+      "pair": "secondary",
+      "pair_preparation_path": "e2e/secondary/n128/raw/candidate_8warp_serial_v0/m256/canonical/preparation.json",
+      "pair_preparation_sha256": "3cc6acacdee52ddaa5bb43e17bb73b013ee9b91829194e1ba56673ec8262011f"
+    },
+    {
+      "canonical_preparation_path": "canonical/n128/raw/candidate_8warp_serial_v0/m8192/canonical/preparation.json",
+      "canonical_preparation_sha256": "5b8921ea467532744a844008329559647affbe6333c6021a08bbf638c43a989e",
+      "comparison_identity": {
+        "case": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "m": 8192,
+          "topk": 8
+        },
+        "fixture": {
+          "duplicate_expert_ids": 0,
+          "fixture_kind": "deterministic_synthetic_random_logits",
+          "m": 8192,
+          "occupancy_max": 302,
+          "occupancy_min": 217,
+          "occupancy_p50": 256.0,
+          "occupancy_p95": 281.0,
+          "occupancy_sha256": "5e937225d3ac21770218000ebdedcb62cc211c4444bb260d0838656ca41260bc",
+          "predicted_cutlass_route_branch": "three_step_large_prefix_candidate",
+          "seed": 10218,
+          "shape": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "topk": 8
+          },
+          "topk_ids_sha256": "f9b3c632d767e754837a14016f5a2ea3c3fccfefef1adee4f9b7b966c68e2f7a",
+          "topk_weights_sha256": "ee885b45d94eee54d3c9114669492419003c914ea3bd1d29dbd58ad765fccb9d",
+          "weight_sum_max_abs_error": 2.384185791015625e-07,
+          "x_sha256": "6c95ae4406b2fc7ad4544936781b71288d98f496a60c58f5695e6dbf868864b4",
+          "zero_token_experts": 0
+        },
+        "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+        "runtime": {
+          "imports": {
+            "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py"
+          },
+          "runtime": {
+            "cuda_runtime": "13.2",
+            "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+            "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+            "torch": "2.12.0a0+5aff3928d8.nv26.05"
+          },
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        },
+        "weights": {
+          "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+          "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+          "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+          "seed": 2026,
+          "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+          "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+          "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+          "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+          "w1_packed_shape": [
+            256,
+            1024,
+            1024
+          ],
+          "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+          "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+          "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+          "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+          "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+          "w2_packed_shape": [
+            256,
+            2048,
+            256
+          ],
+          "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+        }
+      },
+      "cubin_sha256": [
+        "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17"
+      ],
+      "external_arm": "n128",
+      "internal_arm": "candidate_8warp_serial_v0",
+      "jit_artifact_set_sha256": "9c928d442125a682d74ff533874dbc903ae01d70be81236ce988e7221040edba",
+      "jit_root": "/workspace/jit",
+      "m": 8192,
+      "overlay_sha256": "3cd9e6a26056d9221f59ea6749cd601c25cbef017cf6e7349efe0925180407c1",
+      "pair": "secondary",
+      "pair_preparation_path": "e2e/secondary/n128/raw/candidate_8warp_serial_v0/m8192/canonical/preparation.json",
+      "pair_preparation_sha256": "5b8921ea467532744a844008329559647affbe6333c6021a08bbf638c43a989e"
+    },
+    {
+      "canonical_preparation_path": "canonical/v1/raw/candidate_8warp_n64_temporal_replay_v0/m256/canonical/preparation.json",
+      "canonical_preparation_sha256": "04abfe65cc56d040e5ae2c11f57a782bac9774f4619a034ec9c304c18b0e5c52",
+      "comparison_identity": {
+        "case": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "m": 256,
+          "topk": 8
+        },
+        "fixture": {
+          "duplicate_expert_ids": 0,
+          "fixture_kind": "deterministic_synthetic_random_logits",
+          "m": 256,
+          "occupancy_max": 18,
+          "occupancy_min": 1,
+          "occupancy_p50": 8.0,
+          "occupancy_p95": 13.0,
+          "occupancy_sha256": "7649e92fe10f6ca1e80de716b58d6ed5520b563094950bdf01075414c38d1c5d",
+          "predicted_cutlass_route_branch": "fused_route_candidate",
+          "seed": 2282,
+          "shape": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "topk": 8
+          },
+          "topk_ids_sha256": "a48c21b54f47265e7b98261363b94dc58a53e9858b79ffba4deda51128a8e108",
+          "topk_weights_sha256": "9791d0835e68b2cb438358d714a4446eed3fa3ae7224c47e80aa0cb70748bf0c",
+          "weight_sum_max_abs_error": 1.1920928955078125e-07,
+          "x_sha256": "2cd5ab903e8e9118cd70c7432c025040b3336e3db3e9840020c6eb8421ad80fb",
+          "zero_token_experts": 0
+        },
+        "reference_sha256": "4685b1aad24f7c6d18656b108dbba4f3913f24e4061da1eb31712e340afe0aff",
+        "runtime": {
+          "imports": {
+            "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py"
+          },
+          "runtime": {
+            "cuda_runtime": "13.2",
+            "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+            "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+            "torch": "2.12.0a0+5aff3928d8.nv26.05"
+          },
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        },
+        "weights": {
+          "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+          "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+          "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+          "seed": 2026,
+          "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+          "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+          "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+          "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+          "w1_packed_shape": [
+            256,
+            1024,
+            1024
+          ],
+          "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+          "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+          "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+          "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+          "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+          "w2_packed_shape": [
+            256,
+            2048,
+            256
+          ],
+          "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+        }
+      },
+      "cubin_sha256": [
+        "4b835aa8ce91a4dd12b4dc4f43508c205c117aaeb193995fff57dd3ddbeb7725"
+      ],
+      "external_arm": "v1",
+      "internal_arm": "candidate_8warp_n64_temporal_replay_v0",
+      "jit_artifact_set_sha256": "c22a5449113ba7c1c9a40bf02e14698cc84f1e90c56232718eba29d5a06de486",
+      "jit_root": "/workspace/jit",
+      "m": 256,
+      "overlay_sha256": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971",
+      "pair": "secondary",
+      "pair_preparation_path": "e2e/secondary/v1/raw/candidate_8warp_n64_temporal_replay_v0/m256/canonical/preparation.json",
+      "pair_preparation_sha256": "04abfe65cc56d040e5ae2c11f57a782bac9774f4619a034ec9c304c18b0e5c52"
+    },
+    {
+      "canonical_preparation_path": "canonical/v1/raw/candidate_8warp_n64_temporal_replay_v0/m8192/canonical/preparation.json",
+      "canonical_preparation_sha256": "f214d1c15b71ef61a250347b4cb15abcdbd01b6495c0d17449b9bd7908f4a51c",
+      "comparison_identity": {
+        "case": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "m": 8192,
+          "topk": 8
+        },
+        "fixture": {
+          "duplicate_expert_ids": 0,
+          "fixture_kind": "deterministic_synthetic_random_logits",
+          "m": 8192,
+          "occupancy_max": 302,
+          "occupancy_min": 217,
+          "occupancy_p50": 256.0,
+          "occupancy_p95": 281.0,
+          "occupancy_sha256": "5e937225d3ac21770218000ebdedcb62cc211c4444bb260d0838656ca41260bc",
+          "predicted_cutlass_route_branch": "three_step_large_prefix_candidate",
+          "seed": 10218,
+          "shape": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "topk": 8
+          },
+          "topk_ids_sha256": "f9b3c632d767e754837a14016f5a2ea3c3fccfefef1adee4f9b7b966c68e2f7a",
+          "topk_weights_sha256": "ee885b45d94eee54d3c9114669492419003c914ea3bd1d29dbd58ad765fccb9d",
+          "weight_sum_max_abs_error": 2.384185791015625e-07,
+          "x_sha256": "6c95ae4406b2fc7ad4544936781b71288d98f496a60c58f5695e6dbf868864b4",
+          "zero_token_experts": 0
+        },
+        "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+        "runtime": {
+          "imports": {
+            "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py"
+          },
+          "runtime": {
+            "cuda_runtime": "13.2",
+            "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+            "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+            "torch": "2.12.0a0+5aff3928d8.nv26.05"
+          },
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        },
+        "weights": {
+          "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+          "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+          "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+          "seed": 2026,
+          "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+          "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+          "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+          "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+          "w1_packed_shape": [
+            256,
+            1024,
+            1024
+          ],
+          "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+          "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+          "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+          "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+          "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+          "w2_packed_shape": [
+            256,
+            2048,
+            256
+          ],
+          "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+        }
+      },
+      "cubin_sha256": [
+        "4b835aa8ce91a4dd12b4dc4f43508c205c117aaeb193995fff57dd3ddbeb7725"
+      ],
+      "external_arm": "v1",
+      "internal_arm": "candidate_8warp_n64_temporal_replay_v0",
+      "jit_artifact_set_sha256": "b65aa8bbed434a49fc5de13528f01cc2b840aa449045f5b9e0dbd6326f633b04",
+      "jit_root": "/workspace/jit",
+      "m": 8192,
+      "overlay_sha256": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971",
+      "pair": "secondary",
+      "pair_preparation_path": "e2e/secondary/v1/raw/candidate_8warp_n64_temporal_replay_v0/m8192/canonical/preparation.json",
+      "pair_preparation_sha256": "f214d1c15b71ef61a250347b4cb15abcdbd01b6495c0d17449b9bd7908f4a51c"
+    },
+    {
+      "canonical_preparation_path": "canonical/production/raw/baseline_4warp/m256/canonical/preparation.json",
+      "canonical_preparation_sha256": "dae62094ef8214cf4a2d9ff682ee53670a4d39f9b99f33f4e9f65e21c8208700",
+      "comparison_identity": {
+        "case": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "m": 256,
+          "topk": 8
+        },
+        "fixture": {
+          "duplicate_expert_ids": 0,
+          "fixture_kind": "deterministic_synthetic_random_logits",
+          "m": 256,
+          "occupancy_max": 18,
+          "occupancy_min": 1,
+          "occupancy_p50": 8.0,
+          "occupancy_p95": 13.0,
+          "occupancy_sha256": "7649e92fe10f6ca1e80de716b58d6ed5520b563094950bdf01075414c38d1c5d",
+          "predicted_cutlass_route_branch": "fused_route_candidate",
+          "seed": 2282,
+          "shape": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "topk": 8
+          },
+          "topk_ids_sha256": "a48c21b54f47265e7b98261363b94dc58a53e9858b79ffba4deda51128a8e108",
+          "topk_weights_sha256": "9791d0835e68b2cb438358d714a4446eed3fa3ae7224c47e80aa0cb70748bf0c",
+          "weight_sum_max_abs_error": 1.1920928955078125e-07,
+          "x_sha256": "2cd5ab903e8e9118cd70c7432c025040b3336e3db3e9840020c6eb8421ad80fb",
+          "zero_token_experts": 0
+        },
+        "reference_sha256": "4685b1aad24f7c6d18656b108dbba4f3913f24e4061da1eb31712e340afe0aff",
+        "runtime": {
+          "imports": {
+            "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py"
+          },
+          "runtime": {
+            "cuda_runtime": "13.2",
+            "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+            "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+            "torch": "2.12.0a0+5aff3928d8.nv26.05"
+          },
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        },
+        "weights": {
+          "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+          "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+          "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+          "seed": 2026,
+          "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+          "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+          "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+          "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+          "w1_packed_shape": [
+            256,
+            1024,
+            1024
+          ],
+          "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+          "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+          "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+          "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+          "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+          "w2_packed_shape": [
+            256,
+            2048,
+            256
+          ],
+          "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+        }
+      },
+      "cubin_sha256": [
+        "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79"
+      ],
+      "external_arm": "production",
+      "internal_arm": "baseline_4warp",
+      "jit_artifact_set_sha256": "101fd451c425c40880c4260bae7c27c83af62bedd86df6b0856138b59e7098f5",
+      "jit_root": "/workspace/jit",
+      "m": 256,
+      "overlay_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+      "pair": "production",
+      "pair_preparation_path": "e2e/production/production/raw/baseline_4warp/m256/canonical/preparation.json",
+      "pair_preparation_sha256": "dae62094ef8214cf4a2d9ff682ee53670a4d39f9b99f33f4e9f65e21c8208700"
+    },
+    {
+      "canonical_preparation_path": "canonical/production/raw/baseline_4warp/m8192/canonical/preparation.json",
+      "canonical_preparation_sha256": "5e1777efe1892e75fd7f9e161183e4eae9034dc4a141cb2df62bcf916cf4763f",
+      "comparison_identity": {
+        "case": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "m": 8192,
+          "topk": 8
+        },
+        "fixture": {
+          "duplicate_expert_ids": 0,
+          "fixture_kind": "deterministic_synthetic_random_logits",
+          "m": 8192,
+          "occupancy_max": 302,
+          "occupancy_min": 217,
+          "occupancy_p50": 256.0,
+          "occupancy_p95": 281.0,
+          "occupancy_sha256": "5e937225d3ac21770218000ebdedcb62cc211c4444bb260d0838656ca41260bc",
+          "predicted_cutlass_route_branch": "three_step_large_prefix_candidate",
+          "seed": 10218,
+          "shape": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "topk": 8
+          },
+          "topk_ids_sha256": "f9b3c632d767e754837a14016f5a2ea3c3fccfefef1adee4f9b7b966c68e2f7a",
+          "topk_weights_sha256": "ee885b45d94eee54d3c9114669492419003c914ea3bd1d29dbd58ad765fccb9d",
+          "weight_sum_max_abs_error": 2.384185791015625e-07,
+          "x_sha256": "6c95ae4406b2fc7ad4544936781b71288d98f496a60c58f5695e6dbf868864b4",
+          "zero_token_experts": 0
+        },
+        "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+        "runtime": {
+          "imports": {
+            "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py"
+          },
+          "runtime": {
+            "cuda_runtime": "13.2",
+            "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+            "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+            "torch": "2.12.0a0+5aff3928d8.nv26.05"
+          },
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        },
+        "weights": {
+          "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+          "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+          "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+          "seed": 2026,
+          "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+          "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+          "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+          "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+          "w1_packed_shape": [
+            256,
+            1024,
+            1024
+          ],
+          "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+          "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+          "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+          "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+          "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+          "w2_packed_shape": [
+            256,
+            2048,
+            256
+          ],
+          "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+        }
+      },
+      "cubin_sha256": [
+        "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79"
+      ],
+      "external_arm": "production",
+      "internal_arm": "baseline_4warp",
+      "jit_artifact_set_sha256": "4a4b2aafc209e6bc884113e1494509b9d98fd5de31eb1e98bf020f38806ea61d",
+      "jit_root": "/workspace/jit",
+      "m": 8192,
+      "overlay_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+      "pair": "production",
+      "pair_preparation_path": "e2e/production/production/raw/baseline_4warp/m8192/canonical/preparation.json",
+      "pair_preparation_sha256": "5e1777efe1892e75fd7f9e161183e4eae9034dc4a141cb2df62bcf916cf4763f"
+    },
+    {
+      "canonical_preparation_path": "canonical/v1/raw/candidate_8warp_n64_temporal_replay_v0/m256/canonical/preparation.json",
+      "canonical_preparation_sha256": "04abfe65cc56d040e5ae2c11f57a782bac9774f4619a034ec9c304c18b0e5c52",
+      "comparison_identity": {
+        "case": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "m": 256,
+          "topk": 8
+        },
+        "fixture": {
+          "duplicate_expert_ids": 0,
+          "fixture_kind": "deterministic_synthetic_random_logits",
+          "m": 256,
+          "occupancy_max": 18,
+          "occupancy_min": 1,
+          "occupancy_p50": 8.0,
+          "occupancy_p95": 13.0,
+          "occupancy_sha256": "7649e92fe10f6ca1e80de716b58d6ed5520b563094950bdf01075414c38d1c5d",
+          "predicted_cutlass_route_branch": "fused_route_candidate",
+          "seed": 2282,
+          "shape": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "topk": 8
+          },
+          "topk_ids_sha256": "a48c21b54f47265e7b98261363b94dc58a53e9858b79ffba4deda51128a8e108",
+          "topk_weights_sha256": "9791d0835e68b2cb438358d714a4446eed3fa3ae7224c47e80aa0cb70748bf0c",
+          "weight_sum_max_abs_error": 1.1920928955078125e-07,
+          "x_sha256": "2cd5ab903e8e9118cd70c7432c025040b3336e3db3e9840020c6eb8421ad80fb",
+          "zero_token_experts": 0
+        },
+        "reference_sha256": "4685b1aad24f7c6d18656b108dbba4f3913f24e4061da1eb31712e340afe0aff",
+        "runtime": {
+          "imports": {
+            "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py"
+          },
+          "runtime": {
+            "cuda_runtime": "13.2",
+            "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+            "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+            "torch": "2.12.0a0+5aff3928d8.nv26.05"
+          },
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        },
+        "weights": {
+          "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+          "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+          "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+          "seed": 2026,
+          "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+          "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+          "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+          "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+          "w1_packed_shape": [
+            256,
+            1024,
+            1024
+          ],
+          "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+          "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+          "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+          "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+          "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+          "w2_packed_shape": [
+            256,
+            2048,
+            256
+          ],
+          "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+        }
+      },
+      "cubin_sha256": [
+        "4b835aa8ce91a4dd12b4dc4f43508c205c117aaeb193995fff57dd3ddbeb7725"
+      ],
+      "external_arm": "v1",
+      "internal_arm": "candidate_8warp_n64_temporal_replay_v0",
+      "jit_artifact_set_sha256": "c22a5449113ba7c1c9a40bf02e14698cc84f1e90c56232718eba29d5a06de486",
+      "jit_root": "/workspace/jit",
+      "m": 256,
+      "overlay_sha256": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971",
+      "pair": "production",
+      "pair_preparation_path": "e2e/production/v1/raw/candidate_8warp_n64_temporal_replay_v0/m256/canonical/preparation.json",
+      "pair_preparation_sha256": "04abfe65cc56d040e5ae2c11f57a782bac9774f4619a034ec9c304c18b0e5c52"
+    },
+    {
+      "canonical_preparation_path": "canonical/v1/raw/candidate_8warp_n64_temporal_replay_v0/m8192/canonical/preparation.json",
+      "canonical_preparation_sha256": "f214d1c15b71ef61a250347b4cb15abcdbd01b6495c0d17449b9bd7908f4a51c",
+      "comparison_identity": {
+        "case": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "m": 8192,
+          "topk": 8
+        },
+        "fixture": {
+          "duplicate_expert_ids": 0,
+          "fixture_kind": "deterministic_synthetic_random_logits",
+          "m": 8192,
+          "occupancy_max": 302,
+          "occupancy_min": 217,
+          "occupancy_p50": 256.0,
+          "occupancy_p95": 281.0,
+          "occupancy_sha256": "5e937225d3ac21770218000ebdedcb62cc211c4444bb260d0838656ca41260bc",
+          "predicted_cutlass_route_branch": "three_step_large_prefix_candidate",
+          "seed": 10218,
+          "shape": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "topk": 8
+          },
+          "topk_ids_sha256": "f9b3c632d767e754837a14016f5a2ea3c3fccfefef1adee4f9b7b966c68e2f7a",
+          "topk_weights_sha256": "ee885b45d94eee54d3c9114669492419003c914ea3bd1d29dbd58ad765fccb9d",
+          "weight_sum_max_abs_error": 2.384185791015625e-07,
+          "x_sha256": "6c95ae4406b2fc7ad4544936781b71288d98f496a60c58f5695e6dbf868864b4",
+          "zero_token_experts": 0
+        },
+        "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+        "runtime": {
+          "imports": {
+            "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py"
+          },
+          "runtime": {
+            "cuda_runtime": "13.2",
+            "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+            "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+            "torch": "2.12.0a0+5aff3928d8.nv26.05"
+          },
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        },
+        "weights": {
+          "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+          "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+          "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+          "seed": 2026,
+          "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+          "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+          "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+          "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+          "w1_packed_shape": [
+            256,
+            1024,
+            1024
+          ],
+          "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+          "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+          "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+          "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+          "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+          "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+          "w2_packed_shape": [
+            256,
+            2048,
+            256
+          ],
+          "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+          "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+        }
+      },
+      "cubin_sha256": [
+        "4b835aa8ce91a4dd12b4dc4f43508c205c117aaeb193995fff57dd3ddbeb7725"
+      ],
+      "external_arm": "v1",
+      "internal_arm": "candidate_8warp_n64_temporal_replay_v0",
+      "jit_artifact_set_sha256": "b65aa8bbed434a49fc5de13528f01cc2b840aa449045f5b9e0dbd6326f633b04",
+      "jit_root": "/workspace/jit",
+      "m": 8192,
+      "overlay_sha256": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971",
+      "pair": "production",
+      "pair_preparation_path": "e2e/production/v1/raw/candidate_8warp_n64_temporal_replay_v0/m8192/canonical/preparation.json",
+      "pair_preparation_sha256": "f214d1c15b71ef61a250347b4cb15abcdbd01b6495c0d17449b9bd7908f4a51c"
+    }
+  ],
+  "protocol": {
+    "applications_graphics_clock_mhz": "2377",
+    "bootstrap_samples": 10000,
+    "clock_policy": "locked",
+    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "groups": 5,
+    "iters": 50,
+    "l2_flush_bytes": 201326592,
+    "m_values": [
+      256,
+      8192
+    ],
+    "positions_per_group": 4,
+    "ratio_band": [
+      0.98,
+      1.02
+    ],
+    "speedup_definition": "(baseline_us / candidate_us - 1) * 100",
+    "warmup": 5
+  },
+  "sample_count": 120,
+  "schema": "exp008.e2e-paired-abba.v1"
+}

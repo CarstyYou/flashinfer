@@ -1,0 +1,1295 @@
+--- anchor_8warp_n128/moe_dynamic_kernel.py
++++ candidate_8warp_native_n64_v0/moe_dynamic_kernel.py
+@@ -5,0 +6,5 @@
++
++exp_007 candidate: keep each logical FC1 slice at N128 for Q1/FC2 ownership,
++but execute it as two native B-N64 halves.  Each half consumes its Gate/Up
++accumulators immediately into sC so their lifetime does not cross the next
++half.  FC2 and scatter remain one N128 pass.
+@@ -291,0 +297,4 @@
++        if mma_tiler_mn[1] != 128:
++            raise ValueError(
++                "the exp_007 candidate requires a logical N128 CTA tile"
++            )
+@@ -298,0 +308,2 @@
++        if not self.is_gated:
++            raise ValueError("the exp_007 native-N64 candidate is gated-only")
+@@ -304,0 +316,14 @@
++        self.fc1_tile_shape_mnk = (
++            mma_tiler_mn[0],
++            mma_tiler_mn[1] // 2,
++            tile_k,
++        )
++        self.fc1_sfb_tile_shape_nk = (
++            max(128, self.fc1_tile_shape_mnk[1]),
++            tile_k,
++        )
++        self.fc1_sfb_tiles_per_block = (
++            self.fc1_sfb_tile_shape_nk[0] // self.fc1_tile_shape_mnk[1]
++        )
++        if self.fc1_sfb_tiles_per_block != 2:
++            raise ValueError("expected exactly two logical N64 tiles per SFB block")
+@@ -362,0 +388,10 @@
++        )
++        fc1_permutation_mnk = sm120_utils.get_permutation_mnk(
++            self.fc1_tile_shape_mnk,
++            self.sf_vec_size,
++            False,
++        )
++        self.fc1_tiled_mma = cute.make_tiled_mma(
++            mma_op,
++            atom_layout,
++            permutation_mnk=fc1_permutation_mnk,
+@@ -395,3 +430,3 @@
+-        # The gated path stages a second weight pipeline (sB_up / sSFB_up) that
+-        # _compute_stages doesn't model. Extra smem usage requires capping at 2
+-        # to stay within the SM12x smem budget.
++        # Keep the anchor's two-stage contract for this spill experiment.  The
++        # candidate removes the old duplicate Up buffers but does not retune
++        # pipeline depth in the same implementation bundle.
+@@ -425,0 +461,23 @@
++        )
++        # FC1 gets a true N64 B layout/TMA contract while retaining the N128
++        # physical SFB block required by SM120 block-scaled scale-factor
++        # packing.  A/SFA keep the existing M128xK128 storage and are replayed.
++        (
++            _fc1_a_smem_layout_staged,
++            self.fc1_b_smem_layout_staged,
++            _fc1_sfa_smem_layout_staged,
++            self.fc1_sfb_smem_layout_staged,
++            _fc1_epi_smem_layout_staged,
++        ) = self._dense_cls._make_smem_layouts(
++            self.fc1_tile_shape_mnk,
++            (self.fc1_tile_shape_mnk[0], self.fc1_tile_shape_mnk[1]),
++            self.a_dtype,
++            self.a_layout,
++            self.b_dtype,
++            self.b_layout,
++            self.ab_stage,
++            cutlass.BFloat16,
++            self.c_layout,
++            self.epi_stage,
++            self.sf_vec_size,
++            self.fc1_tiled_mma,
+@@ -600,2 +658,2 @@
+-        # Single TMA descriptor over w13. Gated: [2*I_tp, K, E]; relu2: [I_tp, K, E].
+-        # Up tiles at N=0..I_tp/tile_N-1, gate tiles at N=I_tp/tile_N..2*I_tp/tile_N-1.
++        # FC1 B uses a true N64 descriptor.  Each logical N128 slice is two
++        # consecutive native B tiles; Up precedes Gate in global w13 storage.
+@@ -604,2 +662,2 @@
+-            self.b_smem_layout_staged,
+-            (self.tile_shape_mnk[1], self.tile_shape_mnk[2]),
++            self.fc1_b_smem_layout_staged,
++            (self.fc1_tile_shape_mnk[1], self.fc1_tile_shape_mnk[2]),
+@@ -607,0 +666,3 @@
++        # SFB is different from B: the SM120 helper physically packs scale
++        # factors in N128 blocks.  Both N64 halves replay the same physical
++        # block and select half 0/1 from its shared-memory view.
+@@ -610,2 +671,2 @@
+-            self.sfb_smem_layout_staged,
+-            (self.tile_shape_mnk[1], self.tile_shape_mnk[2]),
++            self.fc1_sfb_smem_layout_staged,
++            self.fc1_sfb_tile_shape_nk,
+@@ -671,0 +733 @@
++            self.fc1_tiled_mma,
+@@ -675,0 +738 @@
++            self.fc1_b_smem_layout_staged,
+@@ -677,0 +741 @@
++            self.fc1_sfb_smem_layout_staged,
+@@ -730,0 +795 @@
++        fc1_tiled_mma: cute.TiledMma,
+@@ -734,0 +800 @@
++        fc1_b_smem_staged: cute.ComposedLayout,
+@@ -736,0 +803 @@
++        fc1_sfb_smem_staged: cute.Layout,
+@@ -771,0 +839 @@
++        fc1_b_smem_one = cute.slice_(fc1_b_smem_staged, (None, None, 0))
+@@ -774 +842,2 @@
+-        tma_copy_bytes = (
++        fc1_sfb_smem_one = cute.slice_(fc1_sfb_smem_staged, (None, None, 0))
++        fc1_tma_copy_bytes = (
+@@ -776 +845 @@
+-            + cute.size_in_bytes(self.b_dtype, b_smem_one)
++            + cute.size_in_bytes(self.b_dtype, fc1_b_smem_one)
+@@ -778 +847 @@
+-            + cute.size_in_bytes(self.sf_dtype, sfb_smem_one)
++            + cute.size_in_bytes(self.sf_dtype, fc1_sfb_smem_one)
+@@ -800 +868,0 @@
+-            up_pipeline_array: cute.struct.MemRange[cutlass.Int64, self.ab_stage * 2]
+@@ -818,4 +885,0 @@
+-            sB_up: cute.struct.Align[
+-                cute.struct.MemRange[self.b_dtype, cute.cosize(b_smem_staged)],
+-                self.buffer_align_bytes,
+-            ]
+@@ -827,4 +890,0 @@
+-                cute.struct.MemRange[self.sf_dtype, cute.cosize(sfb_smem_staged)],
+-                self.buffer_align_bytes,
+-            ]
+-            sSFB_up: cute.struct.Align[
+@@ -894 +954 @@
+-            tx_count=tma_copy_bytes,
++            tx_count=fc1_tma_copy_bytes,
+@@ -897,12 +956,0 @@
+-        )
+-        up_pipeline = (
+-            pipeline.PipelineTmaAsync.create(
+-                num_stages=self.ab_stage,
+-                producer_group=prod_group,
+-                consumer_group=cons_group,
+-                tx_count=tma_copy_bytes,
+-                barrier_storage=storage.up_pipeline_array.data_ptr(),
+-                cta_layout_vmnk=cta_layout_vmnk,
+-            )
+-            if self.is_gated
+-            else ml_pipeline
+@@ -923,4 +971,6 @@
+-        sB_up = (
+-            storage.sB_up.get_tensor(b_smem_staged.outer, swizzle=b_smem_staged.inner)
+-            if self.is_gated
+-            else sB
++        # sB/sSFB have N128-sized backing storage for FC2.  FC1 aliases the
++        # same addresses through a true N64 B view and a physical-N128 SFB
++        # view; producer/consumer pass barriers serialize those aliases.
++        sB_fc1 = storage.sB.get_tensor(
++            fc1_b_smem_staged.outer,
++            swizzle=fc1_b_smem_staged.inner,
+@@ -930 +980 @@
+-        cute.recast_tensor(sB_up, cutlass.Uint8)
++        cute.recast_tensor(sB_fc1, cutlass.Uint8)
+@@ -933 +983 @@
+-        sSFB_up = storage.sSFB_up.get_tensor(sfb_smem_staged) if self.is_gated else sSFB
++        sSFB_fc1 = storage.sSFB.get_tensor(fc1_sfb_smem_staged)
+@@ -936 +986 @@
+-        cute.recast_tensor(sSFB_up, cutlass.Uint8)
++        cute.recast_tensor(sSFB_fc1, cutlass.Uint8)
+@@ -1530,5 +1580,3 @@
+-        # Tiled view over w13.
+-        # Gated: [2*I_tp, K, E] packed as [up, gate] across N.
+-        #   Up tiles: N-indices 0..gate_tile_cnt-1
+-        #   Gate tiles: N-indices gate_tile_cnt..2*gate_tile_cnt-1
+-        # ReLU2: [I_tp, K, E] single FC1 pass, gate_tile_cnt == intermediate_tile_cnt.
++        # B is tiled at the native N64 compute granularity.  SFB is tiled at
++        # the physical N128 scale-factor block granularity and replayed for
++        # the two B halves.
+@@ -1537 +1585 @@
+-            cute.slice_(self.tile_shape_mnk, (0, None, None)),
++            cute.slice_(self.fc1_tile_shape_mnk, (0, None, None)),
+@@ -1545 +1593 @@
+-            cute.slice_(self.tile_shape_mnk, (0, None, None)),
++            self.fc1_sfb_tile_shape_nk,
+@@ -1548,0 +1597 @@
++        fc1_thr_mma = fc1_tiled_mma.get_slice(tidx)
+@@ -1572 +1621 @@
+-        # w13 TMA partition (gated: gate+up concatenated; relu2: single W1)
++        # w13 FC1 partitions: N64 B payload plus physical-N128 SFB payload.
+@@ -1577,8 +1626 @@
+-            cute.group_modes(sB, 0, 2),
+-            cute.group_modes(gB_w13_tiled, 0, 2),
+-        )
+-        tBsB_w13_up, _ = cpasync.tma_partition(
+-            tma_b_w13,
+-            b_cta_crd,
+-            b_cta_layout,
+-            cute.group_modes(sB_up, 0, 2),
++            cute.group_modes(sB_fc1, 0, 2),
+@@ -1591 +1633 @@
+-            cute.group_modes(sSFB, 0, 2),
++            cute.group_modes(sSFB_fc1, 0, 2),
+@@ -1594,8 +1635,0 @@
+-        tBsSFB_w13_up, _ = cpasync.tma_partition(
+-            tma_sfb_w13,
+-            b_cta_crd,
+-            b_cta_layout,
+-            cute.group_modes(sSFB_up, 0, 2),
+-            cute.group_modes(gSFB_w13_tiled, 0, 2),
+-        )
+-        tBsB_w13_up = cute.filter_zeros(tBsB_w13_up)
+@@ -1604 +1637,0 @@
+-        tBsSFB_w13_up = cute.filter_zeros(tBsSFB_w13_up)
+@@ -1634 +1667 @@
+-        # MMA fragment partitions
++        # FC2 fragment partitions retain the original N128 contract.
+@@ -1642,0 +1676,18 @@
++
++        # FC1 has an independent N64 MMA/permutation and aliases the same A/SFA
++        # storage.  Its SFB fragment is created per half below because a
++        # physical N128 SFB block contains two logical N64 scale tiles.
++        tCsA_fc1 = fc1_thr_mma.partition_A(sA)
++        tCrA_fc1 = fc1_tiled_mma.make_fragment_A(
++            tCsA_fc1[None, None, None, 0]
++        )
++        tCrSFA_fc1 = self._dense_cls._partition_fragment_SFA(
++            self,  # type: ignore[arg-type]
++            sSFA[None, None, 0],
++            fc1_thr_mma,
++            tidx,
++        )
++        tCsB_fc1 = fc1_thr_mma.partition_B(sB_fc1)
++        tCrB_fc1 = fc1_tiled_mma.make_fragment_B(
++            tCsB_fc1[None, None, None, 0]
++        )
+@@ -1656,6 +1707,5 @@
+-        gate_acc = cute.make_rmem_tensor(acc_shape, self.acc_dtype)
+-        up_acc = (
+-            cute.make_rmem_tensor(acc_shape, self.acc_dtype)
+-            if self.is_gated
+-            else gate_acc
+-        )
++        fc1_acc_shape = fc1_tiled_mma.partition_shape_C(
++            (self.fc1_tile_shape_mnk[0], self.fc1_tile_shape_mnk[1])
++        )
++        gate_acc = cute.make_rmem_tensor(fc1_acc_shape, self.acc_dtype)
++        up_acc = cute.make_rmem_tensor(fc1_acc_shape, self.acc_dtype)
+@@ -1665,8 +1715,3 @@
+-        # Gated: w13 has 2*I_tp/tile_N N-tiles. Gate = second half, up = first half.
+-        # ReLU2: w13 has I_tp/tile_N N-tiles. Single FC1 pass, no split.
+-        intermediate_tile_cnt = cute.size(gB_w13_tiled, mode=[2])
+-        gate_tile_cnt = (
+-            intermediate_tile_cnt // Int32(2)
+-            if self.is_gated
+-            else intermediate_tile_cnt
+-        )
++        # gB is native-N64 while tasks and FC2 remain logical-N128.
++        native_fc1_tile_cnt = cute.size(gB_w13_tiled, mode=[2]) // Int32(2)
++        gate_tile_cnt = native_fc1_tile_cnt // Int32(2)
+@@ -1681,14 +1725,0 @@
+-        up_prod_state = (
+-            pipeline.make_pipeline_state(
+-                pipeline.PipelineUserType.Producer, self.ab_stage
+-            )
+-            if self.is_gated
+-            else prod_state
+-        )
+-        up_cons_state = (
+-            pipeline.make_pipeline_state(
+-                pipeline.PipelineUserType.Consumer, self.ab_stage
+-            )
+-            if self.is_gated
+-            else cons_state
+-        )
+@@ -1702,0 +1734 @@
++        fc1_num_k_blocks = cute.size(tCrA_fc1, mode=[2])
+@@ -1730,0 +1763,18 @@
++        smem_copy_A_fc1 = cute.make_tiled_copy_A(atom_ld_A, fc1_tiled_mma)
++        smem_copy_B_fc1 = cute.make_tiled_copy_B(atom_ld_B, fc1_tiled_mma)
++        smem_copy_SFA_fc1 = cute.make_tiled_copy(
++            atom_ld_SF,
++            self._dense_cls._get_layoutSFA_TV(self, fc1_tiled_mma),  # type: ignore[arg-type]
++            (
++                cute.size(fc1_tiled_mma.permutation_mnk[0]),
++                cute.size(fc1_tiled_mma.permutation_mnk[2]),
++            ),
++        )
++        smem_copy_SFB_fc1 = cute.make_tiled_copy(
++            atom_ld_SF,
++            self._dense_cls._get_layoutSFB_TV(self, fc1_tiled_mma),  # type: ignore[arg-type]
++            (
++                cute.size(fc1_tiled_mma.permutation_mnk[1]),
++                cute.size(fc1_tiled_mma.permutation_mnk[2]),
++            ),
++        )
+@@ -1737 +1786,0 @@
+-        csB_up = thr_ld_B.partition_S(sB_up)
+@@ -1745 +1793,0 @@
+-        csSFB_up = thr_ld_SFB.partition_S(sSFB_up)
+@@ -1746,0 +1795,12 @@
++
++        thr_ld_A_fc1 = smem_copy_A_fc1.get_slice(tidx)
++        thr_ld_B_fc1 = smem_copy_B_fc1.get_slice(tidx)
++        csA_fc1 = thr_ld_A_fc1.partition_S(sA)
++        crA_fc1 = thr_ld_A_fc1.retile(tCrA_fc1)
++        csB_fc1 = thr_ld_B_fc1.partition_S(sB_fc1)
++        crB_fc1 = thr_ld_B_fc1.retile(tCrB_fc1)
++
++        thr_ld_SFA_fc1 = smem_copy_SFA_fc1.get_slice(tidx)
++        thr_ld_SFB_fc1 = smem_copy_SFB_fc1.get_slice(tidx)
++        csSFA_fc1 = thr_ld_SFA_fc1.partition_S(sSFA)
++        crSFA_fc1 = thr_ld_SFA_fc1.retile(tCrSFA_fc1)
+@@ -1871,0 +1932,6 @@
++                fc1_tiled_copy_C_Atom = cute.make_tiled_copy_C_atom(
++                    copy_atom_C, fc1_tiled_mma
++                )
++                fc1_tiled_copy_r2s = cute.make_tiled_copy_S(
++                    copy_atom_r2s, fc1_tiled_copy_C_Atom
++                )
+@@ -1875,2 +1941,4 @@
+-                tRS_rGate = tiled_copy_r2s.retile(gate_acc)
+-                tRS_rUp = tiled_copy_r2s.retile(up_acc)
++                fc1_thr_copy_r2s = fc1_tiled_copy_r2s.get_slice(tidx)
++                fc1_tRS_sD = fc1_thr_copy_r2s.partition_D(sC)
++                fc1_tRS_rGate = fc1_tiled_copy_r2s.retile(gate_acc)
++                fc1_tRS_rUp = fc1_tiled_copy_r2s.retile(up_acc)
+@@ -1884,3 +1952,7 @@
+-
+-                mma_tile_m = self.tile_shape_mnk[0] // cute.size(tRS_rGate, mode=[1])
+-                mma_tile_n = self.tile_shape_mnk[1] // cute.size(tRS_rGate, mode=[2])
++                fc1_tRS_rAct = cute.make_rmem_tensor(
++                    fc1_tRS_rGate[(None, 0, 0)].shape, self.acc_dtype
++                )
++                fc1_tRS_rAct_out = cute.make_rmem_tensor(
++                    fc1_tRS_rGate[(None, 0, 0)].shape, cutlass.BFloat16
++                )
++
+@@ -1890,0 +1963,7 @@
++                tRS_rDown = tiled_copy_r2s.retile(down_acc)
++                mma_tile_m = self.tile_shape_mnk[0] // cute.size(
++                    tRS_rDown, mode=[1]
++                )
++                mma_tile_n = self.tile_shape_mnk[1] // cute.size(
++                    tRS_rDown, mode=[2]
++                )
+@@ -1898,2 +1977,2 @@
+-                fc1_m_tiles = cute.size(tCrA, mode=[1])
+-                fc1_n_tiles = cute.size(tCrB, mode=[1])
++                fc1_m_tiles = cute.size(tCrA_fc1, mode=[1])
++                fc1_n_tiles = cute.size(tCrB_fc1, mode=[1])
+@@ -1903 +1982 @@
+-                    # PHASE A: FC1 for this slice (gate + up)
++                    # PHASE A: native dual-N64 FC1 for this logical N128 slice
+@@ -1905,5 +1984,4 @@
+-
+-                    # Gate GEMM (inlined to avoid @cute.jit pass-by-value for acc)
+-                    fz_crSFA = cute.filter_zeros(crSFA)
+-                    fz_crSFB = cute.filter_zeros(crSFB)
+-                    gate_acc.fill(0.0)
++                    # One pipeline/state sequence covers:
++                    #   Gate0 -> Up0 -> Gate1 -> Up1.
++                    # Stage acquire/release protects the aliased A/B/SF buffers;
++                    # no CTA barrier is inserted between those four passes.
+@@ -1911,22 +1989,143 @@
+-                    peek = ml_pipeline.consumer_try_wait(cons_state)
+-                    ml_pipeline.consumer_wait(cons_state, peek)
+-                    csA_p = csA[None, None, None, cons_state.index]
+-                    csB_p = csB[None, None, None, cons_state.index]
+-                    csSFA_p = csSFA[None, None, None, cons_state.index]
+-                    csSFB_p = csSFB[None, None, None, cons_state.index]
+-                    cute.copy(smem_copy_A, csA_p[None, None, 0], crA[None, None, 0])
+-                    cute.copy(smem_copy_B, csB_p[None, None, 0], crB[None, None, 0])
+-                    fz_csSFA_p = cute.filter_zeros(csSFA_p)
+-                    fz_csSFB_p = cute.filter_zeros(csSFB_p)
+-                    cute.copy(
+-                        smem_copy_SFA,
+-                        fz_csSFA_p[None, None, 0],
+-                        fz_crSFA[None, None, 0],
+-                    )
+-                    cute.copy(
+-                        smem_copy_SFB,
+-                        fz_csSFB_p[None, None, 0],
+-                        fz_crSFB[None, None, 0],
+-                    )
+-                    for _k_tile in range(0, fc1_k_tile_cnt - 1, 1, unroll=4):  # type: ignore[call-overload]
+-                        for k_block_idx in cutlass.range_constexpr(num_k_blocks):
++                    for fc1_half in cutlass.range_constexpr(2):
++                        # SM120 packs SFB in physical N128 blocks.  Select the
++                        # live N64 half from the replayed block for both branches.
++                        sSFB_fc1_half = cute.local_tile(
++                            sSFB_fc1,
++                            cute.slice_(
++                                self.fc1_tile_shape_mnk, (0, None, None)
++                            ),
++                            (fc1_half, 0, None),
++                        )
++                        tCrSFB_fc1_half = (
++                            self._dense_cls._partition_fragment_SFB(
++                                self,  # type: ignore[arg-type]
++                                sSFB_fc1_half[None, None, 0],
++                                fc1_thr_mma,
++                                tidx,
++                            )
++                        )
++                        csSFB_fc1_half = thr_ld_SFB_fc1.partition_S(
++                            sSFB_fc1_half
++                        )
++                        crSFB_fc1_half = thr_ld_SFB_fc1.retile(
++                            tCrSFB_fc1_half
++                        )
++                        fz_crSFA_fc1 = cute.filter_zeros(crSFA_fc1)
++                        fz_crSFB_fc1_half = cute.filter_zeros(
++                            crSFB_fc1_half
++                        )
++
++                        # Gate N64.
++                        gate_acc.fill(0.0)
++                        peek = ml_pipeline.consumer_try_wait(cons_state)
++                        ml_pipeline.consumer_wait(cons_state, peek)
++                        csA_p = csA_fc1[None, None, None, cons_state.index]
++                        csB_p = csB_fc1[None, None, None, cons_state.index]
++                        csSFA_p = csSFA_fc1[None, None, None, cons_state.index]
++                        csSFB_p = csSFB_fc1_half[
++                            None, None, None, cons_state.index
++                        ]
++                        cute.copy(
++                            smem_copy_A_fc1,
++                            csA_p[None, None, 0],
++                            crA_fc1[None, None, 0],
++                        )
++                        cute.copy(
++                            smem_copy_B_fc1,
++                            csB_p[None, None, 0],
++                            crB_fc1[None, None, 0],
++                        )
++                        fz_csSFA_p = cute.filter_zeros(csSFA_p)
++                        fz_csSFB_p = cute.filter_zeros(csSFB_p)
++                        cute.copy(
++                            smem_copy_SFA_fc1,
++                            fz_csSFA_p[None, None, 0],
++                            fz_crSFA_fc1[None, None, 0],
++                        )
++                        cute.copy(
++                            smem_copy_SFB_fc1,
++                            fz_csSFB_p[None, None, 0],
++                            fz_crSFB_fc1_half[None, None, 0],
++                        )
++                        for _k_tile in range(0, fc1_k_tile_cnt - 1, 1, unroll=4):  # type: ignore[call-overload]
++                            for k_block_idx in cutlass.range_constexpr(
++                                fc1_num_k_blocks
++                            ):
++                                k_next = (
++                                    0
++                                    if k_block_idx + 1 == fc1_num_k_blocks
++                                    else k_block_idx + 1
++                                )
++                                if k_block_idx == fc1_num_k_blocks - 1:
++                                    ml_pipeline.consumer_release(cons_state)
++                                    cons_state.advance()
++                                    peek = ml_pipeline.consumer_try_wait(cons_state)
++                                    csA_p = csA_fc1[
++                                        None, None, None, cons_state.index
++                                    ]
++                                    csB_p = csB_fc1[
++                                        None, None, None, cons_state.index
++                                    ]
++                                    csSFA_p = csSFA_fc1[
++                                        None, None, None, cons_state.index
++                                    ]
++                                    csSFB_p = csSFB_fc1_half[
++                                        None, None, None, cons_state.index
++                                    ]
++                                    fz_csSFA_p = cute.filter_zeros(csSFA_p)
++                                    fz_csSFB_p = cute.filter_zeros(csSFB_p)
++                                    ml_pipeline.consumer_wait(cons_state, peek)
++                                for _mt in cutlass.range_constexpr(fc1_m_tiles):
++                                    for _nt in cutlass.range_constexpr(fc1_n_tiles):
++                                        mma_atom.set(
++                                            WarpField.SFA,
++                                            tCrSFA_fc1[
++                                                None, _mt, k_block_idx
++                                            ].iterator,
++                                        )
++                                        mma_atom.set(
++                                            WarpField.SFB,
++                                            tCrSFB_fc1_half[
++                                                None, _nt, k_block_idx
++                                            ].iterator,
++                                        )
++                                        cute.gemm(
++                                            mma_atom,
++                                            gate_acc[None, _mt, _nt],
++                                            tCrA_fc1[None, _mt, k_block_idx],
++                                            tCrB_fc1[None, _nt, k_block_idx],
++                                            gate_acc[None, _mt, _nt],
++                                        )
++                                cute.copy(
++                                    smem_copy_A_fc1,
++                                    csA_p[None, None, k_next],
++                                    crA_fc1[None, None, k_next],
++                                )
++                                cute.copy(
++                                    smem_copy_B_fc1,
++                                    csB_p[None, None, k_next],
++                                    crB_fc1[None, None, k_next],
++                                )
++                                fz_csSFA_cur = cute.filter_zeros(
++                                    csSFA_fc1[
++                                        None, None, None, cons_state.index
++                                    ]
++                                )
++                                fz_csSFB_cur = cute.filter_zeros(
++                                    csSFB_fc1_half[
++                                        None, None, None, cons_state.index
++                                    ]
++                                )
++                                cute.copy(
++                                    smem_copy_SFA_fc1,
++                                    fz_csSFA_cur[None, None, k_next],
++                                    fz_crSFA_fc1[None, None, k_next],
++                                )
++                                cute.copy(
++                                    smem_copy_SFB_fc1,
++                                    fz_csSFB_cur[None, None, k_next],
++                                    fz_crSFB_fc1_half[None, None, k_next],
++                                )
++                        for k_block_idx in cutlass.range_constexpr(
++                            fc1_num_k_blocks
++                        ):
+@@ -1935 +2134 @@
+-                                if k_block_idx + 1 == num_k_blocks
++                                if k_block_idx + 1 == fc1_num_k_blocks
+@@ -1938 +2137 @@
+-                            if k_block_idx == num_k_blocks - 1:
++                            if k_block_idx == fc1_num_k_blocks - 1:
+@@ -1941,8 +2140,21 @@
+-                                peek = ml_pipeline.consumer_try_wait(cons_state)
+-                                csA_p = csA[None, None, None, cons_state.index]
+-                                csB_p = csB[None, None, None, cons_state.index]
+-                                csSFA_p = csSFA[None, None, None, cons_state.index]
+-                                csSFB_p = csSFB[None, None, None, cons_state.index]
+-                                fz_csSFA_p = cute.filter_zeros(csSFA_p)
+-                                fz_csSFB_p = cute.filter_zeros(csSFB_p)
+-                                ml_pipeline.consumer_wait(cons_state, peek)
++                            if k_next > 0 and fc1_k_tile_cnt > Int32(0):
++                                cute.copy(
++                                    smem_copy_A_fc1,
++                                    csA_p[None, None, k_next],
++                                    crA_fc1[None, None, k_next],
++                                )
++                                cute.copy(
++                                    smem_copy_B_fc1,
++                                    csB_p[None, None, k_next],
++                                    crB_fc1[None, None, k_next],
++                                )
++                                cute.copy(
++                                    smem_copy_SFA_fc1,
++                                    fz_csSFA_p[None, None, k_next],
++                                    fz_crSFA_fc1[None, None, k_next],
++                                )
++                                cute.copy(
++                                    smem_copy_SFB_fc1,
++                                    fz_csSFB_p[None, None, k_next],
++                                    fz_crSFB_fc1_half[None, None, k_next],
++                                )
+@@ -1953 +2165,3 @@
+-                                        tCrSFA[None, _mt, k_block_idx].iterator,
++                                        tCrSFA_fc1[
++                                            None, _mt, k_block_idx
++                                        ].iterator,
+@@ -1957 +2171,3 @@
+-                                        tCrSFB[None, _nt, k_block_idx].iterator,
++                                        tCrSFB_fc1_half[
++                                            None, _nt, k_block_idx
++                                        ].iterator,
+@@ -1962,2 +2178,2 @@
+-                                        tCrA[None, _mt, k_block_idx],
+-                                        tCrB[None, _nt, k_block_idx],
++                                        tCrA_fc1[None, _mt, k_block_idx],
++                                        tCrB_fc1[None, _nt, k_block_idx],
+@@ -1966,77 +2182,2 @@
+-                            cute.copy(
+-                                smem_copy_A,
+-                                csA_p[None, None, k_next],
+-                                crA[None, None, k_next],
+-                            )
+-                            cute.copy(
+-                                smem_copy_B,
+-                                csB_p[None, None, k_next],
+-                                crB[None, None, k_next],
+-                            )
+-                            fz_csSFA_cur = cute.filter_zeros(
+-                                csSFA[None, None, None, cons_state.index]
+-                            )
+-                            fz_csSFB_cur = cute.filter_zeros(
+-                                csSFB[None, None, None, cons_state.index]
+-                            )
+-                            cute.copy(
+-                                smem_copy_SFA,
+-                                fz_csSFA_cur[None, None, k_next],
+-                                fz_crSFA[None, None, k_next],
+-                            )
+-                            cute.copy(
+-                                smem_copy_SFB,
+-                                fz_csSFB_cur[None, None, k_next],
+-                                fz_crSFB[None, None, k_next],
+-                            )
+-                    for k_block_idx in cutlass.range_constexpr(num_k_blocks):
+-                        k_next = (
+-                            0 if k_block_idx + 1 == num_k_blocks else k_block_idx + 1
+-                        )
+-                        if k_block_idx == num_k_blocks - 1:
+-                            ml_pipeline.consumer_release(cons_state)
+-                            cons_state.advance()
+-                        if k_next > 0 and fc1_k_tile_cnt > Int32(0):
+-                            cute.copy(
+-                                smem_copy_A,
+-                                csA_p[None, None, k_next],
+-                                crA[None, None, k_next],
+-                            )
+-                            cute.copy(
+-                                smem_copy_B,
+-                                csB_p[None, None, k_next],
+-                                crB[None, None, k_next],
+-                            )
+-                            cute.copy(
+-                                smem_copy_SFA,
+-                                fz_csSFA_p[None, None, k_next],
+-                                fz_crSFA[None, None, k_next],
+-                            )
+-                            cute.copy(
+-                                smem_copy_SFB,
+-                                fz_csSFB_p[None, None, k_next],
+-                                fz_crSFB[None, None, k_next],
+-                            )
+-                        for _mt in cutlass.range_constexpr(fc1_m_tiles):
+-                            for _nt in cutlass.range_constexpr(fc1_n_tiles):
+-                                mma_atom.set(
+-                                    WarpField.SFA,
+-                                    tCrSFA[None, _mt, k_block_idx].iterator,
+-                                )
+-                                mma_atom.set(
+-                                    WarpField.SFB,
+-                                    tCrSFB[None, _nt, k_block_idx].iterator,
+-                                )
+-                                cute.gemm(
+-                                    mma_atom,
+-                                    gate_acc[None, _mt, _nt],
+-                                    tCrA[None, _mt, k_block_idx],
+-                                    tCrB[None, _nt, k_block_idx],
+-                                    gate_acc[None, _mt, _nt],
+-                                )
+-                    # Signal FC1 gate/only completion before the DMA warp
+-                    # reuses the shared A/gate buffers for the next pass.
+-                    self.pass_gate_barrier.arrive_unaligned()
+-
+-                    if cutlass.const_expr(self.is_gated):
+-                        # Up GEMM (inlined, same pattern)
++
++                        # Up N64.  It follows Gate in the same pipeline/state.
+@@ -2044,9 +2185,18 @@
+-                        up_cons_state.reset_count()
+-                        peek = up_pipeline.consumer_try_wait(up_cons_state)
+-                        up_pipeline.consumer_wait(up_cons_state, peek)
+-                        csA_p = csA[None, None, None, up_cons_state.index]
+-                        csB_p = csB_up[None, None, None, up_cons_state.index]
+-                        csSFA_p = csSFA[None, None, None, up_cons_state.index]
+-                        csSFB_p = csSFB_up[None, None, None, up_cons_state.index]
+-                        cute.copy(smem_copy_A, csA_p[None, None, 0], crA[None, None, 0])
+-                        cute.copy(smem_copy_B, csB_p[None, None, 0], crB[None, None, 0])
++                        peek = ml_pipeline.consumer_try_wait(cons_state)
++                        ml_pipeline.consumer_wait(cons_state, peek)
++                        csA_p = csA_fc1[None, None, None, cons_state.index]
++                        csB_p = csB_fc1[None, None, None, cons_state.index]
++                        csSFA_p = csSFA_fc1[None, None, None, cons_state.index]
++                        csSFB_p = csSFB_fc1_half[
++                            None, None, None, cons_state.index
++                        ]
++                        cute.copy(
++                            smem_copy_A_fc1,
++                            csA_p[None, None, 0],
++                            crA_fc1[None, None, 0],
++                        )
++                        cute.copy(
++                            smem_copy_B_fc1,
++                            csB_p[None, None, 0],
++                            crB_fc1[None, None, 0],
++                        )
+@@ -2056 +2206 @@
+-                            smem_copy_SFA,
++                            smem_copy_SFA_fc1,
+@@ -2058 +2208 @@
+-                            fz_crSFA[None, None, 0],
++                            fz_crSFA_fc1[None, None, 0],
+@@ -2061 +2211 @@
+-                            smem_copy_SFB,
++                            smem_copy_SFB_fc1,
+@@ -2063 +2213 @@
+-                            fz_crSFB[None, None, 0],
++                            fz_crSFB_fc1_half[None, None, 0],
+@@ -2066 +2216,3 @@
+-                            for k_block_idx in cutlass.range_constexpr(num_k_blocks):
++                            for k_block_idx in cutlass.range_constexpr(
++                                fc1_num_k_blocks
++                            ):
+@@ -2069 +2221 @@
+-                                    if k_block_idx + 1 == num_k_blocks
++                                    if k_block_idx + 1 == fc1_num_k_blocks
+@@ -2072,7 +2224,6 @@
+-                                if k_block_idx == num_k_blocks - 1:
+-                                    up_pipeline.consumer_release(up_cons_state)
+-                                    up_cons_state.advance()
+-                                    peek = up_pipeline.consumer_try_wait(up_cons_state)
+-                                    csA_p = csA[None, None, None, up_cons_state.index]
+-                                    csB_p = csB_up[
+-                                        None, None, None, up_cons_state.index
++                                if k_block_idx == fc1_num_k_blocks - 1:
++                                    ml_pipeline.consumer_release(cons_state)
++                                    cons_state.advance()
++                                    peek = ml_pipeline.consumer_try_wait(cons_state)
++                                    csA_p = csA_fc1[
++                                        None, None, None, cons_state.index
+@@ -2080,2 +2231,2 @@
+-                                    csSFA_p = csSFA[
+-                                        None, None, None, up_cons_state.index
++                                    csB_p = csB_fc1[
++                                        None, None, None, cons_state.index
+@@ -2083,2 +2234,5 @@
+-                                    csSFB_p = csSFB_up[
+-                                        None, None, None, up_cons_state.index
++                                    csSFA_p = csSFA_fc1[
++                                        None, None, None, cons_state.index
++                                    ]
++                                    csSFB_p = csSFB_fc1_half[
++                                        None, None, None, cons_state.index
+@@ -2088 +2242 @@
+-                                    up_pipeline.consumer_wait(up_cons_state, peek)
++                                    ml_pipeline.consumer_wait(cons_state, peek)
+@@ -2093 +2247,3 @@
+-                                            tCrSFA[None, _mt, k_block_idx].iterator,
++                                            tCrSFA_fc1[
++                                                None, _mt, k_block_idx
++                                            ].iterator,
+@@ -2097 +2253,3 @@
+-                                            tCrSFB[None, _nt, k_block_idx].iterator,
++                                            tCrSFB_fc1_half[
++                                                None, _nt, k_block_idx
++                                            ].iterator,
+@@ -2102,2 +2260,2 @@
+-                                            tCrA[None, _mt, k_block_idx],
+-                                            tCrB[None, _nt, k_block_idx],
++                                            tCrA_fc1[None, _mt, k_block_idx],
++                                            tCrB_fc1[None, _nt, k_block_idx],
+@@ -2107 +2265 @@
+-                                    smem_copy_A,
++                                    smem_copy_A_fc1,
+@@ -2109 +2267 @@
+-                                    crA[None, None, k_next],
++                                    crA_fc1[None, None, k_next],
+@@ -2112 +2270 @@
+-                                    smem_copy_B,
++                                    smem_copy_B_fc1,
+@@ -2114 +2272,11 @@
+-                                    crB[None, None, k_next],
++                                    crB_fc1[None, None, k_next],
++                                )
++                                fz_csSFA_cur = cute.filter_zeros(
++                                    csSFA_fc1[
++                                        None, None, None, cons_state.index
++                                    ]
++                                )
++                                fz_csSFB_cur = cute.filter_zeros(
++                                    csSFB_fc1_half[
++                                        None, None, None, cons_state.index
++                                    ]
+@@ -2117,3 +2285,3 @@
+-                                    smem_copy_SFA,
+-                                    fz_csSFA_p[None, None, k_next],
+-                                    fz_crSFA[None, None, k_next],
++                                    smem_copy_SFA_fc1,
++                                    fz_csSFA_cur[None, None, k_next],
++                                    fz_crSFA_fc1[None, None, k_next],
+@@ -2122,5 +2290,7 @@
+-                                    smem_copy_SFB,
+-                                    fz_csSFB_p[None, None, k_next],
+-                                    fz_crSFB[None, None, k_next],
+-                                )
+-                        for k_block_idx in cutlass.range_constexpr(num_k_blocks):
++                                    smem_copy_SFB_fc1,
++                                    fz_csSFB_cur[None, None, k_next],
++                                    fz_crSFB_fc1_half[None, None, k_next],
++                                )
++                        for k_block_idx in cutlass.range_constexpr(
++                            fc1_num_k_blocks
++                        ):
+@@ -2129 +2299 @@
+-                                if k_block_idx + 1 == num_k_blocks
++                                if k_block_idx + 1 == fc1_num_k_blocks
+@@ -2132,3 +2302,3 @@
+-                            if k_block_idx == num_k_blocks - 1:
+-                                up_pipeline.consumer_release(up_cons_state)
+-                                up_cons_state.advance()
++                            if k_block_idx == fc1_num_k_blocks - 1:
++                                ml_pipeline.consumer_release(cons_state)
++                                cons_state.advance()
+@@ -2137 +2307 @@
+-                                    smem_copy_A,
++                                    smem_copy_A_fc1,
+@@ -2139 +2309 @@
+-                                    crA[None, None, k_next],
++                                    crA_fc1[None, None, k_next],
+@@ -2142 +2312 @@
+-                                    smem_copy_B,
++                                    smem_copy_B_fc1,
+@@ -2144 +2314 @@
+-                                    crB[None, None, k_next],
++                                    crB_fc1[None, None, k_next],
+@@ -2147 +2317 @@
+-                                    smem_copy_SFA,
++                                    smem_copy_SFA_fc1,
+@@ -2149 +2319 @@
+-                                    fz_crSFA[None, None, k_next],
++                                    fz_crSFA_fc1[None, None, k_next],
+@@ -2152 +2322 @@
+-                                    smem_copy_SFB,
++                                    smem_copy_SFB_fc1,
+@@ -2154 +2324 @@
+-                                    fz_crSFB[None, None, k_next],
++                                    fz_crSFB_fc1_half[None, None, k_next],
+@@ -2160 +2330,3 @@
+-                                        tCrSFA[None, _mt, k_block_idx].iterator,
++                                        tCrSFA_fc1[
++                                            None, _mt, k_block_idx
++                                        ].iterator,
+@@ -2164 +2336,3 @@
+-                                        tCrSFB[None, _nt, k_block_idx].iterator,
++                                        tCrSFB_fc1_half[
++                                            None, _nt, k_block_idx
++                                        ].iterator,
+@@ -2169,2 +2343,2 @@
+-                                        tCrA[None, _mt, k_block_idx],
+-                                        tCrB[None, _nt, k_block_idx],
++                                        tCrA_fc1[None, _mt, k_block_idx],
++                                        tCrB_fc1[None, _nt, k_block_idx],
+@@ -2173 +2347,50 @@
+-                    # Activation + quant into sA
++
++                        if fc1_half == 1:
++                            # The final Up consumer has released every FC1
++                            # stage.  This is the sole CTA-wide handoff to the
++                            # independent phase2 pipeline that aliases sB/sSFB.
++                            self.pass_gate_barrier.arrive_unaligned()
++
++                        # Consume this Gate/Up pair immediately.  Its FP32
++                        # accumulator lifetime ends before the next half starts.
++                        for mma_m in cutlass.range_constexpr(fc1_m_tiles):
++                            for mma_n in cutlass.range_constexpr(fc1_n_tiles):
++                                full_mma_n = fc1_half * fc1_n_tiles + mma_n
++                                gate_slice = fc1_tRS_rGate[
++                                    (None, mma_m, mma_n)
++                                ]
++                                up_slice = fc1_tRS_rUp[
++                                    (None, mma_m, mma_n)
++                                ]
++                                for elem_idx in cutlass.range_constexpr(
++                                    cute.size(fc1_tRS_rAct)
++                                ):
++                                    g = alpha_value * gate_slice[elem_idx]
++                                    u = alpha_value * up_slice[elem_idx]
++                                    fc1_tRS_rAct[elem_idx] = gated_activation_f32(
++                                        g,
++                                        u,
++                                        activation=self.activation,
++                                        limit=self.swiglu_limit,
++                                        alpha=self.swiglu_alpha,
++                                        beta=self.swiglu_beta,
++                                        fast_math=self.fast_math,
++                                    )
++                                act_vec = fc1_tRS_rAct.load()
++                                act_vec = act_vec.to(cutlass.BFloat16)
++                                fc1_tRS_rAct_out.store(act_vec)
++                                cute.copy(
++                                    fc1_tiled_copy_r2s,
++                                    fc1_tRS_rAct_out,
++                                    fc1_tRS_sD[
++                                        (None, mma_m, full_mma_n, 0)
++                                    ],
++                                )
++
++                    # Both disjoint N64 activations are now durable in the full
++                    # N128 sC tile before the single Q1 pass reads them.
++                    cute.arch.fence_proxy("async.shared", space="cta")
++                    self.epilog_sync_barrier.arrive_and_wait()
++
++                    # Q1 runs exactly once after both N64 halves.  sA remains
++                    # the full N128 activation consumed by one FC2/scatter pass.
+@@ -2190 +2413,3 @@
+-                        silu_epi_buffer = Int32(epi_m) % cute.size(tRS_sD, mode=[3])
++                        silu_epi_buffer = Int32(epi_m) % cute.size(
++                            fc1_tRS_sD, mode=[3]
++                        )
+@@ -2192,110 +2417,83 @@
+-                            for mma_n_in_epi in cutlass.range_constexpr(MmaNPerEpiN):
+-                                for mma_m_in_epi in cutlass.range_constexpr(
+-                                    MmaMPerEpiM
+-                                ):
+-                                    mma_m = epi_m * MmaMPerEpiM + mma_m_in_epi
+-                                    mma_n = mma_n_in_epi
+-                                    tRS_rD_slice = tRS_rD[
+-                                        (None, mma_m_in_epi, mma_n_in_epi)
+-                                    ]
+-                                    gate_slice = tRS_rGate[(None, mma_m, mma_n)]
+-                                    if cutlass.const_expr(self.is_gated):
+-                                        up_slice = tRS_rUp[(None, mma_m, mma_n)]
+-                                        for elem_idx in cutlass.range_constexpr(
+-                                            cute.size(tRS_rD_slice)
+-                                        ):
+-                                            g = alpha_value * gate_slice[elem_idx]
+-                                            u = alpha_value * up_slice[elem_idx]
+-                                            tRS_rD_slice[elem_idx] = (
+-                                                gated_activation_f32(
+-                                                    g,
+-                                                    u,
+-                                                    activation=self.activation,
+-                                                    limit=self.swiglu_limit,
+-                                                    alpha=self.swiglu_alpha,
+-                                                    beta=self.swiglu_beta,
+-                                                    fast_math=self.fast_math,
+-                                                )
+-                                            )
+-                                    else:
+-                                        for elem_idx in cutlass.range_constexpr(
+-                                            cute.size(tRS_rD_slice)
+-                                        ):
+-                                            g = alpha_value * gate_slice[elem_idx]
+-                                            relu_g = fmax_f32(g, cutlass.Float32(0.0))
+-                                            tRS_rD_slice[elem_idx] = relu_g * relu_g
+-
+-                            acc_vec = tRS_rD.load()
+-                            acc_vec = acc_vec.to(cutlass.BFloat16)
+-                            tRS_rD_out.store(acc_vec)
+-                            cute.copy(
+-                                tiled_copy_r2s,
+-                                tRS_rD_out,
+-                                tRS_sD[(None, None, None, silu_epi_buffer)],
+-                            )
+-                            cute.arch.fence_proxy("async.shared", space="cta")
+-                        self.epilog_sync_barrier.arrive_and_wait()
+-
+-                        rows_offset = Int32(epi_m) * Int32(self.epi_tile[0])
+-                        epi_rows = epi_m_valid
+-                        if epi_rows > Int32(self.epi_tile[0]):
+-                            epi_rows = Int32(self.epi_tile[0])
+-                        if epi_rows < Int32(0):
+-                            epi_rows = Int32(0)
+-                        quant_idx = Int32(tidx)
+-                        while quant_idx < epi_rows * sf_blocks_per_row:
+-                            local_row = quant_idx // sf_blocks_per_row
+-                            row = rows_offset + local_row
+-                            sf_block = quant_idx - local_row * sf_blocks_per_row
+-                            block_start = sf_block * Int32(16)
+-
+-                            values = cute.make_rmem_tensor((16,), cutlass.Float32)
+-                            block_max = cutlass.Float32(0.0)
+-                            for elem_idx in cutlass.range_constexpr(16):
+-                                value = cutlass.Float32(
+-                                    sC[
+-                                        local_row,
+-                                        block_start + elem_idx,
+-                                        silu_epi_buffer,
+-                                    ]
+-                                )
+-                                values[elem_idx] = value
+-                                block_max = fmax_f32(block_max, fabs_f32(value))
+-
+-                            packed64 = Uint64(0)
+-                            scale_byte = Uint8(0)
+-                            if self.fast_math:
+-                                packed64, scale_byte = quantize_block_fp4_fast(
+-                                    values, block_max, gs_value
+-                                )
+-                            else:
+-                                packed64, scale_byte = quantize_block_fp4(
+-                                    values, block_max, gs_value
+-                                )
+-                            packed_base = sf_block << Int32(3)
+-                            dst_pcol = row & Int32(63)
+-                            xor_bits = ((dst_pcol >> Int32(1)) & Int32(0x3)) << Int32(4)
+-                            row_high = row >> Int32(6)
+-                            for byte_idx in cutlass.range_constexpr(8):
+-                                src_pcol = packed_base + Int32(byte_idx)
+-                                dst_row = ((src_pcol ^ xor_bits) << Int32(1)) + row_high
+-                                dst_flat = dst_row * packed_cols + dst_pcol
+-                                byte_val = Uint8(
+-                                    (packed64 >> Uint64(byte_idx * 8)) & Uint64(0xFF)
+-                                )
+-                                sA_u8[dst_flat] = byte_val
+-
+-                            outer_m_idx = row % Int32(32)
+-                            inner_m_idx = row // Int32(32)
+-                            inner_k_idx = sf_block % Int32(4)
+-                            k_tile_idx = sf_block // Int32(4)
+-                            sf_raw_idx = (
+-                                k_tile_idx * Int32(32 * 4 * 4)
+-                                + outer_m_idx * Int32(4 * 4)
+-                                + inner_m_idx * Int32(4)
+-                                + inner_k_idx
+-                            )
+-                            st_shared_u8(sfa_base_addr + sf_raw_idx, scale_byte)
+-                            quant_idx += Int32(
+-                                self.num_mma_warps * self.num_threads_per_warp
+-                            )
++                            rows_offset = Int32(epi_m) * Int32(self.epi_tile[0])
++                            epi_rows = epi_m_valid
++                            if epi_rows > Int32(self.epi_tile[0]):
++                                epi_rows = Int32(self.epi_tile[0])
++                            if epi_rows < Int32(0):
++                                epi_rows = Int32(0)
++                            quant_idx = Int32(tidx)
++                            while quant_idx < epi_rows * sf_blocks_per_row:
++                                local_row = quant_idx // sf_blocks_per_row
++                                row = rows_offset + local_row
++                                sf_block = quant_idx - local_row * sf_blocks_per_row
++                                block_start = sf_block * Int32(16)
++
++                                values = cute.make_rmem_tensor(
++                                    (16,), cutlass.Float32
++                                )
++                                block_max = cutlass.Float32(0.0)
++                                for elem_idx in cutlass.range_constexpr(16):
++                                    value = cutlass.Float32(
++                                        sC[
++                                            local_row,
++                                            block_start + elem_idx,
++                                            silu_epi_buffer,
++                                        ]
++                                    )
++                                    values[elem_idx] = value
++                                    block_max = fmax_f32(
++                                        block_max, fabs_f32(value)
++                                    )
++
++                                packed64 = Uint64(0)
++                                scale_byte = Uint8(0)
++                                if self.fast_math:
++                                    packed64, scale_byte = (
++                                        quantize_block_fp4_fast(
++                                            values, block_max, gs_value
++                                        )
++                                    )
++                                else:
++                                    packed64, scale_byte = quantize_block_fp4(
++                                        values, block_max, gs_value
++                                    )
++                                packed_base = sf_block << Int32(3)
++                                dst_pcol = row & Int32(63)
++                                xor_bits = (
++                                    ((dst_pcol >> Int32(1)) & Int32(0x3))
++                                    << Int32(4)
++                                )
++                                row_high = row >> Int32(6)
++                                for byte_idx in cutlass.range_constexpr(8):
++                                    src_pcol = packed_base + Int32(byte_idx)
++                                    dst_row = (
++                                        (src_pcol ^ xor_bits) << Int32(1)
++                                    ) + row_high
++                                    dst_flat = (
++                                        dst_row * packed_cols + dst_pcol
++                                    )
++                                    byte_val = Uint8(
++                                        (
++                                            packed64
++                                            >> Uint64(byte_idx * 8)
++                                        )
++                                        & Uint64(0xFF)
++                                    )
++                                    sA_u8[dst_flat] = byte_val
++
++                                outer_m_idx = row % Int32(32)
++                                inner_m_idx = row // Int32(32)
++                                inner_k_idx = sf_block % Int32(4)
++                                k_tile_idx = sf_block // Int32(4)
++                                sf_raw_idx = (
++                                    k_tile_idx * Int32(32 * 4 * 4)
++                                    + outer_m_idx * Int32(4 * 4)
++                                    + inner_m_idx * Int32(4)
++                                    + inner_k_idx
++                                )
++                                st_shared_u8(
++                                    sfa_base_addr + sf_raw_idx, scale_byte
++                                )
++                                quant_idx += Int32(
++                                    self.num_mma_warps
++                                    * self.num_threads_per_warp
++                                )
+@@ -2304,3 +2501,0 @@
+-                    # epilog_sync: MMA-only barrier. DMA warp doesn't need to wait
+-                    # for quant — it only loads B_down into sB (separate buffer).
+-                    # This allows DMA to prefetch B_down tiles earlier.
+@@ -2311,4 +2506,3 @@
+-                    # No CTA-wide barrier needed here: gate is done with sB/sSFB
+-                    # (barrier at line 925 ensured that), up uses sB_up/sSFB_up,
+-                    # and DMA's B_down loads into sB/sSFB don't conflict with
+-                    # MMA's SiLU+quant on sC/sA/sSFA. The phase2_pipeline
++                    # The final FC1 pass_gate handoff gave the DMA warp sole
++                    # ownership of sB/sSFB for B_down.  Q1 uses sC/sA/sSFA, so
++                    # phase2 B prefetch can overlap it safely; phase2_pipeline
+@@ -2568,21 +2762,4 @@
+-                    # FC1 producer slice. Gated activation packs [up, gate]
+-                    # across N; relu2 uses a single FC1 pass.
+-                    tBgB_w13_up_nk = tBgB_w13[
+-                        (None, intermediate_slice, None, task_expert_idx)
+-                    ]
+-                    tBgSFB_w13_up_nk = tBgSFB_w13[
+-                        (None, intermediate_slice, None, task_expert_idx)
+-                    ]
+-                    gate_slice_idx = (
+-                        intermediate_slice + gate_tile_cnt
+-                        if self.is_gated
+-                        else intermediate_slice
+-                    )
+-                    tBgB_w13_gate_nk = tBgB_w13[
+-                        (None, gate_slice_idx, None, task_expert_idx)
+-                    ]
+-                    tBgSFB_w13_gate_nk = tBgSFB_w13[
+-                        (None, gate_slice_idx, None, task_expert_idx)
+-                    ]
+-
+-                    # ---- FC1 gate/only pass ----
++                    # FC1 producer follows the same continuous order as the
++                    # consumer.  The logical N128 slice maps to two native B64
++                    # tiles, while each half replays its branch's physical-N128
++                    # SFB block.  A/SFA are intentionally replayed per pass.
+@@ -2590,36 +2767,42 @@
+-                    for k_tile in range(0, fc1_k_tile_cnt, 1, unroll=4):  # type: ignore[call-overload]
+-                        ml_pipeline.producer_acquire(prod_state)
+-                        cute.copy(
+-                            tma_a,
+-                            tAgA_mk[(None, k_tile)],
+-                            tAsA[(None, prod_state.index)],
+-                            tma_bar_ptr=ml_pipeline.producer_get_barrier(prod_state),
+-                        )
+-                        cute.copy(
+-                            tma_b_w13,
+-                            tBgB_w13_gate_nk[(None, k_tile)],
+-                            tBsB_w13[(None, prod_state.index)],
+-                            tma_bar_ptr=ml_pipeline.producer_get_barrier(prod_state),
+-                        )
+-                        cute.copy(
+-                            tma_sfa,
+-                            tAgSFA_mk[(None, k_tile)],
+-                            tAsSFA[(None, prod_state.index)],
+-                            tma_bar_ptr=ml_pipeline.producer_get_barrier(prod_state),
+-                        )
+-                        cute.copy(
+-                            tma_sfb_w13,
+-                            tBgSFB_w13_gate_nk[(None, k_tile)],
+-                            tBsSFB_w13[(None, prod_state.index)],
+-                            tma_bar_ptr=ml_pipeline.producer_get_barrier(prod_state),
+-                        )
+-                        ml_pipeline.producer_commit(prod_state)
+-                        prod_state.advance()
+-
+-                    # Wait for the MMA warps to finish the FC1 gate/only pass
+-                    # before reusing sA/sB/sSFA/sSFB for up/FC2 staging.
+-                    self.pass_gate_barrier.wait_unaligned()
+-
+-                    if cutlass.const_expr(self.is_gated):
+-                        # ---- FC1 up pass ----
+-                        up_prod_state.reset_count()
++                    for fc1_half in cutlass.range_constexpr(2):
++                        native_up_slice_idx = (
++                            intermediate_slice * Int32(2) + Int32(fc1_half)
++                        )
++                        native_gate_slice_idx = (
++                            (intermediate_slice + gate_tile_cnt) * Int32(2)
++                            + Int32(fc1_half)
++                        )
++                        tBgB_w13_gate_nk = tBgB_w13[
++                            (
++                                None,
++                                native_gate_slice_idx,
++                                None,
++                                task_expert_idx,
++                            )
++                        ]
++                        tBgB_w13_up_nk = tBgB_w13[
++                            (
++                                None,
++                                native_up_slice_idx,
++                                None,
++                                task_expert_idx,
++                            )
++                        ]
++                        tBgSFB_w13_gate_nk = tBgSFB_w13[
++                            (
++                                None,
++                                intermediate_slice + gate_tile_cnt,
++                                None,
++                                task_expert_idx,
++                            )
++                        ]
++                        tBgSFB_w13_up_nk = tBgSFB_w13[
++                            (
++                                None,
++                                intermediate_slice,
++                                None,
++                                task_expert_idx,
++                            )
++                        ]
++
++                        # ---- Gate N64 ----
+@@ -2627 +2810 @@
+-                            up_pipeline.producer_acquire(up_prod_state)
++                            ml_pipeline.producer_acquire(prod_state)
+@@ -2631,3 +2814,41 @@
+-                                tAsA[(None, up_prod_state.index)],
+-                                tma_bar_ptr=up_pipeline.producer_get_barrier(
+-                                    up_prod_state
++                                tAsA[(None, prod_state.index)],
++                                tma_bar_ptr=ml_pipeline.producer_get_barrier(
++                                    prod_state
++                                ),
++                            )
++                            cute.copy(
++                                tma_b_w13,
++                                tBgB_w13_gate_nk[(None, k_tile)],
++                                tBsB_w13[(None, prod_state.index)],
++                                tma_bar_ptr=ml_pipeline.producer_get_barrier(
++                                    prod_state
++                                ),
++                            )
++                            cute.copy(
++                                tma_sfa,
++                                tAgSFA_mk[(None, k_tile)],
++                                tAsSFA[(None, prod_state.index)],
++                                tma_bar_ptr=ml_pipeline.producer_get_barrier(
++                                    prod_state
++                                ),
++                            )
++                            cute.copy(
++                                tma_sfb_w13,
++                                tBgSFB_w13_gate_nk[(None, k_tile)],
++                                tBsSFB_w13[(None, prod_state.index)],
++                                tma_bar_ptr=ml_pipeline.producer_get_barrier(
++                                    prod_state
++                                ),
++                            )
++                            ml_pipeline.producer_commit(prod_state)
++                            prod_state.advance()
++
++                        # ---- Up N64 ----
++                        for k_tile in range(0, fc1_k_tile_cnt, 1, unroll=4):  # type: ignore[call-overload]
++                            ml_pipeline.producer_acquire(prod_state)
++                            cute.copy(
++                                tma_a,
++                                tAgA_mk[(None, k_tile)],
++                                tAsA[(None, prod_state.index)],
++                                tma_bar_ptr=ml_pipeline.producer_get_barrier(
++                                    prod_state
+@@ -2639,3 +2860,3 @@
+-                                tBsB_w13_up[(None, up_prod_state.index)],
+-                                tma_bar_ptr=up_pipeline.producer_get_barrier(
+-                                    up_prod_state
++                                tBsB_w13[(None, prod_state.index)],
++                                tma_bar_ptr=ml_pipeline.producer_get_barrier(
++                                    prod_state
+@@ -2647,3 +2868,3 @@
+-                                tAsSFA[(None, up_prod_state.index)],
+-                                tma_bar_ptr=up_pipeline.producer_get_barrier(
+-                                    up_prod_state
++                                tAsSFA[(None, prod_state.index)],
++                                tma_bar_ptr=ml_pipeline.producer_get_barrier(
++                                    prod_state
+@@ -2655,3 +2876,3 @@
+-                                tBsSFB_w13_up[(None, up_prod_state.index)],
+-                                tma_bar_ptr=up_pipeline.producer_get_barrier(
+-                                    up_prod_state
++                                tBsSFB_w13[(None, prod_state.index)],
++                                tma_bar_ptr=ml_pipeline.producer_get_barrier(
++                                    prod_state
+@@ -2660,2 +2881,7 @@
+-                            up_pipeline.producer_commit(up_prod_state)
+-                            up_prod_state.advance()
++                            ml_pipeline.producer_commit(prod_state)
++                            prod_state.advance()
++
++                    # The independent phase2 pipeline aliases sB/sSFB and
++                    # cannot observe ml_pipeline stage releases.  One final
++                    # CTA handoff closes that cross-pipeline dependency.
++                    self.pass_gate_barrier.wait_unaligned()
+@@ -2664,2 +2890,3 @@
+-                    # No barrier needed: sB/sSFB are free (gate done, up uses
+-                    # sB_up/sSFB_up). phase2_pipeline handles data availability.
++                    # The single pass_gate handoff above proves that every FC1
++                    # consumer released the aliased sB/sSFB stages.  The
++                    # phase2 pipeline now owns those N128 views.
+@@ -2713,2 +2939,0 @@
+-            if cutlass.const_expr(self.is_gated):
+-                up_pipeline.producer_tail(up_prod_state)

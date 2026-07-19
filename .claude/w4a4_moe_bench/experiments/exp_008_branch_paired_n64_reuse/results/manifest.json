@@ -1,0 +1,205 @@
+{
+  "schema": "exp008.manifest.v1",
+  "status": "accepted",
+  "arm_registry": {
+    "production": {
+      "reader_label": "Production 基线",
+      "raw_arm_alias": "baseline_4warp",
+      "source_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106",
+      "cubin_sha256_by_case": {
+        "m256": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79",
+        "m8192": "9313fcbc0dd686f0684705e869fdd227608ac83ca43c1dc99d203f8e7143ca79"
+      },
+      "jit_artifact_set_sha256_by_case": {
+        "m256": "101fd451c425c40880c4260bae7c27c83af62bedd86df6b0856138b59e7098f5",
+        "m8192": "4a4b2aafc209e6bc884113e1494509b9d98fd5de31eb1e98bf020f38806ea61d"
+      }
+    },
+    "exp005_n128": {
+      "reader_label": "exp_005 N128 8-warp 版",
+      "raw_arm_alias": "candidate_8warp_serial_v0",
+      "source_sha256": "3cd9e6a26056d9221f59ea6749cd601c25cbef017cf6e7349efe0925180407c1",
+      "cubin_sha256_by_case": {
+        "m256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+        "m8192": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17"
+      },
+      "jit_artifact_set_sha256_by_case": {
+        "m256": "9c928d442125a682d74ff533874dbc903ae01d70be81236ce988e7221040edba",
+        "m8192": "9c928d442125a682d74ff533874dbc903ae01d70be81236ce988e7221040edba"
+      }
+    },
+    "exp007_dual_n64": {
+      "reader_label": "exp_007 双 N64 及时消费版",
+      "raw_arm_alias": "candidate_8warp_n64_temporal_replay_v0",
+      "source_sha256": "1953cbb7717cda4461a4f199d05f370a4bdb35b4b8ef7556443caf36b0b12ec2",
+      "cubin_sha256_by_case": {
+        "m256": "a9557634cf3d1bff59ca93739e75a1acd1187707222255fead78e2e6e8a73af9",
+        "m8192": "a9557634cf3d1bff59ca93739e75a1acd1187707222255fead78e2e6e8a73af9"
+      },
+      "jit_artifact_set_sha256_by_case": {
+        "m256": "29022d8c3f6fc5ed65923140a82ca33b59eba807a9395679a1a960a6f5183f8e",
+        "m8192": "29022d8c3f6fc5ed65923140a82ca33b59eba807a9395679a1a960a6f5183f8e"
+      }
+    },
+    "current_gate_up_paired": {
+      "reader_label": "当前 Gate/Up 配对复用版",
+      "raw_arm_alias": "candidate_8warp_n64_temporal_replay_v0",
+      "source_sha256": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971",
+      "cubin_sha256_by_case": {
+        "m256": "4b835aa8ce91a4dd12b4dc4f43508c205c117aaeb193995fff57dd3ddbeb7725",
+        "m8192": "4b835aa8ce91a4dd12b4dc4f43508c205c117aaeb193995fff57dd3ddbeb7725"
+      },
+      "jit_artifact_set_sha256_by_case": {
+        "m256": "c22a5449113ba7c1c9a40bf02e14698cc84f1e90c56232718eba29d5a06de486",
+        "m8192": "b65aa8bbed434a49fc5de13528f01cc2b840aa449045f5b9e0dbd6326f633b04"
+      }
+    }
+  },
+  "repository": {
+    "flashinfer_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+    "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633"
+  },
+  "environment": {
+    "execution_host": "R6KD-CX8aaS-GPU-16",
+    "container_image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "gpu_name": "NVIDIA Graphics Device",
+    "compute_capability": "12.0",
+    "sm_count": 110,
+    "application_clock_mhz": 2377,
+    "driver": "580.95.05",
+    "cuda_runtime": "13.2",
+    "nvcc_version": "13.2.78",
+    "ptxas_version": "13.2.78",
+    "python_version": "3.12.3",
+    "torch_version": "2.12.0a0+5aff3928d8.nv26.05",
+    "cutedsl_version": "4.6.0",
+    "cutedsl_path": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74"
+  },
+  "measurement_contract": {
+    "cases": [256, 8192],
+    "shape": "E=256,H=2048,I_tp=512,topk=8",
+    "cuda_graph_boundary": "full fused MoE CUDA Graph node timed by external CUDA events",
+    "expected_launch": {
+      "kernel": "MoEDynamicKernel",
+      "grid": [1, 1, 110],
+      "block": [288, 1, 1]
+    },
+    "abba_groups_per_case": 5,
+    "positions_per_group": 4,
+    "warmup": 5,
+    "timed_iterations": 50,
+    "l2_flush_mib": 192,
+    "speedup_definition": "(baseline_us / current_us - 1) * 100",
+    "point_estimator": "ratio of aggregate paired-group means",
+    "bootstrap_unit": "one complete ABBA group",
+    "bootstrap_samples": 10000
+  },
+  "identity_gates": {
+    "fixture_match": true,
+    "weights_match": true,
+    "reference_match": true,
+    "source_match": true,
+    "cubin_and_jit_match": true,
+    "environment_match": true,
+    "sample_set_complete": true
+  },
+  "validation_gates": {
+    "correctness_8_of_8": true,
+    "work_identity": true,
+    "current_static_zero_spill": true,
+    "current_dynamic_zero_spill": true,
+    "e2e_production": true,
+    "e2e_exp005": true,
+    "e2e_exp007": true,
+    "phase_delta_quantitative_eligible": false
+  },
+  "results": {
+    "production_vs_current": {
+      "m256": {
+        "baseline_mean_us": 541.6252796649933,
+        "current_mean_us": 519.0743684768677,
+        "speedup_percent": 4.344447069173785,
+        "ci95_percent": [4.329069002829611, 4.364296003266688],
+        "classification": "faster"
+      },
+      "m8192": {
+        "baseline_mean_us": 1804.154625415802,
+        "current_mean_us": 1567.9498229026794,
+        "speedup_percent": 15.06456386951507,
+        "ci95_percent": [15.029304114585917, 15.098127592782085],
+        "classification": "faster"
+      }
+    },
+    "exp005_vs_current": {
+      "m256": {
+        "baseline_mean_us": 533.9834883213043,
+        "current_mean_us": 519.056382894516,
+        "speedup_percent": 2.8758157916385363,
+        "ci95_percent": [2.8638528833454746, 2.8846821286232505],
+        "classification": "faster"
+      },
+      "m8192": {
+        "baseline_mean_us": 1642.558399438858,
+        "current_mean_us": 1567.696320772171,
+        "speedup_percent": 4.77529210694414,
+        "ci95_percent": [4.741034839975566, 4.80968720570889],
+        "classification": "faster"
+      }
+    },
+    "exp007_vs_current": {
+      "m256": {
+        "baseline_mean_us": 571.745279788971,
+        "current_mean_us": 519.2350734472275,
+        "speedup_percent": 10.11299294424115,
+        "ci95_percent": [10.09471960095727, 10.131268720295704],
+        "classification": "faster"
+      },
+      "m8192": {
+        "baseline_mean_us": 1807.4227848052979,
+        "current_mean_us": 1567.8189442157745,
+        "speedup_percent": 15.28262185333993,
+        "ci95_percent": [15.2308074310737, 15.323328184132713],
+        "classification": "faster"
+      }
+    }
+  },
+  "evidence_index": {
+    "e2e_summary": {
+      "path": "e2e/summary.json",
+      "sha256": "58a3d2194be1de028559c3c961e9798190fedd992ccd41a3a7497ffaf28275a7",
+      "canonical_evidence_sha256": "3a40b75127fdc5f2a7f8ca04bd0552861688f72f3e2454af85214b43bff65a45"
+    },
+    "e2e_raw_csv": {
+      "path": "e2e/raw.csv",
+      "sha256": "657194e550d2aadd5631fde21f161af16779b0a8013fee893283b136a55734b4"
+    },
+    "correctness": {
+      "path": "correctness_evidence.json",
+      "sha256": "6ffdd9f29985ebd05c6cb3c4f7f4e7c942d87ffb177c86e9f2931941284949e4"
+    },
+    "work_identity": {
+      "path": "work_ledger.json",
+      "sha256": "e268f3891bb8454ce342d69a3fc19175dd844db32a266bb4ee8f317431567883"
+    },
+    "static_spill": {
+      "path": "static_spill_evidence.json",
+      "sha256": "84824366e571ad08f4010fae462931e58a6999ac0f06a0602b1517059a27a5d2"
+    },
+    "dynamic_spill": {
+      "path": "dynamic_ncu_evidence.json",
+      "sha256": "b03023df64f2f121ae5e2f4015bd56e752deb951e9b6ec51c53941fe96caaad6"
+    },
+    "phase_markers": {
+      "path": "phase_markers/evidence.json",
+      "sha256": "696947288c2489b245156dcc0489b857159fbed899d6521502c64aa4ed639113"
+    }
+  },
+  "evidence_boundaries": [
+    "Each E2E sample is one independent process position containing 50 timed graph replays; those replays are not independent samples.",
+    "Performance conclusions apply only to the registered M256/M8192 canonical cases on this controlled same-GPU protocol and do not generalize to other shapes, fixtures, or machines.",
+    "The phase-marker perturbation gate failed, so phase deltas are qualitative and do not quantify the accepted E2E speedup.",
+    "Expected launch geometry is a contract; observed launch identity remains in the matched profiler evidence."
+  ]
+}

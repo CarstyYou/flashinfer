@@ -1,0 +1,19 @@
+# Reproducible per-case payloads stay in the experiment workspace.
+canonical/raw/
+canonical/profile_targets/
+canary/**/raw/
+*.pt
+*.cubin
+*.ptx
+*_clean.mlir
+
+# Keep compact NCU CSV/JSON evidence; regenerate reports/VeloQ projections.
+*.ncu-rep
+*.ncu-rep.veloq/
+ncu/**/veloq/
+
+# Keep experiment scripts at exp root; runtime launch logs are transient.
+runtime/
+
+__pycache__/
+.pytest_cache/

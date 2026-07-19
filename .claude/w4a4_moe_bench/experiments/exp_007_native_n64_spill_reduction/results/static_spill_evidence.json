@@ -1,0 +1,603 @@
+{
+  "cases": {
+    "anchor_m256": {
+      "compiler_spill_refill": {
+        "annotation_count": 84,
+        "annotation_exactly_matches_local_sass": true,
+        "annotation_pcs_hex": [
+          "0x5fc0",
+          "0x5fe0",
+          "0x6000",
+          "0x6030",
+          "0x6070",
+          "0x6090",
+          "0x60a0",
+          "0x60c0",
+          "0x60f0",
+          "0x6110",
+          "0x6120",
+          "0x6140",
+          "0x6160",
+          "0x6190",
+          "0x61a0",
+          "0x61c0",
+          "0x61d0",
+          "0x61f0",
+          "0x6210",
+          "0x6240",
+          "0x6270",
+          "0x62b0",
+          "0x62e0",
+          "0x6300",
+          "0x6320",
+          "0x6340",
+          "0x6370",
+          "0x6390",
+          "0x86e0",
+          "0x86f0",
+          "0x8700",
+          "0x8710",
+          "0x8720",
+          "0x8730",
+          "0x8740",
+          "0x8750",
+          "0x8760",
+          "0x8770",
+          "0x8780",
+          "0x8790",
+          "0x87a0",
+          "0x87b0",
+          "0x87c0",
+          "0x87d0",
+          "0x87e0",
+          "0x87f0",
+          "0x8800",
+          "0x8810",
+          "0x8910",
+          "0x8930",
+          "0x8940",
+          "0x8950",
+          "0x8960",
+          "0x8970",
+          "0x8980",
+          "0x8990",
+          "0x89a0",
+          "0x89c0",
+          "0x89f0",
+          "0x8a10",
+          "0x8a20",
+          "0x8a40",
+          "0x8a50",
+          "0x8a60",
+          "0x8a80",
+          "0x8a90",
+          "0x8b80",
+          "0x8b90",
+          "0x8ba0",
+          "0x8bb0",
+          "0x8bc0",
+          "0x8bd0",
+          "0x8be0",
+          "0x8bf0",
+          "0x8c00",
+          "0x8c10",
+          "0x8c20",
+          "0x8d60",
+          "0x8e40",
+          "0x8f40",
+          "0x94c0",
+          "0x94d0",
+          "0x94f0",
+          "0x9510"
+        ],
+        "dynamic_execution_claimed": false,
+        "local_sass_instruction_count": 84,
+        "local_sass_opcode_histogram": {
+          "LDL.LU": 56,
+          "STL.64": 28
+        },
+        "static_fact_only": true
+      },
+      "fixture": "canonical",
+      "gates": {
+        "compiler_annotation_closure": true,
+        "fresh_jit_cubin_locked_by_preparation": true,
+        "kernel_symbol_locked_across_resource_elf_sass": true,
+        "source_locked_by_preparation": true,
+        "zero_spill_static_gate": false
+      },
+      "identity": {
+        "cubin_path": "/home/xiy/workspace/exp007_native_n64_jit/anchor/m256/canonical/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+        "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "kernel_symbol_matches_resource_elf_sass": true,
+        "preparation": {
+          "case": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "m": 256,
+            "topk": 8
+          },
+          "compile_tools": {
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0"
+          },
+          "gpu": {
+            "applications_graphics_clock_mhz": "2377",
+            "compute_capability": [
+              12,
+              0
+            ],
+            "driver": "580.95.05",
+            "foreign_processes_before_cuda_context": [],
+            "graphics_clock_mhz": "232",
+            "max_graphics_clock_mhz": "3090",
+            "name": "NVIDIA Graphics Device",
+            "pci_bus_id": "00000000:76:00.0",
+            "power_draw_w": "18.57",
+            "sm_count": 110,
+            "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+          },
+          "harness_arm": "candidate_8warp_serial_v0",
+          "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+          "local_overlay": {
+            "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/overlays/anchor_8warp_n128/moe_dynamic_kernel.py",
+            "sha256": "3cd9e6a26056d9221f59ea6749cd601c25cbef017cf6e7349efe0925180407c1"
+          },
+          "locked_jit_artifact": {
+            "path": "dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+            "sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+            "size": 131952
+          },
+          "path": "/home/xiy/workspace/flashinfer_exp007_748ad/.claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/canonical/raw/candidate_8warp_serial_v0/m256/canonical/preparation.json",
+          "schema": "exp005.arm-preparation.v1",
+          "sha256": "f520d5cfe0583a44d28751064b4e0c102580489d261326f0d965472283146edb",
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "overlay": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/overlays/anchor_8warp_n128/moe_dynamic_kernel.py",
+            "overlay_sha256": "3cd9e6a26056d9221f59ea6749cd601c25cbef017cf6e7349efe0925180407c1",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        }
+      },
+      "label": "anchor_m256",
+      "logical_arm": "anchor",
+      "m": 256,
+      "resource": {
+        "elf_frame_bytes_per_thread": 224,
+        "elf_minimum_stack_bytes_per_thread": 224,
+        "registers_per_thread": 168,
+        "shared_bytes_per_cta": 1024,
+        "stack_bytes_per_thread": 224,
+        "static_local_bytes_outside_stack": 0
+      },
+      "tensor_core_work": {
+        "omma_static_instruction_count": 448,
+        "omma_static_opcode_histogram": {
+          "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X": 448
+        }
+      },
+      "tool_output_sha256": {
+        "elf_stdout": "5364e1132fa1a510e35a6c82cfe27ebe56a3c3f1f281ec434681093c419e5208",
+        "resource_stdout": "8c161fd2827db38c2f2c5e18d7677983feee7d97a4701f19e9ebade6ca9f753c",
+        "sass_stdout": "e360ce422ccb27a273fa9256f9037eb515785558f117299ea0de43ca191d1739"
+      }
+    },
+    "anchor_m8192": {
+      "compiler_spill_refill": {
+        "annotation_count": 84,
+        "annotation_exactly_matches_local_sass": true,
+        "annotation_pcs_hex": [
+          "0x5fc0",
+          "0x5fe0",
+          "0x6000",
+          "0x6030",
+          "0x6070",
+          "0x6090",
+          "0x60a0",
+          "0x60c0",
+          "0x60f0",
+          "0x6110",
+          "0x6120",
+          "0x6140",
+          "0x6160",
+          "0x6190",
+          "0x61a0",
+          "0x61c0",
+          "0x61d0",
+          "0x61f0",
+          "0x6210",
+          "0x6240",
+          "0x6270",
+          "0x62b0",
+          "0x62e0",
+          "0x6300",
+          "0x6320",
+          "0x6340",
+          "0x6370",
+          "0x6390",
+          "0x86e0",
+          "0x86f0",
+          "0x8700",
+          "0x8710",
+          "0x8720",
+          "0x8730",
+          "0x8740",
+          "0x8750",
+          "0x8760",
+          "0x8770",
+          "0x8780",
+          "0x8790",
+          "0x87a0",
+          "0x87b0",
+          "0x87c0",
+          "0x87d0",
+          "0x87e0",
+          "0x87f0",
+          "0x8800",
+          "0x8810",
+          "0x8910",
+          "0x8930",
+          "0x8940",
+          "0x8950",
+          "0x8960",
+          "0x8970",
+          "0x8980",
+          "0x8990",
+          "0x89a0",
+          "0x89c0",
+          "0x89f0",
+          "0x8a10",
+          "0x8a20",
+          "0x8a40",
+          "0x8a50",
+          "0x8a60",
+          "0x8a80",
+          "0x8a90",
+          "0x8b80",
+          "0x8b90",
+          "0x8ba0",
+          "0x8bb0",
+          "0x8bc0",
+          "0x8bd0",
+          "0x8be0",
+          "0x8bf0",
+          "0x8c00",
+          "0x8c10",
+          "0x8c20",
+          "0x8d60",
+          "0x8e40",
+          "0x8f40",
+          "0x94c0",
+          "0x94d0",
+          "0x94f0",
+          "0x9510"
+        ],
+        "dynamic_execution_claimed": false,
+        "local_sass_instruction_count": 84,
+        "local_sass_opcode_histogram": {
+          "LDL.LU": 56,
+          "STL.64": 28
+        },
+        "static_fact_only": true
+      },
+      "fixture": "canonical",
+      "gates": {
+        "compiler_annotation_closure": true,
+        "fresh_jit_cubin_locked_by_preparation": true,
+        "kernel_symbol_locked_across_resource_elf_sass": true,
+        "source_locked_by_preparation": true,
+        "zero_spill_static_gate": false
+      },
+      "identity": {
+        "cubin_path": "/home/xiy/workspace/exp007_native_n64_jit/anchor/m8192/canonical/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+        "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "kernel_symbol_matches_resource_elf_sass": true,
+        "preparation": {
+          "case": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "m": 8192,
+            "topk": 8
+          },
+          "compile_tools": {
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0"
+          },
+          "gpu": {
+            "applications_graphics_clock_mhz": "2377",
+            "compute_capability": [
+              12,
+              0
+            ],
+            "driver": "580.95.05",
+            "foreign_processes_before_cuda_context": [],
+            "graphics_clock_mhz": "2017",
+            "max_graphics_clock_mhz": "3090",
+            "name": "NVIDIA Graphics Device",
+            "pci_bus_id": "00000000:76:00.0",
+            "power_draw_w": "58.38",
+            "sm_count": 110,
+            "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+          },
+          "harness_arm": "candidate_8warp_serial_v0",
+          "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+          "local_overlay": {
+            "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/overlays/anchor_8warp_n128/moe_dynamic_kernel.py",
+            "sha256": "3cd9e6a26056d9221f59ea6749cd601c25cbef017cf6e7349efe0925180407c1"
+          },
+          "locked_jit_artifact": {
+            "path": "dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+            "sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+            "size": 131952
+          },
+          "path": "/home/xiy/workspace/flashinfer_exp007_748ad/.claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/canonical/raw/candidate_8warp_serial_v0/m8192/canonical/preparation.json",
+          "schema": "exp005.arm-preparation.v1",
+          "sha256": "00caaad325ff69e2af9471e6bdebe6132a6d2c77c582323bde265cf5c628e3ed",
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "overlay": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/overlays/anchor_8warp_n128/moe_dynamic_kernel.py",
+            "overlay_sha256": "3cd9e6a26056d9221f59ea6749cd601c25cbef017cf6e7349efe0925180407c1",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        }
+      },
+      "label": "anchor_m8192",
+      "logical_arm": "anchor",
+      "m": 8192,
+      "resource": {
+        "elf_frame_bytes_per_thread": 224,
+        "elf_minimum_stack_bytes_per_thread": 224,
+        "registers_per_thread": 168,
+        "shared_bytes_per_cta": 1024,
+        "stack_bytes_per_thread": 224,
+        "static_local_bytes_outside_stack": 0
+      },
+      "tensor_core_work": {
+        "omma_static_instruction_count": 448,
+        "omma_static_opcode_histogram": {
+          "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X": 448
+        }
+      },
+      "tool_output_sha256": {
+        "elf_stdout": "5364e1132fa1a510e35a6c82cfe27ebe56a3c3f1f281ec434681093c419e5208",
+        "resource_stdout": "8c161fd2827db38c2f2c5e18d7677983feee7d97a4701f19e9ebade6ca9f753c",
+        "sass_stdout": "e360ce422ccb27a273fa9256f9037eb515785558f117299ea0de43ca191d1739"
+      }
+    },
+    "candidate_m256": {
+      "compiler_spill_refill": {
+        "annotation_count": 0,
+        "annotation_exactly_matches_local_sass": true,
+        "annotation_pcs_hex": [],
+        "dynamic_execution_claimed": false,
+        "local_sass_instruction_count": 0,
+        "local_sass_opcode_histogram": {},
+        "static_fact_only": true
+      },
+      "fixture": "canonical",
+      "gates": {
+        "compiler_annotation_closure": true,
+        "fresh_jit_cubin_locked_by_preparation": true,
+        "kernel_symbol_locked_across_resource_elf_sass": true,
+        "source_locked_by_preparation": true,
+        "zero_spill_static_gate": true
+      },
+      "identity": {
+        "cubin_path": "/home/xiy/workspace/exp007_native_n64_jit/candidate/m256/canonical/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+        "cubin_sha256": "a9557634cf3d1bff59ca93739e75a1acd1187707222255fead78e2e6e8a73af9",
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "kernel_symbol_matches_resource_elf_sass": true,
+        "preparation": {
+          "case": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "m": 256,
+            "topk": 8
+          },
+          "compile_tools": {
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0"
+          },
+          "gpu": {
+            "applications_graphics_clock_mhz": "2377",
+            "compute_capability": [
+              12,
+              0
+            ],
+            "driver": "580.95.05",
+            "foreign_processes_before_cuda_context": [],
+            "graphics_clock_mhz": "2370",
+            "max_graphics_clock_mhz": "3090",
+            "name": "NVIDIA Graphics Device",
+            "pci_bus_id": "00000000:76:00.0",
+            "power_draw_w": "59.44",
+            "sm_count": 110,
+            "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+          },
+          "harness_arm": "candidate_8warp_n64_temporal_replay_v0",
+          "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+          "local_overlay": {
+            "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/overlays/candidate_8warp_native_n64_v0/moe_dynamic_kernel.py",
+            "sha256": "1953cbb7717cda4461a4f199d05f370a4bdb35b4b8ef7556443caf36b0b12ec2"
+          },
+          "locked_jit_artifact": {
+            "path": "dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+            "sha256": "a9557634cf3d1bff59ca93739e75a1acd1187707222255fead78e2e6e8a73af9",
+            "size": 139840
+          },
+          "path": "/home/xiy/workspace/flashinfer_exp007_748ad/.claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/canonical/raw/candidate_8warp_n64_temporal_replay_v0/m256/canonical/preparation.json",
+          "schema": "exp005.arm-preparation.v1",
+          "sha256": "438d80177eaf7497a54f4ce122b601284bc7e226ad41382d290999ffff9c57ec",
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "overlay": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/overlays/candidate_8warp_native_n64_v0/moe_dynamic_kernel.py",
+            "overlay_sha256": "1953cbb7717cda4461a4f199d05f370a4bdb35b4b8ef7556443caf36b0b12ec2",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        }
+      },
+      "label": "candidate_m256",
+      "logical_arm": "candidate",
+      "m": 256,
+      "resource": {
+        "elf_frame_bytes_per_thread": 0,
+        "elf_minimum_stack_bytes_per_thread": 0,
+        "registers_per_thread": 146,
+        "shared_bytes_per_cta": 1024,
+        "stack_bytes_per_thread": 0,
+        "static_local_bytes_outside_stack": 0
+      },
+      "tensor_core_work": {
+        "omma_static_instruction_count": 448,
+        "omma_static_opcode_histogram": {
+          "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X": 448
+        }
+      },
+      "tool_output_sha256": {
+        "elf_stdout": "6e4186d81718957633cd5f8fc4bf61580c422a026448753f27ab45a2c28d0e36",
+        "resource_stdout": "d0855f5c3c20eb8f6dd7b5c9455dcaced01549b5f200c53abf563e9985ba0e93",
+        "sass_stdout": "f7aada3382f8d0bb6938f915cfa5e7302fd97f83630c56f7c873c7d2658554d0"
+      }
+    },
+    "candidate_m8192": {
+      "compiler_spill_refill": {
+        "annotation_count": 0,
+        "annotation_exactly_matches_local_sass": true,
+        "annotation_pcs_hex": [],
+        "dynamic_execution_claimed": false,
+        "local_sass_instruction_count": 0,
+        "local_sass_opcode_histogram": {},
+        "static_fact_only": true
+      },
+      "fixture": "canonical",
+      "gates": {
+        "compiler_annotation_closure": true,
+        "fresh_jit_cubin_locked_by_preparation": true,
+        "kernel_symbol_locked_across_resource_elf_sass": true,
+        "source_locked_by_preparation": true,
+        "zero_spill_static_gate": true
+      },
+      "identity": {
+        "cubin_path": "/home/xiy/workspace/exp007_native_n64_jit/candidate/m8192/canonical/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+        "cubin_sha256": "a9557634cf3d1bff59ca93739e75a1acd1187707222255fead78e2e6e8a73af9",
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "kernel_symbol_matches_resource_elf_sass": true,
+        "preparation": {
+          "case": {
+            "experts": 256,
+            "hidden": 2048,
+            "intermediate_tp": 512,
+            "m": 8192,
+            "topk": 8
+          },
+          "compile_tools": {
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0"
+          },
+          "gpu": {
+            "applications_graphics_clock_mhz": "2377",
+            "compute_capability": [
+              12,
+              0
+            ],
+            "driver": "580.95.05",
+            "foreign_processes_before_cuda_context": [],
+            "graphics_clock_mhz": "2370",
+            "max_graphics_clock_mhz": "3090",
+            "name": "NVIDIA Graphics Device",
+            "pci_bus_id": "00000000:76:00.0",
+            "power_draw_w": "59.52",
+            "sm_count": 110,
+            "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+          },
+          "harness_arm": "candidate_8warp_n64_temporal_replay_v0",
+          "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+          "local_overlay": {
+            "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/overlays/candidate_8warp_native_n64_v0/moe_dynamic_kernel.py",
+            "sha256": "1953cbb7717cda4461a4f199d05f370a4bdb35b4b8ef7556443caf36b0b12ec2"
+          },
+          "locked_jit_artifact": {
+            "path": "dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+            "sha256": "a9557634cf3d1bff59ca93739e75a1acd1187707222255fead78e2e6e8a73af9",
+            "size": 139840
+          },
+          "path": "/home/xiy/workspace/flashinfer_exp007_748ad/.claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/canonical/raw/candidate_8warp_n64_temporal_replay_v0/m8192/canonical/preparation.json",
+          "schema": "exp005.arm-preparation.v1",
+          "sha256": "38fce373519ad29af529aea606646835a94764655bc588416ce353e48d5935cb",
+          "source": {
+            "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+            "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+            "overlay": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/overlays/candidate_8warp_native_n64_v0/moe_dynamic_kernel.py",
+            "overlay_sha256": "1953cbb7717cda4461a4f199d05f370a4bdb35b4b8ef7556443caf36b0b12ec2",
+            "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+            "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+          }
+        }
+      },
+      "label": "candidate_m8192",
+      "logical_arm": "candidate",
+      "m": 8192,
+      "resource": {
+        "elf_frame_bytes_per_thread": 0,
+        "elf_minimum_stack_bytes_per_thread": 0,
+        "registers_per_thread": 146,
+        "shared_bytes_per_cta": 1024,
+        "stack_bytes_per_thread": 0,
+        "static_local_bytes_outside_stack": 0
+      },
+      "tensor_core_work": {
+        "omma_static_instruction_count": 448,
+        "omma_static_opcode_histogram": {
+          "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X": 448
+        }
+      },
+      "tool_output_sha256": {
+        "elf_stdout": "6e4186d81718957633cd5f8fc4bf61580c422a026448753f27ab45a2c28d0e36",
+        "resource_stdout": "d0855f5c3c20eb8f6dd7b5c9455dcaced01549b5f200c53abf563e9985ba0e93",
+        "sass_stdout": "f7aada3382f8d0bb6938f915cfa5e7302fd97f83630c56f7c873c7d2658554d0"
+      }
+    }
+  },
+  "collector": {
+    "commands_are_binary_read_only": true,
+    "cuobjdump_version": "cuobjdump: NVIDIA (R) fat binary listing tool\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "image": "nvcr.io/nvidia/pytorch:26.05-py3",
+    "nvdisasm_version": "nvdisasm: NVIDIA (R) CUDA disassembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:09:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "remote": "xiy@10.6.142.16"
+  },
+  "cross_case_checks": {
+    "anchor_candidate_same_static_omma_count": true,
+    "anchor_candidate_same_static_omma_histogram": true,
+    "anchor_m256_m8192_same_cubin_sha256": true,
+    "anchor_m256_m8192_same_kernel_symbol": true,
+    "candidate_m256_m8192_same_cubin_sha256": true,
+    "candidate_m256_m8192_same_kernel_symbol": true
+  },
+  "evidence_sha256": "9472bb27b869d263954846900bdfb553116b5fdca1878cd165c69e68fa9b078b",
+  "schema": "exp007.static-resource-spill-evidence.v1",
+  "scope": {
+    "cases": [
+      "anchor_m256",
+      "anchor_m8192",
+      "candidate_m256",
+      "candidate_m8192"
+    ],
+    "collector_uses_gpu": false,
+    "evidence_boundary": "Static resource records, SASS instructions, and compiler SpillRefill annotations prove binary presence only; they do not prove dynamic execution frequency or latency."
+  }
+}

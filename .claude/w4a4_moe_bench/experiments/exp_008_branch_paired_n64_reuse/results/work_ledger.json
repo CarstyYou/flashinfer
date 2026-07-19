@@ -1,0 +1,720 @@
+{
+  "checks": {
+    "all_three_source_hashes_locked": true,
+    "all_three_sources_ast_parse": true,
+    "each_stage_tx_count_is_19456": true,
+    "eight_unique_slice_half_stage_groups": true,
+    "fc2_producer_anchor_vs_v0_executable_identical": true,
+    "fc2_producer_v0_vs_v1_executable_identical": true,
+    "fc2_scatter_anchor_vs_v0_executable_identical": true,
+    "fc2_scatter_v0_vs_v1_executable_identical": true,
+    "gate_n64_ranges_exact_once": true,
+    "q1_v0_vs_v1_executable_identical": true,
+    "scheduler_build_anchor_vs_v0_executable_identical": true,
+    "scheduler_build_v0_vs_v1_executable_identical": true,
+    "scheduler_claim_cache_anchor_vs_v0_executable_identical": true,
+    "scheduler_claim_cache_v0_vs_v1_executable_identical": true,
+    "up_n64_ranges_exact_once": true,
+    "v1_a_sfa_are_half_v0": true,
+    "v1_a_sfa_equal_anchor": true,
+    "v1_b_equal_anchor_and_v0": true,
+    "v1_physical_sfb_equal_v0_and_2x_anchor": true,
+    "v1_source_structure_contract": true,
+    "v1_traffic_totals_exact": true
+  },
+  "evidence_boundary": [
+    "The ledger proves immutable source identity, registered coordinates, descriptor payload accounting, and source structure.",
+    "SASS separately proves static OMMA/spill; matched NCU separately proves executed Tensor work and dynamic spill.",
+    "Descriptor payload bytes are not a measurement of L2 or DRAM traffic."
+  ],
+  "evidence_sha256": "670aa4cb0ecf8cb0fe6a3172ecb8722fb9806c62bfdeb41926d35441c4987d3b",
+  "gate_pass": true,
+  "identity": {
+    "anchor_8warp_n128": {
+      "ast_parse_pass": true,
+      "expected_sha256": "3cd9e6a26056d9221f59ea6749cd601c25cbef017cf6e7349efe0925180407c1",
+      "hash_locked": true,
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_008_branch_paired_n64_reuse/results/overlays/anchor_8warp_n128/moe_dynamic_kernel.py",
+      "sha256": "3cd9e6a26056d9221f59ea6749cd601c25cbef017cf6e7349efe0925180407c1"
+    },
+    "branch_paired_n64_v1": {
+      "ast_parse_pass": true,
+      "expected_sha256": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971",
+      "hash_locked": true,
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_008_branch_paired_n64_reuse/results/overlays/branch_paired_n64_v1/moe_dynamic_kernel.py",
+      "sha256": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971"
+    },
+    "temporal_n64_v0": {
+      "ast_parse_pass": true,
+      "expected_sha256": "1953cbb7717cda4461a4f199d05f370a4bdb35b4b8ef7556443caf36b0b12ec2",
+      "hash_locked": true,
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_008_branch_paired_n64_reuse/results/overlays/temporal_n64_v0/moe_dynamic_kernel.py",
+      "sha256": "1953cbb7717cda4461a4f199d05f370a4bdb35b4b8ef7556443caf36b0b12ec2"
+    }
+  },
+  "schema": "exp008.work-ledger.v1",
+  "shape": {
+    "H": 2048,
+    "I_tp": 512,
+    "M": 128,
+    "k_tile": 128,
+    "k_trips": 16,
+    "logical_n": 128,
+    "native_fc1_n": 64
+  },
+  "source_identity": {
+    "fc2_producer": {
+      "anchor_vs_v0": {
+        "byte_identical": false,
+        "end_marker": "                    # Ensure MMA warps finish FC2/scatter before DMA starts the",
+        "executable_identical": true,
+        "left_executable_sha256": "be6623cbef86b4f565ca96a23877859ec626c9bb7150a929cb0d47e481acc4c6",
+        "left_sha256": "a8fabae6a4131cf468aeb49190c82f12c7eeca1bea15b8332cf2443d64449dd4",
+        "right_executable_sha256": "be6623cbef86b4f565ca96a23877859ec626c9bb7150a929cb0d47e481acc4c6",
+        "right_sha256": "fe8a33e45cb6057e2e18fb45f3e02643417f5be3df9d418144f2aac367d39683",
+        "start_marker": "                    # ---- FC2 B_down loads: continuous pipeline ----"
+      },
+      "v0_vs_v1": {
+        "byte_identical": true,
+        "end_marker": "                    # Ensure MMA warps finish FC2/scatter before DMA starts the",
+        "executable_identical": true,
+        "left_executable_sha256": "be6623cbef86b4f565ca96a23877859ec626c9bb7150a929cb0d47e481acc4c6",
+        "left_sha256": "fe8a33e45cb6057e2e18fb45f3e02643417f5be3df9d418144f2aac367d39683",
+        "right_executable_sha256": "be6623cbef86b4f565ca96a23877859ec626c9bb7150a929cb0d47e481acc4c6",
+        "right_sha256": "fe8a33e45cb6057e2e18fb45f3e02643417f5be3df9d418144f2aac367d39683",
+        "start_marker": "                    # ---- FC2 B_down loads: continuous pipeline ----"
+      }
+    },
+    "fc2_scatter": {
+      "anchor_vs_v0": {
+        "byte_identical": false,
+        "end_marker": "                    # Signal that FC2/scatter no longer needs sA",
+        "executable_identical": true,
+        "left_executable_sha256": "bfaf8a8fd604aa4c12833023ee329759d53273da52b6c4f6192b7f1c4a7eaa0e",
+        "left_sha256": "270e817d7aec63f9b905ceeb185b534e2dd78e18d48964a0c86e3bc8489d5131",
+        "right_executable_sha256": "bfaf8a8fd604aa4c12833023ee329759d53273da52b6c4f6192b7f1c4a7eaa0e",
+        "right_sha256": "3ca82684d8ba9678245bb046ced9a91e8fd6c380e76d4d4fa72d1d7c42982e97",
+        "start_marker": "                    # PHASE B: Sweep ALL FC2 output tiles"
+      },
+      "v0_vs_v1": {
+        "byte_identical": true,
+        "end_marker": "                    # Signal that FC2/scatter no longer needs sA",
+        "executable_identical": true,
+        "left_executable_sha256": "bfaf8a8fd604aa4c12833023ee329759d53273da52b6c4f6192b7f1c4a7eaa0e",
+        "left_sha256": "3ca82684d8ba9678245bb046ced9a91e8fd6c380e76d4d4fa72d1d7c42982e97",
+        "right_executable_sha256": "bfaf8a8fd604aa4c12833023ee329759d53273da52b6c4f6192b7f1c4a7eaa0e",
+        "right_sha256": "3ca82684d8ba9678245bb046ced9a91e8fd6c380e76d4d4fa72d1d7c42982e97",
+        "start_marker": "                    # PHASE B: Sweep ALL FC2 output tiles"
+      }
+    },
+    "q1": {
+      "v0_vs_v1": {
+        "byte_identical": true,
+        "end_marker": "                    # PHASE B: Sweep ALL FC2 output tiles",
+        "executable_identical": true,
+        "left_executable_sha256": "9f986c6b507a8bdb9b11cc04d3768f76787711f227eebad1991c04710d6332f3",
+        "left_sha256": "f6ba491fa4ec4b3eb2cddae12f616065df73270ed554291aa84cc635246ae9bf",
+        "right_executable_sha256": "9f986c6b507a8bdb9b11cc04d3768f76787711f227eebad1991c04710d6332f3",
+        "right_sha256": "f6ba491fa4ec4b3eb2cddae12f616065df73270ed554291aa84cc635246ae9bf",
+        "start_marker": "                    # Both disjoint N64 activations are now durable"
+      }
+    },
+    "scheduler_build": {
+      "anchor_vs_v0": {
+        "byte_identical": true,
+        "end_marker": "        gA = cute.local_tile(",
+        "executable_identical": true,
+        "left_executable_sha256": "6dc208e6f195157c6f103f770ab7c9caad8a656cb3d35194b4326b9cdadd897b",
+        "left_sha256": "b60c15ec12411dd8be69ee89d811823da5fe6e4abe0f46cee8791a67b325df98",
+        "right_executable_sha256": "6dc208e6f195157c6f103f770ab7c9caad8a656cb3d35194b4326b9cdadd897b",
+        "right_sha256": "b60c15ec12411dd8be69ee89d811823da5fe6e4abe0f46cee8791a67b325df98",
+        "start_marker": "        # Phase 0: cooperative init"
+      },
+      "v0_vs_v1": {
+        "byte_identical": true,
+        "end_marker": "        gA = cute.local_tile(",
+        "executable_identical": true,
+        "left_executable_sha256": "6dc208e6f195157c6f103f770ab7c9caad8a656cb3d35194b4326b9cdadd897b",
+        "left_sha256": "b60c15ec12411dd8be69ee89d811823da5fe6e4abe0f46cee8791a67b325df98",
+        "right_executable_sha256": "6dc208e6f195157c6f103f770ab7c9caad8a656cb3d35194b4326b9cdadd897b",
+        "right_sha256": "b60c15ec12411dd8be69ee89d811823da5fe6e4abe0f46cee8791a67b325df98",
+        "start_marker": "        # Phase 0: cooperative init"
+      }
+    },
+    "scheduler_claim_cache": {
+      "anchor_vs_v0": {
+        "byte_identical": true,
+        "end_marker": "            elif warp_idx < self.num_mma_warps:",
+        "executable_identical": true,
+        "left_executable_sha256": "3c36ca045ab769a71f0e5db5ec34b0491d188c7bdf370788723637cd556f98ee",
+        "left_sha256": "c4af5792b2447aee30bfe85559e04fecd6cbf58b5260bd967842ea82248d943b",
+        "right_executable_sha256": "3c36ca045ab769a71f0e5db5ec34b0491d188c7bdf370788723637cd556f98ee",
+        "right_sha256": "c4af5792b2447aee30bfe85559e04fecd6cbf58b5260bd967842ea82248d943b",
+        "start_marker": "        # Consumer steady state: pop one ready task per CTA"
+      },
+      "v0_vs_v1": {
+        "byte_identical": true,
+        "end_marker": "            elif warp_idx < self.num_mma_warps:",
+        "executable_identical": true,
+        "left_executable_sha256": "3c36ca045ab769a71f0e5db5ec34b0491d188c7bdf370788723637cd556f98ee",
+        "left_sha256": "c4af5792b2447aee30bfe85559e04fecd6cbf58b5260bd967842ea82248d943b",
+        "right_executable_sha256": "3c36ca045ab769a71f0e5db5ec34b0491d188c7bdf370788723637cd556f98ee",
+        "right_sha256": "c4af5792b2447aee30bfe85559e04fecd6cbf58b5260bd967842ea82248d943b",
+        "start_marker": "        # Consumer steady state: pop one ready task per CTA"
+      }
+    }
+  },
+  "source_structure": {
+    "checks": {
+      "consumer_accumulators_cleared_once_per_half": true,
+      "consumer_gate_up_paired_in_each_k_loop": true,
+      "consumer_gate_up_sfb_select_same_half": true,
+      "consumer_half_store_offset_formula": true,
+      "consumer_immediate_activation_store_inside_half": true,
+      "consumer_one_half_loop": true,
+      "consumer_two_k_loop_bodies": true,
+      "independent_up_smem_backings": true,
+      "independent_up_tma_partitions": true,
+      "one_gate_n64_accumulator_object": true,
+      "one_up_n64_accumulator_object": true,
+      "pipeline_uses_fc1_tx_count": true,
+      "producer_exact_six_copy_multiset": true,
+      "producer_gate_b_index_formula": true,
+      "producer_gate_sfb_index_formula": true,
+      "producer_one_acquire_per_k": true,
+      "producer_one_advance_per_k": true,
+      "producer_one_commit_per_k": true,
+      "producer_one_half_loop": true,
+      "producer_one_k_loop_per_half": true,
+      "producer_up_b_index_formula": true,
+      "producer_up_sfb_index_formula": true,
+      "q1_once_outside_half": true,
+      "single_fc1_to_fc2_handoff": true,
+      "tx_count_exact_six_term_multiset": true
+    },
+    "consumer_k_loop_evidence": [
+      {
+        "gate_pass": true,
+        "gemms": [
+          [
+            "gate_acc",
+            "tCrA_fc1",
+            "tCrB_fc1"
+          ],
+          [
+            "up_acc",
+            "tCrA_fc1",
+            "tCrB_up_fc1"
+          ]
+        ],
+        "line": 107,
+        "sfb_gemm_sequence": [
+          [
+            "sfb",
+            "tCrSFB_fc1_half"
+          ],
+          [
+            "gemm",
+            "gate_acc"
+          ],
+          [
+            "sfb",
+            "tCrSFB_up_fc1_half"
+          ],
+          [
+            "gemm",
+            "up_acc"
+          ]
+        ]
+      },
+      {
+        "gate_pass": true,
+        "gemms": [
+          [
+            "gate_acc",
+            "tCrA_fc1",
+            "tCrB_fc1"
+          ],
+          [
+            "up_acc",
+            "tCrA_fc1",
+            "tCrB_up_fc1"
+          ]
+        ],
+        "line": 222,
+        "sfb_gemm_sequence": [
+          [
+            "sfb",
+            "tCrSFB_fc1_half"
+          ],
+          [
+            "gemm",
+            "gate_acc"
+          ],
+          [
+            "sfb",
+            "tCrSFB_up_fc1_half"
+          ],
+          [
+            "gemm",
+            "up_acc"
+          ]
+        ]
+      }
+    ],
+    "consumer_q1_region_sha256": "15b6b0addeda2480e8f90f3224badb8910bebee00808c45f2604db0dc6a0751e",
+    "consumer_sfb_half_views": {
+      "sSFB_fc1_half": true,
+      "sSFB_up_fc1_half": true
+    },
+    "evidence_boundary": "Source AST/order proves the registered implementation contract only; it does not reconstruct compiler register liveness or dynamic issue.",
+    "gate_pass": true,
+    "producer_copy_multiset": {
+      "tma_a -> tAsA": 1,
+      "tma_b_w13 -> tBsB_w13": 1,
+      "tma_b_w13 -> tBsB_w13_up": 1,
+      "tma_sfa -> tAsSFA": 1,
+      "tma_sfb_w13 -> tBsSFB_w13": 1,
+      "tma_sfb_w13 -> tBsSFB_w13_up": 1
+    },
+    "producer_region_sha256": "e04b48b11cf880936a7f6edf292838065040247c06fe8a5d6b24d01b8b04829e",
+    "tx_count_term_multiset": {
+      "self.a_dtype / a_smem_one": 1,
+      "self.b_dtype / fc1_b_smem_one": 2,
+      "self.sf_dtype / fc1_sfb_smem_one": 2,
+      "self.sf_dtype / sfa_smem_one": 1
+    }
+  },
+  "stage_groups": [
+    {
+      "branches": {
+        "gate": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 8,
+          "global_n_range": [
+            512,
+            576
+          ],
+          "sfb_n128_tile_index": 4,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB",
+            "sSFB"
+          ]
+        },
+        "up": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 0,
+          "global_n_range": [
+            0,
+            64
+          ],
+          "sfb_n128_tile_index": 0,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB_up",
+            "sSFB_up"
+          ]
+        }
+      },
+      "half": 0,
+      "k_trips": 16,
+      "logical_slice": 0,
+      "shared": {
+        "a": {
+          "bytes_per_k": 8192,
+          "bytes_total": 131072
+        },
+        "sfa": {
+          "bytes_per_k": 1024,
+          "bytes_total": 16384
+        }
+      },
+      "tx_bytes_per_k": 19456,
+      "tx_bytes_total": 311296
+    },
+    {
+      "branches": {
+        "gate": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 9,
+          "global_n_range": [
+            576,
+            640
+          ],
+          "sfb_n128_tile_index": 4,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB",
+            "sSFB"
+          ]
+        },
+        "up": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 1,
+          "global_n_range": [
+            64,
+            128
+          ],
+          "sfb_n128_tile_index": 0,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB_up",
+            "sSFB_up"
+          ]
+        }
+      },
+      "half": 1,
+      "k_trips": 16,
+      "logical_slice": 0,
+      "shared": {
+        "a": {
+          "bytes_per_k": 8192,
+          "bytes_total": 131072
+        },
+        "sfa": {
+          "bytes_per_k": 1024,
+          "bytes_total": 16384
+        }
+      },
+      "tx_bytes_per_k": 19456,
+      "tx_bytes_total": 311296
+    },
+    {
+      "branches": {
+        "gate": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 10,
+          "global_n_range": [
+            640,
+            704
+          ],
+          "sfb_n128_tile_index": 5,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB",
+            "sSFB"
+          ]
+        },
+        "up": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 2,
+          "global_n_range": [
+            128,
+            192
+          ],
+          "sfb_n128_tile_index": 1,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB_up",
+            "sSFB_up"
+          ]
+        }
+      },
+      "half": 0,
+      "k_trips": 16,
+      "logical_slice": 1,
+      "shared": {
+        "a": {
+          "bytes_per_k": 8192,
+          "bytes_total": 131072
+        },
+        "sfa": {
+          "bytes_per_k": 1024,
+          "bytes_total": 16384
+        }
+      },
+      "tx_bytes_per_k": 19456,
+      "tx_bytes_total": 311296
+    },
+    {
+      "branches": {
+        "gate": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 11,
+          "global_n_range": [
+            704,
+            768
+          ],
+          "sfb_n128_tile_index": 5,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB",
+            "sSFB"
+          ]
+        },
+        "up": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 3,
+          "global_n_range": [
+            192,
+            256
+          ],
+          "sfb_n128_tile_index": 1,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB_up",
+            "sSFB_up"
+          ]
+        }
+      },
+      "half": 1,
+      "k_trips": 16,
+      "logical_slice": 1,
+      "shared": {
+        "a": {
+          "bytes_per_k": 8192,
+          "bytes_total": 131072
+        },
+        "sfa": {
+          "bytes_per_k": 1024,
+          "bytes_total": 16384
+        }
+      },
+      "tx_bytes_per_k": 19456,
+      "tx_bytes_total": 311296
+    },
+    {
+      "branches": {
+        "gate": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 12,
+          "global_n_range": [
+            768,
+            832
+          ],
+          "sfb_n128_tile_index": 6,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB",
+            "sSFB"
+          ]
+        },
+        "up": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 4,
+          "global_n_range": [
+            256,
+            320
+          ],
+          "sfb_n128_tile_index": 2,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB_up",
+            "sSFB_up"
+          ]
+        }
+      },
+      "half": 0,
+      "k_trips": 16,
+      "logical_slice": 2,
+      "shared": {
+        "a": {
+          "bytes_per_k": 8192,
+          "bytes_total": 131072
+        },
+        "sfa": {
+          "bytes_per_k": 1024,
+          "bytes_total": 16384
+        }
+      },
+      "tx_bytes_per_k": 19456,
+      "tx_bytes_total": 311296
+    },
+    {
+      "branches": {
+        "gate": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 13,
+          "global_n_range": [
+            832,
+            896
+          ],
+          "sfb_n128_tile_index": 6,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB",
+            "sSFB"
+          ]
+        },
+        "up": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 5,
+          "global_n_range": [
+            320,
+            384
+          ],
+          "sfb_n128_tile_index": 2,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB_up",
+            "sSFB_up"
+          ]
+        }
+      },
+      "half": 1,
+      "k_trips": 16,
+      "logical_slice": 2,
+      "shared": {
+        "a": {
+          "bytes_per_k": 8192,
+          "bytes_total": 131072
+        },
+        "sfa": {
+          "bytes_per_k": 1024,
+          "bytes_total": 16384
+        }
+      },
+      "tx_bytes_per_k": 19456,
+      "tx_bytes_total": 311296
+    },
+    {
+      "branches": {
+        "gate": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 14,
+          "global_n_range": [
+            896,
+            960
+          ],
+          "sfb_n128_tile_index": 7,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB",
+            "sSFB"
+          ]
+        },
+        "up": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 6,
+          "global_n_range": [
+            384,
+            448
+          ],
+          "sfb_n128_tile_index": 3,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB_up",
+            "sSFB_up"
+          ]
+        }
+      },
+      "half": 0,
+      "k_trips": 16,
+      "logical_slice": 3,
+      "shared": {
+        "a": {
+          "bytes_per_k": 8192,
+          "bytes_total": 131072
+        },
+        "sfa": {
+          "bytes_per_k": 1024,
+          "bytes_total": 16384
+        }
+      },
+      "tx_bytes_per_k": 19456,
+      "tx_bytes_total": 311296
+    },
+    {
+      "branches": {
+        "gate": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 15,
+          "global_n_range": [
+            960,
+            1024
+          ],
+          "sfb_n128_tile_index": 7,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB",
+            "sSFB"
+          ]
+        },
+        "up": {
+          "b_bytes_per_k": 4096,
+          "b_bytes_total": 65536,
+          "b_n64_tile_index": 7,
+          "global_n_range": [
+            448,
+            512
+          ],
+          "sfb_n128_tile_index": 3,
+          "sfb_physical_bytes_per_k": 1024,
+          "sfb_physical_bytes_total": 16384,
+          "smem_backing": [
+            "sB_up",
+            "sSFB_up"
+          ]
+        }
+      },
+      "half": 1,
+      "k_trips": 16,
+      "logical_slice": 3,
+      "shared": {
+        "a": {
+          "bytes_per_k": 8192,
+          "bytes_total": 131072
+        },
+        "sfa": {
+          "bytes_per_k": 1024,
+          "bytes_total": 16384
+        }
+      },
+      "tx_bytes_per_k": 19456,
+      "tx_bytes_total": 311296
+    }
+  ],
+  "traffic_totals": {
+    "anchor_8warp_n128": {
+      "a": 1048576,
+      "b": 1048576,
+      "sfa": 131072,
+      "sfb_physical": 131072
+    },
+    "boundary": "one complete Gate+Up FC1 sweep across I_tp=512",
+    "branch_paired_n64_v1": {
+      "a": 1048576,
+      "b": 1048576,
+      "sfa": 131072,
+      "sfb_physical": 262144
+    },
+    "semantics": "descriptor payload bytes, not measured DRAM traffic",
+    "temporal_n64_v0": {
+      "a": 2097152,
+      "b": 1048576,
+      "sfa": 262144,
+      "sfb_physical": 262144
+    }
+  }
+}

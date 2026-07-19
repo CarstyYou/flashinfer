@@ -1,0 +1,159 @@
+{
+  "arms": {
+    "anchor": {
+      "dynamic_spill_totals": {
+        "all_four_required_numeric": true,
+        "all_four_zero": false,
+        "metrics": {
+          "spill_refill_bytes": {
+            "metric_id": "sass__inst_executed_register_spilling_mem_local_op_read",
+            "unit": "byte",
+            "value": 1136128.0
+          },
+          "spill_refill_instructions": {
+            "metric_id": "sass__inst_executed_register_spilling_op_read",
+            "unit": "inst",
+            "value": 1136128.0
+          },
+          "spill_store_bytes": {
+            "metric_id": "sass__inst_executed_register_spilling_mem_local_op_write",
+            "unit": "byte",
+            "value": 568064.0
+          },
+          "spill_store_instructions": {
+            "metric_id": "sass__inst_executed_register_spilling_op_write",
+            "unit": "inst",
+            "value": 568064.0
+          }
+        }
+      },
+      "evidence_sha256": {
+        "dynamic_spill_json": "71308a3b17360621909ae73cfd084eeb6f20ac674c18da754ee811e9deb19f70",
+        "source_spill_by_sass_json": "b3ac697f246626ff02c8c92f8c7be9c5eff5d57521ea3d92d481b0b35a6fec72"
+      },
+      "identity": {
+        "block": [
+          288,
+          1,
+          1
+        ],
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "kernel": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "launch_row_id": "launch:0",
+        "loaded_cubin_matches_static": true,
+        "loaded_cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+        "report_sha256": "f77318a2f02624313ba1b3a7a78820c853c9f3399233cfd4e520be6e4a355dd2"
+      },
+      "pc_relation_to_static": {
+        "dynamic_pc_subset_of_static_compiler_or_local_sass": null,
+        "reason": "NCU report exposes required spill counters only as launch aggregates, not per-SASS instances.",
+        "status": "not_evaluable"
+      },
+      "source_spill_by_sass": {
+        "command": "veloq ncu source-metrics <trace.ncu-rep> --row-id launch:0 --counter 'sass__inst_executed_register_spilling_*' --by sass",
+        "limitation": "VeloQ reports all required spill counters as not-a-source-counter; empty rows therefore cannot identify or independently clear spill PCs.",
+        "matched_counters": [],
+        "required_counters_skipped_as_not_source_counter": true,
+        "row_count": 0,
+        "rows_empty": true,
+        "source_attribution_available": false,
+        "source_rows_are_independent_zero_spill_evidence": false
+      },
+      "static_spill_pcs": {
+        "compiler_annotation_count": 84,
+        "compiler_annotations_equal_local_sass": true,
+        "local_sass_instruction_count": 84,
+        "pc_set_sha256": "ec566fa17048d9dcb2cab4530c9a95a918ca2f070095aa2d6eb5b8119ed7db9f",
+        "static_zero_spill": false
+      }
+    },
+    "candidate": {
+      "dynamic_spill_totals": {
+        "all_four_required_numeric": true,
+        "all_four_zero": true,
+        "metrics": {
+          "spill_refill_bytes": {
+            "metric_id": "sass__inst_executed_register_spilling_mem_local_op_read",
+            "unit": "byte",
+            "value": 0.0
+          },
+          "spill_refill_instructions": {
+            "metric_id": "sass__inst_executed_register_spilling_op_read",
+            "unit": "inst",
+            "value": 0.0
+          },
+          "spill_store_bytes": {
+            "metric_id": "sass__inst_executed_register_spilling_mem_local_op_write",
+            "unit": "byte",
+            "value": 0.0
+          },
+          "spill_store_instructions": {
+            "metric_id": "sass__inst_executed_register_spilling_op_write",
+            "unit": "inst",
+            "value": 0.0
+          }
+        }
+      },
+      "evidence_sha256": {
+        "dynamic_spill_json": "cefa030e662f8913b1014859d5b89853f7a15c2dc1785cc32af03fa4d76744e3",
+        "source_spill_by_sass_json": "ecc9248a2c44875b74a06d82b7f935a4868b16d822bd1ea29e15f60fae31c5e5"
+      },
+      "identity": {
+        "block": [
+          288,
+          1,
+          1
+        ],
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "kernel": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "launch_row_id": "launch:0",
+        "loaded_cubin_matches_static": true,
+        "loaded_cubin_sha256": "a9557634cf3d1bff59ca93739e75a1acd1187707222255fead78e2e6e8a73af9",
+        "report_sha256": "bf4a395e55249ada466d225998e3a6ad170db78bb0eb248a11d2785d95789e8c"
+      },
+      "pc_relation_to_static": {
+        "dynamic_pc_subset_of_static_compiler_or_local_sass": null,
+        "reason": "NCU report exposes required spill counters only as launch aggregates, not per-SASS instances.",
+        "status": "not_evaluable"
+      },
+      "source_spill_by_sass": {
+        "command": "veloq ncu source-metrics <trace.ncu-rep> --row-id launch:0 --counter 'sass__inst_executed_register_spilling_*' --by sass",
+        "limitation": "VeloQ reports all required spill counters as not-a-source-counter; empty rows therefore cannot identify or independently clear spill PCs.",
+        "matched_counters": [],
+        "required_counters_skipped_as_not_source_counter": true,
+        "row_count": 0,
+        "rows_empty": true,
+        "source_attribution_available": false,
+        "source_rows_are_independent_zero_spill_evidence": false
+      },
+      "static_spill_pcs": {
+        "compiler_annotation_count": 0,
+        "compiler_annotations_equal_local_sass": true,
+        "local_sass_instruction_count": 0,
+        "pc_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "static_zero_spill": true
+      }
+    }
+  },
+  "evidence_sha256": {
+    "static_spill_evidence_json": "6361e5454f57907706d129e93e0c150324a304c0296c8db3146540ba1d4bce06",
+    "veloq_identity_json": "abc25e32ce3754c01ba73c1ec5fcb198da4455b1f6f6c609eb68a03763bc81a4"
+  },
+  "schema": "exp007.spill-pc-identity.v1",
+  "scope": "M8192 canonical_v0, launch:0",
+  "verdict": {
+    "anchor_dynamic_pc_to_static_pc_relation_closed": false,
+    "candidate_static_and_aggregate_dynamic_zero_spill": true,
+    "loaded_cubin_identity_pass": true,
+    "per_sass_spill_pc_closure": "not_supported_by_capture_counters",
+    "statement": "Candidate has zero static spill/local SASS and all four required dynamic spill aggregates are numeric zero. Per-SASS source attribution is unavailable for both arms, so anchor dynamic spill PCs cannot be tested as a subset of the static compiler SpillRefill/local SASS PCs; empty source rows are not treated as zero evidence."
+  }
+}

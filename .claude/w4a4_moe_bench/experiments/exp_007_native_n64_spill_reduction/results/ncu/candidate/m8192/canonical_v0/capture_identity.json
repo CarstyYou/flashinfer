@@ -1,0 +1,56 @@
+{
+  "arm": "candidate",
+  "cubin_path": "/workspace/jit/dump/cutlass___call___flashinferfused_moecute_dslblackwell_sm12xmoe_dispatch_DynamicMoELaunch_object_at__Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_Ptrgmem_FakeTensorInt3211_FakeTe.sm_120a.cubin",
+  "cubin_sha256": "a9557634cf3d1bff59ca93739e75a1acd1187707222255fead78e2e6e8a73af9",
+  "custom_metric_ids": [
+    "l1tex__t_bytes_pipe_lsu_mem_local_op_ld.sum",
+    "l1tex__t_bytes_pipe_lsu_mem_local_op_st.sum",
+    "sm__inst_executed_pipe_tensor_subpipe_hmma.sum",
+    "sm__ops_path_tensor_src_fp4_dst_fp32.sum",
+    "launch__registers_per_thread",
+    "launch__registers_per_thread_allocated",
+    "launch__shared_mem_per_block",
+    "launch__stack_size",
+    "sm__warps_active.avg.pct_of_peak_sustained_active"
+  ],
+  "internal_arm": "candidate_8warp_n64_temporal_replay_v0",
+  "jit_artifact_set_sha256": "29022d8c3f6fc5ed65923140a82ca33b59eba807a9395679a1a960a6f5183f8e",
+  "native_raw_sha256": "e58074aa4744fc27522464b1cb210f3c403f95ac23fce472d5e0a2fc6e57612d",
+  "ncu_version": "NVIDIA (R) Nsight Compute Command Line Profiler\nCopyright (c) 2018-2026 NVIDIA Corporation\nVersion 2026.1.1.0 (build 37634170) (public-release)",
+  "observed_launch": {
+    "block": [
+      288,
+      1,
+      1
+    ],
+    "context_id": 1,
+    "device_id": 0,
+    "grid": [
+      1,
+      1,
+      110
+    ],
+    "kernel": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+    "row_id": 0,
+    "stream_id": 7
+  },
+  "overlay_sha256": "1953cbb7717cda4461a4f199d05f370a4bdb35b4b8ef7556443caf36b0b12ec2",
+  "preparation_path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/canonical/raw/candidate_8warp_n64_temporal_replay_v0/m8192/canonical/preparation.json",
+  "preparation_sha256": "38fce373519ad29af529aea606646835a94764655bc588416ce353e48d5935cb",
+  "profile_target_path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/canonical/profile_targets/candidate_8warp_n64_temporal_replay_v0/m8192/target.json",
+  "profile_target_sha256": "c9ca2752484558b66066c966d60b6a4864c287b0e0cc00c653ef84bd70c3f1f1",
+  "required_spill_metric_ids": [
+    "sass__inst_executed_register_spilling_op_read",
+    "sass__inst_executed_register_spilling_op_write",
+    "sass__inst_executed_register_spilling_mem_local_op_read",
+    "sass__inst_executed_register_spilling_mem_local_op_write"
+  ],
+  "schema": "exp007.ncu-capture-identity.v1",
+  "section_ids": [
+    "InstructionStats",
+    "SourceCounters",
+    "LaunchStats",
+    "Occupancy"
+  ],
+  "trace_sha256": "bf4a395e55249ada466d225998e3a6ad170db78bb0eb248a11d2785d95789e8c"
+}

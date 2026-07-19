@@ -1,0 +1,383 @@
+{
+  "checks": {
+    "candidate_a_replay_is_2x_anchor": true,
+    "candidate_b_bytes_equal_anchor": true,
+    "candidate_physical_sfb_is_2x_anchor": true,
+    "candidate_sfa_replay_is_2x_anchor": true,
+    "candidate_source_temporal_contract": true,
+    "fc2_scatter_executable_source_identical": true,
+    "gate_n64_ranges_exact_once": true,
+    "scheduler_executable_source_identical": true,
+    "up_n64_ranges_exact_once": true
+  },
+  "descriptor_rows": [
+    {
+      "b_n64_tile_index": 0,
+      "branch": "up",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        0,
+        64
+      ],
+      "half": 0,
+      "k_trips": 16,
+      "logical_slice": 0,
+      "sfb_n128_tile_index": 0
+    },
+    {
+      "b_n64_tile_index": 1,
+      "branch": "up",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        64,
+        128
+      ],
+      "half": 1,
+      "k_trips": 16,
+      "logical_slice": 0,
+      "sfb_n128_tile_index": 0
+    },
+    {
+      "b_n64_tile_index": 2,
+      "branch": "up",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        128,
+        192
+      ],
+      "half": 0,
+      "k_trips": 16,
+      "logical_slice": 1,
+      "sfb_n128_tile_index": 1
+    },
+    {
+      "b_n64_tile_index": 3,
+      "branch": "up",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        192,
+        256
+      ],
+      "half": 1,
+      "k_trips": 16,
+      "logical_slice": 1,
+      "sfb_n128_tile_index": 1
+    },
+    {
+      "b_n64_tile_index": 4,
+      "branch": "up",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        256,
+        320
+      ],
+      "half": 0,
+      "k_trips": 16,
+      "logical_slice": 2,
+      "sfb_n128_tile_index": 2
+    },
+    {
+      "b_n64_tile_index": 5,
+      "branch": "up",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        320,
+        384
+      ],
+      "half": 1,
+      "k_trips": 16,
+      "logical_slice": 2,
+      "sfb_n128_tile_index": 2
+    },
+    {
+      "b_n64_tile_index": 6,
+      "branch": "up",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        384,
+        448
+      ],
+      "half": 0,
+      "k_trips": 16,
+      "logical_slice": 3,
+      "sfb_n128_tile_index": 3
+    },
+    {
+      "b_n64_tile_index": 7,
+      "branch": "up",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        448,
+        512
+      ],
+      "half": 1,
+      "k_trips": 16,
+      "logical_slice": 3,
+      "sfb_n128_tile_index": 3
+    },
+    {
+      "b_n64_tile_index": 8,
+      "branch": "gate",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        512,
+        576
+      ],
+      "half": 0,
+      "k_trips": 16,
+      "logical_slice": 0,
+      "sfb_n128_tile_index": 4
+    },
+    {
+      "b_n64_tile_index": 9,
+      "branch": "gate",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        576,
+        640
+      ],
+      "half": 1,
+      "k_trips": 16,
+      "logical_slice": 0,
+      "sfb_n128_tile_index": 4
+    },
+    {
+      "b_n64_tile_index": 10,
+      "branch": "gate",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        640,
+        704
+      ],
+      "half": 0,
+      "k_trips": 16,
+      "logical_slice": 1,
+      "sfb_n128_tile_index": 5
+    },
+    {
+      "b_n64_tile_index": 11,
+      "branch": "gate",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        704,
+        768
+      ],
+      "half": 1,
+      "k_trips": 16,
+      "logical_slice": 1,
+      "sfb_n128_tile_index": 5
+    },
+    {
+      "b_n64_tile_index": 12,
+      "branch": "gate",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        768,
+        832
+      ],
+      "half": 0,
+      "k_trips": 16,
+      "logical_slice": 2,
+      "sfb_n128_tile_index": 6
+    },
+    {
+      "b_n64_tile_index": 13,
+      "branch": "gate",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        832,
+        896
+      ],
+      "half": 1,
+      "k_trips": 16,
+      "logical_slice": 2,
+      "sfb_n128_tile_index": 6
+    },
+    {
+      "b_n64_tile_index": 14,
+      "branch": "gate",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        896,
+        960
+      ],
+      "half": 0,
+      "k_trips": 16,
+      "logical_slice": 3,
+      "sfb_n128_tile_index": 7
+    },
+    {
+      "b_n64_tile_index": 15,
+      "branch": "gate",
+      "bytes": {
+        "a": 131072,
+        "b": 65536,
+        "sfa": 16384,
+        "sfb_physical": 16384
+      },
+      "global_n_range": [
+        960,
+        1024
+      ],
+      "half": 1,
+      "k_trips": 16,
+      "logical_slice": 3,
+      "sfb_n128_tile_index": 7
+    }
+  ],
+  "evidence_boundary": [
+    "A/SFA and physical-N128 SFB replay are allowed candidate consequences.",
+    "This ledger checks registered coordinates and source identity; matched NCU checks dynamic Tensor work."
+  ],
+  "gate_pass": true,
+  "identity": {
+    "anchor": ".claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/overlays/anchor_8warp_n128/moe_dynamic_kernel.py",
+    "anchor_sha256": "3cd9e6a26056d9221f59ea6749cd601c25cbef017cf6e7349efe0925180407c1",
+    "candidate": ".claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/overlays/candidate_8warp_native_n64_v0/moe_dynamic_kernel.py",
+    "candidate_sha256": "1953cbb7717cda4461a4f199d05f370a4bdb35b4b8ef7556443caf36b0b12ec2"
+  },
+  "schema": "exp007.work-ledger.v1",
+  "shape": {
+    "H": 2048,
+    "I_tp": 512,
+    "M": 128,
+    "k_tile": 128,
+    "logical_n": 128,
+    "native_fc1_n": 64
+  },
+  "source_identity": {
+    "fc2_scatter": {
+      "anchor_executable_sha256": "bfaf8a8fd604aa4c12833023ee329759d53273da52b6c4f6192b7f1c4a7eaa0e",
+      "anchor_sha256": "270e817d7aec63f9b905ceeb185b534e2dd78e18d48964a0c86e3bc8489d5131",
+      "byte_identical": false,
+      "candidate_executable_sha256": "bfaf8a8fd604aa4c12833023ee329759d53273da52b6c4f6192b7f1c4a7eaa0e",
+      "candidate_sha256": "3ca82684d8ba9678245bb046ced9a91e8fd6c380e76d4d4fa72d1d7c42982e97",
+      "end_marker": "                    # Signal that FC2/scatter no longer needs sA",
+      "executable_identical": true,
+      "start_marker": "                    # PHASE B: Sweep ALL FC2 output tiles"
+    },
+    "scheduler": {
+      "anchor_executable_sha256": "6dc208e6f195157c6f103f770ab7c9caad8a656cb3d35194b4326b9cdadd897b",
+      "anchor_sha256": "b60c15ec12411dd8be69ee89d811823da5fe6e4abe0f46cee8791a67b325df98",
+      "byte_identical": true,
+      "candidate_executable_sha256": "6dc208e6f195157c6f103f770ab7c9caad8a656cb3d35194b4326b9cdadd897b",
+      "candidate_sha256": "b60c15ec12411dd8be69ee89d811823da5fe6e4abe0f46cee8791a67b325df98",
+      "end_marker": "        gA = cute.local_tile(",
+      "executable_identical": true,
+      "start_marker": "        # Phase 0: cooperative init"
+    }
+  },
+  "source_temporal_contract": {
+    "checks": {
+      "activation_store_is_inside_two_half_loop": true,
+      "consumer_source_order_gate_up_activation_store": true,
+      "fc1_tile_is_half_of_logical_n": true,
+      "one_gate_n64_accumulator_object": true,
+      "one_up_n64_accumulator_object": true,
+      "physical_sfb_n128_rounding_explicit": true,
+      "producer_gate_native_n64_coordinate": true,
+      "producer_up_native_n64_coordinate": true,
+      "q1_occurs_once_after_both_halves": true,
+      "single_fc1_to_fc2_handoff": true
+    },
+    "consumer_region_sha256": "8d4a2fb2907dad5c8ff8d94de06cce4f387518888824cf210806f3c68dc1871b",
+    "evidence_boundary": "This proves source structure/order only. Compiler resource/SASS and NCU evidence separately prove the compiled spill outcome; this check does not reconstruct exact register live intervals.",
+    "gate_pass": true,
+    "ordered_markers": [
+      "gate_acc.fill(0.0)",
+      "up_acc.fill(0.0)",
+      "gated_activation_f32(",
+      "cute.copy(\n                                    fc1_tiled_copy_r2s,"
+    ]
+  },
+  "traffic_totals": {
+    "anchor": {
+      "a": 1048576,
+      "b": 1048576,
+      "sfa": 131072,
+      "sfb_physical": 131072
+    },
+    "boundary": "one complete Gate+Up sweep across I_tp=512",
+    "candidate": {
+      "a": 2097152,
+      "b": 1048576,
+      "sfa": 262144,
+      "sfb_physical": 262144
+    }
+  }
+}

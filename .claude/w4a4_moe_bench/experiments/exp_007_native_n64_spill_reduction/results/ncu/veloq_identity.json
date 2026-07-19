@@ -1,0 +1,43 @@
+{
+  "arms": {
+    "anchor": {
+      "block": [
+        288,
+        1,
+        1
+      ],
+      "context_id": 1,
+      "device_id": 0,
+      "grid": [
+        1,
+        1,
+        110
+      ],
+      "kernel": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+      "launch_row_id": "launch:0",
+      "loaded_cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+      "report_sha256": "f77318a2f02624313ba1b3a7a78820c853c9f3399233cfd4e520be6e4a355dd2",
+      "stream_id": 7
+    },
+    "candidate": {
+      "block": [
+        288,
+        1,
+        1
+      ],
+      "context_id": 1,
+      "device_id": 0,
+      "grid": [
+        1,
+        1,
+        110
+      ],
+      "kernel": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+      "launch_row_id": "launch:0",
+      "loaded_cubin_sha256": "a9557634cf3d1bff59ca93739e75a1acd1187707222255fead78e2e6e8a73af9",
+      "report_sha256": "bf4a395e55249ada466d225998e3a6ad170db78bb0eb248a11d2785d95789e8c",
+      "stream_id": 7
+    }
+  },
+  "schema": "exp007.veloq-ncu-identity.v1"
+}

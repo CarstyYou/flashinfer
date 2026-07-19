@@ -1,0 +1,287 @@
+{
+  "gate_pass": false,
+  "interpretation_contract": {
+    "gate_b_uninstrumented_latency_is_authority": true,
+    "marker_phase_share_never_replaces_gate_b": true,
+    "spill_change_forbids_precise_uninstrumented_attribution": true
+  },
+  "paired_v0_v1_phase_delta": {
+    "allowed": false,
+    "both_versions_quantitative": true,
+    "cross_version_identity": {
+      "checks": {
+        "dispatch_base": true,
+        "event_abi": true,
+        "fixture": true,
+        "four_independent_jit_namespaces": true,
+        "gpu": true,
+        "normalized_dispatch": true,
+        "probe_dispatch": true,
+        "reference": true,
+        "runtime": true,
+        "weights": true,
+        "wrapper_base": true
+      },
+      "gate_pass": true
+    },
+    "perturbation_overhead_asymmetry_percentage_points": 2.832693113389939,
+    "required_max_asymmetry_percentage_points": 2.0
+  },
+  "schema": "exp008.marker-perturbation-evidence.v1",
+  "versions": {
+    "v0": {
+      "absolute_control_probe_perturbation_pct": 0.3564806234892748,
+      "classification": "quantitative_probe_level_diagnostic",
+      "control_median_us": 1804.2880296707153,
+      "control_probe_identity": {
+        "checks": {
+          "base_source_identity_equal": true,
+          "dispatch_binary_source_distinct": true,
+          "event_abi_equal": true,
+          "fixture_equal": true,
+          "independent_jit_namespaces": true,
+          "kernel_source_equal": true,
+          "normalized_dispatch_equal": true,
+          "reference_equal": true,
+          "runtime_environment_equal": true,
+          "weights_equal": true
+        },
+        "gate_pass": true
+      },
+      "may_replace_uninstrumented_gate_b_latency": false,
+      "phase_stability": {
+        "marker_cost_le_10pct": true,
+        "marker_cost_pct_of_phase_mean_max": {
+          "claim_cache_transition": 2.788866528103109,
+          "combined_fc2_scatter": 0.09737621777868567,
+          "fc1_interleaved_activation_envelope": 0.11087928673488483,
+          "front_end_route_q0": 0.011493628350392665,
+          "q1": 2.1140556356755225
+        },
+        "phase_replay_cv_le_5pct": true,
+        "phase_replay_cv_pct": {
+          "claim_cache_transition": 0.7409955763596436,
+          "combined_fc2_scatter": 0.13408211168963508,
+          "fc1_interleaved_activation_envelope": 0.16282071042134613,
+          "front_end_route_q0": 0.34804587662952946,
+          "q1": 0.20964418865603726,
+          "residual": 1.5363301237246882
+        },
+        "summary": {
+          "denominator_median_sm_equivalent_us": 1800.128,
+          "grid_z": 110,
+          "phase_time_definition": "median(duration_ns) / grid_z / 1000",
+          "phases": {
+            "claim_cache_transition": {
+              "median_share_pct": 1.4903990665714277,
+              "median_sm_equivalent_us": 26.829090909090908,
+              "replay_cv_pct": 0.7409955763596436
+            },
+            "combined_fc2_scatter": {
+              "median_share_pct": 42.18674876775713,
+              "median_sm_equivalent_us": 759.8807272727273,
+              "replay_cv_pct": 0.13408211168963508
+            },
+            "fc1_interleaved_activation_envelope": {
+              "median_share_pct": 37.07169106358497,
+              "median_sm_equivalent_us": 667.3378909090909,
+              "replay_cv_pct": 0.16282071042134613
+            },
+            "front_end_route_q0": {
+              "median_share_pct": 15.503980471392431,
+              "median_sm_equivalent_us": 279.36436363636363,
+              "replay_cv_pct": 0.34804587662952946
+            },
+            "q1": {
+              "median_share_pct": 1.9439425721645653,
+              "median_sm_equivalent_us": 34.99345454545455,
+              "replay_cv_pct": 0.20964418865603726
+            },
+            "residual": {
+              "median_share_pct": 1.7659972776094695,
+              "median_sm_equivalent_us": 31.778909090909092,
+              "replay_cv_pct": 1.5363301237246882
+            }
+          }
+        }
+      },
+      "probe_median_us": 1810.7199668884277,
+      "probe_over_control_overhead_pct": 0.3564806234892748,
+      "quantitative_phase_delta_eligible": true,
+      "resource": {
+        "achieved_occupancy_same": true,
+        "control_zero_spill": true,
+        "drift_pct": {
+          "compiler_spillrefill_sass": 0.0,
+          "registers_per_thread": 3.4246575342465753,
+          "smem_bytes": 0.0,
+          "stack_bytes_per_thread": 0.0,
+          "static_spill_load_bytes": 0.0,
+          "static_spill_store_bytes": 0.0
+        },
+        "dynamic_spill_identity": {
+          "sass__inst_executed_register_spilling_mem_local_op_read": true,
+          "sass__inst_executed_register_spilling_mem_local_op_write": true,
+          "sass__inst_executed_register_spilling_op_read": true,
+          "sass__inst_executed_register_spilling_op_write": true
+        },
+        "max_drift_pct": 3.4246575342465753,
+        "probe_zero_spill": true,
+        "spill_transition_or_count_change": false
+      },
+      "resource_capture_identity": {
+        "measurement_no_marker": {
+          "checks": {
+            "cubin_in_capture_jit_artifacts": true,
+            "dispatch_source": true,
+            "gpu_uuid": true,
+            "jit_artifact_set": true,
+            "kernel_source": true,
+            "kernel_symbol_static_ncu_exact": true
+          },
+          "gate_pass": true
+        },
+        "phase_probe": {
+          "checks": {
+            "cubin_in_capture_jit_artifacts": true,
+            "dispatch_source": true,
+            "gpu_uuid": true,
+            "jit_artifact_set": true,
+            "kernel_source": true,
+            "kernel_symbol_static_ncu_exact": true
+          },
+          "gate_pass": true
+        }
+      },
+      "schema": "exp008.marker-perturbation-version.v1",
+      "version": "v0"
+    },
+    "v1": {
+      "absolute_control_probe_perturbation_pct": 3.189173736879214,
+      "classification": "quantitative_probe_level_diagnostic",
+      "control_median_us": 1561.2800121307373,
+      "control_probe_identity": {
+        "checks": {
+          "base_source_identity_equal": true,
+          "dispatch_binary_source_distinct": true,
+          "event_abi_equal": true,
+          "fixture_equal": true,
+          "independent_jit_namespaces": true,
+          "kernel_source_equal": true,
+          "normalized_dispatch_equal": true,
+          "reference_equal": true,
+          "runtime_environment_equal": true,
+          "weights_equal": true
+        },
+        "gate_pass": true
+      },
+      "may_replace_uninstrumented_gate_b_latency": false,
+      "phase_stability": {
+        "marker_cost_le_10pct": true,
+        "marker_cost_pct_of_phase_mean_max": {
+          "claim_cache_transition": 2.7028179221554334,
+          "combined_fc2_scatter": 0.09750366023204027,
+          "fc1_interleaved_activation_envelope": 0.15820869823437597,
+          "front_end_route_q0": 0.011482290654354866,
+          "q1": 2.116084242849037
+        },
+        "phase_replay_cv_le_5pct": true,
+        "phase_replay_cv_pct": {
+          "claim_cache_transition": 0.14513796313287286,
+          "combined_fc2_scatter": 0.2694844561874207,
+          "fc1_interleaved_activation_envelope": 0.23476818308560937,
+          "front_end_route_q0": 0.11998406841870354,
+          "q1": 0.19824650353080778,
+          "residual": 2.0501735728719788
+        },
+        "summary": {
+          "denominator_median_sm_equivalent_us": 1599.296,
+          "grid_z": 110,
+          "phase_time_definition": "median(duration_ns) / grid_z / 1000",
+          "phases": {
+            "claim_cache_transition": {
+              "median_share_pct": 1.7098149284513466,
+              "median_sm_equivalent_us": 27.329163636363635,
+              "replay_cv_pct": 0.14513796313287286
+            },
+            "combined_fc2_scatter": {
+              "median_share_pct": 47.52530323720781,
+              "median_sm_equivalent_us": 760.448,
+              "replay_cv_pct": 0.2694844561874207
+            },
+            "fc1_interleaved_activation_envelope": {
+              "median_share_pct": 29.270879098933577,
+              "median_sm_equivalent_us": 468.13236363636366,
+              "replay_cv_pct": 0.23476818308560937
+            },
+            "front_end_route_q0": {
+              "median_share_pct": 17.452824697412314,
+              "median_sm_equivalent_us": 279.12232727272726,
+              "replay_cv_pct": 0.11998406841870354
+            },
+            "q1": {
+              "median_share_pct": 2.1868167448222673,
+              "median_sm_equivalent_us": 34.97367272727273,
+              "replay_cv_pct": 0.19824650353080778
+            },
+            "residual": {
+              "median_share_pct": 1.8505867927833246,
+              "median_sm_equivalent_us": 29.505163636363637,
+              "replay_cv_pct": 2.0501735728719788
+            }
+          }
+        }
+      },
+      "probe_median_us": 1611.0719442367554,
+      "probe_over_control_overhead_pct": 3.189173736879214,
+      "quantitative_phase_delta_eligible": true,
+      "resource": {
+        "achieved_occupancy_same": true,
+        "control_zero_spill": true,
+        "drift_pct": {
+          "compiler_spillrefill_sass": 0.0,
+          "registers_per_thread": 0.625,
+          "smem_bytes": 0.0,
+          "stack_bytes_per_thread": 0.0,
+          "static_spill_load_bytes": 0.0,
+          "static_spill_store_bytes": 0.0
+        },
+        "dynamic_spill_identity": {
+          "sass__inst_executed_register_spilling_mem_local_op_read": true,
+          "sass__inst_executed_register_spilling_mem_local_op_write": true,
+          "sass__inst_executed_register_spilling_op_read": true,
+          "sass__inst_executed_register_spilling_op_write": true
+        },
+        "max_drift_pct": 0.625,
+        "probe_zero_spill": true,
+        "spill_transition_or_count_change": false
+      },
+      "resource_capture_identity": {
+        "measurement_no_marker": {
+          "checks": {
+            "cubin_in_capture_jit_artifacts": true,
+            "dispatch_source": true,
+            "gpu_uuid": true,
+            "jit_artifact_set": true,
+            "kernel_source": true,
+            "kernel_symbol_static_ncu_exact": true
+          },
+          "gate_pass": true
+        },
+        "phase_probe": {
+          "checks": {
+            "cubin_in_capture_jit_artifacts": true,
+            "dispatch_source": true,
+            "gpu_uuid": true,
+            "jit_artifact_set": true,
+            "kernel_source": true,
+            "kernel_symbol_static_ncu_exact": true
+          },
+          "gate_pass": true
+        }
+      },
+      "schema": "exp008.marker-perturbation-version.v1",
+      "version": "v1"
+    }
+  }
+}

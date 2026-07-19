@@ -1,0 +1,484 @@
+{
+  "cases": {
+    "n128": {
+      "application_graphics_clock_mhz": 2377,
+      "arm": "n128",
+      "capture_identity_checks": {
+        "arm": true,
+        "clock": true,
+        "clock_control_none": true,
+        "cubin_sha256": true,
+        "gpu_uuid": true,
+        "internal_arm": true,
+        "kernel_symbol": true,
+        "native_csv_sha256": true,
+        "overlay_sha256": true,
+        "profile_target_checks": true,
+        "report_sha256": true,
+        "required_metric_ids": true,
+        "schema": true
+      },
+      "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+      "dynamic_zero_spill": false,
+      "gate_pass": true,
+      "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+      "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+      "metrics": {
+        "fp4_tensor_ops": {
+          "metric_id": "sm__ops_path_tensor_src_fp4_dst_fp32.sum",
+          "unit": "",
+          "value": 510564237312.0
+        },
+        "registers_per_thread": {
+          "metric_id": "launch__registers_per_thread",
+          "unit": "register/thread",
+          "value": 168.0
+        },
+        "shared_mem_per_block_bytes": {
+          "metric_id": "launch__shared_mem_per_block",
+          "unit": "byte/block",
+          "value": 93184.0
+        },
+        "spill_refill_bytes": {
+          "metric_id": "sass__inst_executed_register_spilling_mem_local_op_read",
+          "unit": "byte",
+          "value": 1136128.0
+        },
+        "spill_refill_instructions": {
+          "metric_id": "sass__inst_executed_register_spilling_op_read",
+          "unit": "inst",
+          "value": 1136128.0
+        },
+        "spill_store_bytes": {
+          "metric_id": "sass__inst_executed_register_spilling_mem_local_op_write",
+          "unit": "byte",
+          "value": 568064.0
+        },
+        "spill_store_instructions": {
+          "metric_id": "sass__inst_executed_register_spilling_op_write",
+          "unit": "inst",
+          "value": 568064.0
+        },
+        "tensor_instructions": {
+          "metric_id": "sm__inst_executed_pipe_tensor_subpipe_hmma.sum",
+          "unit": "inst",
+          "value": 31162368.0
+        }
+      },
+      "native_checks": {
+        "arm": true,
+        "block": true,
+        "canonical_fixture": true,
+        "grid": true,
+        "internal_arm": true,
+        "kernel_symbol": true,
+        "m8192": true,
+        "metric_ids": true,
+        "nonspill_capture_gates": true,
+        "profile_target_checks": true,
+        "registers_match_static": true,
+        "schema": true,
+        "shared_matches_static": true
+      },
+      "observed_launch": {
+        "block": [
+          288,
+          1,
+          1
+        ],
+        "context_id": 1,
+        "device_id": 0,
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "row_id": 0,
+        "stream_id": 7
+      },
+      "paths": {
+        "capture_identity": "results/ncu/n128/m8192/canonical_v0/capture_identity.json",
+        "dynamic_ncu": "results/ncu/n128/m8192/canonical_v0/dynamic_ncu.json",
+        "native_csv": "results/ncu/n128/m8192/canonical_v0/native_raw.csv",
+        "report": "results/ncu/n128/m8192/canonical_v0/trace.ncu-rep",
+        "veloq_api": "results/ncu/n128/m8192/canonical_v0/veloq_api"
+      },
+      "source_sha256": "3cd9e6a26056d9221f59ea6749cd601c25cbef017cf6e7349efe0925180407c1",
+      "spill_values": {
+        "spill_refill_bytes": 1136128.0,
+        "spill_refill_instructions": 1136128.0,
+        "spill_store_bytes": 568064.0,
+        "spill_store_instructions": 568064.0
+      },
+      "veloq_api_checks": {
+        "block": true,
+        "disasm_cubin_sha256": true,
+        "grid": true,
+        "kernel_symbol": true,
+        "launch_row_id": true,
+        "metric_values_match_native": true
+      }
+    },
+    "v0": {
+      "application_graphics_clock_mhz": 2377,
+      "arm": "v0",
+      "capture_identity_checks": {
+        "arm": true,
+        "clock": true,
+        "clock_control_none": true,
+        "cubin_sha256": true,
+        "gpu_uuid": true,
+        "internal_arm": true,
+        "kernel_symbol": true,
+        "native_csv_sha256": true,
+        "overlay_sha256": true,
+        "profile_target_checks": true,
+        "report_sha256": true,
+        "required_metric_ids": true,
+        "schema": true
+      },
+      "cubin_sha256": "a9557634cf3d1bff59ca93739e75a1acd1187707222255fead78e2e6e8a73af9",
+      "dynamic_zero_spill": true,
+      "gate_pass": true,
+      "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+      "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+      "metrics": {
+        "fp4_tensor_ops": {
+          "metric_id": "sm__ops_path_tensor_src_fp4_dst_fp32.sum",
+          "unit": "",
+          "value": 510564237312.0
+        },
+        "registers_per_thread": {
+          "metric_id": "launch__registers_per_thread",
+          "unit": "register/thread",
+          "value": 146.0
+        },
+        "shared_mem_per_block_bytes": {
+          "metric_id": "launch__shared_mem_per_block",
+          "unit": "byte/block",
+          "value": 74752.0
+        },
+        "spill_refill_bytes": {
+          "metric_id": "sass__inst_executed_register_spilling_mem_local_op_read",
+          "unit": "byte",
+          "value": 0.0
+        },
+        "spill_refill_instructions": {
+          "metric_id": "sass__inst_executed_register_spilling_op_read",
+          "unit": "inst",
+          "value": 0.0
+        },
+        "spill_store_bytes": {
+          "metric_id": "sass__inst_executed_register_spilling_mem_local_op_write",
+          "unit": "byte",
+          "value": 0.0
+        },
+        "spill_store_instructions": {
+          "metric_id": "sass__inst_executed_register_spilling_op_write",
+          "unit": "inst",
+          "value": 0.0
+        },
+        "tensor_instructions": {
+          "metric_id": "sm__inst_executed_pipe_tensor_subpipe_hmma.sum",
+          "unit": "inst",
+          "value": 31162368.0
+        }
+      },
+      "native_checks": {
+        "arm": true,
+        "block": true,
+        "canonical_fixture": true,
+        "grid": true,
+        "internal_arm": true,
+        "kernel_symbol": true,
+        "m8192": true,
+        "metric_ids": true,
+        "nonspill_capture_gates": true,
+        "profile_target_checks": true,
+        "registers_match_static": true,
+        "schema": true,
+        "shared_matches_static": true
+      },
+      "observed_launch": {
+        "block": [
+          288,
+          1,
+          1
+        ],
+        "context_id": 1,
+        "device_id": 0,
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "row_id": 0,
+        "stream_id": 7
+      },
+      "paths": {
+        "capture_identity": "results/ncu/v0/m8192/canonical_v0/capture_identity.json",
+        "dynamic_ncu": "results/ncu/v0/m8192/canonical_v0/dynamic_ncu.json",
+        "native_csv": "results/ncu/v0/m8192/canonical_v0/native_raw.csv",
+        "report": "results/ncu/v0/m8192/canonical_v0/trace.ncu-rep",
+        "veloq_api": "results/ncu/v0/m8192/canonical_v0/veloq_api"
+      },
+      "source_sha256": "1953cbb7717cda4461a4f199d05f370a4bdb35b4b8ef7556443caf36b0b12ec2",
+      "spill_values": {
+        "spill_refill_bytes": 0.0,
+        "spill_refill_instructions": 0.0,
+        "spill_store_bytes": 0.0,
+        "spill_store_instructions": 0.0
+      },
+      "veloq_api_checks": {
+        "block": true,
+        "disasm_cubin_sha256": true,
+        "grid": true,
+        "kernel_symbol": true,
+        "launch_row_id": true,
+        "metric_values_match_native": true
+      }
+    },
+    "v1": {
+      "application_graphics_clock_mhz": 2377,
+      "arm": "v1",
+      "capture_identity_checks": {
+        "arm": true,
+        "clock": true,
+        "clock_control_none": true,
+        "cubin_sha256": true,
+        "gpu_uuid": true,
+        "internal_arm": true,
+        "kernel_symbol": true,
+        "native_csv_sha256": true,
+        "overlay_sha256": true,
+        "profile_target_checks": true,
+        "report_sha256": true,
+        "required_metric_ids": true,
+        "schema": true
+      },
+      "cubin_sha256": "4b835aa8ce91a4dd12b4dc4f43508c205c117aaeb193995fff57dd3ddbeb7725",
+      "dynamic_zero_spill": true,
+      "gate_pass": true,
+      "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+      "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+      "metrics": {
+        "fp4_tensor_ops": {
+          "metric_id": "sm__ops_path_tensor_src_fp4_dst_fp32.sum",
+          "unit": "",
+          "value": 510564237312.0
+        },
+        "registers_per_thread": {
+          "metric_id": "launch__registers_per_thread",
+          "unit": "register/thread",
+          "value": 160.0
+        },
+        "shared_mem_per_block_bytes": {
+          "metric_id": "launch__shared_mem_per_block",
+          "unit": "byte/block",
+          "value": 84992.0
+        },
+        "spill_refill_bytes": {
+          "metric_id": "sass__inst_executed_register_spilling_mem_local_op_read",
+          "unit": "byte",
+          "value": 0.0
+        },
+        "spill_refill_instructions": {
+          "metric_id": "sass__inst_executed_register_spilling_op_read",
+          "unit": "inst",
+          "value": 0.0
+        },
+        "spill_store_bytes": {
+          "metric_id": "sass__inst_executed_register_spilling_mem_local_op_write",
+          "unit": "byte",
+          "value": 0.0
+        },
+        "spill_store_instructions": {
+          "metric_id": "sass__inst_executed_register_spilling_op_write",
+          "unit": "inst",
+          "value": 0.0
+        },
+        "tensor_instructions": {
+          "metric_id": "sm__inst_executed_pipe_tensor_subpipe_hmma.sum",
+          "unit": "inst",
+          "value": 31162368.0
+        }
+      },
+      "native_checks": {
+        "arm": true,
+        "block": true,
+        "canonical_fixture": true,
+        "grid": true,
+        "internal_arm": true,
+        "kernel_symbol": true,
+        "m8192": true,
+        "metric_ids": true,
+        "nonspill_capture_gates": true,
+        "profile_target_checks": true,
+        "registers_match_static": true,
+        "schema": true,
+        "shared_matches_static": true
+      },
+      "observed_launch": {
+        "block": [
+          288,
+          1,
+          1
+        ],
+        "context_id": 1,
+        "device_id": 0,
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "row_id": 0,
+        "stream_id": 7
+      },
+      "paths": {
+        "capture_identity": "results/ncu/v1/m8192/canonical_v0/capture_identity.json",
+        "dynamic_ncu": "results/ncu/v1/m8192/canonical_v0/dynamic_ncu.json",
+        "native_csv": "results/ncu/v1/m8192/canonical_v0/native_raw.csv",
+        "report": "results/ncu/v1/m8192/canonical_v0/trace.ncu-rep",
+        "veloq_api": "results/ncu/v1/m8192/canonical_v0/veloq_api"
+      },
+      "source_sha256": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971",
+      "spill_values": {
+        "spill_refill_bytes": 0.0,
+        "spill_refill_instructions": 0.0,
+        "spill_store_bytes": 0.0,
+        "spill_store_instructions": 0.0
+      },
+      "veloq_api_checks": {
+        "block": true,
+        "disasm_cubin_sha256": true,
+        "grid": true,
+        "kernel_symbol": true,
+        "launch_row_id": true,
+        "metric_values_match_native": true
+      }
+    }
+  },
+  "cross_arm_checks": {
+    "all_arm_evidence_gates": true,
+    "all_arms_same_executed_tensor_instructions": true,
+    "all_arms_same_fp4_tensor_ops": true,
+    "n128_dynamic_spill_observed": true,
+    "v0_dynamic_zero_spill": true,
+    "v1_dynamic_zero_spill": true
+  },
+  "evidence_boundary": "NCU dynamic metrics describe one final graph-replay MoEDynamicKernel per arm. They do not establish end-to-end latency or run-to-run variance.",
+  "gate_pass": true,
+  "prerequisites": {
+    "arms": {
+      "n128": {
+        "application_graphics_clock_mhz": 2377,
+        "cubin_sha256": "b2bc3c4c229ebee967a6b0d3c5649bc06e3629d46793a19af845665f93683f17",
+        "expected_capture_root": "results/ncu/n128/m8192/canonical_v0",
+        "expected_veloq_api_files": [
+          "results/ncu/n128/m8192/canonical_v0/veloq_api/info.json",
+          "results/ncu/n128/m8192/canonical_v0/veloq_api/summary.json",
+          "results/ncu/n128/m8192/canonical_v0/veloq_api/launches.json",
+          "results/ncu/n128/m8192/canonical_v0/veloq_api/inspect_launch0.json",
+          "results/ncu/n128/m8192/canonical_v0/veloq_api/metrics_spill_refill_instructions.json",
+          "results/ncu/n128/m8192/canonical_v0/veloq_api/metrics_spill_store_instructions.json",
+          "results/ncu/n128/m8192/canonical_v0/veloq_api/metrics_spill_refill_bytes.json",
+          "results/ncu/n128/m8192/canonical_v0/veloq_api/metrics_spill_store_bytes.json",
+          "results/ncu/n128/m8192/canonical_v0/veloq_api/metrics_tensor_instructions.json",
+          "results/ncu/n128/m8192/canonical_v0/veloq_api/metrics_fp4_tensor_ops.json",
+          "results/ncu/n128/m8192/canonical_v0/veloq_api/metrics_launch_registers.json",
+          "results/ncu/n128/m8192/canonical_v0/veloq_api/metrics_launch_shared.json",
+          "results/ncu/n128/m8192/canonical_v0/veloq_api/disasm_launch0.json"
+        ],
+        "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "preparation_path": "results/canonical/n128/raw/candidate_8warp_serial_v0/m8192/canonical/preparation.json",
+        "preparation_sha256": "5b8921ea467532744a844008329559647affbe6333c6021a08bbf638c43a989e",
+        "registers_per_thread": 168,
+        "source_sha256": "3cd9e6a26056d9221f59ea6749cd601c25cbef017cf6e7349efe0925180407c1",
+        "total_shared_bytes_per_cta": 93184
+      },
+      "v0": {
+        "application_graphics_clock_mhz": 2377,
+        "cubin_sha256": "a9557634cf3d1bff59ca93739e75a1acd1187707222255fead78e2e6e8a73af9",
+        "expected_capture_root": "results/ncu/v0/m8192/canonical_v0",
+        "expected_veloq_api_files": [
+          "results/ncu/v0/m8192/canonical_v0/veloq_api/info.json",
+          "results/ncu/v0/m8192/canonical_v0/veloq_api/summary.json",
+          "results/ncu/v0/m8192/canonical_v0/veloq_api/launches.json",
+          "results/ncu/v0/m8192/canonical_v0/veloq_api/inspect_launch0.json",
+          "results/ncu/v0/m8192/canonical_v0/veloq_api/metrics_spill_refill_instructions.json",
+          "results/ncu/v0/m8192/canonical_v0/veloq_api/metrics_spill_store_instructions.json",
+          "results/ncu/v0/m8192/canonical_v0/veloq_api/metrics_spill_refill_bytes.json",
+          "results/ncu/v0/m8192/canonical_v0/veloq_api/metrics_spill_store_bytes.json",
+          "results/ncu/v0/m8192/canonical_v0/veloq_api/metrics_tensor_instructions.json",
+          "results/ncu/v0/m8192/canonical_v0/veloq_api/metrics_fp4_tensor_ops.json",
+          "results/ncu/v0/m8192/canonical_v0/veloq_api/metrics_launch_registers.json",
+          "results/ncu/v0/m8192/canonical_v0/veloq_api/metrics_launch_shared.json",
+          "results/ncu/v0/m8192/canonical_v0/veloq_api/disasm_launch0.json"
+        ],
+        "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "preparation_path": "results/canonical/v0/raw/candidate_8warp_n64_temporal_replay_v0/m8192/canonical/preparation.json",
+        "preparation_sha256": "254298966ded96fbfe5078e5d903f25dd30db633d80b1f514bf41ebaa89bbbd6",
+        "registers_per_thread": 146,
+        "source_sha256": "1953cbb7717cda4461a4f199d05f370a4bdb35b4b8ef7556443caf36b0b12ec2",
+        "total_shared_bytes_per_cta": 74752
+      },
+      "v1": {
+        "application_graphics_clock_mhz": 2377,
+        "cubin_sha256": "4b835aa8ce91a4dd12b4dc4f43508c205c117aaeb193995fff57dd3ddbeb7725",
+        "expected_capture_root": "results/ncu/v1/m8192/canonical_v0",
+        "expected_veloq_api_files": [
+          "results/ncu/v1/m8192/canonical_v0/veloq_api/info.json",
+          "results/ncu/v1/m8192/canonical_v0/veloq_api/summary.json",
+          "results/ncu/v1/m8192/canonical_v0/veloq_api/launches.json",
+          "results/ncu/v1/m8192/canonical_v0/veloq_api/inspect_launch0.json",
+          "results/ncu/v1/m8192/canonical_v0/veloq_api/metrics_spill_refill_instructions.json",
+          "results/ncu/v1/m8192/canonical_v0/veloq_api/metrics_spill_store_instructions.json",
+          "results/ncu/v1/m8192/canonical_v0/veloq_api/metrics_spill_refill_bytes.json",
+          "results/ncu/v1/m8192/canonical_v0/veloq_api/metrics_spill_store_bytes.json",
+          "results/ncu/v1/m8192/canonical_v0/veloq_api/metrics_tensor_instructions.json",
+          "results/ncu/v1/m8192/canonical_v0/veloq_api/metrics_fp4_tensor_ops.json",
+          "results/ncu/v1/m8192/canonical_v0/veloq_api/metrics_launch_registers.json",
+          "results/ncu/v1/m8192/canonical_v0/veloq_api/metrics_launch_shared.json",
+          "results/ncu/v1/m8192/canonical_v0/veloq_api/disasm_launch0.json"
+        ],
+        "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "preparation_path": "results/canonical/v1/raw/candidate_8warp_n64_temporal_replay_v0/m8192/canonical/preparation.json",
+        "preparation_sha256": "f214d1c15b71ef61a250347b4cb15abcdbd01b6495c0d17449b9bd7908f4a51c",
+        "registers_per_thread": 160,
+        "source_sha256": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971",
+        "total_shared_bytes_per_cta": 84992
+      }
+    },
+    "static_evidence_path": "results/static_spill_evidence.json",
+    "static_evidence_sha256": "84824366e571ad08f4010fae462931e58a6999ac0f06a0602b1517059a27a5d2"
+  },
+  "required_metric_ids": {
+    "fp4_tensor_ops": "sm__ops_path_tensor_src_fp4_dst_fp32.sum",
+    "registers_per_thread": "launch__registers_per_thread",
+    "shared_mem_per_block_bytes": "launch__shared_mem_per_block",
+    "spill_refill_bytes": "sass__inst_executed_register_spilling_mem_local_op_read",
+    "spill_refill_instructions": "sass__inst_executed_register_spilling_op_read",
+    "spill_store_bytes": "sass__inst_executed_register_spilling_mem_local_op_write",
+    "spill_store_instructions": "sass__inst_executed_register_spilling_op_write",
+    "tensor_instructions": "sm__inst_executed_pipe_tensor_subpipe_hmma.sum"
+  },
+  "schema": "exp008.dynamic-ncu-evidence.v1",
+  "scope": {
+    "arms": [
+      "n128",
+      "v0",
+      "v1"
+    ],
+    "fixture": "canonical",
+    "m": 8192,
+    "profiled_launches_per_arm": 1,
+    "veloq_interface": "supported CLI JSON envelopes only",
+    "veloq_raw_sidecar_parsed": false
+  }
+}

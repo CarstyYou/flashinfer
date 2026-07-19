@@ -1,0 +1,1 @@
+ncu --import /workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_007_native_n64_spill_reduction/results/ncu/candidate/m8192/.canonical_v0.in-progress.1/trace.ncu-rep --csv --page raw --print-units base
