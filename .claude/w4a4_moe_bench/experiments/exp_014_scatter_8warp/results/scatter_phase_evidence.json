@@ -1,0 +1,686 @@
+{
+  "arms": {
+    "baseline_4warp_scatter": {
+      "body_ns": {
+        "aggregate": {
+          "mean_of_replay_means_ns": 1903.2,
+          "pooled_percentiles_available": false,
+          "primary_estimator": "median_of_replay_medians",
+          "replay_median_max_ns": 1920.0,
+          "replay_median_min_ns": 1904.0,
+          "replays": 5,
+          "tile_samples_per_replay": 16,
+          "value_ns": 1904.0
+        },
+        "per_replay": [
+          {
+            "max_ns": 2016.0,
+            "mean_ns": 1886.0,
+            "median_ns": 1904.0,
+            "min_ns": 1664.0,
+            "p10_ns": 1808.0,
+            "p90_ns": 1952.0,
+            "replay": 0,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 2016.0,
+            "mean_ns": 1892.0,
+            "median_ns": 1904.0,
+            "min_ns": 1696.0,
+            "p10_ns": 1808.0,
+            "p90_ns": 1968.0,
+            "replay": 1,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 2080.0,
+            "mean_ns": 1916.0,
+            "median_ns": 1904.0,
+            "min_ns": 1696.0,
+            "p10_ns": 1840.0,
+            "p90_ns": 2016.0,
+            "replay": 2,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 2016.0,
+            "mean_ns": 1900.0,
+            "median_ns": 1904.0,
+            "min_ns": 1664.0,
+            "p10_ns": 1824.0,
+            "p90_ns": 1984.0,
+            "replay": 3,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 2080.0,
+            "mean_ns": 1922.0,
+            "median_ns": 1920.0,
+            "min_ns": 1664.0,
+            "p10_ns": 1840.0,
+            "p90_ns": 2032.0,
+            "replay": 4,
+            "tile_samples": 16
+          }
+        ]
+      },
+      "capture": {
+        "path": "raw/scatter_phase_probe/baseline_4warp_scatter/m8192/capture.json",
+        "sha256": "531e5af136e18ad1de5e8351f4840d31c794bb9402e2f6ef64fc2b8fb4e2283d"
+      },
+      "cubin_sha256": [
+        "86275bc8a2cf6ffce151d75c2b204800c106ea30fe76bd12e5f0485eb572280e"
+      ],
+      "including_sync_ns": {
+        "aggregate": {
+          "mean_of_replay_means_ns": 1922.8,
+          "pooled_percentiles_available": false,
+          "primary_estimator": "median_of_replay_medians",
+          "replay_median_max_ns": 1936.0,
+          "replay_median_min_ns": 1920.0,
+          "replays": 5,
+          "tile_samples_per_replay": 16,
+          "value_ns": 1936.0
+        },
+        "per_replay": [
+          {
+            "max_ns": 2048.0,
+            "mean_ns": 1910.0,
+            "median_ns": 1920.0,
+            "min_ns": 1696.0,
+            "p10_ns": 1840.0,
+            "p90_ns": 1984.0,
+            "replay": 0,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 2048.0,
+            "mean_ns": 1914.0,
+            "median_ns": 1936.0,
+            "min_ns": 1696.0,
+            "p10_ns": 1840.0,
+            "p90_ns": 1984.0,
+            "replay": 1,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 2080.0,
+            "mean_ns": 1932.0,
+            "median_ns": 1936.0,
+            "min_ns": 1696.0,
+            "p10_ns": 1872.0,
+            "p90_ns": 2016.0,
+            "replay": 2,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 2016.0,
+            "mean_ns": 1916.0,
+            "median_ns": 1920.0,
+            "min_ns": 1696.0,
+            "p10_ns": 1856.0,
+            "p90_ns": 1984.0,
+            "replay": 3,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 2112.0,
+            "mean_ns": 1942.0,
+            "median_ns": 1936.0,
+            "min_ns": 1696.0,
+            "p10_ns": 1872.0,
+            "p90_ns": 2032.0,
+            "replay": 4,
+            "tile_samples": 16
+          }
+        ]
+      },
+      "probe_e2e_us": {
+        "aggregate": {
+          "max_us": 1589.6960496902466,
+          "min_us": 1578.271985054016,
+          "primary_estimator": "median",
+          "replays": 5,
+          "value_us": 1585.2479934692383
+        },
+        "per_replay": [
+          {
+            "elapsed_us": 1578.271985054016,
+            "replay": 0
+          },
+          {
+            "elapsed_us": 1589.6639823913574,
+            "replay": 1
+          },
+          {
+            "elapsed_us": 1583.232045173645,
+            "replay": 2
+          },
+          {
+            "elapsed_us": 1589.6960496902466,
+            "replay": 3
+          },
+          {
+            "elapsed_us": 1585.2479934692383,
+            "replay": 4
+          }
+        ]
+      },
+      "runtime_identity": {
+        "applications_graphics_clock_mhz": "2377",
+        "compute_capability": [
+          12,
+          0
+        ],
+        "cuda_runtime": "13.2",
+        "driver": "580.95.05",
+        "gpu_name": "NVIDIA Graphics Device",
+        "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+        "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+        "image_id": "sha256:a4e056e1d34a5cc9387512ffa3abeed778e3dc7966633c5154d771705d8835ac",
+        "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+        "packages": {
+          "cutlass-dsl": "not-installed-as-distribution",
+          "flashinfer-python": "not-installed-as-distribution",
+          "nvidia-cutlass-dsl": "4.6.0",
+          "torch": "2.12.0a0+5aff3928d8.nv26.5.50603568",
+          "tvm-ffi": "not-installed-as-distribution"
+        },
+        "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+        "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+        "sm_count": 110,
+        "torch": "2.12.0a0+5aff3928d8.nv26.05"
+      },
+      "static_resources": {
+        "cubin_sha256": "86275bc8a2cf6ffce151d75c2b204800c106ea30fe76bd12e5f0485eb572280e",
+        "ldl_instructions": 0,
+        "local_bytes_outside_stack": 0,
+        "registers_per_thread": 160,
+        "stack_bytes_per_thread": 0,
+        "static_zero_spill": true,
+        "stl_instructions": 0
+      }
+    },
+    "candidate_8warp_scatter": {
+      "body_ns": {
+        "aggregate": {
+          "mean_of_replay_means_ns": 1439.6,
+          "pooled_percentiles_available": false,
+          "primary_estimator": "median_of_replay_medians",
+          "replay_median_max_ns": 1456.0,
+          "replay_median_min_ns": 1408.0,
+          "replays": 5,
+          "tile_samples_per_replay": 16,
+          "value_ns": 1424.0
+        },
+        "per_replay": [
+          {
+            "max_ns": 1568.0,
+            "mean_ns": 1438.0,
+            "median_ns": 1424.0,
+            "min_ns": 1344.0,
+            "p10_ns": 1360.0,
+            "p90_ns": 1520.0,
+            "replay": 0,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 1696.0,
+            "mean_ns": 1452.0,
+            "median_ns": 1440.0,
+            "min_ns": 1344.0,
+            "p10_ns": 1376.0,
+            "p90_ns": 1536.0,
+            "replay": 1,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 1536.0,
+            "mean_ns": 1450.0,
+            "median_ns": 1456.0,
+            "min_ns": 1344.0,
+            "p10_ns": 1392.0,
+            "p90_ns": 1504.0,
+            "replay": 2,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 1536.0,
+            "mean_ns": 1434.0,
+            "median_ns": 1408.0,
+            "min_ns": 1344.0,
+            "p10_ns": 1376.0,
+            "p90_ns": 1520.0,
+            "replay": 3,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 1536.0,
+            "mean_ns": 1424.0,
+            "median_ns": 1408.0,
+            "min_ns": 1280.0,
+            "p10_ns": 1360.0,
+            "p90_ns": 1520.0,
+            "replay": 4,
+            "tile_samples": 16
+          }
+        ]
+      },
+      "capture": {
+        "path": "raw/scatter_phase_probe/candidate_8warp_scatter/m8192/capture.json",
+        "sha256": "cf91b96a0f1865a0eda0a884386e9af59c279a30e00a89eea60954bdc30d7021"
+      },
+      "cubin_sha256": [
+        "8129898494aa097024ab827dc867db0daa27d6b18c679c546f1db8e7d11e75ef"
+      ],
+      "including_sync_ns": {
+        "aggregate": {
+          "mean_of_replay_means_ns": 1464.8,
+          "pooled_percentiles_available": false,
+          "primary_estimator": "median_of_replay_medians",
+          "replay_median_max_ns": 1472.0,
+          "replay_median_min_ns": 1440.0,
+          "replays": 5,
+          "tile_samples_per_replay": 16,
+          "value_ns": 1440.0
+        },
+        "per_replay": [
+          {
+            "max_ns": 1568.0,
+            "mean_ns": 1458.0,
+            "median_ns": 1456.0,
+            "min_ns": 1344.0,
+            "p10_ns": 1376.0,
+            "p90_ns": 1552.0,
+            "replay": 0,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 1728.0,
+            "mean_ns": 1478.0,
+            "median_ns": 1440.0,
+            "min_ns": 1376.0,
+            "p10_ns": 1408.0,
+            "p90_ns": 1568.0,
+            "replay": 1,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 1568.0,
+            "mean_ns": 1476.0,
+            "median_ns": 1472.0,
+            "min_ns": 1376.0,
+            "p10_ns": 1424.0,
+            "p90_ns": 1536.0,
+            "replay": 2,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 1568.0,
+            "mean_ns": 1462.0,
+            "median_ns": 1440.0,
+            "min_ns": 1376.0,
+            "p10_ns": 1408.0,
+            "p90_ns": 1552.0,
+            "replay": 3,
+            "tile_samples": 16
+          },
+          {
+            "max_ns": 1568.0,
+            "mean_ns": 1450.0,
+            "median_ns": 1440.0,
+            "min_ns": 1312.0,
+            "p10_ns": 1376.0,
+            "p90_ns": 1552.0,
+            "replay": 4,
+            "tile_samples": 16
+          }
+        ]
+      },
+      "probe_e2e_us": {
+        "aggregate": {
+          "max_us": 1468.9279794692993,
+          "min_us": 1463.647961616516,
+          "primary_estimator": "median",
+          "replays": 5,
+          "value_us": 1466.048002243042
+        },
+        "per_replay": [
+          {
+            "elapsed_us": 1463.647961616516,
+            "replay": 0
+          },
+          {
+            "elapsed_us": 1464.0320539474487,
+            "replay": 1
+          },
+          {
+            "elapsed_us": 1468.7680006027222,
+            "replay": 2
+          },
+          {
+            "elapsed_us": 1466.048002243042,
+            "replay": 3
+          },
+          {
+            "elapsed_us": 1468.9279794692993,
+            "replay": 4
+          }
+        ]
+      },
+      "runtime_identity": {
+        "applications_graphics_clock_mhz": "2377",
+        "compute_capability": [
+          12,
+          0
+        ],
+        "cuda_runtime": "13.2",
+        "driver": "580.95.05",
+        "gpu_name": "NVIDIA Graphics Device",
+        "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+        "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+        "image_id": "sha256:a4e056e1d34a5cc9387512ffa3abeed778e3dc7966633c5154d771705d8835ac",
+        "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+        "packages": {
+          "cutlass-dsl": "not-installed-as-distribution",
+          "flashinfer-python": "not-installed-as-distribution",
+          "nvidia-cutlass-dsl": "4.6.0",
+          "torch": "2.12.0a0+5aff3928d8.nv26.5.50603568",
+          "tvm-ffi": "not-installed-as-distribution"
+        },
+        "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+        "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+        "sm_count": 110,
+        "torch": "2.12.0a0+5aff3928d8.nv26.05"
+      },
+      "static_resources": {
+        "cubin_sha256": "8129898494aa097024ab827dc867db0daa27d6b18c679c546f1db8e7d11e75ef",
+        "ldl_instructions": 0,
+        "local_bytes_outside_stack": 0,
+        "registers_per_thread": 165,
+        "stack_bytes_per_thread": 0,
+        "static_zero_spill": true,
+        "stl_instructions": 0
+      }
+    }
+  },
+  "case": {
+    "baseline_scatter_warps": 4,
+    "candidate_scatter_warps": 8,
+    "fixture": "canonical",
+    "m": 8192,
+    "output_tiles": 16,
+    "replays_per_arm": 5,
+    "sampled_task_slots": [
+      0
+    ]
+  },
+  "comparison": {
+    "body_ns": {
+      "aggregate": {
+        "baseline": 1904.0,
+        "candidate": 1424.0,
+        "latency_reduction_pct": 25.210084033613445,
+        "speedup_pct": 33.70786516853932,
+        "speedup_x": 1.3370786516853932,
+        "unit": "ns"
+      },
+      "pairing_scope": "same replay index only; captures are separate-arm diagnostic runs, not ABBA",
+      "per_replay_index": [
+        {
+          "baseline": 1904.0,
+          "candidate": 1424.0,
+          "latency_reduction_pct": 25.210084033613445,
+          "replay": 0,
+          "speedup_pct": 33.70786516853932,
+          "speedup_x": 1.3370786516853932,
+          "unit": "ns"
+        },
+        {
+          "baseline": 1904.0,
+          "candidate": 1440.0,
+          "latency_reduction_pct": 24.369747899159663,
+          "replay": 1,
+          "speedup_pct": 32.22222222222222,
+          "speedup_x": 1.3222222222222222,
+          "unit": "ns"
+        },
+        {
+          "baseline": 1904.0,
+          "candidate": 1456.0,
+          "latency_reduction_pct": 23.52941176470588,
+          "replay": 2,
+          "speedup_pct": 30.76923076923077,
+          "speedup_x": 1.3076923076923077,
+          "unit": "ns"
+        },
+        {
+          "baseline": 1904.0,
+          "candidate": 1408.0,
+          "latency_reduction_pct": 26.05042016806723,
+          "replay": 3,
+          "speedup_pct": 35.22727272727273,
+          "speedup_x": 1.3522727272727273,
+          "unit": "ns"
+        },
+        {
+          "baseline": 1920.0,
+          "candidate": 1408.0,
+          "latency_reduction_pct": 26.666666666666668,
+          "replay": 4,
+          "speedup_pct": 36.36363636363635,
+          "speedup_x": 1.3636363636363635,
+          "unit": "ns"
+        }
+      ]
+    },
+    "including_sync_ns": {
+      "aggregate": {
+        "baseline": 1936.0,
+        "candidate": 1440.0,
+        "latency_reduction_pct": 25.6198347107438,
+        "speedup_pct": 34.44444444444446,
+        "speedup_x": 1.3444444444444446,
+        "unit": "ns"
+      },
+      "pairing_scope": "same replay index only; captures are separate-arm diagnostic runs, not ABBA",
+      "per_replay_index": [
+        {
+          "baseline": 1920.0,
+          "candidate": 1456.0,
+          "latency_reduction_pct": 24.166666666666668,
+          "replay": 0,
+          "speedup_pct": 31.868131868131865,
+          "speedup_x": 1.3186813186813187,
+          "unit": "ns"
+        },
+        {
+          "baseline": 1936.0,
+          "candidate": 1440.0,
+          "latency_reduction_pct": 25.6198347107438,
+          "replay": 1,
+          "speedup_pct": 34.44444444444446,
+          "speedup_x": 1.3444444444444446,
+          "unit": "ns"
+        },
+        {
+          "baseline": 1936.0,
+          "candidate": 1472.0,
+          "latency_reduction_pct": 23.96694214876033,
+          "replay": 2,
+          "speedup_pct": 31.52173913043479,
+          "speedup_x": 1.315217391304348,
+          "unit": "ns"
+        },
+        {
+          "baseline": 1920.0,
+          "candidate": 1440.0,
+          "latency_reduction_pct": 25.0,
+          "replay": 3,
+          "speedup_pct": 33.33333333333333,
+          "speedup_x": 1.3333333333333333,
+          "unit": "ns"
+        },
+        {
+          "baseline": 1936.0,
+          "candidate": 1440.0,
+          "latency_reduction_pct": 25.6198347107438,
+          "replay": 4,
+          "speedup_pct": 34.44444444444446,
+          "speedup_x": 1.3444444444444446,
+          "unit": "ns"
+        }
+      ]
+    },
+    "probe_e2e_us": {
+      "aggregate": {
+        "baseline": 1585.2479934692383,
+        "candidate": 1466.048002243042,
+        "latency_reduction_pct": 7.5193276835716345,
+        "speedup_pct": 8.130701794472017,
+        "speedup_x": 1.0813070179447202,
+        "unit": "us"
+      },
+      "pairing_scope": "same replay index only; captures are separate-arm diagnostic runs, not ABBA",
+      "per_replay_index": [
+        {
+          "baseline": 1578.271985054016,
+          "candidate": 1463.647961616516,
+          "latency_reduction_pct": 7.262628021213784,
+          "replay": 0,
+          "speedup_pct": 7.831392960839034,
+          "speedup_x": 1.0783139296083903,
+          "unit": "us"
+        },
+        {
+          "baseline": 1589.6639823913574,
+          "candidate": 1464.0320539474487,
+          "latency_reduction_pct": 7.903049313284341,
+          "replay": 1,
+          "speedup_pct": 8.581227993278496,
+          "speedup_x": 1.085812279932785,
+          "unit": "us"
+        },
+        {
+          "baseline": 1583.232045173645,
+          "candidate": 1468.7680006027222,
+          "latency_reduction_pct": 7.229770577209907,
+          "replay": 2,
+          "speedup_pct": 7.793201140272088,
+          "speedup_x": 1.0779320114027209,
+          "unit": "us"
+        },
+        {
+          "baseline": 1589.6960496902466,
+          "candidate": 1466.048002243042,
+          "latency_reduction_pct": 7.778093646977201,
+          "replay": 3,
+          "speedup_pct": 8.434106336083413,
+          "speedup_x": 1.0843410633608341,
+          "unit": "us"
+        },
+        {
+          "baseline": 1585.2479934692383,
+          "candidate": 1468.9279794692993,
+          "latency_reduction_pct": 7.337654075522799,
+          "replay": 4,
+          "speedup_pct": 7.918700959182745,
+          "speedup_x": 1.0791870095918275,
+          "unit": "us"
+        }
+      ]
+    }
+  },
+  "event_abi": {
+    "classification": "diagnostic-only matched probe",
+    "compute_warps": 8,
+    "edges": {
+      "D": "after pre-scatter epilog_sync and before scatter call",
+      "E": "after scatter body returns and before post-scatter epilog_sync",
+      "F": "after post-scatter epilog_sync"
+    },
+    "index": "task*384 + output_tile*24 + edge*8 + warp",
+    "output_tiles": 16,
+    "reductions": {
+      "body_ns": "max(E0..E7) - min(D0..D7)",
+      "including_sync_ns": "max(F0..F7) - min(D0..D7)"
+    },
+    "sampled_task_slots": [
+      0
+    ],
+    "schema": "exp014.scatter-phase-probe-abi.v1",
+    "scope": "sampled full-M128 task slot 0 across all 16 FC2 output tiles",
+    "ticks_per_task": 384,
+    "ticks_per_tile": 24,
+    "timestamp": "%globaltimer (ns)"
+  },
+  "gate_pass": true,
+  "identity": {
+    "cross_arm_runtime_equal": true,
+    "fixture_weights_reference_equal": true,
+    "probe_overlay_root": {
+      "path": "scatter_phase_probe_overlays/identity.json",
+      "sha256": "d11ff85fded409d2e51f4a91a9510966d298d36ece543ee4102a9fd55c1898e3"
+    }
+  },
+  "scatter_ownership": {
+    "candidate_effective_warps": 8,
+    "full_tile_active_warps": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "full_tile_cases": 4,
+    "gate_pass": true,
+    "source": {
+      "path": "ownership_gate.json",
+      "sha256": "c7b0192878d4c5ed855127830b9a77646b25a33cd5ac513c1babd89298849c44"
+    }
+  },
+  "schema": "exp014.scatter-phase-evidence.v1",
+  "scope_limits": [
+    "Diagnostic `%globaltimer` probe evidence; it does not replace uninstrumented exp014 ABBA E2E.",
+    "Only canonical M8192 and sampled full-M128 task slot 0 are represented; tail and other task slots are out of scope.",
+    "Each phase sample is one task/output-tile envelope across W0-W7, not total kernel wall time or an additive whole-kernel share.",
+    "body includes post-D marker-store overhead and cross-warp release skew; including_sync additionally reaches the post-sync F envelope.",
+    "Per-replay-index ratios are diagnostic alignment only; separate-arm captures are not temporally paired ABBA samples.",
+    "Capture JSON retains per-replay 16-tile summaries, not pooled raw percentiles; aggregate uses median of replay medians."
+  ],
+  "static_resource_evidence": {
+    "arms": {
+      "baseline_4warp_scatter": {
+        "cubin_sha256": "86275bc8a2cf6ffce151d75c2b204800c106ea30fe76bd12e5f0485eb572280e",
+        "ldl_instructions": 0,
+        "local_bytes_outside_stack": 0,
+        "registers_per_thread": 160,
+        "stack_bytes_per_thread": 0,
+        "static_zero_spill": true,
+        "stl_instructions": 0
+      },
+      "candidate_8warp_scatter": {
+        "cubin_sha256": "8129898494aa097024ab827dc867db0daa27d6b18c679c546f1db8e7d11e75ef",
+        "ldl_instructions": 0,
+        "local_bytes_outside_stack": 0,
+        "registers_per_thread": 165,
+        "stack_bytes_per_thread": 0,
+        "static_zero_spill": true,
+        "stl_instructions": 0
+      }
+    },
+    "gate_pass": true,
+    "register_count_is_observation_not_acceptance_cap": true,
+    "source": {
+      "path": "scatter_phase_static_resource_evidence.json",
+      "sha256": "7a16e60417ebe38af38871b97c52443cb3e1c600e3099801af794f03a74e2e40"
+    },
+    "static_zero_spill": true
+  },
+  "static_zero_spill": true,
+  "status": "complete"
+}

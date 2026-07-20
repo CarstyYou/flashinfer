@@ -1369,7 +1369,7 @@ class MoEDynamicKernel:
         scatter_N = Int32(scatter_output.shape[1])
         lane_id = Int32(tidx) & Int32(31)
         warp_in_tile = Int32(tidx) >> Int32(5)
-        warp_m_base = (warp_in_tile >> Int32(1)) * Int32(64)
+        warp_m_base = (warp_in_tile >> Int32(1)) * Int32(32)
         warp_n_base = (warp_in_tile & Int32(1)) * Int32(64)
 
         # Scatter using precomputed metadata (no redundant gmem loads)
@@ -1380,11 +1380,11 @@ class MoEDynamicKernel:
             epi_buffer = Int32(epi_m) % cute.size(tRS_sD, mode=[3])
             rows_offset = Int32(epi_m) * Int32(self.epi_tile[0])
 
-            # Per-warp scatter: each warp scatters its own quadrant
-            # of sC (64 M-rows x 64 N-cols).
+            # Per-warp scatter: all eight math warps cover one disjoint
+            # sC strip (32 M-rows x 64 N-cols).
             warp_epi_rows = valid_rows - rows_offset - warp_m_base
-            if warp_epi_rows > Int32(64):
-                warp_epi_rows = Int32(64)
+            if warp_epi_rows > Int32(32):
+                warp_epi_rows = Int32(32)
             if warp_epi_rows < Int32(0):
                 warp_epi_rows = Int32(0)
 

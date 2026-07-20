@@ -1,0 +1,24 @@
+# Keep compact identities and derived evidence in git. Per-process replay,
+# JIT, profiler, and tensor payloads remain reproducible workspace artifacts.
+raw/
+runtime/
+jit/
+ncu/
+harness/
+scatter_phase_probe_overlays/
+
+# Generated source overlays are reproduced by the checked-in builders.  Keep
+# only their compact identity and candidate diff in git.
+overlays/*/moe_dynamic_kernel.py
+
+*.pt
+*.cubin
+*.ptx
+*_clean.mlir
+*.ncu-rep
+*.nsys-rep
+*.qdstrm
+*.sqlite
+
+__pycache__/
+.pytest_cache/

@@ -1,0 +1,15 @@
+--- baseline_4warp_scatter/moe_dynamic_kernel.py
++++ candidate_8warp_scatter/moe_dynamic_kernel.py
+@@ -1372 +1372 @@
+-        warp_m_base = (warp_in_tile >> Int32(1)) * Int32(64)
++        warp_m_base = (warp_in_tile >> Int32(1)) * Int32(32)
+@@ -1383,2 +1383,2 @@
+-            # Per-warp scatter: each warp scatters its own quadrant
+-            # of sC (64 M-rows x 64 N-cols).
++            # Per-warp scatter: all eight math warps cover one disjoint
++            # sC strip (32 M-rows x 64 N-cols).
+@@ -1386,2 +1386,2 @@
+-            if warp_epi_rows > Int32(64):
+-                warp_epi_rows = Int32(64)
++            if warp_epi_rows > Int32(32):
++                warp_epi_rows = Int32(32)

@@ -1,0 +1,29 @@
+{
+  "baseline": "experiments/exp_014_scatter_8warp/results/overlays/baseline_4warp_scatter/moe_dynamic_kernel.py",
+  "baseline_sha256": "b6e141179794561f2144bdec079b7e109fddfccc2db6ba0f19c22d30ea4b34ca",
+  "candidate": "experiments/exp_014_scatter_8warp/results/overlays/candidate_8warp_scatter/moe_dynamic_kernel.py",
+  "candidate_sha256": "c88cef63492b60c0a77484b50f6400b83a103d168e1535b78972341503810184",
+  "change": {
+    "baseline": "4 effective warps, each 64x64",
+    "candidate": "8 effective warps, each 32x64",
+    "scope": "scatter_sC_to_gmem work mapping only",
+    "unchanged": "CTA shape, vector width, REDG count, and all other phases"
+  },
+  "changed_diff_lines": [
+    "-        warp_m_base = (warp_in_tile >> Int32(1)) * Int32(64)",
+    "+        warp_m_base = (warp_in_tile >> Int32(1)) * Int32(32)",
+    "-            # Per-warp scatter: each warp scatters its own quadrant",
+    "-            # of sC (64 M-rows x 64 N-cols).",
+    "+            # Per-warp scatter: all eight math warps cover one disjoint",
+    "+            # sC strip (32 M-rows x 64 N-cols).",
+    "-            if warp_epi_rows > Int32(64):",
+    "-                warp_epi_rows = Int32(64)",
+    "+            if warp_epi_rows > Int32(32):",
+    "+                warp_epi_rows = Int32(32)"
+  ],
+  "diff": "experiments/exp_014_scatter_8warp/results/overlays/candidate_8warp_scatter.diff",
+  "path_base": "w4a4_moe_bench_root",
+  "schema": "exp014.kernel-overlay-identity.v1",
+  "source": "moe_dynamic_kernel_opt.py",
+  "source_sha256": "b6e141179794561f2144bdec079b7e109fddfccc2db6ba0f19c22d30ea4b34ca"
+}
