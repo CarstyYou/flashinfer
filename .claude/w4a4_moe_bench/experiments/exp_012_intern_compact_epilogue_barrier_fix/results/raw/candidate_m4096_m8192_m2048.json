@@ -1,0 +1,736 @@
+{
+  "all_cases_pass": false,
+  "cases": [
+    {
+      "all_replays_pass": false,
+      "compile_identity": {
+        "compiled_max_active_clusters": [
+          110
+        ],
+        "compiled_object_types": [
+          "TVMFFIJitCompiledFunctionWithKwargs"
+        ],
+        "dynamic_cache_entries": 1
+      },
+      "cubin_sha256": [
+        "f7292f5f36c9f29fdc1dfd5dbf81390da2e9ace9cc8254c95bee625ce24acdc4"
+      ],
+      "expected_launch": {
+        "block": [
+          160,
+          1,
+          1
+        ],
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "kernel": "MoEDynamicKernel"
+      },
+      "jit_artifact_set_sha256": "6eea76bf1e9ea7e84a8a14f05e017560bd4d62e6a882847e84054f8561c1b5cb",
+      "m": 4096,
+      "replays": [
+        {
+          "finite": true,
+          "formal_metrics": {
+            "actual_mean": -5.740418782806955e-05,
+            "actual_std": 0.12044795602560043,
+            "actual_to_reference_l2_ratio": 0.7323258519172668,
+            "cosine": 0.7323359847068787,
+            "dtype": "bfloat16",
+            "finite": true,
+            "formal_magnitude_atol": 0.24670976400375366,
+            "formal_magnitude_rtol": 0.5,
+            "formal_pass": false,
+            "formal_percent_threshold": 97.0,
+            "formal_percent_within": 94.43261623382568,
+            "least_squares_actual_gain": 0.5363085269927979,
+            "max_abs_error": 1.003272294998169,
+            "mean_abs_error": 0.06674475967884064,
+            "nonzero": true,
+            "output_sha256": "27d7e286e8660791d6a5d6621aea485b2076b43cedfcb54cd2fcef4c3182f285",
+            "percent_within_rtol_0.2_atol_0.2": 94.59563493728638,
+            "reference_mean": -3.6842913686996326e-05,
+            "reference_sha256": "b27ee0cafca5f7c189514a3956e3415b39bb670b86346c86c90516b15e6dc928",
+            "reference_std": 0.16447317600250244,
+            "relative_l2": 0.680943489074707,
+            "shape": [
+              4096,
+              2048
+            ],
+            "strict_rtol_0.2_atol_0.2_allclose": false
+          },
+          "gate_pass": false,
+          "inf_count": 0,
+          "nan_remaining": 0,
+          "output_sha256": "27d7e286e8660791d6a5d6621aea485b2076b43cedfcb54cd2fcef4c3182f285",
+          "replay": 0,
+          "workspace_checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "pair_head_terminal_state": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "workspace_gate_pass": true,
+          "zero_rows": 1121
+        },
+        {
+          "finite": true,
+          "formal_metrics": {
+            "actual_mean": -4.8983645683620125e-05,
+            "actual_std": 0.12045948952436447,
+            "actual_to_reference_l2_ratio": 0.7323959469795227,
+            "cosine": 0.7324806451797485,
+            "dtype": "bfloat16",
+            "finite": true,
+            "formal_magnitude_atol": 0.24670976400375366,
+            "formal_magnitude_rtol": 0.5,
+            "formal_pass": false,
+            "formal_percent_threshold": 97.0,
+            "formal_percent_within": 94.4345235824585,
+            "least_squares_actual_gain": 0.5364658236503601,
+            "max_abs_error": 1.003028154373169,
+            "mean_abs_error": 0.06671246886253357,
+            "nonzero": true,
+            "output_sha256": "bf82cd8c23b1ed5596281651311cd55a160b1a3d5633fd31fa4bb6d508693c9e",
+            "percent_within_rtol_0.2_atol_0.2": 94.59776878356934,
+            "reference_mean": -3.6842913686996326e-05,
+            "reference_sha256": "b27ee0cafca5f7c189514a3956e3415b39bb670b86346c86c90516b15e6dc928",
+            "reference_std": 0.16447317600250244,
+            "relative_l2": 0.6807878613471985,
+            "shape": [
+              4096,
+              2048
+            ],
+            "strict_rtol_0.2_atol_0.2_allclose": false
+          },
+          "gate_pass": false,
+          "inf_count": 0,
+          "nan_remaining": 0,
+          "output_sha256": "bf82cd8c23b1ed5596281651311cd55a160b1a3d5633fd31fa4bb6d508693c9e",
+          "replay": 1,
+          "workspace_checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "pair_head_terminal_state": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "workspace_gate_pass": true,
+          "zero_rows": 1124
+        },
+        {
+          "finite": true,
+          "formal_metrics": {
+            "actual_mean": -5.612533277599141e-05,
+            "actual_std": 0.12052234262228012,
+            "actual_to_reference_l2_ratio": 0.7327781319618225,
+            "cosine": 0.7328001260757446,
+            "dtype": "bfloat16",
+            "finite": true,
+            "formal_magnitude_atol": 0.24670976400375366,
+            "formal_magnitude_rtol": 0.5,
+            "formal_pass": false,
+            "formal_percent_threshold": 97.0,
+            "formal_percent_within": 94.44469213485718,
+            "least_squares_actual_gain": 0.5369799733161926,
+            "max_abs_error": 1.003150224685669,
+            "mean_abs_error": 0.0666896253824234,
+            "nonzero": true,
+            "output_sha256": "d129f7be88581c201b02eeea4882b59fa3d6c7690fd2ea75f2a6739b819a4253",
+            "percent_within_rtol_0.2_atol_0.2": 94.60805654525757,
+            "reference_mean": -3.6842913686996326e-05,
+            "reference_sha256": "b27ee0cafca5f7c189514a3956e3415b39bb670b86346c86c90516b15e6dc928",
+            "reference_std": 0.16447317600250244,
+            "relative_l2": 0.6804437637329102,
+            "shape": [
+              4096,
+              2048
+            ],
+            "strict_rtol_0.2_atol_0.2_allclose": false
+          },
+          "gate_pass": false,
+          "inf_count": 0,
+          "nan_remaining": 0,
+          "output_sha256": "d129f7be88581c201b02eeea4882b59fa3d6c7690fd2ea75f2a6739b819a4253",
+          "replay": 2,
+          "workspace_checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "pair_head_terminal_state": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "workspace_gate_pass": true,
+          "zero_rows": 1124
+        },
+        {
+          "finite": true,
+          "formal_metrics": {
+            "actual_mean": -5.259708996163681e-05,
+            "actual_std": 0.12045532464981079,
+            "actual_to_reference_l2_ratio": 0.7323706150054932,
+            "cosine": 0.732406735420227,
+            "dtype": "bfloat16",
+            "finite": true,
+            "formal_magnitude_atol": 0.24670976400375366,
+            "formal_magnitude_rtol": 0.5,
+            "formal_pass": false,
+            "formal_percent_threshold": 97.0,
+            "formal_percent_within": 94.43479776382446,
+            "least_squares_actual_gain": 0.5363931655883789,
+            "max_abs_error": 1.003028154373169,
+            "mean_abs_error": 0.06673359125852585,
+            "nonzero": true,
+            "output_sha256": "f075c6e5f0425affda42a5363eaa87ef45f1b7c2b9347ed5d7321958a8407966",
+            "percent_within_rtol_0.2_atol_0.2": 94.59794759750366,
+            "reference_mean": -3.6842913686996326e-05,
+            "reference_sha256": "b27ee0cafca5f7c189514a3956e3415b39bb670b86346c86c90516b15e6dc928",
+            "reference_std": 0.16447317600250244,
+            "relative_l2": 0.6808673739433289,
+            "shape": [
+              4096,
+              2048
+            ],
+            "strict_rtol_0.2_atol_0.2_allclose": false
+          },
+          "gate_pass": false,
+          "inf_count": 0,
+          "nan_remaining": 0,
+          "output_sha256": "f075c6e5f0425affda42a5363eaa87ef45f1b7c2b9347ed5d7321958a8407966",
+          "replay": 3,
+          "workspace_checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "pair_head_terminal_state": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "workspace_gate_pass": true,
+          "zero_rows": 1125
+        }
+      ]
+    },
+    {
+      "all_replays_pass": false,
+      "compile_identity": {
+        "compiled_max_active_clusters": [
+          110
+        ],
+        "compiled_object_types": [
+          "TVMFFIJitCompiledFunctionWithKwargs"
+        ],
+        "dynamic_cache_entries": 1
+      },
+      "cubin_sha256": [
+        "f7292f5f36c9f29fdc1dfd5dbf81390da2e9ace9cc8254c95bee625ce24acdc4"
+      ],
+      "expected_launch": {
+        "block": [
+          160,
+          1,
+          1
+        ],
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "kernel": "MoEDynamicKernel"
+      },
+      "jit_artifact_set_sha256": "6eea76bf1e9ea7e84a8a14f05e017560bd4d62e6a882847e84054f8561c1b5cb",
+      "m": 8192,
+      "replays": [
+        {
+          "finite": true,
+          "formal_metrics": {
+            "actual_mean": -1.8164075299864635e-05,
+            "actual_std": 0.11933016031980515,
+            "actual_to_reference_l2_ratio": 0.7240477800369263,
+            "cosine": 0.7241514325141907,
+            "dtype": "bfloat16",
+            "finite": true,
+            "formal_magnitude_atol": 0.2472146674990654,
+            "formal_magnitude_rtol": 0.5,
+            "formal_pass": false,
+            "formal_percent_threshold": 97.0,
+            "formal_percent_within": 94.58114504814148,
+            "least_squares_actual_gain": 0.5243201851844788,
+            "max_abs_error": 1.0985902547836304,
+            "mean_abs_error": 0.071756511926651,
+            "nonzero": true,
+            "output_sha256": "515f1764249ace4b41fc1499754407404403b154d05d501b7a00eb14e27ad2f0",
+            "percent_within_rtol_0.2_atol_0.2": 94.68050599098206,
+            "reference_mean": 1.752144453348592e-05,
+            "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+            "reference_std": 0.16480977833271027,
+            "relative_l2": 0.6896410584449768,
+            "shape": [
+              8192,
+              2048
+            ],
+            "strict_rtol_0.2_atol_0.2_allclose": false
+          },
+          "gate_pass": false,
+          "inf_count": 0,
+          "nan_remaining": 0,
+          "output_sha256": "515f1764249ace4b41fc1499754407404403b154d05d501b7a00eb14e27ad2f0",
+          "replay": 0,
+          "workspace_checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "pair_head_terminal_state": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "workspace_gate_pass": true,
+          "zero_rows": 1808
+        },
+        {
+          "finite": true,
+          "formal_metrics": {
+            "actual_mean": -1.4315886801341549e-05,
+            "actual_std": 0.11934511363506317,
+            "actual_to_reference_l2_ratio": 0.7241384983062744,
+            "cosine": 0.7242311239242554,
+            "dtype": "bfloat16",
+            "finite": true,
+            "formal_magnitude_atol": 0.2472146674990654,
+            "formal_magnitude_rtol": 0.5,
+            "formal_pass": false,
+            "formal_percent_threshold": 97.0,
+            "formal_percent_within": 94.58395838737488,
+            "least_squares_actual_gain": 0.5244436264038086,
+            "max_abs_error": 1.0985902547836304,
+            "mean_abs_error": 0.07175243645906448,
+            "nonzero": true,
+            "output_sha256": "b83183bd98b20177bb195dceeed63531725068ef3a41c2e3c23ac74a67f5660e",
+            "percent_within_rtol_0.2_atol_0.2": 94.68254446983337,
+            "reference_mean": 1.752144453348592e-05,
+            "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+            "reference_std": 0.16480977833271027,
+            "relative_l2": 0.6895573735237122,
+            "shape": [
+              8192,
+              2048
+            ],
+            "strict_rtol_0.2_atol_0.2_allclose": false
+          },
+          "gate_pass": false,
+          "inf_count": 0,
+          "nan_remaining": 0,
+          "output_sha256": "b83183bd98b20177bb195dceeed63531725068ef3a41c2e3c23ac74a67f5660e",
+          "replay": 1,
+          "workspace_checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "pair_head_terminal_state": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "workspace_gate_pass": true,
+          "zero_rows": 1805
+        },
+        {
+          "finite": true,
+          "formal_metrics": {
+            "actual_mean": -1.4871218809275888e-05,
+            "actual_std": 0.11933791637420654,
+            "actual_to_reference_l2_ratio": 0.7240948677062988,
+            "cosine": 0.724210262298584,
+            "dtype": "bfloat16",
+            "finite": true,
+            "formal_magnitude_atol": 0.2472146674990654,
+            "formal_magnitude_rtol": 0.5,
+            "formal_pass": false,
+            "formal_percent_threshold": 97.0,
+            "formal_percent_within": 94.58184838294983,
+            "least_squares_actual_gain": 0.5243968963623047,
+            "max_abs_error": 1.0985902547836304,
+            "mean_abs_error": 0.07175660133361816,
+            "nonzero": true,
+            "output_sha256": "63eac69dc739234f1163e87745c18c5ca2eedb51cb38ad9ee7c2135b9d0d1fa6",
+            "percent_within_rtol_0.2_atol_0.2": 94.68116164207458,
+            "reference_mean": 1.752144453348592e-05,
+            "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+            "reference_std": 0.16480977833271027,
+            "relative_l2": 0.6895793676376343,
+            "shape": [
+              8192,
+              2048
+            ],
+            "strict_rtol_0.2_atol_0.2_allclose": false
+          },
+          "gate_pass": false,
+          "inf_count": 0,
+          "nan_remaining": 0,
+          "output_sha256": "63eac69dc739234f1163e87745c18c5ca2eedb51cb38ad9ee7c2135b9d0d1fa6",
+          "replay": 2,
+          "workspace_checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "pair_head_terminal_state": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "workspace_gate_pass": true,
+          "zero_rows": 1811
+        },
+        {
+          "finite": true,
+          "formal_metrics": {
+            "actual_mean": -1.5823126886971295e-05,
+            "actual_std": 0.11930999904870987,
+            "actual_to_reference_l2_ratio": 0.7239254713058472,
+            "cosine": 0.724040150642395,
+            "dtype": "bfloat16",
+            "finite": true,
+            "formal_magnitude_atol": 0.2472146674990654,
+            "formal_magnitude_rtol": 0.5,
+            "formal_pass": false,
+            "formal_percent_threshold": 97.0,
+            "formal_percent_within": 94.57785487174988,
+            "least_squares_actual_gain": 0.524151086807251,
+            "max_abs_error": 1.0985902547836304,
+            "mean_abs_error": 0.07177181541919708,
+            "nonzero": true,
+            "output_sha256": "76e97423ae255033246b43d8d84941f47131eda8bcaf87979d499e6b4504fde4",
+            "percent_within_rtol_0.2_atol_0.2": 94.67703104019165,
+            "reference_mean": 1.752144453348592e-05,
+            "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+            "reference_std": 0.16480977833271027,
+            "relative_l2": 0.6897578239440918,
+            "shape": [
+              8192,
+              2048
+            ],
+            "strict_rtol_0.2_atol_0.2_allclose": false
+          },
+          "gate_pass": false,
+          "inf_count": 0,
+          "nan_remaining": 0,
+          "output_sha256": "76e97423ae255033246b43d8d84941f47131eda8bcaf87979d499e6b4504fde4",
+          "replay": 3,
+          "workspace_checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "pair_head_terminal_state": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "workspace_gate_pass": true,
+          "zero_rows": 1806
+        }
+      ]
+    },
+    {
+      "all_replays_pass": true,
+      "compile_identity": {
+        "compiled_max_active_clusters": [
+          110
+        ],
+        "compiled_object_types": [
+          "TVMFFIJitCompiledFunctionWithKwargs"
+        ],
+        "dynamic_cache_entries": 1
+      },
+      "cubin_sha256": [
+        "f7292f5f36c9f29fdc1dfd5dbf81390da2e9ace9cc8254c95bee625ce24acdc4"
+      ],
+      "expected_launch": {
+        "block": [
+          160,
+          1,
+          1
+        ],
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "kernel": "MoEDynamicKernel"
+      },
+      "jit_artifact_set_sha256": "6eea76bf1e9ea7e84a8a14f05e017560bd4d62e6a882847e84054f8561c1b5cb",
+      "m": 2048,
+      "replays": [
+        {
+          "finite": true,
+          "formal_metrics": {
+            "actual_mean": -5.397753193392418e-05,
+            "actual_std": 0.16031970083713531,
+            "actual_to_reference_l2_ratio": 0.9756879210472107,
+            "cosine": 0.9755374193191528,
+            "dtype": "bfloat16",
+            "finite": true,
+            "formal_magnitude_atol": 0.24647176265716553,
+            "formal_magnitude_rtol": 0.5,
+            "formal_pass": true,
+            "formal_percent_threshold": 97.0,
+            "formal_percent_within": 99.75683689117432,
+            "least_squares_actual_gain": 0.9518201947212219,
+            "max_abs_error": 0.6443968415260315,
+            "mean_abs_error": 0.012250878848135471,
+            "nonzero": true,
+            "output_sha256": "4d2d717b8147739f754b069b8f05f518e63511dde2c9acd85e0187266a3b28fd",
+            "percent_within_rtol_0.2_atol_0.2": 99.74427223205566,
+            "reference_mean": -4.959881698596291e-05,
+            "reference_sha256": "0488ac002a0a47f9d8d414617e5fe8678ea247abac7062694bba3222bb3adc40",
+            "reference_std": 0.16431450843811035,
+            "relative_l2": 0.21983341872692108,
+            "shape": [
+              2048,
+              2048
+            ],
+            "strict_rtol_0.2_atol_0.2_allclose": false
+          },
+          "gate_pass": true,
+          "inf_count": 0,
+          "nan_remaining": 0,
+          "output_sha256": "4d2d717b8147739f754b069b8f05f518e63511dde2c9acd85e0187266a3b28fd",
+          "replay": 0,
+          "workspace_checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "pair_head_terminal_state": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "workspace_gate_pass": true,
+          "zero_rows": 0
+        },
+        {
+          "finite": true,
+          "formal_metrics": {
+            "actual_mean": -5.793362288386561e-05,
+            "actual_std": 0.16034257411956787,
+            "actual_to_reference_l2_ratio": 0.975827157497406,
+            "cosine": 0.9757211208343506,
+            "dtype": "bfloat16",
+            "finite": true,
+            "formal_magnitude_atol": 0.24647176265716553,
+            "formal_magnitude_rtol": 0.5,
+            "formal_pass": true,
+            "formal_percent_threshold": 97.0,
+            "formal_percent_within": 99.76522922515869,
+            "least_squares_actual_gain": 0.9521350264549255,
+            "max_abs_error": 0.6441527009010315,
+            "mean_abs_error": 0.012261650525033474,
+            "nonzero": true,
+            "output_sha256": "f3ee8a3b07030cccb52a761d9ea5c4857362cb7613dd381bd6c1f0f66521ddd8",
+            "percent_within_rtol_0.2_atol_0.2": 99.75306987762451,
+            "reference_mean": -4.959881698596291e-05,
+            "reference_sha256": "0488ac002a0a47f9d8d414617e5fe8678ea247abac7062694bba3222bb3adc40",
+            "reference_std": 0.16431450843811035,
+            "relative_l2": 0.219016894698143,
+            "shape": [
+              2048,
+              2048
+            ],
+            "strict_rtol_0.2_atol_0.2_allclose": false
+          },
+          "gate_pass": true,
+          "inf_count": 0,
+          "nan_remaining": 0,
+          "output_sha256": "f3ee8a3b07030cccb52a761d9ea5c4857362cb7613dd381bd6c1f0f66521ddd8",
+          "replay": 1,
+          "workspace_checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "pair_head_terminal_state": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "workspace_gate_pass": true,
+          "zero_rows": 0
+        },
+        {
+          "finite": true,
+          "formal_metrics": {
+            "actual_mean": -5.396661799750291e-05,
+            "actual_std": 0.16036559641361237,
+            "actual_to_reference_l2_ratio": 0.975967288017273,
+            "cosine": 0.9758294820785522,
+            "dtype": "bfloat16",
+            "finite": true,
+            "formal_magnitude_atol": 0.24647176265716553,
+            "formal_magnitude_rtol": 0.5,
+            "formal_pass": true,
+            "formal_percent_threshold": 97.0,
+            "formal_percent_within": 99.76527690887451,
+            "least_squares_actual_gain": 0.9523776173591614,
+            "max_abs_error": 0.6446409821510315,
+            "mean_abs_error": 0.012210490182042122,
+            "nonzero": true,
+            "output_sha256": "e65bba42ff61a4a19a62f72b8f3dde3a6ab0be92e1a6b606540ae737b249d4f5",
+            "percent_within_rtol_0.2_atol_0.2": 99.75388050079346,
+            "reference_mean": -4.959881698596291e-05,
+            "reference_sha256": "0488ac002a0a47f9d8d414617e5fe8678ea247abac7062694bba3222bb3adc40",
+            "reference_std": 0.16431450843811035,
+            "relative_l2": 0.2185334414243698,
+            "shape": [
+              2048,
+              2048
+            ],
+            "strict_rtol_0.2_atol_0.2_allclose": false
+          },
+          "gate_pass": true,
+          "inf_count": 0,
+          "nan_remaining": 0,
+          "output_sha256": "e65bba42ff61a4a19a62f72b8f3dde3a6ab0be92e1a6b606540ae737b249d4f5",
+          "replay": 2,
+          "workspace_checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "pair_head_terminal_state": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "workspace_gate_pass": true,
+          "zero_rows": 0
+        },
+        {
+          "finite": true,
+          "formal_metrics": {
+            "actual_mean": -5.583681195275858e-05,
+            "actual_std": 0.16035209596157074,
+            "actual_to_reference_l2_ratio": 0.9758850932121277,
+            "cosine": 0.9757570028305054,
+            "dtype": "bfloat16",
+            "finite": true,
+            "formal_magnitude_atol": 0.24647176265716553,
+            "formal_magnitude_rtol": 0.5,
+            "formal_pass": true,
+            "formal_percent_threshold": 97.0,
+            "formal_percent_within": 99.76365566253662,
+            "least_squares_actual_gain": 0.9522267580032349,
+            "max_abs_error": 0.6443968415260315,
+            "mean_abs_error": 0.012198489159345627,
+            "nonzero": true,
+            "output_sha256": "8c6b448efd2f67505e8810edeefdbb56fc4cb128e0eb1679dd4e1f80e6cfc1c5",
+            "percent_within_rtol_0.2_atol_0.2": 99.75144863128662,
+            "reference_mean": -4.959881698596291e-05,
+            "reference_sha256": "0488ac002a0a47f9d8d414617e5fe8678ea247abac7062694bba3222bb3adc40",
+            "reference_std": 0.16431450843811035,
+            "relative_l2": 0.21885685622692108,
+            "shape": [
+              2048,
+              2048
+            ],
+            "strict_rtol_0.2_atol_0.2_allclose": false
+          },
+          "gate_pass": true,
+          "inf_count": 0,
+          "nan_remaining": 0,
+          "output_sha256": "8c6b448efd2f67505e8810edeefdbb56fc4cb128e0eb1679dd4e1f80e6cfc1c5",
+          "replay": 3,
+          "workspace_checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "pair_head_terminal_state": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "workspace_gate_pass": true,
+          "zero_rows": 0
+        }
+      ]
+    }
+  ],
+  "runtime": {
+    "cuda_runtime": "13.2",
+    "gpu": {
+      "applications_graphics_clock_mhz": "2377",
+      "compute_capability": [
+        12,
+        0
+      ],
+      "driver": "580.95.05",
+      "foreign_processes_before_cuda_context": [],
+      "graphics_clock_mhz": "2370",
+      "max_graphics_clock_mhz": "3090",
+      "name": "NVIDIA Graphics Device",
+      "pci_bus_id": "00000000:76:00.0",
+      "power_draw_w": "59.53",
+      "sm_count": 110,
+      "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+    },
+    "hostname": "432308086edc",
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "imports": {
+      "cutlass_python": "/workspace/deps/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+      "cutlass_python_version": "4.6.0",
+      "flashinfer": "/workspace/source/flashinfer/flashinfer/__init__.py",
+      "target_module": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_012_intern_compact_epilogue_barrier_fix/results/overlays/post_quant_barrier/moe_dynamic_kernel.py"
+    },
+    "jit_root": "/workspace/jit",
+    "lease_id": "exp012-intern-barrier-20260719",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "pid": 1,
+    "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+    "source": {
+      "checkout_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "locked_source_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+      "overlay": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_012_intern_compact_epilogue_barrier_fix/results/overlays/post_quant_barrier/moe_dynamic_kernel.py",
+      "overlay_sha256": "9aaa5299fc77ee1dbbb3d5cc1426ddef5b46e70704e36609a5059f688379aa01",
+      "production_kernel": "/workspace/source/flashinfer/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dynamic_kernel.py",
+      "production_kernel_sha256": "94b4dd2c25b2b01604a74c8ab4b5708fdf235c56467ebf8b12808dc52b69d106"
+    },
+    "timestamp_unix": 1784528816.4038126,
+    "torch": "2.12.0a0+5aff3928d8.nv26.05"
+  },
+  "schema": "exp012.correctness-only.v1",
+  "status": "complete"
+}

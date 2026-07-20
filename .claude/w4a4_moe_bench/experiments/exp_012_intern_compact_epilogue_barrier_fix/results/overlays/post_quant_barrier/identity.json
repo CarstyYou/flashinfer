@@ -1,0 +1,8 @@
+{
+  "schema": "exp012.kernel-overlay-identity.v1",
+  "baseline": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_009_intern_stage4_compact_lightcheck/results/overlays/intern_stage4_compact/moe_dynamic_kernel.py",
+  "baseline_sha256": "42ca8d40e18b5d0f001236b09b85cbc0aa30e6010f0954efd538d8b9a2fb57d2",
+  "candidate": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_012_intern_compact_epilogue_barrier_fix/results/overlays/post_quant_barrier/moe_dynamic_kernel.py",
+  "candidate_sha256": "9aaa5299fc77ee1dbbb3d5cc1426ddef5b46e70704e36609a5059f688379aa01",
+  "change": "move the existing post-loop fence/barrier to the end of every epi_m pass"
+}

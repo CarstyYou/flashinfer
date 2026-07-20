@@ -1,0 +1,11 @@
+--- exp009_intern_adapter/moe_dynamic_kernel.py
++++ exp012_post_quant_barrier/moe_dynamic_kernel.py
+@@ -2285,5 +2285,3 @@
+-                    cute.arch.fence_proxy("async.shared", space="cta")
+-                    # epilog_sync: MMA-only barrier. DMA warp doesn't need to wait
+-                    # for quant — it only loads B_down into sB (separate buffer).
+-                    # This allows DMA to prefetch B_down tiles earlier.
+-                    self.epilog_sync_barrier.arrive_and_wait()
++                        # Finish Q1 before the next compact pass reuses single-stage sC.
++                        cute.arch.fence_proxy("async.shared", space="cta")
++                        self.epilog_sync_barrier.arrive_and_wait()

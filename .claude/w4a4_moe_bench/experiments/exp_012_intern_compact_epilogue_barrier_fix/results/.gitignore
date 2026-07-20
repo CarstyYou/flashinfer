@@ -1,0 +1,12 @@
+# Runtime command/log payloads stay in the experiment workspace. Commit the
+# compact raw JSON, overlay identity and reader-facing result instead.
+runtime/
+
+__pycache__/
+.pytest_cache/
+*.pt
+*.cubin
+*.ptx
+*_clean.mlir
+*.ncu-rep
+*.nsys-rep
