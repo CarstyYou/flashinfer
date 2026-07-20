@@ -1,0 +1,73 @@
+{
+  "candidate": {
+    "arm": "candidate_token_major_reuse",
+    "artifacts": {
+      "capture_identity": "ncu/candidate_token_major_reuse/capture_identity.json",
+      "native_raw": "ncu/candidate_token_major_reuse/native_raw.csv",
+      "ncu_report": "ncu/candidate_token_major_reuse/trace.ncu-rep",
+      "profile_target": "ncu/candidate_token_major_reuse/profile_target.json",
+      "validation": "raw/validation/candidate_token_major_reuse/m8192_unequal_canonical.json"
+    },
+    "cubin_sha256": "e9b322e4c978c490adbe0a9bf0f9a183288c0ecddb1fd72e5a904c487be541f3",
+    "fixture": "canonical",
+    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "jit_artifact_set_sha256": "ecb7fe9c4d9a24c520daa14338646cf87d3be91e0d21166a42f6a7849cae8980",
+    "m": 8192,
+    "metrics": {
+      "spill_local_load_bytes": 0,
+      "spill_local_store_bytes": 0,
+      "spill_register_read_instructions": 0,
+      "spill_register_write_instructions": 0
+    },
+    "observed_launch": {
+      "block": [
+        288,
+        1,
+        1
+      ],
+      "context_id": 1,
+      "device_id": 0,
+      "grid": [
+        1,
+        1,
+        110
+      ],
+      "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+      "row_id": 0,
+      "stream_id": 7
+    },
+    "scale_kind": "unequal",
+    "source_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19"
+  },
+  "checks": {
+    "dynamic_local_load_store_bytes": 0,
+    "zero_by_dynamic_metric": {
+      "spill_local_load_bytes": true,
+      "spill_local_store_bytes": true,
+      "spill_register_read_instructions": true,
+      "spill_register_write_instructions": true
+    },
+    "zero_dynamic_spill": true
+  },
+  "evidence_boundary": "This gate uses executed NCU spill/refill instruction and local-memory byte counters from one M8192 Candidate graph node. Static STACK/LOCAL allocation or compiler annotations cannot substitute for these dynamic counters.",
+  "gate_pass": true,
+  "schema": "exp016.dynamic-spill-evidence.v1",
+  "scope": {
+    "arm": "candidate_token_major_reuse",
+    "block": [
+      288,
+      1,
+      1
+    ],
+    "execution": "one correctness-validated CUDA Graph replay node",
+    "fixture": "canonical",
+    "grid": [
+      1,
+      1,
+      110
+    ],
+    "m": 8192,
+    "scale_kind": "unequal"
+  },
+  "status": "pass"
+}

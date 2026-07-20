@@ -1,0 +1,705 @@
+{
+  "additive_sm_estimate_used": false,
+  "capture_integrity_gate_pass": true,
+  "captures": {
+    "baseline_pair_major": {
+      "control_no_marker": {
+        "arm": "baseline_pair_major",
+        "arm_overlay_identity_sha256": "5a242e6ad625b63f0eba573859fbd14cc737b6b144bea728d023effddc389a8e",
+        "artifact_set_sha256": "7d236224ac74475e27a67fb82661da384ff6b7f9c077998eda0d1760a9a2ce6b",
+        "base_source": {
+          "barrier_fingerprint": {
+            "cute.arch.sync_threads()": 9,
+            "self.epilog_sync_barrier.arrive_and_wait()": 4,
+            "self.pass_final_barrier.arrive_unaligned()": 1,
+            "self.pass_final_barrier.wait_unaligned()": 1,
+            "self.pass_gate_barrier.arrive_unaligned()": 1,
+            "self.pass_gate_barrier.wait_unaligned()": 1,
+            "self.resident_grid_barrier(": 5
+          },
+          "dispatch_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp015_748ad/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dispatch.py",
+          "dispatch_sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4",
+          "kernel_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp015_748ad/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/overlays/baseline_pair_major/moe_dynamic_kernel.py",
+          "kernel_sha256": "c88cef63492b60c0a77484b50f6400b83a103d168e1535b78972341503810184",
+          "wrapper_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp015_748ad/flashinfer/fused_moe/cute_dsl/b12x_moe.py",
+          "wrapper_sha256": "bcac806795c035decd0773f4f801d477e7ebf14c1d67c3e49eee42ee0579c0a4"
+        },
+        "base_source_identity_sha256": "6aef9bb876560c290e150ceecdfe0eed2c4126465d5478efea8a30598a43a1ed",
+        "capture_gate_pass": true,
+        "cubin_sha256": "f4c4c53a05f1900cf7fedc6ed585723a80a33560c5300f0e9e549254229f3e19",
+        "e2e_median_us": 1454.2720317840576,
+        "fixture_identity_sha256": "98e69617871620729b128e0a3860cc049067dd5806eb5dffb57db652db401399",
+        "mode": "control_no_marker",
+        "p3_grid_critical_wall_median_us": null,
+        "p3_grid_critical_wall_samples_us": [],
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/raw/p3_phase/baseline_pair_major/control_no_marker/capture.json",
+        "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+        "resource": {
+          "cubin_sha256": "f4c4c53a05f1900cf7fedc6ed585723a80a33560c5300f0e9e549254229f3e19",
+          "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+          "registers_per_thread": 165,
+          "stack_bytes_per_thread": 0,
+          "static_local_bytes_outside_stack": 0,
+          "static_shared_bytes_per_cta": 1024
+        },
+        "root_overlay_identity_sha256": "4b459cf7e04ee58bd12722c3732740bde4e99751abc11eacea9056e570a0eda8",
+        "runtime_signature": {
+          "cuda_runtime": "13.2",
+          "gpu": {
+            "applications_graphics_clock_mhz": "2377",
+            "compute_capability": [
+              12,
+              0
+            ],
+            "driver": "580.95.05",
+            "max_graphics_clock_mhz": "3090",
+            "name": "NVIDIA Graphics Device",
+            "pci_bus_id": "00000000:76:00.0",
+            "sm_count": 110,
+            "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+          },
+          "harness": {
+            "run_exp016_arm_sha256": "05196a464b5f0cbf0468a09cc7063e85c9bcec79664281686344eb327465cd92",
+            "sha256": "776cb7fa41a8c8e7a1cd194ed9e80fc1ba325e8e86bc282d63b2e2bad1215a22"
+          },
+          "hostname": "0e7e57da764e",
+          "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+          "image_id": "sha256:a4e056e1d34a5cc9387512ffa3abeed778e3dc7966633c5154d771705d8835ac",
+          "imports": {
+            "cutlass_python": "/home/xiy/workspace/w4a4_deps_460/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/home/xiy/workspace/flashinfer_exp015_748ad/flashinfer/__init__.py"
+          },
+          "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+          "packages": {
+            "cutlass-dsl": "not-installed-as-distribution",
+            "flashinfer-python": "not-installed-as-distribution",
+            "nvidia-cutlass-dsl": "4.6.0",
+            "torch": "2.12.0a0+5aff3928d8.nv26.5.50603568",
+            "tvm-ffi": "not-installed-as-distribution"
+          },
+          "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+          "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+          "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+          "torch": "2.12.0a0+5aff3928d8.nv26.05"
+        },
+        "sass_spill": {
+          "counts": {
+            "annotation_pcs_equal_local_sass_pcs": true,
+            "ldl_opcode_count": 0,
+            "local_sass_opcode_count": 0,
+            "local_sass_opcode_histogram": {},
+            "sass_instruction_count": 5088,
+            "spill_refill_annotation_count": 0,
+            "spill_refill_annotation_unique_pc_count": 0,
+            "stl_opcode_count": 0
+          },
+          "cubin_sha256": "f4c4c53a05f1900cf7fedc6ed585723a80a33560c5300f0e9e549254229f3e19",
+          "gate_pass": true,
+          "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+          "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/raw/p3_phase/baseline_pair_major/control_no_marker/sass_spill_evidence.json",
+          "raw_elf_sha256": "5d2834919a14865acaa144cae84b3ca73b71e12f872e66b50d2e6bf065c6681f",
+          "raw_sass_sha256": "d145940fc153c940600efa07476d7deb09f355f612fc16b30ca396ae37c41435",
+          "sha256": "6c7ea775c38139a8c5911ddd02491a56584b5cf66e56c02582c19309670b35f9"
+        },
+        "sha256": "ffa0408be8756922b28a87a6ae98da06b8f827f24c0575967233309649712eba",
+        "source": {
+          "arm": "baseline_pair_major",
+          "base_kernel_sha256": "c88cef63492b60c0a77484b50f6400b83a103d168e1535b78972341503810184",
+          "dispatch_overlay": "/home/xiy/workspace/flashinfer_exp015_748ad/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/p3_phase_probe_overlays/baseline_pair_major/control_no_marker/moe_dispatch.py",
+          "dispatch_sha256": "c111343d7c4d8d54469759aba04dad0205504ecced5b865866b1a0084b3bc686",
+          "event_abi": {
+            "classification": "diagnostic matched probe; uninstrumented E2E remains authority",
+            "end": "CTA leader after all Route/Q0 quant/store threads reconverge at the final CTA sync and before threadfence/deferred publication",
+            "forbidden_reduction": "sum/additive SM-equivalent estimate",
+            "grid_ctas": 110,
+            "index": "cta_z * 2 + edge(start=0,end=1)",
+            "primary_name": "grid_critical_wall_ns",
+            "primary_reduction": "max(all CTA end) - min(all CTA start)",
+            "schema": "exp016.p3-phase-probe-abi.v1",
+            "start": "CTA leader after the prefix resident-grid barrier returns and before that CTA's first producer claim",
+            "ticks_per_cta": 2,
+            "timestamp": "%globaltimer (ns)"
+          },
+          "kernel_overlay": "/home/xiy/workspace/flashinfer_exp015_748ad/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/p3_phase_probe_overlays/baseline_pair_major/control_no_marker/moe_dynamic_kernel.py",
+          "kernel_sha256": "530ef957d24e2190899b3ba4c033a3d3b9e6ce747a1e2f36e9578a1a77b7f753",
+          "mode": "control_no_marker"
+        },
+        "weight_identity_sha256": "14aae564b440c31dac5277863bfcc3e435a3633f9194de02b42b2cef5fadb694"
+      },
+      "probe": {
+        "arm": "baseline_pair_major",
+        "arm_overlay_identity_sha256": "e0e2a4b3b591ee624832ebdf5dacab06b1530e047c84a7267c28fdf9a3a47e1f",
+        "artifact_set_sha256": "2295f088477d3025045184b9d97ecb9efd5b73f545d2cfd2723fd5a8c6fa23a3",
+        "base_source": {
+          "barrier_fingerprint": {
+            "cute.arch.sync_threads()": 9,
+            "self.epilog_sync_barrier.arrive_and_wait()": 4,
+            "self.pass_final_barrier.arrive_unaligned()": 1,
+            "self.pass_final_barrier.wait_unaligned()": 1,
+            "self.pass_gate_barrier.arrive_unaligned()": 1,
+            "self.pass_gate_barrier.wait_unaligned()": 1,
+            "self.resident_grid_barrier(": 5
+          },
+          "dispatch_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp015_748ad/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dispatch.py",
+          "dispatch_sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4",
+          "kernel_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp015_748ad/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/overlays/baseline_pair_major/moe_dynamic_kernel.py",
+          "kernel_sha256": "c88cef63492b60c0a77484b50f6400b83a103d168e1535b78972341503810184",
+          "wrapper_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp015_748ad/flashinfer/fused_moe/cute_dsl/b12x_moe.py",
+          "wrapper_sha256": "bcac806795c035decd0773f4f801d477e7ebf14c1d67c3e49eee42ee0579c0a4"
+        },
+        "base_source_identity_sha256": "6aef9bb876560c290e150ceecdfe0eed2c4126465d5478efea8a30598a43a1ed",
+        "capture_gate_pass": true,
+        "cubin_sha256": "40036d5595d3f73247954eff3a47a95d05c1c9d4030efb5f80f527030d49cee6",
+        "e2e_median_us": 1449.6639966964722,
+        "fixture_identity_sha256": "98e69617871620729b128e0a3860cc049067dd5806eb5dffb57db652db401399",
+        "mode": "probe",
+        "p3_grid_critical_wall_median_us": 241.344,
+        "p3_grid_critical_wall_samples_us": [
+          242.304,
+          241.344,
+          241.248,
+          241.44,
+          240.8
+        ],
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/raw/p3_phase/baseline_pair_major/probe/capture.json",
+        "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+        "resource": {
+          "cubin_sha256": "40036d5595d3f73247954eff3a47a95d05c1c9d4030efb5f80f527030d49cee6",
+          "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+          "registers_per_thread": 165,
+          "stack_bytes_per_thread": 0,
+          "static_local_bytes_outside_stack": 0,
+          "static_shared_bytes_per_cta": 1024
+        },
+        "root_overlay_identity_sha256": "4b459cf7e04ee58bd12722c3732740bde4e99751abc11eacea9056e570a0eda8",
+        "runtime_signature": {
+          "cuda_runtime": "13.2",
+          "gpu": {
+            "applications_graphics_clock_mhz": "2377",
+            "compute_capability": [
+              12,
+              0
+            ],
+            "driver": "580.95.05",
+            "max_graphics_clock_mhz": "3090",
+            "name": "NVIDIA Graphics Device",
+            "pci_bus_id": "00000000:76:00.0",
+            "sm_count": 110,
+            "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+          },
+          "harness": {
+            "run_exp016_arm_sha256": "05196a464b5f0cbf0468a09cc7063e85c9bcec79664281686344eb327465cd92",
+            "sha256": "776cb7fa41a8c8e7a1cd194ed9e80fc1ba325e8e86bc282d63b2e2bad1215a22"
+          },
+          "hostname": "0e7e57da764e",
+          "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+          "image_id": "sha256:a4e056e1d34a5cc9387512ffa3abeed778e3dc7966633c5154d771705d8835ac",
+          "imports": {
+            "cutlass_python": "/home/xiy/workspace/w4a4_deps_460/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/home/xiy/workspace/flashinfer_exp015_748ad/flashinfer/__init__.py"
+          },
+          "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+          "packages": {
+            "cutlass-dsl": "not-installed-as-distribution",
+            "flashinfer-python": "not-installed-as-distribution",
+            "nvidia-cutlass-dsl": "4.6.0",
+            "torch": "2.12.0a0+5aff3928d8.nv26.5.50603568",
+            "tvm-ffi": "not-installed-as-distribution"
+          },
+          "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+          "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+          "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+          "torch": "2.12.0a0+5aff3928d8.nv26.05"
+        },
+        "sass_spill": {
+          "counts": {
+            "annotation_pcs_equal_local_sass_pcs": true,
+            "ldl_opcode_count": 0,
+            "local_sass_opcode_count": 0,
+            "local_sass_opcode_histogram": {},
+            "sass_instruction_count": 5096,
+            "spill_refill_annotation_count": 0,
+            "spill_refill_annotation_unique_pc_count": 0,
+            "stl_opcode_count": 0
+          },
+          "cubin_sha256": "40036d5595d3f73247954eff3a47a95d05c1c9d4030efb5f80f527030d49cee6",
+          "gate_pass": true,
+          "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+          "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/raw/p3_phase/baseline_pair_major/probe/sass_spill_evidence.json",
+          "raw_elf_sha256": "926403c6fc9f158121cd51913e9d8e52ec3e5a7f428b50d7787eed28ca1956d5",
+          "raw_sass_sha256": "208e58aa6660ed7a0d6a905d6cc8538c79347794fd19342ddb3f199bf59b34d2",
+          "sha256": "8200e5569c694930662253073efd68db4eb7fc57485cde60ce472f45c176d8be"
+        },
+        "sha256": "32eebe8b1e5db26ff27b90d315d9b6978468f87aa1d5b960aa37d5e226bc9fd9",
+        "source": {
+          "arm": "baseline_pair_major",
+          "base_kernel_sha256": "c88cef63492b60c0a77484b50f6400b83a103d168e1535b78972341503810184",
+          "dispatch_overlay": "/home/xiy/workspace/flashinfer_exp015_748ad/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/p3_phase_probe_overlays/baseline_pair_major/probe/moe_dispatch.py",
+          "dispatch_sha256": "3b731d91a1fd5d67361eaebe08526735f18312667ec37133eb381242c65a1c28",
+          "event_abi": {
+            "classification": "diagnostic matched probe; uninstrumented E2E remains authority",
+            "end": "CTA leader after all Route/Q0 quant/store threads reconverge at the final CTA sync and before threadfence/deferred publication",
+            "forbidden_reduction": "sum/additive SM-equivalent estimate",
+            "grid_ctas": 110,
+            "index": "cta_z * 2 + edge(start=0,end=1)",
+            "primary_name": "grid_critical_wall_ns",
+            "primary_reduction": "max(all CTA end) - min(all CTA start)",
+            "schema": "exp016.p3-phase-probe-abi.v1",
+            "start": "CTA leader after the prefix resident-grid barrier returns and before that CTA's first producer claim",
+            "ticks_per_cta": 2,
+            "timestamp": "%globaltimer (ns)"
+          },
+          "kernel_overlay": "/home/xiy/workspace/flashinfer_exp015_748ad/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/p3_phase_probe_overlays/baseline_pair_major/probe/moe_dynamic_kernel.py",
+          "kernel_sha256": "530ef957d24e2190899b3ba4c033a3d3b9e6ce747a1e2f36e9578a1a77b7f753",
+          "mode": "probe"
+        },
+        "weight_identity_sha256": "14aae564b440c31dac5277863bfcc3e435a3633f9194de02b42b2cef5fadb694"
+      }
+    },
+    "candidate_token_major_reuse": {
+      "control_no_marker": {
+        "arm": "candidate_token_major_reuse",
+        "arm_overlay_identity_sha256": "959690275922e412ad4cf2d2e20de9e0212099eef09e561ce35799f45dc16b0d",
+        "artifact_set_sha256": "996ece7672295f46ff9e8043161d51a0b9225fee31a63ae3a410e5aa1e572315",
+        "base_source": {
+          "barrier_fingerprint": {
+            "cute.arch.sync_threads()": 9,
+            "self.epilog_sync_barrier.arrive_and_wait()": 4,
+            "self.pass_final_barrier.arrive_unaligned()": 1,
+            "self.pass_final_barrier.wait_unaligned()": 1,
+            "self.pass_gate_barrier.arrive_unaligned()": 1,
+            "self.pass_gate_barrier.wait_unaligned()": 1,
+            "self.resident_grid_barrier(": 5
+          },
+          "dispatch_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp015_748ad/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dispatch.py",
+          "dispatch_sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4",
+          "kernel_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp015_748ad/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/overlays/candidate_token_major_reuse/moe_dynamic_kernel.py",
+          "kernel_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
+          "wrapper_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp015_748ad/flashinfer/fused_moe/cute_dsl/b12x_moe.py",
+          "wrapper_sha256": "bcac806795c035decd0773f4f801d477e7ebf14c1d67c3e49eee42ee0579c0a4"
+        },
+        "base_source_identity_sha256": "fc493128ba5a65256873123c4f7b4d8b1a181d8f34d59019da2ae44ead6e0990",
+        "capture_gate_pass": true,
+        "cubin_sha256": "8586ff1fe34681bfe0625736af930785239f8df2885ac70f909954af29f20ea5",
+        "e2e_median_us": 1312.8960132598877,
+        "fixture_identity_sha256": "98e69617871620729b128e0a3860cc049067dd5806eb5dffb57db652db401399",
+        "mode": "control_no_marker",
+        "p3_grid_critical_wall_median_us": null,
+        "p3_grid_critical_wall_samples_us": [],
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/raw/p3_phase/candidate_token_major_reuse/control_no_marker/capture.json",
+        "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+        "resource": {
+          "cubin_sha256": "8586ff1fe34681bfe0625736af930785239f8df2885ac70f909954af29f20ea5",
+          "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+          "registers_per_thread": 165,
+          "stack_bytes_per_thread": 0,
+          "static_local_bytes_outside_stack": 0,
+          "static_shared_bytes_per_cta": 1024
+        },
+        "root_overlay_identity_sha256": "4b459cf7e04ee58bd12722c3732740bde4e99751abc11eacea9056e570a0eda8",
+        "runtime_signature": {
+          "cuda_runtime": "13.2",
+          "gpu": {
+            "applications_graphics_clock_mhz": "2377",
+            "compute_capability": [
+              12,
+              0
+            ],
+            "driver": "580.95.05",
+            "max_graphics_clock_mhz": "3090",
+            "name": "NVIDIA Graphics Device",
+            "pci_bus_id": "00000000:76:00.0",
+            "sm_count": 110,
+            "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+          },
+          "harness": {
+            "run_exp016_arm_sha256": "05196a464b5f0cbf0468a09cc7063e85c9bcec79664281686344eb327465cd92",
+            "sha256": "776cb7fa41a8c8e7a1cd194ed9e80fc1ba325e8e86bc282d63b2e2bad1215a22"
+          },
+          "hostname": "0e7e57da764e",
+          "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+          "image_id": "sha256:a4e056e1d34a5cc9387512ffa3abeed778e3dc7966633c5154d771705d8835ac",
+          "imports": {
+            "cutlass_python": "/home/xiy/workspace/w4a4_deps_460/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/home/xiy/workspace/flashinfer_exp015_748ad/flashinfer/__init__.py"
+          },
+          "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+          "packages": {
+            "cutlass-dsl": "not-installed-as-distribution",
+            "flashinfer-python": "not-installed-as-distribution",
+            "nvidia-cutlass-dsl": "4.6.0",
+            "torch": "2.12.0a0+5aff3928d8.nv26.5.50603568",
+            "tvm-ffi": "not-installed-as-distribution"
+          },
+          "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+          "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+          "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+          "torch": "2.12.0a0+5aff3928d8.nv26.05"
+        },
+        "sass_spill": {
+          "counts": {
+            "annotation_pcs_equal_local_sass_pcs": true,
+            "ldl_opcode_count": 0,
+            "local_sass_opcode_count": 0,
+            "local_sass_opcode_histogram": {},
+            "sass_instruction_count": 5920,
+            "spill_refill_annotation_count": 0,
+            "spill_refill_annotation_unique_pc_count": 0,
+            "stl_opcode_count": 0
+          },
+          "cubin_sha256": "8586ff1fe34681bfe0625736af930785239f8df2885ac70f909954af29f20ea5",
+          "gate_pass": true,
+          "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+          "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/raw/p3_phase/candidate_token_major_reuse/control_no_marker/sass_spill_evidence.json",
+          "raw_elf_sha256": "f3525fa96c01aedf6c88cf27aa8d3378f2468660843b4ea4690550a251848181",
+          "raw_sass_sha256": "5dad9ea09d71dec6ba14f270dcd6c3c17b89c9e30b3d25002e142b06f78ddaab",
+          "sha256": "77d5bd2b232dc20df204307485f72a1c1ab46596d0422a1e258fd3df127be2e1"
+        },
+        "sha256": "9bebf88ef66a32351791d3dc8e4145285dc45344b5b73f053ac06e019093bf4a",
+        "source": {
+          "arm": "candidate_token_major_reuse",
+          "base_kernel_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
+          "dispatch_overlay": "/home/xiy/workspace/flashinfer_exp015_748ad/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/p3_phase_probe_overlays/candidate_token_major_reuse/control_no_marker/moe_dispatch.py",
+          "dispatch_sha256": "c111343d7c4d8d54469759aba04dad0205504ecced5b865866b1a0084b3bc686",
+          "event_abi": {
+            "classification": "diagnostic matched probe; uninstrumented E2E remains authority",
+            "end": "CTA leader after all Route/Q0 quant/store threads reconverge at the final CTA sync and before threadfence/deferred publication",
+            "forbidden_reduction": "sum/additive SM-equivalent estimate",
+            "grid_ctas": 110,
+            "index": "cta_z * 2 + edge(start=0,end=1)",
+            "primary_name": "grid_critical_wall_ns",
+            "primary_reduction": "max(all CTA end) - min(all CTA start)",
+            "schema": "exp016.p3-phase-probe-abi.v1",
+            "start": "CTA leader after the prefix resident-grid barrier returns and before that CTA's first producer claim",
+            "ticks_per_cta": 2,
+            "timestamp": "%globaltimer (ns)"
+          },
+          "kernel_overlay": "/home/xiy/workspace/flashinfer_exp015_748ad/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/p3_phase_probe_overlays/candidate_token_major_reuse/control_no_marker/moe_dynamic_kernel.py",
+          "kernel_sha256": "2dec2bc4d1a4b51957d58a02a99436e8facba2f6ea01163c6ff86f4dc00b84d3",
+          "mode": "control_no_marker"
+        },
+        "weight_identity_sha256": "14aae564b440c31dac5277863bfcc3e435a3633f9194de02b42b2cef5fadb694"
+      },
+      "probe": {
+        "arm": "candidate_token_major_reuse",
+        "arm_overlay_identity_sha256": "58dcb93cdfcc451c163e33731e002a083ded5e8006ca50074667ed8cfbdd497a",
+        "artifact_set_sha256": "679b5df1a7bd5bd2d3818bff6a987267424c8eef32747b883e622532e5c8464f",
+        "base_source": {
+          "barrier_fingerprint": {
+            "cute.arch.sync_threads()": 9,
+            "self.epilog_sync_barrier.arrive_and_wait()": 4,
+            "self.pass_final_barrier.arrive_unaligned()": 1,
+            "self.pass_final_barrier.wait_unaligned()": 1,
+            "self.pass_gate_barrier.arrive_unaligned()": 1,
+            "self.pass_gate_barrier.wait_unaligned()": 1,
+            "self.resident_grid_barrier(": 5
+          },
+          "dispatch_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp015_748ad/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dispatch.py",
+          "dispatch_sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4",
+          "kernel_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp015_748ad/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/overlays/candidate_token_major_reuse/moe_dynamic_kernel.py",
+          "kernel_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
+          "wrapper_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp015_748ad/flashinfer/fused_moe/cute_dsl/b12x_moe.py",
+          "wrapper_sha256": "bcac806795c035decd0773f4f801d477e7ebf14c1d67c3e49eee42ee0579c0a4"
+        },
+        "base_source_identity_sha256": "fc493128ba5a65256873123c4f7b4d8b1a181d8f34d59019da2ae44ead6e0990",
+        "capture_gate_pass": true,
+        "cubin_sha256": "b283245ce8f6d469c74a5b9a9cc15bbed666b918ea7a31fbfecbf990db48b395",
+        "e2e_median_us": 1310.912013053894,
+        "fixture_identity_sha256": "98e69617871620729b128e0a3860cc049067dd5806eb5dffb57db652db401399",
+        "mode": "probe",
+        "p3_grid_critical_wall_median_us": 100.768,
+        "p3_grid_critical_wall_samples_us": [
+          100.032,
+          100.768,
+          100.16,
+          101.536,
+          101.12
+        ],
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/raw/p3_phase/candidate_token_major_reuse/probe/capture.json",
+        "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+        "resource": {
+          "cubin_sha256": "b283245ce8f6d469c74a5b9a9cc15bbed666b918ea7a31fbfecbf990db48b395",
+          "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+          "registers_per_thread": 165,
+          "stack_bytes_per_thread": 0,
+          "static_local_bytes_outside_stack": 0,
+          "static_shared_bytes_per_cta": 1024
+        },
+        "root_overlay_identity_sha256": "4b459cf7e04ee58bd12722c3732740bde4e99751abc11eacea9056e570a0eda8",
+        "runtime_signature": {
+          "cuda_runtime": "13.2",
+          "gpu": {
+            "applications_graphics_clock_mhz": "2377",
+            "compute_capability": [
+              12,
+              0
+            ],
+            "driver": "580.95.05",
+            "max_graphics_clock_mhz": "3090",
+            "name": "NVIDIA Graphics Device",
+            "pci_bus_id": "00000000:76:00.0",
+            "sm_count": 110,
+            "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+          },
+          "harness": {
+            "run_exp016_arm_sha256": "05196a464b5f0cbf0468a09cc7063e85c9bcec79664281686344eb327465cd92",
+            "sha256": "776cb7fa41a8c8e7a1cd194ed9e80fc1ba325e8e86bc282d63b2e2bad1215a22"
+          },
+          "hostname": "0e7e57da764e",
+          "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+          "image_id": "sha256:a4e056e1d34a5cc9387512ffa3abeed778e3dc7966633c5154d771705d8835ac",
+          "imports": {
+            "cutlass_python": "/home/xiy/workspace/w4a4_deps_460/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+            "cutlass_python_version": "4.6.0",
+            "flashinfer": "/home/xiy/workspace/flashinfer_exp015_748ad/flashinfer/__init__.py"
+          },
+          "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+          "packages": {
+            "cutlass-dsl": "not-installed-as-distribution",
+            "flashinfer-python": "not-installed-as-distribution",
+            "nvidia-cutlass-dsl": "4.6.0",
+            "torch": "2.12.0a0+5aff3928d8.nv26.5.50603568",
+            "tvm-ffi": "not-installed-as-distribution"
+          },
+          "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+          "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+          "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+          "torch": "2.12.0a0+5aff3928d8.nv26.05"
+        },
+        "sass_spill": {
+          "counts": {
+            "annotation_pcs_equal_local_sass_pcs": true,
+            "ldl_opcode_count": 0,
+            "local_sass_opcode_count": 0,
+            "local_sass_opcode_histogram": {},
+            "sass_instruction_count": 5928,
+            "spill_refill_annotation_count": 0,
+            "spill_refill_annotation_unique_pc_count": 0,
+            "stl_opcode_count": 0
+          },
+          "cubin_sha256": "b283245ce8f6d469c74a5b9a9cc15bbed666b918ea7a31fbfecbf990db48b395",
+          "gate_pass": true,
+          "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+          "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/raw/p3_phase/candidate_token_major_reuse/probe/sass_spill_evidence.json",
+          "raw_elf_sha256": "3ea4d8eb9eb021c544894825eccc3558ecdbe6af72e5d907762c24c07d0fcf0f",
+          "raw_sass_sha256": "d1ae3bcdedb9c9aa4d6a7790ae3d7fbb6c45ceecafb6009b98b67a9b5c45bdaa",
+          "sha256": "60725514a05ae24fea7d9ddb3aa3433ea0d0c4d0fb9c545205550ddfd7c668f5"
+        },
+        "sha256": "eeff9e6187beb93cfa14051961d3c85fac2ecc59e394138c23cd6076833f3452",
+        "source": {
+          "arm": "candidate_token_major_reuse",
+          "base_kernel_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
+          "dispatch_overlay": "/home/xiy/workspace/flashinfer_exp015_748ad/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/p3_phase_probe_overlays/candidate_token_major_reuse/probe/moe_dispatch.py",
+          "dispatch_sha256": "3b731d91a1fd5d67361eaebe08526735f18312667ec37133eb381242c65a1c28",
+          "event_abi": {
+            "classification": "diagnostic matched probe; uninstrumented E2E remains authority",
+            "end": "CTA leader after all Route/Q0 quant/store threads reconverge at the final CTA sync and before threadfence/deferred publication",
+            "forbidden_reduction": "sum/additive SM-equivalent estimate",
+            "grid_ctas": 110,
+            "index": "cta_z * 2 + edge(start=0,end=1)",
+            "primary_name": "grid_critical_wall_ns",
+            "primary_reduction": "max(all CTA end) - min(all CTA start)",
+            "schema": "exp016.p3-phase-probe-abi.v1",
+            "start": "CTA leader after the prefix resident-grid barrier returns and before that CTA's first producer claim",
+            "ticks_per_cta": 2,
+            "timestamp": "%globaltimer (ns)"
+          },
+          "kernel_overlay": "/home/xiy/workspace/flashinfer_exp015_748ad/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/p3_phase_probe_overlays/candidate_token_major_reuse/probe/moe_dynamic_kernel.py",
+          "kernel_sha256": "2dec2bc4d1a4b51957d58a02a99436e8facba2f6ea01163c6ff86f4dc00b84d3",
+          "mode": "probe"
+        },
+        "weight_identity_sha256": "14aae564b440c31dac5277863bfcc3e435a3633f9194de02b42b2cef5fadb694"
+      }
+    }
+  },
+  "environment": {
+    "cuda_runtime": "13.2",
+    "gpu": {
+      "applications_graphics_clock_mhz": "2377",
+      "compute_capability": [
+        12,
+        0
+      ],
+      "driver": "580.95.05",
+      "max_graphics_clock_mhz": "3090",
+      "name": "NVIDIA Graphics Device",
+      "pci_bus_id": "00000000:76:00.0",
+      "sm_count": 110,
+      "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+    },
+    "harness": {
+      "run_exp016_arm_sha256": "05196a464b5f0cbf0468a09cc7063e85c9bcec79664281686344eb327465cd92",
+      "sha256": "776cb7fa41a8c8e7a1cd194ed9e80fc1ba325e8e86bc282d63b2e2bad1215a22"
+    },
+    "hostname": "0e7e57da764e",
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "image_id": "sha256:a4e056e1d34a5cc9387512ffa3abeed778e3dc7966633c5154d771705d8835ac",
+    "imports": {
+      "cutlass_python": "/home/xiy/workspace/w4a4_deps_460/nvidia_cutlass_dsl/dsl_packages/cutlass/__init__.py",
+      "cutlass_python_version": "4.6.0",
+      "flashinfer": "/home/xiy/workspace/flashinfer_exp015_748ad/flashinfer/__init__.py"
+    },
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "packages": {
+      "cutlass-dsl": "not-installed-as-distribution",
+      "flashinfer-python": "not-installed-as-distribution",
+      "nvidia-cutlass-dsl": "4.6.0",
+      "torch": "2.12.0a0+5aff3928d8.nv26.5.50603568",
+      "tvm-ffi": "not-installed-as-distribution"
+    },
+    "ptxas": "ptxas: NVIDIA (R) Ptx optimizing assembler\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+    "torch": "2.12.0a0+5aff3928d8.nv26.05"
+  },
+  "evidence_boundary": "A resource mismatch or material probe E2E perturbation makes the phase comparison diagnostic/unresolved. Even a passing matched probe remains diagnostic and never replaces uninstrumented E2E.",
+  "evidence_classification": "diagnostic",
+  "gate_pass": true,
+  "input_identity": {
+    "fixture_sha256": "98e69617871620729b128e0a3860cc049067dd5806eb5dffb57db652db401399",
+    "reference_sha256": "1149b125c53266c1df09e3ce0a6a0fd745bf46fdd6b6db9cc2b90c5f79d1b00e",
+    "weight_sha256": "14aae564b440c31dac5277863bfcc3e435a3633f9194de02b42b2cef5fadb694"
+  },
+  "instrumentation": {
+    "baseline_pair_major": {
+      "control_e2e_median_us": 1454.2720317840576,
+      "control_resource": {
+        "registers_per_thread": 165,
+        "stack_bytes_per_thread": 0,
+        "static_local_bytes_outside_stack": 0,
+        "static_shared_bytes_per_cta": 1024
+      },
+      "control_sass_spill": {
+        "counts": {
+          "annotation_pcs_equal_local_sass_pcs": true,
+          "ldl_opcode_count": 0,
+          "local_sass_opcode_count": 0,
+          "local_sass_opcode_histogram": {},
+          "sass_instruction_count": 5088,
+          "spill_refill_annotation_count": 0,
+          "spill_refill_annotation_unique_pc_count": 0,
+          "stl_opcode_count": 0
+        },
+        "cubin_sha256": "f4c4c53a05f1900cf7fedc6ed585723a80a33560c5300f0e9e549254229f3e19",
+        "gate_pass": true,
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/raw/p3_phase/baseline_pair_major/control_no_marker/sass_spill_evidence.json",
+        "raw_elf_sha256": "5d2834919a14865acaa144cae84b3ca73b71e12f872e66b50d2e6bf065c6681f",
+        "raw_sass_sha256": "d145940fc153c940600efa07476d7deb09f355f612fc16b30ca396ae37c41435",
+        "sha256": "6c7ea775c38139a8c5911ddd02491a56584b5cf66e56c02582c19309670b35f9"
+      },
+      "e2e_perturbation_small": true,
+      "gate_pass": true,
+      "max_abs_allowed_perturbation_percent": 2.0,
+      "probe_e2e_median_us": 1449.6639966964722,
+      "probe_e2e_perturbation_percent": -0.3168619753989521,
+      "probe_resource": {
+        "registers_per_thread": 165,
+        "stack_bytes_per_thread": 0,
+        "static_local_bytes_outside_stack": 0,
+        "static_shared_bytes_per_cta": 1024
+      },
+      "probe_sass_spill": {
+        "counts": {
+          "annotation_pcs_equal_local_sass_pcs": true,
+          "ldl_opcode_count": 0,
+          "local_sass_opcode_count": 0,
+          "local_sass_opcode_histogram": {},
+          "sass_instruction_count": 5096,
+          "spill_refill_annotation_count": 0,
+          "spill_refill_annotation_unique_pc_count": 0,
+          "stl_opcode_count": 0
+        },
+        "cubin_sha256": "40036d5595d3f73247954eff3a47a95d05c1c9d4030efb5f80f527030d49cee6",
+        "gate_pass": true,
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/raw/p3_phase/baseline_pair_major/probe/sass_spill_evidence.json",
+        "raw_elf_sha256": "926403c6fc9f158121cd51913e9d8e52ec3e5a7f428b50d7787eed28ca1956d5",
+        "raw_sass_sha256": "208e58aa6660ed7a0d6a905d6cc8538c79347794fd19342ddb3f199bf59b34d2",
+        "sha256": "8200e5569c694930662253073efd68db4eb7fc57485cde60ce472f45c176d8be"
+      },
+      "resource_identity_equal": true,
+      "sass_spill_gate_pass": true
+    },
+    "candidate_token_major_reuse": {
+      "control_e2e_median_us": 1312.8960132598877,
+      "control_resource": {
+        "registers_per_thread": 165,
+        "stack_bytes_per_thread": 0,
+        "static_local_bytes_outside_stack": 0,
+        "static_shared_bytes_per_cta": 1024
+      },
+      "control_sass_spill": {
+        "counts": {
+          "annotation_pcs_equal_local_sass_pcs": true,
+          "ldl_opcode_count": 0,
+          "local_sass_opcode_count": 0,
+          "local_sass_opcode_histogram": {},
+          "sass_instruction_count": 5920,
+          "spill_refill_annotation_count": 0,
+          "spill_refill_annotation_unique_pc_count": 0,
+          "stl_opcode_count": 0
+        },
+        "cubin_sha256": "8586ff1fe34681bfe0625736af930785239f8df2885ac70f909954af29f20ea5",
+        "gate_pass": true,
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/raw/p3_phase/candidate_token_major_reuse/control_no_marker/sass_spill_evidence.json",
+        "raw_elf_sha256": "f3525fa96c01aedf6c88cf27aa8d3378f2468660843b4ea4690550a251848181",
+        "raw_sass_sha256": "5dad9ea09d71dec6ba14f270dcd6c3c17b89c9e30b3d25002e142b06f78ddaab",
+        "sha256": "77d5bd2b232dc20df204307485f72a1c1ab46596d0422a1e258fd3df127be2e1"
+      },
+      "e2e_perturbation_small": true,
+      "gate_pass": true,
+      "max_abs_allowed_perturbation_percent": 2.0,
+      "probe_e2e_median_us": 1310.912013053894,
+      "probe_e2e_perturbation_percent": -0.15111632497591954,
+      "probe_resource": {
+        "registers_per_thread": 165,
+        "stack_bytes_per_thread": 0,
+        "static_local_bytes_outside_stack": 0,
+        "static_shared_bytes_per_cta": 1024
+      },
+      "probe_sass_spill": {
+        "counts": {
+          "annotation_pcs_equal_local_sass_pcs": true,
+          "ldl_opcode_count": 0,
+          "local_sass_opcode_count": 0,
+          "local_sass_opcode_histogram": {},
+          "sass_instruction_count": 5928,
+          "spill_refill_annotation_count": 0,
+          "spill_refill_annotation_unique_pc_count": 0,
+          "stl_opcode_count": 0
+        },
+        "cubin_sha256": "b283245ce8f6d469c74a5b9a9cc15bbed666b918ea7a31fbfecbf990db48b395",
+        "gate_pass": true,
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_016_route_q0_token_major_reuse/results/raw/p3_phase/candidate_token_major_reuse/probe/sass_spill_evidence.json",
+        "raw_elf_sha256": "3ea4d8eb9eb021c544894825eccc3558ecdbe6af72e5d907762c24c07d0fcf0f",
+        "raw_sass_sha256": "d1ae3bcdedb9c9aa4d6a7790ae3d7fbb6c45ceecafb6009b98b67a9b5c45bdaa",
+        "sha256": "60725514a05ae24fea7d9ddb3aa3433ea0d0c4d0fb9c545205550ddfd7c668f5"
+      },
+      "resource_identity_equal": true,
+      "sass_spill_gate_pass": true
+    }
+  },
+  "instrumentation_gate_pass": true,
+  "performance_authority": "uninstrumented exp016 E2E only",
+  "phase_comparison": {
+    "all_candidate_samples_faster": true,
+    "baseline_grid_critical_wall_median_us": 241.344,
+    "candidate_faster": true,
+    "candidate_grid_critical_wall_median_us": 100.768,
+    "candidate_minus_baseline_us": -140.576,
+    "interpretation_legal_as_diagnostic": true,
+    "interpretation_legal_as_production_phase_truth": false,
+    "latency_reduction_percent": 58.24714929726863
+  },
+  "phase_improvement_gate_pass": true,
+  "phase_statistic": "max(all CTA end) - min(all CTA start)",
+  "sass_spill_gate_pass": true,
+  "schema": "exp016.p3-phase-evidence.v1",
+  "status": "Complete"
+}

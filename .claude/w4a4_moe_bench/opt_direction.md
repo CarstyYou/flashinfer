@@ -4,15 +4,17 @@
 
 ## 当前优化方向
 
-### [todo] 1. 提高整个 kernel 的有效并行度
+### [done] 1. 提高整个 kernel 的有效并行度
 
 - 目标不是只把 CTA 配置成 8 个 math warp，而是让各 phase 都有效利用 W0–W7。
 - 这是总方向，不作为一次大改版实验；Scatter 与 Route/Q0 分成两个独立子方向逐步实现。
 - FC1、SwiGLU/Q1 和 FC2 已使用 8 个 math warp；重点补齐两个 memory-bound phase：
   - **[done] Scatter / exp_014**：W0–W7 已无重漏地分担 R2S 后的 Scatter；M2048/4096/8192
     fused E2E 分别提升 7.59%/5.69%/7.43%，static/dynamic zero-spill。
-  - **Route/Q0**：当前整个 CTA 已参与，但需要检查有效 work mapping、routing atomic、Top-K metadata
-    复用、quant/pack 分工、GMEM IO 与负载均衡，而不是只看参与线程数。
+  - **[done] Route/Q0 / exp_016**：W0–W8 从 pair-major 改成 token-major；同一 token 的 BF16
+    input load 与 block absmax 复用给 top-8 routes，量化和输出数量保持不变。P3 grid critical wall
+    降低 58.25%；M256–8192 fused E2E 全部提升，M8192 提升 9.71%，static/dynamic zero-spill。
+    此实现仅锁定 `topk=8 + [E] scale + full_tile_publish=0`，不是通用 top-k 路径。
 - 每次只修改一个 phase，用 correctness、spill、phase latency、memory throughput、warp activity 和 E2E
   判断并行度是否真正提高。
 
@@ -42,6 +44,14 @@
 
 - Scatter 从 W0–W3 的 `64×64/warp` 改为 W0–W7 的 `32×64/warp`。
 - 主要 prefill case 稳定提升，已进入 `moe_dynamic_kernel_opt.py`。
+
+### [done] exp_016：Route/Q0 token-major 输入复用
+
+- W0–W8 每轮各处理一个 token，复用该 token 的 BF16 load 与 block absmax，再分别完成 top-8
+  per-expert quant/store。
+- 组合机制同时减少 producer claims 并改变 route metadata ownership；收益不拆归给单一子变化。
+- 正确性、P3 phase、静态/动态 spill 与完整 E2E sweep 均通过，进入
+  `moe_dynamic_kernel_opt.py` 的锁定 topk-8 实验路径。
 
 ### [reject] exp_013：compact epilogue
 
