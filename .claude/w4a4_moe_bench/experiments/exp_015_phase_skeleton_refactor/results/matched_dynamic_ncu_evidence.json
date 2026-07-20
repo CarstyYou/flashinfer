@@ -1,0 +1,134 @@
+{
+  "checks": {
+    "exp008_tensor_work_identity": {
+      "baseline:executed_tensor_instructions": true,
+      "baseline:fp4_tensor_ops": true,
+      "candidate_v2:executed_tensor_instructions": true,
+      "candidate_v2:fp4_tensor_ops": true
+    },
+    "pairwise_tensor_work_identity": {
+      "executed_tensor_instructions": true,
+      "fp4_tensor_ops": true
+    },
+    "zero_dynamic_spill": {
+      "baseline": true,
+      "candidate_v2": true
+    }
+  },
+  "evidence_boundary": "Dynamic counts cover one identity-locked M8192 canonical graph node per arm. They do not replace static cubin STACK/LOCAL/LDL/STL checks.",
+  "gate_pass": true,
+  "records": [
+    {
+      "arm": "baseline",
+      "artifacts": {
+        "capture_identity": "ncu/baseline/capture_identity.json",
+        "native_raw": "ncu/baseline/native_raw.csv",
+        "ncu_report": "ncu/baseline/trace.ncu-rep",
+        "profile_target": "ncu/baseline/profile_target.json"
+      },
+      "cubin_sha256": "4b835aa8ce91a4dd12b4dc4f43508c205c117aaeb193995fff57dd3ddbeb7725",
+      "fixture": "canonical",
+      "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+      "jit_artifact_set_sha256": "286ee3e50518e70a343758174c6aa95db76038b5bdc0aa529f2208e45cc9ef3b",
+      "m": 8192,
+      "metrics": {
+        "executed_tensor_instructions": 31162368,
+        "fp4_tensor_ops": 510564237312,
+        "spill_local_read": 0,
+        "spill_local_write": 0,
+        "spill_register_read": 0,
+        "spill_register_write": 0
+      },
+      "observed_launch": {
+        "block": [
+          288,
+          1,
+          1
+        ],
+        "context_id": 1,
+        "device_id": 0,
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "row_id": 0,
+        "stream_id": 7
+      },
+      "source_record": "ncu/baseline/native_raw.csv",
+      "source_sha256": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971"
+    },
+    {
+      "arm": "candidate_v2",
+      "artifacts": {
+        "capture_identity": "ncu/candidate_v2/capture_identity.json",
+        "native_raw": "ncu/candidate_v2/native_raw.csv",
+        "ncu_report": "ncu/candidate_v2/trace.ncu-rep",
+        "profile_target": "ncu/candidate_v2/profile_target.json"
+      },
+      "cubin_sha256": "fee96b35d9b2c83e354504774fba2e2bc10e54f0316ade18f8adbdabb2ecbada",
+      "fixture": "canonical",
+      "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+      "jit_artifact_set_sha256": "4358e71894a2602030e32e33b13298a3b739ff4c554aaead82b4ef9c0373d3cc",
+      "m": 8192,
+      "metrics": {
+        "executed_tensor_instructions": 31162368,
+        "fp4_tensor_ops": 510564237312,
+        "spill_local_read": 0,
+        "spill_local_write": 0,
+        "spill_register_read": 0,
+        "spill_register_write": 0
+      },
+      "observed_launch": {
+        "block": [
+          288,
+          1,
+          1
+        ],
+        "context_id": 1,
+        "device_id": 0,
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "kernel_symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+        "row_id": 0,
+        "stream_id": 7
+      },
+      "source_record": "ncu/candidate_v2/native_raw.csv",
+      "source_sha256": "b6e141179794561f2144bdec079b7e109fddfccc2db6ba0f19c22d30ea4b34ca"
+    }
+  ],
+  "schema": "exp015.matched-dynamic-ncu-evidence.v1",
+  "scope": {
+    "block": [
+      288,
+      1,
+      1
+    ],
+    "execution": "one uninstrumented final CUDA Graph replay node per arm",
+    "expected_exp008_work_ledger": {
+      "executed_tensor_instructions": 31162368,
+      "fp4_tensor_ops": 510564237312
+    },
+    "fixture": "canonical",
+    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "grid": [
+      1,
+      1,
+      110
+    ],
+    "m": 8192,
+    "metric_ids": {
+      "executed_tensor_instructions": "sm__inst_executed_pipe_tensor_subpipe_hmma.sum",
+      "fp4_tensor_ops": "sm__ops_path_tensor_src_fp4_dst_fp32.sum",
+      "spill_local_read": "sass__inst_executed_register_spilling_mem_local_op_read",
+      "spill_local_write": "sass__inst_executed_register_spilling_mem_local_op_write",
+      "spill_register_read": "sass__inst_executed_register_spilling_op_read",
+      "spill_register_write": "sass__inst_executed_register_spilling_op_write"
+    }
+  },
+  "status": "pass"
+}

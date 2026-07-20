@@ -1,0 +1,18 @@
+# Keep compact, reviewable evidence in git. Raw replay tensors and profiler
+# payloads remain reproducible experiment-workspace artifacts.
+raw/
+runtime/
+ncu/
+harness/
+
+*.pt
+*.cubin
+*.ptx
+*_clean.mlir
+*.ncu-rep
+*.nsys-rep
+*.qdstrm
+*.sqlite
+
+__pycache__/
+.pytest_cache/

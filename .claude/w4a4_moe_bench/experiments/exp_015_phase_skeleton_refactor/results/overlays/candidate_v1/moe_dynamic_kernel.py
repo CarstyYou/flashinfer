@@ -1,26 +1,60 @@
-"""Persistent optimization working copy for the routed NVFP4 MoE kernel.
+"""
+Optimization working copy for w4a4_moe_bench.
 
-Keep the FlashInfer production kernel and closed experiment overlays immutable;
-all iterative optimization work belongs in this file.
+Baseline: exp_005 candidate_8warp_serial_v0. Iterate this file only; keep the
+FlashInfer production kernel and closed experiment overlays immutable.
 
-Locked execution contract:
-  - SM120/SM121, one resident CTA with eight math warps and one TMA warp.
-  - gated FC1 uses two temporal native-N64 halves; each half pairs Gate/Up,
-    reuses A/SFA, and immediately consumes both FP32 accumulators into sC.
-  - Q1 converts sC into the cached FC2 A/SFA representation.
-  - FC2 preloads A/SFA once per logical slice, then processes each output tile
-    as FC2 GEMM + down-alpha epilogue + R2S(sC) -> scatter(sC -> GMEM).
-  - pass_gate transfers aliased sB/sSFB ownership early enough for FC2 weight
-    prefetch to overlap SwiGLU and Q1; pass_final protects sA until all FC2
-    output tiles and scatters complete.
+exp_008 candidate: keep exp_007's two temporal native-B-N64 halves, but pair
+Gate/Up inside each half.  A/SFA are staged once per half while independent
+Gate/Up B/SFB payloads feed two interleaved OMMAs in the same K loop.  Each
+accumulator pair is still consumed immediately into sC; FC2/scatter remain one
+N128 pass.
 
-Top-level device flow:
-  Init/Histogram/Route+Q0/Publish -> persistent task claim/cache
-  -> math phases || TMA producer phases -> pipeline drain.
+MoEDynamicKernel — queue-driven routed NVFP4 MoE kernel for SM120/SM121.
 
-This is an optimization/validation artifact, not the production implementation.
-Structural refactors must preserve math, layouts, warp roles, scheduler order,
-pipeline state progression, and every ownership handoff.
+Ported from the b12x kernel library to FlashInfer.
+
+This is the first dynamic fused control-plane kernel derived from the current
+static implementation. It keeps the proven FC1 / activation / quant / FC2 /
+scatter compute body, but replaces the resident-grid route/pack -> compute
+barrier with a global ready-task queue.
+
+Supports two activation modes selected at construction time:
+  SiLU (gated, activation="silu"):
+    FC1:     A x gate^T, A x up^T     (paired FP4 block-scaled GEMMs)
+    Act:     SiLU(gate) * up           (fused SwiGLU activation)
+  ReLU2 (non-gated, activation="relu2"):
+    FC1:     A x W1^T                  (single FP4 block-scaled GEMM)
+    Act:     max(0, x)^2               (squared ReLU activation)
+
+Execution model
+  Phase 0: cooperative init / clear scratch state
+  Phase 1: all CTAs start as producers
+           - claim routed (token, topk_slot) pairs from pair_head
+           - append expert rows
+           - write token_map + token_weights
+           - quantize each routed token row into expert-major packed A + scales
+           - publish one compute task per ready (expert, m_tile, slice_group)
+             as soon as a tile is fully written
+  Phase 2: CTAs that finish producing become consumers immediately
+           - CTA leader pops one ready task into shared ctrl state
+           - MMA warps run FC1 -> SiLU -> quant -> FC2 -> scatter for that task
+           - DMA warp streams the corresponding FC1 / FC2 weights
+
+This is intentionally conservative:
+  - still one CTA per SM
+  - still the static per-slice microkernel, now executed sequentially for a
+    small grouped slice task
+  - still one initial resident-grid barrier after init
+
+What changes relative to the static path
+  - no global route/pack -> compute barrier
+  - no static scheduler in the compute steady state
+  - route/pack is warp-private instead of CTA-broadcast
+  - compute work is driven by a global append-only ready-task queue
+
+This file is a first implementation pass, not a compiled or profiled artifact.
+It is meant as a concrete CuTeDSL starting point for the next iteration.
 """
 
 from __future__ import annotations
@@ -1177,16 +1211,77 @@ class MoEDynamicKernel:
 
 
     @cute.jit
-    def load_fc2_a_fragments(
+    def fc2_scatter_to_gmem(
         self,
+        tidx,
+        output_tile_cnt,
         num_k_blocks,
-        a_storage,
-        a_fragments,
-        a_copies,
+        acc_shape,
+        tiled_mma,
+        mma_atom,
+        task,
+        pipeline_args,
+        fc2_storage,
+        fc2_fragments,
+        fc2_copies,
+        scatter_params,
     ):
-        csA, csSFA = a_storage
-        crA, crSFA = a_fragments
-        smem_copy_A, smem_copy_SFA = a_copies
+        from cutlass.cute.nvgpu.warp.mma import Field as WarpField
+
+        valid_rows, down_alpha_value = task
+        phase2_pipeline, phase2_cons_state = pipeline_args
+        sC, csA, csB, csSFA, csSFB = fc2_storage
+        tCrA, tCrB, tCrSFA, tCrSFB, crA, crB, crSFA, crSFB = (
+            fc2_fragments
+        )
+        (
+            smem_copy_A,
+            smem_copy_B,
+            smem_copy_SFA,
+            smem_copy_SFB,
+            tiled_copy_r2s,
+            thr_copy_r2s,
+            tRS_sD,
+        ) = fc2_copies
+        (
+            scatter_output,
+            scatter_tok_base_addr,
+            scatter_weight_base_addr,
+        ) = scatter_params
+
+        rD_shape = cute.shape(thr_copy_r2s.partition_S(sC))
+        tRS_rD_layout = cute.make_layout(rD_shape[:3])
+        tRS_rD = cute.make_rmem_tensor(tRS_rD_layout.shape, self.acc_dtype)
+        tRS_rD_out = cute.make_rmem_tensor(
+            tRS_rD_layout.shape, cutlass.BFloat16
+        )
+        down_acc = cute.make_rmem_tensor(acc_shape, self.acc_dtype)
+        tRS_rDown = tiled_copy_r2s.retile(down_acc)
+        mma_tile_m = self.tile_shape_mnk[0] // cute.size(
+            tRS_rDown, mode=[1]
+        )
+        mma_tile_n = self.tile_shape_mnk[1] // cute.size(
+            tRS_rDown, mode=[2]
+        )
+        epi_rest_m = self.tile_shape_mnk[0] // self.epi_tile[0]
+        MmaMPerEpiM = self.epi_tile[0] // mma_tile_m
+        MmaNPerEpiN = self.epi_tile[1] // mma_tile_n
+        fc2_m_tiles = cute.size(tCrA, mode=[1])
+        fc2_n_tiles = cute.size(tCrB, mode=[1])
+        epi_buffer = Int32(0)
+
+        # ============================================================
+        # PHASE B: Sweep ALL FC2 output tiles using cached sA
+        # The final FC1 pass_gate handoff gave the DMA warp sole
+        # ownership of sB/sSFB for B_down.  Q1 uses sC/sA/sSFA, so
+        # phase2 B prefetch can overlap it safely; phase2_pipeline
+        # handles B_down availability for FC2 GEMM.
+        # ============================================================
+        scatter_N = Int32(scatter_output.shape[1])
+        lane_id = Int32(tidx) & Int32(31)
+        warp_in_tile = Int32(tidx) >> Int32(5)
+        warp_m_base = (warp_in_tile >> Int32(1)) * Int32(64)
+        warp_n_base = (warp_in_tile & Int32(1)) * Int32(64)
 
         csA_phase2 = csA[None, None, None, 0]
         csSFA_phase2 = csSFA[None, None, None, 0]
@@ -1219,260 +1314,203 @@ class MoEDynamicKernel:
                 fz_crSFA_p2[None, None, k_pre],
             )
 
-
-    @cute.jit
-    def fc2_to_sC(
-        self,
-        num_k_blocks,
-        acc_shape,
-        mma_atom,
-        down_alpha_value,
-        pipeline_args,
-        fc2_storage,
-        fc2_fragments,
-        fc2_copies,
-    ):
-        from cutlass.cute.nvgpu.warp.mma import Field as WarpField
-
-        phase2_pipeline, phase2_cons_state = pipeline_args
-        sC, csB, csSFB = fc2_storage
-        tCrA, tCrB, tCrSFA, tCrSFB, crB, crSFB = fc2_fragments
-        (
-            smem_copy_B,
-            smem_copy_SFB,
-            tiled_copy_r2s,
-            thr_copy_r2s,
-            tRS_sD,
-        ) = fc2_copies
-
-        rD_shape = cute.shape(thr_copy_r2s.partition_S(sC))
-        tRS_rD_layout = cute.make_layout(rD_shape[:3])
-        tRS_rD = cute.make_rmem_tensor(tRS_rD_layout.shape, self.acc_dtype)
-        tRS_rD_out = cute.make_rmem_tensor(
-            tRS_rD_layout.shape, cutlass.BFloat16
-        )
-        down_acc = cute.make_rmem_tensor(acc_shape, self.acc_dtype)
-        tRS_rDown = tiled_copy_r2s.retile(down_acc)
-        mma_tile_m = self.tile_shape_mnk[0] // cute.size(
-            tRS_rDown, mode=[1]
-        )
-        mma_tile_n = self.tile_shape_mnk[1] // cute.size(
-            tRS_rDown, mode=[2]
-        )
-        epi_rest_m = self.tile_shape_mnk[0] // self.epi_tile[0]
-        MmaMPerEpiM = self.epi_tile[0] // mma_tile_m
-        MmaNPerEpiN = self.epi_tile[1] // mma_tile_n
-        fc2_m_tiles = cute.size(tCrA, mode=[1])
-        fc2_n_tiles = cute.size(tCrB, mode=[1])
-
-        phase2_peek = phase2_pipeline.consumer_try_wait(
-            phase2_cons_state
-        )
-        phase2_pipeline.consumer_wait(phase2_cons_state, phase2_peek)
-        csB_phase2 = csB[None, None, None, phase2_cons_state.index]
-        csSFB_phase2 = csSFB[None, None, None, phase2_cons_state.index]
-
-        # Only load B-side (B_down changes per output tile; A is hoisted)
-        cute.copy(
-            smem_copy_B, csB_phase2[None, None, 0], crB[None, None, 0]
-        )
-        f2 = cute.filter_zeros(csSFB_phase2)
-        f4 = cute.filter_zeros(crSFB)
-        cute.copy(smem_copy_SFB, f2[None, None, 0], f4[None, None, 0])
-
-        down_acc.fill(0.0)
-        for k_block_idx in cutlass.range_constexpr(num_k_blocks):
-            k_next = (
-                0
-                if k_block_idx + 1 == num_k_blocks
-                else k_block_idx + 1
+        phase2_cons_state.reset_count()
+        for output_tile_idx in range(0, output_tile_cnt, 1, unroll=4):  # type: ignore[call-overload]
+            phase2_peek = phase2_pipeline.consumer_try_wait(
+                phase2_cons_state
             )
-            if k_block_idx == num_k_blocks - 1:
-                phase2_pipeline.consumer_release(phase2_cons_state)
-                phase2_cons_state.advance()
-            if k_next > 0:
-                # Only B-side for next k-block (A already in registers)
-                cute.copy(
-                    smem_copy_B,
-                    csB_phase2[None, None, k_next],
-                    crB[None, None, k_next],
-                )
-                f2 = cute.filter_zeros(csSFB_phase2)
-                f4 = cute.filter_zeros(crSFB)
-                cute.copy(
-                    smem_copy_SFB,
-                    f2[None, None, k_next],
-                    f4[None, None, k_next],
-                )
-            for _mt in cutlass.range_constexpr(fc2_m_tiles):
-                for _nt in cutlass.range_constexpr(fc2_n_tiles):
-                    mma_atom.set(
-                        WarpField.SFA,
-                        tCrSFA[None, _mt, k_block_idx].iterator,
-                    )
-                    mma_atom.set(
-                        WarpField.SFB,
-                        tCrSFB[None, _nt, k_block_idx].iterator,
-                    )
-                    cute.gemm(
-                        mma_atom,
-                        down_acc[None, _mt, _nt],
-                        tCrA[None, _mt, k_block_idx],
-                        tCrB[None, _nt, k_block_idx],
-                        down_acc[None, _mt, _nt],
-                    )
+            phase2_pipeline.consumer_wait(phase2_cons_state, phase2_peek)
+            csB_phase2 = csB[None, None, None, phase2_cons_state.index]
+            csSFB_phase2 = csSFB[None, None, None, phase2_cons_state.index]
 
-        for epi_m in cutlass.range_constexpr(epi_rest_m):
-            for mma_n_in_epi in cutlass.range_constexpr(MmaNPerEpiN):
-                for mma_m_in_epi in cutlass.range_constexpr(
-                    MmaMPerEpiM
-                ):
-                    mma_n = mma_n_in_epi
-                    mma_m = epi_m * MmaMPerEpiM + mma_m_in_epi
-                    tRS_rD_slice = tRS_rD[
-                        (None, mma_m_in_epi, mma_n_in_epi)
-                    ]
-                    down_epi_acc_slice = down_acc[(None, mma_m, mma_n)]
-                    for elem_idx in cutlass.range_constexpr(
-                        cute.size(tRS_rD_slice)
-                    ):
-                        tRS_rD_slice[elem_idx] = (
-                            down_alpha_value
-                            * down_epi_acc_slice[elem_idx]
+            # Only load B-side (B_down changes per output tile; A is hoisted)
+            cute.copy(
+                smem_copy_B, csB_phase2[None, None, 0], crB[None, None, 0]
+            )
+            f2 = cute.filter_zeros(csSFB_phase2)
+            f4 = cute.filter_zeros(crSFB)
+            cute.copy(smem_copy_SFB, f2[None, None, 0], f4[None, None, 0])
+
+            down_acc.fill(0.0)
+            for k_block_idx in cutlass.range_constexpr(num_k_blocks):
+                k_next = (
+                    0
+                    if k_block_idx + 1 == num_k_blocks
+                    else k_block_idx + 1
+                )
+                if k_block_idx == num_k_blocks - 1:
+                    phase2_pipeline.consumer_release(phase2_cons_state)
+                    phase2_cons_state.advance()
+                if k_next > 0:
+                    # Only B-side for next k-block (A already in registers)
+                    cute.copy(
+                        smem_copy_B,
+                        csB_phase2[None, None, k_next],
+                        crB[None, None, k_next],
+                    )
+                    f2 = cute.filter_zeros(csSFB_phase2)
+                    f4 = cute.filter_zeros(crSFB)
+                    cute.copy(
+                        smem_copy_SFB,
+                        f2[None, None, k_next],
+                        f4[None, None, k_next],
+                    )
+                for _mt in cutlass.range_constexpr(fc2_m_tiles):
+                    for _nt in cutlass.range_constexpr(fc2_n_tiles):
+                        mma_atom.set(
+                            WarpField.SFA,
+                            tCrSFA[None, _mt, k_block_idx].iterator,
+                        )
+                        mma_atom.set(
+                            WarpField.SFB,
+                            tCrSFB[None, _nt, k_block_idx].iterator,
+                        )
+                        cute.gemm(
+                            mma_atom,
+                            down_acc[None, _mt, _nt],
+                            tCrA[None, _mt, k_block_idx],
+                            tCrB[None, _nt, k_block_idx],
+                            down_acc[None, _mt, _nt],
                         )
 
-            acc_vec = tRS_rD.load()
-            acc_vec = acc_vec.to(cutlass.BFloat16)
-            tRS_rD_out.store(acc_vec)
-            epi_buffer = Int32(epi_m) % cute.size(tRS_sD, mode=[3])
-            cute.copy(
-                tiled_copy_r2s,
-                tRS_rD_out,
-                tRS_sD[(None, None, None, epi_buffer)],
+            # Scatter using precomputed metadata (no redundant gmem loads)
+            tile_n_base_cur = output_tile_idx * Int32(
+                self.tile_shape_mnk[1]
             )
+            for epi_m in cutlass.range_constexpr(epi_rest_m):
+                for mma_n_in_epi in cutlass.range_constexpr(MmaNPerEpiN):
+                    for mma_m_in_epi in cutlass.range_constexpr(
+                        MmaMPerEpiM
+                    ):
+                        mma_n = mma_n_in_epi
+                        mma_m = epi_m * MmaMPerEpiM + mma_m_in_epi
+                        tRS_rD_slice = tRS_rD[
+                            (None, mma_m_in_epi, mma_n_in_epi)
+                        ]
+                        down_epi_acc_slice = down_acc[(None, mma_m, mma_n)]
+                        for elem_idx in cutlass.range_constexpr(
+                            cute.size(tRS_rD_slice)
+                        ):
+                            tRS_rD_slice[elem_idx] = (
+                                down_alpha_value
+                                * down_epi_acc_slice[elem_idx]
+                            )
+
+                acc_vec = tRS_rD.load()
+                acc_vec = acc_vec.to(cutlass.BFloat16)
+                tRS_rD_out.store(acc_vec)
+                epi_buffer = Int32(epi_m) % cute.size(tRS_sD, mode=[3])
+                cute.copy(
+                    tiled_copy_r2s,
+                    tRS_rD_out,
+                    tRS_sD[(None, None, None, epi_buffer)],
+                )
+                cute.arch.fence_proxy("async.shared", space="cta")
+                # Vector scatter reads wider spans from sC than the
+                # scalar path, so wait for all MMA-warps' stores.
+                self.epilog_sync_barrier.arrive_and_wait()
+                rows_offset = Int32(epi_m) * Int32(self.epi_tile[0])
+
+                # Per-warp scatter: each warp scatters its own quadrant
+                # of sC (64 M-rows x 64 N-cols).
+                warp_epi_rows = valid_rows - rows_offset - warp_m_base
+                if warp_epi_rows > Int32(64):
+                    warp_epi_rows = Int32(64)
+                if warp_epi_rows < Int32(0):
+                    warp_epi_rows = Int32(0)
+
+                tile_vec_cols = Int32(64) // Int32(8)
+                vec_idx = lane_id
+                while vec_idx < warp_epi_rows * tile_vec_cols:
+                    local_row = vec_idx // tile_vec_cols
+                    local_vec_col = vec_idx - local_row * tile_vec_cols
+                    local_col = warp_n_base + local_vec_col * Int32(8)
+                    global_col = tile_n_base_cur + local_col
+                    cached_row = rows_offset + warp_m_base + local_row
+                    tok = ld_shared_i32_relaxed(
+                        scatter_tok_base_addr + cached_row * Int32(4)
+                    )
+                    wv = ld_shared_f32(
+                        scatter_weight_base_addr + cached_row * Int32(4)
+                    )
+                    sc_v0 = cutlass.Float32(
+                        sC[
+                            warp_m_base + local_row,
+                            local_col,
+                            epi_buffer,
+                        ]
+                    )
+                    sc_v1 = cutlass.Float32(
+                        sC[
+                            warp_m_base + local_row,
+                            local_col + Int32(1),
+                            epi_buffer,
+                        ]
+                    )
+                    sc_v2 = cutlass.Float32(
+                        sC[
+                            warp_m_base + local_row,
+                            local_col + Int32(2),
+                            epi_buffer,
+                        ]
+                    )
+                    sc_v3 = cutlass.Float32(
+                        sC[
+                            warp_m_base + local_row,
+                            local_col + Int32(3),
+                            epi_buffer,
+                        ]
+                    )
+                    sc_v4 = cutlass.Float32(
+                        sC[
+                            warp_m_base + local_row,
+                            local_col + Int32(4),
+                            epi_buffer,
+                        ]
+                    )
+                    sc_v5 = cutlass.Float32(
+                        sC[
+                            warp_m_base + local_row,
+                            local_col + Int32(5),
+                            epi_buffer,
+                        ]
+                    )
+                    sc_v6 = cutlass.Float32(
+                        sC[
+                            warp_m_base + local_row,
+                            local_col + Int32(6),
+                            epi_buffer,
+                        ]
+                    )
+                    sc_v7 = cutlass.Float32(
+                        sC[
+                            warp_m_base + local_row,
+                            local_col + Int32(7),
+                            epi_buffer,
+                        ]
+                    )
+                    scatter_add_v4_bf16x2(
+                        get_ptr_as_int64(
+                            scatter_output, tok * scatter_N + global_col
+                        ),
+                        wv * sc_v0,
+                        wv * sc_v1,
+                        wv * sc_v2,
+                        wv * sc_v3,
+                        wv * sc_v4,
+                        wv * sc_v5,
+                        wv * sc_v6,
+                        wv * sc_v7,
+                    )
+                    vec_idx += Int32(self.num_threads_per_warp)
+
+                # Post-scatter barrier: needed to ensure all warps
+                # finish scatter before next output tile's pipeline ops
+                # (pipeline consumer is collective across all MMA warps).
+                self.epilog_sync_barrier.arrive_and_wait()
+
 
         return phase2_cons_state
-
-    @cute.jit
-    def scatter_sC_to_gmem(
-        self,
-        tidx,
-        output_tile_idx,
-        valid_rows: Int32,
-        sC: cute.Tensor,
-        tRS_sD: cute.Tensor,
-        scatter_output: cute.Tensor,
-        scatter_tok_base_addr: Int32,
-        scatter_weight_base_addr: Int32,
-    ):
-        epi_rest_m = self.tile_shape_mnk[0] // self.epi_tile[0]
-        scatter_N = Int32(scatter_output.shape[1])
-        lane_id = Int32(tidx) & Int32(31)
-        warp_in_tile = Int32(tidx) >> Int32(5)
-        warp_m_base = (warp_in_tile >> Int32(1)) * Int32(64)
-        warp_n_base = (warp_in_tile & Int32(1)) * Int32(64)
-
-        # Scatter using precomputed metadata (no redundant gmem loads)
-        tile_n_base_cur = output_tile_idx * Int32(
-            self.tile_shape_mnk[1]
-        )
-        for epi_m in cutlass.range_constexpr(epi_rest_m):
-            epi_buffer = Int32(epi_m) % cute.size(tRS_sD, mode=[3])
-            rows_offset = Int32(epi_m) * Int32(self.epi_tile[0])
-
-            # Per-warp scatter: each warp scatters its own quadrant
-            # of sC (64 M-rows x 64 N-cols).
-            warp_epi_rows = valid_rows - rows_offset - warp_m_base
-            if warp_epi_rows > Int32(64):
-                warp_epi_rows = Int32(64)
-            if warp_epi_rows < Int32(0):
-                warp_epi_rows = Int32(0)
-
-            tile_vec_cols = Int32(64) // Int32(8)
-            vec_idx = lane_id
-            while vec_idx < warp_epi_rows * tile_vec_cols:
-                local_row = vec_idx // tile_vec_cols
-                local_vec_col = vec_idx - local_row * tile_vec_cols
-                local_col = warp_n_base + local_vec_col * Int32(8)
-                global_col = tile_n_base_cur + local_col
-                cached_row = rows_offset + warp_m_base + local_row
-                tok = ld_shared_i32_relaxed(
-                    scatter_tok_base_addr + cached_row * Int32(4)
-                )
-                wv = ld_shared_f32(
-                    scatter_weight_base_addr + cached_row * Int32(4)
-                )
-                sc_v0 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col,
-                        epi_buffer,
-                    ]
-                )
-                sc_v1 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col + Int32(1),
-                        epi_buffer,
-                    ]
-                )
-                sc_v2 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col + Int32(2),
-                        epi_buffer,
-                    ]
-                )
-                sc_v3 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col + Int32(3),
-                        epi_buffer,
-                    ]
-                )
-                sc_v4 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col + Int32(4),
-                        epi_buffer,
-                    ]
-                )
-                sc_v5 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col + Int32(5),
-                        epi_buffer,
-                    ]
-                )
-                sc_v6 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col + Int32(6),
-                        epi_buffer,
-                    ]
-                )
-                sc_v7 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col + Int32(7),
-                        epi_buffer,
-                    ]
-                )
-                scatter_add_v4_bf16x2(
-                    get_ptr_as_int64(
-                        scatter_output, tok * scatter_N + global_col
-                    ),
-                    wv * sc_v0,
-                    wv * sc_v1,
-                    wv * sc_v2,
-                    wv * sc_v3,
-                    wv * sc_v4,
-                    wv * sc_v5,
-                    wv * sc_v6,
-                    wv * sc_v7,
-                )
-                vec_idx += Int32(self.num_threads_per_warp)
-
 
     @cute.jit
     def load_fc1_tma_slice(
@@ -3152,52 +3190,41 @@ class MoEDynamicKernel:
                     cute.arch.fence_proxy("async.shared", space="cta")
                     self.epilog_sync_barrier.arrive_and_wait()
 
-                    self.load_fc2_a_fragments(
+                    phase2_cons_state = self.fc2_scatter_to_gmem(
+                        tidx,
+                        output_tile_cnt,
                         num_k_blocks,
-                        (csA, csSFA),
-                        (crA, crSFA),
-                        (smem_copy_A, smem_copy_SFA),
-                    )
-                    phase2_cons_state.reset_count()
-
-                    for output_tile_idx in range(
-                        0, output_tile_cnt, 1, unroll=4
-                    ):  # type: ignore[call-overload]
-                        phase2_cons_state = self.fc2_to_sC(
-                            num_k_blocks,
-                            acc_shape,
-                            mma_atom,
-                            down_alpha_value,
-                            (phase2_pipeline, phase2_cons_state),
-                            (sC, csB, csSFB),
-                            (tCrA, tCrB, tCrSFA, tCrSFB, crB, crSFB),
-                            (
-                                smem_copy_B,
-                                smem_copy_SFB,
-                                tiled_copy_r2s,
-                                thr_copy_r2s,
-                                tRS_sD,
-                            ),
-                        )
-
-                        # FC2 epilogue has made this output tile durable in sC.
-                        cute.arch.fence_proxy("async.shared", space="cta")
-                        self.epilog_sync_barrier.arrive_and_wait()
-
-                        self.scatter_sC_to_gmem(
-                            tidx,
-                            output_tile_idx,
-                            valid_rows,
-                            sC,
+                        acc_shape,
+                        tiled_mma,
+                        mma_atom,
+                        (valid_rows, down_alpha_value),
+                        (phase2_pipeline, phase2_cons_state),
+                        (sC, csA, csB, csSFA, csSFB),
+                        (
+                            tCrA,
+                            tCrB,
+                            tCrSFA,
+                            tCrSFB,
+                            crA,
+                            crB,
+                            crSFA,
+                            crSFB,
+                        ),
+                        (
+                            smem_copy_A,
+                            smem_copy_B,
+                            smem_copy_SFA,
+                            smem_copy_SFB,
+                            tiled_copy_r2s,
+                            thr_copy_r2s,
                             tRS_sD,
+                        ),
+                        (
                             scatter_output,
                             scatter_tok_base_addr,
                             scatter_weight_base_addr,
-                        )
-
-                        # Finish this tile's scatter before the next output
-                        # tile begins collective phase2 pipeline operations.
-                        self.epilog_sync_barrier.arrive_and_wait()
+                        ),
+                    )
 
                     # Signal that FC2/scatter no longer needs sA, so the DMA
                     # warp may start the next slice/task's FC1 loads.
