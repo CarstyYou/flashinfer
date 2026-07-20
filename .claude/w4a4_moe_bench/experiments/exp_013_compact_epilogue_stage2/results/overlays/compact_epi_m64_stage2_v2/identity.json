@@ -1,0 +1,26 @@
+{
+  "baseline": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_008_branch_paired_n64_reuse/results/overlays/branch_paired_n64_v1/moe_dynamic_kernel.py",
+  "baseline_sha256": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971",
+  "candidate": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_013_compact_epilogue_stage2/results/overlays/compact_epi_m64_stage2_v2/moe_dynamic_kernel.py",
+  "candidate_sha256": "e2fb46e49001b7fe17761fcd9af92b8775d41c6b0c5932172e3c57839d4199e5",
+  "changes": [
+    "M64xN128 epilogue storage",
+    "two full M64xN128 Q1 passes with half0 activation register bridge",
+    "four-warp M64xN128 scatter ownership",
+    "full M128xN128 tiled-MMA accumulator layout independent of sC"
+  ],
+  "invariants": {
+    "atom_layout_4x2": true,
+    "eight_math_warps": true,
+    "four_warp_scatter_stride": true,
+    "full_fc2_accumulator_layout": true,
+    "gemm_call_count_unchanged": true,
+    "half0_register_cache": true,
+    "raw_shared_q1_bridge": true,
+    "scatter_call_count_unchanged": true,
+    "shared_q1_bridge": true,
+    "stage2_cap_unchanged": true
+  },
+  "schema": "exp013.kernel-overlay-identity.v2",
+  "version": "v2"
+}

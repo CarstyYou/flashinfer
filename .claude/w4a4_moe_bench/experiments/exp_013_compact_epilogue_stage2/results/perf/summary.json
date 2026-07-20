@@ -1,0 +1,110 @@
+{
+  "cases": [
+    {
+      "exp008_mean_us": 519.0990394353867,
+      "exp013_v2_mean_us": 522.2489586472511,
+      "fixture_topk_ids_sha256": "a48c21b54f47265e7b98261363b94dc58a53e9858b79ffba4deda51128a8e108",
+      "fixture_x_sha256": "2cd5ab903e8e9118cd70c7432c025040b3336e3db3e9840020c6eb8421ad80fb",
+      "groups": [
+        {
+          "exp008_mean_us": 519.0873593091965,
+          "exp008_samples_us": [
+            519.1712009906769,
+            519.0035176277161
+          ],
+          "exp013_v2_mean_us": 522.3507177829742,
+          "exp013_v2_samples_us": [
+            522.3763167858124,
+            522.3251187801361
+          ],
+          "group": 0,
+          "speedup_pct": -0.6247447093838621
+        },
+        {
+          "exp008_mean_us": 519.1107195615768,
+          "exp008_samples_us": [
+            519.0329611301422,
+            519.1884779930115
+          ],
+          "exp013_v2_mean_us": 522.147199511528,
+          "exp013_v2_samples_us": [
+            521.9091188907623,
+            522.3852801322937
+          ],
+          "group": 1,
+          "speedup_pct": -0.5815371513611112
+        }
+      ],
+      "m": 256,
+      "speedup_pct": -0.6031432781492541
+    },
+    {
+      "exp008_mean_us": 1567.0092797279358,
+      "exp013_v2_mean_us": 1579.7494357824326,
+      "fixture_topk_ids_sha256": "f9b3c632d767e754837a14016f5a2ea3c3fccfefef1adee4f9b7b966c68e2f7a",
+      "fixture_x_sha256": "6c95ae4406b2fc7ad4544936781b71288d98f496a60c58f5695e6dbf868864b4",
+      "groups": [
+        {
+          "exp008_mean_us": 1566.816647052765,
+          "exp008_samples_us": [
+            1567.4144101142883,
+            1566.2188839912415
+          ],
+          "exp013_v2_mean_us": 1580.772477388382,
+          "exp013_v2_samples_us": [
+            1580.5331158638,
+            1581.0118389129639
+          ],
+          "group": 0,
+          "speedup_pct": -0.8828487676274421
+        },
+        {
+          "exp008_mean_us": 1567.2019124031067,
+          "exp008_samples_us": [
+            1565.7375955581665,
+            1568.6662292480469
+          ],
+          "exp013_v2_mean_us": 1578.7263941764832,
+          "exp013_v2_samples_us": [
+            1578.9094376564026,
+            1578.5433506965637
+          ],
+          "group": 1,
+          "speedup_pct": -0.7299860074479914
+        }
+      ],
+      "m": 8192,
+      "speedup_pct": -0.8064468337809938
+    }
+  ],
+  "decision": "reject_no_speedup",
+  "identity": {
+    "application_clock_mhz": "2377",
+    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "iters": 50,
+    "l2_flush_bytes": 201326592,
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74",
+    "warmup": 5
+  },
+  "overlays": {
+    "exp008": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971",
+    "exp013_v2": "e2fb46e49001b7fe17761fcd9af92b8775d41c6b0c5932172e3c57839d4199e5"
+  },
+  "protocol": {
+    "groups": 2,
+    "iters": 50,
+    "l2_flush_bytes": 201326592,
+    "order": [
+      "exp008",
+      "exp013_v2",
+      "exp013_v2",
+      "exp008"
+    ],
+    "warmup": 5
+  },
+  "schema": "exp013.quick-abba-summary.v1",
+  "speedup_definition": "(exp008_us / exp013_v2_us - 1) * 100",
+  "status": "complete"
+}

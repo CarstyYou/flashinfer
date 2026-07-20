@@ -1,0 +1,33 @@
+{
+  "schema": "exp013.static-resource-evidence.v1",
+  "status": "complete",
+  "toolchain": {
+    "cuobjdump": "CUDA 13.2 V13.2.78",
+    "nvdisasm": "CUDA 13.2 V13.2.78",
+    "resource_command": "cuobjdump --dump-resource-usage <cubin>",
+    "local_instruction_command": "nvdisasm <cubin> | match LDL/STL opcodes"
+  },
+  "arms": {
+    "exp008": {
+      "source_sha256": "f3c246817679d962a3f7160dbe8b9e68262c919e26e306f349200961fc4ac971",
+      "cubin_sha256": "4b835aa8ce91a4dd12b4dc4f43508c205c117aaeb193995fff57dd3ddbeb7725",
+      "source_identity": ".claude/w4a4_moe_bench/experiments/exp_008_branch_paired_n64_reuse/results/canonical/v1/raw/candidate_8warp_n64_temporal_replay_v0/m256/canonical/preparation.json",
+      "registers": 160,
+      "stack_bytes_per_thread": 0,
+      "static_local_bytes": 0,
+      "ldl_count": 0,
+      "stl_count": 0
+    },
+    "exp013_v2": {
+      "source_sha256": "e2fb46e49001b7fe17761fcd9af92b8775d41c6b0c5932172e3c57839d4199e5",
+      "cubin_sha256": "cb186d207a1b6eba113beeccf84202a6f2fbc7b44fc163346f85d57cd0f3193f",
+      "source_identity": ".claude/w4a4_moe_bench/experiments/exp_013_compact_epilogue_stage2/results/raw/correctness_v2.json",
+      "registers": 168,
+      "stack_bytes_per_thread": 24,
+      "static_local_bytes": 0,
+      "ldl_count": 5,
+      "stl_count": 5
+    }
+  },
+  "interpretation": "exp013_v2 introduces static stack-backed local traffic; it is not a zero-spill candidate."
+}
