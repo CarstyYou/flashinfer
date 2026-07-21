@@ -1,0 +1,108 @@
+{
+  "schema": "exp021.scatter_instruction_evidence.v1",
+  "case": {
+    "m": 8192,
+    "hidden": 2048,
+    "topk": 8,
+    "slices": 4,
+    "groups": 637,
+    "slice_tasks": 2548
+  },
+  "production": {
+    "scatter_sass_ranges": [
+      "0x10430-0x10960",
+      "0x116b0-0x11bf0",
+      "0x12950-0x12e90",
+      "0x13bc0-0x14110"
+    ],
+    "static_instruction_shape": {
+      "unrolled_bodies": 4,
+      "sC_lds_u16_pcs": 32,
+      "metadata_lds_pcs": 8,
+      "fmul_pcs": 32,
+      "redg_bf16x8_pcs": 4
+    },
+    "pc_not_issued_samples": {
+      "total": 20111,
+      "short_scoreboard": {"count": 7500, "percent": 37.2930},
+      "wait": {"count": 5883, "percent": 29.2526},
+      "mio_throttle": {"count": 2783, "percent": 13.8382},
+      "long_scoreboard": {"count": 2433, "percent": 12.0979},
+      "math_pipe_throttle": {"count": 708, "percent": 3.5205},
+      "branch_resolving": {"count": 355, "percent": 1.7652},
+      "no_instructions": {"count": 239, "percent": 1.1884},
+      "dispatch_stall": {"count": 210, "percent": 1.0442},
+      "barrier": {"count": 0, "percent": 0.0},
+      "note": "PC sample shares are not latency shares; a consumer PC can carry producer-dependency stalls."
+    },
+    "opcode_samples_normalized": {
+      "sC_lds_u16": {"samples": 2764, "executed_warp_instructions": 16880640, "samples_per_million_instructions": 163.7},
+      "metadata_lds": {"samples": 499, "executed_warp_instructions": 4220160, "samples_per_million_instructions": 118.2},
+      "imad_u32_consumer": {"samples": 4730, "executed_warp_instructions": 16880640, "samples_per_million_instructions": 280.2},
+      "imad_wide_consumer": {"samples": 2002, "executed_warp_instructions": 2110080, "samples_per_million_instructions": 948.8},
+      "loop_head_shf": {"samples": 3456, "executed_warp_instructions": 18990720, "samples_per_million_instructions": 182.0},
+      "fmul": {"samples": 908, "executed_warp_instructions": 16880640, "samples_per_million_instructions": 53.8},
+      "redg_bf16x8": {"samples": 537, "executed_warp_instructions": 2110080, "samples_per_million_instructions": 254.5}
+    },
+    "shared_wavefronts": {
+      "sC_lds_u16": {
+        "actual": 67108864,
+        "ideal": 16880640,
+        "excessive": 50228224,
+        "actual_over_ideal": 3.9755,
+        "excessive_percent_of_actual": 74.8459
+      },
+      "metadata_lds": {
+        "actual": 4220160,
+        "ideal": 4220160,
+        "excessive": 0,
+        "actual_over_ideal": 1.0
+      }
+    },
+    "global_reduction": {
+      "l2_reduction_sectors": 33554432,
+      "global_reduction_footprint_bytes": 1073741824
+    }
+  },
+  "standalone_correspondence_probe": {
+    "launch": {"grid": [110, 1, 1], "block": [256, 1, 1]},
+    "logical_work": {
+      "redg_bf16x8": 67108864,
+      "reduction_payload_bytes": 1073741824,
+      "path_live": true
+    },
+    "resource": {
+      "registers_per_thread": 40,
+      "shared_memory_bytes_per_cta": 86016,
+      "waves_per_sm": 1.0
+    },
+    "scheduler": {
+      "active_warps_per_scheduler": 2.0,
+      "eligible_warps_per_scheduler": 0.48,
+      "issue_active_percent_of_active_cycles": 38.70
+    },
+    "memory": {
+      "shared_wavefronts_actual": 71405728,
+      "shared_wavefronts_ideal": 21177504,
+      "shared_wavefronts_excessive": 50228224,
+      "l2_atomic_input_active_percent": 63.13
+    },
+    "scope_check": {
+      "initialization_instruction_percent": 0.5407,
+      "initialization_not_issued_sample_percent": 0.3616,
+      "all_pre_scatter_instruction_percent": 0.9467,
+      "scatter_body_instruction_percent": 98.9163
+    },
+    "limitation": "The standalone scheduler ratios corroborate the instruction-stream symptom but are not production phase ratios."
+  },
+  "verdict": {
+    "localized_candidate": "K_SW128 sC scalar LDS.U16 access produces about 4x shared wavefront amplification and a dependent consumer chain.",
+    "unresolved": "REDG pressure is visible, but current evidence cannot separate destination contention, L2 reduction-service throughput, or ordering effects.",
+    "rejected_interpretations": [
+      "IMAD or SHF is intrinsically slow because a dependency stall is sampled at that PC",
+      "few REDG-PC samples prove reduction is cheap",
+      "standalone barrier samples describe production",
+      "standalone duration is production Scatter latency"
+    ]
+  }
+}

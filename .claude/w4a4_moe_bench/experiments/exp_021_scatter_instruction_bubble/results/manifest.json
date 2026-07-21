@@ -1,0 +1,54 @@
+{
+  "schema": "exp021.manifest.v1",
+  "status": "complete",
+  "git": {
+    "branch": "w4a4_moe_bench",
+    "base_commit": "2fedae44cd47899e09064bb965143fdef2c905ee",
+    "production_source": ".claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py",
+    "production_source_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
+    "probe_source_sha256": "70302aa937690e960f0e5ddbe1fa2f77327f1ebfea32dc391bcea18cdc281889"
+  },
+  "hardware": {
+    "host": "10.6.142.16",
+    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "gpu_name": "NVIDIA Graphics Device",
+    "compute_capability": "12.0",
+    "driver": "580.95.05"
+  },
+  "software": {
+    "container": "nvcr.io/nvidia/pytorch:26.05-py3",
+    "container_digest": "sha256:a4e056e1d34a5cc9387512ffa3abeed778e3dc7966633c5154d771705d8835ac",
+    "nvcc": "13.2.78",
+    "ncu": "2026.1.1"
+  },
+  "fixture": {
+    "m": 8192,
+    "identity_sha256": "4a5b04ab05f62546210be5693c363270181d9666513aa181413d4a1f9933f2d0",
+    "groups": 637,
+    "slice_tasks": 2548,
+    "topk": 8,
+    "slices": 4
+  },
+  "reports": {
+    "production": {
+      "captured_at": "2026-07-21T18:27:53+08:00",
+      "remote_path": "/home/xiy/workspace/flashinfer_exp001_corrected_074d93e/.claude/w4a4_moe_bench/experiments/exp_019_opt_vs_eric_dataflow_bottleneck/results/raw/ncu/latest_opt_fp4/m8192/trace.ncu-rep",
+      "sha256": "883355ca648f9eaefe4e85db1f3cf054c7f49e1194d09313f242115d1a23af2b",
+      "cubin_sha256": "e9b322e4c978c490adbe0a9bf0f9a183288c0ecddb1fd72e5a904c487be541f3"
+    },
+    "standalone": {
+      "captured_at": "2026-07-21T22:21:15+08:00",
+      "remote_path": "/home/xiy/workspace/flashinfer_exp001_corrected_074d93e/.claude/w4a4_moe_bench/experiments/exp_021_scatter_instruction_bubble/results/raw/v2/trace.ncu-rep",
+      "sha256": "9261aa325f5992d0242e1035d5aeb8ed6962b1685c2d942ee60c97b554f1a8b8"
+    }
+  },
+  "correctness": {
+    "numerical_validation": false,
+    "path_live": true,
+    "reason": "The standalone is diagnostic-only; exact production SASS and source counters are the primary evidence."
+  },
+  "iket": {
+    "used": false,
+    "reason": "NCU exact-PC and shared source counters localized the first candidate; warp-tail evidence was not required."
+  }
+}

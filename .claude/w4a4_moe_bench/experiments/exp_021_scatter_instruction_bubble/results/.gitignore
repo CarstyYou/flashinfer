@@ -1,0 +1,5 @@
+*
+!.gitignore
+!evidence.json
+!manifest.json
+!result.md
