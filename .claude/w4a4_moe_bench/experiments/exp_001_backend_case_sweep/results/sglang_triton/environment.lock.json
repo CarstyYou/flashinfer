@@ -1,5 +1,5 @@
 {
-  "fingerprint_sha256": "cdc072f99c7c1b3fb099066eddc38c5bfef8cb9da121a6a76177ddc3b11b3d35",
+  "fingerprint_sha256": "db326e772e9b9d0d7530f54144208ef45c1e56766f04f8faf6819321f8fb6d7f",
   "runtime": {
     "compute_capability": [
       12,
@@ -8,14 +8,14 @@
     "cuda_runtime": "13.0",
     "foreign_compute_process_query": "",
     "gpu_name": "NVIDIA Graphics Device",
-    "gpu_uuid": "GPU-4a286357-c999-9547-3a04-25961b1ffd08",
-    "hostname": "995f85e50857",
+    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "hostname": "ef702052016b",
     "image": "lmsysorg/sglang:latest",
     "image_digest": "sha256:00c53fe4c31bf22d7b37537f28bbdfd924c02de13cdfb4bff7378c9c34d75ab2",
     "image_id": "sha256:663867442f321ded36228bafd889fd1db05cbef7a7c8ea6e072df33234dabbfd",
-    "measurement_rerun_id": "exp001-corrected-20260716T0443Z-r1",
+    "measurement_rerun_id": "exp001-latest-opt-20260721T042841Z-r1",
     "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
-    "resource_lease_id": "exp001-corrected-20260716T042843Z-23286",
+    "resource_lease_id": "exp001-latest-opt-20260721T042841Z-28351",
     "server_args": {
       "enable_deterministic_inference": false,
       "enable_fused_moe_sum_all_reduce": false,

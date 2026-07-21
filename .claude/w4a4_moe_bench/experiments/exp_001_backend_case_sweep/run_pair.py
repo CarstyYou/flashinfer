@@ -6,7 +6,9 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import importlib.abc
 import importlib.metadata
+import importlib.util
 import json
 import os
 import platform
@@ -41,7 +43,13 @@ ARMS = (
 )
 PAIRED_ARMS = ARMS
 EXPECTED_FLASHINFER_COMMIT = "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af"
+EXPECTED_OPT_FLASHINFER_COMMIT = "996c3622cd3ce8603a0bd217545a9afe5516f6aa"
 EXPECTED_CUTLASS_COMMIT = "b46b16d003484063bca4ed365e44095c4c6ed633"
+EXPECTED_OPT_OVERLAY = Path(".claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py")
+EXPECTED_OPT_OVERLAY_SHA256 = (
+    "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19"
+)
+TARGET_MODULE = "flashinfer.fused_moe.cute_dsl.blackwell_sm12x.moe_dynamic_kernel"
 EXPECTED_IMAGE_DIGEST = (
     "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba"
 )
@@ -54,6 +62,23 @@ RERUN_ID_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{7,127}$")
 EXPERIMENT_ROOT = Path(__file__).resolve().parent
 DEFAULT_RESULTS = EXPERIMENT_ROOT / "results" / "pair"
 DEFAULT_FIXTURES = EXPERIMENT_ROOT / "results" / "fixtures"
+
+
+class ExactModuleOverlayFinder(importlib.abc.MetaPathFinder):
+    def __init__(self, overlay: Path):
+        self.overlay = overlay
+
+    def find_spec(self, fullname: str, path=None, target=None):
+        del path, target
+        if fullname != TARGET_MODULE:
+            return None
+        return importlib.util.spec_from_file_location(fullname, self.overlay)
+
+
+def install_cutedsl_overlay(overlay: Path) -> None:
+    if TARGET_MODULE in sys.modules:
+        raise RuntimeError("CuteDSL target module imported before overlay installation")
+    sys.meta_path.insert(0, ExactModuleOverlayFinder(overlay))
 
 
 def write_json(path: Path, value: Any) -> None:
@@ -137,7 +162,9 @@ def configure_source_checkout(repo_root: Path) -> None:
     jit_env.SPDLOG_INCLUDE_DIR = repo_root / "3rdparty" / "spdlog" / "include"
 
 
-def validate_source(repo_root: Path) -> dict[str, Any]:
+def validate_source(
+    repo_root: Path, cutedsl_overlay: Path | None = None
+) -> dict[str, Any]:
     flashinfer_git = ["git", "-c", f"safe.directory={repo_root}"]
     cutlass_root = repo_root / "3rdparty" / "cutlass"
     cutlass_git = ["git", "-c", f"safe.directory={cutlass_root}"]
@@ -147,17 +174,41 @@ def validate_source(repo_root: Path) -> dict[str, Any]:
     cutlass_commit = command_output(
         [*cutlass_git, "rev-parse", "HEAD"], cwd=cutlass_root
     )
-    if flashinfer_commit != EXPECTED_FLASHINFER_COMMIT:
-        raise RuntimeError(
-            f"FlashInfer commit drift: {flashinfer_commit} != {EXPECTED_FLASHINFER_COMMIT}"
-        )
+    overlay_identity: dict[str, Any] | None = None
+    if cutedsl_overlay is None:
+        if flashinfer_commit != EXPECTED_FLASHINFER_COMMIT:
+            raise RuntimeError(
+                "FlashInfer commit drift: "
+                f"{flashinfer_commit} != {EXPECTED_FLASHINFER_COMMIT}"
+            )
+    else:
+        expected_overlay = (repo_root / EXPECTED_OPT_OVERLAY).resolve()
+        if flashinfer_commit != EXPECTED_OPT_FLASHINFER_COMMIT:
+            raise RuntimeError(
+                "FlashInfer opt commit drift: "
+                f"{flashinfer_commit} != {EXPECTED_OPT_FLASHINFER_COMMIT}"
+            )
+        if cutedsl_overlay != expected_overlay:
+            raise RuntimeError(
+                f"CuteDSL opt overlay path drift: {cutedsl_overlay} != {expected_overlay}"
+            )
+        overlay_sha256 = file_sha256(cutedsl_overlay)
+        if overlay_sha256 != EXPECTED_OPT_OVERLAY_SHA256:
+            raise RuntimeError(
+                "CuteDSL opt overlay content drift: "
+                f"{overlay_sha256} != {EXPECTED_OPT_OVERLAY_SHA256}"
+            )
+        overlay_identity = {
+            "mode": "exact_module_overlay",
+            "target_module": TARGET_MODULE,
+            "path": str(EXPECTED_OPT_OVERLAY),
+            "sha256": overlay_sha256,
+        }
     if cutlass_commit != EXPECTED_CUTLASS_COMMIT:
         raise RuntimeError(
             f"CUTLASS commit drift: {cutlass_commit} != {EXPECTED_CUTLASS_COMMIT}"
         )
-    allowed_prefix = (
-        ".claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/"
-    )
+    allowed_prefix = ".claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/"
     allowed_paths = {
         ".claude/w4a4_moe_bench/cutedsl_460_requirements.lock.txt",
     }
@@ -227,6 +278,13 @@ def validate_source(repo_root: Path) -> dict[str, Any]:
             "sha256": file_sha256(dependency_lock),
         }
     )
+    if overlay_identity is not None:
+        overlays.append(
+            {
+                "path": overlay_identity["path"],
+                "sha256": overlay_identity["sha256"],
+            }
+        )
     return {
         "flashinfer_commit": flashinfer_commit,
         "cutlass_commit": cutlass_commit,
@@ -234,6 +292,7 @@ def validate_source(repo_root: Path) -> dict[str, Any]:
             [*flashinfer_git, "status", "--short"], cwd=repo_root
         ),
         "experiment_overlays": overlays,
+        "cutedsl_kernel_source": overlay_identity or {"mode": "production"},
     }
 
 
@@ -532,9 +591,7 @@ def validate_output(output: torch.Tensor, m: int) -> None:
         raise ValueError("output is all zero")
 
 
-def load_routed_fixture(
-    root: Path, m: int, *, device: torch.device
-) -> RoutedFixture:
+def load_routed_fixture(root: Path, m: int, *, device: torch.device) -> RoutedFixture:
     """Load the exact persisted fixture shared with the SGLang runtime."""
     x, topk_ids, topk_weights, manifest = load_fixture(root, m, device)
     return RoutedFixture(m, x, topk_ids, topk_weights, manifest)
@@ -585,6 +642,7 @@ def build_arm(
     fixture: RoutedFixture,
     weights: CanonicalWeights,
     max_num_tokens: int,
+    cutedsl_overlay: Path | None = None,
 ) -> CapturedArm:
     if name == "cutedsl_bf16_fused":
         from flashinfer.fused_moe.cute_dsl import B12xMoEWrapper
@@ -625,6 +683,16 @@ def build_arm(
                 "boundary": "BF16 input -> fused W4A4 MoE -> BF16 output",
                 "role": "paired target",
                 "backend": "flashinfer.fused_moe.cute_dsl.B12xMoEWrapper",
+                "kernel_source": (
+                    {
+                        "mode": "exact_module_overlay",
+                        "target_module": TARGET_MODULE,
+                        "path": str(EXPECTED_OPT_OVERLAY),
+                        "sha256": file_sha256(cutedsl_overlay),
+                    }
+                    if cutedsl_overlay is not None
+                    else {"mode": "production"}
+                ),
                 "expected_launches": "one material fused kernel; NSys is authority",
                 "input_dtype": "bfloat16",
             },
@@ -736,7 +804,9 @@ def observed_cuda_kernels(arm: CapturedArm) -> list[str]:
         ):
             missing.append("CUTLASS device GEMM kernel")
         if missing:
-            raise RuntimeError(f"CUTLASS BF16 online chain kernels missing {missing}: {names}")
+            raise RuntimeError(
+                f"CUTLASS BF16 online chain kernels missing {missing}: {names}"
+            )
     return names
 
 
@@ -843,6 +913,7 @@ def benchmark(args: argparse.Namespace, runtime: dict[str, Any]) -> int:
                 fixture=fixture,
                 weights=weights,
                 max_num_tokens=args.max_num_tokens,
+                cutedsl_overlay=args.cutedsl_overlay,
             )
             for name in ARMS
         }
@@ -1108,6 +1179,7 @@ def single_replay(args: argparse.Namespace, runtime: dict[str, Any]) -> int:
         fixture=fixture,
         weights=weights,
         max_num_tokens=args.max_num_tokens,
+        cutedsl_overlay=args.cutedsl_overlay,
     )
     output = arm.eager()
     validate_output(output, args.m)
@@ -1173,6 +1245,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--flashinfer-root", type=Path, required=True)
     parser.add_argument("--results", type=Path, default=DEFAULT_RESULTS)
     parser.add_argument("--fixtures", type=Path, default=DEFAULT_FIXTURES)
+    parser.add_argument("--cutedsl-overlay", type=Path)
     parser.add_argument("--device-index", type=int, default=0)
     parser.add_argument("--expected-gpu-uuid", required=True)
     parser.add_argument("--seed", type=int, default=2026)
@@ -1181,8 +1254,7 @@ def parse_args() -> argparse.Namespace:
 
     benchmark_parser = subparsers.add_parser("benchmark")
     benchmark_parser.add_argument(
-        "--m-values", nargs="+", type=int,
-        default=[256, 512, 1024, 2048, 4096, 8192]
+        "--m-values", nargs="+", type=int, default=[256, 512, 1024, 2048, 4096, 8192]
     )
     benchmark_parser.add_argument("--warmup", type=int, default=5)
     benchmark_parser.add_argument("--iters", type=int, default=50)
@@ -1199,9 +1271,13 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     args.flashinfer_root = args.flashinfer_root.resolve()
+    if args.cutedsl_overlay is not None:
+        args.cutedsl_overlay = args.cutedsl_overlay.resolve()
     if str(args.flashinfer_root) not in sys.path:
         sys.path.insert(0, str(args.flashinfer_root))
-    source = validate_source(args.flashinfer_root)
+    source = validate_source(args.flashinfer_root, args.cutedsl_overlay)
+    if args.cutedsl_overlay is not None:
+        install_cutedsl_overlay(args.cutedsl_overlay)
     configure_source_checkout(args.flashinfer_root)
     runtime = runtime_manifest(
         repo_root=args.flashinfer_root,

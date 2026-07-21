@@ -4,11 +4,12 @@ set -euo pipefail
 gpu_uuid=${W4A4_GPU_UUID:?set W4A4_GPU_UUID to the leased full GPU UUID}
 lease_id=${KDK_LEASE_ID:?set KDK_LEASE_ID to the active advisory lease}
 rerun_id=${W4A4_RERUN_ID:?set W4A4_RERUN_ID to a unique benchmark rerun ID}
+cutedsl_overlay=${W4A4_CUTEDSL_OVERLAY:-}
 
 host_root=${W4A4_HOST_ROOT:-/home/xiy/workspace/flashinfer_exp001_corrected_074d93e}
 host_git_alternate=/home/xiy/workspace/flashinfer_exp002_074d93e/.git
 host_git_upstream=/lustre/raplab/client/xiy/workspace/flashinfer/.git
-host_deps=/home/xiy/workspace/w4a4_deps_460
+host_deps=${W4A4_HOST_DEPS:-/home/xiy/workspace/w4a4_deps_460}
 host_jit=${W4A4_HOST_JIT:-/home/xiy/workspace/exp001_pair_jit_dsl460}
 container_root=/workspace/source/flashinfer
 relative_exp=.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep
@@ -52,6 +53,16 @@ app_args=(
   --results "$container_results"
   --fixtures "$container_fixtures"
   --expected-gpu-uuid "$gpu_uuid"
+)
+if [[ -n "$cutedsl_overlay" ]]; then
+  if [[ "$cutedsl_overlay" == /* ]]; then
+    container_cutedsl_overlay=$cutedsl_overlay
+  else
+    container_cutedsl_overlay="$container_root/$cutedsl_overlay"
+  fi
+  app_args+=(--cutedsl-overlay "$container_cutedsl_overlay")
+fi
+app_args+=(
   benchmark
   --m-values 256 512 1024 2048 4096 8192
   --warmup 5

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed canonical join for exp_001's fresh paired and SGLang arms."""
+"""Fail-closed join for exp_001 production, latest-opt, and baseline evidence."""
 
 from __future__ import annotations
 
@@ -70,10 +70,7 @@ def validate_raw(
     rows: list[dict[str, str]], arms: tuple[str, ...], rerun_id: str
 ) -> None:
     expected_keys = {
-        (m, repeat, arm)
-        for m in M_VALUES
-        for repeat in range(5)
-        for arm in arms
+        (m, repeat, arm) for m in M_VALUES for repeat in range(5) for arm in arms
     }
     keys: set[tuple[int, int, str]] = set()
     for row in rows:
@@ -97,18 +94,16 @@ def validate_raw(
                     if int(row["m"]) == m and int(row["repeat"]) == repeat
                 ]
                 if {row["arm"] for row in paired} != set(arms):
-                    raise EvidenceError(f"incomplete paired repeat m={m} repeat={repeat}")
+                    raise EvidenceError(
+                        f"incomplete paired repeat m={m} repeat={repeat}"
+                    )
                 if len({row["order"] for row in paired}) != 1:
                     raise EvidenceError(f"paired order drift m={m} repeat={repeat}")
 
 
-def validate_correctness(
-    pair: dict[str, Any], sglang: dict[str, Any]
-) -> None:
+def validate_pair_correctness(pair: dict[str, Any]) -> None:
     if not pair.get("all_paired_gates_pass"):
         raise EvidenceError("paired FP4 correctness gate did not pass")
-    if not sglang.get("all_correctness_and_dispatch_gates_pass"):
-        raise EvidenceError("SGLang correctness/dispatch aggregate gate did not pass")
     for m in M_VALUES:
         pair_case = pair.get("cases", {}).get(str(m), {})
         if not pair_case.get("paired_gate_pass"):
@@ -118,7 +113,15 @@ def validate_correctness(
             if not arm_gate.get("formal_pass") or not arm_gate.get("dispatch_pass"):
                 raise EvidenceError(f"paired arm gate failed at m={m} arm={arm}")
             if not arm_gate.get("observed_cuda_kernels"):
-                raise EvidenceError(f"missing paired dispatch evidence at m={m} arm={arm}")
+                raise EvidenceError(
+                    f"missing paired dispatch evidence at m={m} arm={arm}"
+                )
+
+
+def validate_sglang_correctness(sglang: dict[str, Any]) -> None:
+    if not sglang.get("all_correctness_and_dispatch_gates_pass"):
+        raise EvidenceError("SGLang correctness/dispatch aggregate gate did not pass")
+    for m in M_VALUES:
         sglang_case = sglang.get("cases", {}).get(str(m), {})
         if not sglang_case.get("dispatch_pass"):
             raise EvidenceError(f"SGLang dispatch failed at m={m}")
@@ -128,31 +131,81 @@ def validate_correctness(
             raise EvidenceError(f"missing SGLang kernel evidence at m={m}")
 
 
-def build_rows(pair_dir: Path, sglang_dir: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def validate_correctness(pair: dict[str, Any], sglang: dict[str, Any]) -> None:
+    validate_pair_correctness(pair)
+    validate_sglang_correctness(sglang)
+
+
+def build_rows(
+    pair_dir: Path,
+    sglang_dir: Path,
+    production_pair_dir: Path | None = None,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    if production_pair_dir is None:
+        production_pair_dir = ROOT / "results" / "production_pair"
     pair_identity = read_json(pair_dir / "evidence.identity.json")
     sglang_identity = read_json(sglang_dir / "evidence.identity.json")
+    production_identity = read_json(production_pair_dir / "evidence.identity.json")
     rerun_id = pair_identity.get("rerun_id")
     if not rerun_id or sglang_identity.get("rerun_id") != rerun_id:
         raise EvidenceError("pair and SGLang evidence do not share one fresh rerun ID")
     pair_environment = read_json(pair_dir / pair_identity["environment_lock_path"])
     if pair_environment["runtime"]["gpu_uuid"] != sglang_identity.get("gpu_uuid"):
         raise EvidenceError("pair and SGLang arms used different GPU UUIDs")
+    pair_source = pair_environment["runtime"].get("source", {})
+    cutedsl_source = pair_source.get("cutedsl_kernel_source", {"mode": "production"})
+    if cutedsl_source.get("mode") == "exact_module_overlay":
+        if not cutedsl_source.get("path") or not cutedsl_source.get("sha256"):
+            raise EvidenceError("CuteDSL overlay identity is incomplete")
+        cutedsl_label = "Latest opt CuteDSL FP4"
+    elif cutedsl_source.get("mode") == "production":
+        cutedsl_label = "CuteDSL FP4"
+    else:
+        raise EvidenceError(f"unknown CuteDSL source mode: {cutedsl_source}")
+    if cutedsl_label != "Latest opt CuteDSL FP4":
+        raise EvidenceError("fresh pair does not identify the latest opt overlay")
+
+    production_rerun_id = production_identity.get("rerun_id")
+    if not production_rerun_id or production_rerun_id == rerun_id:
+        raise EvidenceError("production baseline must retain its original rerun ID")
+    production_environment = read_json(
+        production_pair_dir / production_identity["environment_lock_path"]
+    )
+    production_runtime = production_environment["runtime"]
+    production_source = production_runtime.get("source", {})
+    if (
+        production_source.get("cutedsl_kernel_source", {"mode": "production"}).get(
+            "mode"
+        )
+        != "production"
+    ):
+        raise EvidenceError("production baseline unexpectedly uses an overlay")
 
     pair_summary_rows = read_csv(pair_dir / "benchmark_summary.csv")
     sglang_summary_rows = read_csv(sglang_dir / "benchmark_summary.csv")
+    production_summary_rows = read_csv(production_pair_dir / "benchmark_summary.csv")
     pair_summary = unique_summary(pair_summary_rows, PAIR_ARMS)
     sglang_summary = unique_summary(sglang_summary_rows, (SGLANG_ARM,))
+    production_summary = unique_summary(production_summary_rows, PAIR_ARMS)
     validate_raw(read_csv(pair_dir / "benchmark_raw.csv"), PAIR_ARMS, rerun_id)
     validate_raw(read_csv(sglang_dir / "benchmark_raw.csv"), (SGLANG_ARM,), rerun_id)
+    validate_raw(
+        read_csv(production_pair_dir / "benchmark_raw.csv"),
+        PAIR_ARMS,
+        production_rerun_id,
+    )
     pair_correctness = read_json(pair_dir / "correctness.json")
     sglang_correctness = read_json(sglang_dir / "correctness.json")
+    production_correctness = read_json(production_pair_dir / "correctness.json")
     validate_correctness(pair_correctness, sglang_correctness)
+    validate_pair_correctness(production_correctness)
 
     rows: list[dict[str, Any]] = []
     for m in M_VALUES:
         cute = pair_summary[(m, "cutedsl_bf16_fused")]
         cutlass = pair_summary[(m, "cutlass_bf16_chain")]
         sglang = sglang_summary[(m, SGLANG_ARM)]
+        production = production_summary[(m, "cutedsl_bf16_fused")]
         for row in (cute, cutlass, sglang):
             if row["rerun_id"] != rerun_id or not truth(row["stable_le_5_percent"]):
                 raise EvidenceError(f"unstable or mixed summary row: {row}")
@@ -160,19 +213,31 @@ def build_rows(pair_dir: Path, sglang_dir: Path) -> tuple[list[dict[str, Any]], 
         for field in fixture_fields:
             if len({cute[field], cutlass[field], sglang[field]}) != 1:
                 raise EvidenceError(f"{field} mismatch across backends at m={m}")
-        if "BF16 input" not in cutlass["boundary"] or "online quant" not in cutlass[
-            "boundary"
-        ]:
+            if production[field] != cute[field]:
+                raise EvidenceError(f"production/latest-opt {field} mismatch at m={m}")
+        if production["rerun_id"] != production_rerun_id or not truth(
+            production["stable_le_5_percent"]
+        ):
+            raise EvidenceError(f"unstable or mixed production row: {production}")
+        if (
+            "BF16 input" not in cutlass["boundary"]
+            or "online quant" not in cutlass["boundary"]
+        ):
             raise EvidenceError(f"CUTLASS boundary is not BF16 online chain at m={m}")
         cute_us = float_value(cute, "median_us")
+        production_us = float_value(production, "median_us")
         cutlass_us = float_value(cutlass, "median_us")
         sglang_us = float_value(sglang, "median_us")
         rows.append(
             {
                 "m": m,
-                "cutedsl_fp4_us": cute_us,
+                "production_cutedsl_fp4_us": production_us,
+                "latest_opt_cutedsl_fp4_us": cute_us,
                 "cutlass_bf16_chain_us": cutlass_us,
                 "sglang_triton_fp8_us": sglang_us,
+                "latest_opt_vs_production_percent": speedup_percent(
+                    baseline_us=production_us, cutedsl_us=cute_us
+                ),
                 "speedup_vs_cutlass_percent": speedup_percent(
                     baseline_us=cutlass_us, cutedsl_us=cute_us
                 ),
@@ -184,7 +249,8 @@ def build_rows(pair_dir: Path, sglang_dir: Path) -> tuple[list[dict[str, Any]], 
                 )
                 >= 100.0,
                 "fixture_sha256": cute["fixture_sha256"],
-                "rerun_id": rerun_id,
+                "latest_opt_rerun_id": rerun_id,
+                "production_rerun_id": production_rerun_id,
             }
         )
     context = {
@@ -192,13 +258,22 @@ def build_rows(pair_dir: Path, sglang_dir: Path) -> tuple[list[dict[str, Any]], 
         "gpu_uuid": sglang_identity["gpu_uuid"],
         "pair_identity": pair_identity,
         "sglang_identity": sglang_identity,
+        "production_identity": production_identity,
+        "cutedsl_label": cutedsl_label,
+        "cutedsl_source": cutedsl_source,
+        "flashinfer_commit": pair_source.get("flashinfer_commit", "unknown"),
+        "production_rerun_id": production_rerun_id,
+        "production_gpu_uuid": production_runtime["gpu_uuid"],
+        "production_flashinfer_commit": production_source.get(
+            "flashinfer_commit", "unknown"
+        ),
     }
     return rows, context
 
 
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
     with path.open("w", newline="") as file:
-        writer = csv.DictWriter(file, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(file, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -206,18 +281,21 @@ def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
 def render_result(rows: list[dict[str, Any]], context: dict[str, Any]) -> str:
     all_met = all(row["customer_2x_target_met"] for row in rows)
     verdict = "TARGET MET" if all_met else "TARGET NOT MET"
+    cutedsl_label = context["cutedsl_label"]
     lines = [
         "# Experiment 001 result: backend case sweep",
         "",
-        f"**Verdict: {verdict}.** Customer criterion: CuteDSL FP4 must be at least "
+        f"**Verdict: {verdict}.** Customer criterion: {cutedsl_label} must be at least "
         "100% faster (2x throughput by latency ratio) than SGLang Triton FP8 for every M.",
         "",
-        "| M | CuteDSL FP4 (us) | CUTLASS BF16 chain (us) | SGLang Triton FP8 (us) | vs CUTLASS | vs SGLang | 2x target |",
-        "|---:|---:|---:|---:|---:|---:|:---:|",
+        f"| M | Production CuteDSL FP4 (us) | {cutedsl_label} (us) | Opt vs Production* | CUTLASS BF16 chain (us) | SGLang Triton FP8 (us) | Opt vs CUTLASS | Opt vs SGLang | 2x target |",
+        "|---:|---:|---:|---:|---:|---:|---:|---:|:---:|",
     ]
     for row in rows:
         lines.append(
-            f"| {row['m']} | {row['cutedsl_fp4_us']:.3f} | "
+            f"| {row['m']} | {row['production_cutedsl_fp4_us']:.3f} | "
+            f"{row['latest_opt_cutedsl_fp4_us']:.3f} | "
+            f"{row['latest_opt_vs_production_percent']:+.2f}% | "
             f"{row['cutlass_bf16_chain_us']:.3f} | {row['sglang_triton_fp8_us']:.3f} | "
             f"{row['speedup_vs_cutlass_percent']:+.2f}% | "
             f"{row['speedup_vs_sglang_percent']:+.2f}% | "
@@ -226,12 +304,24 @@ def render_result(rows: list[dict[str, Any]], context: dict[str, Any]) -> str:
     lines.extend(
         [
             "",
-            "Speedup is `(baseline_time / CuteDSL_time - 1) * 100%`. Both columns use "
-            "the single CuteDSL series from the fresh paired CUTLASS rerun.",
+            "Speedup is `(baseline_time / latest_opt_time - 1) * 100%`. Opt vs "
+            "CUTLASS and Opt vs SGLang use Latest opt as the denominator; all three "
+            "current arms share the fresh rerun.",
+            "",
+            "`Opt vs Production*` is cross-rerun context only: Production retains the "
+            f"original `{context['production_rerun_id']}` evidence on "
+            f"`{context['production_gpu_uuid']}`, while Latest opt uses "
+            f"`{context['rerun_id']}` on `{context['gpu_uuid']}`. It is not a paired "
+            "performance claim.",
             "",
             "CUTLASS is the matched BF16-input online-quantization chain. SGLang is the "
             "direct legacy Triton tensor-scaled W8A8 FP8 chain; its ratio is explicitly "
             "cross-runtime, not a fusion-only causal comparison.",
+            "",
+            "CuteDSL source: "
+            f"`{context['cutedsl_source'].get('path', 'production')}`; SHA256 "
+            f"`{context['cutedsl_source'].get('sha256', 'n/a')}`; FlashInfer "
+            f"`{context['flashinfer_commit']}`.",
             "",
             f"Evidence rerun: `{context['rerun_id']}`; GPU: `{context['gpu_uuid']}`. "
             "All six per-arm correctness, dispatch, fixture, identity, and <=5% spread "
@@ -244,6 +334,7 @@ def render_result(rows: list[dict[str, Any]], context: dict[str, Any]) -> str:
 def render_manifest(context: dict[str, Any]) -> str:
     pair = context["pair_identity"]
     sglang = context["sglang_identity"]
+    production = context["production_identity"]
     return (
         "# Experiment 001 evidence manifest\n\n"
         f"- Fresh rerun ID: `{context['rerun_id']}`\n"
@@ -252,9 +343,17 @@ def render_manifest(context: dict[str, Any]) -> str:
         f"- Pair protocol lock: `{pair['protocol_lock_digest']}`\n"
         f"- SGLang environment lock: `{sglang['environment_lock_digest']}`\n"
         f"- SGLang protocol lock: `{sglang['protocol_lock_digest']}`\n"
-        f"- SGLang artifact lock: `{sglang['artifact_fingerprint_sha256']}`\n\n"
-        "Canonical evidence lives only in `results/pair/` and "
-        "`results/sglang_triton/`. The old vLLM/prequant evidence is under "
+        f"- SGLang artifact lock: `{sglang['artifact_fingerprint_sha256']}`\n"
+        f"- CuteDSL source: `{context['cutedsl_source'].get('path', 'production')}`\n"
+        f"- CuteDSL source SHA256: `{context['cutedsl_source'].get('sha256', 'n/a')}`\n"
+        f"- FlashInfer commit: `{context['flashinfer_commit']}`\n\n"
+        f"- Original Production rerun ID: `{context['production_rerun_id']}`\n"
+        f"- Original Production GPU UUID: `{context['production_gpu_uuid']}`\n"
+        f"- Original Production environment lock: `{production['environment_lock_digest']}`\n"
+        f"- Original Production protocol lock: `{production['protocol_lock_digest']}`\n"
+        f"- Original Production FlashInfer commit: `{context['production_flashinfer_commit']}`\n\n"
+        "Canonical evidence lives in `results/production_pair/`, `results/pair/`, "
+        "and `results/sglang_triton/`. The old vLLM/prequant evidence is under "
         "`results/superseded_vllm_prequant/` and is not read by the builder.\n"
     )
 
@@ -265,9 +364,14 @@ def main() -> int:
     parser.add_argument(
         "--sglang-dir", type=Path, default=ROOT / "results" / "sglang_triton"
     )
+    parser.add_argument(
+        "--production-pair-dir",
+        type=Path,
+        default=ROOT / "results" / "production_pair",
+    )
     parser.add_argument("--output-dir", type=Path, default=ROOT / "results")
     args = parser.parse_args()
-    rows, context = build_rows(args.pair_dir, args.sglang_dir)
+    rows, context = build_rows(args.pair_dir, args.sglang_dir, args.production_pair_dir)
     args.output_dir.mkdir(parents=True, exist_ok=True)
     write_csv(args.output_dir / "formal.csv", rows)
     (args.output_dir / "result.md").write_text(render_result(rows, context))

@@ -1,12 +1,12 @@
 [
   {
     "path": ".cache/flashinfer/0.0.0+unknown/120f/cached_ops/fp4_quantization_120f/fp4_quantization_120f.so",
-    "sha256": "9338747d80980b7fcf34ad18d57c2a4fe15452de70797d6ca47e6660f351d3b9",
+    "sha256": "b959a4fc28caa22ff337602917c0f62cd9b17c9defbac02f4985aebc253ce34b",
     "size": 2975168
   },
   {
     "path": ".cache/flashinfer/0.0.0+unknown/120f/cached_ops/fused_moe_120/fused_moe_120.so",
-    "sha256": "0b4e683611db0d146c2f1a673f9f4b2619fcde0127d6be57b5d760f3235dcbeb",
+    "sha256": "971157c368114aeb02720da2136684bb1bdf384619d0110355cc415fb69471da",
     "size": 63030840
   },
   {

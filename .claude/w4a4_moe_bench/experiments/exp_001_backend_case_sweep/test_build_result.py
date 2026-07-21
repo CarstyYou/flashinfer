@@ -58,9 +58,7 @@ def test_raw_pairing_rejects_missing_repeat():
 def test_checked_in_outputs_are_reproducible(tmp_path):
     if not (RESULTS / "pair" / "evidence.identity.json").exists():
         pytest.skip("fresh GPU rerun has not been materialized")
-    rows, context = build_result.build_rows(
-        RESULTS / "pair", RESULTS / "sglang_triton"
-    )
+    rows, context = build_result.build_rows(RESULTS / "pair", RESULTS / "sglang_triton")
     build_result.write_csv(tmp_path / "formal.csv", rows)
     (tmp_path / "result.md").write_text(build_result.render_result(rows, context))
     (tmp_path / "manifest.md").write_text(build_result.render_manifest(context))
@@ -68,15 +66,21 @@ def test_checked_in_outputs_are_reproducible(tmp_path):
         assert (tmp_path / name).read_bytes() == (RESULTS / name).read_bytes()
 
 
-def test_canonical_result_has_one_cutedsl_column_and_sglang_label():
+def test_canonical_result_has_production_opt_and_sglang_columns():
     if not (RESULTS / "formal.csv").exists():
         pytest.skip("fresh GPU rerun has not been materialized")
     with (RESULTS / "formal.csv").open(newline="") as file:
         rows = list(csv.DictReader(file))
     assert len(rows) == 6
-    assert "cutedsl_fp4_us" in rows[0]
+    assert "production_cutedsl_fp4_us" in rows[0]
+    assert "latest_opt_cutedsl_fp4_us" in rows[0]
     assert "sglang_triton_fp8_us" in rows[0]
     assert not any("vllm" in field.lower() for field in rows[0])
+    result = (RESULTS / "result.md").read_text()
+    assert "Latest opt CuteDSL FP4" in result
+    assert "Production CuteDSL FP4" in result
+    assert rows[0]["production_cutedsl_fp4_us"] == "541.1180758476257"
+    assert "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19" in result
 
 
 def test_old_evidence_is_only_under_superseded_archive():
@@ -86,3 +90,4 @@ def test_old_evidence_is_only_under_superseded_archive():
     assert (archive / "cutlass_arm_raw.csv").is_file()
     assert not (RESULTS / "triton_arm_raw.csv").exists()
     assert not (RESULTS / "cutlass_arm_raw.csv").exists()
+    assert (RESULTS / "production_pair" / "benchmark_raw.csv").is_file()

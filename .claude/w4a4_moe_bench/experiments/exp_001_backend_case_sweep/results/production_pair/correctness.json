@@ -4,9 +4,9 @@
     "1024": {
       "arms": {
         "cutedsl_bf16_fused": {
-          "actual_mean": 4.7916302719386294e-05,
-          "actual_std": 0.16479496657848358,
-          "actual_to_reference_l2_ratio": 0.9999109506607056,
+          "actual_mean": 4.719067146652378e-05,
+          "actual_std": 0.16479571163654327,
+          "actual_to_reference_l2_ratio": 0.9999154806137085,
           "backend": "flashinfer.fused_moe.cute_dsl.B12xMoEWrapper",
           "boundary": "BF16 input -> fused W4A4 MoE -> BF16 output",
           "cosine": 0.9999121427536011,
@@ -20,26 +20,20 @@
           "formal_percent_threshold": 97.0,
           "formal_percent_within": 100.0,
           "input_dtype": "bfloat16",
-          "kernel_source": {
-            "mode": "exact_module_overlay",
-            "path": ".claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py",
-            "sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
-            "target_module": "flashinfer.fused_moe.cute_dsl.blackwell_sm12x.moe_dynamic_kernel"
-          },
-          "least_squares_actual_gain": 0.9998230934143066,
-          "max_abs_error": 0.04698193818330765,
-          "mean_abs_error": 0.0011537225218489766,
+          "least_squares_actual_gain": 0.9998277425765991,
+          "max_abs_error": 0.04576123505830765,
+          "mean_abs_error": 0.0011540681589394808,
           "nonzero": true,
           "observed_cuda_kernels": [
             "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
             "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
           ],
-          "output_sha256": "c8dabb6e7f1e81fb293580e45e2ff7305c707c1018a521b60d845d8890890445",
+          "output_sha256": "e0eec2ce35f12a9c3df574dd9417b7debf9e918b11f18ce3d65331821398b25b",
           "percent_within_rtol_0.2_atol_0.2": 100.0,
           "reference_mean": 4.9095262511400506e-05,
           "reference_sha256": "38426265936390a2be9b8e9c014777ed243a9c5796c6f9bc3c273871e76c8be6",
           "reference_std": 0.16480962932109833,
-          "relative_l2": 0.013253241777420044,
+          "relative_l2": 0.013251155614852905,
           "role": "paired target",
           "shape": [
             1024,
@@ -96,8 +90,8 @@
         }
       },
       "cross_backend_diagnostic": {
-        "cosine": 0.9995582103729248,
-        "relative_l2": 0.02972397767007351
+        "cosine": 0.9995583295822144,
+        "relative_l2": 0.02972177043557167
       },
       "fixture": {
         "duplicate_expert_ids": 0,
@@ -129,12 +123,12 @@
     "2048": {
       "arms": {
         "cutedsl_bf16_fused": {
-          "actual_mean": 7.284694584086537e-05,
-          "actual_std": 0.1653680056333542,
-          "actual_to_reference_l2_ratio": 0.9999382495880127,
+          "actual_mean": 7.276192627614364e-05,
+          "actual_std": 0.1653687208890915,
+          "actual_to_reference_l2_ratio": 0.9999427199363708,
           "backend": "flashinfer.fused_moe.cute_dsl.B12xMoEWrapper",
           "boundary": "BF16 input -> fused W4A4 MoE -> BF16 output",
-          "cosine": 0.9999253153800964,
+          "cosine": 0.9999253749847412,
           "dispatch_pass": true,
           "dtype": "bfloat16",
           "expected_launches": "one material fused kernel; NSys is authority",
@@ -145,26 +139,20 @@
           "formal_percent_threshold": 97.0,
           "formal_percent_within": 100.0,
           "input_dtype": "bfloat16",
-          "kernel_source": {
-            "mode": "exact_module_overlay",
-            "path": ".claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py",
-            "sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
-            "target_module": "flashinfer.fused_moe.cute_dsl.blackwell_sm12x.moe_dynamic_kernel"
-          },
-          "least_squares_actual_gain": 0.9998635053634644,
-          "max_abs_error": 0.055285871028900146,
-          "mean_abs_error": 0.0011064496356993914,
+          "least_squares_actual_gain": 0.9998679757118225,
+          "max_abs_error": 0.053821027278900146,
+          "mean_abs_error": 0.0011058538220822811,
           "nonzero": true,
           "observed_cuda_kernels": [
             "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
             "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
           ],
-          "output_sha256": "85678aff9733103d5904c801e73e9dc8a6357a6298264774c7bf99e4962d9065",
+          "output_sha256": "d76cd3942bb3f9df51dcadd016543d989c3c96b7fd82efa3fc38042e82aad0d4",
           "percent_within_rtol_0.2_atol_0.2": 100.0,
           "reference_mean": 7.238458783831447e-05,
           "reference_sha256": "55d4504de899389994b9077515f770d18fb63d24f8974f5258d1facd0338b448",
           "reference_std": 0.16537819802761078,
-          "relative_l2": 0.012230722233653069,
+          "relative_l2": 0.012224630452692509,
           "role": "paired target",
           "shape": [
             2048,
@@ -221,8 +209,8 @@
         }
       },
       "cross_backend_diagnostic": {
-        "cosine": 0.999586820602417,
-        "relative_l2": 0.028746943920850754
+        "cosine": 0.9995867013931274,
+        "relative_l2": 0.028747716918587685
       },
       "fixture": {
         "duplicate_expert_ids": 0,
@@ -254,12 +242,12 @@
     "256": {
       "arms": {
         "cutedsl_bf16_fused": {
-          "actual_mean": -0.00011706352233886719,
-          "actual_std": 0.1636357456445694,
-          "actual_to_reference_l2_ratio": 0.9999876618385315,
+          "actual_mean": -0.00011683302000164986,
+          "actual_std": 0.16363251209259033,
+          "actual_to_reference_l2_ratio": 0.9999678730964661,
           "backend": "flashinfer.fused_moe.cute_dsl.B12xMoEWrapper",
           "boundary": "BF16 input -> fused W4A4 MoE -> BF16 output",
-          "cosine": 0.9999375343322754,
+          "cosine": 0.9999372959136963,
           "dispatch_pass": true,
           "dtype": "bfloat16",
           "expected_launches": "one material fused kernel; NSys is authority",
@@ -270,26 +258,20 @@
           "formal_percent_threshold": 97.0,
           "formal_percent_within": 100.0,
           "input_dtype": "bfloat16",
-          "kernel_source": {
-            "mode": "exact_module_overlay",
-            "path": ".claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py",
-            "sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
-            "target_module": "flashinfer.fused_moe.cute_dsl.blackwell_sm12x.moe_dynamic_kernel"
-          },
-          "least_squares_actual_gain": 0.9999251365661621,
-          "max_abs_error": 0.03659641742706299,
-          "mean_abs_error": 0.0010618247324600816,
+          "least_squares_actual_gain": 0.9999051094055176,
+          "max_abs_error": 0.03902062773704529,
+          "mean_abs_error": 0.0010634497739374638,
           "nonzero": true,
           "observed_cuda_kernels": [
             "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
             "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
           ],
-          "output_sha256": "79d4c65525a78cfb824d58e596ffa5f436d4bf0ba0daa99f069f3e1ccfdd8ab1",
+          "output_sha256": "d2c5ebc0584d19d095f2ce337eab49e00129bf8578c31781edd055d12fae9181",
           "percent_within_rtol_0.2_atol_0.2": 100.0,
           "reference_mean": -0.00011236224963795394,
           "reference_sha256": "f8ee0320e7923b46d816f3534dc5e9960df84f60f5be00fcf363947bf58110d8",
           "reference_std": 0.16363777220249176,
-          "relative_l2": 0.011179997585713863,
+          "relative_l2": 0.011196202598512173,
           "role": "paired target",
           "shape": [
             256,
@@ -346,8 +328,8 @@
         }
       },
       "cross_backend_diagnostic": {
-        "cosine": 0.9995747208595276,
-        "relative_l2": 0.02916557900607586
+        "cosine": 0.9995744824409485,
+        "relative_l2": 0.029171984642744064
       },
       "fixture": {
         "duplicate_expert_ids": 0,
@@ -379,12 +361,12 @@
     "4096": {
       "arms": {
         "cutedsl_bf16_fused": {
-          "actual_mean": -0.00010318066779291257,
-          "actual_std": 0.1647997945547104,
-          "actual_to_reference_l2_ratio": 0.9999349117279053,
+          "actual_mean": -0.00010347918578190729,
+          "actual_std": 0.16480018198490143,
+          "actual_to_reference_l2_ratio": 0.9999372959136963,
           "backend": "flashinfer.fused_moe.cute_dsl.B12xMoEWrapper",
           "boundary": "BF16 input -> fused W4A4 MoE -> BF16 output",
-          "cosine": 0.999915361404419,
+          "cosine": 0.9999152421951294,
           "dispatch_pass": true,
           "dtype": "bfloat16",
           "expected_launches": "one material fused kernel; NSys is authority",
@@ -395,26 +377,20 @@
           "formal_percent_threshold": 97.0,
           "formal_percent_within": 100.0,
           "input_dtype": "bfloat16",
-          "kernel_source": {
-            "mode": "exact_module_overlay",
-            "path": ".claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py",
-            "sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
-            "target_module": "flashinfer.fused_moe.cute_dsl.blackwell_sm12x.moe_dynamic_kernel"
-          },
-          "least_squares_actual_gain": 0.9998502731323242,
-          "max_abs_error": 0.05927004665136337,
-          "mean_abs_error": 0.0011395413894206285,
+          "least_squares_actual_gain": 0.9998526573181152,
+          "max_abs_error": 0.05780520290136337,
+          "mean_abs_error": 0.0011397688649594784,
           "nonzero": true,
           "observed_cuda_kernels": [
             "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
             "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
           ],
-          "output_sha256": "14e51b34f07ebe7467f3171d923ca4c37069370330bf7461a748714b2b529866",
+          "output_sha256": "d720a91b4993ab579006d9976f1cc6146740ed8dfd6ae6914beedcb19291bab7",
           "percent_within_rtol_0.2_atol_0.2": 100.0,
           "reference_mean": -0.00010440069308970124,
           "reference_sha256": "4aec474798c7ec7642e88ec7653095693402040fce0b7456c3db3ae0a560dea9",
           "reference_std": 0.16481050848960876,
-          "relative_l2": 0.01301112025976181,
+          "relative_l2": 0.013013751246035099,
           "role": "paired target",
           "shape": [
             4096,
@@ -471,8 +447,8 @@
         }
       },
       "cross_backend_diagnostic": {
-        "cosine": 0.9995645880699158,
-        "relative_l2": 0.02950875833630562
+        "cosine": 0.999564528465271,
+        "relative_l2": 0.029509639367461205
       },
       "fixture": {
         "duplicate_expert_ids": 0,
@@ -504,12 +480,12 @@
     "512": {
       "arms": {
         "cutedsl_bf16_fused": {
-          "actual_mean": -4.148668085690588e-05,
-          "actual_std": 0.16543090343475342,
-          "actual_to_reference_l2_ratio": 0.9999387264251709,
+          "actual_mean": -4.3490177631611004e-05,
+          "actual_std": 0.16543292999267578,
+          "actual_to_reference_l2_ratio": 0.9999510049819946,
           "backend": "flashinfer.fused_moe.cute_dsl.B12xMoEWrapper",
           "boundary": "BF16 input -> fused W4A4 MoE -> BF16 output",
-          "cosine": 0.9998825192451477,
+          "cosine": 0.9998825788497925,
           "dispatch_pass": true,
           "dtype": "bfloat16",
           "expected_launches": "one material fused kernel; NSys is authority",
@@ -520,26 +496,20 @@
           "formal_percent_threshold": 97.0,
           "formal_percent_within": 100.0,
           "input_dtype": "bfloat16",
-          "kernel_source": {
-            "mode": "exact_module_overlay",
-            "path": ".claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py",
-            "sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
-            "target_module": "flashinfer.fused_moe.cute_dsl.blackwell_sm12x.moe_dynamic_kernel"
-          },
-          "least_squares_actual_gain": 0.9998213052749634,
-          "max_abs_error": 0.06340819597244263,
-          "mean_abs_error": 0.0012683119857683778,
+          "least_squares_actual_gain": 0.9998335242271423,
+          "max_abs_error": 0.05950194597244263,
+          "mean_abs_error": 0.001268550637178123,
           "nonzero": true,
           "observed_cuda_kernels": [
             "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
             "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
           ],
-          "output_sha256": "c635facb6e14190521e558675439c22345650fd2f24f63e1fbb20051a7cca175",
+          "output_sha256": "8ee951b4f014acd397308b7a379274a720edc72bbc927b90416199ab340b4c32",
           "percent_within_rtol_0.2_atol_0.2": 100.0,
           "reference_mean": -4.530861770035699e-05,
           "reference_sha256": "01670185cfaa652c96f90bda7d194a18d740d59fb2cc30080326a207f172be70",
           "reference_std": 0.16544103622436523,
-          "relative_l2": 0.015326124615967274,
+          "relative_l2": 0.015325178392231464,
           "role": "paired target",
           "shape": [
             512,
@@ -596,8 +566,8 @@
         }
       },
       "cross_backend_diagnostic": {
-        "cosine": 0.9995493292808533,
-        "relative_l2": 0.030025066807866096
+        "cosine": 0.9995492696762085,
+        "relative_l2": 0.030025193467736244
       },
       "fixture": {
         "duplicate_expert_ids": 0,
@@ -629,9 +599,9 @@
     "8192": {
       "arms": {
         "cutedsl_bf16_fused": {
-          "actual_mean": -8.083294233074412e-05,
-          "actual_std": 0.16488493978977203,
-          "actual_to_reference_l2_ratio": 0.9999302625656128,
+          "actual_mean": -8.005091513041407e-05,
+          "actual_std": 0.16488496959209442,
+          "actual_to_reference_l2_ratio": 0.9999305009841919,
           "backend": "flashinfer.fused_moe.cute_dsl.B12xMoEWrapper",
           "boundary": "BF16 input -> fused W4A4 MoE -> BF16 output",
           "cosine": 0.9999179840087891,
@@ -645,26 +615,20 @@
           "formal_percent_threshold": 97.0,
           "formal_percent_within": 100.0,
           "input_dtype": "bfloat16",
-          "kernel_source": {
-            "mode": "exact_module_overlay",
-            "path": ".claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py",
-            "sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
-            "target_module": "flashinfer.fused_moe.cute_dsl.blackwell_sm12x.moe_dynamic_kernel"
-          },
-          "least_squares_actual_gain": 0.9998481869697571,
+          "least_squares_actual_gain": 0.999848484992981,
           "max_abs_error": 0.08801324665546417,
-          "mean_abs_error": 0.0011207405477762222,
+          "mean_abs_error": 0.001120368018746376,
           "nonzero": true,
           "observed_cuda_kernels": [
             "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1} const&)::{lambda(int)#1})",
             "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
           ],
-          "output_sha256": "4e0476e45f1a7c88af320fec1a9be32e8f85c22ea270851d9fb96df2933e6e79",
+          "output_sha256": "a102d5b328b9363bc439c399264c87f669d74c9044cbb4638379acd0e0b6aa6f",
           "percent_within_rtol_0.2_atol_0.2": 100.0,
           "reference_mean": -8.14411323517561e-05,
           "reference_sha256": "7eac9ce7d735e78f809f657e5a567f0d861c4f33a34443206625b0aea7f035b0",
           "reference_std": 0.1648964285850525,
-          "relative_l2": 0.012814074754714966,
+          "relative_l2": 0.012810303829610348,
           "role": "paired target",
           "shape": [
             8192,
@@ -722,7 +686,7 @@
       },
       "cross_backend_diagnostic": {
         "cosine": 0.999565601348877,
-        "relative_l2": 0.02947653830051422
+        "relative_l2": 0.029475368559360504
       },
       "fixture": {
         "duplicate_expert_ids": 0,
@@ -753,18 +717,18 @@
     }
   },
   "evidence_identity": {
-    "artifact_lock_digest": "9f7cb002e2de79a7f3829a96b52e5f9820ca4c1785ad4f5fdbab3f0c4908ab45",
-    "artifact_lock_path": "artifact-locks/9f7cb002e2de79a7f3829a96b52e5f9820ca4c1785ad4f5fdbab3f0c4908ab45.json",
+    "artifact_lock_digest": "0faad00eeb2989275c8b73c549efdb5c7aff8f4d39aa210373d30e64d078581e",
+    "artifact_lock_path": "artifact-locks/0faad00eeb2989275c8b73c549efdb5c7aff8f4d39aa210373d30e64d078581e.json",
     "comparison_group_id": "exp001_cutedsl_vs_cutlass_bf16_fresh",
-    "environment_lock_digest": "5c9f5d1a3adf2329508cd32a0101c0aeeb2eb1bf2aa227315086bdde8838e41e",
-    "environment_lock_path": "environment-locks/5c9f5d1a3adf2329508cd32a0101c0aeeb2eb1bf2aa227315086bdde8838e41e.json",
+    "environment_lock_digest": "33eb08a9b99f6fd84e146b8a24f6e9bfbed0b4819792217e3a895f05086babd7",
+    "environment_lock_path": "environment-locks/33eb08a9b99f6fd84e146b8a24f6e9bfbed0b4819792217e3a895f05086babd7.json",
     "per_arm_artifact_fingerprint_sha256": {
-      "cutedsl_bf16_fused": "a721fd437462a1bbccb04f558b31d5816bac3d2e20afd9598182f34483b8147c",
-      "cutlass_bf16_chain": "7c91b88fdbd8f44b969c177e2fd9b592d517265b87116623350db421cfb7cc1d"
+      "cutedsl_bf16_fused": "acfe7363b418edae9585f1fb3b1fe5f55feb869db8f4bd39079e3686e247645e",
+      "cutlass_bf16_chain": "5d14e51d15abc4638425cbbb114bfe35fc23d671487d2c159e3fa9c0e7d0f4ff"
     },
     "protocol_lock_digest": "c0b6fe17b3ead2fbf6b2660821f0d39da1c85b1286515aeec87e0a5423141104",
     "protocol_lock_path": "protocol-locks/c0b6fe17b3ead2fbf6b2660821f0d39da1c85b1286515aeec87e0a5423141104.json",
-    "rerun_id": "exp001-latest-opt-20260721T042841Z-r1",
+    "rerun_id": "exp001-corrected-20260716T0443Z-r1",
     "schema_version": 2
   },
   "experiment_config": {
@@ -833,11 +797,11 @@
     "flashinfer_workspace_base": "/workspace/jit",
     "foreign_compute_process_query": "",
     "gpu_name": "NVIDIA Graphics Device",
-    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
-    "hostname": "e5ae8f75ca6b",
+    "gpu_uuid": "GPU-4a286357-c999-9547-3a04-25961b1ffd08",
+    "hostname": "d687206b5806",
     "image": "nvcr.io/nvidia/pytorch:26.05-py3",
     "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
-    "measurement_rerun_id": "exp001-latest-opt-20260721T042841Z-r1",
+    "measurement_rerun_id": "exp001-corrected-20260716T0443Z-r1",
     "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
     "python_dependency_overlay": {
       "apache_tvm_ffi": "0.1.11",
@@ -850,19 +814,13 @@
       "tvm_ffi_module": "/workspace/deps/tvm_ffi/__init__.py"
     },
     "repo_root": "/workspace/source/flashinfer",
-    "resource_lease_id": "exp001-latest-opt-20260721T042841Z-28351",
+    "resource_lease_id": "exp001-corrected-20260716T042843Z-23286",
     "source": {
-      "cutedsl_kernel_source": {
-        "mode": "exact_module_overlay",
-        "path": ".claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py",
-        "sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
-        "target_module": "flashinfer.fused_moe.cute_dsl.blackwell_sm12x.moe_dynamic_kernel"
-      },
       "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
       "experiment_overlays": [
         {
           "path": ".claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/plan.md",
-          "sha256": "5bb3f534b10af99c336c43e6b0b489a18ba5471695f26eafafc3771edae8ef87"
+          "sha256": "df9ab6d9eb587f8a61a46324c7d69a1e87dead0e1d488a8412ec83635614136c"
         },
         {
           "path": ".claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/fixture.py",
@@ -878,11 +836,11 @@
         },
         {
           "path": ".claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/run_pair.py",
-          "sha256": "50f2254d819ccb811c3310899ffef3743120f777e5ad4062eafd18d622bf3477"
+          "sha256": "43b9b08c1a063ffd8718b2ff6f4e88dad797da334f1bc1c6c869815734b65452"
         },
         {
           "path": ".claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/run_pair.sh",
-          "sha256": "c4838ce9200ad3261943d80c28e568c3e607c6d4e7b0f19876a1fdc1e62289f3"
+          "sha256": "2bdc4fac8ac0fc345f767e0e2259ead547be8798d2d5572d580402ca3c7ed324"
         },
         {
           "path": ".claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/build_result.py",
@@ -891,16 +849,12 @@
         {
           "path": ".claude/w4a4_moe_bench/cutedsl_460_requirements.lock.txt",
           "sha256": "05d2d472459a2374c7042a434a55232758e0a210081243fee5f7c87e9be9c4a7"
-        },
-        {
-          "path": ".claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py",
-          "sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19"
         }
       ],
-      "flashinfer_commit": "996c3622cd3ce8603a0bd217545a9afe5516f6aa",
-      "source_status": "D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/artifact-locks/0faad00eeb2989275c8b73c549efdb5c7aff8f4d39aa210373d30e64d078581e.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/benchmark_raw.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/benchmark_summary.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/correctness.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/environment-locks/33eb08a9b99f6fd84e146b8a24f6e9bfbed0b4819792217e3a895f05086babd7.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/environment.lock.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/evidence.identity.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/fixtures/m1024_manifest.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/fixtures/m2048_manifest.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/fixtures/m256_manifest.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/fixtures/m4096_manifest.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/fixtures/m512_manifest.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/fixtures/m8192_manifest.json\n M .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/manifests/benchmark_command.txt\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/manifests/docker-image-id.txt\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/manifests/jit_artifacts.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/manifests/runtime.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/protocol-locks/c0b6fe17b3ead2fbf6b2660821f0d39da1c85b1286515aeec87e0a5423141104.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/reruns/exp001-corrected-20260716T0443Z-r1.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/sglang_triton/artifact.lock.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/sglang_triton/benchmark_raw.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/sglang_triton/benchmark_summary.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/sglang_triton/correctness.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/sglang_triton/environment.lock.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/sglang_triton/evidence.identity.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/sglang_triton/manifests/artifacts.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/sglang_triton/manifests/benchmark_command.txt\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/sglang_triton/manifests/docker-image-id.txt\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/sglang_triton/manifests/docker-repo-digests.txt\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/sglang_triton/manifests/runtime.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/sglang_triton/protocol.lock.json\n M .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/run_pair.py\n M .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/run_pair.sh"
+      "flashinfer_commit": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+      "source_status": "D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/bench_cutedsl_fp4.py\n M .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/bench_triton_fp8.py\n M .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/build_result.py\n M .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/fixture.py\n M .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/make_fixtures.py\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/merge_triton_rerun.py\n M .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/plan.md\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/cutlass_arm_exploratory.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/cutlass_arm_exploratory.log\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/cutlass_arm_raw.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/cutlass_arm_raw.log\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/cutlass_arm_smoke_cutedsl.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/cutlass_arm_smoke_cutlass.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/fixture_manifest.json\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/formal.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/manifest.md\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/result.md\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_cutedsl_initial.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_cutedsl_raw.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_cutedsl_raw.log\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_initial.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_initial.log\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_m8192_rerun.csv\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_m8192_rerun.log\n D .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/triton_arm_raw.csv\n M .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/test_build_result.py\n?? .claude/w4a4_moe_bench/cutedsl_460_requirements.lock.txt\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/nvfp4_fixture.py\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/fixtures/\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/pair/\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/smoke_sglang/\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/superseded_vllm_prequant/\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/run_pair.py\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/run_pair.sh\n?? .claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/run_sglang.sh"
     },
-    "timestamp_unix": 1784608556.136595,
+    "timestamp_unix": 1784176889.4993668,
     "torch": "2.12.0a0+5aff3928d8.nv26.05",
     "use_fused_finalize": true
   },

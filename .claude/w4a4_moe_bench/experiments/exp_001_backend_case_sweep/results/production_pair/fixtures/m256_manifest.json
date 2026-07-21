@@ -1,0 +1,20 @@
+{
+  "duplicate_expert_ids": 0,
+  "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+  "fixture_path": "m256.npz",
+  "fixture_sha256": "86b505097acd06bed5a50c3528c78525e6087c07ed69f86606607599ffa21686",
+  "m": 256,
+  "occupancy_max": 15,
+  "occupancy_min": 2,
+  "occupancy_sha256": "60b4becc63e932fe7b11210c9ef78c1a4b58a38798024f55854808e35d6a4920",
+  "shape": {
+    "experts": 256,
+    "hidden": 2048,
+    "intermediate_tp": 512,
+    "topk": 8
+  },
+  "topk_ids_sha256": "9cd310e245d39595e1d322c2da645fe67791f546c29994caea48f7786aa15dc1",
+  "topk_weights_sha256": "e1fdddd7af5a99de0dab6d8620c050e6cee25a0c27ff9c66e617ee346c0110f1",
+  "weight_sum_max_abs_error": 1.1920928955078125e-07,
+  "x_sha256": "ec4c61e362a4de64083be4a9d357a498d28b8a74bb816e8f9dc04eb9f9a80d09"
+}

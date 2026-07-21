@@ -1,0 +1,15 @@
+{
+  "artifact_lock_digest": "0faad00eeb2989275c8b73c549efdb5c7aff8f4d39aa210373d30e64d078581e",
+  "artifact_lock_path": "artifact-locks/0faad00eeb2989275c8b73c549efdb5c7aff8f4d39aa210373d30e64d078581e.json",
+  "comparison_group_id": "exp001_cutedsl_vs_cutlass_bf16_fresh",
+  "environment_lock_digest": "33eb08a9b99f6fd84e146b8a24f6e9bfbed0b4819792217e3a895f05086babd7",
+  "environment_lock_path": "environment-locks/33eb08a9b99f6fd84e146b8a24f6e9bfbed0b4819792217e3a895f05086babd7.json",
+  "per_arm_artifact_fingerprint_sha256": {
+    "cutedsl_bf16_fused": "acfe7363b418edae9585f1fb3b1fe5f55feb869db8f4bd39079e3686e247645e",
+    "cutlass_bf16_chain": "5d14e51d15abc4638425cbbb114bfe35fc23d671487d2c159e3fa9c0e7d0f4ff"
+  },
+  "protocol_lock_digest": "c0b6fe17b3ead2fbf6b2660821f0d39da1c85b1286515aeec87e0a5423141104",
+  "protocol_lock_path": "protocol-locks/c0b6fe17b3ead2fbf6b2660821f0d39da1c85b1286515aeec87e0a5423141104.json",
+  "rerun_id": "exp001-corrected-20260716T0443Z-r1",
+  "schema_version": 2
+}

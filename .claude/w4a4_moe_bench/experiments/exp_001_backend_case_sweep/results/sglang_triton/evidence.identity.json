@@ -1,9 +1,9 @@
 {
-  "artifact_fingerprint_sha256": "7912fe8d5f4199e8c4813f8e1ad40a42fdd150ac440858101434dd2d8801835d",
+  "artifact_fingerprint_sha256": "f7c318b0795d139acf331c3009008f0deaefc4de4ff7ee19c5079b02266cc7c3",
   "comparison_group_id": "exp001_cutedsl_vs_sglang_triton_fp8_cross_runtime",
-  "environment_lock_digest": "cdc072f99c7c1b3fb099066eddc38c5bfef8cb9da121a6a76177ddc3b11b3d35",
-  "fingerprint_sha256": "4cfa1118065fe870147fe4a13c72f4416be6a31224779273c4be892776fdabee",
-  "gpu_uuid": "GPU-4a286357-c999-9547-3a04-25961b1ffd08",
+  "environment_lock_digest": "db326e772e9b9d0d7530f54144208ef45c1e56766f04f8faf6819321f8fb6d7f",
+  "fingerprint_sha256": "3b9ae4cf1b835bce83e937631af5874e7161ef48ae790945cbac264041d819cb",
+  "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
   "m_values": [
     256,
     512,
@@ -13,7 +13,7 @@
     8192
   ],
   "protocol_lock_digest": "a1a6a056b098c822b045dd8d1579ea475c32b7b0a4464fd588afd8e6dac928a8",
-  "rerun_id": "exp001-corrected-20260716T0443Z-r1",
+  "rerun_id": "exp001-latest-opt-20260721T042841Z-r1",
   "schema_version": 1,
   "smoke": false
 }
