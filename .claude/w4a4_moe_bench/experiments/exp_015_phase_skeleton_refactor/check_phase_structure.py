@@ -77,9 +77,7 @@ def is_cute_jit(method):
 
 
 def is_cute_kernel(method):
-    return any(
-        dotted_name(item) == "cute.kernel" for item in method.decorator_list
-    )
+    return any(dotted_name(item) == "cute.kernel" for item in method.decorator_list)
 
 
 def literal_value(node):
@@ -116,7 +114,9 @@ def is_name_return(node, name):
 
 
 def call_uses_name(call, name):
-    return any(isinstance(node, ast.Name) and node.id == name for node in ast.walk(call))
+    return any(
+        isinstance(node, ast.Name) and node.id == name for node in ast.walk(call)
+    )
 
 
 def root_name(node):
@@ -178,9 +178,7 @@ def tuple_binding_from_parameter(method, bound_name, parameter_hint):
         target = node.targets[0]
         if not isinstance(target, (ast.Tuple, ast.List)):
             continue
-        target_names = {
-            item.id for item in target.elts if isinstance(item, ast.Name)
-        }
+        target_names = {item.id for item in target.elts if isinstance(item, ast.Name)}
         if bound_name not in target_names or not isinstance(node.value, ast.Name):
             continue
         source_name = node.value.id
@@ -293,8 +291,9 @@ def validate_source(source, filename="<source>"):
             and not (method.name.startswith("__") and method.name.endswith("__"))
         ):
             errors.append(
-                "@cute.jit phase/helper must not have a leading underscore: {}"
-                .format(method.name)
+                "@cute.jit phase/helper must not have a leading underscore: {}".format(
+                    method.name
+                )
             )
 
     if any(name not in methods for name in REQUIRED_HELPERS + ("__call__", "kernel")):
@@ -312,16 +311,12 @@ def validate_source(source, filename="<source>"):
             if dotted_name(call.func) == state_name + ".advance"
         ]
         if not advances:
-            errors.append(
-                "{} must visibly advance {}".format(helper_name, state_name)
-            )
+            errors.append("{} must visibly advance {}".format(helper_name, state_name))
 
         returns = [node for node in helper_nodes if isinstance(node, ast.Return)]
         if len(returns) != 1 or not is_name_return(returns[0], state_name):
             errors.append(
-                "{} must have one explicit `return {}`".format(
-                    helper_name, state_name
-                )
+                "{} must have one explicit `return {}`".format(helper_name, state_name)
             )
 
         call_sites = []
@@ -331,8 +326,9 @@ def validate_source(source, filename="<source>"):
                 call_sites.append((statement, call))
         if len(call_sites) != 1:
             errors.append(
-                "kernel must contain exactly one syntactic call site for {}; found {}"
-                .format(helper_name, len(call_sites))
+                "kernel must contain exactly one syntactic call site for {}; found {}".format(
+                    helper_name, len(call_sites)
+                )
             )
         elif assignment_target_name(call_sites[0][0]) != state_name:
             errors.append(
@@ -351,8 +347,9 @@ def validate_source(source, filename="<source>"):
                 receiver = dotted_name(call.func.value)
                 if helper_name not in state_helpers:
                     errors.append(
-                        "{} advances hidden state {}; add an explicit return/rebind contract"
-                        .format(helper_name, receiver or "<dynamic>")
+                        "{} advances hidden state {}; add an explicit return/rebind contract".format(
+                            helper_name, receiver or "<dynamic>"
+                        )
                     )
                 elif receiver != PIPELINE_STATE_HELPERS[helper_name]:
                     errors.append(
@@ -395,8 +392,9 @@ def validate_source(source, filename="<source>"):
                 allocations.append(statement)
         if len(allocations) != 1:
             errors.append(
-                "{} must have one visible cute.make_rmem_tensor allocation in {}"
-                .format(accumulator, owner)
+                "{} must have one visible cute.make_rmem_tensor allocation in {}".format(
+                    accumulator, owner
+                )
             )
 
         gemm_uses = [
@@ -466,8 +464,9 @@ def validate_source(source, filename="<source>"):
             innermost_loops.append(loop)
     if len(innermost_loops) != 1:
         errors.append(
-            "expected one per-slice loop containing all math phases; found {}"
-            .format(len(innermost_loops))
+            "expected one per-slice loop containing all math phases; found {}".format(
+                len(innermost_loops)
+            )
         )
     else:
         phase_loop = innermost_loops[0]
@@ -500,8 +499,7 @@ def validate_source(source, filename="<source>"):
             )
         else:
             positions = {
-                label: (call.lineno, call.col_offset)
-                for label, call in phase_events
+                label: (call.lineno, call.col_offset) for label, call in phase_events
             }
             fences = [call for call in ordered_calls if fence_is_cta_shared(call)]
             malformed_fences = [
@@ -517,8 +515,7 @@ def validate_source(source, filename="<source>"):
             epilog_syncs = [
                 call
                 for call in ordered_calls
-                if dotted_name(call.func)
-                == "self.epilog_sync_barrier.arrive_and_wait"
+                if dotted_name(call.func) == "self.epilog_sync_barrier.arrive_and_wait"
             ]
 
             boundaries = (("fc1", "q1"), ("q1", "fc2"), ("fc2", "scatter"))
@@ -550,8 +547,9 @@ def validate_source(source, filename="<source>"):
                     boundary_barriers[0].col_offset,
                 ):
                     errors.append(
-                        "{} -> {} handoff must order fence before epilog barrier"
-                        .format(left, right)
+                        "{} -> {} handoff must order fence before epilog barrier".format(
+                            left, right
+                        )
                     )
 
             # FC2 A/SFA fragments are hoisted once per slice.  The consumer
@@ -569,13 +567,15 @@ def validate_source(source, filename="<source>"):
             ]
             if len(load_a_calls) != 1:
                 errors.append(
-                    "load_fc2_a_fragments must run exactly once per slice; found {}"
-                    .format(len(load_a_calls))
+                    "load_fc2_a_fragments must run exactly once per slice; found {}".format(
+                        len(load_a_calls)
+                    )
                 )
             if len(reset_calls) != 1:
                 errors.append(
-                    "phase2_cons_state.reset_count must run exactly once per slice; found {}"
-                    .format(len(reset_calls))
+                    "phase2_cons_state.reset_count must run exactly once per slice; found {}".format(
+                        len(reset_calls)
+                    )
                 )
             if len(load_a_calls) == 1 and len(reset_calls) == 1:
                 load_pos = (load_a_calls[0].lineno, load_a_calls[0].col_offset)
@@ -596,15 +596,13 @@ def validate_source(source, filename="<source>"):
                 ):
                     continue
                 paths = [dotted_name(call.func) for call in method_calls(node)]
-                if (
-                    "self.fc2_to_sC" in paths
-                    or "self.scatter_sC_to_gmem" in paths
-                ):
+                if "self.fc2_to_sC" in paths or "self.scatter_sC_to_gmem" in paths:
                     output_loops.append(node)
             if len(output_loops) != 1:
                 errors.append(
-                    "expected one output_tile_idx loop containing FC2 + Scatter; found {}"
-                    .format(len(output_loops))
+                    "expected one output_tile_idx loop containing FC2 + Scatter; found {}".format(
+                        len(output_loops)
+                    )
                 )
             else:
                 output_loop = output_loops[0]
@@ -645,9 +643,7 @@ def validate_source(source, filename="<source>"):
                     for call in output_calls
                     if dotted_name(call.func) == "cute.arch.fence_proxy"
                 ]
-                if len(output_fences) != 1 or not fence_is_cta_shared(
-                    output_fences[0]
-                ):
+                if len(output_fences) != 1 or not fence_is_cta_shared(output_fences[0]):
                     errors.append(
                         "output-tile FC2/Scatter handoff requires exactly one "
                         "fence_proxy('async.shared', space='cta')"
@@ -655,7 +651,9 @@ def validate_source(source, filename="<source>"):
 
                 output_nodes = set(iter_nodes(output_loop))
                 if load_a_calls and load_a_calls[0] in output_nodes:
-                    errors.append("load_fc2_a_fragments must remain outside output tile loop")
+                    errors.append(
+                        "load_fc2_a_fragments must remain outside output tile loop"
+                    )
                 if reset_calls and reset_calls[0] in output_nodes:
                     errors.append(
                         "phase2_cons_state.reset_count must remain outside output tile loop"
@@ -670,9 +668,7 @@ def validate_source(source, filename="<source>"):
         if dotted_name(call.func) == "phase2_cons_state.reset_count"
     ]
     if fc2_resets:
-        errors.append(
-            "fc2_to_sC must not reset phase2_cons_state per output tile"
-        )
+        errors.append("fc2_to_sC must not reset phase2_cons_state per output tile")
 
     # Splitting FC2 and Scatter is equivalent only while one epilogue M tile
     # spans the full CTA M tile.  Prove the shared constructor origin and lock
@@ -719,9 +715,7 @@ def validate_source(source, filename="<source>"):
             target = node.targets[0]
             if isinstance(target, ast.Name) and target.id == "epi_rest_m":
                 epi_assignments.append(node.value)
-        if len(epi_assignments) != 1 or not is_epi_rest_expression(
-            epi_assignments[0]
-        ):
+        if len(epi_assignments) != 1 or not is_epi_rest_expression(epi_assignments[0]):
             errors.append(
                 "{} must assign exactly `epi_rest_m = "
                 "self.tile_shape_mnk[0] // self.epi_tile[0]`".format(helper_name)
@@ -741,8 +735,9 @@ def validate_source(source, filename="<source>"):
                 epi_loops.append(node)
         if len(epi_loops) != 1:
             errors.append(
-                "{} must have exactly one range_constexpr(epi_rest_m) loop; found {}"
-                .format(helper_name, len(epi_loops))
+                "{} must have exactly one range_constexpr(epi_rest_m) loop; found {}".format(
+                    helper_name, len(epi_loops)
+                )
             )
 
     # pass_gate is an intentional early handoff: every syntactic FC1 release
@@ -761,28 +756,26 @@ def validate_source(source, filename="<source>"):
         if dotted_name(call.func) == "self.pass_gate_barrier.arrive_unaligned"
     ]
     swiglu_calls = [
-        call
-        for call in fc1_calls
-        if dotted_name(call.func) == "gated_activation_f32"
+        call for call in fc1_calls if dotted_name(call.func) == "gated_activation_f32"
     ]
     if not releases:
         errors.append("FC1 helper must visibly release ml_pipeline stages")
     if len(gate_arrivals) != 1:
         errors.append(
-            "FC1 helper must contain exactly one pass_gate arrive; found {}"
-            .format(len(gate_arrivals))
+            "FC1 helper must contain exactly one pass_gate arrive; found {}".format(
+                len(gate_arrivals)
+            )
         )
     if len(swiglu_calls) != 1:
         errors.append(
-            "FC1 helper must contain exactly one SwiGLU call site; found {}"
-            .format(len(swiglu_calls))
+            "FC1 helper must contain exactly one SwiGLU call site; found {}".format(
+                len(swiglu_calls)
+            )
         )
     if releases and len(gate_arrivals) == 1 and len(swiglu_calls) == 1:
         arrive = gate_arrivals[0]
         arrive_pos = (arrive.lineno, arrive.col_offset)
-        final_release_pos = max(
-            (call.lineno, call.col_offset) for call in releases
-        )
+        final_release_pos = max((call.lineno, call.col_offset) for call in releases)
         swiglu_pos = (swiglu_calls[0].lineno, swiglu_calls[0].col_offset)
         if not final_release_pos < arrive_pos < swiglu_pos:
             errors.append(
@@ -810,8 +803,9 @@ def validate_source(source, filename="<source>"):
     ]
     if len(all_gate_arrivals) != 1:
         errors.append(
-            "pass_gate arrive must have exactly one call site in MoEDynamicKernel; found {}"
-            .format(len(all_gate_arrivals))
+            "pass_gate arrive must have exactly one call site in MoEDynamicKernel; found {}".format(
+                len(all_gate_arrivals)
+            )
         )
 
     return errors

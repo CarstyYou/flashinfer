@@ -127,7 +127,9 @@ def require_new_output(path: Path, description: str) -> None:
 
 def require_registered_measurement_jit(args: argparse.Namespace) -> str:
     if not args.jit_root.is_dir():
-        raise RuntimeError(f"registered measurement JIT root is missing: {args.jit_root}")
+        raise RuntimeError(
+            f"registered measurement JIT root is missing: {args.jit_root}"
+        )
     artifacts = common.artifact_manifest(args.jit_root)
     if not artifacts:
         raise RuntimeError("registered measurement JIT root has no retained artifacts")
@@ -970,9 +972,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     measure_parser.add_argument("--warmup", type=int, choices=(WARMUP,), default=WARMUP)
     measure_parser.add_argument("--iters", type=int, choices=(ITERS,), default=ITERS)
     measure_parser.add_argument("--expected-app-clock-mhz", type=int, required=True)
-    measure_parser.add_argument(
-        "--expected-jit-artifact-set-sha256", required=True
-    )
+    measure_parser.add_argument("--expected-jit-artifact-set-sha256", required=True)
     measure_parser.add_argument("--expected-cubin-sha256", required=True)
     return parser.parse_args(argv)
 

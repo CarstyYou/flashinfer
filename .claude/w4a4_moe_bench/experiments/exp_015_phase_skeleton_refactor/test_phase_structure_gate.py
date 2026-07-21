@@ -164,13 +164,13 @@ class PhaseStructureGateTests(unittest.TestCase):
     def test_fc2_scatter_order_is_rejected_when_reversed(self):
         old = (
             "                phase2_cons_state = self.fc2_to_sC(phase2_cons_state, sC)\n"
-            "                cute.arch.fence_proxy(\"async.shared\", space=\"cta\")\n"
+            '                cute.arch.fence_proxy("async.shared", space="cta")\n'
             "                self.epilog_sync_barrier.arrive_and_wait()\n"
             "                self.scatter_sC_to_gmem(sC, scatter_output)\n"
         )
         new = (
             "                self.scatter_sC_to_gmem(sC, scatter_output)\n"
-            "                cute.arch.fence_proxy(\"async.shared\", space=\"cta\")\n"
+            '                cute.arch.fence_proxy("async.shared", space="cta")\n'
             "                self.epilog_sync_barrier.arrive_and_wait()\n"
             "                phase2_cons_state = self.fc2_to_sC(phase2_cons_state, sC)\n"
         )
@@ -219,11 +219,7 @@ class PhaseStructureGateTests(unittest.TestCase):
         self.assert_rejected_with(source, "generic identifier 'ctx' is forbidden")
 
     def test_leading_underscore_jit_helper_is_rejected(self):
-        insertion = (
-            "    @cute.jit\n"
-            "    def _hidden_phase(self):\n"
-            "        pass\n\n"
-        )
+        insertion = "    @cute.jit\n    def _hidden_phase(self):\n        pass\n\n"
         source = VALID_SOURCE.replace(
             "    @cute.kernel\n    def kernel(self):",
             insertion + "    @cute.kernel\n    def kernel(self):",

@@ -89,9 +89,7 @@ EXPECTED_OCCUPANCY_SHA256 = (
 )
 BENCHMARK_GPU_UUID = "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
 NCU_GPU_UUID = "GPU-c2ac6efb-f30a-c323-6d38-83908adfb14f"
-EXPECTED_OPT_SHA256 = (
-    "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19"
-)
+EXPECTED_OPT_SHA256 = "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19"
 NCU_ROLES = ("fc1", "swiglu", "fc2", "topk_reduce")
 NCU_ROLE_TOKENS = {
     "fc1": "fused_moe_kernel",
@@ -231,15 +229,12 @@ def pc_sample_stall_evidence(path: Path) -> dict[str, Any]:
     reasons = {
         name.removeprefix(PC_STALL_PREFIX): float(count)
         for name, count in totals.items()
-        if name.startswith(PC_STALL_PREFIX)
-        and not name.endswith("_not_issued")
+        if name.startswith(PC_STALL_PREFIX) and not name.endswith("_not_issued")
     }
     denominator = sum(reasons.values())
     if denominator <= 0:
         raise RuntimeError(f"empty PC-sampling denominator: {path}")
-    shares = {
-        name: 100.0 * count / denominator for name, count in reasons.items()
-    }
+    shares = {name: 100.0 * count / denominator for name, count in reasons.items()}
     if abs(sum(shares.values()) - 100.0) > 1e-9:
         raise RuntimeError(f"PC-sampling shares do not close: {path}")
     return {
@@ -287,7 +282,9 @@ def scatter_pc_evidence(
         if str(row.get("opcode", "")).startswith("REDG.E.ADD.BF16x8")
     ]
     if len(redg) != 4:
-        raise RuntimeError(f"expected four unrolled Scatter REDG PCs, found {len(redg)}")
+        raise RuntimeError(
+            f"expected four unrolled Scatter REDG PCs, found {len(redg)}"
+        )
 
     bundles: list[dict[str, Any]] = []
     for ordinal, redg_row in enumerate(redg):
@@ -296,12 +293,8 @@ def scatter_pc_evidence(
         before = instructions[max(0, index - 140) : index]
         scale_pack = instructions[max(0, index - 32) : index]
         if (
-            sum(str(row.get("opcode", "")).startswith("FMUL") for row in scale_pack)
-            < 4
-            or sum(
-                str(row.get("opcode", "")).startswith("F2FP")
-                for row in scale_pack
-            )
+            sum(str(row.get("opcode", "")).startswith("FMUL") for row in scale_pack) < 4
+            or sum(str(row.get("opcode", "")).startswith("F2FP") for row in scale_pack)
             < 4
         ):
             raise RuntimeError(f"Scatter scale/pack bundle drift at 0x{redg_address:x}")
@@ -316,9 +309,7 @@ def scatter_pc_evidence(
 
         after = instructions[index + 1 : index + 12]
         barriers = [
-            row
-            for row in after
-            if str(row.get("opcode", "")).startswith("BAR.SYNC")
+            row for row in after if str(row.get("opcode", "")).startswith("BAR.SYNC")
         ]
         if len(barriers) != 1:
             raise RuntimeError(f"post-Scatter barrier drift at 0x{redg_address:x}")
@@ -395,7 +386,9 @@ def scatter_pc_evidence(
 
 def build_ncu_evidence(results: Path) -> dict[str, Any]:
     root = results / "veloq" / "ncu"
-    opt_manifest_path = results / "raw" / "ncu" / "opt_fused_deep" / "target_manifest.json"
+    opt_manifest_path = (
+        results / "raw" / "ncu" / "opt_fused_deep" / "target_manifest.json"
+    )
     opt_command_path = results / "raw" / "ncu" / "opt_fused_deep" / "command.txt"
     triton_manifest_path = (
         results
@@ -481,9 +474,7 @@ def build_ncu_evidence(results: Path) -> dict[str, Any]:
         or opt_metrics["dynamic_spill_store_instructions"]["value"] != 0
     ):
         raise RuntimeError("Latest-opt NCU resource/spill crosscheck failed")
-    opt_stalls = pc_sample_stall_evidence(
-        root / "opt_fused" / "pc_stalls_file.json"
-    )
+    opt_stalls = pc_sample_stall_evidence(root / "opt_fused" / "pc_stalls_file.json")
     opt_scatter = scatter_pc_evidence(
         disasm_path=root / "opt_fused" / "disasm.json",
         pc_path=root / "opt_fused" / "pc_stalls_sass_full.json",
@@ -494,8 +485,7 @@ def build_ncu_evidence(results: Path) -> dict[str, Any]:
     if triton_manifest.get("status") != "capture_complete_topology_pending_veloq":
         raise RuntimeError("Triton NCU target manifest is incomplete")
     if (
-        triton_manifest["fixture"].get("fixture_sha256")
-        != EXPECTED_FIXTURE_SHA256
+        triton_manifest["fixture"].get("fixture_sha256") != EXPECTED_FIXTURE_SHA256
         or triton_manifest["fixture"].get("occupancy_sha256")
         != EXPECTED_OCCUPANCY_SHA256
     ):
@@ -566,8 +556,7 @@ def build_ncu_evidence(results: Path) -> dict[str, Any]:
         if (
             summary.get("command") != "ncu.summary"
             or "error" in summary
-            or summary.get("data", {}).get("rows", [{}])[0].get("launch_count")
-            != count
+            or summary.get("data", {}).get("rows", [{}])[0].get("launch_count") != count
         ):
             raise RuntimeError(f"{label} VeloQ NCU summary drift")
 
@@ -618,11 +607,7 @@ def build_ncu_evidence(results: Path) -> dict[str, Any]:
                 results / "raw" / "ncu" / "opt_fused_deep" / "trace.ncu-rep"
             ),
             "triton_report_sha256": file_sha256(
-                results
-                / "raw"
-                / "ncu"
-                / "triton_material_deep"
-                / "trace.ncu-rep"
+                results / "raw" / "ncu" / "triton_material_deep" / "trace.ncu-rep"
             ),
         },
     }
@@ -705,8 +690,7 @@ def opt_evidence(results: Path) -> dict[str, Any]:
             for rows in replay_rows
         ]
         shares = [
-            sum(rows[name]["share_percent"] for name in members)
-            for rows in replay_rows
+            sum(rows[name]["share_percent"] for name in members) for rows in replay_rows
         ]
         groups[group] = {
             "members": list(members),
@@ -751,8 +735,7 @@ def opt_evidence(results: Path) -> dict[str, Any]:
         "probe_event_us": probe["summary"]["event_elapsed_us"],
         "probe_overhead_percent": overhead_percent,
         "probe_grid_critical_us": median_range(
-            float(run["phase_timing"]["grid_critical_wall_us"])
-            for run in probe["runs"]
+            float(run["phase_timing"]["grid_critical_wall_us"]) for run in probe["runs"]
         ),
         "phases": phase_stats,
         "groups": groups,
@@ -847,7 +830,10 @@ def triton_evidence(results: Path) -> dict[str, Any]:
     groups: dict[str, Any] = {}
     for group, roles in TRITON_GROUPS.items():
         times = [sum(row[role] for role in roles) for row in replay_rows]
-        shares = [100.0 * time / row["graph_wall"] for time, row in zip(times, replay_rows, strict=True)]
+        shares = [
+            100.0 * time / row["graph_wall"]
+            for time, row in zip(times, replay_rows, strict=True)
+        ]
         groups[group] = {
             "members": list(roles),
             "time_us": median_range(times),
@@ -856,9 +842,7 @@ def triton_evidence(results: Path) -> dict[str, Any]:
     ops = {}
     for role in (*ROLES, "graph_node_bubble"):
         times = [row[role] for row in replay_rows]
-        shares = [
-            100.0 * row[role] / row["graph_wall"] for row in replay_rows
-        ]
+        shares = [100.0 * row[role] / row["graph_wall"] for row in replay_rows]
         ops[role] = {
             "time_us": median_range(times),
             "own_share_percent": median_range(shares),
@@ -935,11 +919,9 @@ def whole_op_context() -> dict[str, Any]:
                 (EXP001 / "pair" / "benchmark_summary.csv").relative_to(ROOT.parents[3])
             ),
             "triton": str(
-                (
-                    EXP001
-                    / "sglang_triton"
-                    / "benchmark_summary.csv"
-                ).relative_to(ROOT.parents[3])
+                (EXP001 / "sglang_triton" / "benchmark_summary.csv").relative_to(
+                    ROOT.parents[3]
+                )
             ),
         },
     }

@@ -37,28 +37,32 @@ M1024 的 fresh control 仅显示 Eric 快 `7.168 µs`，而正式 benchmark 是
 
 ### 2.1 M8192 横向时间对照
 
-`Delta = Eric - Opt`；正值表示 Eric 更慢。FC2 行包含 epilogue、R2S 与 pre-scatter sync，
-没有把 GEMM 尾部转嫁给 Scatter。Triton FP8 列复用 exp_017 的 12-node SGLang chain timeline；
-`—` 表示没有独立 kernel 边界。它与两个 NVFP4 fused kernel 的 precision、实现和计时方式不同，
-仅用于观察时间分布，不参与 `Delta`，也不计算 phase speedup。
+FC2 行包含 epilogue、R2S 与 pre-scatter sync，没有把 GEMM 尾部转嫁给 Scatter。Triton FP8
+列复用 exp_017 的 12-node SGLang chain timeline。`Speedup = Triton time / FP4 time - 1`；正值表示
+FP4 更快，负值表示 FP4 仍慢于 Triton，`+100%` 对应 `2×` 性能。由于 precision、实现和计时方式
+不同，speedup 用于定位各 logical phase 距目标的差距，不作为同精度、单变量的因果 speedup；没有
+可对齐边界的行不计算。
 
-| Phase / logical stage | Latest Opt（time / own share） | Eric Stage4（time / own share） | Triton FP8 Chain（time / own share） | Delta |
-|---|---:|---:|---:|---:|
-| Clear + Histogram + Prefix / Routing | 35.199 µs / 2.68% | 34.638 µs / 2.06% | 40.384 µs / 1.87% | -0.561 µs |
-| Route + Q0 + Pack + publish / Q0 | **107.567 µs / 8.20%** | **348.508 µs / 20.71%** | 49.056 µs / 2.28% | **+240.941 µs** |
-| Claim + cache + control | 27.158 µs / 2.07% | 26.210 µs / 1.55% | — | -0.948 µs |
-| FC1 Gate + Up + SwiGLU | **444.413 µs / 33.84%** | **420.900 µs / 25.03%** | 1130.877 µs / 52.45% | **-23.513 µs** |
-| Q1 | 34.022 µs / 2.59% | 55.118 µs / 3.28% | 57.920 µs / 2.69% | +21.096 µs |
-| FC2 GEMM + epilogue + R2S | **233.033 µs / 17.74%** | **289.432 µs / 17.20%** | 650.142 µs / 30.15% | **+56.399 µs** |
-| Scatter / TopK reduce | **372.003 µs / 28.34%** | **464.452 µs / 27.59%** | 225.696 µs / 10.46% | **+92.449 µs** |
-| CTA residual | 35.192 µs / 2.68% | 14.421 µs / 0.86% | — | -20.771 µs |
-| Launch skew / early finish / Graph bubble | 24.327 µs / 1.85% | 28.701 µs / 1.71% | 2.336 µs / 0.11% | +4.374 µs |
-| **Diagnostic/timeline denominator** | **1312.913 µs / 100%** | **1682.379 µs / 100%** | **2156.058 µs / 100%** | **+369.466 µs** |
+| Phase / logical stage | Latest Opt（time / own share） | Eric Stage4（time / own share） | Triton FP8 Chain（time / own share） | Opt vs Triton speedup | Eric vs Triton speedup |
+|---|---:|---:|---:|---:|---:|
+| Clear + Histogram + Prefix / Routing | 35.199 µs / 2.68% | 34.638 µs / 2.06% | 40.384 µs / 1.87% | +14.73% | +16.59% |
+| Route + Q0 + Pack + publish / Q0 | **107.567 µs / 8.20%** | **348.508 µs / 20.71%** | 49.056 µs / 2.28% | **-54.39%** | **-85.92%** |
+| Claim + cache + control | 27.158 µs / 2.07% | 26.210 µs / 1.55% | — | — | — |
+| FC1 Gate + Up + SwiGLU | **444.413 µs / 33.84%** | **420.900 µs / 25.03%** | 1130.877 µs / 52.45% | **+154.47%** | **+168.68%** |
+| Q1 | 34.022 µs / 2.59% | 55.118 µs / 3.28% | 57.920 µs / 2.69% | +70.24% | +5.08% |
+| FC2 GEMM + epilogue + R2S | **233.033 µs / 17.74%** | **289.432 µs / 17.20%** | 650.142 µs / 30.15% | **+178.99%** | **+124.63%** |
+| Scatter / TopK reduce | **372.003 µs / 28.34%** | **464.452 µs / 27.59%** | 225.696 µs / 10.46% | **-39.33%** | **-51.41%** |
+| CTA residual | 35.192 µs / 2.68% | 14.421 µs / 0.86% | — | — | — |
+| Launch skew / early finish / Graph bubble | 24.327 µs / 1.85% | 28.701 µs / 1.71% | 2.336 µs / 0.11% | — | — |
+| **Diagnostic/timeline denominator** | **1312.913 µs / 100%** | **1682.379 µs / 100%** | **2156.058 µs / 100%** | **+64.22%** | **+28.16%** |
 
 Triton FP8 的原始 node 组成与计时口径见 [exp_017 bottleneck](../../exp_017_opt_vs_triton_phase_share/results/opt_vs_triton_fp8_bottleneck.md)。
 
 ### 2.2 当前 phase 判断
 
+- 相对 Triton FP8，Opt 的 FC1、FC2 已超过 `+100%` 目标，但 Q0 `-54.39%`、Scatter `-39.33%`；
+  这组 phase 投影显示，剩余性能差距主要不在 GEMM。
+- Eric 的 FC1、FC2 同样超过 `+100%`，但 Q0 `-85.92%`、Scatter `-51.41%`，Q1 也仅 `+5.08%`。
 - Eric 回退的第一来源是 Route/Q0，占 diagnostic gap 的约 `65%`；其次是 Scatter、FC2 和 Q1。
 - Eric 的 FC1 bundle 确实更快，但 Stage、warp layout、Gate/Up tile、epilogue 和 accumulator
   lifetime 同时变化，不能把 `23.513 µs` 归给其中任一项。

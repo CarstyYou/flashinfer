@@ -99,9 +99,7 @@ def make_exp001_case(args: argparse.Namespace, core: Any) -> tuple[Any, Any, Any
     }
     if identity != expected:
         raise RuntimeError(f"exp_001 M8192 fixture identity drift: {identity}")
-    fixture = fixture_module.RoutedFixture(
-        args.m, x, topk_ids, topk_weights, manifest
-    )
+    fixture = fixture_module.RoutedFixture(args.m, x, topk_ids, topk_weights, manifest)
     weights = fixture_module.make_canonical_weights(device=device, seed=args.seed)
     return fixture_module, fixture, weights
 

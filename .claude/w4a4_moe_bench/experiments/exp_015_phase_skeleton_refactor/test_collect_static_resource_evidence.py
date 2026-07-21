@@ -16,9 +16,7 @@ SYMBOL = (
 )
 
 
-def resource_fixture(
-    symbol=SYMBOL, registers=160, stack=0, shared=83968, local=0
-):
+def resource_fixture(symbol=SYMBOL, registers=160, stack=0, shared=83968, local=0):
     return """
 Fatbin elf code:
 ================
@@ -41,7 +39,7 @@ Resource usage:
 def sass_fixture(symbol=SYMBOL, omma=3, extra_opcodes=(), include_exit=True):
     lines = [
         ".target sm_120a",
-        ".section .text.{},\"ax\",@progbits".format(symbol),
+        '.section .text.{},"ax",@progbits'.format(symbol),
         ".global {}".format(symbol),
         ".type {},@function".format(symbol),
         "{}:".format(symbol),
@@ -54,7 +52,9 @@ def sass_fixture(symbol=SYMBOL, omma=3, extra_opcodes=(), include_exit=True):
         )
         pc += 0x10
     for opcode in extra_opcodes:
-        lines.append("/*{pc:04x}*/ @!P1 {opcode} R7, [R1] ;".format(pc=pc, opcode=opcode))
+        lines.append(
+            "/*{pc:04x}*/ @!P1 {opcode} R7, [R1] ;".format(pc=pc, opcode=opcode)
+        )
         pc += 0x10
     if include_exit:
         lines.append("/*{pc:04x}*/ EXIT ;".format(pc=pc))
@@ -114,9 +114,7 @@ class SassParserTests(unittest.TestCase):
 
     def test_multiple_global_functions_are_ambiguous(self):
         other = SYMBOL + "_other"
-        text = sass_fixture() + (
-            ".global {0}\n.type {0},@function\n".format(other)
-        )
+        text = sass_fixture() + (".global {0}\n.type {0},@function\n".format(other))
         with self.assertRaisesRegex(collector.EvidenceError, "found 2"):
             collector.parse_sass(text)
 

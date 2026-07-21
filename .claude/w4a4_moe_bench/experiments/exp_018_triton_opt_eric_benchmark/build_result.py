@@ -68,28 +68,39 @@ def load_blocks(results: Path) -> dict[tuple[str, int], dict[str, Any]]:
             require(value.get("schema") == SCHEMA, f"{label} schema drift")
             require(value.get("arm") == arm, f"{label} arm drift")
             require(value.get("block") == block, f"{label} block drift")
-            require(value.get("telemetry_gate", {}).get("pass") is True,
-                    f"{label} telemetry gate failed")
-            require(value.get("block_status") in {"complete", "complete_with_invalid_cells"},
-                    f"{label} is not complete")
+            require(
+                value.get("telemetry_gate", {}).get("pass") is True,
+                f"{label} telemetry gate failed",
+            )
+            require(
+                value.get("block_status")
+                in {"complete", "complete_with_invalid_cells"},
+                f"{label} is not complete",
+            )
             rerun_id = value.get("rerun_id")
             protocol_hash = value.get("protocol_sha256")
             require(isinstance(rerun_id, str) and rerun_id, f"{label} missing rerun ID")
-            require(isinstance(protocol_hash, str) and len(protocol_hash) == 64,
-                    f"{label} missing protocol hash")
+            require(
+                isinstance(protocol_hash, str) and len(protocol_hash) == 64,
+                f"{label} missing protocol hash",
+            )
             rerun_ids.add(rerun_id)
             protocol_hashes.add(protocol_hash)
             cells = value.get("cells")
-            require(isinstance(cells, list) and len(cells) == len(M_VALUES),
-                    f"{label} must contain exactly six cells")
+            require(
+                isinstance(cells, list) and len(cells) == len(M_VALUES),
+                f"{label} must contain exactly six cells",
+            )
             by_m = {int(cell.get("m")): cell for cell in cells}
             require(tuple(sorted(by_m)) == M_VALUES, f"{label} M coverage drift")
             require(len(by_m) == len(cells), f"{label} duplicate M cell")
             value["_cells_by_m"] = by_m
             records[(arm, block)] = value
     require(len(rerun_ids) == 1, f"mixed rerun IDs: {sorted(rerun_ids)}")
-    require(len(protocol_hashes) == 1,
-            f"mixed measurement protocols: {sorted(protocol_hashes)}")
+    require(
+        len(protocol_hashes) == 1,
+        f"mixed measurement protocols: {sorted(protocol_hashes)}",
+    )
     return records
 
 
@@ -98,49 +109,75 @@ def validate_identity(records: dict[tuple[str, int], dict[str, Any]]) -> None:
         source = [records[(arm, block)].get("source_identity") for block in BLOCKS]
         weights = [records[(arm, block)].get("weight_identity") for block in BLOCKS]
         jit = [records[(arm, block)].get("jit_identity") for block in BLOCKS]
-        require(all(value == source[0] for value in source[1:]),
-                f"{arm} source identity drift across blocks")
-        require(all(value == weights[0] for value in weights[1:]),
-                f"{arm} weight identity drift across blocks")
-        require(all(value == jit[0] for value in jit[1:]),
-                f"{arm} JIT identity drift across blocks")
-        require(isinstance(source[0], dict) and source[0], f"{arm} missing source identity")
-        require(isinstance(weights[0], dict) and weights[0], f"{arm} missing weight identity")
+        require(
+            all(value == source[0] for value in source[1:]),
+            f"{arm} source identity drift across blocks",
+        )
+        require(
+            all(value == weights[0] for value in weights[1:]),
+            f"{arm} weight identity drift across blocks",
+        )
+        require(
+            all(value == jit[0] for value in jit[1:]),
+            f"{arm} JIT identity drift across blocks",
+        )
+        require(
+            isinstance(source[0], dict) and source[0], f"{arm} missing source identity"
+        )
+        require(
+            isinstance(weights[0], dict) and weights[0],
+            f"{arm} missing weight identity",
+        )
         require(isinstance(jit[0], dict) and jit[0], f"{arm} missing JIT identity")
 
     # The two FP4 implementations must consume the same packed weights/scales.
     opt_weights = records[("latest_opt_fp4", 0)]["weight_identity"]
     eric_weights = records[("eric_stage4_fp4", 0)]["weight_identity"]
     for key in ("seed", "packed_weights_sha256", "scales_sha256"):
-        require(key in opt_weights and opt_weights.get(key) == eric_weights.get(key),
-                f"FP4 shared weight identity mismatch at {key}")
+        require(
+            key in opt_weights and opt_weights.get(key) == eric_weights.get(key),
+            f"FP4 shared weight identity mismatch at {key}",
+        )
 
 
 def validate_cell(cell: dict[str, Any], arm: str, block: int, m: int) -> str:
     label = f"{arm}/block{block}/M{m}"
-    require(cell.get("fixture_manifest_sha256") == EXPECTED_MANIFEST_SHA256,
-            f"{label} fixture manifest drift")
-    require(cell.get("fixture_sha256") == EXPECTED_FIXTURE_SHA256[m],
-            f"{label} NPZ fixture drift")
+    require(
+        cell.get("fixture_manifest_sha256") == EXPECTED_MANIFEST_SHA256,
+        f"{label} fixture manifest drift",
+    )
+    require(
+        cell.get("fixture_sha256") == EXPECTED_FIXTURE_SHA256[m],
+        f"{label} NPZ fixture drift",
+    )
     status = str(cell.get("status", "")).lower()
-    require(status in {"pass", "invalid", "inconclusive"},
-            f"{label} unknown status: {status}")
+    require(
+        status in {"pass", "invalid", "inconclusive"},
+        f"{label} unknown status: {status}",
+    )
     correctness = cell.get("correctness")
     require(isinstance(correctness, dict), f"{label} missing correctness")
     expected_mode = "full_oracle" if block == 0 else "sentinel_sanity"
-    require(correctness.get("mode") == expected_mode,
-            f"{label} correctness mode drift")
+    require(correctness.get("mode") == expected_mode, f"{label} correctness mode drift")
     if status == "pass":
-        require(correctness.get("qualification_pass") is True,
-                f"{label} pass without correctness qualification")
+        require(
+            correctness.get("qualification_pass") is True,
+            f"{label} pass without correctness qualification",
+        )
         sample = cell.get("sample_us")
-        require(isinstance(sample, (int, float)) and math.isfinite(sample) and sample > 0,
-                f"{label} invalid sample")
+        require(
+            isinstance(sample, (int, float)) and math.isfinite(sample) and sample > 0,
+            f"{label} invalid sample",
+        )
     else:
-        require(cell.get("sample_us") is None,
-                f"{label} non-pass cell must not expose latency")
-        require(isinstance(cell.get("reason"), str) and cell["reason"],
-                f"{label} non-pass cell missing reason")
+        require(
+            cell.get("sample_us") is None,
+            f"{label} non-pass cell must not expose latency",
+        )
+        require(
+            isinstance(cell.get("reason"), str) and cell["reason"],
+            f"{label} non-pass cell missing reason",
+        )
     return status
 
 
@@ -151,29 +188,41 @@ def aggregate(records: dict[tuple[str, int], dict[str, Any]]):
     for arm in ARMS:
         for m in M_VALUES:
             cells = [records[(arm, block)]["_cells_by_m"][m] for block in BLOCKS]
-            statuses = [validate_cell(cell, arm, block, m)
-                        for block, cell in zip(BLOCKS, cells, strict=True)]
+            statuses = [
+                validate_cell(cell, arm, block, m)
+                for block, cell in zip(BLOCKS, cells, strict=True)
+            ]
             for block, cell, status in zip(BLOCKS, cells, statuses, strict=True):
-                raw_rows.append({
-                    "rerun_id": records[(arm, block)]["rerun_id"],
-                    "protocol_sha256": records[(arm, block)]["protocol_sha256"],
-                    "arm": arm,
-                    "block": block,
-                    "m": m,
-                    "status": status,
-                    "sample_us": "" if cell.get("sample_us") is None else cell["sample_us"],
-                    "reason": cell.get("reason") or "",
-                    "fixture_sha256": cell["fixture_sha256"],
-                })
+                raw_rows.append(
+                    {
+                        "rerun_id": records[(arm, block)]["rerun_id"],
+                        "protocol_sha256": records[(arm, block)]["protocol_sha256"],
+                        "arm": arm,
+                        "block": block,
+                        "m": m,
+                        "status": status,
+                        "sample_us": ""
+                        if cell.get("sample_us") is None
+                        else cell["sample_us"],
+                        "reason": cell.get("reason") or "",
+                        "fixture_sha256": cell["fixture_sha256"],
+                    }
+                )
             if "invalid" in statuses:
                 status = "Invalid"
-                reason = next(cell["reason"] for cell in cells
-                              if str(cell["status"]).lower() == "invalid")
+                reason = next(
+                    cell["reason"]
+                    for cell in cells
+                    if str(cell["status"]).lower() == "invalid"
+                )
                 samples: list[float] = []
             elif "inconclusive" in statuses:
                 status = "Inconclusive"
-                reason = next(cell["reason"] for cell in cells
-                              if str(cell["status"]).lower() == "inconclusive")
+                reason = next(
+                    cell["reason"]
+                    for cell in cells
+                    if str(cell["status"]).lower() == "inconclusive"
+                )
                 samples = []
             else:
                 status = "Pass"
@@ -202,16 +251,18 @@ def aggregate(records: dict[tuple[str, int], dict[str, Any]]):
                 "samples": samples,
             }
             summaries[(arm, m)] = summary
-            summary_rows.append({
-                "arm": arm,
-                "m": m,
-                "status": status,
-                "median_us": "" if median_us is None else median_us,
-                "min_us": "" if not samples else min(samples),
-                "max_us": "" if not samples else max(samples),
-                "spread_percent": "" if spread is None else spread,
-                "reason": reason,
-            })
+            summary_rows.append(
+                {
+                    "arm": arm,
+                    "m": m,
+                    "status": status,
+                    "median_us": "" if median_us is None else median_us,
+                    "min_us": "" if not samples else min(samples),
+                    "max_us": "" if not samples else max(samples),
+                    "spread_percent": "" if spread is None else spread,
+                    "reason": reason,
+                }
+            )
     return raw_rows, summary_rows, summaries
 
 
@@ -287,19 +338,21 @@ def render_result(records, summaries) -> str:
             f"{speedup_cell(speedup(eric, triton), target_2x=True)} | "
             f"{eric_vs_opt_cell(records, summaries, m)} |"
         )
-    lines.extend([
-        "",
-        "`Speedup = baseline_latency / subject_latency - 1`。每格为三个 cyclic process block 的 median；",
-        "每个 block 使用 warmup=5、timed=50、192 MiB L2 flush 和 CUDA Graph external-event timing。",
-        "Triton FP8 直接调用 SGLang legacy `fused_experts_impl`；本机没有 shape-specific config，",
-        "六个 case 的实际 config source 均为 `default_heuristic`。",
-        "M512 的 paired-ratio median（+2.006%）与 ratio-of-medians（+1.947%）分居 2% 阈值两侧，",
-        "审计后按“阈值边界/无定论”处理。",
-        "",
-        "原始数据见 [benchmark_raw.csv](benchmark_raw.csv)，聚合数据见 "
-        "[benchmark_summary.csv](benchmark_summary.csv)。",
-        "",
-    ])
+    lines.extend(
+        [
+            "",
+            "`Speedup = baseline_latency / subject_latency - 1`。每格为三个 cyclic process block 的 median；",
+            "每个 block 使用 warmup=5、timed=50、192 MiB L2 flush 和 CUDA Graph external-event timing。",
+            "Triton FP8 直接调用 SGLang legacy `fused_experts_impl`；本机没有 shape-specific config，",
+            "六个 case 的实际 config source 均为 `default_heuristic`。",
+            "M512 的 paired-ratio median（+2.006%）与 ratio-of-medians（+1.947%）分居 2% 阈值两侧，",
+            "审计后按“阈值边界/无定论”处理。",
+            "",
+            "原始数据见 [benchmark_raw.csv](benchmark_raw.csv)，聚合数据见 "
+            "[benchmark_summary.csv](benchmark_summary.csv)。",
+            "",
+        ]
+    )
     return "\n".join(lines)
 
 
@@ -314,7 +367,9 @@ def build(results: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--results", type=Path, default=Path(__file__).parent / "results")
+    parser.add_argument(
+        "--results", type=Path, default=Path(__file__).parent / "results"
+    )
     args = parser.parse_args()
     build(args.results.resolve())
     return 0

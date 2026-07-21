@@ -76,8 +76,9 @@ def parse_resource_usage(text):
     if len(matches) != 1:
         symbols = [match[0] for match in matches]
         raise EvidenceError(
-            "expected exactly one complete kernel resource record; found {} ({})"
-            .format(len(matches), ", ".join(symbols) or "none")
+            "expected exactly one complete kernel resource record; found {} ({})".format(
+                len(matches), ", ".join(symbols) or "none"
+            )
         )
     symbol, registers, stack, shared, local = matches[0]
     if not symbol:
@@ -97,8 +98,9 @@ def parse_sass(text):
     entry_symbols = sorted(global_symbols & function_symbols)
     if len(entry_symbols) != 1:
         raise EvidenceError(
-            "expected exactly one unambiguous global @function symbol; found {} ({})"
-            .format(len(entry_symbols), ", ".join(entry_symbols) or "none")
+            "expected exactly one unambiguous global @function symbol; found {} ({})".format(
+                len(entry_symbols), ", ".join(entry_symbols) or "none"
+            )
         )
 
     instructions = []
@@ -149,17 +151,16 @@ def analyze_static_outputs(resource_text, sass_text):
     sass = parse_sass(sass_text)
     if resource["kernel_symbol"] != sass["kernel_symbol"]:
         raise EvidenceError(
-            "kernel symbol mismatch between cuobjdump and nvdisasm: {!r} != {!r}"
-            .format(resource["kernel_symbol"], sass["kernel_symbol"])
+            "kernel symbol mismatch between cuobjdump and nvdisasm: {!r} != {!r}".format(
+                resource["kernel_symbol"], sass["kernel_symbol"]
+            )
         )
     return {
         "kernel_symbol": resource["kernel_symbol"],
         "resource": {
             key: value for key, value in resource.items() if key != "kernel_symbol"
         },
-        "sass": {
-            key: value for key, value in sass.items() if key != "kernel_symbol"
-        },
+        "sass": {key: value for key, value in sass.items() if key != "kernel_symbol"},
     }
 
 
@@ -167,8 +168,7 @@ def evaluate_arm_gates(analysis):
     resource = analysis["resource"]
     counts = analysis["sass"]["selected_instruction_counts"]
     gates = {
-        "registers_at_most_160": resource["registers_per_thread"]
-        <= REGISTER_CAP,
+        "registers_at_most_160": resource["registers_per_thread"] <= REGISTER_CAP,
         "stack_zero": resource["stack_bytes_per_thread"] == 0,
         "local_zero": resource["local_bytes_outside_stack"] == 0,
         "ldl_zero": counts["ldl"] == 0,
@@ -186,8 +186,7 @@ def evaluate_comparison(baseline, candidate):
     baseline_counts = baseline["sass"]["selected_instruction_counts"]
     candidate_counts = candidate["sass"]["selected_instruction_counts"]
     gates = {
-        "candidate_adds_no_call": candidate_counts["call"]
-        <= baseline_counts["call"],
+        "candidate_adds_no_call": candidate_counts["call"] <= baseline_counts["call"],
         "candidate_adds_no_ret": candidate_counts["ret"] <= baseline_counts["ret"],
     }
     both_zero = all(
@@ -204,8 +203,7 @@ def evaluate_comparison(baseline, candidate):
         "ret_delta_candidate_minus_baseline": candidate_counts["ret"]
         - baseline_counts["ret"],
         "both_arms_call_ret_zero": both_zero,
-        "kernel_symbol_equal": baseline["kernel_symbol"]
-        == candidate["kernel_symbol"],
+        "kernel_symbol_equal": baseline["kernel_symbol"] == candidate["kernel_symbol"],
         "resource_delta_candidate_minus_baseline": {
             key: candidate["resource"][key] - baseline["resource"][key]
             for key in (
@@ -222,9 +220,7 @@ def decode_tool_output(value, label):
     try:
         return value.decode("utf-8")
     except UnicodeDecodeError as exc:
-        raise EvidenceError(
-            "{} is not valid UTF-8: {}".format(label, exc)
-        ) from exc
+        raise EvidenceError("{} is not valid UTF-8: {}".format(label, exc)) from exc
 
 
 def command_record(argv, completed):
@@ -248,9 +244,7 @@ def run_checked(argv, timeout_seconds):
             timeout=timeout_seconds,
         )
     except (OSError, subprocess.TimeoutExpired) as exc:
-        raise EvidenceError(
-            "command could not run {!r}: {}".format(argv, exc)
-        ) from exc
+        raise EvidenceError("command could not run {!r}: {}".format(argv, exc)) from exc
     if completed.returncode != 0:
         stderr = decode_tool_output(completed.stderr, "command stderr")
         raise EvidenceError(
@@ -395,9 +389,7 @@ def build_report(args):
             "cuobjdump": collect_tool_identity(
                 args.cuobjdump, args.tool_timeout_seconds
             ),
-            "nvdisasm": collect_tool_identity(
-                args.nvdisasm, args.tool_timeout_seconds
-            ),
+            "nvdisasm": collect_tool_identity(args.nvdisasm, args.tool_timeout_seconds),
         }
     except EvidenceError as exc:
         report["errors"].append("tool identity: {}".format(exc))
@@ -429,9 +421,7 @@ def build_report(args):
         report["comparison"] = comparison
         if not comparison["pass"]:
             report["errors"].append(
-                "comparison gates failed: {}".format(
-                    ", ".join(comparison["failed"])
-                )
+                "comparison gates failed: {}".format(", ".join(comparison["failed"]))
             )
         if not comparison["both_arms_call_ret_zero"]:
             report["warnings"].append(

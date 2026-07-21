@@ -59,7 +59,9 @@ SOURCE_SHA = {
 }
 ERIC_ADAPTER_SHA = "98adfba7f4e0d00af24383a556e9c93088355539b50dc82480091225e0448120"
 BLOCK_THREADS = {"latest_opt_fp4": 288, "eric_stage4_fp4": 160}
-FIXTURE_MANIFEST_SHA = "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801"
+FIXTURE_MANIFEST_SHA = (
+    "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801"
+)
 FIXTURE_SHA = {
     256: "86b505097acd06bed5a50c3528c78525e6087c07ed69f86606607599ffa21686",
     512: "e6ddb487121a0d681a06bcb453f38623b3d5d8477f2232bbbf78cd2ea4ef23a3",
@@ -80,11 +82,17 @@ TRITON_ENV = {
 }
 
 
-def command(command: Sequence[str], *, optional: bool = False, cwd: Path | None = None) -> str:
+def command(
+    command: Sequence[str], *, optional: bool = False, cwd: Path | None = None
+) -> str:
     try:
         return subprocess.run(
-            list(command), cwd=cwd, check=True, text=True,
-            stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+            list(command),
+            cwd=cwd,
+            check=True,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
         ).stdout.strip()
     except (OSError, subprocess.CalledProcessError) as error:
         if optional:
@@ -100,8 +108,10 @@ def fixture_identity(root: Path) -> dict[str, Any]:
         if triton.file_sha256(root / f"m{m}.npz") != expected:
             raise RuntimeError(f"M={m} fixture drift")
     return {
-        "manifest_path": str(manifest), "manifest_sha256": FIXTURE_MANIFEST_SHA,
-        "seed": SEED, "npz_sha256": {str(m): value for m, value in FIXTURE_SHA.items()},
+        "manifest_path": str(manifest),
+        "manifest_sha256": FIXTURE_MANIFEST_SHA,
+        "seed": SEED,
+        "npz_sha256": {str(m): value for m, value in FIXTURE_SHA.items()},
     }
 
 
@@ -112,10 +122,17 @@ def configure_jit(args: argparse.Namespace) -> str | None:
     if args.jit_policy == "fresh":
         if args.block != 0 or any(args.jit_root.iterdir()):
             raise RuntimeError("only block0 may use an empty fresh JIT root")
-    elif args.block == 0 or not before or before_hash != args.expected_jit_artifact_set_sha256:
+    elif (
+        args.block == 0
+        or not before
+        or before_hash != args.expected_jit_artifact_set_sha256
+    ):
         raise RuntimeError("reuse JIT root does not match the block0 artifact lock")
     values = (
-        {"FLASHINFER_WORKSPACE_BASE": args.jit_root, "CUTE_DSL_DUMP_DIR": args.jit_root / "dump"}
+        {
+            "FLASHINFER_WORKSPACE_BASE": args.jit_root,
+            "CUTE_DSL_DUMP_DIR": args.jit_root / "dump",
+        }
         if args.arm != "sglang_triton_fp8"
         else {"TRITON_CACHE_DIR": args.jit_root, "W4A4_SGLANG_JIT_DIR": args.jit_root}
     )
@@ -139,21 +156,31 @@ def require_environment(args: argparse.Namespace) -> dict[str, str]:
         if os.environ.get(key) != value:
             raise RuntimeError(f"{key} identity drift")
     forbidden = (
-        "CUTE_DSL_COMPILER_OPT", "FLASHINFER_CUTEDSL_IKET_OVERLAY", "EXP003_RUN_IKET",
-        "EXP003_IKET_PROVIDER_ROOT", "EXP003_MARKER_OVERLAY", "W4A4_EXP003_MARKER_OVERLAY",
-        "FLASHINFER_AUTOTUNER_LOAD_FROM_FILE", "FLASHINFER_TACTICS_BLOCKLIST",
+        "CUTE_DSL_COMPILER_OPT",
+        "FLASHINFER_CUTEDSL_IKET_OVERLAY",
+        "EXP003_RUN_IKET",
+        "EXP003_IKET_PROVIDER_ROOT",
+        "EXP003_MARKER_OVERLAY",
+        "W4A4_EXP003_MARKER_OVERLAY",
+        "FLASHINFER_AUTOTUNER_LOAD_FROM_FILE",
+        "FLASHINFER_TACTICS_BLOCKLIST",
     )
     if enabled := [key for key in forbidden if os.environ.get(key, "").strip()]:
-        raise RuntimeError(f"instrumentation/compiler overrides are forbidden: {enabled}")
+        raise RuntimeError(
+            f"instrumentation/compiler overrides are forbidden: {enabled}"
+        )
     return dict(expected)
 
 
 def foreign_processes(uuid: str) -> list[dict[str, str]]:
     rows = []
-    output = command([
-        "nvidia-smi", "--query-compute-apps=gpu_uuid,pid,process_name",
-        "--format=csv,noheader,nounits",
-    ])
+    output = command(
+        [
+            "nvidia-smi",
+            "--query-compute-apps=gpu_uuid,pid,process_name",
+            "--format=csv,noheader,nounits",
+        ]
+    )
     for line in output.splitlines():
         values = [part.strip() for part in line.split(",", 2)]
         if len(values) == 3 and values[0] == uuid:
@@ -166,41 +193,76 @@ def telemetry(uuid: str, *, gate_foreign: bool) -> dict[str, Any]:
         "uuid,name,pci.bus_id,driver_version,clocks.current.graphics,clocks.current.memory,"
         "clocks.applications.graphics,temperature.gpu,power.draw,pstate"
     )
-    row = command([
-        "nvidia-smi", "-i", uuid, f"--query-gpu={fields}", "--format=csv,noheader,nounits"
-    ]).splitlines()
+    row = command(
+        [
+            "nvidia-smi",
+            "-i",
+            uuid,
+            f"--query-gpu={fields}",
+            "--format=csv,noheader,nounits",
+        ]
+    ).splitlines()
     if len(row) != 1:
         raise RuntimeError("selected GPU telemetry is ambiguous")
-    keys = ("uuid", "name", "pci_bus_id", "driver", "graphics_clock_mhz", "memory_clock_mhz",
-            "applications_graphics_clock_mhz", "temperature_c", "power_w", "pstate")
+    keys = (
+        "uuid",
+        "name",
+        "pci_bus_id",
+        "driver",
+        "graphics_clock_mhz",
+        "memory_clock_mhz",
+        "applications_graphics_clock_mhz",
+        "temperature_c",
+        "power_w",
+        "pstate",
+    )
     values = [part.strip() for part in row[0].split(",")]
     result: dict[str, Any] = dict(zip(keys, values, strict=True))
-    if result["uuid"] != uuid or int(float(result["applications_graphics_clock_mhz"])) != CLOCK_MHZ:
+    if (
+        result["uuid"] != uuid
+        or int(float(result["applications_graphics_clock_mhz"])) != CLOCK_MHZ
+    ):
         raise RuntimeError("GPU UUID/application clock drift")
     xml = ET.fromstring(command(["nvidia-smi", "-q", "-x", "-i", uuid]))
     counters = {}
     prefix = "clocks_event_reasons_counters_"
     for child in xml.iter():
-        if child.tag.startswith(prefix) and (match := re.search(r"([0-9]+)\s*us", child.text or "")):
+        if child.tag.startswith(prefix) and (
+            match := re.search(r"([0-9]+)\s*us", child.text or "")
+        ):
             counters[child.tag.removeprefix(prefix)] = int(match.group(1))
     if not {"sw_therm_slowdown", "hw_therm_slowdown"}.issubset(counters):
         raise RuntimeError("thermal slowdown counters unavailable")
     result["throttle_counters_us"] = counters
-    result["foreign_compute_processes"] = foreign_processes(uuid) if gate_foreign else "not_queried_after_context"
+    result["foreign_compute_processes"] = (
+        foreign_processes(uuid) if gate_foreign else "not_queried_after_context"
+    )
     return result
 
 
-def telemetry_verdict(before: Mapping[str, Any], after: Mapping[str, Any]) -> dict[str, Any]:
-    names = sorted(name for name in before["throttle_counters_us"] if "therm" in name or name == "hw_power_brake")
+def telemetry_verdict(
+    before: Mapping[str, Any], after: Mapping[str, Any]
+) -> dict[str, Any]:
+    names = sorted(
+        name
+        for name in before["throttle_counters_us"]
+        if "therm" in name or name == "hw_power_brake"
+    )
     checks = {
         "uuid_stable": before["uuid"] == after["uuid"],
-        "application_clock_stable": before["applications_graphics_clock_mhz"] == after["applications_graphics_clock_mhz"],
+        "application_clock_stable": before["applications_graphics_clock_mhz"]
+        == after["applications_graphics_clock_mhz"],
         "no_foreign_process_before": not before["foreign_compute_processes"],
         "slowdown_not_increased": all(
-            after["throttle_counters_us"][name] <= before["throttle_counters_us"][name] for name in names
+            after["throttle_counters_us"][name] <= before["throttle_counters_us"][name]
+            for name in names
         ),
     }
-    return {"checks": checks, "checked_throttle_counters": names, "pass": all(checks.values())}
+    return {
+        "checks": checks,
+        "checked_throttle_counters": names,
+        "pass": all(checks.values()),
+    }
 
 
 def runtime(args: argparse.Namespace, environment: Mapping[str, str]) -> dict[str, Any]:
@@ -212,29 +274,45 @@ def runtime(args: argparse.Namespace, environment: Mapping[str, str]) -> dict[st
         raise RuntimeError("exp_018 requires SM120/121")
     freeze = command([sys.executable, "-m", "pip", "freeze"])
     return {
-        "timestamp_unix": time.time(), "hostname": platform.node(), "python": sys.version,
-        "torch": torch.__version__, "cuda_runtime": torch.version.cuda,
-        "nvcc": command(["nvcc", "--version"], optional=True), "gpu_uuid": args.expected_gpu_uuid,
-        "gpu_name": properties.name, "sm_count": properties.multi_processor_count,
-        "lease_id": os.environ["KDK_LEASE_ID"], "image_environment": dict(environment),
-        "pip_freeze_sha256": hashlib.sha256(freeze.encode()).hexdigest(), "jit_root": str(args.jit_root),
+        "timestamp_unix": time.time(),
+        "hostname": platform.node(),
+        "python": sys.version,
+        "torch": torch.__version__,
+        "cuda_runtime": torch.version.cuda,
+        "nvcc": command(["nvcc", "--version"], optional=True),
+        "gpu_uuid": args.expected_gpu_uuid,
+        "gpu_name": properties.name,
+        "sm_count": properties.multi_processor_count,
+        "lease_id": os.environ["KDK_LEASE_ID"],
+        "image_environment": dict(environment),
+        "pip_freeze_sha256": hashlib.sha256(freeze.encode()).hexdigest(),
+        "jit_root": str(args.jit_root),
     }
 
 
 def prepare(args: argparse.Namespace) -> dict[str, Any]:
     if args.arm == "sglang_triton_fp8":
         init = triton.initialize_sglang()
-        from sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe import fused_experts_impl
-        callable_source = Path(inspect.getsourcefile(fused_experts_impl) or "").resolve()
+        from sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe import (
+            fused_experts_impl,
+        )
+
+        callable_source = Path(
+            inspect.getsourcefile(fused_experts_impl) or ""
+        ).resolve()
         weights = triton.make_fp8_weights(device=torch.device("cuda"), seed=SEED)
         return {
-            "weights": weights, "source_identity": {
-                "kind": "sglang_legacy_triton_fp8_chain", "sglang": init,
+            "weights": weights,
+            "source_identity": {
+                "kind": "sglang_legacy_triton_fp8_chain",
+                "sglang": init,
                 "sglang_commit": TRITON_ENV["W4A4_SGLANG_COMMIT"],
                 "callable_source": str(callable_source),
                 "callable_source_sha256": triton.file_sha256(callable_source),
-                "adapter_source_sha256": triton.file_sha256(EXP001 / "bench_triton_fp8.py"),
-            }
+                "adapter_source_sha256": triton.file_sha256(
+                    EXP001 / "bench_triton_fp8.py"
+                ),
+            },
         }
     source = SOURCES[args.arm]
     if triton.file_sha256(source) != SOURCE_SHA[args.arm]:
@@ -242,7 +320,8 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     overlay, adapter = source, None
     if args.arm == "eric_stage4_fp4":
         adapter = eric_adapter.build_adapter(
-            source=source, output_dir=args.jit_root / "eric_adapter",
+            source=source,
+            output_dir=args.jit_root / "eric_adapter",
             expected_original_sha256=SOURCE_SHA[args.arm],
         )
         overlay = args.jit_root / "eric_adapter" / eric_adapter.ADAPTER_NAME
@@ -254,10 +333,14 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
         raise RuntimeError("selected FP4 overlay was not imported")
     weights = nvfp4.make_canonical_weights(device=torch.device("cuda"), seed=SEED)
     return {
-        "weights": weights, "source_identity": {
-            "kind": "cutedsl_dynamic_fused_moe", "source": str(source),
-            "source_sha256": SOURCE_SHA[args.arm], "overlay": str(overlay),
-            "overlay_sha256": triton.file_sha256(overlay), "adapter": adapter,
+        "weights": weights,
+        "source_identity": {
+            "kind": "cutedsl_dynamic_fused_moe",
+            "source": str(source),
+            "source_sha256": SOURCE_SHA[args.arm],
+            "overlay": str(overlay),
+            "overlay_sha256": triton.file_sha256(overlay),
+            "adapter": adapter,
             "flashinfer_commit": command(
                 ["git", "-c", "safe.directory=*", "rev-parse", "HEAD"],
                 cwd=args.flashinfer_root,
@@ -266,9 +349,18 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
                 ["git", "-c", "safe.directory=*", "rev-parse", "HEAD"],
                 cwd=args.flashinfer_root / "3rdparty/cutlass",
             ),
-            "target_module": TARGET_MODULE, "expected_block_threads": BLOCK_THREADS[args.arm],
-            "wrapper_kwargs": {"E": 256, "topk": 8, "H": 2048, "I_tp": 512, "activation": "silu", "quant_mode": "w4a4", "use_cuda_graph": True},
-        }
+            "target_module": TARGET_MODULE,
+            "expected_block_threads": BLOCK_THREADS[args.arm],
+            "wrapper_kwargs": {
+                "E": 256,
+                "topk": 8,
+                "H": 2048,
+                "I_tp": 512,
+                "activation": "silu",
+                "quant_mode": "w4a4",
+                "use_cuda_graph": True,
+            },
+        },
     }
 
 
@@ -278,37 +370,71 @@ def normalized_weight_identity(arm: str, weights: Any) -> dict[str, Any]:
         packed = {"w1": manifest["w1_sha256"], "w2": manifest["w2_sha256"]}
         scales = {"w1": manifest["w1_scale_sha256"], "w2": manifest["w2_scale_sha256"]}
     else:
-        packed = {"w1": manifest["w1_packed_sha256"], "w2": manifest["w2_packed_sha256"]}
-        scales = {
-            "w1": manifest["w1_cutedsl_scale_sha256"], "w2": manifest["w2_cutedsl_scale_sha256"],
-            "w1_global": manifest["w1_global_scale_sha256"], "w2_global": manifest["w2_global_scale_sha256"],
+        packed = {
+            "w1": manifest["w1_packed_sha256"],
+            "w2": manifest["w2_packed_sha256"],
         }
-    return {"seed": SEED, "packed_weights_sha256": packed, "scales_sha256": scales, "manifest": manifest}
-
-
-def sanity(output: torch.Tensor, m: int, hash_tensor: Callable[[torch.Tensor], str]) -> dict[str, Any]:
-    value = {
-        "shape": list(output.shape), "dtype": str(output.dtype).replace("torch.", ""),
-        "finite": bool(torch.isfinite(output).all()), "nonzero": bool(torch.count_nonzero(output)),
-        "sentinel_nan_remaining": int(torch.isnan(output).sum()), "output_sha256": hash_tensor(output),
+        scales = {
+            "w1": manifest["w1_cutedsl_scale_sha256"],
+            "w2": manifest["w2_cutedsl_scale_sha256"],
+            "w1_global": manifest["w1_global_scale_sha256"],
+            "w2_global": manifest["w2_global_scale_sha256"],
+        }
+    return {
+        "seed": SEED,
+        "packed_weights_sha256": packed,
+        "scales_sha256": scales,
+        "manifest": manifest,
     }
-    value["pass"] = value["shape"] == [m, 2048] and value["dtype"] == "bfloat16" and value["finite"] and value["nonzero"] and not value["sentinel_nan_remaining"]
+
+
+def sanity(
+    output: torch.Tensor, m: int, hash_tensor: Callable[[torch.Tensor], str]
+) -> dict[str, Any]:
+    value = {
+        "shape": list(output.shape),
+        "dtype": str(output.dtype).replace("torch.", ""),
+        "finite": bool(torch.isfinite(output).all()),
+        "nonzero": bool(torch.count_nonzero(output)),
+        "sentinel_nan_remaining": int(torch.isnan(output).sum()),
+        "output_sha256": hash_tensor(output),
+    }
+    value["pass"] = (
+        value["shape"] == [m, 2048]
+        and value["dtype"] == "bfloat16"
+        and value["finite"]
+        and value["nonzero"]
+        and not value["sentinel_nan_remaining"]
+    )
     return value
 
 
-def workspace_gate(args: argparse.Namespace, captured: Any, routed: Any) -> dict[str, Any]:
+def workspace_gate(
+    args: argparse.Namespace, captured: Any, routed: Any
+) -> dict[str, Any]:
     warps = BLOCK_THREADS[args.arm] // 32
-    _, summary = fp4_worker._workspace_snapshot(captured.wrapper, routed, num_cta_warps=warps)
+    _, summary = fp4_worker._workspace_snapshot(
+        captured.wrapper, routed, num_cta_warps=warps
+    )
     if args.arm == "latest_opt_fp4":
         verification = summary["verification"]
         expected = (math.ceil(routed.m / warps) + 110) * warps
         observed = int(captured.wrapper._dynamic_workspace.pair_head.item())
         verification["checks"]["pair_head_terminal_state"] = observed == expected
-        verification.update({"gate_pass": all(verification["checks"].values()), "producer_counter_unit": "token", "expected_pair_head": expected, "observed_pair_head": observed})
+        verification.update(
+            {
+                "gate_pass": all(verification["checks"].values()),
+                "producer_counter_unit": "token",
+                "expected_pair_head": expected,
+                "observed_pair_head": observed,
+            }
+        )
     return summary
 
 
-def measure(flush: Callable[[], None], replay_ms: Callable[[], float]) -> tuple[float, dict[str, float]]:
+def measure(
+    flush: Callable[[], None], replay_ms: Callable[[], float]
+) -> tuple[float, dict[str, float]]:
     for _ in range(WARMUP):
         flush()
         replay_ms()
@@ -316,50 +442,89 @@ def measure(flush: Callable[[], None], replay_ms: Callable[[], float]) -> tuple[
     for _ in range(ITERS):
         flush()
         samples.append(replay_ms() * 1000.0)
-    return statistics.fmean(samples), {"min_us": min(samples), "max_us": max(samples), "median_us": statistics.median(samples)}
+    return statistics.fmean(samples), {
+        "min_us": min(samples),
+        "max_us": max(samples),
+        "median_us": statistics.median(samples),
+    }
 
 
-def run_cell(args: argparse.Namespace, context: Mapping[str, Any], m: int) -> dict[str, Any]:
-    x, ids, routing, fixture = persisted.load_fixture(args.fixture_dir, m, torch.device("cuda"))
+def run_cell(
+    args: argparse.Namespace, context: Mapping[str, Any], m: int
+) -> dict[str, Any]:
+    x, ids, routing, fixture = persisted.load_fixture(
+        args.fixture_dir, m, torch.device("cuda")
+    )
     full_oracle = args.block == 0
     if args.arm == "sglang_triton_fp8":
-        launch, launch_identity = triton.build_launch(x, ids, routing, context["weights"])
+        launch, launch_identity = triton.build_launch(
+            x, ids, routing, context["weights"]
+        )
         launch()
         torch.cuda.synchronize()
-        reference = triton.fp8_oracle(x, ids, routing, context["weights"]) if full_oracle else None
+        reference = (
+            triton.fp8_oracle(x, ids, routing, context["weights"])
+            if full_oracle
+            else None
+        )
         captured = triton.CapturedCall(launch)
         captured.capture()
+
         def replay(sentinel: bool = False):
             if sentinel:
                 captured.output.fill_(float("nan"))
                 torch.cuda.synchronize()
             elapsed = captured.replay_ms()
             return captured.output.clone(), elapsed
+
         timed_replay = captured.replay_ms
         hash_tensor, oracle = triton.tensor_sha256, triton.output_diagnostics
         flush, flush_bytes = triton.make_l2_flusher(x.device, FLUSH_BYTES)
         workspace = lambda: {"not_applicable": True, "gate_pass": True}
     else:
         routed = nvfp4.RoutedFixture(m, x, ids, routing, fixture)
-        reference = nvfp4.reference_moe_nvfp4(routed, context["weights"]) if full_oracle else None
-        captured = fp4_worker.build_arm(argparse.Namespace(m=m, device_index=0), routed, context["weights"])
+        reference = (
+            nvfp4.reference_moe_nvfp4(routed, context["weights"])
+            if full_oracle
+            else None
+        )
+        captured = fp4_worker.build_arm(
+            argparse.Namespace(m=m, device_index=0), routed, context["weights"]
+        )
         captured.eager()
         captured.capture()
+
         def replay(sentinel: bool = False):
             output, elapsed = captured.replay(sentinel=sentinel)
             return output.clone(), elapsed
+
         timed_replay = lambda: captured.replay()[1]
         hash_tensor, oracle = fp4_worker.tensor_sha256, nvfp4.output_diagnostics
         flush, flush_bytes = fp4_worker.make_flusher(x.device, FLUSH_BYTES)
         workspace = lambda: workspace_gate(args, captured, routed)
-        launch_identity = {"grid": [1, 1, 110], "block": [BLOCK_THREADS[args.arm], 1, 1]}
+        launch_identity = {
+            "grid": [1, 1, 110],
+            "block": [BLOCK_THREADS[args.arm], 1, 1],
+        }
 
     def qualify() -> dict[str, Any]:
         output, elapsed = replay(True)
         basic, route = sanity(output, m, hash_tensor), workspace()
         diagnostics = oracle(output, reference) if reference is not None else None
-        passed = basic["pass"] and bool(route.get("gate_pass", route.get("verification", {}).get("gate_pass"))) and (diagnostics is None or diagnostics["formal_pass"])
-        return {"event_elapsed_us": elapsed * 1000.0, "sanity": basic, "oracle": diagnostics, "workspace": route, "pass": passed}
+        passed = (
+            basic["pass"]
+            and bool(
+                route.get("gate_pass", route.get("verification", {}).get("gate_pass"))
+            )
+            and (diagnostics is None or diagnostics["formal_pass"])
+        )
+        return {
+            "event_elapsed_us": elapsed * 1000.0,
+            "sanity": basic,
+            "oracle": diagnostics,
+            "workspace": route,
+            "pass": passed,
+        }
 
     pre = [qualify(), qualify()]
     if not all(item["pass"] for item in pre):
@@ -370,8 +535,15 @@ def run_cell(args: argparse.Namespace, context: Mapping[str, Any], m: int) -> di
         raise RuntimeError("post-timing qualification failed")
     launch_identity.update({"timed_statistics": timed, "l2_flush_bytes": flush_bytes})
     return {
-        "sample_us": sample_us, "fixture_manifest": fixture, "launch_identity": launch_identity,
-        "correctness": {"mode": "full_oracle" if full_oracle else "sentinel_sanity", "pre_replays": pre, "post_timing": post, "qualification_pass": True},
+        "sample_us": sample_us,
+        "fixture_manifest": fixture,
+        "launch_identity": launch_identity,
+        "correctness": {
+            "mode": "full_oracle" if full_oracle else "sentinel_sanity",
+            "pre_replays": pre,
+            "post_timing": post,
+            "qualification_pass": True,
+        },
     }
 
 
@@ -386,32 +558,47 @@ def jit_identity(args: argparse.Namespace) -> dict[str, Any]:
     for item in artifacts:
         path = args.jit_root / item["path"]
         if path.suffix in {".sass", ".ptx"}:
-            symbols.update(re.findall(r"(?:Function\s*:\s*|\.entry\s+)([^\s({]+)", path.read_text(errors="ignore")))
+            symbols.update(
+                re.findall(
+                    r"(?:Function\s*:\s*|\.entry\s+)([^\s({]+)",
+                    path.read_text(errors="ignore"),
+                )
+            )
         elif path.suffix == ".json" and path.stat().st_size < 10 << 20:
             text = path.read_text(errors="ignore")
             symbols.update(re.findall(r'"(?:name|kernel_name)"\s*:\s*"([^"]+)"', text))
     target_symbols = sorted(name for name in symbols if "moe" in name.lower())
     if not target_symbols:
         raise RuntimeError("JIT metadata contains no MoE kernel symbol")
-    cubins = sorted({item["sha256"] for item in artifacts if item["path"].endswith(".cubin")})
+    cubins = sorted(
+        {item["sha256"] for item in artifacts if item["path"].endswith(".cubin")}
+    )
     if args.arm != "sglang_triton_fp8" and not cubins:
         raise RuntimeError("CuteDSL JIT artifact set contains no cubin")
     return {
-        "artifact_count": len(artifacts), "artifact_set_sha256": digest,
+        "artifact_count": len(artifacts),
+        "artifact_set_sha256": digest,
         "cubin_sha256": cubins,
-        "symbols": target_symbols, "symbol_gate": True,
+        "symbols": target_symbols,
+        "symbol_gate": True,
     }
 
 
 def protocol() -> dict[str, Any]:
     return {
-        "m_values": list(M_VALUES), "case": {"E": 256, "H": 2048, "I_tp": 512, "topk": 8},
-        "boundary": "BF16 input -> complete MoE -> BF16 output", "warmup": WARMUP, "iters": ITERS,
-        "l2_flush_bytes": FLUSH_BYTES, "blocks": 3, "block_orders": [list(order) for order in BLOCK_ORDERS],
+        "m_values": list(M_VALUES),
+        "case": {"E": 256, "H": 2048, "I_tp": 512, "topk": 8},
+        "boundary": "BF16 input -> complete MoE -> BF16 output",
+        "warmup": WARMUP,
+        "iters": ITERS,
+        "l2_flush_bytes": FLUSH_BYTES,
+        "blocks": 3,
+        "block_orders": [list(order) for order in BLOCK_ORDERS],
         "timing": "single CUDA Graph replay with external CUDA events",
         "qualification": "block0 full oracle; block1/2 two-pre plus one-post sentinel sanity",
         "cooldown_between_arm_processes_seconds": 2,
-        "profilers": "forbidden", "application_graphics_clock_mhz": CLOCK_MHZ,
+        "profilers": "forbidden",
+        "application_graphics_clock_mhz": CLOCK_MHZ,
     }
 
 
@@ -443,15 +630,24 @@ def main(argv: Sequence[str] | None = None) -> int:
     environment = require_environment(args)
     before = telemetry(args.expected_gpu_uuid, gate_foreign=True)
     if before["foreign_compute_processes"]:
-        raise RuntimeError(f"foreign compute process present: {before['foreign_compute_processes']}")
+        raise RuntimeError(
+            f"foreign compute process present: {before['foreign_compute_processes']}"
+        )
     runtime_identity = runtime(args, environment)
     context = prepare(args)
     cells = []
     for m in M_VALUES:
         cell = {
-            "m": m, "status": "Invalid", "reason": "not executed", "sample_us": None,
-            "correctness": {"mode": "full_oracle" if args.block == 0 else "sentinel_sanity", "qualification_pass": False},
-            "fixture_sha256": FIXTURE_SHA[m], "fixture_manifest_sha256": FIXTURE_MANIFEST_SHA,
+            "m": m,
+            "status": "Invalid",
+            "reason": "not executed",
+            "sample_us": None,
+            "correctness": {
+                "mode": "full_oracle" if args.block == 0 else "sentinel_sanity",
+                "qualification_pass": False,
+            },
+            "fixture_sha256": FIXTURE_SHA[m],
+            "fixture_manifest_sha256": FIXTURE_MANIFEST_SHA,
             "launch_identity": None,
         }
         try:
@@ -471,23 +667,53 @@ def main(argv: Sequence[str] | None = None) -> int:
     source = dict(context["source_identity"])
     source["runner_sha256"] = triton.file_sha256(Path(__file__))
     payload = {
-        "schema": "exp018.arm-block.v1", "arm": args.arm, "block": args.block,
-        "rerun_id": args.rerun_id, "protocol": contract, "protocol_sha256": triton.canonical_sha256(contract),
-        "runtime": runtime_identity, "source_identity": source, "fixture_identity": fixtures,
+        "schema": "exp018.arm-block.v1",
+        "arm": args.arm,
+        "block": args.block,
+        "rerun_id": args.rerun_id,
+        "protocol": contract,
+        "protocol_sha256": triton.canonical_sha256(contract),
+        "runtime": runtime_identity,
+        "source_identity": source,
+        "fixture_identity": fixtures,
         "weight_identity": normalized_weight_identity(args.arm, context["weights"]),
-        "telemetry_before": before, "telemetry_after": after, "telemetry_gate": gate,
-        "jit_identity": jit, "cells": cells,
-        "block_status": "complete" if all(cell["status"] == "Pass" for cell in cells) else "complete_with_invalid_cells",
+        "telemetry_before": before,
+        "telemetry_after": after,
+        "telemetry_gate": gate,
+        "jit_identity": jit,
+        "cells": cells,
+        "block_status": "complete"
+        if all(cell["status"] == "Pass" for cell in cells)
+        else "complete_with_invalid_cells",
     }
     common.write_json(output, payload)
-    common.write_csv(csv_path, [{
-        "schema": payload["schema"], "rerun_id": args.rerun_id, "arm": args.arm, "block": args.block,
-        "m": cell["m"], "status": cell["status"], "reason": cell["reason"], "sample_us": cell["sample_us"],
-        "qualification_pass": cell["correctness"]["qualification_pass"], "fixture_sha256": cell["fixture_sha256"],
-        "protocol_sha256": payload["protocol_sha256"], "jit_artifact_set_sha256": jit["artifact_set_sha256"],
-        "telemetry_gate_pass": gate["pass"],
-    } for cell in cells])
-    print(json.dumps({"output": str(output), "block_status": payload["block_status"]}, sort_keys=True))
+    common.write_csv(
+        csv_path,
+        [
+            {
+                "schema": payload["schema"],
+                "rerun_id": args.rerun_id,
+                "arm": args.arm,
+                "block": args.block,
+                "m": cell["m"],
+                "status": cell["status"],
+                "reason": cell["reason"],
+                "sample_us": cell["sample_us"],
+                "qualification_pass": cell["correctness"]["qualification_pass"],
+                "fixture_sha256": cell["fixture_sha256"],
+                "protocol_sha256": payload["protocol_sha256"],
+                "jit_artifact_set_sha256": jit["artifact_set_sha256"],
+                "telemetry_gate_pass": gate["pass"],
+            }
+            for cell in cells
+        ],
+    )
+    print(
+        json.dumps(
+            {"output": str(output), "block_status": payload["block_status"]},
+            sort_keys=True,
+        )
+    )
     return 0
 
 

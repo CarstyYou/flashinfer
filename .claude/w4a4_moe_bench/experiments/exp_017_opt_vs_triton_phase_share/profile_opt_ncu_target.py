@@ -103,7 +103,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     core.reused.EXPECTED_OVERLAY_SHA256 = dict(core.EXPECTED_OVERLAY_SHA256)
     source = core.reused.validate_source(args.flashinfer_root, args.overlay, ARM)
     if core.reused.TARGET_MODULE in sys.modules:
-        raise RuntimeError("Latest-opt module imported before exact overlay installation")
+        raise RuntimeError(
+            "Latest-opt module imported before exact overlay installation"
+        )
     core.worker.install_overlay(args.overlay)
     imports = core.reused.configure_source_checkout(args.flashinfer_root, args.jit_root)
     if Path(imports["target_module"]).resolve() != args.overlay:
@@ -125,7 +127,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         fixture_module, pre_profile_output, reference, core, fixture, arm
     )
     if not pre_profile["gate_pass"]:
-        raise RuntimeError(f"Latest-opt pre-profile graph correctness failed: {pre_profile}")
+        raise RuntimeError(
+            f"Latest-opt pre-profile graph correctness failed: {pre_profile}"
+        )
 
     specialization = core.specialization_contract(args.overlay)
     nvtx_range = "exp017_latest_opt_m8192_ncu"
@@ -156,11 +160,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                 raise RuntimeError(f"cudaProfilerStop failed: {status}")
 
     assert output is not None
-    post_profile = gate_output(
-        fixture_module, output, reference, core, fixture, arm
-    )
+    post_profile = gate_output(fixture_module, output, reference, core, fixture, arm)
     if not post_profile["gate_pass"]:
-        raise RuntimeError(f"Latest-opt post-profile correctness failed: {post_profile}")
+        raise RuntimeError(
+            f"Latest-opt post-profile correctness failed: {post_profile}"
+        )
 
     artifacts, artifact_set, cubins = core._artifacts(args.jit_root)
     if len(cubins) != 1:
