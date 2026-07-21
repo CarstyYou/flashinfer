@@ -117,6 +117,15 @@
   分别慢 4.58%/15.47%/20.85%，因此不并入当前主优化 kernel。
 - 只保留其 SMEM 生命周期复用机制作为方向 4 的参考。
 
+### [reject] exp_020：4-CTA DSM 合并 32-way Scatter
+
+- 4 个 FC2 slice CTA 先经 DSM 合并，将静态 REDG 账本从 32-way 降为 8-way；canonical 与 tail
+  correctness 通过。
+- Device-only demo 的 AB/BA 两组结果一致：Direct-32 约 `870.4 µs`，DSM-8 约 `9994.0 µs`，
+  按 `Direct / DSM - 1` 为 `-91.29%`，因此不集成到 Opt。
+- 本结果只拒绝当前“4-CTA cluster + remote partial reads + FP32 merge + 每 tile 双 cluster barrier”
+  的组合实现；未做 NCU，不把回退臆断归因给其中某一个子机制。输出归并 residual 方向仍保持 `[todo]`。
+
 ## 验证与接受条件
 
 `单一优化问题 → 最小候选 → correctness → static/dynamic zero-spill → E2E → accept/reject`

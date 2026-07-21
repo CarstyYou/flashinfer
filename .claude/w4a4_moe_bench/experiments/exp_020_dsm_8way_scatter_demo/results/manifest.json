@@ -1,0 +1,110 @@
+{
+  "case": {
+    "experts": 256,
+    "hidden": 2048,
+    "m": 8192,
+    "topk": 8
+  },
+  "environment": {
+    "artifacts": [
+      {
+        "bytes": 92904,
+        "path": "dump/cutlass_launch_demo_Tensorgmemo6371281281_Tensorgmemo6371281281_Tensorgmemo6371_Tensorgmemo8192204820481_False_CUstream0x0.sm_120a.cubin",
+        "sha256": "ff3b12b93853b899cb0ae95abd3386957e9b7fae55c0f5286f0c4528f905838d"
+      },
+      {
+        "bytes": 142904,
+        "path": "dump/cutlass_launch_demo_Tensorgmemo6371281281_Tensorgmemo6371281281_Tensorgmemo6371_Tensorgmemo8192204820481_True_CUstream0x0.sm_120a.cubin",
+        "sha256": "df73877e2042356e52c4e7c7684f55a9b426736dd017e30e7b3fcb9f3ff1d136"
+      },
+      {
+        "bytes": 126677,
+        "path": "dump/cutlass_launch_demo_Tensorgmemo6371281281_Tensorgmemo6371281281_Tensorgmemo6371_Tensorgmemo8192204820481_False_CUstream0x0.sm_120a.ptx",
+        "sha256": "35cd568f99f46303aa7b5a4f84ae4200cfb68af59134bcf2def0113179316719"
+      },
+      {
+        "bytes": 206724,
+        "path": "dump/cutlass_launch_demo_Tensorgmemo6371281281_Tensorgmemo6371281281_Tensorgmemo6371_Tensorgmemo8192204820481_True_CUstream0x0.sm_120a.ptx",
+        "sha256": "6f505ef2137ababfa4e22003fcbb93e785b55e22a5b2f76f8f1c98f419b04dca"
+      },
+      {
+        "bytes": 108474,
+        "path": "dump/cute_dsl_cutlass_launch_demo_Tensorgmemo6371281281_Tensorgmemo6371281281_Tensorgmemo6371_Tensorgmemo8192204820481_False_CUstream0x0_clean.mlir",
+        "sha256": "800420b91086bf78d9867b9428e06891c3393d7d24117b46405ca308d59c9baf"
+      },
+      {
+        "bytes": 185984,
+        "path": "dump/cute_dsl_cutlass_launch_demo_Tensorgmemo6371281281_Tensorgmemo6371281281_Tensorgmemo6371_Tensorgmemo8192204820481_True_CUstream0x0_clean.mlir",
+        "sha256": "6ae792aa8fb304bfc0af0b26fa5d829579a442c9aab76238aa4d73009cf0d35b"
+      }
+    ],
+    "compute_capability": [
+      12,
+      0
+    ],
+    "device_name": "NVIDIA Graphics Device",
+    "expected_application_clock_mhz": "2377",
+    "expected_gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "fixture_sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438",
+    "flashinfer_commit": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+    "gpu": {
+      "clocks.applications.graphics": "2377",
+      "clocks.current.graphics": "2557",
+      "compute_processes": [
+        "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522, 1, python3"
+      ],
+      "power.draw": "104.48",
+      "temperature.gpu": "31",
+      "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+    },
+    "image_digest": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+    "image_id": "sha256:a4e056e1d34a5cc9387512ffa3abeed778e3dc7966633c5154d771705d8835ac",
+    "jit_root": "/workspace/jit",
+    "kernel_source_sha256": "1b5e4a08433aa8c0ba28856f4b9f0a5e88f1020250797b7de0ace872944a959e",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "remote_launcher_sha256": "db401775a7c5db0193f15840b92b7441674ef21fe17fdb9144f1ca18c2cc7ae2",
+    "runner_source_sha256": "be6c6ec7e15d2964c02bfd0cf3f0570fcb49025d6c30850fee8ab70a3962fbf9",
+    "torch": "2.12.0a0+5aff3928d8.nv26.05",
+    "torch_cuda": "13.2"
+  },
+  "experiment": "exp_020_dsm_8way_scatter_demo",
+  "fixture": {
+    "group_identity_sha256": "4a5b04ab05f62546210be5693c363270181d9666513aa181413d4a1f9933f2d0",
+    "path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/fixtures/m8192.npz",
+    "sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438"
+  },
+  "launch_contract": {
+    "block": [
+      288,
+      1,
+      1
+    ],
+    "cluster": [
+      4,
+      1,
+      1
+    ],
+    "dynamic_smem_bytes_per_cta": 84992,
+    "grid": [
+      2548,
+      1,
+      1
+    ],
+    "output_tiles_per_cluster": 16
+  },
+  "ledger": {
+    "direct_redg_bf16x8": 67108864,
+    "direct_reduction_bytes": 1073741824,
+    "dsm_fp32_adds": 402653184,
+    "dsm_partial_read_bytes": 1073741824,
+    "dsm_redg_bf16x8": 16777216,
+    "dsm_reduction_bytes": 268435456,
+    "groups": 637,
+    "occupancy_max": 295,
+    "occupancy_min": 205,
+    "routed_rows": 65536,
+    "slice_tasks": 2548
+  },
+  "schema": "exp020.manifest.v1",
+  "status": "reject_performance"
+}
