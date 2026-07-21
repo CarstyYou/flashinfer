@@ -1630,9 +1630,11 @@ class MoEDynamicKernel:
         )
 
         tCsC_for_shape = thr_mma.partition_C(sC[None, None, 0])
-        epi_m_scale = self.tile_shape_mnk[0] // self.epi_tile[0]
-        sub_shape = tCsC_for_shape.shape[:3]
-        acc_shape = (sub_shape[0], sub_shape[1] * epi_m_scale, sub_shape[2])
+        # partition_C already returns the complete per-thread MMA fragment
+        # shape even when the epilogue sC tile covers only 64 of the 128 MMA
+        # rows. Scaling its M mode again doubles the accumulator layout and
+        # makes the second epilogue pass read fragments that GEMM never wrote.
+        acc_shape = tCsC_for_shape.shape[:3]
         gate_acc = cute.make_rmem_tensor(acc_shape, self.acc_dtype)
         up_acc = (
             cute.make_rmem_tensor(acc_shape, self.acc_dtype)
@@ -2279,11 +2281,13 @@ class MoEDynamicKernel:
                                 self.num_mma_warps * self.num_threads_per_warp
                             )
 
-                    cute.arch.fence_proxy("async.shared", space="cta")
-                    # epilog_sync: MMA-only barrier. DMA warp doesn't need to wait
-                    # for quant — it only loads B_down into sB (separate buffer).
-                    # This allows DMA to prefetch B_down tiles earlier.
-                    self.epilog_sync_barrier.arrive_and_wait()
+                        # sC is a single 64-row buffer shared by both epilogue
+                        # passes. Every MMA warp must finish reading/quantizing
+                        # the current pass before any warp overwrites sC with
+                        # the next 64 rows. This barrier also makes the final
+                        # pass's sA/sSFA writes visible before FC2 consumes them.
+                        cute.arch.fence_proxy("async.shared", space="cta")
+                        self.epilog_sync_barrier.arrive_and_wait()
 
                     # ============================================================
                     # PHASE B: Sweep ALL FC2 output tiles using cached sA

@@ -1,0 +1,1016 @@
+{
+  "arm": "sglang_triton_fp8",
+  "block": 1,
+  "block_status": "complete",
+  "cells": [
+    {
+      "correctness": {
+        "mode": "sentinel_sanity",
+        "post_timing": {
+          "event_elapsed_us": 736.8320226669312,
+          "oracle": null,
+          "pass": true,
+          "sanity": {
+            "dtype": "bfloat16",
+            "finite": true,
+            "nonzero": true,
+            "output_sha256": "51f4604bfac72092fea43b9bcfa821b7a0c2edf6e0dddb0c7f369326c01fa62b",
+            "pass": true,
+            "sentinel_nan_remaining": 0,
+            "shape": [
+              256,
+              2048
+            ]
+          },
+          "workspace": {
+            "gate_pass": true,
+            "not_applicable": true
+          }
+        },
+        "pre_replays": [
+          {
+            "event_elapsed_us": 779.0719866752625,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "51f4604bfac72092fea43b9bcfa821b7a0c2edf6e0dddb0c7f369326c01fa62b",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                256,
+                2048
+              ]
+            },
+            "workspace": {
+              "gate_pass": true,
+              "not_applicable": true
+            }
+          },
+          {
+            "event_elapsed_us": 754.368007183075,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "51f4604bfac72092fea43b9bcfa821b7a0c2edf6e0dddb0c7f369326c01fa62b",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                256,
+                2048
+              ]
+            },
+            "workspace": {
+              "gate_pass": true,
+              "not_applicable": true
+            }
+          }
+        ],
+        "qualification_pass": true
+      },
+      "fixture_manifest": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m256.npz",
+        "fixture_sha256": "86b505097acd06bed5a50c3528c78525e6087c07ed69f86606607599ffa21686",
+        "m": 256,
+        "occupancy_max": 15,
+        "occupancy_min": 2,
+        "occupancy_sha256": "60b4becc63e932fe7b11210c9ef78c1a4b58a38798024f55854808e35d6a4920",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "9cd310e245d39595e1d322c2da645fe67791f546c29994caea48f7786aa15dc1",
+        "topk_weights_sha256": "e1fdddd7af5a99de0dab6d8620c050e6cee25a0c27ff9c66e617ee346c0110f1",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "ec4c61e362a4de64083be4a9d357a498d28b8a74bb816e8f9dc04eb9f9a80d09"
+      },
+      "fixture_manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+      "fixture_sha256": "86b505097acd06bed5a50c3528c78525e6087c07ed69f86606607599ffa21686",
+      "launch_identity": {
+        "alternate_dispatch": "direct callable; no runner/DeepGEMM/CUTLASS dispatcher",
+        "backend": "sglang_legacy_triton_fp8_chain",
+        "callable": "sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe.fused_experts_impl",
+        "callable_source": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+        "callable_source_sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056",
+        "config": {
+          "down": null,
+          "down_max_block_m": null,
+          "source": "default_heuristic",
+          "topk_ids_shape": [
+            256,
+            8
+          ],
+          "tuned_grid": [],
+          "up": {
+            "BLOCK_SIZE_K": 256,
+            "BLOCK_SIZE_M": 32,
+            "BLOCK_SIZE_N": 64,
+            "GROUP_SIZE_M": 1,
+            "num_stages": 4,
+            "num_warps": 4
+          }
+        },
+        "l2_flush_bytes": 201326592,
+        "quant_contract": {
+          "block_shape": null,
+          "input": "BF16 -> dynamic tensor-wise E4M3 inside FC1",
+          "intermediate": "BF16 -> dynamic tensor-wise E4M3 inside FC2",
+          "per_channel_quant": false,
+          "weight": "E4M3 per-expert tensor scale"
+        },
+        "timed_statistics": {
+          "max_us": 771.2640166282654,
+          "median_us": 768.5439884662628,
+          "min_us": 765.2480006217957
+        }
+      },
+      "m": 256,
+      "reason": "",
+      "sample_us": 768.5926401615143,
+      "status": "Pass"
+    },
+    {
+      "correctness": {
+        "mode": "sentinel_sanity",
+        "post_timing": {
+          "event_elapsed_us": 719.9680209159851,
+          "oracle": null,
+          "pass": true,
+          "sanity": {
+            "dtype": "bfloat16",
+            "finite": true,
+            "nonzero": true,
+            "output_sha256": "a1822f8687cbc4b55b33d4a41e31b9b217806d0f6bd778b589a5b6d0124dfc52",
+            "pass": true,
+            "sentinel_nan_remaining": 0,
+            "shape": [
+              512,
+              2048
+            ]
+          },
+          "workspace": {
+            "gate_pass": true,
+            "not_applicable": true
+          }
+        },
+        "pre_replays": [
+          {
+            "event_elapsed_us": 752.5119781494141,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "a1822f8687cbc4b55b33d4a41e31b9b217806d0f6bd778b589a5b6d0124dfc52",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                512,
+                2048
+              ]
+            },
+            "workspace": {
+              "gate_pass": true,
+              "not_applicable": true
+            }
+          },
+          {
+            "event_elapsed_us": 723.6480116844177,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "a1822f8687cbc4b55b33d4a41e31b9b217806d0f6bd778b589a5b6d0124dfc52",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                512,
+                2048
+              ]
+            },
+            "workspace": {
+              "gate_pass": true,
+              "not_applicable": true
+            }
+          }
+        ],
+        "qualification_pass": true
+      },
+      "fixture_manifest": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m512.npz",
+        "fixture_sha256": "e6ddb487121a0d681a06bcb453f38623b3d5d8477f2232bbbf78cd2ea4ef23a3",
+        "m": 512,
+        "occupancy_max": 32,
+        "occupancy_min": 7,
+        "occupancy_sha256": "1743ac1105dd3d277607a09eda29d22e0d81293524e72589faf14eaaa6e4a6ed",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "6547b9e499a45732e2e209d6e7802bb869cf9c0f56dddebc38b94373d9125378",
+        "topk_weights_sha256": "31f9568afcba7d5f4df04ff5e61ecc082434dd9f045b7aec9d77a86e6e0143c0",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "5178555ed52d79f5945b7c6637c9c20371c902d69e3817437caf2bee7fb34087"
+      },
+      "fixture_manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+      "fixture_sha256": "e6ddb487121a0d681a06bcb453f38623b3d5d8477f2232bbbf78cd2ea4ef23a3",
+      "launch_identity": {
+        "alternate_dispatch": "direct callable; no runner/DeepGEMM/CUTLASS dispatcher",
+        "backend": "sglang_legacy_triton_fp8_chain",
+        "callable": "sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe.fused_experts_impl",
+        "callable_source": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+        "callable_source_sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056",
+        "config": {
+          "down": null,
+          "down_max_block_m": null,
+          "source": "default_heuristic",
+          "topk_ids_shape": [
+            512,
+            8
+          ],
+          "tuned_grid": [],
+          "up": {
+            "BLOCK_SIZE_K": 256,
+            "BLOCK_SIZE_M": 64,
+            "BLOCK_SIZE_N": 128,
+            "GROUP_SIZE_M": 64,
+            "num_stages": 2,
+            "num_warps": 4
+          }
+        },
+        "l2_flush_bytes": 201326592,
+        "quant_contract": {
+          "block_shape": null,
+          "input": "BF16 -> dynamic tensor-wise E4M3 inside FC1",
+          "intermediate": "BF16 -> dynamic tensor-wise E4M3 inside FC2",
+          "per_channel_quant": false,
+          "weight": "E4M3 per-expert tensor scale"
+        },
+        "timed_statistics": {
+          "max_us": 748.6079931259155,
+          "median_us": 745.0080215930939,
+          "min_us": 742.9119944572449
+        }
+      },
+      "m": 512,
+      "reason": "",
+      "sample_us": 745.14240026474,
+      "status": "Pass"
+    },
+    {
+      "correctness": {
+        "mode": "sentinel_sanity",
+        "post_timing": {
+          "event_elapsed_us": 736.735999584198,
+          "oracle": null,
+          "pass": true,
+          "sanity": {
+            "dtype": "bfloat16",
+            "finite": true,
+            "nonzero": true,
+            "output_sha256": "c2051707f0d6d1b68e389374e2c333abb293357c867bd9380ee5650aeb6247d7",
+            "pass": true,
+            "sentinel_nan_remaining": 0,
+            "shape": [
+              1024,
+              2048
+            ]
+          },
+          "workspace": {
+            "gate_pass": true,
+            "not_applicable": true
+          }
+        },
+        "pre_replays": [
+          {
+            "event_elapsed_us": 769.7280049324036,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "c2051707f0d6d1b68e389374e2c333abb293357c867bd9380ee5650aeb6247d7",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                1024,
+                2048
+              ]
+            },
+            "workspace": {
+              "gate_pass": true,
+              "not_applicable": true
+            }
+          },
+          {
+            "event_elapsed_us": 739.3280267715454,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "c2051707f0d6d1b68e389374e2c333abb293357c867bd9380ee5650aeb6247d7",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                1024,
+                2048
+              ]
+            },
+            "workspace": {
+              "gate_pass": true,
+              "not_applicable": true
+            }
+          }
+        ],
+        "qualification_pass": true
+      },
+      "fixture_manifest": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m1024.npz",
+        "fixture_sha256": "0fa7e8a7d8d1d32172971f987d6f55b534aabf8d12a84a910d010cec25ba04a5",
+        "m": 1024,
+        "occupancy_max": 50,
+        "occupancy_min": 14,
+        "occupancy_sha256": "e03917667a2d3629721f3c6a2b13dea8aac9c8593280282013395eb9a5f2e5bd",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "5d5fdccddc2828d49d466385a93fbeff720aba9361985a9c4bb35603bc5fa6d0",
+        "topk_weights_sha256": "d7342a44f8bfe9a2b0cf94a3d45e9ea30fbbe244d047feeaac7b212603103dcc",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "6339b37d71b116774bf956e5882b2f4d132c82f4a7fdbe01dbc07808698722b5"
+      },
+      "fixture_manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+      "fixture_sha256": "0fa7e8a7d8d1d32172971f987d6f55b534aabf8d12a84a910d010cec25ba04a5",
+      "launch_identity": {
+        "alternate_dispatch": "direct callable; no runner/DeepGEMM/CUTLASS dispatcher",
+        "backend": "sglang_legacy_triton_fp8_chain",
+        "callable": "sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe.fused_experts_impl",
+        "callable_source": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+        "callable_source_sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056",
+        "config": {
+          "down": null,
+          "down_max_block_m": null,
+          "source": "default_heuristic",
+          "topk_ids_shape": [
+            1024,
+            8
+          ],
+          "tuned_grid": [],
+          "up": {
+            "BLOCK_SIZE_K": 256,
+            "BLOCK_SIZE_M": 64,
+            "BLOCK_SIZE_N": 128,
+            "GROUP_SIZE_M": 64,
+            "num_stages": 2,
+            "num_warps": 4
+          }
+        },
+        "l2_flush_bytes": 201326592,
+        "quant_contract": {
+          "block_shape": null,
+          "input": "BF16 -> dynamic tensor-wise E4M3 inside FC1",
+          "intermediate": "BF16 -> dynamic tensor-wise E4M3 inside FC2",
+          "per_channel_quant": false,
+          "weight": "E4M3 per-expert tensor scale"
+        },
+        "timed_statistics": {
+          "max_us": 763.7760043144226,
+          "median_us": 760.2239847183228,
+          "min_us": 756.6080093383789
+        }
+      },
+      "m": 1024,
+      "reason": "",
+      "sample_us": 760.5036807060242,
+      "status": "Pass"
+    },
+    {
+      "correctness": {
+        "mode": "sentinel_sanity",
+        "post_timing": {
+          "event_elapsed_us": 859.6159815788269,
+          "oracle": null,
+          "pass": true,
+          "sanity": {
+            "dtype": "bfloat16",
+            "finite": true,
+            "nonzero": true,
+            "output_sha256": "1908fb25ca6e1ca5d0713edc54f5c739af14610df7dc266abab8cadf2ad644ad",
+            "pass": true,
+            "sentinel_nan_remaining": 0,
+            "shape": [
+              2048,
+              2048
+            ]
+          },
+          "workspace": {
+            "gate_pass": true,
+            "not_applicable": true
+          }
+        },
+        "pre_replays": [
+          {
+            "event_elapsed_us": 887.1359825134277,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "1908fb25ca6e1ca5d0713edc54f5c739af14610df7dc266abab8cadf2ad644ad",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                2048,
+                2048
+              ]
+            },
+            "workspace": {
+              "gate_pass": true,
+              "not_applicable": true
+            }
+          },
+          {
+            "event_elapsed_us": 854.6239733695984,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "1908fb25ca6e1ca5d0713edc54f5c739af14610df7dc266abab8cadf2ad644ad",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                2048,
+                2048
+              ]
+            },
+            "workspace": {
+              "gate_pass": true,
+              "not_applicable": true
+            }
+          }
+        ],
+        "qualification_pass": true
+      },
+      "fixture_manifest": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m2048.npz",
+        "fixture_sha256": "5375fd8b3e5e15f8c956998bfc3e2f3ee59948a2aeaf5ba1294ec6a74092bde3",
+        "m": 2048,
+        "occupancy_max": 89,
+        "occupancy_min": 44,
+        "occupancy_sha256": "ef23f3672ac6f6dc3a6abbc1ad2fda9b4219cb091698affd6997a70e8b93a244",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "38801fb6845c3d19a502e035e5ec3ec008fa7c88933f05a33f276d8ce9e8654d",
+        "topk_weights_sha256": "b03cb15feff7fa5e53e95911f1987d57103666f577732fd1fb19d88f7192938b",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "ccf6bdc9fd88f35afb0fd317f930799053d8a614b4107e3cf16b8a0c115e884e"
+      },
+      "fixture_manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+      "fixture_sha256": "5375fd8b3e5e15f8c956998bfc3e2f3ee59948a2aeaf5ba1294ec6a74092bde3",
+      "launch_identity": {
+        "alternate_dispatch": "direct callable; no runner/DeepGEMM/CUTLASS dispatcher",
+        "backend": "sglang_legacy_triton_fp8_chain",
+        "callable": "sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe.fused_experts_impl",
+        "callable_source": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+        "callable_source_sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056",
+        "config": {
+          "down": null,
+          "down_max_block_m": null,
+          "source": "default_heuristic",
+          "topk_ids_shape": [
+            2048,
+            8
+          ],
+          "tuned_grid": [],
+          "up": {
+            "BLOCK_SIZE_K": 256,
+            "BLOCK_SIZE_M": 64,
+            "BLOCK_SIZE_N": 128,
+            "GROUP_SIZE_M": 64,
+            "num_stages": 2,
+            "num_warps": 4
+          }
+        },
+        "l2_flush_bytes": 201326592,
+        "quant_contract": {
+          "block_shape": null,
+          "input": "BF16 -> dynamic tensor-wise E4M3 inside FC1",
+          "intermediate": "BF16 -> dynamic tensor-wise E4M3 inside FC2",
+          "per_channel_quant": false,
+          "weight": "E4M3 per-expert tensor scale"
+        },
+        "timed_statistics": {
+          "max_us": 883.9359879493713,
+          "median_us": 877.1200180053711,
+          "min_us": 871.1040019989014
+        }
+      },
+      "m": 2048,
+      "reason": "",
+      "sample_us": 876.8940818309784,
+      "status": "Pass"
+    },
+    {
+      "correctness": {
+        "mode": "sentinel_sanity",
+        "post_timing": {
+          "event_elapsed_us": 1145.7279920578003,
+          "oracle": null,
+          "pass": true,
+          "sanity": {
+            "dtype": "bfloat16",
+            "finite": true,
+            "nonzero": true,
+            "output_sha256": "21170d3501cbdf916a556e5c0a4a055fe645281b74ed73257f38b28288655c39",
+            "pass": true,
+            "sentinel_nan_remaining": 0,
+            "shape": [
+              4096,
+              2048
+            ]
+          },
+          "workspace": {
+            "gate_pass": true,
+            "not_applicable": true
+          }
+        },
+        "pre_replays": [
+          {
+            "event_elapsed_us": 1160.863995552063,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "21170d3501cbdf916a556e5c0a4a055fe645281b74ed73257f38b28288655c39",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                4096,
+                2048
+              ]
+            },
+            "workspace": {
+              "gate_pass": true,
+              "not_applicable": true
+            }
+          },
+          {
+            "event_elapsed_us": 1154.304027557373,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "21170d3501cbdf916a556e5c0a4a055fe645281b74ed73257f38b28288655c39",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                4096,
+                2048
+              ]
+            },
+            "workspace": {
+              "gate_pass": true,
+              "not_applicable": true
+            }
+          }
+        ],
+        "qualification_pass": true
+      },
+      "fixture_manifest": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m4096.npz",
+        "fixture_sha256": "a1ac93cb8dfb2e81a000476efc36b75588f79f1954b406396b77c172464ce2cc",
+        "m": 4096,
+        "occupancy_max": 166,
+        "occupancy_min": 92,
+        "occupancy_sha256": "0b57ad7fd66d1405ea04eb3135a5615e45664eb1ea61d9b61e7cb7de333be5df",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "1f66203f9c8589a25517a3422c3012eea61aea2dc9ee4e2fc807fbf98ca667fc",
+        "topk_weights_sha256": "8d97adaf9846929c340a63d81d13816c06820e737797712a2ec7f94d1ae88232",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "d8ff96b666568acab63a31b7f5812da2678053931dd9ff60fe33eaa90f588870"
+      },
+      "fixture_manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+      "fixture_sha256": "a1ac93cb8dfb2e81a000476efc36b75588f79f1954b406396b77c172464ce2cc",
+      "launch_identity": {
+        "alternate_dispatch": "direct callable; no runner/DeepGEMM/CUTLASS dispatcher",
+        "backend": "sglang_legacy_triton_fp8_chain",
+        "callable": "sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe.fused_experts_impl",
+        "callable_source": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+        "callable_source_sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056",
+        "config": {
+          "down": null,
+          "down_max_block_m": null,
+          "source": "default_heuristic",
+          "topk_ids_shape": [
+            4096,
+            8
+          ],
+          "tuned_grid": [],
+          "up": {
+            "BLOCK_SIZE_K": 256,
+            "BLOCK_SIZE_M": 64,
+            "BLOCK_SIZE_N": 128,
+            "GROUP_SIZE_M": 64,
+            "num_stages": 2,
+            "num_warps": 4
+          }
+        },
+        "l2_flush_bytes": 201326592,
+        "quant_contract": {
+          "block_shape": null,
+          "input": "BF16 -> dynamic tensor-wise E4M3 inside FC1",
+          "intermediate": "BF16 -> dynamic tensor-wise E4M3 inside FC2",
+          "per_channel_quant": false,
+          "weight": "E4M3 per-expert tensor scale"
+        },
+        "timed_statistics": {
+          "max_us": 1159.2639684677124,
+          "median_us": 1153.9199948310852,
+          "min_us": 1150.7519483566284
+        }
+      },
+      "m": 4096,
+      "reason": "",
+      "sample_us": 1154.190080165863,
+      "status": "Pass"
+    },
+    {
+      "correctness": {
+        "mode": "sentinel_sanity",
+        "post_timing": {
+          "event_elapsed_us": 2182.015895843506,
+          "oracle": null,
+          "pass": true,
+          "sanity": {
+            "dtype": "bfloat16",
+            "finite": true,
+            "nonzero": true,
+            "output_sha256": "0b2dc0c560263a9ff2f6e8f7ede3783d63d4a6f982fe61344b5d5e499ca4fe61",
+            "pass": true,
+            "sentinel_nan_remaining": 0,
+            "shape": [
+              8192,
+              2048
+            ]
+          },
+          "workspace": {
+            "gate_pass": true,
+            "not_applicable": true
+          }
+        },
+        "pre_replays": [
+          {
+            "event_elapsed_us": 2153.343915939331,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "0b2dc0c560263a9ff2f6e8f7ede3783d63d4a6f982fe61344b5d5e499ca4fe61",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                8192,
+                2048
+              ]
+            },
+            "workspace": {
+              "gate_pass": true,
+              "not_applicable": true
+            }
+          },
+          {
+            "event_elapsed_us": 2135.8718872070312,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "0b2dc0c560263a9ff2f6e8f7ede3783d63d4a6f982fe61344b5d5e499ca4fe61",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                8192,
+                2048
+              ]
+            },
+            "workspace": {
+              "gate_pass": true,
+              "not_applicable": true
+            }
+          }
+        ],
+        "qualification_pass": true
+      },
+      "fixture_manifest": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m8192.npz",
+        "fixture_sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438",
+        "m": 8192,
+        "occupancy_max": 295,
+        "occupancy_min": 205,
+        "occupancy_sha256": "3e4350788bfcdd1cca175141f0c6626934589b97cb23d74811e4bc2785531a94",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "c7ea3babd394cb6fc73980a2754b13a8215deaee991b3aaf7ce3b45502592abb",
+        "topk_weights_sha256": "441f51ba80975dc8cfc3fc0d7e5a07a8c474a6781f8d606ff0eaecef69adbcea",
+        "weight_sum_max_abs_error": 2.384185791015625e-07,
+        "x_sha256": "00d8fb81ac350100bdb9c4f9341ac2cbbc24d6c0b21b62f565f7f44a8ad24bec"
+      },
+      "fixture_manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+      "fixture_sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438",
+      "launch_identity": {
+        "alternate_dispatch": "direct callable; no runner/DeepGEMM/CUTLASS dispatcher",
+        "backend": "sglang_legacy_triton_fp8_chain",
+        "callable": "sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe.fused_experts_impl",
+        "callable_source": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+        "callable_source_sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056",
+        "config": {
+          "down": null,
+          "down_max_block_m": null,
+          "source": "default_heuristic",
+          "topk_ids_shape": [
+            8192,
+            8
+          ],
+          "tuned_grid": [],
+          "up": {
+            "BLOCK_SIZE_K": 256,
+            "BLOCK_SIZE_M": 64,
+            "BLOCK_SIZE_N": 128,
+            "GROUP_SIZE_M": 64,
+            "num_stages": 2,
+            "num_warps": 4
+          }
+        },
+        "l2_flush_bytes": 201326592,
+        "quant_contract": {
+          "block_shape": null,
+          "input": "BF16 -> dynamic tensor-wise E4M3 inside FC1",
+          "intermediate": "BF16 -> dynamic tensor-wise E4M3 inside FC2",
+          "per_channel_quant": false,
+          "weight": "E4M3 per-expert tensor scale"
+        },
+        "timed_statistics": {
+          "max_us": 2194.240093231201,
+          "median_us": 2143.488049507141,
+          "min_us": 2136.320114135742
+        }
+      },
+      "m": 8192,
+      "reason": "",
+      "sample_us": 2149.269118309021,
+      "status": "Pass"
+    }
+  ],
+  "fixture_identity": {
+    "manifest_path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/fixtures/manifest.json",
+    "manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+    "npz_sha256": {
+      "1024": "0fa7e8a7d8d1d32172971f987d6f55b534aabf8d12a84a910d010cec25ba04a5",
+      "2048": "5375fd8b3e5e15f8c956998bfc3e2f3ee59948a2aeaf5ba1294ec6a74092bde3",
+      "256": "86b505097acd06bed5a50c3528c78525e6087c07ed69f86606607599ffa21686",
+      "4096": "a1ac93cb8dfb2e81a000476efc36b75588f79f1954b406396b77c172464ce2cc",
+      "512": "e6ddb487121a0d681a06bcb453f38623b3d5d8477f2232bbbf78cd2ea4ef23a3",
+      "8192": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438"
+    },
+    "seed": 2026
+  },
+  "jit_identity": {
+    "artifact_count": 18,
+    "artifact_set_sha256": "f1ffb47a74f1c9cc397e4cc3b70c885db34791dd89e9a7a677c4b837ca6103fd",
+    "cubin_sha256": [
+      "02cdf8124052b65252ada04e769fa579d0bf428b6592ae1d41835f3dd1c1ffa6",
+      "395470053442f5818185036ec3ece20fee5b712e27d039149fb17c0e068422a6",
+      "b22ba72ac72b6226739334e251d4398b1ee7bfbe58fc08a08582c9742002ebec",
+      "cd59827d137a8e6124f5b9268d15ce9d90b311b78e6cdf62b780037d8c7e573a"
+    ],
+    "symbol_gate": true,
+    "symbols": [
+      "fused_moe_kernel"
+    ]
+  },
+  "protocol": {
+    "application_graphics_clock_mhz": 2377,
+    "block_orders": [
+      [
+        "latest_opt_fp4",
+        "eric_stage4_fp4",
+        "sglang_triton_fp8"
+      ],
+      [
+        "eric_stage4_fp4",
+        "sglang_triton_fp8",
+        "latest_opt_fp4"
+      ],
+      [
+        "sglang_triton_fp8",
+        "latest_opt_fp4",
+        "eric_stage4_fp4"
+      ]
+    ],
+    "blocks": 3,
+    "boundary": "BF16 input -> complete MoE -> BF16 output",
+    "case": {
+      "E": 256,
+      "H": 2048,
+      "I_tp": 512,
+      "topk": 8
+    },
+    "cooldown_between_arm_processes_seconds": 2,
+    "iters": 50,
+    "l2_flush_bytes": 201326592,
+    "m_values": [
+      256,
+      512,
+      1024,
+      2048,
+      4096,
+      8192
+    ],
+    "profilers": "forbidden",
+    "qualification": "block0 full oracle; block1/2 two-pre plus one-post sentinel sanity",
+    "timing": "single CUDA Graph replay with external CUDA events",
+    "warmup": 5
+  },
+  "protocol_sha256": "d7c7380e6a3ec58c691fa998e63b1ffed4c7d50fbc4a09e31c9951d894743465",
+  "rerun_id": "exp018-eric-benchmark-20260721T085049Z-1403258",
+  "runtime": {
+    "cuda_runtime": "13.0",
+    "gpu_name": "NVIDIA Graphics Device",
+    "gpu_uuid": "GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12",
+    "hostname": "4561472f0222",
+    "image_environment": {
+      "W4A4_IMAGE_DIGEST": "sha256:00c53fe4c31bf22d7b37537f28bbdfd924c02de13cdfb4bff7378c9c34d75ab2",
+      "W4A4_IMAGE_ID": "sha256:663867442f321ded36228bafd889fd1db05cbef7a7c8ea6e072df33234dabbfd",
+      "W4A4_SGLANG_COMMIT": "0b3bb0cbe31873994c9f989fddfe2f87ca839fdd"
+    },
+    "jit_root": "/workspace/jit",
+    "lease_id": "exp018-eric-benchmark-20260721T085049Z-1403258",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+    "pip_freeze_sha256": "9fc1f1e5d86bb3a5144ee7fdf46c7922364fadda92f427ff2194657b481a9c01",
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "sm_count": 110,
+    "timestamp_unix": 1784624020.2952323,
+    "torch": "2.11.0+cu130"
+  },
+  "schema": "exp018.arm-block.v1",
+  "source_identity": {
+    "adapter_source_sha256": "96dbe559e1d61a894fd9fda98827ba4b9cd37e74f10ec45a5bc0d8aaccd7916b",
+    "callable_source": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+    "callable_source_sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056",
+    "kind": "sglang_legacy_triton_fp8_chain",
+    "runner_sha256": "20b22467a314bc0ffc1f6a3e5dd4d30eb9af9ca9d26ff77996cd9605d798080c",
+    "sglang": {
+      "server_args": {
+        "enable_deterministic_inference": false,
+        "enable_fused_moe_sum_all_reduce": false,
+        "model_path": "dummy",
+        "moe_runner_backend": "triton"
+      },
+      "sglang_module": "/sgl-workspace/sglang/python/sglang/__init__.py",
+      "sglang_version": "0.5.15.post1",
+      "triton_version": "3.6.0"
+    },
+    "sglang_commit": "0b3bb0cbe31873994c9f989fddfe2f87ca839fdd"
+  },
+  "telemetry_after": {
+    "applications_graphics_clock_mhz": "2377",
+    "driver": "580.95.05",
+    "foreign_compute_processes": "not_queried_after_context",
+    "graphics_clock_mhz": "2550",
+    "memory_clock_mhz": "13365",
+    "name": "NVIDIA Graphics Device",
+    "pci_bus_id": "00000000:79:00.0",
+    "power_w": "171.95",
+    "pstate": "P1",
+    "temperature_c": "38",
+    "throttle_counters_us": {
+      "hw_power_brake": 0,
+      "hw_therm_slowdown": 0,
+      "sw_power_cap": 5045981692938,
+      "sw_therm_slowdown": 0,
+      "sync_boost": 0
+    },
+    "uuid": "GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12"
+  },
+  "telemetry_before": {
+    "applications_graphics_clock_mhz": "2377",
+    "driver": "580.95.05",
+    "foreign_compute_processes": [],
+    "graphics_clock_mhz": "217",
+    "memory_clock_mhz": "7001",
+    "name": "NVIDIA Graphics Device",
+    "pci_bus_id": "00000000:79:00.0",
+    "power_w": "39.29",
+    "pstate": "P3",
+    "temperature_c": "29",
+    "throttle_counters_us": {
+      "hw_power_brake": 0,
+      "hw_therm_slowdown": 0,
+      "sw_power_cap": 5045981656817,
+      "sw_therm_slowdown": 0,
+      "sync_boost": 0
+    },
+    "uuid": "GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12"
+  },
+  "telemetry_gate": {
+    "checked_throttle_counters": [
+      "hw_power_brake",
+      "hw_therm_slowdown",
+      "sw_therm_slowdown"
+    ],
+    "checks": {
+      "application_clock_stable": true,
+      "no_foreign_process_before": true,
+      "slowdown_not_increased": true,
+      "uuid_stable": true
+    },
+    "pass": true
+  },
+  "weight_identity": {
+    "manifest": {
+      "layout": {
+        "w1": [
+          256,
+          1024,
+          2048
+        ],
+        "w2": [
+          256,
+          2048,
+          512
+        ]
+      },
+      "master_distribution": "torch.float32 normal(0,0.1) rounded to BF16",
+      "quantizer": "sglang.srt.layers.quantization.fp8_kernel.scaled_fp8_quant",
+      "scale_contract": "FP32 [E], one tensor scale per expert",
+      "seed": 2026,
+      "storage_dtype": "float8_e4m3fn",
+      "w1_scale_sha256": "9e116b27c565caff2db6fa21680f8610525d38e4477156caa62b064d44241e1f",
+      "w1_sha256": "1258a066d515d569b164f19643ee5ea3ab6b0fae7eee141c59a6ea81fc020186",
+      "w2_scale_sha256": "4fc52fd21e883f98dedbf52421e9c249985bf432068fd9d3500db8e8f732faf2",
+      "w2_sha256": "3d64d5bc2ffd62640061dc53bd699fd9072166884786c8996bb12828470ee6e2"
+    },
+    "packed_weights_sha256": {
+      "w1": "1258a066d515d569b164f19643ee5ea3ab6b0fae7eee141c59a6ea81fc020186",
+      "w2": "3d64d5bc2ffd62640061dc53bd699fd9072166884786c8996bb12828470ee6e2"
+    },
+    "scales_sha256": {
+      "w1": "9e116b27c565caff2db6fa21680f8610525d38e4477156caa62b064d44241e1f",
+      "w2": "4fc52fd21e883f98dedbf52421e9c249985bf432068fd9d3500db8e8f732faf2"
+    },
+    "seed": 2026
+  }
+}

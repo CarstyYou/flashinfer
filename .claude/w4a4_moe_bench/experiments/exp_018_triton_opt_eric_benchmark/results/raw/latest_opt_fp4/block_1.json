@@ -1,0 +1,1877 @@
+{
+  "arm": "latest_opt_fp4",
+  "block": 1,
+  "block_status": "complete",
+  "cells": [
+    {
+      "correctness": {
+        "mode": "sentinel_sanity",
+        "post_timing": {
+          "event_elapsed_us": 476.99201107025146,
+          "oracle": null,
+          "pass": true,
+          "sanity": {
+            "dtype": "bfloat16",
+            "finite": true,
+            "nonzero": true,
+            "output_sha256": "aec57f389b782662abd6fece75b64ee389b985b3ffe693dd9c85b98eff61a7de",
+            "pass": true,
+            "sentinel_nan_remaining": 0,
+            "shape": [
+              256,
+              2048
+            ]
+          },
+          "workspace": {
+            "expected_row_counts_sha256": "cb5a522fbb5a0762e3c79cb3a82ab066a56ed9c8d02d053e6349947593f3fc21",
+            "scalars": {
+              "all_work_published": 1,
+              "barrier_count": 0,
+              "barrier_epoch": 300,
+              "pair_head": 1251,
+              "producers_done_count": 0,
+              "task_head": 1134,
+              "task_tail": 1024
+            },
+            "schema": "exp005.workspace-route-task-evidence.v1",
+            "tensor_sha256": {
+              "expert_tile_base": "951b384ff2bc4ea8a36148acd7813193070a46404c3499be49ad5d54a4f281ff",
+              "expert_write_rows": "fa39c0506a79e0fa1046e767c84b5d7a31386bed388be041925d62958fa96699",
+              "row_counts": "fa39c0506a79e0fa1046e767c84b5d7a31386bed388be041925d62958fa96699",
+              "task_expert": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+              "task_m_tile": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+              "task_ready": "b4f44543b34288e32f86e04e4c4d882efc49c232331c5d1fc71e5bbd3ee18cb6",
+              "task_slice_begin": "5895cbef74dd8a56a0aa98b2cbba4a5d384581ff79efd0301adde9c827898ad9",
+              "task_slice_count": "c1e2f6bdf9e484395dd93b568a2b96fcf0d8a620a575521c2fe2e16f06a03423",
+              "task_valid_rows": "463fefed62ef2750b44c63984e529074624e23bd12109986661b07ecf891e1ee",
+              "tile_write_count": "e494148d475e1e68ee34de40653431fcc10beb50fc808c0cd67d7918c9eef73a"
+            },
+            "verification": {
+              "checks": {
+                "all_work_published": true,
+                "atomic_head_terminal_state": true,
+                "expert_tile_base": true,
+                "expert_write_rows": true,
+                "pair_head_terminal_state": true,
+                "routed_row_sum": true,
+                "row_counts": true,
+                "task_descriptor_multiset": true,
+                "task_tail": true
+              },
+              "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+              "expected_pair_head": 1251,
+              "expected_task_count": 1024,
+              "gate_pass": true,
+              "missing_task_descriptors": [],
+              "observed_pair_head": 1251,
+              "observed_task_head": 1134,
+              "observed_task_tail": 1024,
+              "producer_claim_count": 18,
+              "producer_counter_unit": "token",
+              "task_descriptor_multiset_sha256": "4cf23866f3c98950d39276b383b0b149cb8321cfeb141d30734efca555a53b47",
+              "task_descriptor_order_sha256": "4cf23866f3c98950d39276b383b0b149cb8321cfeb141d30734efca555a53b47",
+              "terminal_head_overshoot": 110,
+              "unexpected_task_descriptors": []
+            },
+            "workspace_capacity": {
+              "physical_tiles": 271,
+              "routed_rows": 2048,
+              "tasks": 1084
+            },
+            "workspace_type": "Sm120DynamicMoEWorkspace"
+          }
+        },
+        "pre_replays": [
+          {
+            "event_elapsed_us": 516.2240266799927,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "85613295226c57d234aa015ecbdfcee444cd6524c608580c34dfd2c947f3134d",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                256,
+                2048
+              ]
+            },
+            "workspace": {
+              "expected_row_counts_sha256": "cb5a522fbb5a0762e3c79cb3a82ab066a56ed9c8d02d053e6349947593f3fc21",
+              "scalars": {
+                "all_work_published": 1,
+                "barrier_count": 0,
+                "barrier_epoch": 15,
+                "pair_head": 1251,
+                "producers_done_count": 0,
+                "task_head": 1134,
+                "task_tail": 1024
+              },
+              "schema": "exp005.workspace-route-task-evidence.v1",
+              "tensor_sha256": {
+                "expert_tile_base": "951b384ff2bc4ea8a36148acd7813193070a46404c3499be49ad5d54a4f281ff",
+                "expert_write_rows": "fa39c0506a79e0fa1046e767c84b5d7a31386bed388be041925d62958fa96699",
+                "row_counts": "fa39c0506a79e0fa1046e767c84b5d7a31386bed388be041925d62958fa96699",
+                "task_expert": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_m_tile": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_ready": "b4f44543b34288e32f86e04e4c4d882efc49c232331c5d1fc71e5bbd3ee18cb6",
+                "task_slice_begin": "5895cbef74dd8a56a0aa98b2cbba4a5d384581ff79efd0301adde9c827898ad9",
+                "task_slice_count": "c1e2f6bdf9e484395dd93b568a2b96fcf0d8a620a575521c2fe2e16f06a03423",
+                "task_valid_rows": "463fefed62ef2750b44c63984e529074624e23bd12109986661b07ecf891e1ee",
+                "tile_write_count": "e494148d475e1e68ee34de40653431fcc10beb50fc808c0cd67d7918c9eef73a"
+              },
+              "verification": {
+                "checks": {
+                  "all_work_published": true,
+                  "atomic_head_terminal_state": true,
+                  "expert_tile_base": true,
+                  "expert_write_rows": true,
+                  "pair_head_terminal_state": true,
+                  "routed_row_sum": true,
+                  "row_counts": true,
+                  "task_descriptor_multiset": true,
+                  "task_tail": true
+                },
+                "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+                "expected_pair_head": 1251,
+                "expected_task_count": 1024,
+                "gate_pass": true,
+                "missing_task_descriptors": [],
+                "observed_pair_head": 1251,
+                "observed_task_head": 1134,
+                "observed_task_tail": 1024,
+                "producer_claim_count": 18,
+                "producer_counter_unit": "token",
+                "task_descriptor_multiset_sha256": "4cf23866f3c98950d39276b383b0b149cb8321cfeb141d30734efca555a53b47",
+                "task_descriptor_order_sha256": "4cf23866f3c98950d39276b383b0b149cb8321cfeb141d30734efca555a53b47",
+                "terminal_head_overshoot": 110,
+                "unexpected_task_descriptors": []
+              },
+              "workspace_capacity": {
+                "physical_tiles": 271,
+                "routed_rows": 2048,
+                "tasks": 1084
+              },
+              "workspace_type": "Sm120DynamicMoEWorkspace"
+            }
+          },
+          {
+            "event_elapsed_us": 492.0960068702698,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "431fe950f0dc3c6754794295f3cf2ef1297c7d8c6c1a8d6d662798d2494c3fee",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                256,
+                2048
+              ]
+            },
+            "workspace": {
+              "expected_row_counts_sha256": "cb5a522fbb5a0762e3c79cb3a82ab066a56ed9c8d02d053e6349947593f3fc21",
+              "scalars": {
+                "all_work_published": 1,
+                "barrier_count": 0,
+                "barrier_epoch": 20,
+                "pair_head": 1251,
+                "producers_done_count": 0,
+                "task_head": 1134,
+                "task_tail": 1024
+              },
+              "schema": "exp005.workspace-route-task-evidence.v1",
+              "tensor_sha256": {
+                "expert_tile_base": "951b384ff2bc4ea8a36148acd7813193070a46404c3499be49ad5d54a4f281ff",
+                "expert_write_rows": "fa39c0506a79e0fa1046e767c84b5d7a31386bed388be041925d62958fa96699",
+                "row_counts": "fa39c0506a79e0fa1046e767c84b5d7a31386bed388be041925d62958fa96699",
+                "task_expert": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_m_tile": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_ready": "b4f44543b34288e32f86e04e4c4d882efc49c232331c5d1fc71e5bbd3ee18cb6",
+                "task_slice_begin": "5895cbef74dd8a56a0aa98b2cbba4a5d384581ff79efd0301adde9c827898ad9",
+                "task_slice_count": "c1e2f6bdf9e484395dd93b568a2b96fcf0d8a620a575521c2fe2e16f06a03423",
+                "task_valid_rows": "463fefed62ef2750b44c63984e529074624e23bd12109986661b07ecf891e1ee",
+                "tile_write_count": "e494148d475e1e68ee34de40653431fcc10beb50fc808c0cd67d7918c9eef73a"
+              },
+              "verification": {
+                "checks": {
+                  "all_work_published": true,
+                  "atomic_head_terminal_state": true,
+                  "expert_tile_base": true,
+                  "expert_write_rows": true,
+                  "pair_head_terminal_state": true,
+                  "routed_row_sum": true,
+                  "row_counts": true,
+                  "task_descriptor_multiset": true,
+                  "task_tail": true
+                },
+                "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+                "expected_pair_head": 1251,
+                "expected_task_count": 1024,
+                "gate_pass": true,
+                "missing_task_descriptors": [],
+                "observed_pair_head": 1251,
+                "observed_task_head": 1134,
+                "observed_task_tail": 1024,
+                "producer_claim_count": 18,
+                "producer_counter_unit": "token",
+                "task_descriptor_multiset_sha256": "4cf23866f3c98950d39276b383b0b149cb8321cfeb141d30734efca555a53b47",
+                "task_descriptor_order_sha256": "4cf23866f3c98950d39276b383b0b149cb8321cfeb141d30734efca555a53b47",
+                "terminal_head_overshoot": 110,
+                "unexpected_task_descriptors": []
+              },
+              "workspace_capacity": {
+                "physical_tiles": 271,
+                "routed_rows": 2048,
+                "tasks": 1084
+              },
+              "workspace_type": "Sm120DynamicMoEWorkspace"
+            }
+          }
+        ],
+        "qualification_pass": true
+      },
+      "fixture_manifest": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m256.npz",
+        "fixture_sha256": "86b505097acd06bed5a50c3528c78525e6087c07ed69f86606607599ffa21686",
+        "m": 256,
+        "occupancy_max": 15,
+        "occupancy_min": 2,
+        "occupancy_sha256": "60b4becc63e932fe7b11210c9ef78c1a4b58a38798024f55854808e35d6a4920",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "9cd310e245d39595e1d322c2da645fe67791f546c29994caea48f7786aa15dc1",
+        "topk_weights_sha256": "e1fdddd7af5a99de0dab6d8620c050e6cee25a0c27ff9c66e617ee346c0110f1",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "ec4c61e362a4de64083be4a9d357a498d28b8a74bb816e8f9dc04eb9f9a80d09"
+      },
+      "fixture_manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+      "fixture_sha256": "86b505097acd06bed5a50c3528c78525e6087c07ed69f86606607599ffa21686",
+      "launch_identity": {
+        "block": [
+          288,
+          1,
+          1
+        ],
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "l2_flush_bytes": 201326592,
+        "timed_statistics": {
+          "max_us": 515.7759785652161,
+          "median_us": 513.7120187282562,
+          "min_us": 511.4560127258301
+        }
+      },
+      "m": 256,
+      "reason": "",
+      "sample_us": 513.6780798435211,
+      "status": "Pass"
+    },
+    {
+      "correctness": {
+        "mode": "sentinel_sanity",
+        "post_timing": {
+          "event_elapsed_us": 495.61598896980286,
+          "oracle": null,
+          "pass": true,
+          "sanity": {
+            "dtype": "bfloat16",
+            "finite": true,
+            "nonzero": true,
+            "output_sha256": "a4734278a69f90c30a3022c9efdc944621711506e66f2ead19f1bd9be783b538",
+            "pass": true,
+            "sentinel_nan_remaining": 0,
+            "shape": [
+              512,
+              2048
+            ]
+          },
+          "workspace": {
+            "expected_row_counts_sha256": "c6ce21b0b97da00923fa2f2254fb9950588424eec15deaf7939e37b163c1ccc4",
+            "scalars": {
+              "all_work_published": 1,
+              "barrier_count": 0,
+              "barrier_epoch": 300,
+              "pair_head": 1503,
+              "producers_done_count": 0,
+              "task_head": 1134,
+              "task_tail": 1024
+            },
+            "schema": "exp005.workspace-route-task-evidence.v1",
+            "tensor_sha256": {
+              "expert_tile_base": "951b384ff2bc4ea8a36148acd7813193070a46404c3499be49ad5d54a4f281ff",
+              "expert_write_rows": "1ad3ac6aa19105a79fa2247b0cf909d3efe563a41cb28347059de318dfe8ec9b",
+              "row_counts": "1ad3ac6aa19105a79fa2247b0cf909d3efe563a41cb28347059de318dfe8ec9b",
+              "task_expert": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+              "task_m_tile": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+              "task_ready": "b4f44543b34288e32f86e04e4c4d882efc49c232331c5d1fc71e5bbd3ee18cb6",
+              "task_slice_begin": "5895cbef74dd8a56a0aa98b2cbba4a5d384581ff79efd0301adde9c827898ad9",
+              "task_slice_count": "c1e2f6bdf9e484395dd93b568a2b96fcf0d8a620a575521c2fe2e16f06a03423",
+              "task_valid_rows": "90f8b389e78ed9141aee3fb5628d3ca7044ce6b1295a72fe2f8f210d1a5dba59",
+              "tile_write_count": "5e070d6d566f61d64c4d08e185d558f9b3dfdaede0d506a25c04b703bf5954ad"
+            },
+            "verification": {
+              "checks": {
+                "all_work_published": true,
+                "atomic_head_terminal_state": true,
+                "expert_tile_base": true,
+                "expert_write_rows": true,
+                "pair_head_terminal_state": true,
+                "routed_row_sum": true,
+                "row_counts": true,
+                "task_descriptor_multiset": true,
+                "task_tail": true
+              },
+              "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+              "expected_pair_head": 1503,
+              "expected_task_count": 1024,
+              "gate_pass": true,
+              "missing_task_descriptors": [],
+              "observed_pair_head": 1503,
+              "observed_task_head": 1134,
+              "observed_task_tail": 1024,
+              "producer_claim_count": 18,
+              "producer_counter_unit": "token",
+              "task_descriptor_multiset_sha256": "dcd432ab801cb5dbf839aa0b01d79d2a4f952f37fb13c69714c768269ce22c49",
+              "task_descriptor_order_sha256": "dcd432ab801cb5dbf839aa0b01d79d2a4f952f37fb13c69714c768269ce22c49",
+              "terminal_head_overshoot": 110,
+              "unexpected_task_descriptors": []
+            },
+            "workspace_capacity": {
+              "physical_tiles": 287,
+              "routed_rows": 4096,
+              "tasks": 1148
+            },
+            "workspace_type": "Sm120DynamicMoEWorkspace"
+          }
+        },
+        "pre_replays": [
+          {
+            "event_elapsed_us": 527.1679759025574,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "af2dc930b2a9ac055295c5fe5b68fd6dffd08b17125fdd6ec9a1fdc88e3a664d",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                512,
+                2048
+              ]
+            },
+            "workspace": {
+              "expected_row_counts_sha256": "c6ce21b0b97da00923fa2f2254fb9950588424eec15deaf7939e37b163c1ccc4",
+              "scalars": {
+                "all_work_published": 1,
+                "barrier_count": 0,
+                "barrier_epoch": 15,
+                "pair_head": 1503,
+                "producers_done_count": 0,
+                "task_head": 1134,
+                "task_tail": 1024
+              },
+              "schema": "exp005.workspace-route-task-evidence.v1",
+              "tensor_sha256": {
+                "expert_tile_base": "951b384ff2bc4ea8a36148acd7813193070a46404c3499be49ad5d54a4f281ff",
+                "expert_write_rows": "1ad3ac6aa19105a79fa2247b0cf909d3efe563a41cb28347059de318dfe8ec9b",
+                "row_counts": "1ad3ac6aa19105a79fa2247b0cf909d3efe563a41cb28347059de318dfe8ec9b",
+                "task_expert": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_m_tile": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_ready": "b4f44543b34288e32f86e04e4c4d882efc49c232331c5d1fc71e5bbd3ee18cb6",
+                "task_slice_begin": "5895cbef74dd8a56a0aa98b2cbba4a5d384581ff79efd0301adde9c827898ad9",
+                "task_slice_count": "c1e2f6bdf9e484395dd93b568a2b96fcf0d8a620a575521c2fe2e16f06a03423",
+                "task_valid_rows": "90f8b389e78ed9141aee3fb5628d3ca7044ce6b1295a72fe2f8f210d1a5dba59",
+                "tile_write_count": "5e070d6d566f61d64c4d08e185d558f9b3dfdaede0d506a25c04b703bf5954ad"
+              },
+              "verification": {
+                "checks": {
+                  "all_work_published": true,
+                  "atomic_head_terminal_state": true,
+                  "expert_tile_base": true,
+                  "expert_write_rows": true,
+                  "pair_head_terminal_state": true,
+                  "routed_row_sum": true,
+                  "row_counts": true,
+                  "task_descriptor_multiset": true,
+                  "task_tail": true
+                },
+                "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+                "expected_pair_head": 1503,
+                "expected_task_count": 1024,
+                "gate_pass": true,
+                "missing_task_descriptors": [],
+                "observed_pair_head": 1503,
+                "observed_task_head": 1134,
+                "observed_task_tail": 1024,
+                "producer_claim_count": 18,
+                "producer_counter_unit": "token",
+                "task_descriptor_multiset_sha256": "dcd432ab801cb5dbf839aa0b01d79d2a4f952f37fb13c69714c768269ce22c49",
+                "task_descriptor_order_sha256": "dcd432ab801cb5dbf839aa0b01d79d2a4f952f37fb13c69714c768269ce22c49",
+                "terminal_head_overshoot": 110,
+                "unexpected_task_descriptors": []
+              },
+              "workspace_capacity": {
+                "physical_tiles": 287,
+                "routed_rows": 4096,
+                "tasks": 1148
+              },
+              "workspace_type": "Sm120DynamicMoEWorkspace"
+            }
+          },
+          {
+            "event_elapsed_us": 508.512020111084,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "8e9b6106c51fd8a6a0953d15baae2e2ff786274b31c9ba1d6712c17a44314e28",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                512,
+                2048
+              ]
+            },
+            "workspace": {
+              "expected_row_counts_sha256": "c6ce21b0b97da00923fa2f2254fb9950588424eec15deaf7939e37b163c1ccc4",
+              "scalars": {
+                "all_work_published": 1,
+                "barrier_count": 0,
+                "barrier_epoch": 20,
+                "pair_head": 1503,
+                "producers_done_count": 0,
+                "task_head": 1134,
+                "task_tail": 1024
+              },
+              "schema": "exp005.workspace-route-task-evidence.v1",
+              "tensor_sha256": {
+                "expert_tile_base": "951b384ff2bc4ea8a36148acd7813193070a46404c3499be49ad5d54a4f281ff",
+                "expert_write_rows": "1ad3ac6aa19105a79fa2247b0cf909d3efe563a41cb28347059de318dfe8ec9b",
+                "row_counts": "1ad3ac6aa19105a79fa2247b0cf909d3efe563a41cb28347059de318dfe8ec9b",
+                "task_expert": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_m_tile": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_ready": "b4f44543b34288e32f86e04e4c4d882efc49c232331c5d1fc71e5bbd3ee18cb6",
+                "task_slice_begin": "5895cbef74dd8a56a0aa98b2cbba4a5d384581ff79efd0301adde9c827898ad9",
+                "task_slice_count": "c1e2f6bdf9e484395dd93b568a2b96fcf0d8a620a575521c2fe2e16f06a03423",
+                "task_valid_rows": "90f8b389e78ed9141aee3fb5628d3ca7044ce6b1295a72fe2f8f210d1a5dba59",
+                "tile_write_count": "5e070d6d566f61d64c4d08e185d558f9b3dfdaede0d506a25c04b703bf5954ad"
+              },
+              "verification": {
+                "checks": {
+                  "all_work_published": true,
+                  "atomic_head_terminal_state": true,
+                  "expert_tile_base": true,
+                  "expert_write_rows": true,
+                  "pair_head_terminal_state": true,
+                  "routed_row_sum": true,
+                  "row_counts": true,
+                  "task_descriptor_multiset": true,
+                  "task_tail": true
+                },
+                "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+                "expected_pair_head": 1503,
+                "expected_task_count": 1024,
+                "gate_pass": true,
+                "missing_task_descriptors": [],
+                "observed_pair_head": 1503,
+                "observed_task_head": 1134,
+                "observed_task_tail": 1024,
+                "producer_claim_count": 18,
+                "producer_counter_unit": "token",
+                "task_descriptor_multiset_sha256": "dcd432ab801cb5dbf839aa0b01d79d2a4f952f37fb13c69714c768269ce22c49",
+                "task_descriptor_order_sha256": "dcd432ab801cb5dbf839aa0b01d79d2a4f952f37fb13c69714c768269ce22c49",
+                "terminal_head_overshoot": 110,
+                "unexpected_task_descriptors": []
+              },
+              "workspace_capacity": {
+                "physical_tiles": 287,
+                "routed_rows": 4096,
+                "tasks": 1148
+              },
+              "workspace_type": "Sm120DynamicMoEWorkspace"
+            }
+          }
+        ],
+        "qualification_pass": true
+      },
+      "fixture_manifest": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m512.npz",
+        "fixture_sha256": "e6ddb487121a0d681a06bcb453f38623b3d5d8477f2232bbbf78cd2ea4ef23a3",
+        "m": 512,
+        "occupancy_max": 32,
+        "occupancy_min": 7,
+        "occupancy_sha256": "1743ac1105dd3d277607a09eda29d22e0d81293524e72589faf14eaaa6e4a6ed",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "6547b9e499a45732e2e209d6e7802bb869cf9c0f56dddebc38b94373d9125378",
+        "topk_weights_sha256": "31f9568afcba7d5f4df04ff5e61ecc082434dd9f045b7aec9d77a86e6e0143c0",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "5178555ed52d79f5945b7c6637c9c20371c902d69e3817437caf2bee7fb34087"
+      },
+      "fixture_manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+      "fixture_sha256": "e6ddb487121a0d681a06bcb453f38623b3d5d8477f2232bbbf78cd2ea4ef23a3",
+      "launch_identity": {
+        "block": [
+          288,
+          1,
+          1
+        ],
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "l2_flush_bytes": 201326592,
+        "timed_statistics": {
+          "max_us": 526.0480046272278,
+          "median_us": 523.2319831848145,
+          "min_us": 519.9999809265137
+        }
+      },
+      "m": 512,
+      "reason": "",
+      "sample_us": 523.2076799869537,
+      "status": "Pass"
+    },
+    {
+      "correctness": {
+        "mode": "sentinel_sanity",
+        "post_timing": {
+          "event_elapsed_us": 550.4000186920166,
+          "oracle": null,
+          "pass": true,
+          "sanity": {
+            "dtype": "bfloat16",
+            "finite": true,
+            "nonzero": true,
+            "output_sha256": "d2d7d61cc814fd2847980101c6c3757a8820ee5d61988e2db2eb2dc255c53a3e",
+            "pass": true,
+            "sentinel_nan_remaining": 0,
+            "shape": [
+              1024,
+              2048
+            ]
+          },
+          "workspace": {
+            "expected_row_counts_sha256": "d5d84499b6d066ee7a991a785a8b53c21ceebab33d01eb0fe9a6b654a9539c46",
+            "scalars": {
+              "all_work_published": 1,
+              "barrier_count": 0,
+              "barrier_epoch": 300,
+              "pair_head": 2016,
+              "producers_done_count": 0,
+              "task_head": 1134,
+              "task_tail": 1024
+            },
+            "schema": "exp005.workspace-route-task-evidence.v1",
+            "tensor_sha256": {
+              "expert_tile_base": "951b384ff2bc4ea8a36148acd7813193070a46404c3499be49ad5d54a4f281ff",
+              "expert_write_rows": "d4422a7b1a14af2773ff19f9b9730a269f7c651f514cb4b21d219ce8b95bb1ac",
+              "row_counts": "d4422a7b1a14af2773ff19f9b9730a269f7c651f514cb4b21d219ce8b95bb1ac",
+              "task_expert": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+              "task_m_tile": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+              "task_ready": "b4f44543b34288e32f86e04e4c4d882efc49c232331c5d1fc71e5bbd3ee18cb6",
+              "task_slice_begin": "5895cbef74dd8a56a0aa98b2cbba4a5d384581ff79efd0301adde9c827898ad9",
+              "task_slice_count": "c1e2f6bdf9e484395dd93b568a2b96fcf0d8a620a575521c2fe2e16f06a03423",
+              "task_valid_rows": "ab076ad74837e97000c4cee078ef9f0fdfb424e76b27d15bec0094302b469be0",
+              "tile_write_count": "bf2f0cc6e9763f75a3426d24631974a9d7703ef017466d103c2ad7d01c4aea40"
+            },
+            "verification": {
+              "checks": {
+                "all_work_published": true,
+                "atomic_head_terminal_state": true,
+                "expert_tile_base": true,
+                "expert_write_rows": true,
+                "pair_head_terminal_state": true,
+                "routed_row_sum": true,
+                "row_counts": true,
+                "task_descriptor_multiset": true,
+                "task_tail": true
+              },
+              "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+              "expected_pair_head": 2016,
+              "expected_task_count": 1024,
+              "gate_pass": true,
+              "missing_task_descriptors": [],
+              "observed_pair_head": 2016,
+              "observed_task_head": 1134,
+              "observed_task_tail": 1024,
+              "producer_claim_count": 18,
+              "producer_counter_unit": "token",
+              "task_descriptor_multiset_sha256": "9cce77dded2003f4c63d5ee7f84c762c5e1a8432e666905dba0a71316bcf80b9",
+              "task_descriptor_order_sha256": "9cce77dded2003f4c63d5ee7f84c762c5e1a8432e666905dba0a71316bcf80b9",
+              "terminal_head_overshoot": 110,
+              "unexpected_task_descriptors": []
+            },
+            "workspace_capacity": {
+              "physical_tiles": 319,
+              "routed_rows": 8192,
+              "tasks": 1276
+            },
+            "workspace_type": "Sm120DynamicMoEWorkspace"
+          }
+        },
+        "pre_replays": [
+          {
+            "event_elapsed_us": 573.311984539032,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "6f1e06add6dd9b6a1cc8cc5e53b257fd30c8c7e1e90666ddcdcc830506367cdb",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                1024,
+                2048
+              ]
+            },
+            "workspace": {
+              "expected_row_counts_sha256": "d5d84499b6d066ee7a991a785a8b53c21ceebab33d01eb0fe9a6b654a9539c46",
+              "scalars": {
+                "all_work_published": 1,
+                "barrier_count": 0,
+                "barrier_epoch": 15,
+                "pair_head": 2016,
+                "producers_done_count": 0,
+                "task_head": 1134,
+                "task_tail": 1024
+              },
+              "schema": "exp005.workspace-route-task-evidence.v1",
+              "tensor_sha256": {
+                "expert_tile_base": "951b384ff2bc4ea8a36148acd7813193070a46404c3499be49ad5d54a4f281ff",
+                "expert_write_rows": "d4422a7b1a14af2773ff19f9b9730a269f7c651f514cb4b21d219ce8b95bb1ac",
+                "row_counts": "d4422a7b1a14af2773ff19f9b9730a269f7c651f514cb4b21d219ce8b95bb1ac",
+                "task_expert": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_m_tile": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_ready": "b4f44543b34288e32f86e04e4c4d882efc49c232331c5d1fc71e5bbd3ee18cb6",
+                "task_slice_begin": "5895cbef74dd8a56a0aa98b2cbba4a5d384581ff79efd0301adde9c827898ad9",
+                "task_slice_count": "c1e2f6bdf9e484395dd93b568a2b96fcf0d8a620a575521c2fe2e16f06a03423",
+                "task_valid_rows": "ab076ad74837e97000c4cee078ef9f0fdfb424e76b27d15bec0094302b469be0",
+                "tile_write_count": "bf2f0cc6e9763f75a3426d24631974a9d7703ef017466d103c2ad7d01c4aea40"
+              },
+              "verification": {
+                "checks": {
+                  "all_work_published": true,
+                  "atomic_head_terminal_state": true,
+                  "expert_tile_base": true,
+                  "expert_write_rows": true,
+                  "pair_head_terminal_state": true,
+                  "routed_row_sum": true,
+                  "row_counts": true,
+                  "task_descriptor_multiset": true,
+                  "task_tail": true
+                },
+                "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+                "expected_pair_head": 2016,
+                "expected_task_count": 1024,
+                "gate_pass": true,
+                "missing_task_descriptors": [],
+                "observed_pair_head": 2016,
+                "observed_task_head": 1134,
+                "observed_task_tail": 1024,
+                "producer_claim_count": 18,
+                "producer_counter_unit": "token",
+                "task_descriptor_multiset_sha256": "9cce77dded2003f4c63d5ee7f84c762c5e1a8432e666905dba0a71316bcf80b9",
+                "task_descriptor_order_sha256": "9cce77dded2003f4c63d5ee7f84c762c5e1a8432e666905dba0a71316bcf80b9",
+                "terminal_head_overshoot": 110,
+                "unexpected_task_descriptors": []
+              },
+              "workspace_capacity": {
+                "physical_tiles": 319,
+                "routed_rows": 8192,
+                "tasks": 1276
+              },
+              "workspace_type": "Sm120DynamicMoEWorkspace"
+            }
+          },
+          {
+            "event_elapsed_us": 561.4079833030701,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "4a9de93a4965721e878d067b74c86186440cc37d6878ab44a3dc083895c8820e",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                1024,
+                2048
+              ]
+            },
+            "workspace": {
+              "expected_row_counts_sha256": "d5d84499b6d066ee7a991a785a8b53c21ceebab33d01eb0fe9a6b654a9539c46",
+              "scalars": {
+                "all_work_published": 1,
+                "barrier_count": 0,
+                "barrier_epoch": 20,
+                "pair_head": 2016,
+                "producers_done_count": 0,
+                "task_head": 1134,
+                "task_tail": 1024
+              },
+              "schema": "exp005.workspace-route-task-evidence.v1",
+              "tensor_sha256": {
+                "expert_tile_base": "951b384ff2bc4ea8a36148acd7813193070a46404c3499be49ad5d54a4f281ff",
+                "expert_write_rows": "d4422a7b1a14af2773ff19f9b9730a269f7c651f514cb4b21d219ce8b95bb1ac",
+                "row_counts": "d4422a7b1a14af2773ff19f9b9730a269f7c651f514cb4b21d219ce8b95bb1ac",
+                "task_expert": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_m_tile": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_ready": "b4f44543b34288e32f86e04e4c4d882efc49c232331c5d1fc71e5bbd3ee18cb6",
+                "task_slice_begin": "5895cbef74dd8a56a0aa98b2cbba4a5d384581ff79efd0301adde9c827898ad9",
+                "task_slice_count": "c1e2f6bdf9e484395dd93b568a2b96fcf0d8a620a575521c2fe2e16f06a03423",
+                "task_valid_rows": "ab076ad74837e97000c4cee078ef9f0fdfb424e76b27d15bec0094302b469be0",
+                "tile_write_count": "bf2f0cc6e9763f75a3426d24631974a9d7703ef017466d103c2ad7d01c4aea40"
+              },
+              "verification": {
+                "checks": {
+                  "all_work_published": true,
+                  "atomic_head_terminal_state": true,
+                  "expert_tile_base": true,
+                  "expert_write_rows": true,
+                  "pair_head_terminal_state": true,
+                  "routed_row_sum": true,
+                  "row_counts": true,
+                  "task_descriptor_multiset": true,
+                  "task_tail": true
+                },
+                "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+                "expected_pair_head": 2016,
+                "expected_task_count": 1024,
+                "gate_pass": true,
+                "missing_task_descriptors": [],
+                "observed_pair_head": 2016,
+                "observed_task_head": 1134,
+                "observed_task_tail": 1024,
+                "producer_claim_count": 18,
+                "producer_counter_unit": "token",
+                "task_descriptor_multiset_sha256": "9cce77dded2003f4c63d5ee7f84c762c5e1a8432e666905dba0a71316bcf80b9",
+                "task_descriptor_order_sha256": "9cce77dded2003f4c63d5ee7f84c762c5e1a8432e666905dba0a71316bcf80b9",
+                "terminal_head_overshoot": 110,
+                "unexpected_task_descriptors": []
+              },
+              "workspace_capacity": {
+                "physical_tiles": 319,
+                "routed_rows": 8192,
+                "tasks": 1276
+              },
+              "workspace_type": "Sm120DynamicMoEWorkspace"
+            }
+          }
+        ],
+        "qualification_pass": true
+      },
+      "fixture_manifest": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m1024.npz",
+        "fixture_sha256": "0fa7e8a7d8d1d32172971f987d6f55b534aabf8d12a84a910d010cec25ba04a5",
+        "m": 1024,
+        "occupancy_max": 50,
+        "occupancy_min": 14,
+        "occupancy_sha256": "e03917667a2d3629721f3c6a2b13dea8aac9c8593280282013395eb9a5f2e5bd",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "5d5fdccddc2828d49d466385a93fbeff720aba9361985a9c4bb35603bc5fa6d0",
+        "topk_weights_sha256": "d7342a44f8bfe9a2b0cf94a3d45e9ea30fbbe244d047feeaac7b212603103dcc",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "6339b37d71b116774bf956e5882b2f4d132c82f4a7fdbe01dbc07808698722b5"
+      },
+      "fixture_manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+      "fixture_sha256": "0fa7e8a7d8d1d32172971f987d6f55b534aabf8d12a84a910d010cec25ba04a5",
+      "launch_identity": {
+        "block": [
+          288,
+          1,
+          1
+        ],
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "l2_flush_bytes": 201326592,
+        "timed_statistics": {
+          "max_us": 577.1840214729309,
+          "median_us": 571.0079967975616,
+          "min_us": 567.3279762268066
+        }
+      },
+      "m": 1024,
+      "reason": "",
+      "sample_us": 570.9696042537689,
+      "status": "Pass"
+    },
+    {
+      "correctness": {
+        "mode": "sentinel_sanity",
+        "post_timing": {
+          "event_elapsed_us": 595.2960252761841,
+          "oracle": null,
+          "pass": true,
+          "sanity": {
+            "dtype": "bfloat16",
+            "finite": true,
+            "nonzero": true,
+            "output_sha256": "233df6667ea2191d085f2edbfc715e490fa0658d88ee26668305320c4e9d85e8",
+            "pass": true,
+            "sentinel_nan_remaining": 0,
+            "shape": [
+              2048,
+              2048
+            ]
+          },
+          "workspace": {
+            "expected_row_counts_sha256": "709f5930c103433958238fe69e3951a099d58c1b4ad9a2281c33f074407ef699",
+            "scalars": {
+              "all_work_published": 1,
+              "barrier_count": 0,
+              "barrier_epoch": 300,
+              "pair_head": 3042,
+              "producers_done_count": 0,
+              "task_head": 1134,
+              "task_tail": 1024
+            },
+            "schema": "exp005.workspace-route-task-evidence.v1",
+            "tensor_sha256": {
+              "expert_tile_base": "951b384ff2bc4ea8a36148acd7813193070a46404c3499be49ad5d54a4f281ff",
+              "expert_write_rows": "c26638713be5402bd76a213e8475058215a67aef8e55ec44eca85e2849b4a1f8",
+              "row_counts": "c26638713be5402bd76a213e8475058215a67aef8e55ec44eca85e2849b4a1f8",
+              "task_expert": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+              "task_m_tile": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+              "task_ready": "b4f44543b34288e32f86e04e4c4d882efc49c232331c5d1fc71e5bbd3ee18cb6",
+              "task_slice_begin": "5895cbef74dd8a56a0aa98b2cbba4a5d384581ff79efd0301adde9c827898ad9",
+              "task_slice_count": "c1e2f6bdf9e484395dd93b568a2b96fcf0d8a620a575521c2fe2e16f06a03423",
+              "task_valid_rows": "163e6d623528782dbba6eb67f492665cdc3ad9a8b5d22dcfad06b41d6e9fea62",
+              "tile_write_count": "58ecac644691fc959995be021bb52b615b5e19e04a7d292086e39c9bd6893100"
+            },
+            "verification": {
+              "checks": {
+                "all_work_published": true,
+                "atomic_head_terminal_state": true,
+                "expert_tile_base": true,
+                "expert_write_rows": true,
+                "pair_head_terminal_state": true,
+                "routed_row_sum": true,
+                "row_counts": true,
+                "task_descriptor_multiset": true,
+                "task_tail": true
+              },
+              "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+              "expected_pair_head": 3042,
+              "expected_task_count": 1024,
+              "gate_pass": true,
+              "missing_task_descriptors": [],
+              "observed_pair_head": 3042,
+              "observed_task_head": 1134,
+              "observed_task_tail": 1024,
+              "producer_claim_count": 18,
+              "producer_counter_unit": "token",
+              "task_descriptor_multiset_sha256": "265dc99454ebda37a0beb06ef580eccc8be272b33b6852619a546cb38d015d36",
+              "task_descriptor_order_sha256": "265dc99454ebda37a0beb06ef580eccc8be272b33b6852619a546cb38d015d36",
+              "terminal_head_overshoot": 110,
+              "unexpected_task_descriptors": []
+            },
+            "workspace_capacity": {
+              "physical_tiles": 383,
+              "routed_rows": 16384,
+              "tasks": 1532
+            },
+            "workspace_type": "Sm120DynamicMoEWorkspace"
+          }
+        },
+        "pre_replays": [
+          {
+            "event_elapsed_us": 612.671971321106,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "f9b2e41e961f4eb58bac8d0a1157301ba1d06e400acd8d23b983b05f1de83c02",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                2048,
+                2048
+              ]
+            },
+            "workspace": {
+              "expected_row_counts_sha256": "709f5930c103433958238fe69e3951a099d58c1b4ad9a2281c33f074407ef699",
+              "scalars": {
+                "all_work_published": 1,
+                "barrier_count": 0,
+                "barrier_epoch": 15,
+                "pair_head": 3042,
+                "producers_done_count": 0,
+                "task_head": 1134,
+                "task_tail": 1024
+              },
+              "schema": "exp005.workspace-route-task-evidence.v1",
+              "tensor_sha256": {
+                "expert_tile_base": "951b384ff2bc4ea8a36148acd7813193070a46404c3499be49ad5d54a4f281ff",
+                "expert_write_rows": "c26638713be5402bd76a213e8475058215a67aef8e55ec44eca85e2849b4a1f8",
+                "row_counts": "c26638713be5402bd76a213e8475058215a67aef8e55ec44eca85e2849b4a1f8",
+                "task_expert": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_m_tile": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_ready": "b4f44543b34288e32f86e04e4c4d882efc49c232331c5d1fc71e5bbd3ee18cb6",
+                "task_slice_begin": "5895cbef74dd8a56a0aa98b2cbba4a5d384581ff79efd0301adde9c827898ad9",
+                "task_slice_count": "c1e2f6bdf9e484395dd93b568a2b96fcf0d8a620a575521c2fe2e16f06a03423",
+                "task_valid_rows": "163e6d623528782dbba6eb67f492665cdc3ad9a8b5d22dcfad06b41d6e9fea62",
+                "tile_write_count": "58ecac644691fc959995be021bb52b615b5e19e04a7d292086e39c9bd6893100"
+              },
+              "verification": {
+                "checks": {
+                  "all_work_published": true,
+                  "atomic_head_terminal_state": true,
+                  "expert_tile_base": true,
+                  "expert_write_rows": true,
+                  "pair_head_terminal_state": true,
+                  "routed_row_sum": true,
+                  "row_counts": true,
+                  "task_descriptor_multiset": true,
+                  "task_tail": true
+                },
+                "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+                "expected_pair_head": 3042,
+                "expected_task_count": 1024,
+                "gate_pass": true,
+                "missing_task_descriptors": [],
+                "observed_pair_head": 3042,
+                "observed_task_head": 1134,
+                "observed_task_tail": 1024,
+                "producer_claim_count": 18,
+                "producer_counter_unit": "token",
+                "task_descriptor_multiset_sha256": "265dc99454ebda37a0beb06ef580eccc8be272b33b6852619a546cb38d015d36",
+                "task_descriptor_order_sha256": "265dc99454ebda37a0beb06ef580eccc8be272b33b6852619a546cb38d015d36",
+                "terminal_head_overshoot": 110,
+                "unexpected_task_descriptors": []
+              },
+              "workspace_capacity": {
+                "physical_tiles": 383,
+                "routed_rows": 16384,
+                "tasks": 1532
+              },
+              "workspace_type": "Sm120DynamicMoEWorkspace"
+            }
+          },
+          {
+            "event_elapsed_us": 607.2319746017456,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "36ca7e1afb315d75c779212efd7f0891b1ac9c4881ea3edd2b80084072734a1b",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                2048,
+                2048
+              ]
+            },
+            "workspace": {
+              "expected_row_counts_sha256": "709f5930c103433958238fe69e3951a099d58c1b4ad9a2281c33f074407ef699",
+              "scalars": {
+                "all_work_published": 1,
+                "barrier_count": 0,
+                "barrier_epoch": 20,
+                "pair_head": 3042,
+                "producers_done_count": 0,
+                "task_head": 1134,
+                "task_tail": 1024
+              },
+              "schema": "exp005.workspace-route-task-evidence.v1",
+              "tensor_sha256": {
+                "expert_tile_base": "951b384ff2bc4ea8a36148acd7813193070a46404c3499be49ad5d54a4f281ff",
+                "expert_write_rows": "c26638713be5402bd76a213e8475058215a67aef8e55ec44eca85e2849b4a1f8",
+                "row_counts": "c26638713be5402bd76a213e8475058215a67aef8e55ec44eca85e2849b4a1f8",
+                "task_expert": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_m_tile": "4c98c88d0a44dd8aaca37859176fc195a3e0711ed138014641ed536ce7b2b52a",
+                "task_ready": "b4f44543b34288e32f86e04e4c4d882efc49c232331c5d1fc71e5bbd3ee18cb6",
+                "task_slice_begin": "5895cbef74dd8a56a0aa98b2cbba4a5d384581ff79efd0301adde9c827898ad9",
+                "task_slice_count": "c1e2f6bdf9e484395dd93b568a2b96fcf0d8a620a575521c2fe2e16f06a03423",
+                "task_valid_rows": "163e6d623528782dbba6eb67f492665cdc3ad9a8b5d22dcfad06b41d6e9fea62",
+                "tile_write_count": "58ecac644691fc959995be021bb52b615b5e19e04a7d292086e39c9bd6893100"
+              },
+              "verification": {
+                "checks": {
+                  "all_work_published": true,
+                  "atomic_head_terminal_state": true,
+                  "expert_tile_base": true,
+                  "expert_write_rows": true,
+                  "pair_head_terminal_state": true,
+                  "routed_row_sum": true,
+                  "row_counts": true,
+                  "task_descriptor_multiset": true,
+                  "task_tail": true
+                },
+                "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+                "expected_pair_head": 3042,
+                "expected_task_count": 1024,
+                "gate_pass": true,
+                "missing_task_descriptors": [],
+                "observed_pair_head": 3042,
+                "observed_task_head": 1134,
+                "observed_task_tail": 1024,
+                "producer_claim_count": 18,
+                "producer_counter_unit": "token",
+                "task_descriptor_multiset_sha256": "265dc99454ebda37a0beb06ef580eccc8be272b33b6852619a546cb38d015d36",
+                "task_descriptor_order_sha256": "265dc99454ebda37a0beb06ef580eccc8be272b33b6852619a546cb38d015d36",
+                "terminal_head_overshoot": 110,
+                "unexpected_task_descriptors": []
+              },
+              "workspace_capacity": {
+                "physical_tiles": 383,
+                "routed_rows": 16384,
+                "tasks": 1532
+              },
+              "workspace_type": "Sm120DynamicMoEWorkspace"
+            }
+          }
+        ],
+        "qualification_pass": true
+      },
+      "fixture_manifest": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m2048.npz",
+        "fixture_sha256": "5375fd8b3e5e15f8c956998bfc3e2f3ee59948a2aeaf5ba1294ec6a74092bde3",
+        "m": 2048,
+        "occupancy_max": 89,
+        "occupancy_min": 44,
+        "occupancy_sha256": "ef23f3672ac6f6dc3a6abbc1ad2fda9b4219cb091698affd6997a70e8b93a244",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "38801fb6845c3d19a502e035e5ec3ec008fa7c88933f05a33f276d8ce9e8654d",
+        "topk_weights_sha256": "b03cb15feff7fa5e53e95911f1987d57103666f577732fd1fb19d88f7192938b",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "ccf6bdc9fd88f35afb0fd317f930799053d8a614b4107e3cf16b8a0c115e884e"
+      },
+      "fixture_manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+      "fixture_sha256": "5375fd8b3e5e15f8c956998bfc3e2f3ee59948a2aeaf5ba1294ec6a74092bde3",
+      "launch_identity": {
+        "block": [
+          288,
+          1,
+          1
+        ],
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "l2_flush_bytes": 201326592,
+        "timed_statistics": {
+          "max_us": 623.2640147209167,
+          "median_us": 616.5599822998047,
+          "min_us": 612.5760078430176
+        }
+      },
+      "m": 2048,
+      "reason": "",
+      "sample_us": 616.973443031311,
+      "status": "Pass"
+    },
+    {
+      "correctness": {
+        "mode": "sentinel_sanity",
+        "post_timing": {
+          "event_elapsed_us": 781.9520235061646,
+          "oracle": null,
+          "pass": true,
+          "sanity": {
+            "dtype": "bfloat16",
+            "finite": true,
+            "nonzero": true,
+            "output_sha256": "3a7686d9c31e3e018fa540bee0a386fb9441c2307f867eaf690adf3b91e1c85a",
+            "pass": true,
+            "sentinel_nan_remaining": 0,
+            "shape": [
+              4096,
+              2048
+            ]
+          },
+          "workspace": {
+            "expected_row_counts_sha256": "daa6c04c37dd94ee3af8210d5ede0afc50b0e34f39401cf6e10bc0edac8fda17",
+            "scalars": {
+              "all_work_published": 1,
+              "barrier_count": 0,
+              "barrier_epoch": 300,
+              "pair_head": 5094,
+              "producers_done_count": 0,
+              "task_head": 1626,
+              "task_tail": 1516
+            },
+            "schema": "exp005.workspace-route-task-evidence.v1",
+            "tensor_sha256": {
+              "expert_tile_base": "54aca8e2e94964c34fd4addd107c344cfd7b6aa616b6d2a10fd7c488c2408bc6",
+              "expert_write_rows": "5735086867e057a8c8f0fef12a0789a4231f274fd53e57eaa0c7910d1ee5894c",
+              "row_counts": "5735086867e057a8c8f0fef12a0789a4231f274fd53e57eaa0c7910d1ee5894c",
+              "task_expert": "8307f5b382bdaea314399fb941bcfb16ef9394da9c112fbf3523dbaf43536b41",
+              "task_m_tile": "5de61e6283625f8b69a78c45532c0f1c9f5cb0b92df84a8aa02cefc2b6b576fe",
+              "task_ready": "77e373a51a2ecdc9d3726346fa36f536453493b784a61d5adbc29e3c4eb44fcb",
+              "task_slice_begin": "b3f1fd6a4e5f671cc4171430d854e92f47cc80e56832b722100347f6732f9133",
+              "task_slice_count": "a780c7894298e4f12631ae5a48fbc5d65a25dc5605546c47f6c9e68a93a704b3",
+              "task_valid_rows": "ab6a3d8a59101638735491db4164fa0aa143fdf45f90475dbd799680bcc60ac0",
+              "tile_write_count": "07ab8f69edd4256ee0f2e9caff23708626214fcdf073048d5a50c67c95c07c65"
+            },
+            "verification": {
+              "checks": {
+                "all_work_published": true,
+                "atomic_head_terminal_state": true,
+                "expert_tile_base": true,
+                "expert_write_rows": true,
+                "pair_head_terminal_state": true,
+                "routed_row_sum": true,
+                "row_counts": true,
+                "task_descriptor_multiset": true,
+                "task_tail": true
+              },
+              "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+              "expected_pair_head": 5094,
+              "expected_task_count": 1516,
+              "gate_pass": true,
+              "missing_task_descriptors": [],
+              "observed_pair_head": 5094,
+              "observed_task_head": 1626,
+              "observed_task_tail": 1516,
+              "producer_claim_count": 18,
+              "producer_counter_unit": "token",
+              "task_descriptor_multiset_sha256": "41c163c08c9c8466bb01e3f16f800c9e8419659c559005837479bb90d4916657",
+              "task_descriptor_order_sha256": "41c163c08c9c8466bb01e3f16f800c9e8419659c559005837479bb90d4916657",
+              "terminal_head_overshoot": 110,
+              "unexpected_task_descriptors": []
+            },
+            "workspace_capacity": {
+              "physical_tiles": 511,
+              "routed_rows": 32768,
+              "tasks": 2044
+            },
+            "workspace_type": "Sm120DynamicMoEWorkspace"
+          }
+        },
+        "pre_replays": [
+          {
+            "event_elapsed_us": 797.3440289497375,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "52ad89011c572fcc6e6296211b6775cbf78d7bdf4bca0a8fe4a65e1b30539365",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                4096,
+                2048
+              ]
+            },
+            "workspace": {
+              "expected_row_counts_sha256": "daa6c04c37dd94ee3af8210d5ede0afc50b0e34f39401cf6e10bc0edac8fda17",
+              "scalars": {
+                "all_work_published": 1,
+                "barrier_count": 0,
+                "barrier_epoch": 15,
+                "pair_head": 5094,
+                "producers_done_count": 0,
+                "task_head": 1626,
+                "task_tail": 1516
+              },
+              "schema": "exp005.workspace-route-task-evidence.v1",
+              "tensor_sha256": {
+                "expert_tile_base": "54aca8e2e94964c34fd4addd107c344cfd7b6aa616b6d2a10fd7c488c2408bc6",
+                "expert_write_rows": "5735086867e057a8c8f0fef12a0789a4231f274fd53e57eaa0c7910d1ee5894c",
+                "row_counts": "5735086867e057a8c8f0fef12a0789a4231f274fd53e57eaa0c7910d1ee5894c",
+                "task_expert": "8307f5b382bdaea314399fb941bcfb16ef9394da9c112fbf3523dbaf43536b41",
+                "task_m_tile": "5de61e6283625f8b69a78c45532c0f1c9f5cb0b92df84a8aa02cefc2b6b576fe",
+                "task_ready": "77e373a51a2ecdc9d3726346fa36f536453493b784a61d5adbc29e3c4eb44fcb",
+                "task_slice_begin": "b3f1fd6a4e5f671cc4171430d854e92f47cc80e56832b722100347f6732f9133",
+                "task_slice_count": "a780c7894298e4f12631ae5a48fbc5d65a25dc5605546c47f6c9e68a93a704b3",
+                "task_valid_rows": "ab6a3d8a59101638735491db4164fa0aa143fdf45f90475dbd799680bcc60ac0",
+                "tile_write_count": "07ab8f69edd4256ee0f2e9caff23708626214fcdf073048d5a50c67c95c07c65"
+              },
+              "verification": {
+                "checks": {
+                  "all_work_published": true,
+                  "atomic_head_terminal_state": true,
+                  "expert_tile_base": true,
+                  "expert_write_rows": true,
+                  "pair_head_terminal_state": true,
+                  "routed_row_sum": true,
+                  "row_counts": true,
+                  "task_descriptor_multiset": true,
+                  "task_tail": true
+                },
+                "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+                "expected_pair_head": 5094,
+                "expected_task_count": 1516,
+                "gate_pass": true,
+                "missing_task_descriptors": [],
+                "observed_pair_head": 5094,
+                "observed_task_head": 1626,
+                "observed_task_tail": 1516,
+                "producer_claim_count": 18,
+                "producer_counter_unit": "token",
+                "task_descriptor_multiset_sha256": "41c163c08c9c8466bb01e3f16f800c9e8419659c559005837479bb90d4916657",
+                "task_descriptor_order_sha256": "41c163c08c9c8466bb01e3f16f800c9e8419659c559005837479bb90d4916657",
+                "terminal_head_overshoot": 110,
+                "unexpected_task_descriptors": []
+              },
+              "workspace_capacity": {
+                "physical_tiles": 511,
+                "routed_rows": 32768,
+                "tasks": 2044
+              },
+              "workspace_type": "Sm120DynamicMoEWorkspace"
+            }
+          },
+          {
+            "event_elapsed_us": 793.3120131492615,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "8b1964dd590ff19877c425bbb1f0a39363fce3e83882df7f46e20293eb68a52e",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                4096,
+                2048
+              ]
+            },
+            "workspace": {
+              "expected_row_counts_sha256": "daa6c04c37dd94ee3af8210d5ede0afc50b0e34f39401cf6e10bc0edac8fda17",
+              "scalars": {
+                "all_work_published": 1,
+                "barrier_count": 0,
+                "barrier_epoch": 20,
+                "pair_head": 5094,
+                "producers_done_count": 0,
+                "task_head": 1626,
+                "task_tail": 1516
+              },
+              "schema": "exp005.workspace-route-task-evidence.v1",
+              "tensor_sha256": {
+                "expert_tile_base": "54aca8e2e94964c34fd4addd107c344cfd7b6aa616b6d2a10fd7c488c2408bc6",
+                "expert_write_rows": "5735086867e057a8c8f0fef12a0789a4231f274fd53e57eaa0c7910d1ee5894c",
+                "row_counts": "5735086867e057a8c8f0fef12a0789a4231f274fd53e57eaa0c7910d1ee5894c",
+                "task_expert": "8307f5b382bdaea314399fb941bcfb16ef9394da9c112fbf3523dbaf43536b41",
+                "task_m_tile": "5de61e6283625f8b69a78c45532c0f1c9f5cb0b92df84a8aa02cefc2b6b576fe",
+                "task_ready": "77e373a51a2ecdc9d3726346fa36f536453493b784a61d5adbc29e3c4eb44fcb",
+                "task_slice_begin": "b3f1fd6a4e5f671cc4171430d854e92f47cc80e56832b722100347f6732f9133",
+                "task_slice_count": "a780c7894298e4f12631ae5a48fbc5d65a25dc5605546c47f6c9e68a93a704b3",
+                "task_valid_rows": "ab6a3d8a59101638735491db4164fa0aa143fdf45f90475dbd799680bcc60ac0",
+                "tile_write_count": "07ab8f69edd4256ee0f2e9caff23708626214fcdf073048d5a50c67c95c07c65"
+              },
+              "verification": {
+                "checks": {
+                  "all_work_published": true,
+                  "atomic_head_terminal_state": true,
+                  "expert_tile_base": true,
+                  "expert_write_rows": true,
+                  "pair_head_terminal_state": true,
+                  "routed_row_sum": true,
+                  "row_counts": true,
+                  "task_descriptor_multiset": true,
+                  "task_tail": true
+                },
+                "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+                "expected_pair_head": 5094,
+                "expected_task_count": 1516,
+                "gate_pass": true,
+                "missing_task_descriptors": [],
+                "observed_pair_head": 5094,
+                "observed_task_head": 1626,
+                "observed_task_tail": 1516,
+                "producer_claim_count": 18,
+                "producer_counter_unit": "token",
+                "task_descriptor_multiset_sha256": "41c163c08c9c8466bb01e3f16f800c9e8419659c559005837479bb90d4916657",
+                "task_descriptor_order_sha256": "41c163c08c9c8466bb01e3f16f800c9e8419659c559005837479bb90d4916657",
+                "terminal_head_overshoot": 110,
+                "unexpected_task_descriptors": []
+              },
+              "workspace_capacity": {
+                "physical_tiles": 511,
+                "routed_rows": 32768,
+                "tasks": 2044
+              },
+              "workspace_type": "Sm120DynamicMoEWorkspace"
+            }
+          }
+        ],
+        "qualification_pass": true
+      },
+      "fixture_manifest": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m4096.npz",
+        "fixture_sha256": "a1ac93cb8dfb2e81a000476efc36b75588f79f1954b406396b77c172464ce2cc",
+        "m": 4096,
+        "occupancy_max": 166,
+        "occupancy_min": 92,
+        "occupancy_sha256": "0b57ad7fd66d1405ea04eb3135a5615e45664eb1ea61d9b61e7cb7de333be5df",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "1f66203f9c8589a25517a3422c3012eea61aea2dc9ee4e2fc807fbf98ca667fc",
+        "topk_weights_sha256": "8d97adaf9846929c340a63d81d13816c06820e737797712a2ec7f94d1ae88232",
+        "weight_sum_max_abs_error": 1.1920928955078125e-07,
+        "x_sha256": "d8ff96b666568acab63a31b7f5812da2678053931dd9ff60fe33eaa90f588870"
+      },
+      "fixture_manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+      "fixture_sha256": "a1ac93cb8dfb2e81a000476efc36b75588f79f1954b406396b77c172464ce2cc",
+      "launch_identity": {
+        "block": [
+          288,
+          1,
+          1
+        ],
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "l2_flush_bytes": 201326592,
+        "timed_statistics": {
+          "max_us": 813.215970993042,
+          "median_us": 808.6560070514679,
+          "min_us": 806.3679933547974
+        }
+      },
+      "m": 4096,
+      "reason": "",
+      "sample_us": 808.7731158733368,
+      "status": "Pass"
+    },
+    {
+      "correctness": {
+        "mode": "sentinel_sanity",
+        "post_timing": {
+          "event_elapsed_us": 1302.7839660644531,
+          "oracle": null,
+          "pass": true,
+          "sanity": {
+            "dtype": "bfloat16",
+            "finite": true,
+            "nonzero": true,
+            "output_sha256": "f44ef99a6c63c23601ae4bfdcbdf15dc6d644acd67462667618125a99832210a",
+            "pass": true,
+            "sentinel_nan_remaining": 0,
+            "shape": [
+              8192,
+              2048
+            ]
+          },
+          "workspace": {
+            "expected_row_counts_sha256": "7583d460dbedd16f446c71f161308169c62b9a557e118373602c3d90db8627dd",
+            "scalars": {
+              "all_work_published": 1,
+              "barrier_count": 0,
+              "barrier_epoch": 300,
+              "pair_head": 9189,
+              "producers_done_count": 0,
+              "task_head": 2658,
+              "task_tail": 2548
+            },
+            "schema": "exp005.workspace-route-task-evidence.v1",
+            "tensor_sha256": {
+              "expert_tile_base": "4b86f54e8e58a1c60b4e9d570b1bde9ddf9b10d64c961e81b7b2130f24aad3d4",
+              "expert_write_rows": "642f6b3ba63757d7ad286219619fcc7ec78027d82866f78ae38125a420b6edd9",
+              "row_counts": "642f6b3ba63757d7ad286219619fcc7ec78027d82866f78ae38125a420b6edd9",
+              "task_expert": "2cf6256217d75ff5b028f7486e6dfd29a338cc2762bc13a1e0c15c577a2bad48",
+              "task_m_tile": "ca6dba2bc5be731b9d3146db5ed67086d0e33760e7ee48d1c2012ea5611400aa",
+              "task_ready": "02a3bbd244504831467c64842a9cfa5296e72343836f325b805e5329397c420e",
+              "task_slice_begin": "9a676701cc34edebcde1a5683dcb038ecd6647ab851298decb5a0292a0caf60c",
+              "task_slice_count": "7de0213eaf9c51180371c683da10a8cb9a0e1032bff364065ecd3c1c20fb3cd4",
+              "task_valid_rows": "e1d23d93a19c177d6ade6718e80194478f2351ed4798ba11a388661ed4813995",
+              "tile_write_count": "6952caeaa65a2c378d050989ec11f69cefe5254d926ad1caa592e2f3ac3c5286"
+            },
+            "verification": {
+              "checks": {
+                "all_work_published": true,
+                "atomic_head_terminal_state": true,
+                "expert_tile_base": true,
+                "expert_write_rows": true,
+                "pair_head_terminal_state": true,
+                "routed_row_sum": true,
+                "row_counts": true,
+                "task_descriptor_multiset": true,
+                "task_tail": true
+              },
+              "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+              "expected_pair_head": 9189,
+              "expected_task_count": 2548,
+              "gate_pass": true,
+              "missing_task_descriptors": [],
+              "observed_pair_head": 9189,
+              "observed_task_head": 2658,
+              "observed_task_tail": 2548,
+              "producer_claim_count": 18,
+              "producer_counter_unit": "token",
+              "task_descriptor_multiset_sha256": "fc28e24c2a414c338fd43fa5e9be3bbeb1166b72e66e9c690114a9412dcc0c2a",
+              "task_descriptor_order_sha256": "fc28e24c2a414c338fd43fa5e9be3bbeb1166b72e66e9c690114a9412dcc0c2a",
+              "terminal_head_overshoot": 110,
+              "unexpected_task_descriptors": []
+            },
+            "workspace_capacity": {
+              "physical_tiles": 767,
+              "routed_rows": 65536,
+              "tasks": 3068
+            },
+            "workspace_type": "Sm120DynamicMoEWorkspace"
+          }
+        },
+        "pre_replays": [
+          {
+            "event_elapsed_us": 1309.2479705810547,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "153eff7decc24ad8ffcc706beb3f57f031d1759e607932e55390194cccb5b0f4",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                8192,
+                2048
+              ]
+            },
+            "workspace": {
+              "expected_row_counts_sha256": "7583d460dbedd16f446c71f161308169c62b9a557e118373602c3d90db8627dd",
+              "scalars": {
+                "all_work_published": 1,
+                "barrier_count": 0,
+                "barrier_epoch": 15,
+                "pair_head": 9189,
+                "producers_done_count": 0,
+                "task_head": 2658,
+                "task_tail": 2548
+              },
+              "schema": "exp005.workspace-route-task-evidence.v1",
+              "tensor_sha256": {
+                "expert_tile_base": "4b86f54e8e58a1c60b4e9d570b1bde9ddf9b10d64c961e81b7b2130f24aad3d4",
+                "expert_write_rows": "642f6b3ba63757d7ad286219619fcc7ec78027d82866f78ae38125a420b6edd9",
+                "row_counts": "642f6b3ba63757d7ad286219619fcc7ec78027d82866f78ae38125a420b6edd9",
+                "task_expert": "2cf6256217d75ff5b028f7486e6dfd29a338cc2762bc13a1e0c15c577a2bad48",
+                "task_m_tile": "ca6dba2bc5be731b9d3146db5ed67086d0e33760e7ee48d1c2012ea5611400aa",
+                "task_ready": "02a3bbd244504831467c64842a9cfa5296e72343836f325b805e5329397c420e",
+                "task_slice_begin": "9a676701cc34edebcde1a5683dcb038ecd6647ab851298decb5a0292a0caf60c",
+                "task_slice_count": "7de0213eaf9c51180371c683da10a8cb9a0e1032bff364065ecd3c1c20fb3cd4",
+                "task_valid_rows": "e1d23d93a19c177d6ade6718e80194478f2351ed4798ba11a388661ed4813995",
+                "tile_write_count": "6952caeaa65a2c378d050989ec11f69cefe5254d926ad1caa592e2f3ac3c5286"
+              },
+              "verification": {
+                "checks": {
+                  "all_work_published": true,
+                  "atomic_head_terminal_state": true,
+                  "expert_tile_base": true,
+                  "expert_write_rows": true,
+                  "pair_head_terminal_state": true,
+                  "routed_row_sum": true,
+                  "row_counts": true,
+                  "task_descriptor_multiset": true,
+                  "task_tail": true
+                },
+                "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+                "expected_pair_head": 9189,
+                "expected_task_count": 2548,
+                "gate_pass": true,
+                "missing_task_descriptors": [],
+                "observed_pair_head": 9189,
+                "observed_task_head": 2658,
+                "observed_task_tail": 2548,
+                "producer_claim_count": 18,
+                "producer_counter_unit": "token",
+                "task_descriptor_multiset_sha256": "fc28e24c2a414c338fd43fa5e9be3bbeb1166b72e66e9c690114a9412dcc0c2a",
+                "task_descriptor_order_sha256": "fc28e24c2a414c338fd43fa5e9be3bbeb1166b72e66e9c690114a9412dcc0c2a",
+                "terminal_head_overshoot": 110,
+                "unexpected_task_descriptors": []
+              },
+              "workspace_capacity": {
+                "physical_tiles": 767,
+                "routed_rows": 65536,
+                "tasks": 3068
+              },
+              "workspace_type": "Sm120DynamicMoEWorkspace"
+            }
+          },
+          {
+            "event_elapsed_us": 1302.8160333633423,
+            "oracle": null,
+            "pass": true,
+            "sanity": {
+              "dtype": "bfloat16",
+              "finite": true,
+              "nonzero": true,
+              "output_sha256": "31c978523c330eea17e25414672a9ec78429b5fcf766efa92522babf4988ab2b",
+              "pass": true,
+              "sentinel_nan_remaining": 0,
+              "shape": [
+                8192,
+                2048
+              ]
+            },
+            "workspace": {
+              "expected_row_counts_sha256": "7583d460dbedd16f446c71f161308169c62b9a557e118373602c3d90db8627dd",
+              "scalars": {
+                "all_work_published": 1,
+                "barrier_count": 0,
+                "barrier_epoch": 20,
+                "pair_head": 9189,
+                "producers_done_count": 0,
+                "task_head": 2658,
+                "task_tail": 2548
+              },
+              "schema": "exp005.workspace-route-task-evidence.v1",
+              "tensor_sha256": {
+                "expert_tile_base": "4b86f54e8e58a1c60b4e9d570b1bde9ddf9b10d64c961e81b7b2130f24aad3d4",
+                "expert_write_rows": "642f6b3ba63757d7ad286219619fcc7ec78027d82866f78ae38125a420b6edd9",
+                "row_counts": "642f6b3ba63757d7ad286219619fcc7ec78027d82866f78ae38125a420b6edd9",
+                "task_expert": "2cf6256217d75ff5b028f7486e6dfd29a338cc2762bc13a1e0c15c577a2bad48",
+                "task_m_tile": "ca6dba2bc5be731b9d3146db5ed67086d0e33760e7ee48d1c2012ea5611400aa",
+                "task_ready": "02a3bbd244504831467c64842a9cfa5296e72343836f325b805e5329397c420e",
+                "task_slice_begin": "9a676701cc34edebcde1a5683dcb038ecd6647ab851298decb5a0292a0caf60c",
+                "task_slice_count": "7de0213eaf9c51180371c683da10a8cb9a0e1032bff364065ecd3c1c20fb3cd4",
+                "task_valid_rows": "e1d23d93a19c177d6ade6718e80194478f2351ed4798ba11a388661ed4813995",
+                "tile_write_count": "6952caeaa65a2c378d050989ec11f69cefe5254d926ad1caa592e2f3ac3c5286"
+              },
+              "verification": {
+                "checks": {
+                  "all_work_published": true,
+                  "atomic_head_terminal_state": true,
+                  "expert_tile_base": true,
+                  "expert_write_rows": true,
+                  "pair_head_terminal_state": true,
+                  "routed_row_sum": true,
+                  "row_counts": true,
+                  "task_descriptor_multiset": true,
+                  "task_tail": true
+                },
+                "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+                "expected_pair_head": 9189,
+                "expected_task_count": 2548,
+                "gate_pass": true,
+                "missing_task_descriptors": [],
+                "observed_pair_head": 9189,
+                "observed_task_head": 2658,
+                "observed_task_tail": 2548,
+                "producer_claim_count": 18,
+                "producer_counter_unit": "token",
+                "task_descriptor_multiset_sha256": "fc28e24c2a414c338fd43fa5e9be3bbeb1166b72e66e9c690114a9412dcc0c2a",
+                "task_descriptor_order_sha256": "fc28e24c2a414c338fd43fa5e9be3bbeb1166b72e66e9c690114a9412dcc0c2a",
+                "terminal_head_overshoot": 110,
+                "unexpected_task_descriptors": []
+              },
+              "workspace_capacity": {
+                "physical_tiles": 767,
+                "routed_rows": 65536,
+                "tasks": 3068
+              },
+              "workspace_type": "Sm120DynamicMoEWorkspace"
+            }
+          }
+        ],
+        "qualification_pass": true
+      },
+      "fixture_manifest": {
+        "duplicate_expert_ids": 0,
+        "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+        "fixture_path": "m8192.npz",
+        "fixture_sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438",
+        "m": 8192,
+        "occupancy_max": 295,
+        "occupancy_min": 205,
+        "occupancy_sha256": "3e4350788bfcdd1cca175141f0c6626934589b97cb23d74811e4bc2785531a94",
+        "shape": {
+          "experts": 256,
+          "hidden": 2048,
+          "intermediate_tp": 512,
+          "topk": 8
+        },
+        "topk_ids_sha256": "c7ea3babd394cb6fc73980a2754b13a8215deaee991b3aaf7ce3b45502592abb",
+        "topk_weights_sha256": "441f51ba80975dc8cfc3fc0d7e5a07a8c474a6781f8d606ff0eaecef69adbcea",
+        "weight_sum_max_abs_error": 2.384185791015625e-07,
+        "x_sha256": "00d8fb81ac350100bdb9c4f9341ac2cbbc24d6c0b21b62f565f7f44a8ad24bec"
+      },
+      "fixture_manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+      "fixture_sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438",
+      "launch_identity": {
+        "block": [
+          288,
+          1,
+          1
+        ],
+        "grid": [
+          1,
+          1,
+          110
+        ],
+        "l2_flush_bytes": 201326592,
+        "timed_statistics": {
+          "max_us": 1345.088005065918,
+          "median_us": 1337.231993675232,
+          "min_us": 1332.543969154358
+        }
+      },
+      "m": 8192,
+      "reason": "",
+      "sample_us": 1337.2710394859314,
+      "status": "Pass"
+    }
+  ],
+  "fixture_identity": {
+    "manifest_path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/fixtures/manifest.json",
+    "manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+    "npz_sha256": {
+      "1024": "0fa7e8a7d8d1d32172971f987d6f55b534aabf8d12a84a910d010cec25ba04a5",
+      "2048": "5375fd8b3e5e15f8c956998bfc3e2f3ee59948a2aeaf5ba1294ec6a74092bde3",
+      "256": "86b505097acd06bed5a50c3528c78525e6087c07ed69f86606607599ffa21686",
+      "4096": "a1ac93cb8dfb2e81a000476efc36b75588f79f1954b406396b77c172464ce2cc",
+      "512": "e6ddb487121a0d681a06bcb453f38623b3d5d8477f2232bbbf78cd2ea4ef23a3",
+      "8192": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438"
+    },
+    "seed": 2026
+  },
+  "jit_identity": {
+    "artifact_count": 5,
+    "artifact_set_sha256": "4aa7f95202db57421e1099e68f923ab585fb3ac914bdcd117aa3aab03d78e7c9",
+    "cubin_sha256": [
+      "e9b322e4c978c490adbe0a9bf0f9a183288c0ecddb1fd72e5a904c487be541f3"
+    ],
+    "symbol_gate": true,
+    "symbols": [
+      "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
+    ]
+  },
+  "protocol": {
+    "application_graphics_clock_mhz": 2377,
+    "block_orders": [
+      [
+        "latest_opt_fp4",
+        "eric_stage4_fp4",
+        "sglang_triton_fp8"
+      ],
+      [
+        "eric_stage4_fp4",
+        "sglang_triton_fp8",
+        "latest_opt_fp4"
+      ],
+      [
+        "sglang_triton_fp8",
+        "latest_opt_fp4",
+        "eric_stage4_fp4"
+      ]
+    ],
+    "blocks": 3,
+    "boundary": "BF16 input -> complete MoE -> BF16 output",
+    "case": {
+      "E": 256,
+      "H": 2048,
+      "I_tp": 512,
+      "topk": 8
+    },
+    "cooldown_between_arm_processes_seconds": 2,
+    "iters": 50,
+    "l2_flush_bytes": 201326592,
+    "m_values": [
+      256,
+      512,
+      1024,
+      2048,
+      4096,
+      8192
+    ],
+    "profilers": "forbidden",
+    "qualification": "block0 full oracle; block1/2 two-pre plus one-post sentinel sanity",
+    "timing": "single CUDA Graph replay with external CUDA events",
+    "warmup": 5
+  },
+  "protocol_sha256": "d7c7380e6a3ec58c691fa998e63b1ffed4c7d50fbc4a09e31c9951d894743465",
+  "rerun_id": "exp018-eric-benchmark-20260721T085049Z-1403258",
+  "runtime": {
+    "cuda_runtime": "13.2",
+    "gpu_name": "NVIDIA Graphics Device",
+    "gpu_uuid": "GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12",
+    "hostname": "fc4260047147",
+    "image_environment": {
+      "W4A4_IMAGE_DIGEST": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+      "W4A4_IMAGE_ID": "sha256:a4e056e1d34a5cc9387512ffa3abeed778e3dc7966633c5154d771705d8835ac",
+      "W4A4_PYTHON_DEPS_SHA256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74"
+    },
+    "jit_root": "/workspace/jit",
+    "lease_id": "exp018-eric-benchmark-20260721T085049Z-1403258",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "pip_freeze_sha256": "294d3f1c0248ec59e602a22c5d14def1bfabb1b90243435747d46416211d8608",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "sm_count": 110,
+    "timestamp_unix": 1784624045.2253408,
+    "torch": "2.12.0a0+5aff3928d8.nv26.05"
+  },
+  "schema": "exp018.arm-block.v1",
+  "source_identity": {
+    "adapter": null,
+    "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+    "expected_block_threads": 288,
+    "flashinfer_commit": "074d93e4aa54c75bee1b3dfdb39b7f075a3ff2af",
+    "kind": "cutedsl_dynamic_fused_moe",
+    "overlay": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py",
+    "overlay_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
+    "runner_sha256": "20b22467a314bc0ffc1f6a3e5dd4d30eb9af9ca9d26ff77996cd9605d798080c",
+    "source": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py",
+    "source_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
+    "target_module": "flashinfer.fused_moe.cute_dsl.blackwell_sm12x.moe_dynamic_kernel",
+    "wrapper_kwargs": {
+      "E": 256,
+      "H": 2048,
+      "I_tp": 512,
+      "activation": "silu",
+      "quant_mode": "w4a4",
+      "topk": 8,
+      "use_cuda_graph": true
+    }
+  },
+  "telemetry_after": {
+    "applications_graphics_clock_mhz": "2377",
+    "driver": "580.95.05",
+    "foreign_compute_processes": "not_queried_after_context",
+    "graphics_clock_mhz": "2550",
+    "memory_clock_mhz": "13365",
+    "name": "NVIDIA Graphics Device",
+    "pci_bus_id": "00000000:79:00.0",
+    "power_w": "121.28",
+    "pstate": "P1",
+    "temperature_c": "32",
+    "throttle_counters_us": {
+      "hw_power_brake": 0,
+      "hw_therm_slowdown": 0,
+      "sw_power_cap": 5045981730845,
+      "sw_therm_slowdown": 0,
+      "sync_boost": 0
+    },
+    "uuid": "GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12"
+  },
+  "telemetry_before": {
+    "applications_graphics_clock_mhz": "2377",
+    "driver": "580.95.05",
+    "foreign_compute_processes": [],
+    "graphics_clock_mhz": "2370",
+    "memory_clock_mhz": "13365",
+    "name": "NVIDIA Graphics Device",
+    "pci_bus_id": "00000000:79:00.0",
+    "power_w": "52.22",
+    "pstate": "P1",
+    "temperature_c": "30",
+    "throttle_counters_us": {
+      "hw_power_brake": 0,
+      "hw_therm_slowdown": 0,
+      "sw_power_cap": 5045981730845,
+      "sw_therm_slowdown": 0,
+      "sync_boost": 0
+    },
+    "uuid": "GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12"
+  },
+  "telemetry_gate": {
+    "checked_throttle_counters": [
+      "hw_power_brake",
+      "hw_therm_slowdown",
+      "sw_therm_slowdown"
+    ],
+    "checks": {
+      "application_clock_stable": true,
+      "no_foreign_process_before": true,
+      "slowdown_not_increased": true,
+      "uuid_stable": true
+    },
+    "pass": true
+  },
+  "weight_identity": {
+    "manifest": {
+      "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+      "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+      "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+      "seed": 2026,
+      "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+      "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+      "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+      "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+      "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+      "w1_packed_shape": [
+        256,
+        1024,
+        1024
+      ],
+      "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+      "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+      "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+      "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+      "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+      "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+      "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+      "w2_packed_shape": [
+        256,
+        2048,
+        256
+      ],
+      "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+      "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+    },
+    "packed_weights_sha256": {
+      "w1": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+      "w2": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1"
+    },
+    "scales_sha256": {
+      "w1": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+      "w1_global": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+      "w2": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+      "w2_global": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a"
+    },
+    "seed": 2026
+  }
+}
