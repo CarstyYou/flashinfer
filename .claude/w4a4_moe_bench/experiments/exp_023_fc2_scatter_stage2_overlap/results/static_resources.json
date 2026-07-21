@@ -1,0 +1,76 @@
+{
+  "schema": "exp023.gate-a-static-resources.v1",
+  "status": "rejected",
+  "gate": "Gate A: compile, launch, and zero-spill role feasibility",
+  "baseline": {
+    "name": "current_opt",
+    "source_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
+    "stack_bytes_per_thread": 0,
+    "evidence": "../../exp_017_opt_vs_triton_phase_share/results/ncu_evidence.json:396"
+  },
+  "role_preflight": {
+    "source_sha256": "4cee4d2cb9b1dfc7555c042db5b7813725207a16f72c1a30153078a95acd8e47",
+    "cubin_sha256": "72ed647c6f9ebedcdd3bdf825f498cd74a5290efa378c1b20bcd6ef704aaa4aa",
+    "ptx_sha256": "2fc2d1cd961e8ccce09976a0102573e4e8747f81f53a9faffbe993216f65703a",
+    "launch": {
+      "grid": [1, 1, 110],
+      "block": [416, 1, 1],
+      "compiled": true,
+      "completed_first_replay": true
+    },
+    "cuobjdump_resource_usage": {
+      "registers_per_thread": 128,
+      "stack_bytes_per_thread": 72,
+      "static_shared_bytes": 1024,
+      "reported_local_bytes": 0
+    },
+    "sass": {
+      "ldl_instruction_count": 61,
+      "stl_instruction_count": 18,
+      "lowest_observed_local_offset_bytes": 0,
+      "highest_observed_local_offset_bytes": 68,
+      "examples": [
+        "STL [R1+0x44], R8",
+        "STL [R1+0x1c], R70",
+        "LDL R38, [R1+0x44]",
+        "LDL R107, [R1+0x4]"
+      ]
+    },
+    "raw_evidence": {
+      "resource": {
+        "path": "raw/resource.txt",
+        "sha256": "3d3d5579ad6790cf8c04e0b292ba9e40094d57662fe7dd558e1353a8f73348fe"
+      },
+      "sass_local_instructions": {
+        "path": "raw/sass_local_instructions.txt",
+        "sha256": "2ec360ce181e9670e06fa739fc3fab4edc7cdf9d90ce17e5338058f7f9084906"
+      }
+    },
+    "route_virtual_mapping": {
+      "active_warps": 9,
+      "virtual_threads": 288,
+      "bidz109_tidx287_flat_id": 31679,
+      "extra_warp_flat_sentinel": 1073741824,
+      "extra_warp_route_index_sentinel": 1048576,
+      "workspace_checks_passed": [
+        "row_counts",
+        "expert_write_rows",
+        "expert_tile_base",
+        "task_descriptor_multiset",
+        "task_tail",
+        "routed_row_sum"
+      ],
+      "legacy_runner_check_not_admitted": "exp_005 pair_head oracle expects an older claim accounting convention and rejected observed pair_head=1251 versus expected=4032"
+    }
+  },
+  "verdict": {
+    "value": "Reject",
+    "reason": "The locked Gate A requires zero static stack/local spill. Before the two-stage data path is added, the role-only preflight binary already reports a 72-byte stack and contains 18 STL plus 61 LDL/LDL.LU SASS instructions. No dynamic execution count is claimed.",
+    "stopped_before": [
+      "M64xN128 two-stage sC alias implementation",
+      "PipelineAsync protocol validation",
+      "IKET overlap capture",
+      "ABBA performance measurement"
+    ]
+  }
+}

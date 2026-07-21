@@ -1,0 +1,47 @@
+{
+  "schema": "exp022.correctness-summary.v1",
+  "status": "complete",
+  "all_cases_pass": true,
+  "raw_capture": {
+    "remote_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp008_748ad/.claude/w4a4_moe_bench/experiments/exp_022_scatter_vector_s2r/results/raw/correctness.json",
+    "sha256": "32d2e7eb1be44f5e7a9930e60601f087d1bb8ebd52bdbc6862ccde1a6c8fcb1c"
+  },
+  "candidate_source_sha256": "db2ea34071b5dddd8ae6a366a600e412ffa7b872438b2e55f09b037e2764977a",
+  "candidate_cubin_sha256": "6567aa92ad8376b3f254a4b79df482eaad711162b1c265260c55b3e2d8eb6721",
+  "coverage": {
+    "case_count": 15,
+    "replays_per_case": 2,
+    "canonical_m": [256, 8192],
+    "directed_valid_rows": [0, 1, 31, 32, 33, 63, 64, 65, 95, 96, 97, 127, 128],
+    "topk": 8,
+    "same_destination_token_accumulation": true
+  },
+  "numerics": {
+    "cosine_min": 0.9998783469200134,
+    "cosine_max": 0.9999148845672607,
+    "relative_l2_min": 0.013052384369075298,
+    "relative_l2_max": 0.015597579069435596,
+    "formal_percent_within": 100.0,
+    "finite": true,
+    "max_nan_remaining": 0,
+    "max_inf_count": 0,
+    "max_zero_rows": 0
+  },
+  "ownership_checks": {
+    "all_work_published": true,
+    "atomic_head_terminal_state": true,
+    "expert_tile_base": true,
+    "expert_write_rows": true,
+    "routed_row_sum": true,
+    "row_counts": true,
+    "task_descriptor_multiset": true,
+    "task_tail": true
+  },
+  "legacy_verifier_drift": {
+    "check": "pair_head_terminal_state",
+    "baseline_observed": false,
+    "candidate_observed": false,
+    "admitted": false,
+    "reason": "same legacy verifier drift on locked Baseline; concrete ownership checks remain mandatory"
+  }
+}

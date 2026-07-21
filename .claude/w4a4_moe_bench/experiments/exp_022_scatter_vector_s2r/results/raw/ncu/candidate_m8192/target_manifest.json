@@ -1,0 +1,576 @@
+{
+  "arm": "candidate_vector_s2r_v0",
+  "case": {
+    "E": 256,
+    "H": 2048,
+    "I_tp": 512,
+    "topk": 8
+  },
+  "compile_identity": {
+    "compiled_max_active_clusters": [
+      110
+    ],
+    "compiled_object_types": [
+      "TVMFFIJitCompiledFunctionWithKwargs"
+    ],
+    "dynamic_cache_entries": 1
+  },
+  "correctness": {
+    "eager": {
+      "checks": {
+        "full_oracle": true,
+        "route_task": true,
+        "sanity": true
+      },
+      "gate_pass": true,
+      "oracle": {
+        "actual_mean": -8.047206210903823e-05,
+        "actual_std": 0.16488483548164368,
+        "actual_to_reference_l2_ratio": 0.999929666519165,
+        "cosine": 0.9999179244041443,
+        "dtype": "bfloat16",
+        "finite": true,
+        "formal_magnitude_atol": 0.24734464287757874,
+        "formal_magnitude_rtol": 0.5,
+        "formal_pass": true,
+        "formal_percent_threshold": 97.0,
+        "formal_percent_within": 100.0,
+        "least_squares_actual_gain": 0.9998476505279541,
+        "max_abs_error": 0.08801324665546417,
+        "mean_abs_error": 0.0011204390320926905,
+        "nonzero": true,
+        "output_sha256": "40c6083f7e175a249f4c6dbfa345f427d92e77ce00aa1d7a957490cdfa826e69",
+        "percent_within_rtol_0.2_atol_0.2": 100.0,
+        "reference_mean": -8.14411323517561e-05,
+        "reference_sha256": "7eac9ce7d735e78f809f657e5a567f0d861c4f33a34443206625b0aea7f035b0",
+        "reference_std": 0.1648964285850525,
+        "relative_l2": 0.012812566943466663,
+        "shape": [
+          8192,
+          2048
+        ],
+        "strict_rtol_0.2_atol_0.2_allclose": true
+      },
+      "sanity": {
+        "dtype": "bfloat16",
+        "finite": true,
+        "nonzero": true,
+        "output_sha256": "40c6083f7e175a249f4c6dbfa345f427d92e77ce00aa1d7a957490cdfa826e69",
+        "pass": true,
+        "sentinel_nan_remaining": 0,
+        "shape": [
+          8192,
+          2048
+        ]
+      },
+      "workspace": {
+        "expected_row_counts_sha256": "7583d460dbedd16f446c71f161308169c62b9a557e118373602c3d90db8627dd",
+        "scalars": {
+          "all_work_published": 1,
+          "barrier_count": 0,
+          "barrier_epoch": 5,
+          "pair_head": 9189,
+          "producers_done_count": 0,
+          "task_head": 2658,
+          "task_tail": 2548
+        },
+        "schema": "exp005.workspace-route-task-evidence.v1",
+        "tensor_sha256": {
+          "expert_tile_base": "4b86f54e8e58a1c60b4e9d570b1bde9ddf9b10d64c961e81b7b2130f24aad3d4",
+          "expert_write_rows": "642f6b3ba63757d7ad286219619fcc7ec78027d82866f78ae38125a420b6edd9",
+          "row_counts": "642f6b3ba63757d7ad286219619fcc7ec78027d82866f78ae38125a420b6edd9",
+          "task_expert": "2cf6256217d75ff5b028f7486e6dfd29a338cc2762bc13a1e0c15c577a2bad48",
+          "task_m_tile": "ca6dba2bc5be731b9d3146db5ed67086d0e33760e7ee48d1c2012ea5611400aa",
+          "task_ready": "02a3bbd244504831467c64842a9cfa5296e72343836f325b805e5329397c420e",
+          "task_slice_begin": "9a676701cc34edebcde1a5683dcb038ecd6647ab851298decb5a0292a0caf60c",
+          "task_slice_count": "7de0213eaf9c51180371c683da10a8cb9a0e1032bff364065ecd3c1c20fb3cd4",
+          "task_valid_rows": "e1d23d93a19c177d6ade6718e80194478f2351ed4798ba11a388661ed4813995",
+          "tile_write_count": "6952caeaa65a2c378d050989ec11f69cefe5254d926ad1caa592e2f3ac3c5286"
+        },
+        "verification": {
+          "checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+          "expected_pair_head": 67518,
+          "expected_task_count": 2548,
+          "gate_pass": true,
+          "legacy_pair_head_terminal_state": {
+            "admitted": false,
+            "observed": false,
+            "reason": "same verifier drift reproduced by locked Baseline"
+          },
+          "missing_task_descriptors": [],
+          "observed_pair_head": 9189,
+          "observed_task_head": 2658,
+          "observed_task_tail": 2548,
+          "producer_claim_count": 18,
+          "task_descriptor_multiset_sha256": "fc28e24c2a414c338fd43fa5e9be3bbeb1166b72e66e9c690114a9412dcc0c2a",
+          "task_descriptor_order_sha256": "fc28e24c2a414c338fd43fa5e9be3bbeb1166b72e66e9c690114a9412dcc0c2a",
+          "terminal_head_overshoot": 110,
+          "unexpected_task_descriptors": []
+        },
+        "workspace_capacity": {
+          "physical_tiles": 767,
+          "routed_rows": 65536,
+          "tasks": 3068
+        },
+        "workspace_type": "Sm120DynamicMoEWorkspace"
+      }
+    },
+    "gate_pass": true,
+    "post_profile_graph": {
+      "checks": {
+        "full_oracle": true,
+        "route_task": true,
+        "sanity": true
+      },
+      "gate_pass": true,
+      "oracle": {
+        "actual_mean": -8.082622662186623e-05,
+        "actual_std": 0.16488488018512726,
+        "actual_to_reference_l2_ratio": 0.9999299645423889,
+        "cosine": 0.9999179244041443,
+        "dtype": "bfloat16",
+        "finite": true,
+        "formal_magnitude_atol": 0.24734464287757874,
+        "formal_magnitude_rtol": 0.5,
+        "formal_pass": true,
+        "formal_percent_threshold": 97.0,
+        "formal_percent_within": 100.0,
+        "least_squares_actual_gain": 0.999847948551178,
+        "max_abs_error": 0.08752496540546417,
+        "mean_abs_error": 0.0011206392664462328,
+        "nonzero": true,
+        "output_sha256": "e7557581c9f60432928abe27ede65bf5b7e31382087886839f8cde532958d7f9",
+        "percent_within_rtol_0.2_atol_0.2": 100.0,
+        "reference_mean": -8.14411323517561e-05,
+        "reference_sha256": "7eac9ce7d735e78f809f657e5a567f0d861c4f33a34443206625b0aea7f035b0",
+        "reference_std": 0.1648964285850525,
+        "relative_l2": 0.012812321074306965,
+        "shape": [
+          8192,
+          2048
+        ],
+        "strict_rtol_0.2_atol_0.2_allclose": true
+      },
+      "sanity": {
+        "dtype": "bfloat16",
+        "finite": true,
+        "nonzero": true,
+        "output_sha256": "e7557581c9f60432928abe27ede65bf5b7e31382087886839f8cde532958d7f9",
+        "pass": true,
+        "sentinel_nan_remaining": 0,
+        "shape": [
+          8192,
+          2048
+        ]
+      },
+      "workspace": {
+        "expected_row_counts_sha256": "7583d460dbedd16f446c71f161308169c62b9a557e118373602c3d90db8627dd",
+        "scalars": {
+          "all_work_published": 1,
+          "barrier_count": 0,
+          "barrier_epoch": 45,
+          "pair_head": 9189,
+          "producers_done_count": 0,
+          "task_head": 2658,
+          "task_tail": 2548
+        },
+        "schema": "exp005.workspace-route-task-evidence.v1",
+        "tensor_sha256": {
+          "expert_tile_base": "4b86f54e8e58a1c60b4e9d570b1bde9ddf9b10d64c961e81b7b2130f24aad3d4",
+          "expert_write_rows": "642f6b3ba63757d7ad286219619fcc7ec78027d82866f78ae38125a420b6edd9",
+          "row_counts": "642f6b3ba63757d7ad286219619fcc7ec78027d82866f78ae38125a420b6edd9",
+          "task_expert": "2cf6256217d75ff5b028f7486e6dfd29a338cc2762bc13a1e0c15c577a2bad48",
+          "task_m_tile": "ca6dba2bc5be731b9d3146db5ed67086d0e33760e7ee48d1c2012ea5611400aa",
+          "task_ready": "02a3bbd244504831467c64842a9cfa5296e72343836f325b805e5329397c420e",
+          "task_slice_begin": "9a676701cc34edebcde1a5683dcb038ecd6647ab851298decb5a0292a0caf60c",
+          "task_slice_count": "7de0213eaf9c51180371c683da10a8cb9a0e1032bff364065ecd3c1c20fb3cd4",
+          "task_valid_rows": "e1d23d93a19c177d6ade6718e80194478f2351ed4798ba11a388661ed4813995",
+          "tile_write_count": "6952caeaa65a2c378d050989ec11f69cefe5254d926ad1caa592e2f3ac3c5286"
+        },
+        "verification": {
+          "checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+          "expected_pair_head": 67518,
+          "expected_task_count": 2548,
+          "gate_pass": true,
+          "legacy_pair_head_terminal_state": {
+            "admitted": false,
+            "observed": false,
+            "reason": "same verifier drift reproduced by locked Baseline"
+          },
+          "missing_task_descriptors": [],
+          "observed_pair_head": 9189,
+          "observed_task_head": 2658,
+          "observed_task_tail": 2548,
+          "producer_claim_count": 18,
+          "task_descriptor_multiset_sha256": "fc28e24c2a414c338fd43fa5e9be3bbeb1166b72e66e9c690114a9412dcc0c2a",
+          "task_descriptor_order_sha256": "fc28e24c2a414c338fd43fa5e9be3bbeb1166b72e66e9c690114a9412dcc0c2a",
+          "terminal_head_overshoot": 110,
+          "unexpected_task_descriptors": []
+        },
+        "workspace_capacity": {
+          "physical_tiles": 767,
+          "routed_rows": 65536,
+          "tasks": 3068
+        },
+        "workspace_type": "Sm120DynamicMoEWorkspace"
+      }
+    },
+    "pre_profile_graph": {
+      "checks": {
+        "full_oracle": true,
+        "route_task": true,
+        "sanity": true
+      },
+      "gate_pass": true,
+      "oracle": {
+        "actual_mean": -8.085307490546256e-05,
+        "actual_std": 0.16488520801067352,
+        "actual_to_reference_l2_ratio": 0.9999319314956665,
+        "cosine": 0.9999179244041443,
+        "dtype": "bfloat16",
+        "finite": true,
+        "formal_magnitude_atol": 0.24734464287757874,
+        "formal_magnitude_rtol": 0.5,
+        "formal_pass": true,
+        "formal_percent_threshold": 97.0,
+        "formal_percent_within": 100.0,
+        "least_squares_actual_gain": 0.9998498558998108,
+        "max_abs_error": 0.08752496540546417,
+        "mean_abs_error": 0.0011204811744391918,
+        "nonzero": true,
+        "output_sha256": "5943c32a1dea672cda16f5e55f7396dd0301f4c15c63bbb03baac9b0f9213935",
+        "percent_within_rtol_0.2_atol_0.2": 100.0,
+        "reference_mean": -8.14411323517561e-05,
+        "reference_sha256": "7eac9ce7d735e78f809f657e5a567f0d861c4f33a34443206625b0aea7f035b0",
+        "reference_std": 0.1648964285850525,
+        "relative_l2": 0.012812270782887936,
+        "shape": [
+          8192,
+          2048
+        ],
+        "strict_rtol_0.2_atol_0.2_allclose": true
+      },
+      "sanity": {
+        "dtype": "bfloat16",
+        "finite": true,
+        "nonzero": true,
+        "output_sha256": "5943c32a1dea672cda16f5e55f7396dd0301f4c15c63bbb03baac9b0f9213935",
+        "pass": true,
+        "sentinel_nan_remaining": 0,
+        "shape": [
+          8192,
+          2048
+        ]
+      },
+      "workspace": {
+        "expected_row_counts_sha256": "7583d460dbedd16f446c71f161308169c62b9a557e118373602c3d90db8627dd",
+        "scalars": {
+          "all_work_published": 1,
+          "barrier_count": 0,
+          "barrier_epoch": 40,
+          "pair_head": 9189,
+          "producers_done_count": 0,
+          "task_head": 2658,
+          "task_tail": 2548
+        },
+        "schema": "exp005.workspace-route-task-evidence.v1",
+        "tensor_sha256": {
+          "expert_tile_base": "4b86f54e8e58a1c60b4e9d570b1bde9ddf9b10d64c961e81b7b2130f24aad3d4",
+          "expert_write_rows": "642f6b3ba63757d7ad286219619fcc7ec78027d82866f78ae38125a420b6edd9",
+          "row_counts": "642f6b3ba63757d7ad286219619fcc7ec78027d82866f78ae38125a420b6edd9",
+          "task_expert": "2cf6256217d75ff5b028f7486e6dfd29a338cc2762bc13a1e0c15c577a2bad48",
+          "task_m_tile": "ca6dba2bc5be731b9d3146db5ed67086d0e33760e7ee48d1c2012ea5611400aa",
+          "task_ready": "02a3bbd244504831467c64842a9cfa5296e72343836f325b805e5329397c420e",
+          "task_slice_begin": "9a676701cc34edebcde1a5683dcb038ecd6647ab851298decb5a0292a0caf60c",
+          "task_slice_count": "7de0213eaf9c51180371c683da10a8cb9a0e1032bff364065ecd3c1c20fb3cd4",
+          "task_valid_rows": "e1d23d93a19c177d6ade6718e80194478f2351ed4798ba11a388661ed4813995",
+          "tile_write_count": "6952caeaa65a2c378d050989ec11f69cefe5254d926ad1caa592e2f3ac3c5286"
+        },
+        "verification": {
+          "checks": {
+            "all_work_published": true,
+            "atomic_head_terminal_state": true,
+            "expert_tile_base": true,
+            "expert_write_rows": true,
+            "routed_row_sum": true,
+            "row_counts": true,
+            "task_descriptor_multiset": true,
+            "task_tail": true
+          },
+          "exact_once_evidence": "append-only descriptor multiset + terminal atomic-head inference; no direct per-task consumed bitmap exists",
+          "expected_pair_head": 67518,
+          "expected_task_count": 2548,
+          "gate_pass": true,
+          "legacy_pair_head_terminal_state": {
+            "admitted": false,
+            "observed": false,
+            "reason": "same verifier drift reproduced by locked Baseline"
+          },
+          "missing_task_descriptors": [],
+          "observed_pair_head": 9189,
+          "observed_task_head": 2658,
+          "observed_task_tail": 2548,
+          "producer_claim_count": 18,
+          "task_descriptor_multiset_sha256": "fc28e24c2a414c338fd43fa5e9be3bbeb1166b72e66e9c690114a9412dcc0c2a",
+          "task_descriptor_order_sha256": "fc28e24c2a414c338fd43fa5e9be3bbeb1166b72e66e9c690114a9412dcc0c2a",
+          "terminal_head_overshoot": 110,
+          "unexpected_task_descriptors": []
+        },
+        "workspace_capacity": {
+          "physical_tiles": 767,
+          "routed_rows": 65536,
+          "tasks": 3068
+        },
+        "workspace_type": "Sm120DynamicMoEWorkspace"
+      }
+    }
+  },
+  "fixture_identity": {
+    "manifest_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp008_748ad/.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/fixtures/manifest.json",
+    "manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+    "npz_sha256": {
+      "8192": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438"
+    },
+    "seed": 2026
+  },
+  "fixture_manifest": {
+    "duplicate_expert_ids": 0,
+    "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+    "fixture_path": "m8192.npz",
+    "fixture_sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438",
+    "m": 8192,
+    "occupancy_max": 295,
+    "occupancy_min": 205,
+    "occupancy_sha256": "3e4350788bfcdd1cca175141f0c6626934589b97cb23d74811e4bc2785531a94",
+    "shape": {
+      "experts": 256,
+      "hidden": 2048,
+      "intermediate_tp": 512,
+      "topk": 8
+    },
+    "topk_ids_sha256": "c7ea3babd394cb6fc73980a2754b13a8215deaee991b3aaf7ce3b45502592abb",
+    "topk_weights_sha256": "441f51ba80975dc8cfc3fc0d7e5a07a8c474a6781f8d606ff0eaecef69adbcea",
+    "weight_sum_max_abs_error": 2.384185791015625e-07,
+    "x_sha256": "00d8fb81ac350100bdb9c4f9341ac2cbbc24d6c0b21b62f565f7f44a8ad24bec"
+  },
+  "jit_identity": {
+    "artifact_count": 5,
+    "artifact_set_sha256": "eef98c7bb250b217d25781594c72e0e84c74086c99a60d48c50756b1606c73b6",
+    "cubin_sha256": [
+      "6567aa92ad8376b3f254a4b79df482eaad711162b1c265260c55b3e2d8eb6721"
+    ],
+    "exp018_artifact_set_sha256_reference": "4aa7f95202db57421e1099e68f923ab585fb3ac914bdcd117aa3aab03d78e7c9",
+    "symbol_gate": true,
+    "symbols": [
+      "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
+    ]
+  },
+  "launch_contract": {
+    "block": [
+      288,
+      1,
+      1
+    ],
+    "grid": [
+      1,
+      1,
+      110
+    ],
+    "symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0"
+  },
+  "m": 8192,
+  "profile": {
+    "boundary": "one complete production CUDA Graph replay",
+    "event_elapsed_us": 1597677.001953125,
+    "nvtx_range": "exp022_candidate_m8192_ncu",
+    "profiled_graph_replays": 1,
+    "warmup_graph_replays": 5
+  },
+  "runtime": {
+    "cuda_runtime": "13.2",
+    "gpu_name": "NVIDIA Graphics Device",
+    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "hostname": "0034dc5ce4c3",
+    "image_environment": {
+      "W4A4_IMAGE_DIGEST": "sha256:222d8b18e671be5c3ef91cb41727a2572a0b23f59ded6c39f373a96946f6f2ba",
+      "W4A4_IMAGE_ID": "sha256:a4e056e1d34a5cc9387512ffa3abeed778e3dc7966633c5154d771705d8835ac",
+      "W4A4_PYTHON_DEPS_SHA256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74"
+    },
+    "jit_root": "/workspace/jit",
+    "lease_id": "exp022-scatter-vector-s2r-20260721",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+    "pip_freeze_sha256": "294d3f1c0248ec59e602a22c5d14def1bfabb1b90243435747d46416211d8608",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "sm_count": 110,
+    "timestamp_unix": 1784653170.2438083,
+    "torch": "2.12.0a0+5aff3928d8.nv26.05"
+  },
+  "schema": "exp022.vector-s2r-ncu-target.v1",
+  "source_identity": {
+    "locked_files": {
+      "dispatch": {
+        "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp008_748ad/flashinfer/fused_moe/cute_dsl/blackwell_sm12x/moe_dispatch.py",
+        "sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4"
+      },
+      "exp018_runner": {
+        "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp008_748ad/.claude/w4a4_moe_bench/experiments/exp_018_triton_opt_eric_benchmark/run_arm.py",
+        "sha256": "a26febd63021a0e3d48a8b4ef26fd3580ed05a1a9b658791694b921993c1621c"
+      },
+      "exp019_target": {
+        "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp008_748ad/.claude/w4a4_moe_bench/experiments/exp_019_opt_vs_eric_dataflow_bottleneck/profile_ncu_target.py",
+        "sha256": "1110be0b7f32e012a9e3ab72e7144a4b028bb2de3f5ee8435ccedbefd273f593"
+      },
+      "exp022_adapter": {
+        "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp008_748ad/.claude/w4a4_moe_bench/experiments/exp_022_scatter_vector_s2r/profile_target.py",
+        "sha256": "5ede7e03ea72e6e16fbb7f8b1046da974fbe4d6cba18146d70811c53a51a2476"
+      },
+      "source": {
+        "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp008_748ad/.claude/w4a4_moe_bench/experiments/exp_022_scatter_vector_s2r/results/overlays/candidate_vector_s2r_v0/moe_dynamic_kernel.py",
+        "sha256": "db2ea34071b5dddd8ae6a366a600e412ffa7b872438b2e55f09b037e2764977a"
+      },
+      "wrapper": {
+        "path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp008_748ad/flashinfer/fused_moe/cute_dsl/b12x_moe.py",
+        "sha256": "bcac806795c035decd0773f4f801d477e7ebf14c1d67c3e49eee42ee0579c0a4"
+      }
+    },
+    "runtime": {
+      "adapter": null,
+      "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+      "expected_block_threads": 288,
+      "flashinfer_commit": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+      "kind": "cutedsl_dynamic_fused_moe",
+      "overlay": "/lustre/raplab/client/xiy/workspace/flashinfer_exp008_748ad/.claude/w4a4_moe_bench/experiments/exp_022_scatter_vector_s2r/results/overlays/candidate_vector_s2r_v0/moe_dynamic_kernel.py",
+      "overlay_sha256": "db2ea34071b5dddd8ae6a366a600e412ffa7b872438b2e55f09b037e2764977a",
+      "source": "/lustre/raplab/client/xiy/workspace/flashinfer_exp008_748ad/.claude/w4a4_moe_bench/experiments/exp_022_scatter_vector_s2r/results/overlays/candidate_vector_s2r_v0/moe_dynamic_kernel.py",
+      "source_sha256": "db2ea34071b5dddd8ae6a366a600e412ffa7b872438b2e55f09b037e2764977a",
+      "target_module": "flashinfer.fused_moe.cute_dsl.blackwell_sm12x.moe_dynamic_kernel",
+      "wrapper_kwargs": {
+        "E": 256,
+        "H": 2048,
+        "I_tp": 512,
+        "activation": "silu",
+        "quant_mode": "w4a4",
+        "topk": 8,
+        "use_cuda_graph": true
+      }
+    }
+  },
+  "status": "complete",
+  "telemetry_after": {
+    "applications_graphics_clock_mhz": "2377",
+    "driver": "580.95.05",
+    "foreign_compute_processes": "not_queried_after_context",
+    "graphics_clock_mhz": "2565",
+    "memory_clock_mhz": "13365",
+    "name": "NVIDIA Graphics Device",
+    "pci_bus_id": "00000000:76:00.0",
+    "power_w": "71.71",
+    "pstate": "P1",
+    "temperature_c": "28",
+    "throttle_counters_us": {
+      "hw_power_brake": 0,
+      "hw_therm_slowdown": 0,
+      "sw_power_cap": 379897760880,
+      "sw_therm_slowdown": 0,
+      "sync_boost": 0
+    },
+    "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+  },
+  "telemetry_before": {
+    "applications_graphics_clock_mhz": "2377",
+    "driver": "580.95.05",
+    "foreign_compute_processes": [],
+    "graphics_clock_mhz": "2370",
+    "memory_clock_mhz": "13365",
+    "name": "NVIDIA Graphics Device",
+    "pci_bus_id": "00000000:76:00.0",
+    "power_w": "34.98",
+    "pstate": "P1",
+    "temperature_c": "26",
+    "throttle_counters_us": {
+      "hw_power_brake": 0,
+      "hw_therm_slowdown": 0,
+      "sw_power_cap": 379897749282,
+      "sw_therm_slowdown": 0,
+      "sync_boost": 0
+    },
+    "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+  },
+  "telemetry_gate": {
+    "checked_throttle_counters": [
+      "hw_power_brake",
+      "hw_therm_slowdown",
+      "sw_therm_slowdown"
+    ],
+    "checks": {
+      "application_clock_stable": true,
+      "no_foreign_process_before": true,
+      "slowdown_not_increased": true,
+      "uuid_stable": true
+    },
+    "pass": true
+  },
+  "weight_identity": {
+    "manifest": {
+      "canonical_format": "modelopt_w31_packed_e2m1_nonuniform_e4m3_scale",
+      "fc2_input_scale_sha256": "3ea3c53d6188c3b35eebe17726476d4d7d71599a4140ea41592e6c731c9c4845",
+      "logical_scale_pattern": "E4M3 repeating 1/64,1/32,1/16 over K blocks",
+      "seed": 2026,
+      "w1_cutedsl_scale_sha256": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+      "w1_cutlass_scale_sha256": "1f2b798d164c31806c00c20385c913009293fc1060c5cb2e97f6e10a5bed925d",
+      "w1_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+      "w1_logical_scale_sha256": "57fa13c73e5db08fcd7f732f99e39e8b0039b6fceb49f84cfeb6e6fb82ae505b",
+      "w1_packed_sha256": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+      "w1_packed_shape": [
+        256,
+        1024,
+        1024
+      ],
+      "w1_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+      "w1_swizzled_storage_sha256": "bf58a75aef43548a5a82d0524267a52ff213c63565bd6efae64c475fc32a49f2",
+      "w2_cutedsl_scale_sha256": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+      "w2_cutlass_scale_sha256": "a890071534f7109ccc6f42cc972ad91194b7d1527dd351f6da76c5405763954f",
+      "w2_global_scale_sha256": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+      "w2_logical_scale_sha256": "fbbed3d41e7f19f099c3ce947249b72f20ec4053d34bcb9d2f230489e3c22621",
+      "w2_packed_sha256": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1",
+      "w2_packed_shape": [
+        256,
+        2048,
+        256
+      ],
+      "w2_scale_transform": "logical linear -> block_scale_interleave -> shared swizzled storage -> cutedsl MMA/CUTLASS views",
+      "w2_swizzled_storage_sha256": "cff48c1752119a5d857515c0f6fc53df73fb66d8f52578d65c98295479d09319"
+    },
+    "packed_weights_sha256": {
+      "w1": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+      "w2": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1"
+    },
+    "scales_sha256": {
+      "w1": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+      "w1_global": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+      "w2": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+      "w2_global": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a"
+    },
+    "seed": 2026
+  }
+}

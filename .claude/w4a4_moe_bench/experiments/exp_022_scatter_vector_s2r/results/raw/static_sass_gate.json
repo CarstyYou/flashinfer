@@ -1,0 +1,22 @@
+{
+  "schema": "exp022.static-sass-gate.v1",
+  "status": "pass",
+  "baseline": {
+    "source_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
+    "cubin_sha256": "e9b322e4c978c490adbe0a9bf0f9a183288c0ecddb1fd72e5a904c487be541f3",
+    "sass_total": {"LDS.128": 20, "LDS.U16": 48, "REDG.BF16x8": 4, "LDL": 0, "STL": 0},
+    "resource": {"registers_per_thread": 165, "stack_bytes_per_thread": 0, "local_bytes_per_thread": 0}
+  },
+  "candidate": {
+    "source_sha256": "db2ea34071b5dddd8ae6a366a600e412ffa7b872438b2e55f09b037e2764977a",
+    "cubin_sha256": "6567aa92ad8376b3f254a4b79df482eaad711162b1c265260c55b3e2d8eb6721",
+    "sass_total": {"LDS.128": 24, "LDS.U16": 16, "REDG.BF16x8": 4, "LDL": 0, "STL": 0},
+    "resource": {"registers_per_thread": 146, "stack_bytes_per_thread": 0, "local_bytes_per_thread": 0},
+    "scatter_change": {
+      "removed_LDS.U16_pcs": 32,
+      "added_LDS.128_pcs": ["0xfe70", "0x10df0", "0x11d30", "0x12cc0"],
+      "REDG_static_count_unchanged": true
+    }
+  },
+  "verdict": "true 128-bit S2R generated; zero spill; only the predeclared Scatter load-width bundle changed"
+}

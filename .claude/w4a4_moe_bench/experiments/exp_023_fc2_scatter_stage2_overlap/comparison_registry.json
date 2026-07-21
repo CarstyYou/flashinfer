@@ -1,0 +1,57 @@
+{
+  "schema": "kdk.kernel-dataflow-bottleneck.comparison-registry.v1",
+  "experiment": "exp_023_fc2_scatter_stage2_overlap",
+  "accepted_at_utc": "2026-07-21T16:24:25Z",
+  "accepted_revision": "r1-after-single-round-review",
+  "plan_sha256": "4771caec10125d618ab3ab391123084905a672d811c881003b606e3626ccdf34",
+  "source_commit": "1590811f923b9f4944b92ad1515c7dad38c27c35",
+  "source_kernel_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
+  "relationships": [
+    {
+      "id": "R1_stage2_overlap_vs_current_opt",
+      "mode": "paired",
+      "component_scope": "complete persistent fused MoE launch plus role-scoped overlap evidence",
+      "canonical_status": "accepted-pre-implementation",
+      "subjects": ["candidate_fc2_scatter_stage2_v0"],
+      "anchor": "current_opt",
+      "changed_bundle": {
+        "name": "FC2/Scatter M64xN128 two-stage producer-consumer bundle",
+        "fields": [
+          "warp roles: 8 math + 1 TMA -> 8 FC2 + 4 Scatter + 1 TMA",
+          "block: 288 -> 416 threads",
+          "same 32 KiB sC backing aliased as two M64xN128 stages",
+          "two-stage PipelineAsync full/empty protocol",
+          "setmaxnreg budget: producer 224, consumer 48, TMA 32"
+        ],
+        "boundary": "inseparable overlap design bundle; candidate source/JIT/cubin hashes must be frozen before capture"
+      },
+      "logical_work_boundary": "same E256 H2048 I_tp512 topk8 BF16-input/NVFP4-weight persistent fused MoE",
+      "timed_boundary": "one complete fused MoE CUDA Graph replay on the same routed fixture",
+      "controlled_invariants": [
+        "same FC2 M128xN128 OMMA tile and Tensor work",
+        "same Scatter logical outputs, BF16x8 REDG count and addresses",
+        "same route/task/cache semantics with original 288-thread virtual mapping",
+        "same 32 KiB sC payload and all non-epilogue logical work",
+        "same grid, fixture hashes, compiler/container/dependencies, GPU UUID GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12 and 2377 MHz clock",
+        "fresh identity-locked JIT roots and immutable cubin artifact sets"
+      ],
+      "predeclared_allowed_consequence_fields": [
+        "physical Scatter warp/lane ownership",
+        "block threads and warp roles",
+        "register redistribution, barrier state, SMEM padding and occupancy",
+        "schedule, stalls, issue cadence and complete fused-kernel latency"
+      ],
+      "normalization_scope": "none; exact same complete fused MoE logical work",
+      "denominator": "one complete persistent fused MoE graph replay for the same routed fixture",
+      "allowed_claims": [
+        "whether the declared bundle creates FC2 OMMA/Scatter LDS-to-REDG overlap",
+        "whether the complete bundle improves full fused-kernel latency"
+      ],
+      "prohibited_claims": [
+        "pure causal contribution of stage count, extra warps or register redistribution alone",
+        "claims that R2S/TMA overlap proves FC2 OMMA/Scatter overlap",
+        "performance claims after correctness, protocol, work, binary or environment identity failure"
+      ]
+    }
+  ]
+}

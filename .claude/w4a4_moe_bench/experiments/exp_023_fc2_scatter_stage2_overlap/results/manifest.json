@@ -1,0 +1,58 @@
+{
+  "schema": "exp023.manifest.v1",
+  "status": "closed-reject-gate-a",
+  "experiment": "exp_023_fc2_scatter_stage2_overlap",
+  "source": {
+    "flashinfer_commit": "1590811f923b9f4944b92ad1515c7dad38c27c35",
+    "baseline_kernel": ".claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py",
+    "baseline_kernel_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
+    "plan_sha256": "4771caec10125d618ab3ab391123084905a672d811c881003b606e3626ccdf34",
+    "comparison_registry_sha256": "f264a591f5e5f48871df7d2889501544b6874b13ca158de8e0ba30bdb00cd1a1",
+    "builder_sha256": "da1131d9990ee3ac35e33d93bb8cd2964154df1c7487e9520502575f84e47ee5",
+    "role_preflight_source_sha256": "4cee4d2cb9b1dfc7555c042db5b7813725207a16f72c1a30153078a95acd8e47"
+  },
+  "environment": {
+    "host": "10.6.142.16",
+    "gpu_uuid": "GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12",
+    "gpu_name": "NVIDIA Graphics Device",
+    "application_clock_mhz": 2377,
+    "driver": "580.95.05",
+    "container": "nvcr.io/nvidia/pytorch:26.05-py3",
+    "container_image_id": "sha256:a4e056e1d34a5cc9387512ffa3abeed778e3dc7966633c5154d771705d8835ac",
+    "nvcc": "13.2.78",
+    "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74"
+  },
+  "capture": {
+    "lease_id": "exp023-stage2-overlap-20260721",
+    "runner": ".claude/w4a4_moe_bench/experiments/exp_005_8warp_spill_reduction/run_exp005_arm.py",
+    "case": "M256 canonical",
+    "capture_workdir": "exp_023_fc2_scatter_stage2_overlap",
+    "candidate_cubin_sha256": "72ed647c6f9ebedcdd3bdf825f498cd74a5290efa378c1b20bcd6ef704aaa4aa",
+    "candidate_ptx_sha256": "2fc2d1cd961e8ccce09976a0102573e4e8747f81f53a9faffbe993216f65703a",
+    "resource_command": "/usr/local/cuda/bin/cuobjdump --dump-resource-usage $cubin > results/raw/resource.txt",
+    "sass_local_command": "/usr/local/cuda/bin/nvdisasm -g $cubin | grep -E 'LDL|STL' > results/raw/sass_local_instructions.txt",
+    "evidence_files": [
+      {
+        "path": "results/raw/resource.txt",
+        "sha256": "3d3d5579ad6790cf8c04e0b292ba9e40094d57662fe7dd558e1353a8f73348fe"
+      },
+      {
+        "path": "results/raw/sass_local_instructions.txt",
+        "sha256": "2ec360ce181e9670e06fa739fc3fab4edc7cdf9d90ce17e5338058f7f9084906",
+        "stl_count": 18,
+        "ldl_count": 61
+      }
+    ],
+    "jit_artifacts_checked_in": false,
+    "artifact_policy": "The rejected JIT cache/cubin is not checked in; hashes and minimal raw resource evidence are retained. build_candidate.py deterministically regenerates the exact source."
+  },
+  "outcome": {
+    "verdict": "Reject",
+    "failed_gate": "Gate A zero-spill role feasibility",
+    "live_opt_modified": false,
+    "full_stage2_candidate_built": false,
+    "iket_run": false,
+    "benchmark_run": false
+  }
+}

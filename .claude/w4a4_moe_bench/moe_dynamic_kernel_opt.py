@@ -62,6 +62,7 @@ from flashinfer.cute_dsl.fp4_common import (
     quantize_block_fp4,
     quantize_block_fp4_fast,
     get_ptr_as_int64,
+    get_smem_ptr_as_int32,
     st_global_f32,
     st_global_i32,
     shared_ptr_to_u32,
@@ -143,6 +144,45 @@ def _ld_shared_i32(addr, *, loc=None, ip=None):
             asm_dialect=llvm.AsmDialect.AD_ATT,
         )
     )
+
+
+@dsl_user_op
+def load_shared_bf16x8_to_f32x8(addr: Int32, *, loc=None, ip=None):
+    """Load one aligned BF16x8 vector with exactly one 128-bit S2R."""
+    result = llvm.inline_asm(
+        llvm.StructType.get_literal([T.f32()] * 8),
+        [Int32(addr).ir_value(loc=loc, ip=ip)],
+        """
+        {
+            .reg .b32 p0, p1, p2, p3;
+            .reg .b16 b0, b1, b2, b3, b4, b5, b6, b7;
+            ld.shared.v4.u32 {p0, p1, p2, p3}, [$8];
+            mov.b32 {b0, b1}, p0;
+            mov.b32 {b2, b3}, p1;
+            mov.b32 {b4, b5}, p2;
+            mov.b32 {b6, b7}, p3;
+            cvt.f32.bf16 $0, b0;
+            cvt.f32.bf16 $1, b1;
+            cvt.f32.bf16 $2, b2;
+            cvt.f32.bf16 $3, b3;
+            cvt.f32.bf16 $4, b4;
+            cvt.f32.bf16 $5, b5;
+            cvt.f32.bf16 $6, b6;
+            cvt.f32.bf16 $7, b7;
+        }
+        """,
+        "=f,=f,=f,=f,=f,=f,=f,=f,r",
+        has_side_effects=False,
+        is_align_stack=False,
+        asm_dialect=llvm.AsmDialect.AD_ATT,
+        loc=loc,
+        ip=ip,
+    )
+    values = []
+    for idx in range(8):
+        value = llvm.extractvalue(T.f32(), result, [idx], loc=loc, ip=ip)
+        values.append(cutlass.Float32(value))
+    return tuple(values)
 
 
 @dsl_user_op
@@ -1402,62 +1442,37 @@ class MoEDynamicKernel:
                 wv = ld_shared_f32(
                     scatter_weight_base_addr + cached_row * Int32(4)
                 )
-                sc_v0 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col,
-                        epi_buffer,
-                    ]
+                # Preserve the K_SW128 address transform: compute the
+                # unswizzled outer offset through sC.layout, then explicitly
+                # apply S<3,4,3> in BF16 element units before stripping the
+                # SMEM pointer metadata.  A raw pointer does not retain CuTe's
+                # swizzle transform.
+                sc_element_offset = Int32(
+                    sC.layout(
+                        (
+                            warp_m_base + local_row,
+                            local_col,
+                            epi_buffer,
+                        )
+                    )
                 )
-                sc_v1 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col + Int32(1),
-                        epi_buffer,
-                    ]
+                sc_element_offset = sc_element_offset ^ (
+                    (sc_element_offset & Int32(0x1C0)) >> Int32(3)
                 )
-                sc_v2 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col + Int32(2),
-                        epi_buffer,
-                    ]
+                sc_smem_addr = get_smem_ptr_as_int32(
+                    sC,
+                    sc_element_offset,
                 )
-                sc_v3 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col + Int32(3),
-                        epi_buffer,
-                    ]
-                )
-                sc_v4 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col + Int32(4),
-                        epi_buffer,
-                    ]
-                )
-                sc_v5 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col + Int32(5),
-                        epi_buffer,
-                    ]
-                )
-                sc_v6 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col + Int32(6),
-                        epi_buffer,
-                    ]
-                )
-                sc_v7 = cutlass.Float32(
-                    sC[
-                        warp_m_base + local_row,
-                        local_col + Int32(7),
-                        epi_buffer,
-                    ]
-                )
+                (
+                    sc_v0,
+                    sc_v1,
+                    sc_v2,
+                    sc_v3,
+                    sc_v4,
+                    sc_v5,
+                    sc_v6,
+                    sc_v7,
+                ) = load_shared_bf16x8_to_f32x8(sc_smem_addr)
                 scatter_add_v4_bf16x2(
                     get_ptr_as_int64(
                         scatter_output, tok * scatter_N + global_col

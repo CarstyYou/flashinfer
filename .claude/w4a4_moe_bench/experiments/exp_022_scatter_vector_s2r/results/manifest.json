@@ -1,0 +1,64 @@
+{
+  "schema": "exp022.manifest.v1",
+  "status": "accepted_and_integrated",
+  "control_repo": {
+    "plan_source_commit": "1590811f923b9f4944b92ad1515c7dad38c27c35",
+    "baseline_source_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
+    "integrated_live_source_sha256": "db2ea34071b5dddd8ae6a366a600e412ffa7b872438b2e55f09b037e2764977a"
+  },
+  "capture_checkout": {
+    "host": "10.6.142.16",
+    "worktree_head": "748ad45594f5e701cbbdca59c60335f39d1c3b2f",
+    "cutlass_commit": "b46b16d003484063bca4ed365e44095c4c6ed633",
+    "note": "worktree commit differs from control repo; exact source, runner, fixture and cubin hashes close the comparison identity"
+  },
+  "hardware": {
+    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "gpu_name": "NVIDIA Graphics Device",
+    "driver": "580.95.05",
+    "application_graphics_clock_mhz": 2377
+  },
+  "software": {
+    "container": "nvcr.io/nvidia/pytorch:26.05-py3",
+    "container_image_id": "sha256:a4e056e1d34a5cc9387512ffa3abeed778e3dc7966633c5154d771705d8835ac",
+    "nvcc": "13.2.78",
+    "ncu": "2026.1.1",
+    "veloq": "0.2.2",
+    "python_deps_sha256": "32090c58dc24660cb2cb6a4368c7fe756a181234055a9bae7f798ebf25d64c74"
+  },
+  "identity": {
+    "fixture_manifest_sha256": "683ec75341e4d8317dfdc5c4b04229f9695f9aa286d575c4f6e1fdef55d90801",
+    "m8192_fixture_sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438",
+    "candidate_cubin_sha256": "6567aa92ad8376b3f254a4b79df482eaad711162b1c265260c55b3e2d8eb6721",
+    "capture_profile_adapter_sha256": "5ede7e03ea72e6e16fbb7f8b1046da974fbe4d6cba18146d70811c53a51a2476",
+    "retained_profile_adapter_sha256": "2b218eb31e4e31e416ee07cd3659be3999b4f0b7240742efeb717eff3c710692",
+    "exp018_runner_sha256": "a26febd63021a0e3d48a8b4ef26fd3580ed05a1a9b658791694b921993c1621c"
+  },
+  "ncu_reports": {
+    "baseline": {
+      "remote_path": "/home/xiy/workspace/flashinfer_exp001_corrected_074d93e/.claude/w4a4_moe_bench/experiments/exp_019_opt_vs_eric_dataflow_bottleneck/results/raw/ncu/latest_opt_fp4/m8192/trace.ncu-rep",
+      "sha256": "883355ca648f9eaefe4e85db1f3cf054c7f49e1194d09313f242115d1a23af2b"
+    },
+    "candidate": {
+      "remote_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp008_748ad/.claude/w4a4_moe_bench/experiments/exp_022_scatter_vector_s2r/results/raw/ncu/candidate_m8192/trace.ncu-rep",
+      "sha256": "32ebb5192003eecd322f61ccea777611d350a453061ba29d22a509020875f85a"
+    }
+  },
+  "correctness_capture": {
+    "remote_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp008_748ad/.claude/w4a4_moe_bench/experiments/exp_022_scatter_vector_s2r/results/raw/correctness.json",
+    "sha256": "32d2e7eb1be44f5e7a9930e60601f087d1bb8ebd52bdbc6862ccde1a6c8fcb1c"
+  },
+  "retained_artifacts": [
+    "../plan.md",
+    "../comparison_registry.json",
+    "../build_candidate.py",
+    "../profile_target.py",
+    "result.md",
+    "raw/benchmark_raw.json",
+    "raw/correctness_summary.json",
+    "raw/static_sass_gate.json",
+    "raw/ncu_pc_evidence.json",
+    "raw/ncu/candidate_m8192/target_manifest.json",
+    "raw/swizzle_address_enumeration.json"
+  ]
+}

@@ -46,10 +46,11 @@
 
 ### [todo] 2. 输出归并 residual 定位与优化
 
-- 当前 P0：即使 exp_014 已让 W0–W7 共同执行 Scatter，诊断投影仍为
-  `371.964 µs / 27.91%`，不能把 8-warp mapping 已完成误写为 Scatter 已收口。
-- 先用 matched、低扰动 probe 区分 `SMEM LDS → scale/pack → REDG → post-sync`，判断 dominant edge；
-  现有证据只定位到这些语义区间，尚未证明 barrier、REDG completion 或 work imbalance 中谁是根因。
+- **[done] exp_022**：exp_021 定位出的 `sC` scalar LDS 放大已修复；32 个 `LDS.U16` 变为 4 个
+  `LDS.128`，PC-scoped actual/ideal 从 `3.9755×` 降为 `1.0000×`，REDG logical work 不变。
+  M8192 未插桩 fused E2E 提升 `9.18%`，M256 持平，已进入 Opt。
+- Scatter 尚未整体收口；后续 residual 只继续调查 REDG service/contention、CTA work imbalance 或更小的
+  overlap 设计，不重复优化已经消除的 `sC` LDS amplification。
 - 只有定位问题点后才设计单变量候选；以 correctness、zero-spill、Scatter phase 与未插桩 E2E
   同时改善作为接受条件。
 
@@ -105,6 +106,17 @@
 - 组合机制同时减少 producer claims 并改变 route metadata ownership；收益不拆归给单一子变化。
 - 正确性、P3 phase、静态/动态 spill 与完整 E2E sweep 均通过，进入
   `moe_dynamic_kernel_opt.py` 的锁定 topk-8 实验路径。
+
+### [done] exp_022：Scatter 128-bit S2R
+
+- 保持 `sC` layout、8-warp ownership、REDG、同步和 launch 不变，只向量化每 lane 的 BF16x8 S2R。
+- PC-scoped NCU、correctness、zero-spill 与 paired E2E 全过，已进入 `moe_dynamic_kernel_opt.py`。
+
+### [reject] exp_023：FC2 → Scatter M64×N128 双 stage overlap
+
+- 预注册的 13-warp / 416-thread role-only preflight 已产生 `72 B/thread` stack、18 STL 与 61 LDL；
+  按第一快门直接 Reject，未继续实现 stage alias、IKET 或 ABBA。
+- 只拒绝这组 dedicated Scatter warpgroup 设计束，不否定后续更小角色增量的 overlap 方案。
 
 ### [reject] exp_013：compact epilogue
 
