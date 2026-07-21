@@ -1,5 +1,5 @@
 {
-  "schema": "exp021.scatter_instruction_evidence.v1",
+  "schema": "exp021.scatter_instruction_evidence.v2",
   "case": {
     "m": 8192,
     "hidden": 2048,
@@ -95,8 +95,66 @@
     },
     "limitation": "The standalone scheduler ratios corroborate the instruction-stream symptom but are not production phase ratios."
   },
+  "iket": {
+    "provider": {
+      "version": "0.7.10",
+      "archive_sha256": "fe4c979f96fa8aaa585e985f363a700175aaa2a807b63583b2db459d6877da96",
+      "timestamp_unit": "raw timestamp units"
+    },
+    "warp_trace": {
+      "scope": "full-grid standalone correspondence probe",
+      "canonical_replay_grid_id": 4,
+      "ctas": 110,
+      "warps_per_cta": 8,
+      "warp_lifetime": {
+        "min": 329920,
+        "p50": 413136,
+        "p95": 477024,
+        "max": 485024
+      },
+      "global_end_skew": 155104,
+      "max_intra_cta_warp_end_skew": 64,
+      "other_launch_max_intra_cta_warp_end_skew": 96,
+      "cta_lifetime": {
+        "min": 329984,
+        "p50": 413136,
+        "max": 485024
+      },
+      "cta_valid_row_work": {
+        "min": 1833,
+        "mean": 2383.1273,
+        "max": 2783,
+        "pearson_r_with_cta_lifetime": 0.783043
+      },
+      "capture_manifest_sha256": "b1a0ac2a5bae8fd3767917e4f2d943cfb1b4d36a959b4b05b36a8fe4cab9941b",
+      "decoded_trace_sha256": "8d17a0f44422f744032176458613782c412c4ae29f645eb125f682f2b363d81d",
+      "analysis_sha256": "4a214c90be4fd753ce947ba2dbbf2308ff20a8b54935328bf71d68c86f759ed6",
+      "interpretation": "No meaningful kernel-end warp tail was observed within a CTA. CTA lifetime is strongly correlated with routed valid-row work; this is correlation, not standalone proof of causality."
+    },
+    "named_range_capture": {
+      "scope": "selected-cluster standalone diagnostic",
+      "enabled_cluster": [0, 0, 0],
+      "probe_source_sha256": "4b3ccfb8fd44b110024cf7650daa1e6d8e8d84eb655455b1d55cd6859eb903be",
+      "tracker_cubin_sha256": "48a27900e69542c8f0b8264cf8f133d7bdc792ce1545c783c0ab6bfe60494cdf",
+      "resource_gate": {
+        "baseline_registers_per_thread": 40,
+        "named_registers_per_thread": 40,
+        "baseline_stack_bytes": 0,
+        "named_stack_bytes": 0,
+        "baseline_local_bytes": 0,
+        "named_local_bytes": 0
+      },
+      "cta0_lifetime_overhead_percent": 26.63,
+      "capture_manifest_sha256": "6440b74ac41e0abaa9e73d3e4a30dd40bc64461d902b3883993454d35d5ad86a",
+      "decoded_trace_sha256": "246e5dd617c8718b195c5c2e126942298dbe7c62af4a11fe3038c6981100bea9",
+      "analysis_sha256": "b47c57e475e47797a2874eb71f8c4395cc7d12ae1f50a22d3e7a493986ecf762",
+      "quantitative_phase_breakdown_admitted": false,
+      "reason": "Runtime perturbation is 26.63%, timestamps are quantized in 32 raw-unit steps, and only the first BF16x8 vector per warp/tile is sampled."
+    }
+  },
   "verdict": {
-    "localized_candidate": "K_SW128 sC scalar LDS.U16 access produces about 4x shared wavefront amplification and a dependent consumer chain.",
+    "localized_candidate": "IKET finds no meaningful intra-CTA kernel-end warp tail; NCU localizes the strongest instruction candidate to K_SW128 sC scalar LDS.U16 access, which produces about 4x shared wavefront amplification and a dependent consumer chain.",
+    "cta_tail": "Standalone CTA lifetime is strongly correlated with routed valid-row work (Pearson r=0.783043), but correlation alone is not a causal proof and is not a production fused-kernel phase share.",
     "unresolved": "REDG pressure is visible, but current evidence cannot separate destination contention, L2 reduction-service throughput, or ordering effects.",
     "rejected_interpretations": [
       "IMAD or SHF is intrinsically slow because a dependency stall is sampled at that PC",

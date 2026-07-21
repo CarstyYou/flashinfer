@@ -19,7 +19,8 @@
     "container": "nvcr.io/nvidia/pytorch:26.05-py3",
     "container_digest": "sha256:a4e056e1d34a5cc9387512ffa3abeed778e3dc7966633c5154d771705d8835ac",
     "nvcc": "13.2.78",
-    "ncu": "2026.1.1"
+    "ncu": "2026.1.1",
+    "iket": "0.7.10"
   },
   "fixture": {
     "m": 8192,
@@ -48,7 +49,28 @@
     "reason": "The standalone is diagnostic-only; exact production SASS and source counters are the primary evidence."
   },
   "iket": {
-    "used": false,
-    "reason": "NCU exact-PC and shared source counters localized the first candidate; warp-tail evidence was not required."
+    "used": true,
+    "provider": {
+      "path": "/home/xiy/workspace/iket_0_7_10",
+      "archive_sha256": "fe4c979f96fa8aaa585e985f363a700175aaa2a807b63583b2db459d6877da96"
+    },
+    "warp_trace": {
+      "started_at_utc": "2026-07-21T15:33:25.224231+00:00",
+      "completed_at_utc": "2026-07-21T15:34:22.907826+00:00",
+      "scope": "full-grid",
+      "remote_path": "/home/xiy/workspace/flashinfer_exp001_corrected_074d93e/.claude/w4a4_moe_bench/experiments/exp_021_scatter_instruction_bubble/results/raw/iket_warp_trace_v1",
+      "capture_manifest_sha256": "b1a0ac2a5bae8fd3767917e4f2d943cfb1b4d36a959b4b05b36a8fe4cab9941b",
+      "decoded_trace_sha256": "8d17a0f44422f744032176458613782c412c4ae29f645eb125f682f2b363d81d"
+    },
+    "named_range": {
+      "started_at_utc": "2026-07-21T15:42:23.911710+00:00",
+      "completed_at_utc": "2026-07-21T15:42:30.245171+00:00",
+      "scope": "selected-cluster 0,0,0",
+      "remote_path": "/home/xiy/workspace/flashinfer_exp001_corrected_074d93e/.claude/w4a4_moe_bench/experiments/exp_021_scatter_instruction_bubble/results/raw/iket_named_v2",
+      "capture_manifest_sha256": "6440b74ac41e0abaa9e73d3e4a30dd40bc64461d902b3883993454d35d5ad86a",
+      "decoded_trace_sha256": "246e5dd617c8718b195c5c2e126942298dbe7c62af4a11fe3038c6981100bea9",
+      "quantitative_phase_breakdown_admitted": false,
+      "reason": "Named overlay perturbs CTA0 lifetime by 26.63%; preserve only as execution-order diagnostics."
+    }
   }
 }

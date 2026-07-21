@@ -1,11 +1,29 @@
 # exp_021：Scatter 指令热点与 Bubble
 
-结论：当前最清晰、已定位的瓶颈候选是 **`sC` 的标量 `LDS.U16` 读取链**。Production
-每次 `BF16x8` Scatter 先执行 8 次 `LDS.U16`；在当前 `K_SW128` layout 与 lane mapping 下，
-这些读取产生约 **3.98× shared wavefront amplification**。等待主要落在 shared-memory 发射和
-后继依赖链，不能解释为 `IMAD/SHF` 本身慢。
+结论：IKET 排除了 standalone Scatter 的明显 CTA 内 warp 收尾问题，并发现 CTA runtime 与路由
+工作量强相关；NCU/SASS 进一步把最清晰的指令级瓶颈候选定位到 **`sC` 的标量 `LDS.U16`
+读取链**。因此第一优化方向仍是 `sC` layout/load，而不是 barrier；`REDG` 的独立代价尚未闭合。
 
-## 1. Production 精确证据
+## 1. IKET：时间线与 Tail
+
+M8192 full-grid warp trace 覆盖 110 个 CTA、每 CTA 8 个 warp。以下均为 IKET
+`raw timestamp units`，不能换算为 ns/µs。
+
+| 观测 | Canonical replay | 结论 |
+|---|---:|---|
+| 同一 CTA 最大 warp end skew | **64** | 未观察到明显 kernel-end warp tail |
+| CTA lifetime | 329,984–485,024 | CTA 之间存在明显长尾 |
+| 每 CTA valid-row work | 1,833–2,783 | 路由工作量不均 |
+| work 与 lifetime Pearson `r` | **0.783** | 两者强相关，但不是单独的因果证明 |
+
+另一轮 launch 的同 CTA 最大 end skew 为 96，方向一致。这个结论只描述 standalone Scatter，
+不能直接外推为 production fused kernel 的所有 tile 内 barrier 行为。
+
+Named-range capture 没有进入定量结论：同一 CTA0 的 lifetime 相比无 named overlay 增加约
+**26.6%**，且 timestamp 以 32 units 量化。两者资源均为 40 regs/thread、0 stack、0 local，
+但运行时扰动已经足以拒绝 production phase 占比。该 trace 只保留作执行顺序诊断。
+
+## 2. Production 精确指令证据
 
 分析对象是 Opt M8192 的四段 Scatter SASS；以下占比是 **not-issued PC samples**，不是耗时占比。
 
@@ -31,7 +49,7 @@
 `sC` 读取中有 50,228,224 个 excessive wavefront，占实际值的 74.85%；metadata 没有
 excessive wavefront。这个对照把问题收敛到了 `sC` layout/access，而不是笼统的 shared memory。
 
-## 2. 哪条指令链在等
+## 3. 哪条指令链在等
 
 | SASS 类别 | PC samples / 1M executed warp instructions | 读法 |
 |---|---:|---|
@@ -46,7 +64,7 @@ Standalone 保持相同 `LDS/REDG` body 与动态次数时，每 scheduler 有 `
 但 standalone 只有 40 regs/thread、没有 FC2 producer，因此这些比例不外推为 Production phase
 的定量结果。初始化只占 0.54% 动态指令和 0.36% not-issued samples，不影响该观察。
 
-## 3. 判定与下一步
+## 4. 判定与下一步
 
 1. **先验证 `sC` 读路径。** 做一个单变量 demo，只改变 `sC` 的 shared layout 或向量 load，保持
    8-warps mapping、REDG 数量和地址完全不变。接受条件是 wavefront amplification 从 `3.975×`
@@ -54,7 +72,7 @@ Standalone 保持相同 `LDS/REDG` body 与动态次数时，每 scheduler 有 `
 2. **REDG 暂不下结论。** Production 有 1 GiB global reduction footprint，但现有证据不能区分
    destination contention、L2 reduction service throughput 与 strong-ordering；REDG PC 样本少也
    不表示它便宜。
-3. **不需要 IKET。** 当前第一问题点已由 Production exact SASS/source counters 定位；只有后续要
-   区分 warp skew 或 tail 时才需要 trace。
+3. **区分证据职责。** IKET 用于 phase/warp/CTA 时间线，NCU/SASS 用于精确 transaction、stall
+   和 PC 归因；两者不能互相替代。
 
 完整数字、身份与证据边界见 [evidence.json](evidence.json) 和 [manifest.json](manifest.json)。

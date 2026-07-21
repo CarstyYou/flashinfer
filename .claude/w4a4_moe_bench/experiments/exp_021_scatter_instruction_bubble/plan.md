@@ -17,7 +17,8 @@ warp 不足产生明显 bubble。
 - 保留真实 token/weight、tail、topk=8 与 4-slice，即每个输出元素 32 个 REDG contribution。
 - 只采一次 targeted NCU：`InstructionStats`、`SourceCounters`、`SchedulerStats`、
   `WarpStateStats`、memory/shared 与 launch/resource；用 SASS PC/source line 解释。
-- IKET 仅在 NCU 无法区分 warp skew/tail 且 audited provider 已存在时使用；不为本实验安装新环境。
+- NCU 定位指令候选后，按用户 follow-up 使用已有 audited IKET provider：full-grid warp trace
+  判断 warp/CTA tail，selected-cluster named range 仅作顺序与方向性诊断。
 - 分析前将 standalone 与当前 Opt Scatter 的 `LDS/REDG` 形式、循环展开、动态次数和资源并列审计；
   形态不一致时，结果只描述 standalone，不能外推 Opt。
 - PC stall 同时报告原始样本和每条 executed warp instruction 归一化值；等待 PC 与其 producer/consumer
@@ -34,6 +35,14 @@ warp 不足产生明显 bubble。
 - warp/barrier tail 若没有 IKET 证据则保留未知，不猜测。
 
 本实验不报告 production speedup，也不据 standalone duration 归因 production latency。
+
+## IKET follow-up
+
+- Provider 固定为 IKET 0.7.10；保留 full-grid warp trace 与 selected-cluster named-range 原始 trace。
+- 时间单位只写 `raw timestamp units`，不擅自换算为 ns/µs。
+- full-grid trace 可定量判断 kernel-end warp/CTA skew；named overlay 若显著扰动 runtime，则不生成
+  phase 占比，也不外推 production fused kernel。
+- 本 follow-up 属于同一实验的证据补强；按 single-round 规则不重复 Plan Review。
 
 ## Plan Review
 
