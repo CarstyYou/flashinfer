@@ -1,0 +1,101 @@
+{
+  "schema": "v1",
+  "source": {
+    "kind": "nsys",
+    "version": "v2"
+  },
+  "command": "nsys.summary",
+  "trace": {
+    "kind": "nsys",
+    "path": ".claude/w4a4_moe_bench/experiments/exp_017_opt_vs_triton_phase_share/results/raw/nsys/sglang_triton_fp8_m8192_pqtdir"
+  },
+  "trace_span": {
+    "origin_ns": 8213913,
+    "span_ns": 192730807
+  },
+  "data": {
+    "count": 7,
+    "total_matched": 7,
+    "schema_version": "3.27.0",
+    "product_version": "2026.3.1.157",
+    "rows": [
+      {
+        "key": "table|CUPTI_ACTIVITY_KIND_KERNEL",
+        "name": "CUPTI_ACTIVITY_KIND_KERNEL",
+        "row_count": 136,
+        "start_ns": 8341397,
+        "end_ns": 113929721
+      },
+      {
+        "key": "table|CUPTI_ACTIVITY_KIND_MEMCPY",
+        "name": "CUPTI_ACTIVITY_KIND_MEMCPY",
+        "row_count": 22,
+        "start_ns": 10775727,
+        "end_ns": 155133258
+      },
+      {
+        "key": "table|CUPTI_ACTIVITY_KIND_MEMSET",
+        "name": "CUPTI_ACTIVITY_KIND_MEMSET",
+        "row_count": 20,
+        "start_ns": 10735503,
+        "end_ns": 113866777
+      },
+      {
+        "key": "table|CUPTI_ACTIVITY_KIND_RUNTIME",
+        "name": "CUPTI_ACTIVITY_KIND_RUNTIME",
+        "row_count": 243,
+        "start_ns": 8213913,
+        "end_ns": 200928661
+      },
+      {
+        "key": "table|CUPTI_ACTIVITY_KIND_SYNCHRONIZATION",
+        "name": "CUPTI_ACTIVITY_KIND_SYNCHRONIZATION",
+        "row_count": 35,
+        "start_ns": 8358780,
+        "end_ns": 200944720
+      },
+      {
+        "key": "table|OSRT_API",
+        "name": "OSRT_API",
+        "row_count": 6,
+        "start_ns": 8157804,
+        "end_ns": 277371290
+      },
+      {
+        "key": "table|NVTX_EVENTS",
+        "name": "NVTX_EVENTS",
+        "row_count": 6,
+        "start_ns": -695592619,
+        "end_ns": 111391707
+      }
+    ],
+    "auxiliary": {
+      "full_time_range_ns": {
+        "start": -695592619,
+        "end": 277371290,
+        "duration": 972963909
+      },
+      "capabilities": {
+        "has_kernels": true,
+        "has_memcpy": true,
+        "has_memset": true,
+        "has_sync": true,
+        "has_runtime": true,
+        "has_osrt": true,
+        "has_nvtx": true,
+        "has_graph_trace": false,
+        "has_graph_nodes": true,
+        "has_graph_events": false,
+        "has_cuda_event_activity": false,
+        "has_overhead": false,
+        "has_cuda_contexts": true,
+        "has_sampling": false,
+        "has_composite_events": false,
+        "has_sched_events": false,
+        "has_gpu_metrics": false,
+        "has_nic_metrics": false,
+        "has_target_info": true
+      }
+    }
+  }
+}

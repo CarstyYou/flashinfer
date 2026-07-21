@@ -1,0 +1,15 @@
+raw/
+runtime/
+jit/
+
+*.nsys-rep
+*.qdstrm
+*.sqlite
+*_pqtdir/
+*.nsys-rep.veloq/
+*.ncu-rep
+*.ncu-rep.veloq/
+veloq/ncu/
+
+__pycache__/
+.pytest_cache/

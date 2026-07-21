@@ -1,0 +1,118 @@
+{
+  "schema": "v1",
+  "source": {
+    "kind": "veloq",
+    "version": "0.2.2"
+  },
+  "command": "info",
+  "trace": {
+    "kind": "nsys",
+    "path": ".claude/w4a4_moe_bench/experiments/exp_017_opt_vs_triton_phase_share/results/raw/nsys/sglang_triton_fp8_m8192_pqtdir"
+  },
+  "data": {
+    "detected_source": "nsys",
+    "exists": true,
+    "size_bytes": 8192,
+    "capabilities": {
+      "has_kernels": true,
+      "has_memcpy": true,
+      "has_memset": true,
+      "has_sync": true,
+      "has_runtime": true,
+      "has_osrt": true,
+      "has_nvtx": true,
+      "has_graph_trace": false,
+      "has_graph_nodes": true,
+      "has_graph_events": false,
+      "has_cuda_event_activity": false,
+      "has_overhead": false,
+      "has_cuda_contexts": true,
+      "has_sampling": false,
+      "has_composite_events": false,
+      "has_sched_events": false,
+      "has_gpu_metrics": false,
+      "has_nic_metrics": false,
+      "has_target_info": true
+    },
+    "trace_map": {
+      "devices": {
+        "count": 1,
+        "ids": [
+          0
+        ]
+      },
+      "processes": {
+        "count": 5,
+        "native_pids": [
+          1,
+          42,
+          52,
+          53,
+          54
+        ],
+        "launches": [
+          {
+            "index": 0,
+            "label": "python3",
+            "command": "python3"
+          }
+        ]
+      },
+      "nvtx": {
+        "domains": [
+          {
+            "pid": 53,
+            "id": 0
+          },
+          {
+            "pid": 53,
+            "id": 1,
+            "name": "CCCL"
+          }
+        ],
+        "top_paths": [
+          {
+            "path": "exp017_sglang_triton_fp8_m8192_replay_01",
+            "total_ns": 2232312,
+            "instances": 1
+          },
+          {
+            "path": "exp017_sglang_triton_fp8_m8192_replay_02",
+            "total_ns": 2230092,
+            "instances": 1
+          },
+          {
+            "path": "exp017_sglang_triton_fp8_m8192_replay_05",
+            "total_ns": 2172154,
+            "instances": 1
+          },
+          {
+            "path": "exp017_sglang_triton_fp8_m8192_replay_03",
+            "total_ns": 2169104,
+            "instances": 1
+          },
+          {
+            "path": "exp017_sglang_triton_fp8_m8192_replay_04",
+            "total_ns": 2168504,
+            "instances": 1
+          }
+        ]
+      }
+    },
+    "applicable_recipes": [
+      "nvtx-breakdown",
+      "nvtx-iteration-compare",
+      "nvtx-evidence-first",
+      "gpu-idle-audit",
+      "cold-kernel-hotspot",
+      "cpu-side-bottleneck",
+      "memcpy-asymmetry",
+      "nvtx-context-attribution",
+      "prep-then-query",
+      "source-line-hotspots",
+      "graph-replay-survey",
+      "graph-replay-hotspots",
+      "source-instruction-walk"
+    ]
+  }
+}

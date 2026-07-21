@@ -1,0 +1,269 @@
+{
+  "artifact_fingerprint_sha256": "1b72ff662b57cf8c9dfed6331d8f5c57fb0d27e0b37f7cb78f0a455e222b3346",
+  "artifact_stable_during_capture": true,
+  "eager_correctness": {
+    "atol": 0.01,
+    "cosine": 0.9999045133590698,
+    "formal_pass": true,
+    "formal_percent_threshold": 97.0,
+    "formal_percent_within": 99.99959468841553,
+    "max_abs_error": 0.03073546290397644,
+    "max_relative_error": 215148.46875,
+    "oracle": "actual E4M3 weights/scales plus two dynamic activation E4M3 round trips",
+    "output_sha256": "0b2dc0c560263a9ff2f6e8f7ede3783d63d4a6f982fe61344b5d5e499ca4fe61",
+    "reference_sha256": "4cb21025c276c9928825fcc0fffced9a85251519b023ecc4b75d3cf179f26037",
+    "relative_l2": 0.013822781853377819,
+    "rtol": 0.1
+  },
+  "expected_graph_topology": {
+    "fingerprint_sha256": "f792a16f3238b1a71ccb5479505c2d76352721892240bfb242e0e9f79c2f04ac",
+    "identity_rule": "graph execution ordinal plus kernel name; repeated fused_moe/fill/absmax/quant names are not grouped by name alone",
+    "node_count": 12,
+    "nodes": [
+      {
+        "kernel_name": "void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, int, int)",
+        "ordinal": 1,
+        "role": "route_align"
+      },
+      {
+        "kernel_name": "void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long)",
+        "ordinal": 2,
+        "role": "route_count_sort"
+      },
+      {
+        "kernel_name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "ordinal": 3,
+        "role": "q0_fill"
+      },
+      {
+        "kernel_name": "void (anonymous namespace)::per_tensor_absmax_kernel<__nv_bfloat16>(__nv_bfloat16 const*, float*, long)",
+        "ordinal": 4,
+        "role": "q0_absmax"
+      },
+      {
+        "kernel_name": "void (anonymous namespace)::per_tensor_quant_fp8_kernel<__nv_bfloat16, __nv_fp8_e4m3>(__nv_bfloat16 const*, __nv_fp8_e4m3*, float const*, long)",
+        "ordinal": 5,
+        "role": "q0_quant"
+      },
+      {
+        "kernel_name": "fused_moe_kernel",
+        "ordinal": 6,
+        "role": "fc1"
+      },
+      {
+        "kernel_name": "void (anonymous namespace)::act_and_mul_kernel<__nv_bfloat16, ((anonymous namespace)::ActivationKind)0, true, true>((anonymous namespace)::ActivationParams)",
+        "ordinal": 7,
+        "role": "swiglu"
+      },
+      {
+        "kernel_name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "ordinal": 8,
+        "role": "q1_fill"
+      },
+      {
+        "kernel_name": "void (anonymous namespace)::per_tensor_absmax_kernel<__nv_bfloat16>(__nv_bfloat16 const*, float*, long)",
+        "ordinal": 9,
+        "role": "q1_absmax"
+      },
+      {
+        "kernel_name": "void (anonymous namespace)::per_tensor_quant_fp8_kernel<__nv_bfloat16, __nv_fp8_e4m3>(__nv_bfloat16 const*, __nv_fp8_e4m3*, float const*, long)",
+        "ordinal": 10,
+        "role": "q1_quant"
+      },
+      {
+        "kernel_name": "fused_moe_kernel",
+        "ordinal": 11,
+        "role": "fc2"
+      },
+      {
+        "kernel_name": "void moe_sum_reduce_warp_per_token_vec_kernel<8>(c10::BFloat16 const*, c10::BFloat16*, long, long, long, long, long, long, float)",
+        "ordinal": 12,
+        "role": "topk_reduce"
+      }
+    ],
+    "schema": "exp017.sglang-triton-graph-topology.v1"
+  },
+  "fingerprint_sha256": "37a6713c8974bf2e726d2047a790b46ea8ef01730ebada11f5c521c2163e6f11",
+  "fixture": {
+    "duplicate_expert_ids": 0,
+    "fixture_kind": "persisted_numpy_bf16_input_and_topk_routing",
+    "fixture_path": "m8192.npz",
+    "fixture_sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438",
+    "m": 8192,
+    "occupancy_max": 295,
+    "occupancy_min": 205,
+    "occupancy_sha256": "3e4350788bfcdd1cca175141f0c6626934589b97cb23d74811e4bc2785531a94",
+    "shape": {
+      "experts": 256,
+      "hidden": 2048,
+      "intermediate_tp": 512,
+      "topk": 8
+    },
+    "topk_ids_sha256": "c7ea3babd394cb6fc73980a2754b13a8215deaee991b3aaf7ce3b45502592abb",
+    "topk_weights_sha256": "441f51ba80975dc8cfc3fc0d7e5a07a8c474a6781f8d606ff0eaecef69adbcea",
+    "weight_sum_max_abs_error": 2.384185791015625e-07,
+    "x_sha256": "00d8fb81ac350100bdb9c4f9341ac2cbbc24d6c0b21b62f565f7f44a8ad24bec"
+  },
+  "launch_contract": {
+    "alternate_dispatch": "direct callable; no runner/DeepGEMM/CUTLASS dispatcher",
+    "backend": "sglang_legacy_triton_fp8_chain",
+    "callable": "sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe.fused_experts_impl",
+    "callable_source": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+    "callable_source_sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056",
+    "config": {
+      "down": null,
+      "down_max_block_m": null,
+      "source": "default_heuristic",
+      "topk_ids_shape": [
+        8192,
+        8
+      ],
+      "tuned_grid": [],
+      "up": {
+        "BLOCK_SIZE_K": 256,
+        "BLOCK_SIZE_M": 64,
+        "BLOCK_SIZE_N": 128,
+        "GROUP_SIZE_M": 64,
+        "num_stages": 2,
+        "num_warps": 4
+      }
+    },
+    "quant_contract": {
+      "block_shape": null,
+      "input": "BF16 -> dynamic tensor-wise E4M3 inside FC1",
+      "intermediate": "BF16 -> dynamic tensor-wise E4M3 inside FC2",
+      "per_channel_quant": false,
+      "weight": "E4M3 per-expert tensor scale"
+    }
+  },
+  "nvtx_ranges": [
+    "exp017_sglang_triton_fp8_m8192_replay_01",
+    "exp017_sglang_triton_fp8_m8192_replay_02",
+    "exp017_sglang_triton_fp8_m8192_replay_03",
+    "exp017_sglang_triton_fp8_m8192_replay_04",
+    "exp017_sglang_triton_fp8_m8192_replay_05"
+  ],
+  "post_capture_topology_gate": {
+    "requirement": "each NVTX replay must contain the same ordered 12 CUDA graph kernel nodes",
+    "status": "pending_veloq"
+  },
+  "protocol": {
+    "analysis_interface": "VeloQ only; no direct sqlite/parquet queries",
+    "capture_range": "cudaProfilerStart/Stop",
+    "captured_graph_replays": 5,
+    "correctness_replays": [
+      1,
+      5
+    ],
+    "fingerprint_sha256": "01cc92890fec32c6d71a65f148a249b9e50410f5d03ccd85d2e2f54fedbbe9cd",
+    "l2_flush_bytes": 201326592,
+    "m": 8192,
+    "nsys_graph_mode": "node:host-only",
+    "order_per_replay": "L2 flush -> CUDA sync -> unique NVTX push -> graph replay -> CUDA sync -> NVTX pop",
+    "schema": "exp017.sglang-triton-nsys-protocol.v1",
+    "warmup_graph_replays": 5
+  },
+  "replay_correctness": {
+    "1": {
+      "atol": 0.01,
+      "cosine": 0.9999045133590698,
+      "formal_pass": true,
+      "formal_percent_threshold": 97.0,
+      "formal_percent_within": 99.99959468841553,
+      "max_abs_error": 0.03073546290397644,
+      "max_relative_error": 215148.46875,
+      "oracle": "actual E4M3 weights/scales plus two dynamic activation E4M3 round trips",
+      "output_sha256": "0b2dc0c560263a9ff2f6e8f7ede3783d63d4a6f982fe61344b5d5e499ca4fe61",
+      "reference_sha256": "4cb21025c276c9928825fcc0fffced9a85251519b023ecc4b75d3cf179f26037",
+      "relative_l2": 0.013822781853377819,
+      "rtol": 0.1
+    },
+    "5": {
+      "atol": 0.01,
+      "cosine": 0.9999045133590698,
+      "formal_pass": true,
+      "formal_percent_threshold": 97.0,
+      "formal_percent_within": 99.99959468841553,
+      "max_abs_error": 0.03073546290397644,
+      "max_relative_error": 215148.46875,
+      "oracle": "actual E4M3 weights/scales plus two dynamic activation E4M3 round trips",
+      "output_sha256": "0b2dc0c560263a9ff2f6e8f7ede3783d63d4a6f982fe61344b5d5e499ca4fe61",
+      "reference_sha256": "4cb21025c276c9928825fcc0fffced9a85251519b023ecc4b75d3cf179f26037",
+      "relative_l2": 0.013822781853377819,
+      "rtol": 0.1
+    }
+  },
+  "runtime_identity": {
+    "application_clock_mhz": 2377,
+    "compute_capability": [
+      12,
+      0
+    ],
+    "cuda_runtime": "13.0",
+    "fingerprint_sha256": "a668cc0e9f5ed394429b7b131830737f77508d9135b46e6e0694809f7bb641cd",
+    "foreign_compute_process_query": "",
+    "gpu_name": "NVIDIA Graphics Device",
+    "gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+    "image": "lmsysorg/sglang:latest",
+    "image_digest": "sha256:00c53fe4c31bf22d7b37537f28bbdfd924c02de13cdfb4bff7378c9c34d75ab2",
+    "image_id": "sha256:663867442f321ded36228bafd889fd1db05cbef7a7c8ea6e072df33234dabbfd",
+    "measurement_rerun_id": "exp017-triton-20260721T053015Z-r3",
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "resource_lease_id": "exp017-phase-share-20260721T053015Z-8193",
+    "server_args": {
+      "enable_deterministic_inference": false,
+      "enable_fused_moe_sum_all_reduce": false,
+      "model_path": "dummy",
+      "moe_runner_backend": "triton"
+    },
+    "sglang_commit": "0b3bb0cbe31873994c9f989fddfe2f87ca839fdd",
+    "sglang_module": "/sgl-workspace/sglang/python/sglang/__init__.py",
+    "sglang_version": "0.5.15.post1",
+    "torch": "2.11.0+cu130",
+    "triton_version": "3.6.0"
+  },
+  "schema": "exp017.sglang-triton-nsys-capture.v1",
+  "source_lock": {
+    "capture_script": {
+      "path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_017_opt_vs_triton_phase_share/capture_triton_nsys.py",
+      "sha256": "28414b93b886bab7e4eecd8afbae812c0e5a5aca710d80f6a58b1957a0895e6f"
+    },
+    "exp001_benchmark": {
+      "path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/bench_triton_fp8.py",
+      "sha256": "96dbe559e1d61a894fd9fda98827ba4b9cd37e74f10ec45a5bc0d8aaccd7916b"
+    },
+    "exp001_fixture": {
+      "path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/fixture.py",
+      "sha256": "7a0a59c61ce8b635e1e937077da37acb9e5f5c25434913f92dff83d60ac19d2b"
+    }
+  },
+  "status": "capture_complete_topology_pending_veloq",
+  "topology_preflight": {
+    "collection": "standalone torch.profiler process outside NSys",
+    "fingerprint_sha256": "82fb54085326408dcf30a429285ffd80912ee432749988450c748bb2d10094af",
+    "path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_017_opt_vs_triton_phase_share/results/triton_topology_preflight.json"
+  },
+  "weights": {
+    "layout": {
+      "w1": [
+        256,
+        1024,
+        2048
+      ],
+      "w2": [
+        256,
+        2048,
+        512
+      ]
+    },
+    "master_distribution": "torch.float32 normal(0,0.1) rounded to BF16",
+    "quantizer": "sglang.srt.layers.quantization.fp8_kernel.scaled_fp8_quant",
+    "scale_contract": "FP32 [E], one tensor scale per expert",
+    "seed": 2026,
+    "storage_dtype": "float8_e4m3fn",
+    "w1_scale_sha256": "9e116b27c565caff2db6fa21680f8610525d38e4477156caa62b064d44241e1f",
+    "w1_sha256": "1258a066d515d569b164f19643ee5ea3ab6b0fae7eee141c59a6ea81fc020186",
+    "w2_scale_sha256": "4fc52fd21e883f98dedbf52421e9c249985bf432068fd9d3500db8e8f732faf2",
+    "w2_sha256": "3d64d5bc2ffd62640061dc53bd699fd9072166884786c8996bb12828470ee6e2"
+  }
+}

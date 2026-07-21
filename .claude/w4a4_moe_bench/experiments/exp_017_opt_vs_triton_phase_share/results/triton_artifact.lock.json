@@ -1,0 +1,137 @@
+{
+  "fingerprint_sha256": "1b72ff662b57cf8c9dfed6331d8f5c57fb0d27e0b37f7cb78f0a455e222b3346",
+  "jit_artifacts": [
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/__grp__fused_moe_kernel.json",
+      "sha256": "295965013bc31b95db34f2f5eff5bed7fc700a3d472ebb6fe6243ccc9e51839f",
+      "size": 849
+    },
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/fused_moe_kernel.cubin",
+      "sha256": "b22ba72ac72b6226739334e251d4398b1ee7bfbe58fc08a08582c9742002ebec",
+      "size": 133832
+    },
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/fused_moe_kernel.json",
+      "sha256": "ef4127de54e03b70a7572be24fc6f6250f8fa48a251e1d0391e34e9b1e94df7c",
+      "size": 1104
+    },
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/fused_moe_kernel.llir",
+      "sha256": "3025599d43ad8523fc7ec496a23752c8728bcdcb833d32cb861c4111169b5db2",
+      "size": 186173
+    },
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/fused_moe_kernel.ptx",
+      "sha256": "b961acdd03b756e3bfea3dca4954f9a5eaf111395d220a5455aea7bdc89451ed",
+      "size": 96394
+    },
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/fused_moe_kernel.source",
+      "sha256": "64bf08316fddd6298b5fc9ecddb8a1048efaef11c17dc5af9b81d8b0f20c0424",
+      "size": 51198
+    },
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/fused_moe_kernel.ttgir",
+      "sha256": "48fa25028fc36797659485ee61fe6f6a27dbf7e45a09f81c49c2d435f950512c",
+      "size": 41050
+    },
+    {
+      "path": "5WAJSVHZMALRN4DWBATSKBOSYPAWEILQ7DO7NZWYDAZ4K5XJ4NZA/fused_moe_kernel.ttir",
+      "sha256": "7ad2ad4c8a792bd30b61e1315a67df15fe53283c976ec667c48d2963f1accb00",
+      "size": 30183
+    },
+    {
+      "path": "5WK6ANV7DWSBXM4FITM4HAQVLURE6AIJCMDSHPDUDQ75SJD4TVMQ/__triton_launcher.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "74969a8b7c64eefa40d9dd38fbd1f8d77f2ec60ebdc21376e002f9d14bff7c48",
+      "size": 25808
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/__grp__fused_moe_kernel.json",
+      "sha256": "9ecc3023594aea471355db43fc3a2fbc617de8dafbde79912a8a3139e6285302",
+      "size": 849
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/fused_moe_kernel.cubin",
+      "sha256": "395470053442f5818185036ec3ece20fee5b712e27d039149fb17c0e068422a6",
+      "size": 126720
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/fused_moe_kernel.json",
+      "sha256": "08a470149a31070afd604f40140e40bcdcd45cb46dce8067ac5620e7c2f2ada7",
+      "size": 1104
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/fused_moe_kernel.llir",
+      "sha256": "c086639e2b2761a2d59b9748535ced734b4076c3c0a511f35209a86a199b0eb5",
+      "size": 178795
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/fused_moe_kernel.ptx",
+      "sha256": "75a2e69b0908c9215c6bc3f3741f32a6d39d773fd3565319ece8fd8d84939a66",
+      "size": 91543
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/fused_moe_kernel.source",
+      "sha256": "749545297ef4d55ba54c15586d646475b0203f39f3da6e3999e716dc813fd102",
+      "size": 49643
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/fused_moe_kernel.ttgir",
+      "sha256": "eb6dd25c4bf91040ca37380e6c287084c93b713ab2e86399e38aea737f00e064",
+      "size": 38265
+    },
+    {
+      "path": "VHWPLB5RAFQTRSIUFNJTIK3WACDANBRE6KFVSFSOGRBOPVLWDEGQ/fused_moe_kernel.ttir",
+      "sha256": "57e40858cb8714cd8b8e469cf3014a0e22c1635cec5521eea2189fb9f2c4b1f6",
+      "size": 29106
+    },
+    {
+      "path": "XU5DT2AO5BD5AEHEYGLPP5LRDFHHCUEJT4LGDVLB4STXUGVGHFPA/cuda_utils.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "60d13726184f577c22f785c90124852c4d6e732e5dbc2a0caa2bae2e2477442d",
+      "size": 31944
+    }
+  ],
+  "jit_root": "/workspace/jit",
+  "source_files": [
+    {
+      "path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/bench_triton_fp8.py",
+      "sha256": "96dbe559e1d61a894fd9fda98827ba4b9cd37e74f10ec45a5bc0d8aaccd7916b"
+    },
+    {
+      "path": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe.py",
+      "sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056"
+    },
+    {
+      "path": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe_triton_config.py",
+      "sha256": "6bd14aea63c629bfab25c8d9a4f68087e59cb023b732db67fde94007af3306e7"
+    },
+    {
+      "path": "/sgl-workspace/sglang/python/sglang/srt/layers/moe/moe_runner/triton_utils/fused_moe_triton_kernels.py",
+      "sha256": "62cf5a03a1bfcaae1f1818d4d22315d10e5253bf26d7f790da781399bda07a31"
+    }
+  ],
+  "weights": {
+    "layout": {
+      "w1": [
+        256,
+        1024,
+        2048
+      ],
+      "w2": [
+        256,
+        2048,
+        512
+      ]
+    },
+    "master_distribution": "torch.float32 normal(0,0.1) rounded to BF16",
+    "quantizer": "sglang.srt.layers.quantization.fp8_kernel.scaled_fp8_quant",
+    "scale_contract": "FP32 [E], one tensor scale per expert",
+    "seed": 2026,
+    "storage_dtype": "float8_e4m3fn",
+    "w1_scale_sha256": "9e116b27c565caff2db6fa21680f8610525d38e4477156caa62b064d44241e1f",
+    "w1_sha256": "1258a066d515d569b164f19643ee5ea3ab6b0fae7eee141c59a6ea81fc020186",
+    "w2_scale_sha256": "4fc52fd21e883f98dedbf52421e9c249985bf432068fd9d3500db8e8f732faf2",
+    "w2_sha256": "3d64d5bc2ffd62640061dc53bd699fd9072166884786c8996bb12828470ee6e2"
+  }
+}
