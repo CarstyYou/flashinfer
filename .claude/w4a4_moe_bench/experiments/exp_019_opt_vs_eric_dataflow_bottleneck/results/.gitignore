@@ -1,0 +1,10 @@
+raw/
+runtime/
+jit/
+veloq/ncu/
+
+*.ncu-rep
+*.ncu-rep.veloq/
+
+__pycache__/
+.pytest_cache/

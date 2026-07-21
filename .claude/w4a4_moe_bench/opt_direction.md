@@ -16,6 +16,18 @@
 - phase 时间用于确定调查优先级，不是可直接回收的 latency budget；跨 backend 的非等价 phase
   也不能据此声明正式 speedup。
 
+## exp_019 Opt vs Eric Takeaway
+
+- Latest Opt 继续作为主干。M8192 时 Eric 慢 `352.340 µs / 26.35%`；同边界 phase 中主要回退是
+  Route/Q0 `+240.941 µs`、Scatter `+92.449 µs` 和 FC2 `+56.399 µs`。
+- 保留 Opt 的 token-major Route/Q0、8-warp Scatter、paired N64 与 zero-spill。Eric production cubin
+  有 `947,200 / 509,600` 次动态 spill load/store，不能整体合并。
+- Eric 的 FC1 Gate+Up+SwiGLU bundle 在 M8192 快 `23.513 µs / 5.29%`，说明更深 pipeline / buffer
+  schedule 值得做单变量实验；Stage4、4-warp、N128 与 compact epilogue 同时变化，当前不能把收益归因
+  给任一项。
+- M1024 正式 benchmark 中 Eric 快 `21.348 µs`，但 fresh diagnostic control 只快 `7.168 µs`；方向一致、
+  幅度差 `2.98×`，本轮不对 crossover 做 phase 因果归因，也不为此启动 deep NCU。
+
 ## 当前优化方向
 
 ### [done] 1. 首轮 phase 并行化
@@ -55,6 +67,9 @@
   `101,376 B` 上限，该直接方案已 `[reject]`。
 - 后续尝试生命周期互斥 buffer 的安全复用，或 A/SFA 与 B/SFB 使用非对称 stage。
 - 不采用已经 reject 的 compact epilogue 来换取 SMEM。
+- exp_019 提供新的启动依据：Eric 的整个 FC1 bundle 快 `23.513 µs`。下一候选只改变 Opt 的 FC1
+  pipeline / buffer schedule，保持 8 math warps、paired N64、M128 epilogue 与其他 phase 不变；
+  compiler/dynamic zero-spill 是硬门禁。该结果不能预先记为 Stage4 收益。
 
 ### [todo] 5. 跨 worktile 的 phase overlap
 

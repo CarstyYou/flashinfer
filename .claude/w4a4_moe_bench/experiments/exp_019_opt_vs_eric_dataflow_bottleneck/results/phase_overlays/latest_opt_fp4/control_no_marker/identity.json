@@ -1,0 +1,111 @@
+{
+  "arm": "latest_opt_fp4",
+  "base": {
+    "adapter_sha256": null,
+    "adapter_validation": null,
+    "barrier_fingerprint": {
+      "cute.arch.sync_threads()": 9,
+      "cute.arch.sync_warp()": 6,
+      "self.epilog_sync_barrier.arrive_and_wait()": 4,
+      "self.pass_final_barrier.arrive_unaligned()": 1,
+      "self.pass_final_barrier.wait_unaligned()": 1,
+      "self.pass_gate_barrier.arrive_unaligned()": 1,
+      "self.pass_gate_barrier.wait_unaligned()": 1,
+      "self.resident_grid_barrier(": 5
+    },
+    "dispatch_sha256": "cba2d0966631a47a576747e8322b57116122f2c8e5e868f8efb3f5ea692391a4",
+    "source_path": "/workspace/source/flashinfer/.claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py",
+    "source_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
+    "wrapper_sha256": "bcac806795c035decd0773f4f801d477e7ebf14c1d67c3e49eee42ee0579c0a4"
+  },
+  "boundary": {
+    "eric_interval_accumulation": null,
+    "new_barriers": 0,
+    "occurrence_close_call_sites": 10,
+    "phase_names": [
+      "clear_init",
+      "histogram",
+      "prefix",
+      "route_q0_pack",
+      "publish_route_tail",
+      "claim_cache_control",
+      "fc1_gate_up_swiglu",
+      "q1",
+      "fc2_epilogue_r2s",
+      "scatter"
+    ],
+    "timer_read_call_sites": 18
+  },
+  "event_abi": {
+    "classification": "diagnostic matched probe; uninstrumented E2E is authority",
+    "closure": "named phases + CTA residual + launch skew == denominator",
+    "cta_final": "max(reader_final, tma_final)",
+    "cta_residual": "sum((CTA final-entry)-sum named durations)",
+    "denominator": "grid_ctas * (max CTA final - min CTA entry)",
+    "events_per_cta": 14,
+    "grid_ctas": 110,
+    "launch_skew": "denominator - sum(CTA final-entry); includes early-finish/launch skew",
+    "layout": {
+      "cursor": 1,
+      "entry": 0,
+      "phase_duration_base": 4,
+      "phase_names": [
+        "clear_init",
+        "histogram",
+        "prefix",
+        "route_q0_pack",
+        "publish_route_tail",
+        "claim_cache_control",
+        "fc1_gate_up_swiglu",
+        "q1",
+        "fc2_epilogue_r2s",
+        "scatter"
+      ],
+      "reader_final": 2,
+      "tma_final": 3
+    },
+    "phase_equivalent_wall": "sum CTA phase duration / grid_ctas",
+    "reader_track": "CTA leader intervals only; named intervals are mutually exclusive. W8 TMA work remains overlapped and is not added as a reader phase.",
+    "schema": "exp017.opt-full-phase-event-abi.v1",
+    "timestamp": "%globaltimer (ns)"
+  },
+  "mode": "control_no_marker",
+  "occurrence_abi": {
+    "grid_ctas": 110,
+    "meaning": "CTA-leader close-marker execution count",
+    "occurrences_per_cta": 10,
+    "phase_names": [
+      "clear_init",
+      "histogram",
+      "prefix",
+      "route_q0_pack",
+      "publish_route_tail",
+      "claim_cache_control",
+      "fc1_gate_up_swiglu",
+      "q1",
+      "fc2_epilogue_r2s",
+      "scatter"
+    ],
+    "schema": "exp019.phase-occurrence-abi.v1",
+    "storage": "uint64 tail after the exp017 timing prefix",
+    "timing_prefix_values": 1540
+  },
+  "overlay": {
+    "barrier_fingerprint": {
+      "cute.arch.sync_threads()": 9,
+      "cute.arch.sync_warp()": 6,
+      "self.epilog_sync_barrier.arrive_and_wait()": 4,
+      "self.pass_final_barrier.arrive_unaligned()": 1,
+      "self.pass_final_barrier.wait_unaligned()": 1,
+      "self.pass_gate_barrier.arrive_unaligned()": 1,
+      "self.pass_gate_barrier.wait_unaligned()": 1,
+      "self.resident_grid_barrier(": 5
+    },
+    "dispatch_diff_sha256": "0fc88b74db7ad0877e63b6bd1b266a3cea0b7da829407ad29b8b4590d9b5c27f",
+    "dispatch_sha256": "59ac32f8431857a9298670536c96287adc3ca2cf99ed35e352d41647cf66946f",
+    "kernel_diff_sha256": "d6e38fee098c66650992e6e46860a859a54d9467126859c89ad2f32c95e5c803",
+    "kernel_sha256": "7800d7d3e5ed0697f1159910d7c97c284e392786a148604f8cc13b555e6d02cd"
+  },
+  "probe_enabled": false,
+  "schema": "exp019.phase-overlay.v1"
+}

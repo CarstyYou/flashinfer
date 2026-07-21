@@ -1,0 +1,1378 @@
+{
+  "cases": {
+    "m8192": {
+      "arms": {
+        "eric_stage4_fp4": {
+          "additive_metrics": {
+            "dram_read_bytes": {
+              "metric": "dram__bytes_op_read.sum",
+              "unit": "byte",
+              "value": 688003328.0
+            },
+            "dram_total_bytes": {
+              "metric": "dram__bytes.sum",
+              "unit": "byte",
+              "value": 918458368.0
+            },
+            "dram_write_bytes": {
+              "metric": "dram__bytes_op_write.sum",
+              "unit": "byte",
+              "value": 230455040.0
+            },
+            "executed_warp_instructions": {
+              "metric": "sm__inst_executed.sum",
+              "unit": "inst",
+              "value": 351079700.0
+            },
+            "fp4_to_fp32_tensor_ops": {
+              "metric": "sm__ops_path_tensor_src_fp4_dst_fp32.sum",
+              "unit": null,
+              "value": 512980156416.0
+            },
+            "l2_atomic_sectors": {
+              "metric": "lts__t_sectors_op_atom.sum",
+              "unit": "sector",
+              "value": 121368.0
+            },
+            "l2_membar_sectors": {
+              "metric": "lts__t_sectors_op_membar.sum",
+              "unit": "sector",
+              "value": 14898.0
+            },
+            "l2_read_sectors": {
+              "metric": "lts__t_sectors_op_read.sum",
+              "unit": "sector",
+              "value": 72121788.0
+            },
+            "l2_reduction_sectors": {
+              "metric": "lts__t_sectors_op_red.sum",
+              "unit": "sector",
+              "value": 33554432.0
+            },
+            "l2_total_sectors": {
+              "metric": "lts__t_sectors.sum",
+              "unit": "sector",
+              "value": 115331157.0
+            },
+            "l2_write_sectors": {
+              "metric": "lts__t_sectors_op_write.sum",
+              "unit": "sector",
+              "value": 9515090.0
+            },
+            "local_load_footprint_bytes": {
+              "metric": "l1tex__t_bytes_pipe_lsu_mem_local_op_ld.sum",
+              "unit": "byte",
+              "value": 121241600.0
+            },
+            "local_store_footprint_bytes": {
+              "metric": "l1tex__t_bytes_pipe_lsu_mem_local_op_st.sum",
+              "unit": "byte",
+              "value": 130457600.0
+            },
+            "lsu_global_atomic_footprint_bytes": {
+              "metric": "l1tex__t_bytes_pipe_lsu_mem_global_op_atom.sum",
+              "unit": "byte",
+              "value": 3883776.0
+            },
+            "lsu_global_ldgsts_footprint_bytes": {
+              "metric": "l1tex__t_bytes_pipe_lsu_mem_global_op_ldgsts_cache_access.sum",
+              "unit": "byte",
+              "value": 0.0
+            },
+            "lsu_global_load_footprint_bytes": {
+              "metric": "l1tex__t_bytes_pipe_lsu_mem_global_op_ld.sum",
+              "unit": "byte",
+              "value": 4307656992.0
+            },
+            "lsu_global_reduction_footprint_bytes": {
+              "metric": "l1tex__t_bytes_pipe_lsu_mem_global_op_red.sum",
+              "unit": "byte",
+              "value": 1073741824.0
+            },
+            "lsu_global_store_footprint_bytes": {
+              "metric": "l1tex__t_bytes_pipe_lsu_mem_global_op_st.sum",
+              "unit": "byte",
+              "value": 172459744.0
+            },
+            "profiler_duration_ns": {
+              "metric": "gpu__time_duration.sum",
+              "unit": "ns",
+              "value": 1678432.0
+            },
+            "tensor_instructions": {
+              "metric": "sm__inst_executed_pipe_tensor_subpipe_hmma.sum",
+              "unit": "inst",
+              "value": 31309824.0
+            },
+            "tma_global_load_interface_bytes": {
+              "metric": "l1tex__m_xbar2l1tex_read_bytes_mem_global_op_tma_ld.sum",
+              "unit": "byte",
+              "value": 1878589440.0
+            },
+            "tma_global_reduction_interface_bytes": {
+              "metric": "l1tex__m_l1tex2xbar_write_bytes_mem_global_op_tma_red.sum",
+              "unit": "byte",
+              "value": 0.0
+            },
+            "tma_global_store_interface_bytes": {
+              "metric": "l1tex__m_l1tex2xbar_write_bytes_mem_global_op_tma_st.sum",
+              "unit": "byte",
+              "value": 0.0
+            }
+          },
+          "artifacts": {
+            "inspect": "veloq/ncu/eric_stage4_fp4/m8192/inspect.json",
+            "ledger_native_raw": "raw/ncu/eric_stage4_fp4/m8192/ledger_native_raw.csv",
+            "manifest": "raw/ncu/eric_stage4_fp4/m8192/target_manifest.json",
+            "native_raw": "raw/ncu/eric_stage4_fp4/m8192/native_raw.csv",
+            "pc_stalls": "veloq/ncu/eric_stage4_fp4/m8192/pc_stalls_file.json"
+          },
+          "identity": {
+            "block": [
+              160,
+              1,
+              1
+            ],
+            "correctness_gate_pass": true,
+            "cubin_sha256": "4c728f4ee6115f342f0b32e578ca4901abd7f35ac233035fb8eaf54fce3900b0",
+            "fixture_sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438",
+            "gpu_uuid": "GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12",
+            "grid": [
+              1,
+              1,
+              110
+            ],
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "overlay_sha256": "98adfba7f4e0d00af24383a556e9c93088355539b50dc82480091225e0448120",
+            "packed_weights_sha256": {
+              "w1": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+              "w2": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1"
+            },
+            "reference_sha256": "7eac9ce7d735e78f809f657e5a567f0d861c4f33a34443206625b0aea7f035b0",
+            "scales_sha256": {
+              "w1": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+              "w1_global": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+              "w2": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+              "w2_global": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a"
+            },
+            "source_sha256": "3a5000a990bb978b434f1c7dac621de25112d9f3cec4a5fdfab5f2970b0dc3b8",
+            "symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+            "topk_ids_sha256": "c7ea3babd394cb6fc73980a2754b13a8215deaee991b3aaf7ce3b45502592abb",
+            "topk_weights_sha256": "441f51ba80975dc8cfc3fc0d7e5a07a8c474a6781f8d606ff0eaecef69adbcea",
+            "x_sha256": "00d8fb81ac350100bdb9c4f9341ac2cbbc24d6c0b21b62f565f7f44a8ad24bec"
+          },
+          "pc_sample_stalls": {
+            "denominator": "all non-_not_issued PC-sampling reason samples",
+            "reasons": {
+              "barrier": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_barrier",
+                "share_percent": 6.486261890448743,
+                "unit": "sample",
+                "value": 14674.0
+              },
+              "branch_resolving": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_branch_resolving",
+                "share_percent": 0.8928887160083454,
+                "unit": "sample",
+                "value": 2020.0
+              },
+              "dispatch_stall": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_dispatch_stall",
+                "share_percent": 0.4216910074613671,
+                "unit": "sample",
+                "value": 954.0
+              },
+              "drain": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_drain",
+                "share_percent": 0.0,
+                "unit": "sample",
+                "value": 0.0
+              },
+              "lg_throttle": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_lg_throttle",
+                "share_percent": 0.4066621874889494,
+                "unit": "sample",
+                "value": 920.0
+              },
+              "long_scoreboard": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_long_scoreboard",
+                "share_percent": 19.647087945118287,
+                "unit": "sample",
+                "value": 44448.0
+              },
+              "math_pipe_throttle": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_math_pipe_throttle",
+                "share_percent": 0.2603522048162948,
+                "unit": "sample",
+                "value": 589.0
+              },
+              "membar": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_membar",
+                "share_percent": 0.09901340217122247,
+                "unit": "sample",
+                "value": 224.0
+              },
+              "mio_throttle": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_mio_throttle",
+                "share_percent": 2.8360267336185863,
+                "unit": "sample",
+                "value": 6416.0
+              },
+              "misc": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_misc",
+                "share_percent": 0.014144771738746066,
+                "unit": "sample",
+                "value": 32.0
+              },
+              "no_instructions": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_no_instructions",
+                "share_percent": 0.9397432723929418,
+                "unit": "sample",
+                "value": 2126.0
+              },
+              "not_selected": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_not_selected",
+                "share_percent": 0.14277378973796812,
+                "unit": "sample",
+                "value": 323.0
+              },
+              "selected": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_selected",
+                "share_percent": 16.174546483256126,
+                "unit": "sample",
+                "value": 36592.0
+              },
+              "short_scoreboard": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_short_scoreboard",
+                "share_percent": 11.259238304041869,
+                "unit": "sample",
+                "value": 25472.0
+              },
+              "sleeping": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_sleeping",
+                "share_percent": 7.2407970578874785,
+                "unit": "sample",
+                "value": 16381.0
+              },
+              "tex_throttle": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_tex_throttle",
+                "share_percent": 0.0,
+                "unit": "sample",
+                "value": 0.0
+              },
+              "wait": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_wait",
+                "share_percent": 33.17877223381308,
+                "unit": "sample",
+                "value": 75061.0
+              }
+            },
+            "total_samples": 226232.0
+          },
+          "selected_metrics": {
+            "achieved_occupancy_pct": {
+              "metric": "sm__warps_active.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 10.41349162400591
+            },
+            "allocated_registers_per_thread": {
+              "metric": "launch__registers_per_thread_allocated",
+              "unit": "register/thread",
+              "value": 256.0
+            },
+            "alu_pipe_active_pct": {
+              "metric": "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 7.738179153742686
+            },
+            "dram_throughput_pct": {
+              "metric": "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed",
+              "unit": "%",
+              "value": 42.78539443452108
+            },
+            "dynamic_shared_mem_per_cta_bytes": {
+              "metric": "launch__shared_mem_per_block_dynamic",
+              "unit": "byte/block",
+              "value": 93184
+            },
+            "dynamic_spill_load_instructions": {
+              "metric": "sass__inst_executed_register_spilling_op_read",
+              "unit": "inst",
+              "value": 947200
+            },
+            "dynamic_spill_store_instructions": {
+              "metric": "sass__inst_executed_register_spilling_op_write",
+              "unit": "inst",
+              "value": 509600
+            },
+            "fma_pipe_active_pct": {
+              "metric": "sm__pipe_fma_cycles_active.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 4.663424835646507
+            },
+            "issue_active_pct": {
+              "metric": "smsp__issue_active.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 18.989992601356004
+            },
+            "l1_throughput_pct": {
+              "metric": "l1tex__throughput.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 38.20242764490479
+            },
+            "l2_throughput_pct": {
+              "metric": "lts__throughput.avg.pct_of_peak_sustained_elapsed",
+              "unit": "%",
+              "value": 42.72603833027474
+            },
+            "lsu_pipe_active_pct": {
+              "metric": "sm__inst_executed_pipe_lsu.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 23.018316109608897
+            },
+            "occupancy_limit_registers_cta": {
+              "metric": "launch__occupancy_limit_registers",
+              "unit": "block",
+              "value": 1.0
+            },
+            "occupancy_limit_shared_mem_cta": {
+              "metric": "launch__occupancy_limit_shared_mem",
+              "unit": "block",
+              "value": 1.0
+            },
+            "registers_per_thread": {
+              "metric": "launch__registers_per_thread",
+              "unit": "register/thread",
+              "value": 254
+            },
+            "shared_mem_per_cta_bytes": {
+              "metric": "launch__shared_mem_per_block",
+              "unit": "byte/block",
+              "value": 94208
+            },
+            "tc_subpipe_active_pct": {
+              "metric": "sm__pipe_tensor_subpipe_hmma_cycles_active.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 27.051574284761987
+            },
+            "tma_pipe_active_pct": {
+              "metric": "sm__pipe_tma_cycles_active.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 0.2646032083278329
+            },
+            "waves_per_sm": {
+              "metric": "launch__waves_per_multiprocessor",
+              "unit": null,
+              "value": 1.0
+            },
+            "xu_pipe_active_pct": {
+              "metric": "sm__inst_executed_pipe_xu.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 1.6123338661339752
+            }
+          }
+        },
+        "latest_opt_fp4": {
+          "additive_metrics": {
+            "dram_read_bytes": {
+              "metric": "dram__bytes_op_read.sum",
+              "unit": "byte",
+              "value": 682018560.0
+            },
+            "dram_total_bytes": {
+              "metric": "dram__bytes.sum",
+              "unit": "byte",
+              "value": 884791040.0
+            },
+            "dram_write_bytes": {
+              "metric": "dram__bytes_op_write.sum",
+              "unit": "byte",
+              "value": 202772480.0
+            },
+            "executed_warp_instructions": {
+              "metric": "sm__inst_executed.sum",
+              "unit": "inst",
+              "value": 393174349.0
+            },
+            "fp4_to_fp32_tensor_ops": {
+              "metric": "sm__ops_path_tensor_src_fp4_dst_fp32.sum",
+              "unit": null,
+              "value": 512980156416.0
+            },
+            "l2_atomic_sectors": {
+              "metric": "lts__t_sectors_op_atom.sum",
+              "unit": "sector",
+              "value": 115725.0
+            },
+            "l2_membar_sectors": {
+              "metric": "lts__t_sectors_op_membar.sum",
+              "unit": "sector",
+              "value": 14279.0
+            },
+            "l2_read_sectors": {
+              "metric": "lts__t_sectors_op_read.sum",
+              "unit": "sector",
+              "value": 70112798.0
+            },
+            "l2_reduction_sectors": {
+              "metric": "lts__t_sectors_op_red.sum",
+              "unit": "sector",
+              "value": 33554432.0
+            },
+            "l2_total_sectors": {
+              "metric": "lts__t_sectors.sum",
+              "unit": "sector",
+              "value": 109238872.0
+            },
+            "l2_write_sectors": {
+              "metric": "lts__t_sectors_op_write.sum",
+              "unit": "sector",
+              "value": 5439180.0
+            },
+            "local_load_footprint_bytes": {
+              "metric": "l1tex__t_bytes_pipe_lsu_mem_local_op_ld.sum",
+              "unit": "byte",
+              "value": 0.0
+            },
+            "local_store_footprint_bytes": {
+              "metric": "l1tex__t_bytes_pipe_lsu_mem_local_op_st.sum",
+              "unit": "byte",
+              "value": 0.0
+            },
+            "lsu_global_atomic_footprint_bytes": {
+              "metric": "l1tex__t_bytes_pipe_lsu_mem_global_op_atom.sum",
+              "unit": "byte",
+              "value": 3703200.0
+            },
+            "lsu_global_ldgsts_footprint_bytes": {
+              "metric": "l1tex__t_bytes_pipe_lsu_mem_global_op_ldgsts_cache_access.sum",
+              "unit": "byte",
+              "value": 0.0
+            },
+            "lsu_global_load_footprint_bytes": {
+              "metric": "l1tex__t_bytes_pipe_lsu_mem_global_op_ld.sum",
+              "unit": "byte",
+              "value": 550564864.0
+            },
+            "lsu_global_reduction_footprint_bytes": {
+              "metric": "l1tex__t_bytes_pipe_lsu_mem_global_op_red.sum",
+              "unit": "byte",
+              "value": 1073741824.0
+            },
+            "lsu_global_store_footprint_bytes": {
+              "metric": "l1tex__t_bytes_pipe_lsu_mem_global_op_st.sum",
+              "unit": "byte",
+              "value": 172459744.0
+            },
+            "profiler_duration_ns": {
+              "metric": "gpu__time_duration.sum",
+              "unit": "ns",
+              "value": 1317984.0
+            },
+            "tensor_instructions": {
+              "metric": "sm__inst_executed_pipe_tensor_subpipe_hmma.sum",
+              "unit": "inst",
+              "value": 31309824.0
+            },
+            "tma_global_load_interface_bytes": {
+              "metric": "l1tex__m_xbar2l1tex_read_bytes_mem_global_op_tma_ld.sum",
+              "unit": "byte",
+              "value": 1962082304.0
+            },
+            "tma_global_reduction_interface_bytes": {
+              "metric": "l1tex__m_l1tex2xbar_write_bytes_mem_global_op_tma_red.sum",
+              "unit": "byte",
+              "value": 0.0
+            },
+            "tma_global_store_interface_bytes": {
+              "metric": "l1tex__m_l1tex2xbar_write_bytes_mem_global_op_tma_st.sum",
+              "unit": "byte",
+              "value": 0.0
+            }
+          },
+          "artifacts": {
+            "inspect": "veloq/ncu/latest_opt_fp4/m8192/inspect.json",
+            "ledger_native_raw": "raw/ncu/latest_opt_fp4/m8192/ledger_native_raw.csv",
+            "manifest": "raw/ncu/latest_opt_fp4/m8192/target_manifest.json",
+            "native_raw": "raw/ncu/latest_opt_fp4/m8192/native_raw.csv",
+            "pc_stalls": "veloq/ncu/latest_opt_fp4/m8192/pc_stalls_file.json"
+          },
+          "identity": {
+            "block": [
+              288,
+              1,
+              1
+            ],
+            "correctness_gate_pass": true,
+            "cubin_sha256": "e9b322e4c978c490adbe0a9bf0f9a183288c0ecddb1fd72e5a904c487be541f3",
+            "fixture_sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438",
+            "gpu_uuid": "GPU-2fdb0b79-0ba7-f356-b714-6c461b71ce12",
+            "grid": [
+              1,
+              1,
+              110
+            ],
+            "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Thu_Mar_19_11:12:51_PM_PDT_2026\nCuda compilation tools, release 13.2, V13.2.78\nBuild cuda_13.2.r13.2/compiler.37668154_0",
+            "overlay_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
+            "packed_weights_sha256": {
+              "w1": "3942d8eeac83adbb94f6d0605d4a4145cdfec4eb2589b2e84d562e1c09ab033e",
+              "w2": "96cd81fc9436aa3fa5d4f0105187e99e87543708e22bf30a9d1fe961ecb01ee1"
+            },
+            "reference_sha256": "7eac9ce7d735e78f809f657e5a567f0d861c4f33a34443206625b0aea7f035b0",
+            "scales_sha256": {
+              "w1": "7d48ad89cefd33ecb0a61df9f9e978eb0e4c53014a4e53c28452e3e304eb3209",
+              "w1_global": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a",
+              "w2": "36979eb275a11938b34345555b715c8c1c9d73510ebffca47c3aab7668f88063",
+              "w2_global": "1a98f0f33f1306bdbd2045c3b901af60be9dd4edddadfd834a617d110f4bc05a"
+            },
+            "source_sha256": "ad4c26f9f808586e3204e7d495b6c439175f708d3713d9ab61b330848fbf8d19",
+            "symbol": "kernel_cutlass_kernel_flashinferfused_moecute_dslblackwell_sm12xmoe_dynamic_kernelMoEDynamicKernel_object_at__tensorptrbf16gmemalign16o204820481_tensorptri32gmemo1_tensorptrf32gmemo1_tens_0",
+            "topk_ids_sha256": "c7ea3babd394cb6fc73980a2754b13a8215deaee991b3aaf7ce3b45502592abb",
+            "topk_weights_sha256": "441f51ba80975dc8cfc3fc0d7e5a07a8c474a6781f8d606ff0eaecef69adbcea",
+            "x_sha256": "00d8fb81ac350100bdb9c4f9341ac2cbbc24d6c0b21b62f565f7f44a8ad24bec"
+          },
+          "pc_sample_stalls": {
+            "denominator": "all non-_not_issued PC-sampling reason samples",
+            "reasons": {
+              "barrier": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_barrier",
+                "share_percent": 9.838728323699423,
+                "unit": "sample",
+                "value": 17021.0
+              },
+              "branch_resolving": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_branch_resolving",
+                "share_percent": 0.8410404624277457,
+                "unit": "sample",
+                "value": 1455.0
+              },
+              "dispatch_stall": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_dispatch_stall",
+                "share_percent": 0.8895953757225433,
+                "unit": "sample",
+                "value": 1539.0
+              },
+              "drain": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_drain",
+                "share_percent": 0.0,
+                "unit": "sample",
+                "value": 0.0
+              },
+              "lg_throttle": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_lg_throttle",
+                "share_percent": 0.035838150289017344,
+                "unit": "sample",
+                "value": 62.0
+              },
+              "long_scoreboard": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_long_scoreboard",
+                "share_percent": 9.860115606936416,
+                "unit": "sample",
+                "value": 17058.0
+              },
+              "math_pipe_throttle": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_math_pipe_throttle",
+                "share_percent": 14.05606936416185,
+                "unit": "sample",
+                "value": 24317.0
+              },
+              "membar": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_membar",
+                "share_percent": 0.20635838150289018,
+                "unit": "sample",
+                "value": 357.0
+              },
+              "mio_throttle": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_mio_throttle",
+                "share_percent": 5.313872832369942,
+                "unit": "sample",
+                "value": 9193.0
+              },
+              "misc": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_misc",
+                "share_percent": 0.04450867052023121,
+                "unit": "sample",
+                "value": 77.0
+              },
+              "no_instructions": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_no_instructions",
+                "share_percent": 0.6861271676300578,
+                "unit": "sample",
+                "value": 1187.0
+              },
+              "not_selected": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_not_selected",
+                "share_percent": 3.566473988439306,
+                "unit": "sample",
+                "value": 6170.0
+              },
+              "selected": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_selected",
+                "share_percent": 12.710404624277457,
+                "unit": "sample",
+                "value": 21989.0
+              },
+              "short_scoreboard": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_short_scoreboard",
+                "share_percent": 8.03757225433526,
+                "unit": "sample",
+                "value": 13905.0
+              },
+              "sleeping": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_sleeping",
+                "share_percent": 11.897687861271676,
+                "unit": "sample",
+                "value": 20583.0
+              },
+              "tex_throttle": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_tex_throttle",
+                "share_percent": 0.0,
+                "unit": "sample",
+                "value": 0.0
+              },
+              "wait": {
+                "metric": "smsp__pcsamp_warps_issue_stalled_wait",
+                "share_percent": 22.015606936416184,
+                "unit": "sample",
+                "value": 38087.0
+              }
+            },
+            "total_samples": 173000.0
+          },
+          "selected_metrics": {
+            "achieved_occupancy_pct": {
+              "metric": "sm__warps_active.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 18.75579571439876
+            },
+            "allocated_registers_per_thread": {
+              "metric": "launch__registers_per_thread_allocated",
+              "unit": "register/thread",
+              "value": 168.0
+            },
+            "alu_pipe_active_pct": {
+              "metric": "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 11.76242040983966
+            },
+            "dram_throughput_pct": {
+              "metric": "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed",
+              "unit": "%",
+              "value": 52.31867734495006
+            },
+            "dynamic_shared_mem_per_cta_bytes": {
+              "metric": "launch__shared_mem_per_block_dynamic",
+              "unit": "byte/block",
+              "value": 83968
+            },
+            "dynamic_spill_load_instructions": {
+              "metric": "sass__inst_executed_register_spilling_op_read",
+              "unit": "inst",
+              "value": 0
+            },
+            "dynamic_spill_store_instructions": {
+              "metric": "sass__inst_executed_register_spilling_op_write",
+              "unit": "inst",
+              "value": 0
+            },
+            "fma_pipe_active_pct": {
+              "metric": "sm__pipe_fma_cycles_active.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 7.10777059044902
+            },
+            "issue_active_pct": {
+              "metric": "smsp__issue_active.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 27.81325829901742
+            },
+            "l1_throughput_pct": {
+              "metric": "l1tex__throughput.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 48.2868429531118
+            },
+            "l2_throughput_pct": {
+              "metric": "lts__throughput.avg.pct_of_peak_sustained_elapsed",
+              "unit": "%",
+              "value": 52.53353905924827
+            },
+            "lsu_pipe_active_pct": {
+              "metric": "sm__inst_executed_pipe_lsu.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 33.31284549575885
+            },
+            "occupancy_limit_registers_cta": {
+              "metric": "launch__occupancy_limit_registers",
+              "unit": "block",
+              "value": 1.0
+            },
+            "occupancy_limit_shared_mem_cta": {
+              "metric": "launch__occupancy_limit_shared_mem",
+              "unit": "block",
+              "value": 1.0
+            },
+            "registers_per_thread": {
+              "metric": "launch__registers_per_thread",
+              "unit": "register/thread",
+              "value": 165
+            },
+            "shared_mem_per_cta_bytes": {
+              "metric": "launch__shared_mem_per_block",
+              "unit": "byte/block",
+              "value": 84992
+            },
+            "tc_subpipe_active_pct": {
+              "metric": "sm__pipe_tensor_subpipe_hmma_cycles_active.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 35.36611470932194
+            },
+            "tma_pipe_active_pct": {
+              "metric": "sm__pipe_tma_cycles_active.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 0.4840802284200736
+            },
+            "waves_per_sm": {
+              "metric": "launch__waves_per_multiprocessor",
+              "unit": null,
+              "value": 1.0
+            },
+            "xu_pipe_active_pct": {
+              "metric": "sm__inst_executed_pipe_xu.avg.pct_of_peak_sustained_active",
+              "unit": "%",
+              "value": 2.0450279927590667
+            }
+          }
+        }
+      },
+      "m": 8192,
+      "paired_direct": {
+        "additive_metrics": [
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 1678432.0,
+            "eric_minus_opt": 360448.0,
+            "eric_vs_opt_percent": 27.34843518585961,
+            "metric": "gpu__time_duration.sum",
+            "name": "profiler_duration_ns",
+            "opt": 1317984.0,
+            "unit": "ns"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 918458368.0,
+            "eric_minus_opt": 33667328.0,
+            "eric_vs_opt_percent": 3.805116290508548,
+            "metric": "dram__bytes.sum",
+            "name": "dram_total_bytes",
+            "opt": 884791040.0,
+            "unit": "byte"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 688003328.0,
+            "eric_minus_opt": 5984768.0,
+            "eric_vs_opt_percent": 0.8775080842374772,
+            "metric": "dram__bytes_op_read.sum",
+            "name": "dram_read_bytes",
+            "opt": 682018560.0,
+            "unit": "byte"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 230455040.0,
+            "eric_minus_opt": 27682560.0,
+            "eric_vs_opt_percent": 13.652030097969892,
+            "metric": "dram__bytes_op_write.sum",
+            "name": "dram_write_bytes",
+            "opt": 202772480.0,
+            "unit": "byte"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 115331157.0,
+            "eric_minus_opt": 6092285.0,
+            "eric_vs_opt_percent": 5.57703030840524,
+            "metric": "lts__t_sectors.sum",
+            "name": "l2_total_sectors",
+            "opt": 109238872.0,
+            "unit": "sector"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 72121788.0,
+            "eric_minus_opt": 2008990.0,
+            "eric_vs_opt_percent": 2.8653684595499884,
+            "metric": "lts__t_sectors_op_read.sum",
+            "name": "l2_read_sectors",
+            "opt": 70112798.0,
+            "unit": "sector"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 9515090.0,
+            "eric_minus_opt": 4075910.0,
+            "eric_vs_opt_percent": 74.93611169330671,
+            "metric": "lts__t_sectors_op_write.sum",
+            "name": "l2_write_sectors",
+            "opt": 5439180.0,
+            "unit": "sector"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 121368.0,
+            "eric_minus_opt": 5643.0,
+            "eric_vs_opt_percent": 4.876215165262465,
+            "metric": "lts__t_sectors_op_atom.sum",
+            "name": "l2_atomic_sectors",
+            "opt": 115725.0,
+            "unit": "sector"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 33554432.0,
+            "eric_minus_opt": 0.0,
+            "eric_vs_opt_percent": 0.0,
+            "metric": "lts__t_sectors_op_red.sum",
+            "name": "l2_reduction_sectors",
+            "opt": 33554432.0,
+            "unit": "sector"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 14898.0,
+            "eric_minus_opt": 619.0,
+            "eric_vs_opt_percent": 4.33503746760977,
+            "metric": "lts__t_sectors_op_membar.sum",
+            "name": "l2_membar_sectors",
+            "opt": 14279.0,
+            "unit": "sector"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 4307656992.0,
+            "eric_minus_opt": 3757092128.0,
+            "eric_vs_opt_percent": 682.4068104716541,
+            "metric": "l1tex__t_bytes_pipe_lsu_mem_global_op_ld.sum",
+            "name": "lsu_global_load_footprint_bytes",
+            "opt": 550564864.0,
+            "unit": "byte"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 172459744.0,
+            "eric_minus_opt": 0.0,
+            "eric_vs_opt_percent": 0.0,
+            "metric": "l1tex__t_bytes_pipe_lsu_mem_global_op_st.sum",
+            "name": "lsu_global_store_footprint_bytes",
+            "opt": 172459744.0,
+            "unit": "byte"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 3883776.0,
+            "eric_minus_opt": 180576.0,
+            "eric_vs_opt_percent": 4.876215165262465,
+            "metric": "l1tex__t_bytes_pipe_lsu_mem_global_op_atom.sum",
+            "name": "lsu_global_atomic_footprint_bytes",
+            "opt": 3703200.0,
+            "unit": "byte"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 1073741824.0,
+            "eric_minus_opt": 0.0,
+            "eric_vs_opt_percent": 0.0,
+            "metric": "l1tex__t_bytes_pipe_lsu_mem_global_op_red.sum",
+            "name": "lsu_global_reduction_footprint_bytes",
+            "opt": 1073741824.0,
+            "unit": "byte"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 0.0,
+            "eric_minus_opt": 0.0,
+            "eric_vs_opt_percent": null,
+            "metric": "l1tex__t_bytes_pipe_lsu_mem_global_op_ldgsts_cache_access.sum",
+            "name": "lsu_global_ldgsts_footprint_bytes",
+            "opt": 0.0,
+            "unit": "byte"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 1878589440.0,
+            "eric_minus_opt": -83492864.0,
+            "eric_vs_opt_percent": -4.255319148936165,
+            "metric": "l1tex__m_xbar2l1tex_read_bytes_mem_global_op_tma_ld.sum",
+            "name": "tma_global_load_interface_bytes",
+            "opt": 1962082304.0,
+            "unit": "byte"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 0.0,
+            "eric_minus_opt": 0.0,
+            "eric_vs_opt_percent": null,
+            "metric": "l1tex__m_l1tex2xbar_write_bytes_mem_global_op_tma_st.sum",
+            "name": "tma_global_store_interface_bytes",
+            "opt": 0.0,
+            "unit": "byte"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 0.0,
+            "eric_minus_opt": 0.0,
+            "eric_vs_opt_percent": null,
+            "metric": "l1tex__m_l1tex2xbar_write_bytes_mem_global_op_tma_red.sum",
+            "name": "tma_global_reduction_interface_bytes",
+            "opt": 0.0,
+            "unit": "byte"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 121241600.0,
+            "eric_minus_opt": 121241600.0,
+            "eric_vs_opt_percent": null,
+            "metric": "l1tex__t_bytes_pipe_lsu_mem_local_op_ld.sum",
+            "name": "local_load_footprint_bytes",
+            "opt": 0.0,
+            "unit": "byte"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 130457600.0,
+            "eric_minus_opt": 130457600.0,
+            "eric_vs_opt_percent": null,
+            "metric": "l1tex__t_bytes_pipe_lsu_mem_local_op_st.sum",
+            "name": "local_store_footprint_bytes",
+            "opt": 0.0,
+            "unit": "byte"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 351079700.0,
+            "eric_minus_opt": -42094649.0,
+            "eric_vs_opt_percent": -10.706356889014646,
+            "metric": "sm__inst_executed.sum",
+            "name": "executed_warp_instructions",
+            "opt": 393174349.0,
+            "unit": "inst"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 31309824.0,
+            "eric_minus_opt": 0.0,
+            "eric_vs_opt_percent": 0.0,
+            "metric": "sm__inst_executed_pipe_tensor_subpipe_hmma.sum",
+            "name": "tensor_instructions",
+            "opt": 31309824.0,
+            "unit": "inst"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 512980156416.0,
+            "eric_minus_opt": 0.0,
+            "eric_vs_opt_percent": 0.0,
+            "metric": "sm__ops_path_tensor_src_fp4_dst_fp32.sum",
+            "name": "fp4_to_fp32_tensor_ops",
+            "opt": 512980156416.0,
+            "unit": null
+          }
+        ],
+        "additive_unavailable": [],
+        "identity_gate": {
+          "checks": {
+            "fixture_sha256": true,
+            "gpu_uuid": true,
+            "nvcc": true,
+            "packed_weights_sha256": true,
+            "reference_sha256": true,
+            "scales_sha256": true,
+            "topk_ids_sha256": true,
+            "topk_weights_sha256": true,
+            "x_sha256": true
+          },
+          "pass": true
+        },
+        "pc_stall_sample_shares": [
+          {
+            "delta_kind": "percentage_points",
+            "eric": 6.486261890448743,
+            "eric_minus_opt_pp": -3.3524664332506795,
+            "metric": "smsp__pcsamp_warps_issue_stalled_barrier",
+            "opt": 9.838728323699423,
+            "reason": "barrier",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 0.8928887160083454,
+            "eric_minus_opt_pp": 0.051848253580599746,
+            "metric": "smsp__pcsamp_warps_issue_stalled_branch_resolving",
+            "opt": 0.8410404624277457,
+            "reason": "branch_resolving",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 0.4216910074613671,
+            "eric_minus_opt_pp": -0.4679043682611762,
+            "metric": "smsp__pcsamp_warps_issue_stalled_dispatch_stall",
+            "opt": 0.8895953757225433,
+            "reason": "dispatch_stall",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 0.0,
+            "eric_minus_opt_pp": 0.0,
+            "metric": "smsp__pcsamp_warps_issue_stalled_drain",
+            "opt": 0.0,
+            "reason": "drain",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 0.4066621874889494,
+            "eric_minus_opt_pp": 0.37082403719993207,
+            "metric": "smsp__pcsamp_warps_issue_stalled_lg_throttle",
+            "opt": 0.035838150289017344,
+            "reason": "lg_throttle",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 19.647087945118287,
+            "eric_minus_opt_pp": 9.78697233818187,
+            "metric": "smsp__pcsamp_warps_issue_stalled_long_scoreboard",
+            "opt": 9.860115606936416,
+            "reason": "long_scoreboard",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 0.2603522048162948,
+            "eric_minus_opt_pp": -13.795717159345555,
+            "metric": "smsp__pcsamp_warps_issue_stalled_math_pipe_throttle",
+            "opt": 14.05606936416185,
+            "reason": "math_pipe_throttle",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 0.09901340217122247,
+            "eric_minus_opt_pp": -0.10734497933166771,
+            "metric": "smsp__pcsamp_warps_issue_stalled_membar",
+            "opt": 0.20635838150289018,
+            "reason": "membar",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 2.8360267336185863,
+            "eric_minus_opt_pp": -2.4778460987513555,
+            "metric": "smsp__pcsamp_warps_issue_stalled_mio_throttle",
+            "opt": 5.313872832369942,
+            "reason": "mio_throttle",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 0.014144771738746066,
+            "eric_minus_opt_pp": -0.030363898781485148,
+            "metric": "smsp__pcsamp_warps_issue_stalled_misc",
+            "opt": 0.04450867052023121,
+            "reason": "misc",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 0.9397432723929418,
+            "eric_minus_opt_pp": 0.253616104762884,
+            "metric": "smsp__pcsamp_warps_issue_stalled_no_instructions",
+            "opt": 0.6861271676300578,
+            "reason": "no_instructions",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 0.14277378973796812,
+            "eric_minus_opt_pp": -3.4237001987013382,
+            "metric": "smsp__pcsamp_warps_issue_stalled_not_selected",
+            "opt": 3.566473988439306,
+            "reason": "not_selected",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 16.174546483256126,
+            "eric_minus_opt_pp": 3.464141858978669,
+            "metric": "smsp__pcsamp_warps_issue_stalled_selected",
+            "opt": 12.710404624277457,
+            "reason": "selected",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 11.259238304041869,
+            "eric_minus_opt_pp": 3.2216660497066094,
+            "metric": "smsp__pcsamp_warps_issue_stalled_short_scoreboard",
+            "opt": 8.03757225433526,
+            "reason": "short_scoreboard",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 7.2407970578874785,
+            "eric_minus_opt_pp": -4.656890803384197,
+            "metric": "smsp__pcsamp_warps_issue_stalled_sleeping",
+            "opt": 11.897687861271676,
+            "reason": "sleeping",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 0.0,
+            "eric_minus_opt_pp": 0.0,
+            "metric": "smsp__pcsamp_warps_issue_stalled_tex_throttle",
+            "opt": 0.0,
+            "reason": "tex_throttle",
+            "unit": "% of non-_not_issued PC samples"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 33.17877223381308,
+            "eric_minus_opt_pp": 11.163165297396894,
+            "metric": "smsp__pcsamp_warps_issue_stalled_wait",
+            "opt": 22.015606936416184,
+            "reason": "wait",
+            "unit": "% of non-_not_issued PC samples"
+          }
+        ],
+        "selected_metrics": [
+          {
+            "delta_kind": "percentage_points",
+            "eric": 18.989992601356004,
+            "eric_minus_opt_pp": -8.823265697661416,
+            "metric": "smsp__issue_active.avg.pct_of_peak_sustained_active",
+            "name": "issue_active_pct",
+            "opt": 27.81325829901742,
+            "unit": "%"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 27.051574284761987,
+            "eric_minus_opt_pp": -8.314540424559954,
+            "metric": "sm__pipe_tensor_subpipe_hmma_cycles_active.avg.pct_of_peak_sustained_active",
+            "name": "tc_subpipe_active_pct",
+            "opt": 35.36611470932194,
+            "unit": "%"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 7.738179153742686,
+            "eric_minus_opt_pp": -4.024241256096974,
+            "metric": "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_active",
+            "name": "alu_pipe_active_pct",
+            "opt": 11.76242040983966,
+            "unit": "%"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 4.663424835646507,
+            "eric_minus_opt_pp": -2.444345754802513,
+            "metric": "sm__pipe_fma_cycles_active.avg.pct_of_peak_sustained_active",
+            "name": "fma_pipe_active_pct",
+            "opt": 7.10777059044902,
+            "unit": "%"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 1.6123338661339752,
+            "eric_minus_opt_pp": -0.43269412662509144,
+            "metric": "sm__inst_executed_pipe_xu.avg.pct_of_peak_sustained_active",
+            "name": "xu_pipe_active_pct",
+            "opt": 2.0450279927590667,
+            "unit": "%"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 42.78539443452108,
+            "eric_minus_opt_pp": -9.53328291042898,
+            "metric": "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed",
+            "name": "dram_throughput_pct",
+            "opt": 52.31867734495006,
+            "unit": "%"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 42.72603833027474,
+            "eric_minus_opt_pp": -9.80750072897353,
+            "metric": "lts__throughput.avg.pct_of_peak_sustained_elapsed",
+            "name": "l2_throughput_pct",
+            "opt": 52.53353905924827,
+            "unit": "%"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 38.20242764490479,
+            "eric_minus_opt_pp": -10.084415308207014,
+            "metric": "l1tex__throughput.avg.pct_of_peak_sustained_active",
+            "name": "l1_throughput_pct",
+            "opt": 48.2868429531118,
+            "unit": "%"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 23.018316109608897,
+            "eric_minus_opt_pp": -10.294529386149954,
+            "metric": "sm__inst_executed_pipe_lsu.avg.pct_of_peak_sustained_active",
+            "name": "lsu_pipe_active_pct",
+            "opt": 33.31284549575885,
+            "unit": "%"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 0.2646032083278329,
+            "eric_minus_opt_pp": -0.21947702009224068,
+            "metric": "sm__pipe_tma_cycles_active.avg.pct_of_peak_sustained_active",
+            "name": "tma_pipe_active_pct",
+            "opt": 0.4840802284200736,
+            "unit": "%"
+          },
+          {
+            "delta_kind": "percentage_points",
+            "eric": 10.41349162400591,
+            "eric_minus_opt_pp": -8.342304090392851,
+            "metric": "sm__warps_active.avg.pct_of_peak_sustained_active",
+            "name": "achieved_occupancy_pct",
+            "opt": 18.75579571439876,
+            "unit": "%"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 254.0,
+            "eric_minus_opt": 89.0,
+            "eric_vs_opt_percent": 53.93939393939393,
+            "metric": "launch__registers_per_thread",
+            "name": "registers_per_thread",
+            "opt": 165.0,
+            "unit": "register/thread"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 256.0,
+            "eric_minus_opt": 88.0,
+            "eric_vs_opt_percent": 52.38095238095237,
+            "metric": "launch__registers_per_thread_allocated",
+            "name": "allocated_registers_per_thread",
+            "opt": 168.0,
+            "unit": "register/thread"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 94208.0,
+            "eric_minus_opt": 9216.0,
+            "eric_vs_opt_percent": 10.843373493975905,
+            "metric": "launch__shared_mem_per_block",
+            "name": "shared_mem_per_cta_bytes",
+            "opt": 84992.0,
+            "unit": "byte/block"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 93184.0,
+            "eric_minus_opt": 9216.0,
+            "eric_vs_opt_percent": 10.97560975609757,
+            "metric": "launch__shared_mem_per_block_dynamic",
+            "name": "dynamic_shared_mem_per_cta_bytes",
+            "opt": 83968.0,
+            "unit": "byte/block"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 947200.0,
+            "eric_minus_opt": 947200.0,
+            "eric_vs_opt_percent": null,
+            "metric": "sass__inst_executed_register_spilling_op_read",
+            "name": "dynamic_spill_load_instructions",
+            "opt": 0.0,
+            "unit": "inst"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 509600.0,
+            "eric_minus_opt": 509600.0,
+            "eric_vs_opt_percent": null,
+            "metric": "sass__inst_executed_register_spilling_op_write",
+            "name": "dynamic_spill_store_instructions",
+            "opt": 0.0,
+            "unit": "inst"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 1.0,
+            "eric_minus_opt": 0.0,
+            "eric_vs_opt_percent": 0.0,
+            "metric": "launch__occupancy_limit_registers",
+            "name": "occupancy_limit_registers_cta",
+            "opt": 1.0,
+            "unit": "block"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 1.0,
+            "eric_minus_opt": 0.0,
+            "eric_vs_opt_percent": 0.0,
+            "metric": "launch__occupancy_limit_shared_mem",
+            "name": "occupancy_limit_shared_mem_cta",
+            "opt": 1.0,
+            "unit": "block"
+          },
+          {
+            "delta_kind": "absolute_and_percent_vs_opt",
+            "eric": 1.0,
+            "eric_minus_opt": 0.0,
+            "eric_vs_opt_percent": 0.0,
+            "metric": "launch__waves_per_multiprocessor",
+            "name": "waves_per_sm",
+            "opt": 1.0,
+            "unit": null
+          }
+        ]
+      },
+      "status": "complete"
+    }
+  },
+  "comparison": {
+    "baseline": "latest_opt_fp4",
+    "boundary": "one correctness-qualified complete fused MoE kernel launch",
+    "candidate": "eric_stage4_fp4",
+    "formal_latency_authority": "exp_018 benchmark; NCU duration is diagnostic only",
+    "non_percentage_metric_delta": "absolute plus percent relative to Opt when Opt != 0",
+    "pc_stall_denominator": "own-side non-_not_issued PC-sampling reason samples",
+    "percentage_metric_delta": "percentage points",
+    "phase_partition_forbidden": true
+  },
+  "missing_cells": [
+    "latest_opt_fp4/m1024",
+    "eric_stage4_fp4/m1024"
+  ],
+  "raw_retention": {
+    "capture_host": "10.6.142.16",
+    "m8192": {
+      "eric_stage4_fp4": {
+        "ledger_ncu_rep_sha256": "aa163191319ff6142523592cb57270a0d97b02c4a46ba68bff309b72a95181da",
+        "production_ncu_rep_sha256": "5dce4fefca1158bbcf02ccb2297985795857c77511273d35a5901cd01819a84e"
+      },
+      "latest_opt_fp4": {
+        "ledger_ncu_rep_sha256": "ed865eb4cac0a398b75cbd2ffdfe61d82991bab4e0a7d79f701191cf2796a504",
+        "production_ncu_rep_sha256": "883355ca648f9eaefe4e85db1f3cf054c7f49e1194d09313f242115d1a23af2b"
+      }
+    },
+    "root": "/home/xiy/workspace/flashinfer_exp001_corrected_074d93e/.claude/w4a4_moe_bench/experiments/exp_019_opt_vs_eric_dataflow_bottleneck/results/raw/ncu"
+  },
+  "requested_cases": [
+    1024,
+    8192
+  ],
+  "schema": "exp019.paired-production-ncu-evidence.v1"
+}
