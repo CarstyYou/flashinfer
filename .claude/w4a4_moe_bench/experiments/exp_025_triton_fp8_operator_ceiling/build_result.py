@@ -877,34 +877,38 @@ def render(model):
         ncu_row = ncu_by_phase[phase]
         if phase in ("fc1", "fc2"):
             return (
-                "TC Useful **{:.2f}%** / Executed **{:.2f}%**"
-                "（source-contract diagnostic）；NCU DRAM throughput **{:.2f}%**"
-                "（sibling-GPU diagnostic）；Padding **{:.2f}%**"
+                "TC: Useful **{:.2f}%** / Executed **{:.2f}%**<br>"
+                "DRAM throughput: **{:.2f}%**<br>"
+                "Padding: **{:.2f}%**"
             ).format(
                 row["calibrated_useful_ceiling_efficiency_percent"],
                 row["calibrated_executed_ceiling_efficiency_percent"],
                 ncu_row["dram_throughput_percent"],
                 row["padding_efficiency_percent"],
             )
-        return "NCU DRAM throughput **{:.2f}%**（sibling-GPU diagnostic）".format(
-            ncu_row["dram_throughput_percent"]
-        )
+        return "DRAM throughput: **{:.2f}%**".format(ncu_row["dram_throughput_percent"])
 
     def optimization_meaning(phase):
         row = ncu_by_phase[phase]
         if phase == "fc1":
             return (
-                "主耗时；现有 TC/DRAM diagnostic 均未逼近 ceiling。"
-                "Achieved occupancy {:.2f}%，优先调查调度与访存等待。"
+                "主耗时；现有 TC/DRAM diagnostic 均未逼近 ceiling。<br>"
+                "下一步：结合 Achieved occupancy {:.2f}% 调查调度与访存等待。"
             ).format(row["achieved_occupancy_percent"])
         if phase == "swiglu":
-            return "DRAM throughput 接近上限；优先减少 traffic、改善 locality 或融合。"
+            return (
+                "DRAM throughput 接近上限。<br>"
+                "下一步：减少 traffic、改善 locality 或融合。"
+            )
         if phase == "fc2":
             return (
-                "DRAM diagnostic 比 TC 更接近上限，但仍未封顶；Achieved occupancy {:.2f}%，"
-                "继续区分 memory wait 与 compute schedule。"
+                "DRAM diagnostic 比 TC 更接近上限，但仍未封顶。<br>"
+                "下一步：结合 Achieved occupancy {:.2f}% 区分 memory wait 与 compute schedule。"
             ).format(row["achieved_occupancy_percent"])
-        return "DRAM throughput 接近上限；优先减少读流量、优化 reduction/locality 或与前级融合。"
+        return (
+            "DRAM throughput 接近上限。<br>"
+            "下一步：减少读流量、优化 reduction/locality 或与前级融合。"
+        )
 
     lines = [
         "# exp_025：SGLang Triton FP8 逐算子性能上界",
