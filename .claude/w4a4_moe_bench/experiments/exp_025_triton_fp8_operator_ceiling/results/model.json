@@ -375,6 +375,23 @@
     "padding_efficiency_percent": 89.12097476066144,
     "physical_routed_rows": 73536
   },
+  "reader_reporting_policy": {
+    "accounting_only_phases": [
+      "route",
+      "q0",
+      "q1",
+      "graph_bubble"
+    ],
+    "ceiling_phases": [
+      "fc1",
+      "swiglu",
+      "fc2",
+      "topk_reduce"
+    ],
+    "minimum_share_percent": 3.0,
+    "primary_case_m": 8192,
+    "rule": "all phases remain in time accounting; phases below the primary-case share threshold are omitted from reader-facing resource analysis"
+  },
   "schema": "operator-performance-ceiling.v1",
   "subject": {
     "arm": "sglang_triton_fp8",

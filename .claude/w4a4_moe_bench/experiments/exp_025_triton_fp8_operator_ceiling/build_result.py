@@ -81,6 +81,14 @@ GROUPS = {
     "topk_reduce": ("topk_reduce",),
 }
 
+CEILING_MIN_SHARE_PERCENT = 3.0
+CEILING_PHASES = (
+    "fc1",
+    "swiglu",
+    "fc2",
+    "topk_reduce",
+)
+
 LABELS = {
     "route": "Routing / scheduler",
     "q0": "Q0（input quant）",
@@ -715,6 +723,17 @@ def build():
             }
         )
 
+    operation_by_phase = {row["phase"]: row for row in operations}
+    selected_ceiling_phases = tuple(
+        phase
+        for phase in GROUPS
+        if operation_by_phase[phase]["share_percent"] >= CEILING_MIN_SHARE_PERCENT
+    )
+    require(
+        selected_ceiling_phases == CEILING_PHASES,
+        "reader ceiling phase selection drift",
+    )
+
     return {
         "schema": "operator-performance-ceiling.v1",
         "subject": {
@@ -733,6 +752,19 @@ def build():
             "accounting": "vetted",
             "validation": "limited to one per-op M regime",
             "reason": "GEMM percentage uses a vetted same-UUID calibrated roof, but target instruction equivalence is source-contract-derived because target SASS binding is unavailable; non-GEMM roofs and all independent SOTA anchors remain unavailable",
+        },
+        "reader_reporting_policy": {
+            "primary_case_m": M,
+            "minimum_share_percent": CEILING_MIN_SHARE_PERCENT,
+            "ceiling_phases": list(CEILING_PHASES),
+            "accounting_only_phases": [
+                phase for phase in GROUPS if phase not in CEILING_PHASES
+            ]
+            + ["graph_bubble"],
+            "rule": (
+                "all phases remain in time accounting; phases below the primary-case "
+                "share threshold are omitted from reader-facing resource analysis"
+            ),
         },
         "evidence_status": {
             "timeline_identity": "vetted",
@@ -836,8 +868,44 @@ def build():
 
 def render(model):
     operations = {row["phase"]: row for row in model["operations"]}
+    ncu_by_phase = {row["phase"]: row for row in model["ncu_diagnostic"]["rows"]}
     timeline = model["timeline"]
     padding = model["padding"]
+
+    def resource_cell(phase):
+        row = operations[phase]
+        ncu_row = ncu_by_phase[phase]
+        if phase in ("fc1", "fc2"):
+            return (
+                "TC Useful **{:.2f}%** / Executed **{:.2f}%**"
+                "（source-contract diagnostic）；NCU DRAM throughput **{:.2f}%**"
+                "（sibling-GPU diagnostic）；Padding **{:.2f}%**"
+            ).format(
+                row["calibrated_useful_ceiling_efficiency_percent"],
+                row["calibrated_executed_ceiling_efficiency_percent"],
+                ncu_row["dram_throughput_percent"],
+                row["padding_efficiency_percent"],
+            )
+        return "NCU DRAM throughput **{:.2f}%**（sibling-GPU diagnostic）".format(
+            ncu_row["dram_throughput_percent"]
+        )
+
+    def optimization_meaning(phase):
+        row = ncu_by_phase[phase]
+        if phase == "fc1":
+            return (
+                "主耗时；现有 TC/DRAM diagnostic 均未逼近 ceiling。"
+                "Achieved occupancy {:.2f}%，优先调查调度与访存等待。"
+            ).format(row["achieved_occupancy_percent"])
+        if phase == "swiglu":
+            return "DRAM throughput 接近上限；优先减少 traffic、改善 locality 或融合。"
+        if phase == "fc2":
+            return (
+                "DRAM diagnostic 比 TC 更接近上限，但仍未封顶；Achieved occupancy {:.2f}%，"
+                "继续区分 memory wait 与 compute schedule。"
+            ).format(row["achieved_occupancy_percent"])
+        return "DRAM throughput 接近上限；优先减少读流量、优化 reduction/locality 或与前级融合。"
+
     lines = [
         "# exp_025：SGLang Triton FP8 逐算子性能上界",
         "",
@@ -860,7 +928,7 @@ def render(model):
             "相对同一 5KP GPU UUID 上实测、source-contract-compatible 的 full-card calibrated TC roof，"
             "FC1 的 Useful / Executed efficiency 为 "
             "**{:.2f}% / {:.2f}%**，FC2 为 **{:.2f}% / {:.2f}%**；padding efficiency 为 **{:.2f}%**。"
-            "这是本报告的主 ceiling 百分比估计。"
+            "由于 target SASS binding 缺失，这些值保持 diagnostic estimate。"
         ).format(
             operations["fc1"]["calibrated_useful_ceiling_efficiency_percent"],
             operations["fc1"]["calibrated_executed_ceiling_efficiency_percent"],
@@ -870,9 +938,13 @@ def render(model):
         ),
         "",
         (
-            "Routing、Q0/Q1、SwiGLU、TopK reduce 没有完整且合法的 operator roof，保持 unavailable；"
-            "不会用 logical payload rate 或单项 NCU utilization 冒充 hardware-ceiling efficiency。"
-            "所有 op 仍缺少独立同契约 SOTA anchor，因此 SOTA distance 也保持 unavailable。"
+            "第 3 节覆盖 FC1、SwiGLU、FC2、TopK reduce 四个主要 op；"
+            "Routing、Q0、Q1 只保留在时间 accounting。SwiGLU / TopK reduce 的 NCU DRAM "
+            "throughput 为 **{:.2f}% / {:.2f}%**，只作为 sibling-GPU launch-local diagnostic。"
+            "所有 op 的独立同契约 SOTA anchor 仍 unavailable。"
+        ).format(
+            ncu_by_phase["swiglu"]["dram_throughput_percent"],
+            ncu_by_phase["topk_reduce"]["dram_throughput_percent"],
         ),
         "",
         "当前 verdict：**accounting=vetted，GEMM percentage=diagnostic（same UUID measured roof；target SASS binding unavailable），coverage=partial**。M256/M1024 只有 E2E benchmark，不能插值出逐 op 占比。",
@@ -926,102 +998,42 @@ def render(model):
                 timeline["median_share_nonadditivity_pp"],
             ),
             "",
-            "## 3. M8192 逐算子 ceiling card",
+            "## 3. M8192 主要 op 的资源达成率",
             "",
-            "| Op | Graph share | Hardware ceiling efficiency | Padding efficiency | SOTA distance |",
-            "|---|---:|---|---:|---|",
+            "| Op | Graph share | 已观测资源达成率 | 对优化的含义 |",
+            "|---|---:|---|---|",
         ]
     )
-    for phase in GROUPS:
+    for phase in CEILING_PHASES:
         row = operations[phase]
-        if phase in ("fc1", "fc2"):
-            hardware = "{:.2f}% Useful / {:.2f}% Executed（same-UUID calibrated TC estimate）".format(
-                row["calibrated_useful_ceiling_efficiency_percent"],
-                row["calibrated_executed_ceiling_efficiency_percent"],
-            )
-            padding_cell = "{:.2f}%".format(row["padding_efficiency_percent"])
-        else:
-            hardware = "unavailable（no legal complete-op roof）"
-            padding_cell = "—"
         lines.append(
-            "| {} | {:.2f}% | {} | {} | unavailable |".format(
-                row["label"], row["share_percent"], hardware, padding_cell
+            "| {} | {:.2f}% | {} | {} |".format(
+                row["label"],
+                row["share_percent"],
+                resource_cell(phase),
+                optimization_meaning(phase),
             )
         )
 
     lines.extend(
         [
             "",
-            "主表只呈现对用户有意义的 ceiling 百分比。Raw TFLOP/s、logical payload rate、cycle proxy 计数与 nominal diagnostic 均下沉到 [model.json](model.json)。",
-            "",
-            "## 4. GEMM 与 NCU 交叉证据",
-            "",
-            "| GEMM | Calibrated Useful ceiling efficiency | Calibrated Executed ceiling efficiency | Padding efficiency | TC active（诊断） |",
-            "|---|---:|---:|---:|---:|",
-        ]
-    )
-    for phase in ("fc1", "fc2"):
-        row = operations[phase]
-        lines.append(
-            "| {} | {:.2f}% | {:.2f}% | {:.2f}% | {:.2f}% |".format(
-                row["label"],
-                row["calibrated_useful_ceiling_efficiency_percent"],
-                row["calibrated_executed_ceiling_efficiency_percent"],
-                row["padding_efficiency_percent"],
-                row["tensor_pipe_active_percent"],
-            )
-        )
-    lines.extend(
-        [
-            "",
             (
-                "Calibrated efficiency 的分母来自 exp_026 中同一 GPU UUID 的 "
+                "TC diagnostic 的分母来自 exp_026 中同一 GPU UUID 的 "
                 "`QMMA.16832.F32.E4M3.E4M3` full-card measured roof。目标 Triton 的 "
                 "FP8 instruction 目前由 source/dispatch contract 推导，缺少可追溯 target SASS binding，"
-                "因此百分比保持 diagnostic。"
-                "Sibling-GPU NCU 的 `l1tex__cycles_elapsed.sum` 只保留在 model 中作交叉诊断，"
-                "不参与主百分比。"
+                "因此不能称 exact MFU。NCU DRAM throughput 来自 sibling GPU，只允许 launch-local "
+                "diagnostic，不能与 NSys 时间混算或称 complete-op efficiency。"
             ),
             "",
-            "Dispatch/source-derived physical routed rows = **{}**，logical rows = {}；由 fixture per-expert occupancy 按 `BLOCK_SIZE_M={}` 逐 expert 向上取整得到，不是 NCU dynamic counter。".format(
-                padding["physical_routed_rows"],
-                padding["logical_routed_rows"],
-                padding["block_m"],
-            ),
+            "## 4. 优化优先级与最小下一步",
             "",
-            "`TC active` 与 calibrated efficiency 的分母、采集语义不同，只并列展示，不作差也不互证。",
+            "1. **FC1**：占比最高，优先调查低 occupancy、访存等待与 grouped-GEMM 调度。",
+            "2. **TopK reduce + SwiGLU**：DRAM throughput 已接近上限，优先减少 traffic、改善 locality 或融合。",
+            "3. **FC2**：继续区分 memory wait 与 TC schedule；现有 diagnostic 不能单独决定优化顺序。",
+            "4. 只有结论需要升级时，再补 target SASS binding、同责任 standalone 或独立 SOTA anchor。",
             "",
-            "| Op | TC active | DRAM throughput | Issue active | Achieved occupancy | PC-sampled stall reason share (Wait / Long / Short / Barrier) |",
-            "|---|---:|---:|---:|---:|---|",
-        ]
-    )
-    for row in model["ncu_diagnostic"]["rows"]:
-        stalls = row["stall_share_percent"]
-        lines.append(
-            "| {} | {:.2f}% | {:.2f}% | {:.2f}% | {:.2f}% | {:.2f}% / {:.2f}% / {:.2f}% / {:.2f}% |".format(
-                row["label"],
-                row["tc_active_percent"],
-                row["dram_throughput_percent"],
-                row["issue_active_percent"],
-                row["achieved_occupancy_percent"],
-                stalls["wait"],
-                stalls["long_scoreboard"],
-                stalls["short_scoreboard"],
-                stalls["barrier"],
-            )
-        )
-    lines.extend(
-        [
-            "",
-            "NCU 来自同配置 sibling GPU，只允许 normalized launch-local 诊断；NCU duration、跨 launch 可加 traffic 与 NSys 时间均不混算。Stall 列的分母是全部非 `_not_issued` PC samples，只展示四类，合计不要求 100%。",
-            "",
-            "## 5. 下一步最小补证",
-            "",
-            "1. 若要判断 Q0/Q1、SwiGLU 或 TopK reduce 的硬件余量，分别补同责任 standalone calibration；在此之前保持 unavailable。",
-            "2. 用独立、同 shape/precision/layout/protocol 的 grouped-GEMM 实现补 FC1/FC2 SOTA anchor；否则 SOTA gap 保持 unavailable。",
-            "3. 只有需要验证跨 M 稳定性时，再为 M256 补一次轻量 NSys timeline；M1024 不做插值。",
-            "",
-            "公式、input digest 与 identity status 见 [model.json](model.json)。",
+            "Raw NCU metrics、TFLOP/s、cycle proxy、公式、input digest 与 identity status 见 [model.json](model.json)。",
         ]
     )
     return "\n".join(lines) + "\n"

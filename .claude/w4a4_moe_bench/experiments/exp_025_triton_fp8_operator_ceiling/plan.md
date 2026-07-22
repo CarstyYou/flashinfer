@@ -9,6 +9,7 @@
 - Case：`M=8192, E=256, H=2048, I_tp=512, topk=8, SwiGLU`；现有 accepted per-op timeline 只覆盖 M8192。
 - Subject：`sglang_triton_fp8`，边界从既有 top-k ids/weights + BF16 activation 到 BF16 MoE output；router logits/softmax/top-k selection 不在边界内。
 - Material nodes：`Q0 → FC1 → SwiGLU → Q1 → FC2 → TopK reduce/finalize`；routing/scheduler 与 residual/helper 保留在时间闭合中。
+- Reader reporting：完整 graph 保留在第 2 章 accounting；第 3 章只展开 M8192 share ≥3% 的 FC1、SwiGLU、FC2、TopK reduce。
 - 时间 authority：exp_017 canonical Triton NSys five-replay topology；NCU replay time不参与时间或 MFU分母。
 - Work authority：source/shape contract 给 logical work；只有通过 launch identity 的动态 counter 才能给 physical work。
 
@@ -60,6 +61,7 @@ Physical routed rows 允许由 fixture 的 per-expert occupancy、pinned JIT `BL
 - NSys/NCU cross-capture 必须核对 fixture SHA、SGLang/container/toolchain、ordered dispatch、逐 kernel JIT/cubin identity、report hash与 stale rule；NCU在 sibling GPU，无法闭合的项只作 normalized launch-local diagnostic；
 - SOTA anchor 必须独立且 contract/precision/shape/protocol equivalent；Opt NVFP4不是有效绝对 SOTA anchor；
 - 只有一个 M regime 时，模型 verdict 至少降级为 `validation-limited`；
+- reader ceiling threshold 固定为 M8192 share ≥3%；低于阈值的真实 op 与 graph bubble 仍保留时间 accounting，不生成 ceiling/优化任务；
 - 报告动笔前运行 data-audit。
 
 ## 输出
@@ -75,6 +77,7 @@ exp_025_triton_fp8_operator_ceiling/
 
 不创建新 profiler artifact、第二份 bottleneck 报告、通用 schema 或测试框架。
 读者报告以 ceiling 百分比为主；TFLOP/s、cycle proxy 和公式输入下沉 model。
+主表按 op 同行展示 share、TC/DRAM diagnostic、padding 与优化含义；不再单设 GEMM-only 或完整 NCU reader table。
 
 ## Decision
 
