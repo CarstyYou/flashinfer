@@ -1,0 +1,10 @@
+benchmark_remote=ssh://git@gitlab-master.nvidia.com:12051/xiy/sm120_mma_benchmarks.git
+benchmark_commit=0f3c99a9126de9f4a6fa2e5d5c501bdeace36fc1
+benchmark_status=clean
+target_uuid=GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522
+host=R6KD-CX8aaS-GPU-16
+5666f90cbad11ce04dd7b6f26cebbec2304b8e3bda2d41930cd3a81e8f2e795d  /home/xiy/workspace/exp026_sm120_mma_benchmarks/CMakeLists.txt
+c48cd1bad2a30e76028c2b4f356ef8a9774213dfa1cc47b6629575640735af90  /home/xiy/workspace/exp026_sm120_mma_benchmarks/IPC_benchmark.cu
+4c0906eb922a875d83e9a064aa65e079b14da0176a7afbb4a2acb8b5b9405ff4  /home/xiy/workspace/exp026_sm120_mma_benchmarks/IPC_bench_recipe.cuh
+aa4a9923d76a37cc9174c3159b2022d8ce7ea1bcf15b85f26d1adf00f1c19118  /home/xiy/workspace/exp026_sm120_mma_benchmarks/back_to_back_throttle_benchmark.cu
+65ee1919f35bf6ea8b08d6da523b7d774126b5eb4096863babd8600e8285b8fa  /home/xiy/workspace/exp026_sm120_mma_benchmarks/dram_bw_benchmark.cu

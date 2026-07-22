@@ -1,0 +1,543 @@
+{
+  "cases": [
+    {
+      "logical_routed_rows": 2048,
+      "m": 256,
+      "overall_benchmark_us": 550.739198923111,
+      "phases": [
+        {
+          "achieved_gwork_per_s": 381.0232558139535,
+          "dram_resource_efficiency_percent": 6.548564980648496,
+          "dram_resource_efficiency_status": "diagnostic",
+          "hardware_ceiling_reason": "physical DRAM bytes and calibrated directional roofs do not model the complete mixed operator",
+          "hardware_ceiling_status": "partial DRAM resource view only",
+          "label": "Route/Q0/Pack",
+          "logical_payload_gbs": 976.3720930232557,
+          "logical_work": {
+            "payload_floor_bytes": 10747904.0,
+            "payload_scope": "routed BF16 read + NVFP4 value/scale write; metadata excluded",
+            "work_count": 4194304,
+            "work_name": "quantized values"
+          },
+          "model": "route/quant/transform",
+          "ncu_diagnostic": {
+            "dram_bytes": 1070080.0,
+            "dram_gbs": 68.52459016393442,
+            "dram_read_bytes": 1070080.0,
+            "dram_write_bytes": 0.0,
+            "ncu_duration_us": 15.616,
+            "physical_dram_floor_ns": 1022.6239073780691,
+            "physical_dram_formula": "max(read_bytes/read_roof, write_bytes/write_roof, total_bytes/copy_roof) / NCU duration",
+            "physical_dram_resource_efficiency_percent": 6.548564980648496,
+            "physical_dram_resource_status": "diagnostic",
+            "physical_dram_roof_transfer": "same-SKU cross-UUID transfer",
+            "scope": "NCU kernel replay/cache-control all; not canonical NSys throughput",
+            "theoretical_dram_efficiency_percent": 5.098191659221842
+          },
+          "phase": "expand_quant",
+          "share_percent": 2.1597314461842716,
+          "sota_efficiency_percent": null,
+          "sota_reason": "no independent contract-equivalent per-op implementation",
+          "time_us": 11.008,
+          "timing_class": "paired cross-capture / canonical NSys"
+        },
+        {
+          "calibrated_executed_ceiling_efficiency_percent": 43.97916628199216,
+          "calibrated_useful_ceiling_efficiency_percent": 2.74869789262451,
+          "executed_flops": 137438953472,
+          "executed_tflops": 502.98246820470786,
+          "hardware_ceiling_status": "vetted measured roof / same-SKU cross-UUID transfer",
+          "label": "FC1",
+          "model": "dense NVFP4 tensor-core compute",
+          "ncu_diagnostic": {
+            "dram_bytes": 314713088.0,
+            "dram_gbs": 1102.9251990579792,
+            "dram_read_bytes": 308485120.0,
+            "dram_write_bytes": 6227968.0,
+            "ncu_duration_us": 285.344,
+            "physical_dram_floor_ns": 300756.13762856805,
+            "physical_dram_formula": "max(read_bytes/read_roof, write_bytes/write_roof, total_bytes/copy_roof) / NCU duration",
+            "physical_dram_resource_efficiency_percent": 105.40124818765001,
+            "physical_dram_resource_status": "invalid",
+            "physical_dram_roof_transfer": "same-SKU cross-UUID transfer",
+            "scope": "NCU kernel replay/cache-control all; not canonical NSys throughput",
+            "theoretical_dram_efficiency_percent": 82.05702561855546
+          },
+          "nominal_executed_mfu_percent": 46.964643802937246,
+          "nominal_useful_mfu_percent": 2.935290237683578,
+          "padding_efficiency_percent": 6.25,
+          "phase": "fc1",
+          "physical_routed_rows": 32768,
+          "share_percent": 53.61031052025435,
+          "sota_efficiency_percent": null,
+          "sota_reason": "no independent contract-equivalent per-op implementation",
+          "tensor_pipe_active_percent": 47.714264599678074,
+          "time_us": 273.248,
+          "timing_class": "paired cross-capture / canonical NSys",
+          "useful_flops": 8589934592,
+          "useful_tflops": 31.43640426279424
+        },
+        {
+          "achieved_gwork_per_s": 109.22666666666666,
+          "dram_resource_efficiency_percent": 27.62190837680096,
+          "dram_resource_efficiency_status": "diagnostic",
+          "hardware_ceiling_reason": "physical DRAM bytes and calibrated directional roofs do not model the complete mixed operator",
+          "hardware_ceiling_status": "partial DRAM resource view only",
+          "label": "SwiGLU/Q1",
+          "logical_payload_gbs": 498.34666666666664,
+          "logical_work": {
+            "payload_floor_bytes": 4784128.0,
+            "payload_scope": "Gate+Up BF16 read + NVFP4 value/scale write",
+            "work_count": 1048576,
+            "work_name": "SwiGLU output values"
+          },
+          "model": "elementwise/quant/transform",
+          "ncu_diagnostic": {
+            "dram_bytes": 4208384.0,
+            "dram_gbs": 289.03736263736266,
+            "dram_read_bytes": 4208384.0,
+            "dram_write_bytes": 0.0,
+            "ncu_duration_us": 14.56,
+            "physical_dram_floor_ns": 4021.7498596622195,
+            "physical_dram_formula": "max(read_bytes/read_roof, write_bytes/write_roof, total_bytes/copy_roof) / NCU duration",
+            "physical_dram_resource_efficiency_percent": 27.62190837680096,
+            "physical_dram_resource_status": "diagnostic",
+            "physical_dram_roof_transfer": "same-SKU cross-UUID transfer",
+            "scope": "NCU kernel replay/cache-control all; not canonical NSys throughput",
+            "theoretical_dram_efficiency_percent": 21.504220132889518
+          },
+          "phase": "activation_requant",
+          "share_percent": 1.8834867263234927,
+          "sota_efficiency_percent": null,
+          "sota_reason": "no independent contract-equivalent per-op implementation",
+          "time_us": 9.6,
+          "timing_class": "paired cross-capture / canonical NSys"
+        },
+        {
+          "calibrated_executed_ceiling_efficiency_percent": 29.449493528487814,
+          "calibrated_useful_ceiling_efficiency_percent": 1.8405933455304884,
+          "executed_flops": 68719476736,
+          "executed_tflops": 336.8089983188829,
+          "hardware_ceiling_status": "vetted measured roof / same-SKU cross-UUID transfer",
+          "label": "FC2",
+          "model": "dense NVFP4 tensor-core compute",
+          "ncu_diagnostic": {
+            "dram_bytes": 159012096.0,
+            "dram_gbs": 803.1562954582189,
+            "dram_read_bytes": 152770304.0,
+            "dram_write_bytes": 6241792.0,
+            "ncu_duration_us": 197.984,
+            "physical_dram_floor_ns": 151960.2001083065,
+            "physical_dram_formula": "max(read_bytes/read_roof, write_bytes/write_roof, total_bytes/copy_roof) / NCU duration",
+            "physical_dram_resource_efficiency_percent": 76.7537781377821,
+            "physical_dram_resource_status": "diagnostic",
+            "physical_dram_roof_transfer": "same-SKU cross-UUID transfer",
+            "scope": "NCU kernel replay/cache-control all; not canonical NSys throughput",
+            "theoretical_dram_efficiency_percent": 59.754384765538994
+          },
+          "nominal_executed_mfu_percent": 31.448640132786185,
+          "nominal_useful_mfu_percent": 1.9655400082991366,
+          "padding_efficiency_percent": 6.25,
+          "phase": "fc2",
+          "physical_routed_rows": 32768,
+          "share_percent": 40.03017502692797,
+          "sota_efficiency_percent": null,
+          "sota_reason": "no independent contract-equivalent per-op implementation",
+          "tensor_pipe_active_percent": 33.84879670660714,
+          "time_us": 204.031,
+          "timing_class": "paired cross-capture / canonical NSys",
+          "useful_flops": 4294967296,
+          "useful_tflops": 21.050562394930182
+        },
+        {
+          "achieved_gwork_per_s": 74.47272727272727,
+          "dram_resource_efficiency_percent": 67.04547411888991,
+          "dram_resource_efficiency_status": "diagnostic",
+          "hardware_ceiling_reason": "physical DRAM bytes and calibrated directional roofs do not model the complete mixed operator",
+          "hardware_ceiling_status": "partial DRAM resource view only",
+          "label": "Finalize",
+          "logical_payload_gbs": 1341.6727272727273,
+          "logical_work": {
+            "payload_floor_bytes": 9445376,
+            "payload_scope": "routed BF16 read + BF16 output + route weight; metadata excluded",
+            "work_count": 524288,
+            "work_name": "output values"
+          },
+          "model": "gather/reduction/store",
+          "ncu_diagnostic": {
+            "dram_bytes": 8418816.0,
+            "dram_gbs": 701.568,
+            "dram_read_bytes": 8418816.0,
+            "dram_write_bytes": 0.0,
+            "ncu_duration_us": 12.0,
+            "physical_dram_floor_ns": 8045.456894266789,
+            "physical_dram_formula": "max(read_bytes/read_roof, write_bytes/write_roof, total_bytes/copy_roof) / NCU duration",
+            "physical_dram_resource_efficiency_percent": 67.04547411888991,
+            "physical_dram_resource_status": "diagnostic",
+            "physical_dram_roof_transfer": "same-SKU cross-UUID transfer",
+            "scope": "NCU kernel replay/cache-control all; not canonical NSys throughput",
+            "theoretical_dram_efficiency_percent": 52.19627169487894
+          },
+          "phase": "finalize",
+          "share_percent": 1.3812235993038946,
+          "sota_efficiency_percent": null,
+          "sota_reason": "no independent contract-equivalent per-op implementation",
+          "time_us": 7.04,
+          "timing_class": "paired cross-capture / canonical NSys"
+        },
+        {
+          "hardware_ceiling_status": "unavailable",
+          "label": "Prefix",
+          "model": "routing prefix/latency",
+          "phase": "prefix",
+          "share_percent": 0.8536511193993247,
+          "sota_efficiency_percent": null,
+          "time_us": 4.351
+        },
+        {
+          "hardware_ceiling_status": "unavailable",
+          "label": "GEMM metadata",
+          "model": "metadata/latency",
+          "phase": "gemm_metadata",
+          "share_percent": 0.3890577269061965,
+          "sota_efficiency_percent": null,
+          "time_us": 1.983
+        }
+      ],
+      "physical_routed_rows": 32768,
+      "timeline_accounting": {
+        "active_union_ns": 509693,
+        "category_share_sum_percent": 100.3076361652995,
+        "category_sum_ns": 511261,
+        "cross_category_overlap_ns": 1568,
+        "gemm_metadata_ns": 1983,
+        "kernel_idle_ns": 2,
+        "kernel_wall_ns": 509695,
+        "prefix_internal_overlap_ns": 32,
+        "prefix_union_ns": 4351
+      },
+      "timeline_active_union_us": 509.693,
+      "timeline_vs_benchmark_percent": 92.5470714626141
+    },
+    {
+      "logical_routed_rows": 65536,
+      "m": 8192,
+      "overall_benchmark_us": 1665.7792043685913,
+      "phases": [
+        {
+          "achieved_gwork_per_s": 546.4891205211726,
+          "dram_resource_efficiency_percent": 25.630692744726527,
+          "dram_resource_efficiency_status": "diagnostic",
+          "hardware_ceiling_reason": "physical DRAM bytes and calibrated directional roofs do not model the complete mixed operator",
+          "hardware_ceiling_status": "partial DRAM resource view only",
+          "label": "Route/Q0/Pack",
+          "logical_payload_gbs": 1400.3783713355049,
+          "logical_work": {
+            "payload_floor_bytes": 343932928.0,
+            "payload_scope": "routed BF16 read + NVFP4 value/scale write; metadata excluded",
+            "work_count": 134217728,
+            "work_name": "quantized values"
+          },
+          "model": "route/quant/transform",
+          "ncu_diagnostic": {
+            "dram_bytes": 74066432.0,
+            "dram_gbs": 268.20115874855156,
+            "dram_read_bytes": 34284288.0,
+            "dram_write_bytes": 39782144.0,
+            "ncu_duration_us": 276.16,
+            "physical_dram_floor_ns": 70781.72108383678,
+            "physical_dram_formula": "max(read_bytes/read_roof, write_bytes/write_roof, total_bytes/copy_roof) / NCU duration",
+            "physical_dram_resource_efficiency_percent": 25.630692744726527,
+            "physical_dram_resource_status": "diagnostic",
+            "physical_dram_roof_transfer": "same-SKU cross-UUID transfer",
+            "scope": "NCU kernel replay/cache-control all; not canonical NSys throughput",
+            "theoretical_dram_efficiency_percent": 19.95401807226207
+          },
+          "phase": "expand_quant",
+          "share_percent": 14.776416454285762,
+          "sota_efficiency_percent": null,
+          "sota_reason": "no independent contract-equivalent per-op implementation",
+          "time_us": 245.6,
+          "timing_class": "paired cross-capture / canonical NSys"
+        },
+        {
+          "calibrated_executed_ceiling_efficiency_percent": 58.33565834251587,
+          "calibrated_useful_ceiling_efficiency_percent": 47.110184655154775,
+          "executed_flops": 340376158208,
+          "executed_tflops": 667.1752990797276,
+          "hardware_ceiling_status": "vetted measured roof / same-SKU cross-UUID transfer",
+          "label": "FC1",
+          "model": "dense NVFP4 tensor-core compute",
+          "ncu_diagnostic": {
+            "dram_bytes": 491530496.0,
+            "dram_gbs": 897.4250993222715,
+            "dram_read_bytes": 379689728.0,
+            "dram_write_bytes": 111840768.0,
+            "ncu_duration_us": 547.712,
+            "physical_dram_floor_ns": 469732.0166856687,
+            "physical_dram_formula": "max(read_bytes/read_roof, write_bytes/write_roof, total_bytes/copy_roof) / NCU duration",
+            "physical_dram_resource_efficiency_percent": 85.76259360497282,
+            "physical_dram_resource_status": "diagnostic",
+            "physical_dram_roof_transfer": "same-SKU cross-UUID transfer",
+            "scope": "NCU kernel replay/cache-control all; not canonical NSys throughput",
+            "theoretical_dram_efficiency_percent": 66.76793170445202
+          },
+          "nominal_executed_mfu_percent": 62.29571059849567,
+          "nominal_useful_mfu_percent": 50.308207928122684,
+          "padding_efficiency_percent": 80.7570977917981,
+          "phase": "fc1",
+          "physical_routed_rows": 81152,
+          "share_percent": 30.694455474614166,
+          "sota_efficiency_percent": null,
+          "sota_reason": "no independent contract-equivalent per-op implementation",
+          "tensor_pipe_active_percent": 62.68521721451377,
+          "time_us": 510.175,
+          "timing_class": "paired cross-capture / canonical NSys",
+          "useful_flops": 274877906944,
+          "useful_tflops": 538.7914087205371
+        },
+        {
+          "achieved_gwork_per_s": 144.85157157226294,
+          "dram_resource_efficiency_percent": 54.134029956462086,
+          "dram_resource_efficiency_status": "diagnostic",
+          "hardware_ceiling_reason": "physical DRAM bytes and calibrated directional roofs do not model the complete mixed operator",
+          "hardware_ceiling_status": "partial DRAM resource view only",
+          "label": "SwiGLU/Q1",
+          "logical_payload_gbs": 660.8852952984497,
+          "logical_work": {
+            "payload_floor_bytes": 153092096.0,
+            "payload_scope": "Gate+Up BF16 read + NVFP4 value/scale write",
+            "work_count": 33554432,
+            "work_name": "SwiGLU output values"
+          },
+          "model": "elementwise/quant/transform",
+          "ncu_diagnostic": {
+            "dram_bytes": 144434176.0,
+            "dram_gbs": 566.4618473895582,
+            "dram_read_bytes": 134487552.0,
+            "dram_write_bytes": 9946624.0,
+            "ncu_duration_us": 254.976,
+            "physical_dram_floor_ns": 138028.78422178878,
+            "physical_dram_formula": "max(read_bytes/read_roof, write_bytes/write_roof, total_bytes/copy_roof) / NCU duration",
+            "physical_dram_resource_efficiency_percent": 54.134029956462086,
+            "physical_dram_resource_status": "diagnostic",
+            "physical_dram_roof_transfer": "same-SKU cross-UUID transfer",
+            "scope": "NCU kernel replay/cache-control all; not canonical NSys throughput",
+            "theoretical_dram_efficiency_percent": 42.144448565396985
+          },
+          "phase": "activation_requant",
+          "share_percent": 13.93694031916097,
+          "sota_efficiency_percent": null,
+          "sota_reason": "no independent contract-equivalent per-op implementation",
+          "time_us": 231.647,
+          "timing_class": "paired cross-capture / canonical NSys"
+        },
+        {
+          "calibrated_executed_ceiling_efficiency_percent": 36.44951622747185,
+          "calibrated_useful_ceiling_efficiency_percent": 29.435571464456757,
+          "executed_flops": 170188079104,
+          "executed_tflops": 416.867102923418,
+          "hardware_ceiling_status": "vetted measured roof / same-SKU cross-UUID transfer",
+          "label": "FC2",
+          "model": "dense NVFP4 tensor-core compute",
+          "ncu_diagnostic": {
+            "dram_bytes": 405553664.0,
+            "dram_gbs": 909.0196528475111,
+            "dram_read_bytes": 170575616.0,
+            "dram_write_bytes": 234978048.0,
+            "ncu_duration_us": 446.144,
+            "physical_dram_floor_ns": 387568.10007772554,
+            "physical_dram_formula": "max(read_bytes/read_roof, write_bytes/write_roof, total_bytes/copy_roof) / NCU duration",
+            "physical_dram_resource_efficiency_percent": 86.87062923130773,
+            "physical_dram_resource_status": "diagnostic",
+            "physical_dram_roof_transfer": "same-SKU cross-UUID transfer",
+            "scope": "NCU kernel replay/cache-control all; not canonical NSys throughput",
+            "theoretical_dram_efficiency_percent": 67.63056008257678
+          },
+          "nominal_executed_mfu_percent": 38.92385170369931,
+          "nominal_useful_mfu_percent": 31.43377298469093,
+          "padding_efficiency_percent": 80.7570977917981,
+          "phase": "fc2",
+          "physical_routed_rows": 81152,
+          "share_percent": 24.562483304334016,
+          "sota_efficiency_percent": null,
+          "sota_reason": "no independent contract-equivalent per-op implementation",
+          "tensor_pipe_active_percent": 38.30357601487944,
+          "time_us": 408.255,
+          "timing_class": "paired cross-capture / canonical NSys",
+          "useful_flops": 137438953472,
+          "useful_tflops": 336.64977396970033
+        },
+        {
+          "achieved_gwork_per_s": 75.25305009329696,
+          "dram_resource_efficiency_percent": 114.16228705065069,
+          "dram_resource_efficiency_status": "invalid",
+          "hardware_ceiling_reason": "physical DRAM bytes and calibrated directional roofs do not model the complete mixed operator",
+          "hardware_ceiling_status": "partial DRAM resource view only",
+          "label": "Finalize",
+          "logical_payload_gbs": 1355.7307305870531,
+          "logical_work": {
+            "payload_floor_bytes": 302252032,
+            "payload_scope": "routed BF16 read + BF16 output + route weight; metadata excluded",
+            "work_count": 16777216,
+            "work_name": "output values"
+          },
+          "model": "gather/reduction/store",
+          "ncu_diagnostic": {
+            "dram_bytes": 286742528.0,
+            "dram_gbs": 1194.6012531662445,
+            "dram_read_bytes": 269231616.0,
+            "dram_write_bytes": 17510912.0,
+            "ncu_duration_us": 240.032,
+            "physical_dram_floor_ns": 274026.02085341787,
+            "physical_dram_formula": "max(read_bytes/read_roof, write_bytes/write_roof, total_bytes/copy_roof) / NCU duration",
+            "physical_dram_resource_efficiency_percent": 114.16228705065069,
+            "physical_dram_resource_status": "invalid",
+            "physical_dram_roof_transfer": "same-SKU cross-UUID transfer",
+            "scope": "NCU kernel replay/cache-control all; not canonical NSys throughput",
+            "theoretical_dram_efficiency_percent": 88.87767340772122
+          },
+          "phase": "finalize",
+          "share_percent": 13.413328135115167,
+          "sota_efficiency_percent": null,
+          "sota_reason": "no independent contract-equivalent per-op implementation",
+          "time_us": 222.944,
+          "timing_class": "paired cross-capture / canonical NSys"
+        },
+        {
+          "hardware_ceiling_status": "unavailable",
+          "label": "Prefix",
+          "model": "routing prefix/latency",
+          "phase": "prefix",
+          "share_percent": 2.8069776452553024,
+          "sota_efficiency_percent": null,
+          "time_us": 46.655
+        },
+        {
+          "hardware_ceiling_status": "unavailable",
+          "label": "GEMM metadata",
+          "model": "metadata/latency",
+          "phase": "gemm_metadata",
+          "share_percent": 0.12321702320186173,
+          "sota_efficiency_percent": null,
+          "time_us": 2.048
+        }
+      ],
+      "physical_routed_rows": 81152,
+      "timeline_accounting": {
+        "active_union_ns": 1662108,
+        "category_share_sum_percent": 100.31381835596724,
+        "category_sum_ns": 1667324,
+        "cross_category_overlap_ns": 5216,
+        "gemm_metadata_ns": 2048,
+        "kernel_idle_ns": 0,
+        "kernel_wall_ns": 1662108,
+        "prefix_internal_overlap_ns": 128,
+        "prefix_union_ns": 46655
+      },
+      "timeline_active_union_us": 1662.108,
+      "timeline_vs_benchmark_percent": 99.7796103854002
+    }
+  ],
+  "hardware_authority": {
+    "authority_status": "secondary nominal reference; calibrated profile is primary",
+    "calibrated_profile": {
+      "audit_status": "vetted",
+      "calibrated_nvfp4_sustained_window_tflops": 1143.6835,
+      "calibration_gpu_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+      "consumer_gpu_uuid": "GPU-4a286357-c999-9547-3a04-25961b1ffd08",
+      "instruction": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_026_5kp_ceiling_calibration/results/profile.json",
+      "physical_dram_gbs": {
+        "copy": 1046.4062029838562,
+        "read": 1182.0154995918274,
+        "write": 1113.0798299789428
+      },
+      "profile_id": "rtx5kp-sm120-20260722",
+      "record_id": "nvfp4-e2m1-vs16",
+      "sha256": "12e0afd71c7ca463cc9acd894cb4f3ed278a40b718ea8f6221f7239301b58569",
+      "transfer_scope": "same RTX 5KP SKU and SM count; different GPU UUID"
+    },
+    "device_attributes": {
+      "compute_capability": "12.0",
+      "extraction": "veloq ncu metrics --counter device__attribute_*",
+      "memory_bus_bits": 384,
+      "memory_clock_hz": 14001000000,
+      "sm_clock_hz": 2377000000,
+      "sm_count": 110,
+      "source_report": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/ncu/m8192/cutlass_bf16_chain/deep_launch_5/trace.ncu-rep"
+    },
+    "nominal_dense_nvfp4_peak_tflops": 1070.98112,
+    "official_architecture": {
+      "fp4_flop_per_sm_cycle": 4096,
+      "table": "Table 4 dense FP4 value; sparse second value excluded",
+      "url": "https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/quadro-product-literature/pdf/NVIDIA-RTX-Blackwell-PRO-GPU-Architecture-v1_1.pdf"
+    },
+    "theoretical_dram_gbs": 1344.096
+  },
+  "inputs": {
+    "benchmark": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/benchmark_summary.csv",
+      "sha256": "ca3fcfc2262c1bb734876d9bc0601b29db700073f4bb9aa3fe6144b9b4b0f74f"
+    },
+    "calibration_profile": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_026_5kp_ceiling_calibration/results/profile.json",
+      "sha256": "12e0afd71c7ca463cc9acd894cb4f3ed278a40b718ea8f6221f7239301b58569"
+    },
+    "deep_launch": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/ncu/deep_launch_metrics.json",
+      "sha256": "6bfeb594828026275c273ff5dfc96a5f1a092535416107f85d238ae70ef58505"
+    },
+    "exp002_runtime": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/manifests/runtime.json",
+      "sha256": "9df68a58b708416c8666e9093c981999cd65b9cfbfb176d51a8f14e966f33cfa"
+    },
+    "nsys_graph_replays": {
+      "256": {
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/nsys/m256/cutlass_bf16_chain/veloq/graph_replays.json",
+        "sha256": "944f0d517248fc2c96018274310304d69a0d4ba18bcdd16fb090c40572079374"
+      },
+      "8192": {
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/nsys/m8192/cutlass_bf16_chain/veloq/graph_replays.json",
+        "sha256": "1371f624667d38ad9ebdd01d50e7849f1d9abec9fede00d0debf4b2b6620f7e4"
+      }
+    },
+    "nsys_kernels": {
+      "256": {
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/nsys/m256/cutlass_bf16_chain/veloq/kernels.json",
+        "sha256": "86b357da0785e61f14f75bee7ea79dd671fed87f015698f2826353f6e41fdb44"
+      },
+      "8192": {
+        "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/nsys/m8192/cutlass_bf16_chain/veloq/kernels.json",
+        "sha256": "fe282f143dc2262329c8f65dddee1913d2ebe440938cd917e7a64e94401cc3a3"
+      }
+    },
+    "operator_traffic": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/ncu/operator_traffic_v2.json",
+      "sha256": "2e251e5cb6675782ce983df8b328676f10e3aefc991642ddd5ec2c9912570cd8"
+    }
+  },
+  "overall_only_cases": [
+    {
+      "m": 1024,
+      "overall_benchmark_us": 577.2204780578613,
+      "per_op_timeline": "unavailable",
+      "reason": "accepted exp_002 evidence has no per-op NSys/NCU row for M1024"
+    }
+  ],
+  "schema": "operator-performance-ceiling.v1",
+  "subject": {
+    "arm": "cutlass_bf16_chain",
+    "boundary": "BF16 input -> native CUTLASS online NVFP4 chain -> BF16 output",
+    "shape": {
+      "experts": 256,
+      "hidden": 2048,
+      "intermediate_tp": 512,
+      "topk": 8
+    }
+  },
+  "verdict": {
+    "reason": "FC1/FC2 consume a vetted same-SKU measured NVFP4 roof; mixed non-GEMM complete roofs and all independent SOTA anchors remain unavailable",
+    "status": "accept"
+  }
+}

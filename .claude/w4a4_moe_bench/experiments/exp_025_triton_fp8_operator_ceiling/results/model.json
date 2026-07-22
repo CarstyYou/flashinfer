@@ -1,0 +1,480 @@
+{
+  "benchmarks": [
+    {
+      "difference_percent": -0.7027305015693486,
+      "independent_exp018_us": 768.5926401615143,
+      "m": 256,
+      "paired_exp001_us": 774.0319991111755,
+      "per_op_timeline": "unavailable"
+    },
+    {
+      "difference_percent": -0.6156459290883376,
+      "independent_exp018_us": 760.3008043766022,
+      "m": 1024,
+      "paired_exp001_us": 765.0105607509613,
+      "per_op_timeline": "unavailable"
+    },
+    {
+      "difference_percent": -2.8346012157094647,
+      "independent_exp018_us": 2150.661120414734,
+      "m": 8192,
+      "paired_exp001_us": 2213.402247428894,
+      "per_op_timeline": "available"
+    }
+  ],
+  "evidence_status": {
+    "calibrated_fp8_instruction_ceiling": "vetted",
+    "cross_regime_validation": "limited",
+    "fixture_work_accounting": "vetted",
+    "l1tex_cycle_proxy": "diagnostic cross-check only; audited sibling-GPU proxy and explicitly not an SM-cycle counter",
+    "ncu_launch_local": "accepted diagnostic",
+    "raw_ncu_cubin_revalidation": "unavailable; raw report is not present in this worktree",
+    "target_fp8_sass_binding": "unavailable; target instruction match is source-contract-derived",
+    "timeline_identity": "vetted"
+  },
+  "hardware_authority": {
+    "authority_status": "same-UUID full-card roof vetted; target instruction equivalence source-contract-derived and diagnostic; architecture-derived nominal roof remains diagnostic",
+    "calibrated_tensor_core": {
+      "audit_status": "vetted",
+      "combined_status": "diagnostic same-UUID source-contract-compatible full-card estimate; target SASS binding unavailable",
+      "cycle_proxy_diagnostic": {
+        "gpc_avg_times_110_max_delta_percent": 0.008,
+        "launch_values": {
+          "fc1": 266274162,
+          "fc2": 177121036
+        },
+        "metric": "l1tex__cycles_elapsed.sum",
+        "role": "audited proxy; not sm__cycles_elapsed.sum",
+        "status": "diagnostic; not used by the primary percentage",
+        "sum_over_avg_instance_count": 110
+      },
+      "formula": "efficiency = target modeled throughput / exact-mode full-card sustained-window roof",
+      "full_card_sustained_window_tflops": 573.115,
+      "instruction": "QMMA.16832.F32.E4M3.E4M3",
+      "profile_id": "rtx5kp-sm120-20260722",
+      "profile_path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_026_5kp_ceiling_calibration/results/profile.json",
+      "profile_sha256": "12e0afd71c7ca463cc9acd894cb4f3ed278a40b718ea8f6221f7239301b58569",
+      "record_id": "fp8-e4m3-noscale",
+      "target_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522",
+      "target_uuid_match": true,
+      "work_per_cycle_sm": 2039.4
+    },
+    "device_application_clock_hz": 2377000000,
+    "device_sm_count": {
+      "applicability": "accepted same-class 5KP NCU device attribute; not the exact NSys target UUID",
+      "source": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/ncu/m8192/cutlass_bf16_chain/deep_launch_5/trace.ncu-rep",
+      "source_sha256": "7736b2adbf5685381d21255ac02bbb5fc59c762810e27562819ea14cbbc75e0a",
+      "status": "diagnostic",
+      "value": 110
+    },
+    "fp8_flop_per_sm_cycle": 2048,
+    "nominal_dense_fp8_peak_tflops": 535.49056,
+    "official_architecture_url": "https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/quadro-product-literature/pdf/NVIDIA-RTX-Blackwell-PRO-GPU-Architecture-v1_1.pdf"
+  },
+  "identity": {
+    "artifact_fingerprint_sha256": "1b72ff662b57cf8c9dfed6331d8f5c57fb0d27e0b37f7cb78f0a455e222b3346",
+    "callable_source_sha256": "04babb3355ed15e1d056ec4edfb96ff948ba45d87cb7ef9edb45e376008ef056",
+    "correctness": {
+      "atol": 0.01,
+      "cosine": 0.9999045133590698,
+      "formal_pass": true,
+      "formal_percent_threshold": 97.0,
+      "formal_percent_within": 99.99959468841553,
+      "max_abs_error": 0.03073546290397644,
+      "max_relative_error": 215148.46875,
+      "oracle": "actual E4M3 weights/scales plus two dynamic activation E4M3 round trips",
+      "output_sha256": "0b2dc0c560263a9ff2f6e8f7ede3783d63d4a6f982fe61344b5d5e499ca4fe61",
+      "reference_sha256": "4cb21025c276c9928825fcc0fffced9a85251519b023ecc4b75d3cf179f26037",
+      "relative_l2": 0.013822781853377819,
+      "rtol": 0.1
+    },
+    "fixture_sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438",
+    "occupancy_sha256": "3e4350788bfcdd1cca175141f0c6626934589b97cb23d74811e4bc2785531a94",
+    "sglang_commit": "0b3bb0cbe31873994c9f989fddfe2f87ca839fdd",
+    "triton_version": "3.6.0"
+  },
+  "inputs": {
+    "artifact": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_017_opt_vs_triton_phase_share/results/triton_artifact.lock.json",
+      "sha256": "523a45c864147f00012da6d54a7b3ea69f5fbe6c92dd3666ec8191453cc3b886"
+    },
+    "benchmark": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/sglang_triton/benchmark_summary.csv",
+      "sha256": "51335acfcbd8856e78da8c00d3a12213d80df5c5c68de817020cab49cfd85b18"
+    },
+    "calibration_profile": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_026_5kp_ceiling_calibration/results/profile.json",
+      "sha256": "12e0afd71c7ca463cc9acd894cb4f3ed278a40b718ea8f6221f7239301b58569"
+    },
+    "capture": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_017_opt_vs_triton_phase_share/results/triton_capture_manifest.json",
+      "sha256": "e843e59e49ed763e18819fbe3caf6849cf3a3979ff907344c782b3beef70bacf"
+    },
+    "device_reference_report": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_002_fused_vs_chain_dataflow/results/ncu/m8192/cutlass_bf16_chain/deep_launch_5/trace.ncu-rep",
+      "sha256": "7736b2adbf5685381d21255ac02bbb5fc59c762810e27562819ea14cbbc75e0a"
+    },
+    "evidence": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_017_opt_vs_triton_phase_share/results/evidence.json",
+      "sha256": "fefa82f3cd17dbd98b68b456de384188c1be06d70eafb5c8b32f2a72843201fb"
+    },
+    "fixture": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/results/fixtures/m8192.npz",
+      "sha256": "c113ecd5ddeff77154ddbd23fc3dc3c83f8ee822e880179ca5c16b1145372438"
+    },
+    "graph": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_017_opt_vs_triton_phase_share/results/veloq/triton_graph_replays.json",
+      "sha256": "258fefd39456b12a4d4bda0ade4fc7f1f497af355ce0ee069dbd18901895196f"
+    },
+    "ncu": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_017_opt_vs_triton_phase_share/results/ncu_evidence.json",
+      "sha256": "5d2d82adb0de25c744fba621c5c65f996ca1e818248de93ae9ae36fbfdb1773d"
+    },
+    "sanity_benchmark": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_018_triton_opt_eric_benchmark/results/benchmark_summary.csv",
+      "sha256": "ac5faaa1121696c3b8eb8da4052debc6d4a77e9b424917ebc94eb9154fb70efd"
+    },
+    "sanity_benchmark_raw": {
+      "path": "/home/scratch.xiy_gpu/mega_inference/flashinfer/.claude/w4a4_moe_bench/experiments/exp_018_triton_opt_eric_benchmark/results/benchmark_raw.csv",
+      "sha256": "b61f00efda927cfcd0aafb387ab3a1fe13c1be8e19096da4267e9f6f8a4b1cd9"
+    }
+  },
+  "ncu_diagnostic": {
+    "report_sha256": "013c27166f2b93cf66d56fd3590fdbfb2ab8223380c6403784059f135221667f",
+    "rows": [
+      {
+        "achieved_occupancy_percent": 16.57041891119939,
+        "dram_throughput_percent": 54.43502732640725,
+        "issue_active_percent": 13.0102427325574,
+        "label": "FC1",
+        "phase": "fc1",
+        "stall_share_percent": {
+          "barrier": 4.242648932965683,
+          "long_scoreboard": 43.55492735825011,
+          "short_scoreboard": 3.471047570498413,
+          "wait": 29.031983996416187
+        },
+        "tc_active_percent": 57.0509203851949
+      },
+      {
+        "achieved_occupancy_percent": 16.443318711356067,
+        "dram_throughput_percent": 63.559484609183016,
+        "issue_active_percent": 20.174357498434347,
+        "label": "FC2",
+        "phase": "fc2",
+        "stall_share_percent": {
+          "barrier": 3.1318560135582203,
+          "long_scoreboard": 31.053896247112494,
+          "short_scoreboard": 9.518613532682508,
+          "wait": 33.43238882375474
+        },
+        "tc_active_percent": 42.84765112611383
+      },
+      {
+        "achieved_occupancy_percent": 88.90735012670933,
+        "dram_throughput_percent": 94.60443844956244,
+        "issue_active_percent": 24.64298567859734,
+        "label": "SwiGLU",
+        "phase": "swiglu",
+        "stall_share_percent": {
+          "barrier": 0.0,
+          "long_scoreboard": 84.64102564102564,
+          "short_scoreboard": 3.6153846153846154,
+          "wait": 5.205128205128205
+        },
+        "tc_active_percent": 0.0
+      },
+      {
+        "achieved_occupancy_percent": 61.49427593266659,
+        "dram_throughput_percent": 95.66714233494544,
+        "issue_active_percent": 6.294323975123793,
+        "label": "TopK reduce / finalize",
+        "phase": "topk_reduce",
+        "stall_share_percent": {
+          "barrier": 0.0,
+          "long_scoreboard": 97.34128262971318,
+          "short_scoreboard": 0.235256203673864,
+          "wait": 0.8314534321624235
+        },
+        "tc_active_percent": 0.0
+      }
+    ],
+    "scope": "normalized launch-local metrics from sibling GPU; NCU duration and additive graph traffic are forbidden"
+  },
+  "operations": [
+    {
+      "hardware_ceiling_status": "unavailable for complete operator",
+      "label": "Routing / scheduler",
+      "logical_work": {
+        "achieved_gwork_per_s": 1.6228209191759115,
+        "payload_floor_bytes": null,
+        "payload_scope": "not modeled",
+        "work_count": 65536,
+        "work_name": "assignments"
+      },
+      "model": "routing/scheduler",
+      "phase": "route",
+      "share_percent": 1.8726857487334654,
+      "sota_reason": "no independent contract-equivalent per-op anchor",
+      "sota_status": "unavailable",
+      "time_us": 40.384
+    },
+    {
+      "hardware_ceiling_status": "unavailable for complete operator",
+      "label": "Q0\uff08input quant\uff09",
+      "logical_work": {
+        "achieved_gwork_per_s": 342.00130463144166,
+        "logical_payload_gbs": 1710.0065231572082,
+        "payload_floor_bytes": 83886080,
+        "payload_scope": "absmax BF16 read + quant BF16 read/E4M3 write; scalar fill excluded",
+        "work_count": 16777216,
+        "work_name": "input values"
+      },
+      "model": "quant/pack",
+      "phase": "q0",
+      "share_percent": 2.277832827055394,
+      "sota_reason": "no independent contract-equivalent per-op anchor",
+      "sota_status": "unavailable",
+      "time_us": 49.056
+    },
+    {
+      "calibrated_executed_ceiling_efficiency_percent": 53.56672932937426,
+      "calibrated_full_card_tflops": 573.115,
+      "calibrated_useful_ceiling_efficiency_percent": 47.73919132574348,
+      "calibrated_work_per_cycle_sm": 2039.4,
+      "cycle_proxy": {
+        "diagnostic_executed_efficiency_percent": 56.79740132834624,
+        "diagnostic_useful_efficiency_percent": 50.61839770254704,
+        "gpc_avg_times_instance_count_max_delta_percent": 0.008,
+        "instance_count_from_sum_over_avg": 110,
+        "metric": "l1tex__cycles_elapsed.sum",
+        "scope": "accepted sibling-GPU NCU launch; proxy for aggregate SM elapsed cycles, not sm__cycles_elapsed.sum",
+        "value": 266274162
+      },
+      "executed_flops": 308432338944,
+      "executed_tflops": 306.9989607960433,
+      "executed_work_authority": "dispatch/source-derived physical work; not an NCU dynamic counter",
+      "hardware_ceiling_status": "diagnostic same-UUID source-contract-compatible full-card estimate; target SASS binding unavailable",
+      "label": "FC1",
+      "logical_routed_rows": 65536,
+      "model": "dense FP8 tensor-core grouped GEMM",
+      "nominal_executed_mfu_percent": 57.33041508631699,
+      "nominal_useful_mfu_percent": 51.09342475925901,
+      "padding_efficiency_percent": 89.12097476066144,
+      "phase": "fc1",
+      "physical_routed_rows": 73536,
+      "share_percent": 46.60936765151958,
+      "sota_reason": "no independent contract-equivalent per-op anchor",
+      "sota_status": "unavailable",
+      "tensor_pipe_active_percent": 57.0509203851949,
+      "time_us": 1004.669,
+      "useful_flops": 274877906944,
+      "useful_tflops": 273.6004663665347
+    },
+    {
+      "hardware_ceiling_status": "unavailable for complete operator",
+      "label": "SwiGLU",
+      "logical_work": {
+        "achieved_gwork_per_s": 266.0010147133435,
+        "logical_payload_gbs": 1596.006088280061,
+        "payload_floor_bytes": 201326592,
+        "payload_scope": "Gate/Up BF16 reads + SwiGLU BF16 write",
+        "work_count": 33554432,
+        "work_name": "output values"
+      },
+      "model": "elementwise ALU/SFU",
+      "ncu_diagnostic": {
+        "dram_throughput_percent": 94.60443844956244,
+        "scope": "sibling-GPU NCU replay; normalized launch-local diagnostic only"
+      },
+      "phase": "swiglu",
+      "share_percent": 5.8572844124281565,
+      "sota_reason": "no independent contract-equivalent per-op anchor",
+      "sota_status": "unavailable",
+      "time_us": 126.144
+    },
+    {
+      "hardware_ceiling_status": "unavailable for complete operator",
+      "label": "Q1\uff08intermediate quant\uff09",
+      "logical_work": {
+        "achieved_gwork_per_s": 579.3237569060774,
+        "logical_payload_gbs": 2896.6187845303866,
+        "payload_floor_bytes": 167772160,
+        "payload_scope": "absmax BF16 read + quant BF16 read/E4M3 write; scalar fill excluded",
+        "work_count": 33554432,
+        "work_name": "output values"
+      },
+      "model": "quant/pack",
+      "phase": "q1",
+      "share_percent": 2.685864663397443,
+      "sota_reason": "no independent contract-equivalent per-op anchor",
+      "sota_status": "unavailable",
+      "time_us": 57.92
+    },
+    {
+      "calibrated_executed_ceiling_efficiency_percent": 41.38852157575814,
+      "calibrated_full_card_tflops": 573.115,
+      "calibrated_useful_ceiling_efficiency_percent": 36.885853867342334,
+      "calibrated_work_per_cycle_sm": 2039.4,
+      "cycle_proxy": {
+        "diagnostic_executed_efficiency_percent": 42.693066797788724,
+        "diagnostic_useful_efficiency_percent": 38.04847728540962,
+        "gpc_avg_times_instance_count_max_delta_percent": 0.008,
+        "instance_count_from_sum_over_avg": 110,
+        "metric": "l1tex__cycles_elapsed.sum",
+        "scope": "accepted sibling-GPU NCU launch; proxy for aggregate SM elapsed cycles, not sm__cycles_elapsed.sum",
+        "value": 177121036
+      },
+      "executed_flops": 154216169472,
+      "executed_tflops": 237.20382542890627,
+      "executed_work_authority": "dispatch/source-derived physical work; not an NCU dynamic counter",
+      "hardware_ceiling_status": "diagnostic same-UUID source-contract-compatible full-card estimate; target SASS binding unavailable",
+      "label": "FC2",
+      "logical_routed_rows": 65536,
+      "model": "dense FP8 tensor-core grouped GEMM",
+      "nominal_executed_mfu_percent": 44.29654659624743,
+      "nominal_useful_mfu_percent": 39.47751411188631,
+      "padding_efficiency_percent": 89.12097476066144,
+      "phase": "fc2",
+      "physical_routed_rows": 73536,
+      "share_percent": 30.148367126908497,
+      "sota_reason": "no independent contract-equivalent per-op anchor",
+      "sota_status": "unavailable",
+      "tensor_pipe_active_percent": 42.84765112611383,
+      "time_us": 650.142,
+      "useful_flops": 137438953472,
+      "useful_tflops": 211.398361391819
+    },
+    {
+      "hardware_ceiling_status": "unavailable for complete operator",
+      "label": "TopK reduce / finalize",
+      "logical_work": {
+        "achieved_gwork_per_s": 74.33546008790587,
+        "logical_payload_gbs": 1338.0382815823057,
+        "payload_floor_bytes": 301989888,
+        "payload_scope": "already weighted top-k BF16 contribution reads + BF16 output",
+        "work_count": 16777216,
+        "work_name": "output values"
+      },
+      "model": "gather/reduction/store",
+      "ncu_diagnostic": {
+        "dram_throughput_percent": 95.66714233494544,
+        "scope": "sibling-GPU NCU replay; normalized launch-local diagnostic only"
+      },
+      "phase": "topk_reduce",
+      "share_percent": 10.459765107607263,
+      "sota_reason": "no independent contract-equivalent per-op anchor",
+      "sota_status": "unavailable",
+      "time_us": 225.696
+    }
+  ],
+  "padding": {
+    "block_m": 64,
+    "derivation": "sum_e ceil(occupancy[e] / BLOCK_SIZE_M) * BLOCK_SIZE_M",
+    "logical_routed_rows": 65536,
+    "padding_efficiency_percent": 89.12097476066144,
+    "physical_routed_rows": 73536
+  },
+  "schema": "operator-performance-ceiling.v1",
+  "subject": {
+    "arm": "sglang_triton_fp8",
+    "boundary": "BF16 input -> SGLang Triton W8A8 FP8 MoE chain -> BF16 output",
+    "case": {
+      "experts": 256,
+      "hidden": 2048,
+      "intermediate_tp": 512,
+      "m": 8192,
+      "topk": 8
+    }
+  },
+  "timeline": {
+    "component_median_sum_us": 2156.347,
+    "graph_wall_median_us": 2156.058,
+    "median_nonadditivity_us": 0.289,
+    "median_share_nonadditivity_pp": 0.019492466063070424,
+    "median_share_sum_percent": 100.01949246606307,
+    "phases": [
+      {
+        "label": "Routing / scheduler",
+        "phase": "route",
+        "share_percent": 1.8726857487334654,
+        "time_us": 40.384
+      },
+      {
+        "label": "Q0\uff08input quant\uff09",
+        "phase": "q0",
+        "share_percent": 2.277832827055394,
+        "time_us": 49.056
+      },
+      {
+        "label": "FC1",
+        "phase": "fc1",
+        "share_percent": 46.60936765151958,
+        "time_us": 1004.669
+      },
+      {
+        "label": "SwiGLU",
+        "phase": "swiglu",
+        "share_percent": 5.8572844124281565,
+        "time_us": 126.144
+      },
+      {
+        "label": "Q1\uff08intermediate quant\uff09",
+        "phase": "q1",
+        "share_percent": 2.685864663397443,
+        "time_us": 57.92
+      },
+      {
+        "label": "FC2",
+        "phase": "fc2",
+        "share_percent": 30.148367126908497,
+        "time_us": 650.142
+      },
+      {
+        "label": "TopK reduce / finalize",
+        "phase": "topk_reduce",
+        "share_percent": 10.459765107607263,
+        "time_us": 225.696
+      },
+      {
+        "label": "Graph bubble",
+        "phase": "graph_bubble",
+        "share_percent": 0.10832492841326702,
+        "time_us": 2.336
+      }
+    ],
+    "replays": [
+      {
+        "bubble_us": 2.24,
+        "correlation_id": 8,
+        "wall_us": 2156.058
+      },
+      {
+        "bubble_us": 2.336,
+        "correlation_id": 636,
+        "wall_us": 2156.475
+      },
+      {
+        "bubble_us": 2.432,
+        "correlation_id": 664,
+        "wall_us": 2152.314
+      },
+      {
+        "bubble_us": 2.336,
+        "correlation_id": 692,
+        "wall_us": 2153.626
+      },
+      {
+        "bubble_us": 2.272,
+        "correlation_id": 720,
+        "wall_us": 2157.754
+      }
+    ]
+  },
+  "verdict": {
+    "accounting": "vetted",
+    "reason": "GEMM percentage uses a vetted same-UUID calibrated roof, but target instruction equivalence is source-contract-derived because target SASS binding is unavailable; non-GEMM roofs and all independent SOTA anchors remain unavailable",
+    "status": "revise",
+    "validation": "limited to one per-op M regime"
+  }
+}

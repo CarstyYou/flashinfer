@@ -1,0 +1,508 @@
+{
+  "audit": {
+    "diagnostic": [
+      "FP8 VS32 record is not consumed by exp_025",
+      "architecture nominal ratios use a documented 16-cycle issue assumption",
+      "2377 MHz application-clock nominal ratios do not close per-kernel effective clock; boost is plausible but not attributable from sampled telemetry",
+      "gap/recovery and runtime D2D records are not denominators"
+    ],
+    "unavailable": [
+      "operator SOTA ceilings",
+      "atomic/reduction/latency service ceilings",
+      "infinite-duration thermal steady-state compute roof"
+    ],
+    "vetted": [
+      "exact FP8 no-scale and NVFP4 VS16 SASS identity",
+      "clean source-to-binary build and exact 64000-loop mode/SASS binding",
+      "benchmark commit reachable as canonical remote main",
+      "five-run per-cycle stability",
+      "8 blocks/SM within 99% of density sweep maximum",
+      "three-run ~100 ms compute-window stability",
+      "DRAM three-run stability and physical read/write counter scope",
+      "target UUID, 110 SMs, single visible container GPU, clean benchmark commit"
+    ]
+  },
+  "benchmark": {
+    "benchmark_commit": "0f3c99a9126de9f4a6fa2e5d5c501bdeace36fc1",
+    "benchmark_remote": "ssh://git@gitlab-master.nvidia.com:12051/xiy/sm120_mma_benchmarks.git",
+    "benchmark_status": "clean",
+    "host": "R6KD-CX8aaS-GPU-16",
+    "remote_ref_identity": {
+      "benchmark_remote": "ssh://git@gitlab-master.nvidia.com:12051/xiy/sm120_mma_benchmarks.git",
+      "remote_ref": "refs/heads/main",
+      "remote_ref_commit": "0f3c99a9126de9f4a6fa2e5d5c501bdeace36fc1"
+    },
+    "source_sha256": {
+      "/home/xiy/workspace/exp026_sm120_mma_benchmarks/CMakeLists.txt": "5666f90cbad11ce04dd7b6f26cebbec2304b8e3bda2d41930cd3a81e8f2e795d",
+      "/home/xiy/workspace/exp026_sm120_mma_benchmarks/IPC_bench_recipe.cuh": "4c0906eb922a875d83e9a064aa65e079b14da0176a7afbb4a2acb8b5b9405ff4",
+      "/home/xiy/workspace/exp026_sm120_mma_benchmarks/IPC_benchmark.cu": "c48cd1bad2a30e76028c2b4f356ef8a9774213dfa1cc47b6629575640735af90",
+      "/home/xiy/workspace/exp026_sm120_mma_benchmarks/back_to_back_throttle_benchmark.cu": "aa4a9923d76a37cc9174c3159b2022d8ce7ea1bcf15b85f26d1adf00f1c19118",
+      "/home/xiy/workspace/exp026_sm120_mma_benchmarks/dram_bw_benchmark.cu": "65ee1919f35bf6ea8b08d6da523b7d774126b5eb4096863babd8600e8285b8fa"
+    },
+    "target_uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+  },
+  "decision": "accept",
+  "dram_record": {
+    "audit_status": "vetted",
+    "d2d_payload_gbs": 1110.8,
+    "d2d_role": "runtime D2D copy diagnostic only; not a kernel roof",
+    "ncu_launches": {
+      "copy": {
+        "dram__bytes_op_read.sum": [
+          536883712.0,
+          536874496.0,
+          536874496.0,
+          536874240.0
+        ],
+        "dram__bytes_op_write.sum": [
+          497709056.0,
+          494895104.0,
+          495224576.0,
+          491695104.0
+        ]
+      },
+      "read": {
+        "dram__bytes_op_read.sum": [
+          536879616.0,
+          537165312.0,
+          536875264.0,
+          536876288.0
+        ],
+        "dram__bytes_op_write.sum": [
+          3636992.0,
+          50432.0,
+          27136.0,
+          239872.0
+        ]
+      },
+      "write": {
+        "dram__bytes_op_read.sum": [
+          9216.0,
+          3328.0,
+          3584.0,
+          4608.0
+        ],
+        "dram__bytes_op_write.sum": [
+          485216000.0,
+          482310400.0,
+          483478272.0,
+          483245312.0
+        ]
+      }
+    },
+    "nominal_gbs": 1344.1,
+    "payload_gbs_samples": {
+      "copy": [
+        1088.8,
+        1088.2,
+        1089.1
+      ],
+      "d2d": [
+        1110.4,
+        1111.0,
+        1110.8
+      ],
+      "nominal": [
+        1344.1,
+        1344.1,
+        1344.1
+      ],
+      "read": [
+        1181.6,
+        1182.6,
+        1182.0
+      ],
+      "write": [
+        1236.3,
+        1237.5,
+        1234.5
+      ]
+    },
+    "physical_byte_ratio": {
+      "copy": 0.9610637426376343,
+      "read": 1.0000131130218506,
+      "write": 0.9003314971923828
+    },
+    "physical_gbs": {
+      "copy": 1046.4062029838562,
+      "read": 1182.0154995918274,
+      "write": 1113.0798299789428
+    },
+    "physical_vs_nominal_percent": {
+      "copy": 77.85181184315574,
+      "read": 87.9410385828307,
+      "write": 82.81227810274109
+    },
+    "run_cv_percent": {
+      "copy": 0.03436812149144277,
+      "d2d": 0.02245757989780489,
+      "read": 0.03476630761360838,
+      "write": 0.0997397298433616
+    },
+    "scope": "physical DRAM bytes; 512 MiB, 4-pass timed sequence"
+  },
+  "gpu": {
+    "application_graphics_clock_mhz": 2377.0,
+    "application_memory_clock_mhz": 14001.0,
+    "architecture": "SM120",
+    "host": "R6KD-CX8aaS-GPU-16",
+    "internal_sku": "RTX 5KP",
+    "memory_bus_bits": 384,
+    "power_limit_w": 350.0,
+    "sm_count": 110,
+    "uuid": "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
+  },
+  "policy": "development / measured compatible roof first",
+  "profile_id": "rtx5kp-sm120-20260722",
+  "protocol": {
+    "dram": "3 process invocations; each median of 10 trials \u00d7 4 passes; NCU validates four consecutive launches",
+    "tensor_per_cycle": "5 independent process invocations; median Ops/clk/SM",
+    "tensor_saturation": "4/8/12/16 one-warp blocks per installed SM; exclude rested kernel 0, then select smallest >=99% of best",
+    "tensor_window": "3 runs of 32 kernels \u00d7 64000 iterations; last-8 median"
+  },
+  "raw_evidence_sha256": {
+    "results/raw/binary_sha256.txt": "60f71689d69770cb808e93a94727c0f706a5438c66eb8371aedafc16a8e9394b",
+    "results/raw/build.log": "9dde4e81ddd28b1fcdf16b6f8c67ca60262dfdb1abcb0078105fa7b552f42387",
+    "results/raw/compute_window/fp8-e4m3-noscale_run1.log": "67f65a3542e52e3abc28ad5126ac6b9d8f6524586314b04fa81cd23a6d68a8b7",
+    "results/raw/compute_window/fp8-e4m3-noscale_run2.log": "a7ec8f27c80ec9568245b5a1d0a6d58277cb76b3f2e3cfe3dff072bb914e422e",
+    "results/raw/compute_window/fp8-e4m3-noscale_run3.log": "0f71e1b8f811722b7a8188e9a64748555e0b147558e50e5c65300a66d2261a1f",
+    "results/raw/compute_window/fp8-e4m3-vs32_run1.log": "d030aa03982573f537863afb67a6b1d13f8067dcab291c414647e26a97fda3a9",
+    "results/raw/compute_window/fp8-e4m3-vs32_run2.log": "f86e3d4964fb01c8ff0462a6d6e76d3a964cfeea1e8f7181743b8c245678383d",
+    "results/raw/compute_window/fp8-e4m3-vs32_run3.log": "fd3f54a65622bfb561c56e96898630fa3c30a13fcdc9457d5b96bac1f9470378",
+    "results/raw/compute_window/nvfp4-e2m1-vs16_run1.log": "10284ea871a9d6c65c9718cd4b5fde2339c1675aafa56d68a5ff280794a0c7ee",
+    "results/raw/compute_window/nvfp4-e2m1-vs16_run2.log": "8b8972064f8f5fa0768f8db5f66b27999271c690ad033dcf3fc83f6eeda20d7c",
+    "results/raw/compute_window/nvfp4-e2m1-vs16_run3.log": "f9c83204ad6b79c7410a533b1e0d55b5c1e8964129219407c0d434a903613f84",
+    "results/raw/container_gpu_identity.txt": "a379184fcbb0d5211fd9e67095ba687c77ea9c3e805537b3fba39bd7c569226b",
+    "results/raw/container_image.json": "9a50083c98c0d527fcd8e625b01f96775ffc50eedce958d8b50a5ec387a9cfa9",
+    "results/raw/dram/run_1.log": "432f237484087508e25d359ec3c5963234093a2f5f4e5a4867a0bf7c8a052743",
+    "results/raw/dram/run_2.log": "d8a4e04d58b74f4e8f15ef27026ce65bfb0ca43d68e2070e3fa48478d7567014",
+    "results/raw/dram/run_3.log": "15a0d3eb3da827495432853d6f0573e7881dd31003075ca18e4cf1ef0758383a",
+    "results/raw/dram/stream_copy_kernel_ncu.csv": "9c049b95c9187212c12f899be7e1bb0c86f942ee8158199edef8200c256e287a",
+    "results/raw/dram/stream_copy_kernel_ncu_driver.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "results/raw/dram/stream_read_kernel_ncu.csv": "2a9e7332779b55baef1ffb612a53d6614a0aaaaf36137782c54d168c4307002c",
+    "results/raw/dram/stream_read_kernel_ncu_driver.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "results/raw/dram/stream_write_kernel_ncu.csv": "203ff2e711038c4c344111493ae82ebfeb271b06748de02c837d5ffbe2ae7d85",
+    "results/raw/dram/stream_write_kernel_ncu_driver.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "results/raw/gpu_post.csv": "d647f84052bacb96b294db2ada4fb20d502bcfc88b9e2b279649256f3164d209",
+    "results/raw/gpu_pre.csv": "82b9d5b676cb9a4c10546af26b9f5d09a0fb9a17af700b2c0e06a51dd36872e1",
+    "results/raw/host_software.txt": "9374698e3743ba25a39ffe0ac8a454d95bc9d69bd35b48939d71ea06805ab078",
+    "results/raw/ipc/run_1.log": "f1af291ad396a4617c555ba20e89b9622504735b772ba60dd3d5069101607e7a",
+    "results/raw/ipc/run_2.log": "f1af291ad396a4617c555ba20e89b9622504735b772ba60dd3d5069101607e7a",
+    "results/raw/ipc/run_3.log": "f1af291ad396a4617c555ba20e89b9622504735b772ba60dd3d5069101607e7a",
+    "results/raw/ipc/run_4.log": "f1af291ad396a4617c555ba20e89b9622504735b772ba60dd3d5069101607e7a",
+    "results/raw/ipc/run_5.log": "f1af291ad396a4617c555ba20e89b9622504735b772ba60dd3d5069101607e7a",
+    "results/raw/processes_post.csv": "d24c0ab0094010696efeca6991704b6ba6a7460e423ff4dac9eed8e1f3601f36",
+    "results/raw/processes_pre.csv": "d24c0ab0094010696efeca6991704b6ba6a7460e423ff4dac9eed8e1f3601f36",
+    "results/raw/recovery/fp8-e4m3-noscale.log": "fdf0a9f4d5976e98af9aa12ed23d284b357fa371b7a9918076ea3874178c1a56",
+    "results/raw/recovery/fp8-e4m3-vs32.log": "1c8b6d7980a2add43db81b52c44fd6957ddda3d205b6e88c0dee7b2c7f57d097",
+    "results/raw/recovery/nvfp4-e2m1-vs16.log": "d17f02d0dc6f15d676d54345d352ca58701364d0596f828f9a9917d54f0aec86",
+    "results/raw/remote_ref_identity.txt": "01c716459a3d1c074f134f0708ce408be74fa1d95740021b053cae102c16a0e4",
+    "results/raw/sass_instructions.txt": "77b7c98a2c38a8ab2273ca93d880824a7492a8b0f4981ac7d59d0fef2a869be6",
+    "results/raw/sass_mode_bindings.txt": "78cfd2a225bd96b3fb0c0b4e40dd59390e3d5ab6e131983a9bca439783f1de17",
+    "results/raw/saturation/fp8-e4m3-noscale_b12.log": "eeeea142c984b4c6114058a864e2c2761739e6d3c35ca00072b8447597606415",
+    "results/raw/saturation/fp8-e4m3-noscale_b16.log": "aa56c5acba61f5359a611d76e5a3886d6b2d198aa8ddcd47564c0daf0f511577",
+    "results/raw/saturation/fp8-e4m3-noscale_b4.log": "c6d4e6438b503b0d440853d24ad0a2dc2e0724f1c4ce8e5b850354c747630072",
+    "results/raw/saturation/fp8-e4m3-noscale_b8.log": "63e4158872a4bdb354396ad4eadc51ade44bfb0a295d94f63abe497ff7c4b433",
+    "results/raw/saturation/fp8-e4m3-vs32_b12.log": "010ca65b49cc176a44f8021bef43c876b27a8ab5b8557463926c430a00653b0d",
+    "results/raw/saturation/fp8-e4m3-vs32_b16.log": "77221970cd07eca6a5666b5a4c5061756227c2d811b4739030de5e975dc0530d",
+    "results/raw/saturation/fp8-e4m3-vs32_b4.log": "885d5e2392a15900e761cb416b951360a0890acc41fdc1aa2190a85126e16923",
+    "results/raw/saturation/fp8-e4m3-vs32_b8.log": "87349d9bdd4d9ea89eb876e33e452f317a2b48f81c50bd00816c625a98ab68b3",
+    "results/raw/saturation/nvfp4-e2m1-vs16_b12.log": "340700dec8d3707b8e395df45eff102b516c358daf5203efd285d5cf1803cbbf",
+    "results/raw/saturation/nvfp4-e2m1-vs16_b16.log": "5b5683bebf6040cec7f38bebafcc05d6ea41dc06d07d67b4de90c11773ef6de1",
+    "results/raw/saturation/nvfp4-e2m1-vs16_b4.log": "0c20d7c56e82339fa001c65ba7128176a95857f757f9ab6ec85030d22d461949",
+    "results/raw/saturation/nvfp4-e2m1-vs16_b8.log": "d064bb02903e7c96ca1d496d3f9da4204408a38c96d9dbe5c2bd3c54283c080d",
+    "results/raw/source_identity.txt": "a5c24437c4442a0af70487cba88c566e8b6e528ff2d8bf44c4519f7de395e778",
+    "results/raw/source_mode_bindings.txt": "095ccb9294fce4bf5ff92f972273ce55d23618edfe97b2abb833dd9fb4e89261",
+    "results/raw/telemetry/compute_window/fp8-e4m3-noscale_run1.csv": "022044b6fd0ab44b8120e97e8c974cd6848dd3f3a59abbab0be0d62062a170d4",
+    "results/raw/telemetry/compute_window/fp8-e4m3-noscale_run2.csv": "7c5c169bd4a358b37440750d53fa4cb070e56d854c5aae61bc8eda491bdc1597",
+    "results/raw/telemetry/compute_window/fp8-e4m3-noscale_run3.csv": "d57569733908be57f7fd5f2ce0856d60a59e2d857bc9dabf43b57803ded7caba",
+    "results/raw/telemetry/compute_window/fp8-e4m3-vs32_run1.csv": "ba98612ebcf93494ced7da50296da6f6e0e8a34a833021fa0aa344a81e404de8",
+    "results/raw/telemetry/compute_window/fp8-e4m3-vs32_run2.csv": "06f8b6ac75d0dc16e5ed8fec5a825e002b95cc11f709c5196827d445cf2b0a24",
+    "results/raw/telemetry/compute_window/fp8-e4m3-vs32_run3.csv": "227d200c4874f8c6968798d0cb1d16fa5f2923453550ae7b4fd200be421cc109",
+    "results/raw/telemetry/compute_window/nvfp4-e2m1-vs16_run1.csv": "943953b2ddbd687c4ddce8b2d6836ad6d73d2eb98d09711911711d1bf1eb847a",
+    "results/raw/telemetry/compute_window/nvfp4-e2m1-vs16_run2.csv": "e2cc3de59bbb51f828e521553579f28bbc86cad41e71803adda48c12c6794a36",
+    "results/raw/telemetry/compute_window/nvfp4-e2m1-vs16_run3.csv": "e559a28985d7c9ad49e468a801d554cc197f5b1aaa384c831813986f1b30d959",
+    "results/raw/telemetry/dram/run_1.csv": "6c0409e9cc296efe41886112b5eba9088c66fa00c7101d73f4651f6a4480a0a0",
+    "results/raw/telemetry/dram/run_2.csv": "49017908adf854d9a9dca9b1ac752a0ff4cf39d0cca919fcb51371e02e643b51",
+    "results/raw/telemetry/dram/run_3.csv": "bf15b1ac50b574d5c161cb5459b012d9b6a580f679dc78b6adb8688b8fe380e3",
+    "results/raw/telemetry/recovery/fp8-e4m3-noscale.csv": "9c14319fe585ec216db853060a9f8e0db3d9f10d5c2339a3dda9e04678e79dc4",
+    "results/raw/telemetry/recovery/fp8-e4m3-vs32.csv": "f4cf027f7c81088d07c7d52b5b8904f452598a7b5e29074d2d0d4aa64ad590c0",
+    "results/raw/telemetry/recovery/nvfp4-e2m1-vs16.csv": "a7bf807cfbd2dec83d248b751b90e8f3d6d1869066a053373a7504181ae8a1d4",
+    "results/raw/telemetry/saturation/fp8-e4m3-noscale_b12.csv": "7df4cf90e630916b68658581120e3276207b78dfc7fd9a049b4d70d21de6a6d4",
+    "results/raw/telemetry/saturation/fp8-e4m3-noscale_b16.csv": "b808266c40c686522283b786f82b69904f3d61353e91b32fb83d2ce2224e9058",
+    "results/raw/telemetry/saturation/fp8-e4m3-noscale_b4.csv": "1a89131ad7069563f56a3787e753ec87f315ea46f68a9afbd3066c622177084f",
+    "results/raw/telemetry/saturation/fp8-e4m3-noscale_b8.csv": "c9394f240aa8cbcad7a8e6cf3bf3e0f083128061b28608f51db8185521884c89",
+    "results/raw/telemetry/saturation/fp8-e4m3-vs32_b12.csv": "6e678153067d7ca28af8df30212db1d351501ba978af1a29f5fae9116ed4ee35",
+    "results/raw/telemetry/saturation/fp8-e4m3-vs32_b16.csv": "0b6f0e7eb3289d73dbccab95e43ea331dbd6b9adead4205b7794272baf0734f2",
+    "results/raw/telemetry/saturation/fp8-e4m3-vs32_b4.csv": "953f777a21d5d89ae9ad380682850153f61a1a37a4ffb32414cd42dd5190a2a9",
+    "results/raw/telemetry/saturation/fp8-e4m3-vs32_b8.csv": "8c4baa55d579304b20cb30479ab94b53ef600ba71e5f66a25604c43dcf545809",
+    "results/raw/telemetry/saturation/nvfp4-e2m1-vs16_b12.csv": "c70c79248d91ac8d2cc50de32c2d0f992e374c4edd8bc90b0af7aa8e16e2dbaa",
+    "results/raw/telemetry/saturation/nvfp4-e2m1-vs16_b16.csv": "7d3dbea6788b4d46fbd6259ac9974c32d0cd64eb614cb7598f5bc29b97229c9d",
+    "results/raw/telemetry/saturation/nvfp4-e2m1-vs16_b4.csv": "6a0741cbc3cd0513468bfdda2d94334d7bdcb036213a38cab2393712d44029e2",
+    "results/raw/telemetry/saturation/nvfp4-e2m1-vs16_b8.csv": "ced955e63e83f8400959ea589ed8e3c3b438e579839c8d728eeac100fefc60cf"
+  },
+  "schema": "calibrated-gpu-ceiling-profile.v1",
+  "tensor_core_records": [
+    {
+      "architecture_nominal": {
+        "derivation": "4 tensor subpartitions \u00d7 (2\u00d716\u00d78\u00d7K FLOPs/instruction) / 16 cycles",
+        "evidence_locator": "sm120_mma_benchmarks/IPC_bench_recipe.cuh: TC_benchmark_wrapper",
+        "instruction_k": 32,
+        "status": "diagnostic",
+        "work_per_cycle_sm": 2048.0
+      },
+      "audit_status": "vetted",
+      "consumer_scope": "exp_025 SGLang Triton FP8 FC1/FC2",
+      "id": "fp8-e4m3-noscale",
+      "instruction": "QMMA.16832.F32.E4M3.E4M3",
+      "label": "FP8 E4M3\u00d7E4M3 no-scale",
+      "nominal_app_clock_tflops": 535.49056,
+      "per_cycle_vs_arch_nominal_percent": 99.580078125,
+      "per_sm_instruction_ceiling": {
+        "cv_percent": 0.0,
+        "max_work_per_cycle_sm": 2039.4,
+        "median_work_per_cycle_sm": 2039.4,
+        "min_work_per_cycle_sm": 2039.4,
+        "samples_work_per_cycle_sm": [
+          2039.4,
+          2039.4,
+          2039.4,
+          2039.4,
+          2039.4
+        ]
+      },
+      "recovery": {
+        "cv_percent": 5.323020226080765,
+        "gap_us": 50000,
+        "median_tflops": 519.081,
+        "role": "directional recovery diagnostic; not a denominator"
+      },
+      "saturation": {
+        "best_observed_blocks_per_sm": 16,
+        "median_tflops_by_blocks_per_sm": {
+          "12": 571.958,
+          "16": 572.265,
+          "4": 566.519,
+          "8": 569.158
+        },
+        "selected_blocks_per_sm": 8,
+        "selected_vs_best_percent": 99.45706971420584
+      },
+      "source_dispatch": "run_no_scale_test",
+      "sustained_window": {
+        "rested_first_tflops": 566.759,
+        "runs": [
+          {
+            "last8_median_tflops": 573.115,
+            "max_active_one_warp_blocks_per_sm": 24,
+            "registers_per_thread": 44,
+            "rested_first_tflops": 566.759
+          },
+          {
+            "last8_median_tflops": 573.118,
+            "max_active_one_warp_blocks_per_sm": 24,
+            "registers_per_thread": 44,
+            "rested_first_tflops": 568.054
+          },
+          {
+            "last8_median_tflops": 572.935,
+            "max_active_one_warp_blocks_per_sm": 24,
+            "registers_per_thread": 44,
+            "rested_first_tflops": 565.619
+          }
+        ],
+        "sustained_window_cv_percent": 0.014931993707624727,
+        "sustained_window_tflops": 573.115,
+        "window_definition": "median(last 8 kernels) of each 32\u00d764000 back-to-back run; median of 3 runs"
+      },
+      "sustained_window_vs_app_clock_nominal_percent": 107.02616307559185,
+      "telemetry": {
+        "active_clock_mhz_max": 2565.0,
+        "active_clock_mhz_median": 2392.0,
+        "active_clock_mhz_min": 2370.0,
+        "active_power_w_max": 71.11,
+        "active_samples": 116,
+        "memory_mib_max": 467.0,
+        "pstates": [
+          "P1"
+        ],
+        "samples": 325,
+        "temperature_c_max": 33.0
+      }
+    },
+    {
+      "architecture_nominal": {
+        "derivation": "4 tensor subpartitions \u00d7 (2\u00d716\u00d78\u00d7K FLOPs/instruction) / 16 cycles",
+        "evidence_locator": "sm120_mma_benchmarks/IPC_bench_recipe.cuh: TC_benchmark_wrapper",
+        "instruction_k": 64,
+        "status": "diagnostic",
+        "work_per_cycle_sm": 4096.0
+      },
+      "audit_status": "vetted",
+      "consumer_scope": "exp_024 CUTLASS NVFP4 FC1/FC2",
+      "id": "nvfp4-e2m1-vs16",
+      "instruction": "OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X",
+      "label": "NVFP4 E2M1\u00d7E2M1 VS16",
+      "nominal_app_clock_tflops": 1070.98112,
+      "per_cycle_vs_arch_nominal_percent": 98.750244140625,
+      "per_sm_instruction_ceiling": {
+        "cv_percent": 0.0,
+        "max_work_per_cycle_sm": 4044.81,
+        "median_work_per_cycle_sm": 4044.81,
+        "min_work_per_cycle_sm": 4044.81,
+        "samples_work_per_cycle_sm": [
+          4044.81,
+          4044.81,
+          4044.81,
+          4044.81,
+          4044.81
+        ]
+      },
+      "recovery": {
+        "cv_percent": 4.71675765302119,
+        "gap_us": 50000,
+        "median_tflops": 1047.51,
+        "role": "directional recovery diagnostic; not a denominator"
+      },
+      "saturation": {
+        "best_observed_blocks_per_sm": 16,
+        "median_tflops_by_blocks_per_sm": {
+          "12": 1141.983,
+          "16": 1144.552,
+          "4": 1127.457,
+          "8": 1138.317
+        },
+        "selected_blocks_per_sm": 8,
+        "selected_vs_best_percent": 99.45524537111464
+      },
+      "source_dispatch": "run_blockscaled_test",
+      "sustained_window": {
+        "rested_first_tflops": 1132.761,
+        "runs": [
+          {
+            "last8_median_tflops": 1143.6835,
+            "max_active_one_warp_blocks_per_sm": 24,
+            "registers_per_thread": 52,
+            "rested_first_tflops": 1132.627
+          },
+          {
+            "last8_median_tflops": 1144.0465,
+            "max_active_one_warp_blocks_per_sm": 24,
+            "registers_per_thread": 52,
+            "rested_first_tflops": 1132.761
+          },
+          {
+            "last8_median_tflops": 1143.1395,
+            "max_active_one_warp_blocks_per_sm": 24,
+            "registers_per_thread": 52,
+            "rested_first_tflops": 1133.117
+          }
+        ],
+        "sustained_window_cv_percent": 0.032592096293829184,
+        "sustained_window_tflops": 1143.6835,
+        "window_definition": "median(last 8 kernels) of each 32\u00d764000 back-to-back run; median of 3 runs"
+      },
+      "sustained_window_vs_app_clock_nominal_percent": 106.78839044333482,
+      "telemetry": {
+        "active_clock_mhz_max": 2565.0,
+        "active_clock_mhz_median": 2373.5,
+        "active_clock_mhz_min": 2370.0,
+        "active_power_w_max": 76.64,
+        "active_samples": 0,
+        "memory_mib_max": 467.0,
+        "pstates": [
+          "P1"
+        ],
+        "samples": 328,
+        "temperature_c_max": 30.0
+      }
+    },
+    {
+      "architecture_nominal": {
+        "derivation": "4 tensor subpartitions \u00d7 (2\u00d716\u00d78\u00d7K FLOPs/instruction) / 16 cycles",
+        "evidence_locator": "sm120_mma_benchmarks/IPC_bench_recipe.cuh: TC_benchmark_wrapper",
+        "instruction_k": 32,
+        "status": "diagnostic",
+        "work_per_cycle_sm": 2048.0
+      },
+      "audit_status": "diagnostic",
+      "consumer_scope": "block-scaled FP8 diagnostic only",
+      "id": "fp8-e4m3-vs32",
+      "instruction": "QMMA.SF.16832.F32.E4M3.E4M3.E8",
+      "label": "FP8 E4M3\u00d7E4M3 VS32",
+      "nominal_app_clock_tflops": 535.49056,
+      "per_cycle_vs_arch_nominal_percent": 97.11669921875,
+      "per_sm_instruction_ceiling": {
+        "cv_percent": 0.0,
+        "max_work_per_cycle_sm": 1988.95,
+        "median_work_per_cycle_sm": 1988.95,
+        "min_work_per_cycle_sm": 1988.95,
+        "samples_work_per_cycle_sm": [
+          1988.95,
+          1988.95,
+          1988.95,
+          1988.95,
+          1988.95
+        ]
+      },
+      "recovery": {
+        "cv_percent": 5.1393530213505425,
+        "gap_us": 50000,
+        "median_tflops": 527.1335,
+        "role": "directional recovery diagnostic; not a denominator"
+      },
+      "saturation": {
+        "best_observed_blocks_per_sm": 16,
+        "median_tflops_by_blocks_per_sm": {
+          "12": 571.958,
+          "16": 573.004,
+          "4": 566.519,
+          "8": 570.6
+        },
+        "selected_blocks_per_sm": 8,
+        "selected_vs_best_percent": 99.58045668093067
+      },
+      "source_dispatch": "run_blockscaled_test",
+      "sustained_window": {
+        "rested_first_tflops": 567.4,
+        "runs": [
+          {
+            "last8_median_tflops": 573.206,
+            "max_active_one_warp_blocks_per_sm": 24,
+            "registers_per_thread": 52,
+            "rested_first_tflops": 566.725
+          },
+          {
+            "last8_median_tflops": 573.0235,
+            "max_active_one_warp_blocks_per_sm": 24,
+            "registers_per_thread": 52,
+            "rested_first_tflops": 567.584
+          },
+          {
+            "last8_median_tflops": 572.9324999999999,
+            "max_active_one_warp_blocks_per_sm": 24,
+            "registers_per_thread": 52,
+            "rested_first_tflops": 567.4
+          }
+        ],
+        "sustained_window_cv_percent": 0.019844497133790495,
+        "sustained_window_tflops": 573.0235,
+        "window_definition": "median(last 8 kernels) of each 32\u00d764000 back-to-back run; median of 3 runs"
+      },
+      "sustained_window_vs_app_clock_nominal_percent": 107.00907593963935,
+      "telemetry": {
+        "active_clock_mhz_max": 2565.0,
+        "active_clock_mhz_median": 2565.0,
+        "active_clock_mhz_min": 2370.0,
+        "active_power_w_max": 69.7,
+        "active_samples": 0,
+        "memory_mib_max": 467.0,
+        "pstates": [
+          "P1"
+        ],
+        "samples": 327,
+        "temperature_c_max": 30.0
+      }
+    }
+  ]
+}

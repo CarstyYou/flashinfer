@@ -1,0 +1,7 @@
+Linux R6KD-CX8aaS-GPU-16 5.15.0-1069-nvidia #70-Ubuntu SMP Fri Dec 6 16:03:09 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+NVIDIA-SMI version  : 580.95.05
+NVML version        : 580.95
+DRIVER version      : 580.95.05
+CUDA Version        : 13.0
+driver_version, vbios_version
+580.95.05, 98.02.A5.00.0E

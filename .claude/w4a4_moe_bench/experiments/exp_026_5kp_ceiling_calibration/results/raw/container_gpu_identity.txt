@@ -1,0 +1,5 @@
+0, GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522, NVIDIA Graphics Device
+visible_devices=1
+device_name=NVIDIA Graphics Device
+sm_count=110
+compute_capability=12.0

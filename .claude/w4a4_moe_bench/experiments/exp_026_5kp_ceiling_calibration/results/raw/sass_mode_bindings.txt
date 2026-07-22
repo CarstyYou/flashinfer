@@ -1,0 +1,6 @@
+		Function : _Z26stress_mma_no_scale_kernelILi64000EN7cutlass12float_e4m3_tES1_fN4cute5tupleIJNS2_1CILi16EEENS4_ILi8EEENS4_ILi32EEEEEEEvPf
+        /*01c0*/                   QMMA.16832.F32.E4M3.E4M3 R4, R20, R2, R4 ;                                /* 0x000000021404727a */
+		Function : _Z29stress_blockscaled_mma_kernelILi64000EN7cutlass12float_e2m1_tES1_fNS0_13float_ue4m3_tELi16ELi0EN4cute5tupleIJNS3_1CILi16EEENS5_ILi8EEENS5_ILi64EEEEEEEvPf
+        /*0240*/                   OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X R4, R28, R26, R4, R0, R3, URZ ;      /* 0x7030001a1c04747f */
+		Function : _Z29stress_blockscaled_mma_kernelILi64000EN7cutlass12float_e4m3_tES1_fNS0_13float_ue8m0_tELi32ELi1EN4cute5tupleIJNS3_1CILi16EEENS5_ILi8EEENS5_ILi32EEEEEEEvPf
+        /*02c0*/                   QMMA.SF.16832.F32.E4M3.E4M3.E8 R4, R28, R26, R4, R0, R3, URZ ;            /* 0x7030001a1c04747a */

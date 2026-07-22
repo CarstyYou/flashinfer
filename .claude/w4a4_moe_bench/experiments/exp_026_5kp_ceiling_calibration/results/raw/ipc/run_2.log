@@ -1,0 +1,27 @@
+this GPU has 110 SM
+IPC of   TF32_FP32_HMMA1684 : 8.00T/clk/SM, Ops/clk/SM 256.09, Next Independent Inst Wait: 16
+IPC of   TF32_FP32_HMMA1688 : 7.97T/clk/SM, Ops/clk/SM 509.85, Next Independent Inst Wait: 16
+IPC of   BF16_FP32_HMMA1688 : 8.00T/clk/SM, Ops/clk/SM 512.19, Next Independent Inst Wait: 16
+IPC of  BF16_FP32_HMMA16816 : 7.97T/clk/SM, Ops/clk/SM 1019.70, Next Independent Inst Wait: 16
+IPC of   FP16_FP16_HMMA1688 : 8.00T/clk/SM, Ops/clk/SM 512.19, Next Independent Inst Wait: 16
+IPC of   FP16_FP32_HMMA1688 : 8.00T/clk/SM, Ops/clk/SM 512.19, Next Independent Inst Wait: 16
+IPC of  FP16_FP16_HMMA16816 : 7.97T/clk/SM, Ops/clk/SM 1019.70, Next Independent Inst Wait: 16
+IPC of  FP16_FP32_HMMA16816 : 7.97T/clk/SM, Ops/clk/SM 1019.70, Next Independent Inst Wait: 16
+IPC of INT8_INT32_IMMA16816 : 8.00T/clk/SM, Ops/clk/SM 1024.37, Next Independent Inst Wait: 16
+IPC of INT8_INT32_IMMA16832 : 7.97T/clk/SM, Ops/clk/SM 2039.40, Next Independent Inst Wait: 16
+IPC of  E5M2_FP32_QMMA16832 : 7.97T/clk/SM, Ops/clk/SM 2039.40, Next Independent Inst Wait: 16
+IPC of E4M3_E4M3_FP32_QMMA16832 : 7.97T/clk/SM, Ops/clk/SM 2039.40, Next Independent Inst Wait: 16
+IPC of E5M2_E3M2_FP32_QMMA16832 : 7.97T/clk/SM, Ops/clk/SM 2039.40, Next Independent Inst Wait: 16
+IPC of E5M2_E2M1_FP32_QMMA16832 : 7.97T/clk/SM, Ops/clk/SM 2039.40, Next Independent Inst Wait: 16
+IPC of E3M2_E3M2_FP32_QMMA16832 : 7.97T/clk/SM, Ops/clk/SM 2039.40, Next Independent Inst Wait: 16
+IPC of E3M2_E2M1_FP32_QMMA16832 : 7.97T/clk/SM, Ops/clk/SM 2039.40, Next Independent Inst Wait: 16
+IPC of E2M1_E2M1_FP32_QMMA16832 : 7.97T/clk/SM, Ops/clk/SM 2039.40, Next Independent Inst Wait: 16
+IPC of E4M3_E4M3_FP32_QMMA16832_VS32 : 7.77T/clk/SM, Ops/clk/SM 1988.95, Next Independent Inst Wait: 16
+IPC of E4M3_E3M2_FP32_QMMA16832_VS32 : 7.77T/clk/SM, Ops/clk/SM 1988.95, Next Independent Inst Wait: 16
+IPC of E4M3_E2M1_FP32_QMMA16832_VS32 : 7.77T/clk/SM, Ops/clk/SM 1988.95, Next Independent Inst Wait: 16
+IPC of E3M2_E3M2_FP32_QMMA16832_VS32 : 7.77T/clk/SM, Ops/clk/SM 1988.95, Next Independent Inst Wait: 16
+IPC of E3M2_E2M1_FP32_QMMA16832_VS32 : 7.77T/clk/SM, Ops/clk/SM 1988.95, Next Independent Inst Wait: 16
+IPC of E2M1_E2M1_FP32_QMMA16832_VS32 : 7.77T/clk/SM, Ops/clk/SM 1988.95, Next Independent Inst Wait: 16
+IPC of MXFP4_FP32_OMMA16864_VS32 : 7.90T/clk/SM, Ops/clk/SM 4044.81, Next Independent Inst Wait: 16
+IPC of NVFP4_FP32_OMMA16864_VS16 : 7.90T/clk/SM, Ops/clk/SM 4044.81, Next Independent Inst Wait: 16
+no error

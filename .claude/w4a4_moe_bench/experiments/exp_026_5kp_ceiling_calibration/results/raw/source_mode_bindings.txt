@@ -1,0 +1,17 @@
+246:    if (mode == "fp8-e4m3-vs32") {
+247-        run_blockscaled_test<
+248-            TESTTIMES, cutlass::float_e4m3_t, cutlass::float_e4m3_t,
+249-            cutlass::float_ue8m0_t, 32, true,
+250-            cute::Shape<cute::_16, cute::_8, cute::_32>>(
+251-                num_kernels, gap_us, num_sms, blocks_per_sm, mode.c_str());
+252-    } else if (mode == "nvfp4-e2m1-vs16") {
+253-        run_blockscaled_test<
+254-            TESTTIMES, cutlass::float_e2m1_t, cutlass::float_e2m1_t,
+255-            cutlass::float_ue4m3_t, 16, false,
+256-            cute::Shape<cute::_16, cute::_8, cute::_64>>(
+257-                num_kernels, gap_us, num_sms, blocks_per_sm, mode.c_str());
+258-    } else if (mode == "fp8-e4m3-noscale") {
+259-        run_no_scale_test<
+260-            TESTTIMES, cutlass::float_e4m3_t, cutlass::float_e4m3_t,
+261-            cute::Shape<cute::_16, cute::_8, cute::_32>>(
+322:        case 64000:  run_mode<64000>(mode, num_kernels, gap_us, num_sms, blocks_per_sm); break;

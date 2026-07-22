@@ -1,0 +1,2 @@
+uuid, pci.bus_id, name, pstate, clocks.current.graphics [MHz], clocks.current.memory [MHz], clocks.applications.graphics [MHz], clocks.applications.memory [MHz], power.draw [W], power.limit [W], temperature.gpu, memory.used [MiB], utilization.gpu [%]
+GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522, 00000000:76:00.0, NVIDIA Graphics Device, P1, 1980 MHz, 13365 MHz, 2377 MHz, 14001 MHz, 81.38 W, 350.00 W, 30, 124 MiB, 1 %

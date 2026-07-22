@@ -1,0 +1,11 @@
+==PROF== Connected to process 1759 (/workspace/build/SM120_DRAM_bw_benchmark)
+==PROF== Disconnected from process 1759
+"ID","Process ID","Process Name","Host Name","Kernel Name","Context","Stream","Block Size","Grid Size","Device","CC","Section Name","Metric Name","Metric Unit","Metric Value"
+"0","1759","SM120_DRAM_bw_benchmark","127.0.0.1","stream_write_kernel(uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_read.sum","byte","9216"
+"0","1759","SM120_DRAM_bw_benchmark","127.0.0.1","stream_write_kernel(uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_write.sum","byte","485216000"
+"1","1759","SM120_DRAM_bw_benchmark","127.0.0.1","stream_write_kernel(uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_read.sum","byte","3328"
+"1","1759","SM120_DRAM_bw_benchmark","127.0.0.1","stream_write_kernel(uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_write.sum","byte","482310400"
+"2","1759","SM120_DRAM_bw_benchmark","127.0.0.1","stream_write_kernel(uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_read.sum","byte","3584"
+"2","1759","SM120_DRAM_bw_benchmark","127.0.0.1","stream_write_kernel(uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_write.sum","byte","483478272"
+"3","1759","SM120_DRAM_bw_benchmark","127.0.0.1","stream_write_kernel(uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_read.sum","byte","4608"
+"3","1759","SM120_DRAM_bw_benchmark","127.0.0.1","stream_write_kernel(uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_write.sum","byte","483245312"

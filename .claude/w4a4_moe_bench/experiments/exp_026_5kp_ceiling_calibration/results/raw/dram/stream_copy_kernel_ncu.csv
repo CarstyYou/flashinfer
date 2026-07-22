@@ -1,0 +1,11 @@
+==PROF== Connected to process 1823 (/workspace/build/SM120_DRAM_bw_benchmark)
+==PROF== Disconnected from process 1823
+"ID","Process ID","Process Name","Host Name","Kernel Name","Context","Stream","Block Size","Grid Size","Device","CC","Section Name","Metric Name","Metric Unit","Metric Value"
+"0","1823","SM120_DRAM_bw_benchmark","127.0.0.1","stream_copy_kernel(const uint4 *, uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_read.sum","byte","536883712"
+"0","1823","SM120_DRAM_bw_benchmark","127.0.0.1","stream_copy_kernel(const uint4 *, uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_write.sum","byte","497709056"
+"1","1823","SM120_DRAM_bw_benchmark","127.0.0.1","stream_copy_kernel(const uint4 *, uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_read.sum","byte","536874496"
+"1","1823","SM120_DRAM_bw_benchmark","127.0.0.1","stream_copy_kernel(const uint4 *, uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_write.sum","byte","494895104"
+"2","1823","SM120_DRAM_bw_benchmark","127.0.0.1","stream_copy_kernel(const uint4 *, uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_read.sum","byte","536874496"
+"2","1823","SM120_DRAM_bw_benchmark","127.0.0.1","stream_copy_kernel(const uint4 *, uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_write.sum","byte","495224576"
+"3","1823","SM120_DRAM_bw_benchmark","127.0.0.1","stream_copy_kernel(const uint4 *, uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_read.sum","byte","536874240"
+"3","1823","SM120_DRAM_bw_benchmark","127.0.0.1","stream_copy_kernel(const uint4 *, uint4 *, unsigned long)","1","7","(256, 1, 1)","(440, 1, 1)","0","12.0","Command line profiler metrics","dram__bytes_op_write.sum","byte","491695104"

@@ -1,0 +1,13 @@
+Device: NVIDIA Graphics Device, 110 SMs, blocks_per_sm=12, grid=1320 blocks × 32 threads
+Config: num_kernels=8 testtimes=16000 gap_us=0 mode=nvfp4-e2m1-vs16
+Mode: nvfp4-e2m1-vs16, FLOPs/block=1048576000, FLOPs/kernel=1384120320000
+Kernel resources: registers/thread=52 static_smem=0B max_active_one_warp_blocks/SM=24
+kernel_idx,dur_us,tflops
+0,1233.248,1122.337
+1,1216.352,1137.927
+2,1214.080,1140.057
+3,1213.056,1141.019
+4,1212.032,1141.983
+5,1211.008,1142.949
+6,1211.040,1142.919
+7,1209.984,1143.916

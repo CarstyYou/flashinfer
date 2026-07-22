@@ -1,0 +1,11 @@
+GPU:      NVIDIA Graphics Device (sm_120)
+SMs:      110
+Mem clock: 14001 MHz, bus: 384-bit, peak: 1344.1 GB/s
+L2:       100.7 MB
+Buffer:   512 MB (> L2 for true DRAM)
+
+=== Achievable DRAM bandwidth (512 MB buffer, median of 10) ===
+Streaming Read  :  1181.6 GB/s  (87.9% of peak)
+Streaming Write :  1236.3 GB/s  (92.0% of peak)
+Copy (R+W)      :  1088.8 GB/s  (81.0% of peak)
+cudaMemcpy D2D  :  1110.4 GB/s  (82.6% of peak)
