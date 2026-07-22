@@ -345,32 +345,52 @@ def build():
                 abs((dram_read_bytes + dram_write_bytes) - dram_bytes) < 1.0,
                 phase + " DRAM byte accounting drift",
             )
+            require(dram_bytes > 0.0, phase + " DRAM traffic is empty")
+            dram_read_gbs = dram_read_bytes / ncu_duration_ns
+            dram_write_gbs = dram_write_bytes / ncu_duration_ns
             dram_gbs = dram_bytes / ncu_duration_ns
-            dram_floor_ns = max(
-                dram_read_bytes / dram_roofs["read"],
-                dram_write_bytes / dram_roofs["write"],
-                dram_bytes / dram_roofs["copy"],
+            dram_read_efficiency_percent = 100.0 * dram_read_gbs / dram_roofs["read"]
+            dram_write_efficiency_percent = 100.0 * dram_write_gbs / dram_roofs["write"]
+            dram_copy_reference_percent = 100.0 * dram_gbs / dram_roofs["copy"]
+            dram_read_fraction = dram_read_bytes / dram_bytes
+            copy_reference_visible = 0.4 <= dram_read_fraction <= 0.6
+            require(
+                0.0 <= dram_read_efficiency_percent <= 100.0,
+                phase + " DRAM-read efficiency is invalid",
             )
-            dram_resource_efficiency_percent = 100.0 * dram_floor_ns / ncu_duration_ns
-            dram_resource_status = (
-                "diagnostic" if dram_resource_efficiency_percent <= 100.0 else "invalid"
+            require(
+                0.0 <= dram_write_efficiency_percent <= 100.0,
+                phase + " DRAM-write efficiency is invalid",
             )
+            if copy_reference_visible:
+                require(
+                    0.0 <= dram_copy_reference_percent <= 100.0,
+                    phase + " 1:1 copy diagnostic reference is invalid",
+                )
             row["ncu_diagnostic"] = {
                 "dram_read_bytes": dram_read_bytes,
                 "dram_write_bytes": dram_write_bytes,
                 "dram_bytes": dram_bytes,
                 "ncu_duration_us": ncu_duration_ns / 1000.0,
+                "dram_read_gbs": dram_read_gbs,
+                "dram_write_gbs": dram_write_gbs,
                 "dram_gbs": dram_gbs,
                 "theoretical_dram_efficiency_percent": 100.0
                 * dram_gbs
                 / DRAM_THEORETICAL_GBS,
-                "physical_dram_floor_ns": dram_floor_ns,
-                "physical_dram_resource_efficiency_percent": dram_resource_efficiency_percent,
-                "physical_dram_resource_status": dram_resource_status,
+                "physical_dram_read_efficiency_percent": dram_read_efficiency_percent,
+                "physical_dram_write_efficiency_percent": dram_write_efficiency_percent,
+                "physical_dram_1to1_copy_reference_percent": (
+                    dram_copy_reference_percent if copy_reference_visible else None
+                ),
+                "dram_read_fraction_percent": 100.0 * dram_read_fraction,
+                "copy_reference_visible": copy_reference_visible,
+                "copy_reference_status": "diagnostic-only / not a ratio-matched ceiling",
                 "physical_dram_roof_transfer": "same-SKU cross-UUID transfer",
-                "physical_dram_formula": (
-                    "max(read_bytes/read_roof, write_bytes/write_roof, "
-                    "total_bytes/copy_roof) / NCU duration"
+                "physical_dram_formula": "directional achieved physical GB/s / matching calibrated directional roof",
+                "copy_reference_rule": (
+                    "display only when read fraction is within [40%, 60%]; "
+                    "never treat as a ceiling without a ratio-matched calibration"
                 ),
                 "scope": "NCU kernel replay/cache-control all; not canonical NSys throughput",
             }
@@ -430,9 +450,16 @@ def build():
                         "logical_work": payload,
                         "achieved_gwork_per_s": work_per_second_giga,
                         "logical_payload_gbs": logical_gbs,
-                        "dram_resource_efficiency_percent": dram_resource_efficiency_percent,
-                        "dram_resource_efficiency_status": dram_resource_status,
-                        "hardware_ceiling_status": "partial DRAM resource view only",
+                        "dram_bandwidth_efficiency_percent": {
+                            "read": dram_read_efficiency_percent,
+                            "write": dram_write_efficiency_percent,
+                            "copy_1to1_diagnostic_reference": (
+                                dram_copy_reference_percent
+                                if copy_reference_visible
+                                else None
+                            ),
+                        },
+                        "hardware_ceiling_status": "scoped directional DRAM percentages available; complete mixed-op ceiling unavailable",
                         "hardware_ceiling_reason": (
                             "physical DRAM bytes and calibrated directional roofs do not model "
                             "the complete mixed operator"
@@ -506,8 +533,9 @@ def build():
         "verdict": {
             "status": "accept",
             "reason": (
-                "FC1/FC2 consume a vetted same-SKU measured NVFP4 roof; mixed non-GEMM "
-                "complete roofs and all independent SOTA anchors remain unavailable"
+                "FC1/FC2 have calibrated Tensor Core percentages, and every NCU-profiled "
+                "material op has scoped directional DRAM percentages; mixed complete-op "
+                "ceilings and independent SOTA anchors remain unavailable"
             ),
         },
         "hardware_authority": {
@@ -591,12 +619,56 @@ def render(model):
     finalize = by_phase[8192]["finalize"]
     authority = model["hardware_authority"]["calibrated_profile"]
 
-    def dram_diagnostic(row):
+    def dram_cell(row):
         diag = row["ncu_diagnostic"]
-        value = diag["physical_dram_resource_efficiency_percent"]
-        if diag["physical_dram_resource_status"] == "invalid":
-            return "unavailable（投影为 {:.2f}% > 100%，scope 不闭合）".format(value)
-        return "{:.2f}%（diagnostic，不是完整 op ceiling）".format(value)
+        read = diag["physical_dram_read_efficiency_percent"]
+        write = diag["physical_dram_write_efficiency_percent"]
+        if diag["copy_reference_visible"]:
+            copy_reference = diag["physical_dram_1to1_copy_reference_percent"]
+            return (
+                "DRAM Read **{:.2f}%** / Write **{:.2f}%**；"
+                "1:1 Copy reference {:.2f}%（diagnostic）"
+            ).format(read, write, copy_reference)
+        if diag["dram_read_fraction_percent"] >= 60.0:
+            return "DRAM Read **{:.2f}%**（Write {:.2f}%）".format(read, write)
+        return "DRAM Write **{:.2f}%**（Read {:.2f}%）".format(write, read)
+
+    def resource_cell(phase, row):
+        if phase in ("fc1", "fc2"):
+            return (
+                "TC Useful **{:.2f}%** / Executed **{:.2f}%**；{}；Padding **{:.2f}%**"
+            ).format(
+                row["calibrated_useful_ceiling_efficiency_percent"],
+                row["calibrated_executed_ceiling_efficiency_percent"],
+                dram_cell(row),
+                row["padding_efficiency_percent"],
+            )
+        if "ncu_diagnostic" in row:
+            return dram_cell(row)
+        return "Latency / SOTA ceiling **unavailable**"
+
+    def optimization_meaning(phase):
+        return {
+            "prefix": "占比仅 2.81%；暂不为它补 calibration。",
+            "expand_quant": (
+                "未接近 streaming DRAM roof；拆开 Route 与 Quant/Pack，检查 irregular access、"
+                "量化计算和并行度。"
+            ),
+            "gemm_metadata": "占比仅 0.12%；不是当前优先项。",
+            "fc1": (
+                "现有证据未见 TC 或 DRAM 单项逼近 ceiling；下一步区分计算调度与权重读取。"
+            ),
+            "activation_requant": (
+                "未接近 DRAM Read roof；优先检查 ALU/SFU、量化长指令、局部性与并行度。"
+            ),
+            "fc2": (
+                "1:1 copy reference 提示 mixed-R/W traffic 值得调查；需 ratio-matched "
+                "standalone 才能与 TC 优化排序。"
+            ),
+            "finalize": (
+                "已接近 DRAM Read roof；优先减少读取量、改善 locality 或与前级融合。"
+            ),
+        }[phase]
 
     lines = [
         "# exp_024：CUTLASS Chain 逐算子性能上界",
@@ -616,16 +688,17 @@ def render(model):
         ),
         "",
         (
-            "非 GEMM op 不能套 MFU。基于 NCU physical bytes 与 exp_026 directional DRAM roof 的"
-            "投影只作为资源诊断：Route/Q0/Pack 为 **{}**，SwiGLU/Q1 为 **{}**，Finalize 为 **{}**。"
+            "第 3 节覆盖全部 7 个 op。非 GEMM 不套 MFU：Route/Q0/Pack 为 {}，"
+            "SwiGLU/Q1 为 {}，Finalize 为 {}。"
         ).format(
-            dram_diagnostic(route),
-            dram_diagnostic(activation),
-            dram_diagnostic(finalize),
+            dram_cell(route),
+            dram_cell(activation),
+            dram_cell(finalize),
         ),
         "",
         (
             "硬件 ceiling verdict 为 **accept**；operator SOTA distance 仍为 unavailable。"
+            "各资源百分比不能相加或合成一个总分；DRAM 结论是 NCU replay 上的 scoped diagnostic。"
             "计算分母来自同一 RTX 5KP SKU、不同 GPU UUID 的实测迁移，不能表述为同卡同窗测量。"
         ),
         "",
@@ -645,27 +718,12 @@ def render(model):
             authority["calibration_gpu_uuid"],
         ),
         "",
-        "| M | E2E benchmark | NSys active union | NSys / benchmark |",
-        "|---:|---:|---:|---:|",
+        "| M | 在模型中的作用 | 逐 op 证据 |",
+        "|---:|---|---|",
+        "| 256 | 小规模 / padding 压力场景 | 可用 |",
+        "| 1024 | 整体 benchmark sanity | 不可用；禁止插值 |",
+        "| 8192 | Prefill 主优化场景 | 可用；第 3 节的主判定 case |",
     ]
-    for m in BENCHMARK_CASES:
-        if m in cases:
-            case = cases[m]
-            lines.append(
-                "| {} | {:.3f} μs | {:.3f} μs | {:.2f}% |".format(
-                    m,
-                    case["overall_benchmark_us"],
-                    case["timeline_active_union_us"],
-                    case["timeline_vs_benchmark_percent"],
-                )
-            )
-        else:
-            row = model["overall_only_cases"][0]
-            lines.append(
-                "| 1024 | {:.3f} μs | unavailable | unavailable |".format(
-                    row["overall_benchmark_us"]
-                )
-            )
 
     lines.extend(
         [
@@ -708,97 +766,47 @@ def render(model):
     lines.extend(
         [
             "",
-            "## 3. M8192 逐算子 ceiling 百分比",
+            "## 3. M8192 各 op 的资源 ceiling 达成率",
             "",
-            "| Op | Hardware ceiling efficiency | Padding | SOTA distance |",
-            "|---|---|---:|---|",
+            "| Op | 时间占比 | 已校准资源达成率 | 对优化的含义 |",
+            "|---|---:|---|---|",
         ]
     )
     rows = by_phase[8192]
-    for phase in PHASE_LABELS:
+    for phase in DISPLAY_PHASES:
         row = rows[phase]
-        if phase in ("fc1", "fc2"):
-            hardware = "{:.2f}% Useful / {:.2f}% Executed（calibrated TC）".format(
-                row["calibrated_useful_ceiling_efficiency_percent"],
-                row["calibrated_executed_ceiling_efficiency_percent"],
-            )
-            padding = "{:.2f}%".format(row["padding_efficiency_percent"])
-        else:
-            hardware = "complete op ceiling unavailable; DRAM {}".format(
-                dram_diagnostic(row)
-            )
-            padding = "—"
         lines.append(
-            "| {} | {} | {} | unavailable |".format(row["label"], hardware, padding)
+            "| {} | {:.2f}% | {} | {} |".format(
+                row["label"],
+                row["share_percent"],
+                resource_cell(phase, row),
+                optimization_meaning(phase),
+            )
         )
 
     lines.extend(
         [
             "",
             (
-                "DRAM resource efficiency = `max(R/BWread, W/BWwrite, (R+W)/BWcopy) / NCU duration`。"
-                "它只说明 physical DRAM 资源投影；大于 100% 直接标 invalid，不截断，也不称完整 op ceiling。"
+                "这里没有把异构资源压成一个总分：Tensor Core、DRAM Read、DRAM Write 使用各自分母。"
+                "read/write mix 在 40%–60% 时只显示 1:1 copy diagnostic reference；"
+                "没有 ratio-matched calibration 时不能把它称为 ceiling。"
+                "因此 read-heavy Finalize 使用 DRAM Read 达成率，而不是错误的 copy roof。"
             ),
             "",
-            "## 4. GEMM ceiling 达成率",
-            "",
-            "| M | GEMM | Calibrated Useful | Calibrated Executed | Padding | Nominal Useful / Executed（次级） | TC active（诊断） |",
-            "|---:|---|---:|---:|---:|---:|---:|",
-        ]
-    )
-    for m in CASES:
-        for phase in ("fc1", "fc2"):
-            row = by_phase[m][phase]
-            lines.append(
-                "| {} | {} | {:.2f}% | {:.2f}% | {:.2f}% | {:.2f}% / {:.2f}% | {:.2f}% |".format(
-                    m,
-                    row["label"],
-                    row["calibrated_useful_ceiling_efficiency_percent"],
-                    row["calibrated_executed_ceiling_efficiency_percent"],
-                    row["padding_efficiency_percent"],
-                    row["nominal_useful_mfu_percent"],
-                    row["nominal_executed_mfu_percent"],
-                    row["tensor_pipe_active_percent"],
-                )
-            )
-
-    lines.extend(
-        [
-            "",
             (
-                "主分母是 exp_026 对 exact `{}` 指令的 full-card ~100 ms calibrated window；"
-                "由于 exp_002 没有同 launch cycle counter，本报告没有使用 per-cycle normalization。"
-                "Nominal 百分比只作架构次级参照；`TC active` 分母不同，也只并列诊断。"
+                "TC 主分母是 exp_026 对 exact `{}` 指令的 full-card calibrated window。"
+                "DRAM 百分比来自 NCU physical bytes / NCU duration 与 exp_026 directional roof，"
+                "只用于定位接近哪个资源 ceiling，不等同于完整 mixed-op efficiency。"
             ).format(authority["instruction"]),
             "",
-            (
-                "M256 的 {:.2f}% padding efficiency 使 Nominal Useful MFU 为 {:.2f}%–{:.2f}%，"
-                "而 Nominal Executed MFU 为 {:.2f}%–{:.2f}%；padding 是 Useful MFU 与 Executed MFU "
-                "差距的主要来源，但这不等同于证明它是相对 SOTA latency gap 的首要原因。"
-            ).format(
-                by_phase[256]["fc1"]["padding_efficiency_percent"],
-                min(
-                    by_phase[256]["fc1"]["nominal_useful_mfu_percent"],
-                    by_phase[256]["fc2"]["nominal_useful_mfu_percent"],
-                ),
-                max(
-                    by_phase[256]["fc1"]["nominal_useful_mfu_percent"],
-                    by_phase[256]["fc2"]["nominal_useful_mfu_percent"],
-                ),
-                min(
-                    by_phase[256]["fc1"]["nominal_executed_mfu_percent"],
-                    by_phase[256]["fc2"]["nominal_executed_mfu_percent"],
-                ),
-                max(
-                    by_phase[256]["fc1"]["nominal_executed_mfu_percent"],
-                    by_phase[256]["fc2"]["nominal_executed_mfu_percent"],
-                ),
-            ),
+            "## 4. 优化优先级与最小下一步",
             "",
-            "## 5. 未闭合项",
-            "",
-            "1. 用 contract-equivalent、独立实现测 FC1/FC2 grouped-GEMM SOTA；在此之前不报告 SOTA gap。",
-            "2. Route/Q0/Pack、SwiGLU/Q1、Finalize 仍需同 layout/责任边界的 standalone calibration；DRAM resource diagnostic 不能替代它。",
+            "1. **Finalize**：DRAM Read 已达 94.89%，优先减少读取量、改善 reuse/layout。",
+            "2. **FC2**：做 ratio-matched mixed-R/W standalone，确认 traffic 与 TC 哪个更值得先优化。",
+            "3. **FC1**：用最小 standalone 对照区分 TC schedule 与权重读取，不能仅凭当前表选择其中一个。",
+            "4. **Route/Q0/Pack + SwiGLU/Q1**：分别抽取 standalone，检查量化/ALU/SFU/irregular access 与 latency。",
+            "5. **Prefix + GEMM metadata**：合计不足 3%，暂不投入 latency ceiling calibration。",
             "",
             "原始 throughput、公式输入、digest 与逐 op ceiling status 见 [model.json](model.json)。",
         ]

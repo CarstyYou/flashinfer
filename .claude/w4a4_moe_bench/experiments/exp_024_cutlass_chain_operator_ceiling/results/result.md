@@ -4,9 +4,9 @@
 
 M8192 下，相对 5KP 实测 NVFP4 Tensor Core ceiling，FC1 的 Useful / Executed efficiency 为 **47.11% / 58.34%**，FC2 为 **29.44% / 36.45%**；两者 padding efficiency 均为 **80.76%**。
 
-非 GEMM op 不能套 MFU。基于 NCU physical bytes 与 exp_026 directional DRAM roof 的投影只作为资源诊断：Route/Q0/Pack 为 **25.63%（diagnostic，不是完整 op ceiling）**，SwiGLU/Q1 为 **54.13%（diagnostic，不是完整 op ceiling）**，Finalize 为 **unavailable（投影为 114.16% > 100%，scope 不闭合）**。
+第 3 节覆盖全部 7 个 op。非 GEMM 不套 MFU：Route/Q0/Pack 为 DRAM Read **10.50%** / Write **12.94%**；1:1 Copy reference 25.63%（diagnostic），SwiGLU/Q1 为 DRAM Read **44.62%**（Write 3.50%），Finalize 为 DRAM Read **94.89%**（Write 6.55%）。
 
-硬件 ceiling verdict 为 **accept**；operator SOTA distance 仍为 unavailable。计算分母来自同一 RTX 5KP SKU、不同 GPU UUID 的实测迁移，不能表述为同卡同窗测量。
+硬件 ceiling verdict 为 **accept**；operator SOTA distance 仍为 unavailable。各资源百分比不能相加或合成一个总分；DRAM 结论是 NCU replay 上的 scoped diagnostic。计算分母来自同一 RTX 5KP SKU、不同 GPU UUID 的实测迁移，不能表述为同卡同窗测量。
 
 ## 1. Scope 与证据边界
 
@@ -16,11 +16,11 @@ BF16 input → Prefix → Route/Q0/Pack → GEMM metadata → FC1 → SwiGLU/Q1 
 
 逐 op 时间来自 exp_002 canonical NSys；work counter 来自同 rerun 的独立 NCU replay。计算 ceiling 来自 exp_026 vetted `nvfp4-e2m1-vs16` record。consumer GPU `GPU-4a286357-c999-9547-3a04-25961b1ffd08` 与 calibration GPU `GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522` UUID 不同；二者同为 RTX 5KP、110 SM，因此这里只接受 same-SKU transfer。
 
-| M | E2E benchmark | NSys active union | NSys / benchmark |
-|---:|---:|---:|---:|
-| 256 | 550.739 μs | 509.693 μs | 92.55% |
-| 1024 | 577.220 μs | unavailable | unavailable |
-| 8192 | 1665.779 μs | 1662.108 μs | 99.78% |
+| M | 在模型中的作用 | 逐 op 证据 |
+|---:|---|---|
+| 256 | 小规模 / padding 压力场景 | 可用 |
+| 1024 | 整体 benchmark sanity | 不可用；禁止插值 |
+| 8192 | Prefill 主优化场景 | 可用；第 3 节的主判定 case |
 
 ## 2. 各 op 时间与占比
 
@@ -36,34 +36,28 @@ BF16 input → Prefix → Route/Q0/Pack → GEMM metadata → FC1 → SwiGLU/Q1 
 
 占比分母是全部 kernel interval 的 active union。相邻 launch 存在 PDL overlap，所以各行 duration/share 不是互斥分区；M256 / M8192 的 share 合计为 **100.3076% / 100.3138%**，cross-category overlap 为 **1.568 / 5.216 μs**，不重新归一化。
 
-## 3. M8192 逐算子 ceiling 百分比
+## 3. M8192 各 op 的资源 ceiling 达成率
 
-| Op | Hardware ceiling efficiency | Padding | SOTA distance |
-|---|---|---:|---|
-| Route/Q0/Pack | complete op ceiling unavailable; DRAM 25.63%（diagnostic，不是完整 op ceiling） | — | unavailable |
-| FC1 | 47.11% Useful / 58.34% Executed（calibrated TC） | 80.76% | unavailable |
-| SwiGLU/Q1 | complete op ceiling unavailable; DRAM 54.13%（diagnostic，不是完整 op ceiling） | — | unavailable |
-| FC2 | 29.44% Useful / 36.45% Executed（calibrated TC） | 80.76% | unavailable |
-| Finalize | complete op ceiling unavailable; DRAM unavailable（投影为 114.16% > 100%，scope 不闭合） | — | unavailable |
+| Op | 时间占比 | 已校准资源达成率 | 对优化的含义 |
+|---|---:|---|---|
+| Prefix | 2.81% | Latency / SOTA ceiling **unavailable** | 占比仅 2.81%；暂不为它补 calibration。 |
+| Route/Q0/Pack | 14.78% | DRAM Read **10.50%** / Write **12.94%**；1:1 Copy reference 25.63%（diagnostic） | 未接近 streaming DRAM roof；拆开 Route 与 Quant/Pack，检查 irregular access、量化计算和并行度。 |
+| GEMM metadata | 0.12% | Latency / SOTA ceiling **unavailable** | 占比仅 0.12%；不是当前优先项。 |
+| FC1 | 30.69% | TC Useful **47.11%** / Executed **58.34%**；DRAM Read **58.65%**（Write 18.35%）；Padding **80.76%** | 现有证据未见 TC 或 DRAM 单项逼近 ceiling；下一步区分计算调度与权重读取。 |
+| SwiGLU/Q1 | 13.94% | DRAM Read **44.62%**（Write 3.50%） | 未接近 DRAM Read roof；优先检查 ALU/SFU、量化长指令、局部性与并行度。 |
+| FC2 | 24.56% | TC Useful **29.44%** / Executed **36.45%**；DRAM Read **32.35%** / Write **47.32%**；1:1 Copy reference 86.87%（diagnostic）；Padding **80.76%** | 1:1 copy reference 提示 mixed-R/W traffic 值得调查；需 ratio-matched standalone 才能与 TC 优化排序。 |
+| Finalize | 13.41% | DRAM Read **94.89%**（Write 6.55%） | 已接近 DRAM Read roof；优先减少读取量、改善 locality 或与前级融合。 |
 
-DRAM resource efficiency = `max(R/BWread, W/BWwrite, (R+W)/BWcopy) / NCU duration`。它只说明 physical DRAM 资源投影；大于 100% 直接标 invalid，不截断，也不称完整 op ceiling。
+这里没有把异构资源压成一个总分：Tensor Core、DRAM Read、DRAM Write 使用各自分母。read/write mix 在 40%–60% 时只显示 1:1 copy diagnostic reference；没有 ratio-matched calibration 时不能把它称为 ceiling。因此 read-heavy Finalize 使用 DRAM Read 达成率，而不是错误的 copy roof。
 
-## 4. GEMM ceiling 达成率
+TC 主分母是 exp_026 对 exact `OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X` 指令的 full-card calibrated window。DRAM 百分比来自 NCU physical bytes / NCU duration 与 exp_026 directional roof，只用于定位接近哪个资源 ceiling，不等同于完整 mixed-op efficiency。
 
-| M | GEMM | Calibrated Useful | Calibrated Executed | Padding | Nominal Useful / Executed（次级） | TC active（诊断） |
-|---:|---|---:|---:|---:|---:|---:|
-| 256 | FC1 | 2.75% | 43.98% | 6.25% | 2.94% / 46.96% | 47.71% |
-| 256 | FC2 | 1.84% | 29.45% | 6.25% | 1.97% / 31.45% | 33.85% |
-| 8192 | FC1 | 47.11% | 58.34% | 80.76% | 50.31% / 62.30% | 62.69% |
-| 8192 | FC2 | 29.44% | 36.45% | 80.76% | 31.43% / 38.92% | 38.30% |
+## 4. 优化优先级与最小下一步
 
-主分母是 exp_026 对 exact `OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X` 指令的 full-card ~100 ms calibrated window；由于 exp_002 没有同 launch cycle counter，本报告没有使用 per-cycle normalization。Nominal 百分比只作架构次级参照；`TC active` 分母不同，也只并列诊断。
-
-M256 的 6.25% padding efficiency 使 Nominal Useful MFU 为 1.97%–2.94%，而 Nominal Executed MFU 为 31.45%–46.96%；padding 是 Useful MFU 与 Executed MFU 差距的主要来源，但这不等同于证明它是相对 SOTA latency gap 的首要原因。
-
-## 5. 未闭合项
-
-1. 用 contract-equivalent、独立实现测 FC1/FC2 grouped-GEMM SOTA；在此之前不报告 SOTA gap。
-2. Route/Q0/Pack、SwiGLU/Q1、Finalize 仍需同 layout/责任边界的 standalone calibration；DRAM resource diagnostic 不能替代它。
+1. **Finalize**：DRAM Read 已达 94.89%，优先减少读取量、改善 reuse/layout。
+2. **FC2**：做 ratio-matched mixed-R/W standalone，确认 traffic 与 TC 哪个更值得先优化。
+3. **FC1**：用最小 standalone 对照区分 TC schedule 与权重读取，不能仅凭当前表选择其中一个。
+4. **Route/Q0/Pack + SwiGLU/Q1**：分别抽取 standalone，检查量化/ALU/SFU/irregular access 与 latency。
+5. **Prefix + GEMM metadata**：合计不足 3%，暂不投入 latency ceiling calibration。
 
 原始 throughput、公式输入、digest 与逐 op ceiling status 见 [model.json](model.json)。

@@ -33,11 +33,11 @@ Builder 只读消费这些 accepted artifacts；不重跑 benchmark、NSys 或 N
 
 | Node | 任务类型 | 主模型 |
 |---|---|---|
-| Route/Q0/Pack | route + quant + data transform | logical values/s、logical payload GB/s；hardware/SOTA roof 必须有独立 authority |
-| FC1 | Tensor Core grouped GEMM | calibrated Useful/Executed ceiling percentage、padding efficiency；raw rate 下沉 model |
-| SwiGLU/Q1 | elementwise + quant | elements/s、logical payload GB/s；不强行套 MFU |
-| FC2 | Tensor Core grouped GEMM | calibrated Useful/Executed ceiling percentage、padding efficiency；Nominal MFU 仅作 diagnostic |
-| Finalize | top-k gather/reduction/store | output elements/s、logical payload GB/s；generic DRAM peak 不冒充 reduction roof |
+| Route/Q0/Pack | route + quant + data transform | directional DRAM 百分比；1:1 copy 只作 diagnostic reference |
+| FC1 | Tensor Core grouped GEMM | calibrated TC Useful/Executed、directional DRAM、padding；raw rate 下沉 model |
+| SwiGLU/Q1 | elementwise + quant | DRAM Read/Write 百分比；不强行套 MFU |
+| FC2 | Tensor Core grouped GEMM | calibrated TC Useful/Executed、directional DRAM、padding；ratio 不匹配的 copy 只作 diagnostic |
+| Finalize | top-k gather/reduction/store | read-heavy，使用 DRAM Read 百分比；不把 1:1 copy roof 冒充分母 |
 
 主要公式：
 
@@ -55,6 +55,8 @@ SOTA efficiency = matched independent SOTA time / measured time
 roof；官方架构缩放只作 nominal diagnostic。没有独立 contract-equivalent
 implementation 时，SOTA efficiency 标 `unavailable`，禁止从 CUTLASS 自身时间反向拟合。
 读者报告以 ceiling 百分比为主，TFLOP/s、GB/s 和公式输入仅保存在 model。
+第 3 章必须覆盖完整 op graph；没有合法 ceiling 的 Prefix/metadata 也保留并标
+`unavailable`，不能只展开 GEMM。每行同时给出时间占比、资源达成率和它对下一步优化的含义。
 
 ## 验证
 
@@ -62,6 +64,7 @@ implementation 时，SOTA efficiency 标 `unavailable`，禁止从 CUTLASS 自�
 - `useful work <= executed work`，FC1/FC2 executed sum 必须闭合 operator FP4 tensor ops；
 - M256 作为 padding/fixed-cost regime，M8192 作为 steady-state regime，公式冻结不调参；
 - 所有百分比检查单位、分母与 `>100%` invalid gate；
+- DRAM Read/Write 必须匹配 directional roof；read fraction 在 40%–60% 时也只能显示 1:1 copy diagnostic reference，除非 calibration 的读写比在预先声明的 tolerance 内匹配；禁止取多个不兼容 roof 的 `max`；
 - 报告动笔前运行 data-audit。
 
 ## 输出
