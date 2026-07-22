@@ -4,7 +4,7 @@
 
 M8192 的 graph wall 为 **2156.058 μs**。FC1 / FC2 分别占 **46.61% / 30.15%**，TopK reduce 占 **10.46%**；三者合计 **87.22%**，是当前 chain 的主耗时。
 
-相对同一 5KP GPU UUID 上实测、source-contract-compatible 的 full-card calibrated TC roof，FC1 的 Useful / Executed efficiency 为 **47.74% / 53.57%**，FC2 为 **36.89% / 41.39%**；padding efficiency 为 **89.12%**。由于 target SASS binding 缺失，这些值保持 diagnostic estimate。
+相对同一 5KP GPU UUID 上实测、source-contract-compatible 的 full-card calibrated TC roof，FC1 的 Useful / Executed efficiency 为 **47.74% / 53.57%**，FC2 为 **36.89% / 41.39%**；有效计算占比为 **89.12%**。由于 target SASS binding 缺失，这些值保持 diagnostic estimate。
 
 第 3 节覆盖 FC1、SwiGLU、FC2、TopK reduce 四个主要 op；Routing、Q0、Q1 只保留在时间 accounting。SwiGLU / TopK reduce 的 NCU DRAM throughput 为 **94.60% / 95.67%**，只作为 sibling-GPU launch-local diagnostic。所有 op 的独立同契约 SOTA anchor 仍 unavailable。
 
@@ -43,9 +43,9 @@ M8192 NSys graph wall / exp_001 E2E = **97.41%**；工具与采样协议不同�
 
 | Op | Graph share | 已观测资源达成率 | 对优化的含义 |
 |---|---:|---|---|
-| FC1 | 46.61% | TC: Useful **47.74%** / Executed **53.57%**<br>DRAM throughput: **54.44%**<br>Padding: **89.12%** | 主耗时；现有 TC/DRAM diagnostic 均未逼近 ceiling。<br>下一步：结合 Achieved occupancy 16.57% 调查调度与访存等待。 |
+| FC1 | 46.61% | TC: Useful **47.74%** / Executed **53.57%**<br>DRAM throughput: **54.44%**<br>有效计算占比: **89.12%** | 主耗时；现有 TC/DRAM diagnostic 均未逼近 ceiling。<br>下一步：结合 Achieved occupancy 16.57% 调查调度与访存等待。 |
 | SwiGLU | 5.86% | DRAM throughput: **94.60%** | DRAM throughput 接近上限。<br>下一步：减少 traffic、改善 locality 或融合。 |
-| FC2 | 30.15% | TC: Useful **36.89%** / Executed **41.39%**<br>DRAM throughput: **63.56%**<br>Padding: **89.12%** | DRAM diagnostic 比 TC 更接近上限，但仍未封顶。<br>下一步：结合 Achieved occupancy 16.44% 区分 memory wait 与 compute schedule。 |
+| FC2 | 30.15% | TC: Useful **36.89%** / Executed **41.39%**<br>DRAM throughput: **63.56%**<br>有效计算占比: **89.12%** | DRAM diagnostic 比 TC 更接近上限，但仍未封顶。<br>下一步：结合 Achieved occupancy 16.44% 区分 memory wait 与 compute schedule。 |
 | TopK reduce / finalize | 10.46% | DRAM throughput: **95.67%** | DRAM throughput 接近上限。<br>下一步：减少读流量、优化 reduction/locality 或与前级融合。 |
 
 TC diagnostic 的分母来自 exp_026 中同一 GPU UUID 的 `QMMA.16832.F32.E4M3.E4M3` full-card measured roof。目标 Triton 的 FP8 instruction 目前由 source/dispatch contract 推导，缺少可追溯 target SASS binding，因此不能称 exact MFU。NCU DRAM throughput 来自 sibling GPU，只允许 launch-local diagnostic，不能与 NSys 时间混算或称 complete-op efficiency。

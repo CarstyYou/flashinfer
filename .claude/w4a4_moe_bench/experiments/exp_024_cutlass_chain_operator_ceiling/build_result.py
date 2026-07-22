@@ -670,7 +670,8 @@ def render(model):
     def resource_cell(phase, row):
         if phase in ("fc1", "fc2"):
             return (
-                "TC Useful **{:.2f}%** / Executed **{:.2f}%**；{}；Padding **{:.2f}%**"
+                "TC: Useful **{:.2f}%** / Executed **{:.2f}%**<br>"
+                "{}<br>有效计算占比: **{:.2f}%**"
             ).format(
                 row["calibrated_useful_ceiling_efficiency_percent"],
                 row["calibrated_executed_ceiling_efficiency_percent"],
@@ -710,7 +711,7 @@ def render(model):
         (
             "M8192 下，相对 5KP 实测 NVFP4 Tensor Core ceiling，FC1 的 Useful / Executed "
             "efficiency 为 **{:.2f}% / {:.2f}%**，FC2 为 **{:.2f}% / {:.2f}%**；"
-            "两者 padding efficiency 均为 **{:.2f}%**。"
+            "两者有效计算占比均为 **{:.2f}%**。"
         ).format(
             fc1["calibrated_useful_ceiling_efficiency_percent"],
             fc1["calibrated_executed_ceiling_efficiency_percent"],

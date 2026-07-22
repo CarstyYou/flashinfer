@@ -879,7 +879,7 @@ def render(model):
             return (
                 "TC: Useful **{:.2f}%** / Executed **{:.2f}%**<br>"
                 "DRAM throughput: **{:.2f}%**<br>"
-                "Padding: **{:.2f}%**"
+                "有效计算占比: **{:.2f}%**"
             ).format(
                 row["calibrated_useful_ceiling_efficiency_percent"],
                 row["calibrated_executed_ceiling_efficiency_percent"],
@@ -931,7 +931,7 @@ def render(model):
         (
             "相对同一 5KP GPU UUID 上实测、source-contract-compatible 的 full-card calibrated TC roof，"
             "FC1 的 Useful / Executed efficiency 为 "
-            "**{:.2f}% / {:.2f}%**，FC2 为 **{:.2f}% / {:.2f}%**；padding efficiency 为 **{:.2f}%**。"
+            "**{:.2f}% / {:.2f}%**，FC2 为 **{:.2f}% / {:.2f}%**；有效计算占比为 **{:.2f}%**。"
             "由于 target SASS binding 缺失，这些值保持 diagnostic estimate。"
         ).format(
             operations["fc1"]["calibrated_useful_ceiling_efficiency_percent"],

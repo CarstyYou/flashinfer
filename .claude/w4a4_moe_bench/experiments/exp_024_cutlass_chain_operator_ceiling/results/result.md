@@ -2,7 +2,7 @@
 
 ## 结论
 
-M8192 下，相对 5KP 实测 NVFP4 Tensor Core ceiling，FC1 的 Useful / Executed efficiency 为 **47.11% / 58.34%**，FC2 为 **29.44% / 36.45%**；两者 padding efficiency 均为 **80.76%**。
+M8192 下，相对 5KP 实测 NVFP4 Tensor Core ceiling，FC1 的 Useful / Executed efficiency 为 **47.11% / 58.34%**，FC2 为 **29.44% / 36.45%**；两者有效计算占比均为 **80.76%**。
 
 第 3 节覆盖 5 个主要 op；Prefix 与 GEMM metadata 只保留在时间 accounting。非 GEMM 不套 MFU：Route/Q0/Pack 为 DRAM Read **10.50%** / Write **12.94%**；1:1 Copy reference 25.63%（diagnostic），SwiGLU/Q1 为 DRAM Read **44.62%**（Write 3.50%），Finalize 为 DRAM Read **94.89%**（Write 6.55%）。
 
@@ -41,9 +41,9 @@ BF16 input → Prefix → Route/Q0/Pack → GEMM metadata → FC1 → SwiGLU/Q1 
 | Op | 时间占比 | 已校准资源达成率 | 对优化的含义 |
 |---|---:|---|---|
 | Route/Q0/Pack | 14.78% | DRAM Read **10.50%** / Write **12.94%**；1:1 Copy reference 25.63%（diagnostic） | 未接近 streaming DRAM roof；拆开 Route 与 Quant/Pack，检查 irregular access、量化计算和并行度。 |
-| FC1 | 30.69% | TC Useful **47.11%** / Executed **58.34%**；DRAM Read **58.65%**（Write 18.35%）；Padding **80.76%** | 现有证据未见 TC 或 DRAM 单项逼近 ceiling；下一步区分计算调度与权重读取。 |
+| FC1 | 30.69% | TC: Useful **47.11%** / Executed **58.34%**<br>DRAM Read **58.65%**（Write 18.35%）<br>有效计算占比: **80.76%** | 现有证据未见 TC 或 DRAM 单项逼近 ceiling；下一步区分计算调度与权重读取。 |
 | SwiGLU/Q1 | 13.94% | DRAM Read **44.62%**（Write 3.50%） | 未接近 DRAM Read roof；优先检查 ALU/SFU、量化长指令、局部性与并行度。 |
-| FC2 | 24.56% | TC Useful **29.44%** / Executed **36.45%**；DRAM Read **32.35%** / Write **47.32%**；1:1 Copy reference 86.87%（diagnostic）；Padding **80.76%** | 1:1 copy reference 提示 mixed-R/W traffic 值得调查；需 ratio-matched standalone 才能与 TC 优化排序。 |
+| FC2 | 24.56% | TC: Useful **29.44%** / Executed **36.45%**<br>DRAM Read **32.35%** / Write **47.32%**；1:1 Copy reference 86.87%（diagnostic）<br>有效计算占比: **80.76%** | 1:1 copy reference 提示 mixed-R/W traffic 值得调查；需 ratio-matched standalone 才能与 TC 优化排序。 |
 | Finalize | 13.41% | DRAM Read **94.89%**（Write 6.55%） | 已接近 DRAM Read roof；优先减少读取量、改善 locality 或与前级融合。 |
 
 这里没有把异构资源压成一个总分：Tensor Core、DRAM Read、DRAM Write 使用各自分母。read/write mix 在 40%–60% 时只显示 1:1 copy diagnostic reference；没有 ratio-matched calibration 时不能把它称为 ceiling。因此 read-heavy Finalize 使用 DRAM Read 达成率，而不是错误的 copy roof。
