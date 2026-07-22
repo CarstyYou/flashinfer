@@ -71,6 +71,16 @@ DISPLAY_PHASES = (
     "finalize",
 )
 
+CEILING_REPORTING_CASE = 8192
+CEILING_MIN_SHARE_PERCENT = 3.0
+CEILING_PHASES = (
+    "expand_quant",
+    "fc1",
+    "activation_requant",
+    "fc2",
+    "finalize",
+)
+
 
 def load_json(path):
     with path.open(encoding="utf-8") as handle:
@@ -518,6 +528,18 @@ def build():
             }
         )
 
+    primary_case = next(row for row in cases if row["m"] == CEILING_REPORTING_CASE)
+    primary_rows = {row["phase"]: row for row in primary_case["phases"]}
+    selected_ceiling_phases = tuple(
+        phase
+        for phase in DISPLAY_PHASES
+        if primary_rows[phase]["share_percent"] >= CEILING_MIN_SHARE_PERCENT
+    )
+    require(
+        selected_ceiling_phases == CEILING_PHASES,
+        "reader ceiling phase selection drift",
+    )
+
     return {
         "schema": "operator-performance-ceiling.v1",
         "subject": {
@@ -536,6 +558,18 @@ def build():
                 "FC1/FC2 have calibrated Tensor Core percentages, and every NCU-profiled "
                 "material op has scoped directional DRAM percentages; mixed complete-op "
                 "ceilings and independent SOTA anchors remain unavailable"
+            ),
+        },
+        "reader_reporting_policy": {
+            "primary_case_m": CEILING_REPORTING_CASE,
+            "minimum_share_percent": CEILING_MIN_SHARE_PERCENT,
+            "ceiling_phases": list(CEILING_PHASES),
+            "accounting_only_phases": [
+                phase for phase in DISPLAY_PHASES if phase not in CEILING_PHASES
+            ],
+            "rule": (
+                "all phases remain in time accounting; phases below the primary-case "
+                "share threshold are omitted from reader-facing ceiling analysis"
             ),
         },
         "hardware_authority": {
@@ -649,12 +683,10 @@ def render(model):
 
     def optimization_meaning(phase):
         return {
-            "prefix": "占比仅 2.81%；暂不为它补 calibration。",
             "expand_quant": (
                 "未接近 streaming DRAM roof；拆开 Route 与 Quant/Pack，检查 irregular access、"
                 "量化计算和并行度。"
             ),
-            "gemm_metadata": "占比仅 0.12%；不是当前优先项。",
             "fc1": (
                 "现有证据未见 TC 或 DRAM 单项逼近 ceiling；下一步区分计算调度与权重读取。"
             ),
@@ -688,7 +720,8 @@ def render(model):
         ),
         "",
         (
-            "第 3 节覆盖全部 7 个 op。非 GEMM 不套 MFU：Route/Q0/Pack 为 {}，"
+            "第 3 节覆盖 5 个主要 op；Prefix 与 GEMM metadata 只保留在时间 accounting。"
+            "非 GEMM 不套 MFU：Route/Q0/Pack 为 {}，"
             "SwiGLU/Q1 为 {}，Finalize 为 {}。"
         ).format(
             dram_cell(route),
@@ -766,14 +799,14 @@ def render(model):
     lines.extend(
         [
             "",
-            "## 3. M8192 各 op 的资源 ceiling 达成率",
+            "## 3. M8192 主要 op 的资源 ceiling 达成率",
             "",
             "| Op | 时间占比 | 已校准资源达成率 | 对优化的含义 |",
             "|---|---:|---|---|",
         ]
     )
     rows = by_phase[8192]
-    for phase in DISPLAY_PHASES:
+    for phase in CEILING_PHASES:
         row = rows[phase]
         lines.append(
             "| {} | {:.2f}% | {} | {} |".format(
@@ -806,7 +839,6 @@ def render(model):
             "2. **FC2**：做 ratio-matched mixed-R/W standalone，确认 traffic 与 TC 哪个更值得先优化。",
             "3. **FC1**：用最小 standalone 对照区分 TC schedule 与权重读取，不能仅凭当前表选择其中一个。",
             "4. **Route/Q0/Pack + SwiGLU/Q1**：分别抽取 standalone，检查量化/ALU/SFU/irregular access 与 latency。",
-            "5. **Prefix + GEMM metadata**：合计不足 3%，暂不投入 latency ceiling calibration。",
             "",
             "原始 throughput、公式输入、digest 与逐 op ceiling status 见 [model.json](model.json)。",
         ]

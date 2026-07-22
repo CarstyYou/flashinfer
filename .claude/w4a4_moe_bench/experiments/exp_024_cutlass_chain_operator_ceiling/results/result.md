@@ -4,7 +4,7 @@
 
 M8192 下，相对 5KP 实测 NVFP4 Tensor Core ceiling，FC1 的 Useful / Executed efficiency 为 **47.11% / 58.34%**，FC2 为 **29.44% / 36.45%**；两者 padding efficiency 均为 **80.76%**。
 
-第 3 节覆盖全部 7 个 op。非 GEMM 不套 MFU：Route/Q0/Pack 为 DRAM Read **10.50%** / Write **12.94%**；1:1 Copy reference 25.63%（diagnostic），SwiGLU/Q1 为 DRAM Read **44.62%**（Write 3.50%），Finalize 为 DRAM Read **94.89%**（Write 6.55%）。
+第 3 节覆盖 5 个主要 op；Prefix 与 GEMM metadata 只保留在时间 accounting。非 GEMM 不套 MFU：Route/Q0/Pack 为 DRAM Read **10.50%** / Write **12.94%**；1:1 Copy reference 25.63%（diagnostic），SwiGLU/Q1 为 DRAM Read **44.62%**（Write 3.50%），Finalize 为 DRAM Read **94.89%**（Write 6.55%）。
 
 硬件 ceiling verdict 为 **accept**；operator SOTA distance 仍为 unavailable。各资源百分比不能相加或合成一个总分；DRAM 结论是 NCU replay 上的 scoped diagnostic。计算分母来自同一 RTX 5KP SKU、不同 GPU UUID 的实测迁移，不能表述为同卡同窗测量。
 
@@ -36,13 +36,11 @@ BF16 input → Prefix → Route/Q0/Pack → GEMM metadata → FC1 → SwiGLU/Q1 
 
 占比分母是全部 kernel interval 的 active union。相邻 launch 存在 PDL overlap，所以各行 duration/share 不是互斥分区；M256 / M8192 的 share 合计为 **100.3076% / 100.3138%**，cross-category overlap 为 **1.568 / 5.216 μs**，不重新归一化。
 
-## 3. M8192 各 op 的资源 ceiling 达成率
+## 3. M8192 主要 op 的资源 ceiling 达成率
 
 | Op | 时间占比 | 已校准资源达成率 | 对优化的含义 |
 |---|---:|---|---|
-| Prefix | 2.81% | Latency / SOTA ceiling **unavailable** | 占比仅 2.81%；暂不为它补 calibration。 |
 | Route/Q0/Pack | 14.78% | DRAM Read **10.50%** / Write **12.94%**；1:1 Copy reference 25.63%（diagnostic） | 未接近 streaming DRAM roof；拆开 Route 与 Quant/Pack，检查 irregular access、量化计算和并行度。 |
-| GEMM metadata | 0.12% | Latency / SOTA ceiling **unavailable** | 占比仅 0.12%；不是当前优先项。 |
 | FC1 | 30.69% | TC Useful **47.11%** / Executed **58.34%**；DRAM Read **58.65%**（Write 18.35%）；Padding **80.76%** | 现有证据未见 TC 或 DRAM 单项逼近 ceiling；下一步区分计算调度与权重读取。 |
 | SwiGLU/Q1 | 13.94% | DRAM Read **44.62%**（Write 3.50%） | 未接近 DRAM Read roof；优先检查 ALU/SFU、量化长指令、局部性与并行度。 |
 | FC2 | 24.56% | TC Useful **29.44%** / Executed **36.45%**；DRAM Read **32.35%** / Write **47.32%**；1:1 Copy reference 86.87%（diagnostic）；Padding **80.76%** | 1:1 copy reference 提示 mixed-R/W traffic 值得调查；需 ratio-matched standalone 才能与 TC 优化排序。 |
@@ -58,6 +56,5 @@ TC 主分母是 exp_026 对 exact `OMMA.SF.16864.F32.E2M1.E2M1.UE4M3.4X` 指令�
 2. **FC2**：做 ratio-matched mixed-R/W standalone，确认 traffic 与 TC 哪个更值得先优化。
 3. **FC1**：用最小 standalone 对照区分 TC schedule 与权重读取，不能仅凭当前表选择其中一个。
 4. **Route/Q0/Pack + SwiGLU/Q1**：分别抽取 standalone，检查量化/ALU/SFU/irregular access 与 latency。
-5. **Prefix + GEMM metadata**：合计不足 3%，暂不投入 latency ceiling calibration。
 
 原始 throughput、公式输入、digest 与逐 op ceiling status 见 [model.json](model.json)。

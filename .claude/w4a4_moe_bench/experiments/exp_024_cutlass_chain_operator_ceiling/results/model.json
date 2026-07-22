@@ -603,6 +603,22 @@
       "reason": "accepted exp_002 evidence has no per-op NSys/NCU row for M1024"
     }
   ],
+  "reader_reporting_policy": {
+    "accounting_only_phases": [
+      "prefix",
+      "gemm_metadata"
+    ],
+    "ceiling_phases": [
+      "expand_quant",
+      "fc1",
+      "activation_requant",
+      "fc2",
+      "finalize"
+    ],
+    "minimum_share_percent": 3.0,
+    "primary_case_m": 8192,
+    "rule": "all phases remain in time accounting; phases below the primary-case share threshold are omitted from reader-facing ceiling analysis"
+  },
   "schema": "operator-performance-ceiling.v1",
   "subject": {
     "arm": "cutlass_bf16_chain",

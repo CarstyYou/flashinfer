@@ -55,14 +55,16 @@ SOTA efficiency = matched independent SOTA time / measured time
 roof；官方架构缩放只作 nominal diagnostic。没有独立 contract-equivalent
 implementation 时，SOTA efficiency 标 `unavailable`，禁止从 CUTLASS 自身时间反向拟合。
 读者报告以 ceiling 百分比为主，TFLOP/s、GB/s 和公式输入仅保存在 model。
-第 3 章必须覆盖完整 op graph；没有合法 ceiling 的 Prefix/metadata 也保留并标
-`unavailable`，不能只展开 GEMM。每行同时给出时间占比、资源达成率和它对下一步优化的含义。
+完整 op graph 必须保留在时间 accounting。第 3 章覆盖 M8192 占比不低于 3% 的
+material op；Prefix/metadata 等低占比节点不强制建立 ceiling。每行同时给出时间占比、
+资源达成率和它对下一步优化的含义，不能只展开 GEMM。
 
 ## 验证
 
 - 七类 node 的 interval union 必须闭合到 Chain active union；raw duration/share 因 PDL overlap 可以超过 100%，必须显式登记 overlap 且不得重新归一化；
 - `useful work <= executed work`，FC1/FC2 executed sum 必须闭合 operator FP4 tensor ops；
 - M256 作为 padding/fixed-cost regime，M8192 作为 steady-state regime，公式冻结不调参；
+- reader ceiling threshold 固定为 M8192 share ≥3%；低于阈值的真实节点仍保留在第 2 章 accounting；
 - 所有百分比检查单位、分母与 `>100%` invalid gate；
 - DRAM Read/Write 必须匹配 directional roof；read fraction 在 40%–60% 时也只能显示 1:1 copy diagnostic reference，除非 calibration 的读写比在预先声明的 tolerance 内匹配；禁止取多个不兼容 roof 的 `max`；
 - 报告动笔前运行 data-audit。
