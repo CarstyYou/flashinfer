@@ -48,12 +48,38 @@
     "remote_path": "/lustre/raplab/client/xiy/workspace/flashinfer_exp008_748ad/.claude/w4a4_moe_bench/experiments/exp_022_scatter_vector_s2r/results/raw/correctness.json",
     "sha256": "32d2e7eb1be44f5e7a9930e60601f087d1bb8ebd52bdbc6862ccde1a6c8fcb1c"
   },
+  "lightweight_phase_report": {
+    "scope": "M8192 Current Opt FP4 vs SGLang Triton FP8 time/share only; no NCU",
+    "current_opt": {
+      "source_sha256": "db2ea34071b5dddd8ae6a366a600e412ffa7b872438b2e55f09b037e2764977a",
+      "control_capture_sha256": "df1815a0e12683717432c85f4bbe4a3b725671e92c7f419a030b713dd74e6560",
+      "probe_capture_sha256": "c21e7f153c51b7e15c302573057cec763a6b2f3c4b9012f508b316609473111e",
+      "control_event_median_us": 1197.983980178833,
+      "probe_event_median_us": 1191.7439699172974,
+      "probe_control_bias_percent": -0.5208759353029224
+    },
+    "triton_reused_evidence": {
+      "path": "../../exp_017_opt_vs_triton_phase_share/results/evidence.json",
+      "sha256": "fefa82f3cd17dbd98b68b456de384188c1be06d70eafb5c8b32f2a72843201fb",
+      "capture_manifest_sha256": "e843e59e49ed763e18819fbe3caf6849cf3a3979ff907344c782b3beef70bacf"
+    },
+    "checks": {
+      "same_m8192_fixture": true,
+      "same_gpu_uuid": true,
+      "same_application_clock_mhz": true,
+      "five_replays_each": true,
+      "opt_correctness_and_occurrence_gates": true,
+      "opt_probe_control_abs_le_5_percent": true,
+      "normalized_phase_shares_close_to_100_percent": true
+    }
+  },
   "retained_artifacts": [
     "../plan.md",
     "../comparison_registry.json",
     "../build_candidate.py",
     "../profile_target.py",
     "result.md",
+    "bottleneck.md",
     "raw/benchmark_raw.json",
     "raw/correctness_summary.json",
     "raw/static_sass_gate.json",
