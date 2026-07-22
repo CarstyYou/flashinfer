@@ -214,8 +214,8 @@ def capture(args: argparse.Namespace) -> dict[str, Any]:
     fixture = runner.nvfp4.RoutedFixture(args.m, x, ids, routing, fixture_manifest)
     weights = runner.nvfp4.make_canonical_weights(device=device, seed=runner.SEED)
     reference = runner.nvfp4.reference_moe_nvfp4(fixture, weights).detach()
-    captured = runner.fp4_worker.build_arm(
-        argparse.Namespace(m=args.m, device_index=args.device_index), fixture, weights
+    captured = runner.fp4_worker.build_w4a4_arm(
+        m=args.m, fixture=fixture, weights=weights
     )
 
     eager_output = captured.eager().detach()
@@ -249,7 +249,7 @@ def capture(args: argparse.Namespace) -> dict[str, Any]:
         raise RuntimeError("eager correctness/occurrence gate failed")
 
     captured.capture()
-    flush, flush_bytes = runner.fp4_worker.make_flusher(device, L2_FLUSH_BYTES)
+    flush, flush_bytes = runner.fp4_worker.make_l2_flusher(device, L2_FLUSH_BYTES)
     for _ in range(args.warmup):
         reset_phase_storage(workspace)
         flush()

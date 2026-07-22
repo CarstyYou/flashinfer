@@ -126,7 +126,7 @@ def static_identity(flashinfer_root: Path, arm: str) -> dict[str, Any]:
         "dispatch": EXPECTED_DISPATCH_SHA256,
         "wrapper": EXPECTED_WRAPPER_SHA256,
         "exp018_runner": (
-            "20b22467a314bc0ffc1f6a3e5dd4d30eb9af9ca9d26ff77996cd9605d798080c"
+            "1f2fc64e8db7adf6c95c56c4467e05eb47f4d82f54d4b3c2fdebf6b35026adc6"
         ),
     }
     observed = {name: file_sha256(path) for name, path in paths.items()}
@@ -235,7 +235,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     weights = context["weights"]
     reference = benchmark.nvfp4.reference_moe_nvfp4(routed, weights)
     weight_identity = benchmark.normalized_weight_identity(args.arm, weights)
-    captured = benchmark.fp4_worker.build_arm(args, routed, weights)
+    captured = benchmark.fp4_worker.build_w4a4_arm(
+        m=args.m, fixture=routed, weights=weights
+    )
 
     eager = gate_output(benchmark, args, captured, routed, captured.eager(), reference)
     if not eager["gate_pass"]:
@@ -310,6 +312,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "m": args.m,
         "case": {"E": 256, "H": 2048, "I_tp": 512, "topk": 8},
         "source_identity": {"locked_files": identity, "runtime": source},
+        "harness_sources": benchmark.harness_source_manifest(args.arm),
         "fixture_identity": fixtures,
         "fixture_manifest": fixture,
         "weight_identity": weight_identity,
@@ -332,7 +335,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "symbol": EXPECTED_SYMBOL,
         },
         "jit_identity": jit,
-        "compile_identity": benchmark.fp4_worker._compile_identity(),
+        "compile_identity": benchmark.fp4_worker.dynamic_compile_identity(
+            expected_max_active_clusters=110
+        ),
         "runtime": runtime,
         "telemetry_before": telemetry_before,
         "telemetry_after": telemetry_after,

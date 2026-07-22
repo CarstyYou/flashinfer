@@ -10,23 +10,27 @@ processes.
 from __future__ import annotations
 
 import argparse
-import hashlib
-import importlib
-import importlib.abc
-import importlib.util
 import json
 import os
 import platform
 import subprocess
 import sys
 import time
-from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Callable, Sequence
+from typing import Any, Sequence
 
 import torch
 
-from exp005_common import (
+BENCH_ROOT = Path(__file__).resolve().parents[2]
+if str(BENCH_ROOT) not in sys.path:
+    sys.path.insert(0, str(BENCH_ROOT))
+
+from breakdown_harness import case as canonical_case  # noqa: E402
+from breakdown_harness import artifacts as harness_artifacts  # noqa: E402
+from breakdown_harness.backends import cutedsl as cutedsl_backend  # noqa: E402
+from breakdown_harness.backends import cutedsl_workspace  # noqa: E402
+import exp005_common as experiment_common  # noqa: E402
+from exp005_common import (  # noqa: E402
     ALL_FIXTURES,
     BASELINE,
     CANDIDATE,
@@ -62,7 +66,7 @@ from exp005_common import (
 
 
 ROOT = Path(__file__).resolve().parent
-FIXTURE_PATH = ROOT.parent / "exp_002_fused_vs_chain_dataflow" / "fixture.py"
+FIXTURE_PATH = Path(canonical_case.__file__).resolve()
 
 
 def command_output(command: Sequence[str], *, cwd: Path | None = None) -> str:
@@ -74,21 +78,8 @@ def command_output(command: Sequence[str], *, cwd: Path | None = None) -> str:
         return f"ERROR: {error}"
 
 
-class ExactModuleOverlayFinder(importlib.abc.MetaPathFinder):
-    def __init__(self, overlay: Path):
-        self.overlay = overlay
-
-    def find_spec(self, fullname: str, path=None, target=None):
-        del path, target
-        if fullname != TARGET_MODULE:
-            return None
-        return importlib.util.spec_from_file_location(fullname, self.overlay)
-
-
 def install_overlay(overlay: Path) -> None:
-    if TARGET_MODULE in sys.modules:
-        raise RuntimeError("target module imported before exp_005 overlay installation")
-    sys.meta_path.insert(0, ExactModuleOverlayFinder(overlay))
+    cutedsl_backend.install_overlay(overlay, target_module=TARGET_MODULE)
 
 
 def git(repo: Path, *args: str) -> str:
@@ -132,76 +123,19 @@ def validate_source(repo: Path, overlay: Path, arm: str) -> dict[str, Any]:
 
 
 def configure_source_checkout(repo: Path) -> dict[str, str]:
-    flashinfer = importlib.import_module("flashinfer")
-    imported_root = Path(flashinfer.__file__).resolve().parents[1]
-    if imported_root != repo:
-        raise RuntimeError(f"imported FlashInfer root {imported_root} != {repo}")
-    from flashinfer.jit import env as jit_env
-
-    jit_env.FLASHINFER_CSRC_DIR = repo / "csrc"
-    jit_env.FLASHINFER_INCLUDE_DIR = repo / "include"
-    jit_env.FLASHINFER_AOT_DIR = (
-        jit_env.FLASHINFER_WORKSPACE_DIR / "aot_disabled_for_exp005"
+    return cutedsl_backend.configure_source_checkout(
+        repo,
+        target_module=TARGET_MODULE,
+        aot_dir_name="aot_disabled_for_exp005",
     )
-    jit_env.CUTLASS_INCLUDE_DIRS = [
-        repo / "3rdparty/cutlass/include",
-        repo / "3rdparty/cutlass/tools/util/include",
-    ]
-    jit_env.CCCL_INCLUDE_DIRS = [
-        repo / "3rdparty/cccl/cub",
-        repo / "3rdparty/cccl/libcudacxx/include",
-        repo / "3rdparty/cccl/thrust",
-    ]
-    jit_env.SPDLOG_INCLUDE_DIR = repo / "3rdparty/spdlog/include"
-    target = importlib.import_module(TARGET_MODULE)
-    cutlass = importlib.import_module("cutlass")
-    return {
-        "flashinfer": str(Path(flashinfer.__file__).resolve()),
-        "target_module": str(Path(target.__file__).resolve()),
-        "cutlass_python": str(Path(cutlass.__file__).resolve()),
-        "cutlass_python_version": str(getattr(cutlass, "__version__", "unknown")),
-    }
 
 
 def load_fixture_module():
-    spec = importlib.util.spec_from_file_location("exp005_fixture", FIXTURE_PATH)
-    if spec is None or spec.loader is None:
-        raise RuntimeError(f"cannot load fixture module: {FIXTURE_PATH}")
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
-    return module
+    return canonical_case
 
 
-def tensor_sha256(tensor: torch.Tensor) -> str:
-    value = tensor.detach().contiguous()
-    digest = hashlib.sha256()
-    digest.update(str(value.dtype).encode())
-    digest.update(str(tuple(value.shape)).encode())
-    digest.update(value.view(torch.uint8).cpu().numpy().tobytes())
-    return digest.hexdigest()
-
-
-def tensor_error(actual: torch.Tensor, expected: torch.Tensor) -> dict[str, float]:
-    actual_f = actual.float()
-    expected_f = expected.float()
-    error = actual_f - expected_f
-    cosine = torch.nn.functional.cosine_similarity(
-        actual_f.flatten(), expected_f.flatten(), dim=0
-    )
-    denominator = torch.linalg.vector_norm(expected_f, dim=1).clamp_min(1e-12)
-    token_relative = torch.linalg.vector_norm(error, dim=1) / denominator
-    return {
-        "cosine_loss": max(0.0, 1.0 - float(cosine.item())),
-        "relative_l2": float(
-            (
-                torch.linalg.vector_norm(error)
-                / torch.linalg.vector_norm(expected_f).clamp_min(1e-12)
-            ).item()
-        ),
-        "max_abs": float(error.abs().max().item()),
-        "token_rel_l2_p99": float(torch.quantile(token_relative, 0.99).item()),
-    }
+tensor_sha256 = cutedsl_backend.tensor_sha256
+tensor_error = cutedsl_backend.tensor_error
 
 
 def _gpu_query() -> dict[str, str]:
@@ -318,6 +252,16 @@ def runtime_identity(
         "lease_id": os.environ["KDK_LEASE_ID"],
         "jit_root": str(args.jit_root),
         "source": source,
+        "harness_sources": harness_artifacts.source_manifest(
+            {
+                "artifacts": Path(harness_artifacts.__file__),
+                "case": Path(canonical_case.__file__),
+                "cutedsl": Path(cutedsl_backend.__file__),
+                "cutedsl_workspace": Path(cutedsl_workspace.__file__),
+                "experiment_common": Path(experiment_common.__file__),
+                "runner": Path(__file__),
+            }
+        ),
     }
 
 
@@ -375,180 +319,33 @@ def make_case(args: argparse.Namespace):
     return fixture_module, fixture, weights
 
 
-@dataclass
-class CapturedArm:
-    launch: Callable[[], torch.Tensor]
-    wrapper: Any
-    graph: torch.cuda.CUDAGraph | None = None
-    output: torch.Tensor | None = None
-    start: torch.cuda.Event | None = None
-    end: torch.cuda.Event | None = None
-
-    def eager(self) -> torch.Tensor:
-        self.output = self.launch()
-        torch.cuda.synchronize()
-        return self.output
-
-    def capture(self) -> None:
-        stream = torch.cuda.Stream()
-        stream.wait_stream(torch.cuda.current_stream())
-        with torch.cuda.stream(stream):
-            self.launch()
-        torch.cuda.synchronize()
-        self.graph = torch.cuda.CUDAGraph()
-        self.start = torch.cuda.Event(enable_timing=True, external=True)
-        self.end = torch.cuda.Event(enable_timing=True, external=True)
-        with torch.cuda.graph(self.graph, stream=stream):
-            self.start.record()
-            self.output = self.launch()
-            self.end.record()
-        torch.cuda.synchronize()
-
-    def replay(self, *, sentinel: bool = False) -> tuple[torch.Tensor, float]:
-        if self.graph is None or self.start is None or self.end is None:
-            raise RuntimeError("CUDA graph is not captured")
-        if sentinel:
-            self.wrapper._moe_output.fill_(float("nan"))
-            torch.cuda.synchronize()
-        self.graph.replay()
-        torch.cuda.synchronize()
-        assert self.output is not None
-        return self.output, float(self.start.elapsed_time(self.end))
+CapturedArm = cutedsl_backend.CapturedArm
 
 
 def build_arm(args: argparse.Namespace, fixture: Any, weights: Any) -> CapturedArm:
-    from flashinfer.fused_moe.cute_dsl import B12xMoEWrapper
-
-    values = weights.cutedsl()
-    wrapper = B12xMoEWrapper(
-        num_experts=E,
-        top_k=TOPK,
-        hidden_size=H,
-        intermediate_size=I,
-        use_cuda_graph=True,
-        max_num_tokens=args.m,
-        output_dtype=torch.bfloat16,
-        device=str(fixture.x.device),
-        activation="silu",
-        quant_mode="w4a4",
-        source_format="modelopt",
-    )
-
-    def launch() -> torch.Tensor:
-        return wrapper.run(
-            x=fixture.x,
-            w1_weight=values["w1_fp4"],
-            w1_weight_sf=values["w1_sf"],
-            w2_weight=values["w2_fp4"],
-            w2_weight_sf=values["w2_sf"],
-            token_selected_experts=fixture.topk_ids,
-            token_final_scales=fixture.topk_weights,
-            w1_alpha=values["w1_alpha"],
-            w2_alpha=values["w2_alpha"],
-            fc2_input_scale=values["fc2_input_scale"],
-        )
-
-    return CapturedArm(launch, wrapper)
+    return cutedsl_backend.build_w4a4_arm(m=args.m, fixture=fixture, weights=weights)
 
 
 def _workspace_snapshot(
     wrapper: Any, fixture: Any, *, num_cta_warps: int
 ) -> tuple[dict[str, torch.Tensor], dict[str, Any]]:
-    workspace = wrapper._dynamic_workspace
-    if workspace is None:
-        raise RuntimeError("exp_005 case did not select the dynamic workspace")
-    task_tail = int(workspace.task_tail.item())
-    tensor_names = (
-        "row_counts",
-        "expert_write_rows",
-        "expert_tile_base",
-        "task_ready",
-        "task_expert",
-        "task_m_tile",
-        "task_slice_begin",
-        "task_slice_count",
-        "task_valid_rows",
-        "tile_write_count",
-    )
-    tensors: dict[str, torch.Tensor] = {}
-    for name in tensor_names:
-        value = getattr(workspace, name).detach().cpu().clone()
-        if name.startswith("task_"):
-            value = value[:task_tail]
-        tensors[name] = value
-    scalar_names = (
-        "pair_head",
-        "producers_done_count",
-        "all_work_published",
-        "task_head",
-        "task_tail",
-        "barrier_count",
-        "barrier_epoch",
-    )
-    scalars = {name: int(getattr(workspace, name).item()) for name in scalar_names}
-    expected_rows = torch.bincount(fixture.topk_ids.flatten().long(), minlength=E).cpu()
-    plain: dict[str, Any] = {
-        **{name: value.tolist() for name, value in tensors.items()},
-        **scalars,
-        "routed_rows": int(fixture.m * TOPK),
-    }
-    verification = verify_workspace_evidence(
-        plain,
-        expected_row_counts=expected_rows.tolist(),
+    return cutedsl_backend.snapshot_dynamic_workspace(
+        wrapper,
+        fixture,
         num_cta_warps=num_cta_warps,
-        grid_z=NUM_SMS,
+        schema="exp005.workspace-route-task-evidence.v1",
+        verifier=verify_workspace_evidence,
     )
-    summary = {
-        "schema": "exp005.workspace-route-task-evidence.v1",
-        "workspace_type": type(workspace).__name__,
-        "workspace_capacity": {
-            "routed_rows": int(workspace.routed_rows_capacity),
-            "physical_tiles": int(workspace.physical_tiles_capacity),
-            "tasks": int(workspace.task_capacity),
-        },
-        "scalars": scalars,
-        "tensor_sha256": {
-            name: tensor_sha256(value) for name, value in tensors.items()
-        },
-        "expected_row_counts_sha256": tensor_sha256(expected_rows),
-        "verification": verification,
-    }
-    return tensors, summary
 
 
 def _compile_identity() -> dict[str, Any]:
-    dispatch = importlib.import_module(
-        "flashinfer.fused_moe.cute_dsl.blackwell_sm12x.moe_dispatch"
+    return cutedsl_backend.dynamic_compile_identity(
+        expected_max_active_clusters=MAX_ACTIVE_CLUSTERS
     )
-    entries = list(dispatch._DYNAMIC_KERNEL_CACHE.items())
-    if not entries:
-        raise RuntimeError("dynamic kernel cache is empty after launch")
-    macs = sorted({int(value[1]) for _, value in entries})
-    if macs != [MAX_ACTIVE_CLUSTERS]:
-        raise RuntimeError(
-            f"compiled max_active_clusters drift: {macs} != {[MAX_ACTIVE_CLUSTERS]}"
-        )
-    return {
-        "dynamic_cache_entries": len(entries),
-        "compiled_max_active_clusters": macs,
-        "compiled_object_types": sorted(
-            {type(value[0]).__name__ for _, value in entries}
-        ),
-    }
 
 
 def make_flusher(device: torch.device, bytes_: int = 192 << 20):
-    buffer = torch.empty((bytes_ + 3) // 4, dtype=torch.int32, device=device)
-    state = 0
-
-    def flush() -> None:
-        nonlocal state
-        state += 1
-        buffer.fill_(state)
-        torch.cuda.synchronize()
-
-    flush()
-    return flush, buffer.numel() * buffer.element_size()
+    return cutedsl_backend.make_l2_flusher(device, bytes_)
 
 
 def preparation_path(args: argparse.Namespace) -> Path:

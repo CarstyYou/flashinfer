@@ -18,8 +18,16 @@ CANDIDATE_CUBIN_SHA256 = (
 )
 GPU_UUID = "GPU-ab3d387a-b17d-bd26-a5cf-7968a2129522"
 EXP018_RUNNER_SHA256 = (
-    "a26febd63021a0e3d48a8b4ef26fd3580ed05a1a9b658791694b921993c1621c"
+    "1f2fc64e8db7adf6c95c56c4467e05eb47f4d82f54d4b3c2fdebf6b35026adc6"
 )
+EXPECTED_HARNESS_SHA256 = {
+    "artifacts": "07343ca172de5e4f92255211dd075dfaf18dd98b0a85a14309d8067f2578a438",
+    "case": "a00930d590ccbb6e1404ab5d5a37e1d9ea07e5c1745e51e5b5f3c7c4509ce2c0",
+    "cutedsl": "66f82c53f61ef02cbc0c3e6c2dba19dcb330a9b9b918c274dfb86306d8684f02",
+    "cutedsl_workspace": (
+        "7b8f5e70507d5f9b13a357040832a75f86df84e7ed577a3ef619bebeead251da"
+    ),
+}
 
 
 def load_module(path, name):
@@ -67,10 +75,11 @@ def configure_target(target):
         runner.fixture_identity = fixture_identity
 
         def workspace_gate(args, captured, routed):
-            _, summary = runner.fp4_worker._workspace_snapshot(
+            _, summary = runner.fp4_worker.snapshot_dynamic_workspace(
                 captured.wrapper,
                 routed,
                 num_cta_warps=runner.BLOCK_THREADS[args.arm] // 32,
+                schema="exp005.workspace-route-task-evidence.v1",
             )
             verification = summary["verification"]
             checks = dict(verification["checks"])
@@ -98,12 +107,22 @@ def configure_target(target):
             "exp018_runner": target.EXP018_RUNNER,
             "exp019_target": EXP019_TARGET,
             "exp022_adapter": Path(__file__).resolve(),
+            "harness_artifacts": target.BENCH_ROOT / "breakdown_harness/artifacts.py",
+            "harness_case": target.BENCH_ROOT / "breakdown_harness/case.py",
+            "harness_cutedsl": target.BENCH_ROOT
+            / "breakdown_harness/backends/cutedsl.py",
+            "harness_cutedsl_workspace": target.BENCH_ROOT
+            / "breakdown_harness/backends/cutedsl_workspace.py",
         }
         expected = {
             "source": CANDIDATE_SHA256,
             "dispatch": target.EXPECTED_DISPATCH_SHA256,
             "wrapper": target.EXPECTED_WRAPPER_SHA256,
             "exp018_runner": EXP018_RUNNER_SHA256,
+            **{
+                f"harness_{name}": digest
+                for name, digest in EXPECTED_HARNESS_SHA256.items()
+            },
         }
         observed = {name: target.file_sha256(path) for name, path in paths.items()}
         for name, digest in expected.items():

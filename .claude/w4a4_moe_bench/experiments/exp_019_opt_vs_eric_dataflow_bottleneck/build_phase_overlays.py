@@ -41,14 +41,14 @@ from phase_common import (
 
 
 ROOT = Path(__file__).resolve().parent
+BENCH_ROOT = ROOT.parents[1]
 EXP017 = ROOT.parent / "exp_017_opt_vs_triton_phase_share"
-EXP009 = ROOT.parent / "exp_009_intern_stage4_compact_lightcheck"
-for dependency in (EXP017, EXP009):
+for dependency in (BENCH_ROOT, EXP017):
     if str(dependency) not in sys.path:
         sys.path.insert(0, str(dependency))
 
 import build_opt_phase_overlays as exp017_builder  # noqa: E402
-import build_adapter as eric_adapter  # noqa: E402
+from breakdown_harness.fragments import eric_stage4_adapter as eric_adapter  # noqa: E402
 
 
 OVERLAY_ROOT = ROOT / "results" / "phase_overlays"

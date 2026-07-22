@@ -21,15 +21,10 @@ if [[ $on_host == 0 ]]; then
   ssh -o BatchMode=yes "$host" "mkdir -p '$repo/$relative_exp'"
   rsync -a --exclude results --exclude __pycache__ \
     "$local_repo/$relative_exp/" "$host:$repo/$relative_exp/"
-  rsync -aR \
+  rsync -aR --exclude __pycache__ \
+    "$local_repo/./.claude/w4a4_moe_bench/breakdown_harness/" \
     "$local_repo/./.claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py" \
     "$local_repo/./.claude/w4a4_moe_bench/moe_dyanmice_kernel_ab_stage4_compact.py" \
-    "$local_repo/./.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/fixture.py" \
-    "$local_repo/./.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/nvfp4_fixture.py" \
-    "$local_repo/./.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/bench_triton_fp8.py" \
-    "$local_repo/./.claude/w4a4_moe_bench/experiments/exp_005_8warp_spill_reduction/exp005_common.py" \
-    "$local_repo/./.claude/w4a4_moe_bench/experiments/exp_005_8warp_spill_reduction/run_exp005_arm.py" \
-    "$local_repo/./.claude/w4a4_moe_bench/experiments/exp_009_intern_stage4_compact_lightcheck/build_adapter.py" \
     "$local_repo/./.claude/w4a4_moe_bench/experiments/exp_018_triton_opt_eric_benchmark/run_arm.py" \
     "$host:$repo/"
   remote=(env EXP019_REPO="$repo" bash "$repo/$relative_exp/run_ncu_remote.sh" --on-host "$mode")

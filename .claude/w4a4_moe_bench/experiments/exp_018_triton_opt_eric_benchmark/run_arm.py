@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run one identity-locked exp_018 arm/block without profiler instrumentation."""
+"""Run one identity-locked W4A4 MoE arm/block without instrumentation."""
 
 from __future__ import annotations
 
@@ -25,18 +25,18 @@ import torch
 ROOT = Path(__file__).resolve().parent
 BENCH_ROOT = ROOT.parents[1]
 REPO = ROOT.parents[3]
-EXP001 = ROOT.parent / "exp_001_backend_case_sweep"
-EXP005 = ROOT.parent / "exp_005_8warp_spill_reduction"
-EXP009 = ROOT.parent / "exp_009_intern_stage4_compact_lightcheck"
-for dependency in (EXP001, EXP005, EXP009):
-    sys.path.insert(0, str(dependency))
+EXPERIMENT_ROOT = ROOT
+EXP001 = BENCH_ROOT / "experiments/exp_001_backend_case_sweep"
+if str(BENCH_ROOT) not in sys.path:
+    sys.path.insert(0, str(BENCH_ROOT))
 
-import fixture as persisted  # noqa: E402
-import nvfp4_fixture as nvfp4  # noqa: E402
-import bench_triton_fp8 as triton  # noqa: E402
-import exp005_common as common  # noqa: E402
-import run_exp005_arm as fp4_worker  # noqa: E402
-import build_adapter as eric_adapter  # noqa: E402
+from breakdown_harness import case as nvfp4  # noqa: E402
+from breakdown_harness import case as persisted  # noqa: E402
+from breakdown_harness import artifacts as common  # noqa: E402
+from breakdown_harness.backends import cutedsl as fp4_worker  # noqa: E402
+from breakdown_harness.backends import cutedsl_workspace  # noqa: E402
+from breakdown_harness.fragments import eric_stage4_adapter as eric_adapter  # noqa: E402
+from breakdown_harness.backends import triton_fp8 as triton  # noqa: E402
 
 
 ARMS = ("latest_opt_fp4", "eric_stage4_fp4", "sglang_triton_fp8")
@@ -98,6 +98,26 @@ def command(
         if optional:
             return f"unavailable: {error}"
         raise
+
+
+def harness_source_manifest(arm: str) -> dict[str, Any]:
+    paths = {
+        "artifacts": Path(common.__file__),
+        "case": Path(nvfp4.__file__),
+        "runner": Path(__file__),
+    }
+    if arm == "sglang_triton_fp8":
+        paths["triton_fp8"] = Path(triton.__file__)
+    else:
+        paths.update(
+            {
+                "cutedsl": Path(fp4_worker.__file__),
+                "cutedsl_workspace": Path(cutedsl_workspace.__file__),
+            }
+        )
+        if arm == "eric_stage4_fp4":
+            paths["eric_stage4_adapter"] = Path(eric_adapter.__file__)
+    return common.source_manifest(paths)
 
 
 def fixture_identity(root: Path) -> dict[str, Any]:
@@ -292,7 +312,7 @@ def runtime(args: argparse.Namespace, environment: Mapping[str, str]) -> dict[st
 
 def prepare(args: argparse.Namespace) -> dict[str, Any]:
     if args.arm == "sglang_triton_fp8":
-        init = triton.initialize_sglang()
+        init = triton.initialize_sglang(expected_version="0.5.15.post1")
         from sglang.srt.layers.moe.moe_runner.triton_utils.fused_moe import (
             fused_experts_impl,
         )
@@ -310,7 +330,7 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
                 "callable_source": str(callable_source),
                 "callable_source_sha256": triton.file_sha256(callable_source),
                 "adapter_source_sha256": triton.file_sha256(
-                    EXP001 / "bench_triton_fp8.py"
+                    Path(triton.__file__).resolve()
                 ),
             },
         }
@@ -323,12 +343,15 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
             source=source,
             output_dir=args.jit_root / "eric_adapter",
             expected_original_sha256=SOURCE_SHA[args.arm],
+            identity_schema="exp018.eric-stage4-adapter-identity.v1",
         )
         overlay = args.jit_root / "eric_adapter" / eric_adapter.ADAPTER_NAME
         if triton.file_sha256(overlay) != ERIC_ADAPTER_SHA:
             raise RuntimeError("Eric compatibility adapter drift")
     fp4_worker.install_overlay(overlay)
-    imports = fp4_worker.configure_source_checkout(args.flashinfer_root)
+    imports = fp4_worker.configure_source_checkout(
+        args.flashinfer_root, aot_dir_name="aot_disabled_for_exp005"
+    )
     if Path(imports["target_module"]).resolve() != overlay.resolve():
         raise RuntimeError("selected FP4 overlay was not imported")
     weights = nvfp4.make_canonical_weights(device=torch.device("cuda"), seed=SEED)
@@ -413,8 +436,11 @@ def workspace_gate(
     args: argparse.Namespace, captured: Any, routed: Any
 ) -> dict[str, Any]:
     warps = BLOCK_THREADS[args.arm] // 32
-    _, summary = fp4_worker._workspace_snapshot(
-        captured.wrapper, routed, num_cta_warps=warps
+    _, summary = fp4_worker.snapshot_dynamic_workspace(
+        captured.wrapper,
+        routed,
+        num_cta_warps=warps,
+        schema="exp005.workspace-route-task-evidence.v1",
     )
     if args.arm == "latest_opt_fp4":
         verification = summary["verification"]
@@ -488,8 +514,8 @@ def run_cell(
             if full_oracle
             else None
         )
-        captured = fp4_worker.build_arm(
-            argparse.Namespace(m=m, device_index=0), routed, context["weights"]
+        captured = fp4_worker.build_w4a4_arm(
+            m=m, fixture=routed, weights=context["weights"]
         )
         captured.eager()
         captured.capture()
@@ -500,7 +526,7 @@ def run_cell(
 
         timed_replay = lambda: captured.replay()[1]
         hash_tensor, oracle = fp4_worker.tensor_sha256, nvfp4.output_diagnostics
-        flush, flush_bytes = fp4_worker.make_flusher(x.device, FLUSH_BYTES)
+        flush, flush_bytes = fp4_worker.make_l2_flusher(x.device, FLUSH_BYTES)
         workspace = lambda: workspace_gate(args, captured, routed)
         launch_identity = {
             "grid": [1, 1, 110],
@@ -613,7 +639,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--rerun-id", default=os.environ.get("W4A4_RERUN_ID", ""))
     parser.add_argument("--flashinfer-root", type=Path, default=REPO)
     parser.add_argument("--fixture-dir", type=Path, default=FIXTURE_DIR)
-    parser.add_argument("--results", type=Path, default=ROOT / "results")
+    parser.add_argument("--results", type=Path, default=EXPERIMENT_ROOT / "results")
     return parser.parse_args(argv)
 
 
@@ -675,6 +701,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "protocol_sha256": triton.canonical_sha256(contract),
         "runtime": runtime_identity,
         "source_identity": source,
+        "harness_sources": harness_source_manifest(args.arm),
         "fixture_identity": fixtures,
         "weight_identity": normalized_weight_identity(args.arm, context["weights"]),
         "telemetry_before": before,

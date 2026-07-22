@@ -10,15 +10,10 @@ if [[ ${EXP018_ON_GPU_HOST:-0} != 1 ]]; then
   ssh -o BatchMode=yes "$remote_host" "mkdir -p '$remote_root/$relative_exp'"
   rsync -a --exclude results --exclude __pycache__ \
     "$repo_root/$relative_exp/" "$remote_host:$remote_root/$relative_exp/"
-  rsync -aR \
+  rsync -aR --exclude __pycache__ \
+    "$repo_root/./.claude/w4a4_moe_bench/breakdown_harness/" \
     "$repo_root/./.claude/w4a4_moe_bench/moe_dynamic_kernel_opt.py" \
     "$repo_root/./.claude/w4a4_moe_bench/moe_dyanmice_kernel_ab_stage4_compact.py" \
-    "$repo_root/./.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/fixture.py" \
-    "$repo_root/./.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/nvfp4_fixture.py" \
-    "$repo_root/./.claude/w4a4_moe_bench/experiments/exp_001_backend_case_sweep/bench_triton_fp8.py" \
-    "$repo_root/./.claude/w4a4_moe_bench/experiments/exp_005_8warp_spill_reduction/exp005_common.py" \
-    "$repo_root/./.claude/w4a4_moe_bench/experiments/exp_005_8warp_spill_reduction/run_exp005_arm.py" \
-    "$repo_root/./.claude/w4a4_moe_bench/experiments/exp_009_intern_stage4_compact_lightcheck/build_adapter.py" \
     "$remote_host:$remote_root/"
   ssh -o BatchMode=yes "$remote_host" \
     "EXP018_ON_GPU_HOST=1 EXP018_REMOTE_ROOT='$remote_root' bash '$remote_root/$relative_exp/run_remote.sh'"

@@ -20,10 +20,15 @@ if [[ $on_host == 0 ]]; then
   local_repo=$(git rev-parse --show-toplevel)
   rsync -a --exclude results --exclude __pycache__ \
     "$local_repo/$relative_exp/" "$host:$repo/$relative_exp/"
+  rsync -a --exclude __pycache__ \
+    "$local_repo/.claude/w4a4_moe_bench/breakdown_harness/" \
+    "$host:$repo/.claude/w4a4_moe_bench/breakdown_harness/"
   for dependency in \
+    exp_005_8warp_spill_reduction \
     exp_014_scatter_8warp \
     exp_016_route_q0_token_major_reuse \
-    exp_017_opt_vs_triton_phase_share; do
+    exp_017_opt_vs_triton_phase_share \
+    exp_018_triton_opt_eric_benchmark; do
     rsync -a --exclude results --exclude __pycache__ \
       "$local_repo/.claude/w4a4_moe_bench/experiments/$dependency/" \
       "$host:$repo/.claude/w4a4_moe_bench/experiments/$dependency/"
