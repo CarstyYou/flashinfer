@@ -298,6 +298,7 @@ class MoEDynamicKernel:
         swiglu_beta: float = 1.0,
         swiglu_limit: float | None = None,
         share_input_across_experts: bool = False,
+        num_topk: int = 8,
     ):
         if activation not in {"silu", "relu2", "gelu_tanh", "swigluoai_uninterleave"}:
             raise ValueError(f"unsupported activation {activation!r}")
@@ -318,6 +319,9 @@ class MoEDynamicKernel:
         self.swiglu_beta = float(swiglu_beta)
         self.swiglu_limit = float(swiglu_limit) if swiglu_limit is not None else None
         self.share_input_across_experts = share_input_across_experts
+        # Compile-time topk for route-phase slot unrolls; hardcoding 8 over-reads
+        # topk_ids when topk<8 -> garbage expert_id -> OOB global atomic.
+        self.num_topk = int(num_topk)
         tile_k = sf_vec_size * 8
         self.tile_shape_mnk = (mma_tiler_mn[0], mma_tiler_mn[1], tile_k)
         self.fc1_tile_shape_mnk = (
@@ -2086,7 +2090,7 @@ class MoEDynamicKernel:
                         route_slot_base = warp_idx * Int32(32)
                         if lane_id == Int32(0):
                             topk_slot = Int32(0)
-                            while topk_slot < Int32(8):
+                            while topk_slot < Int32(self.num_topk):  # not 8: over-reads topk_ids when topk<8
                                 pair_idx = token_idx * num_topk + topk_slot
                                 expert_id = topk_ids[pair_idx].to(Int32)
                                 weight = topk_weights[pair_idx].to(cutlass.Float32)
@@ -2124,7 +2128,8 @@ class MoEDynamicKernel:
                         # reciprocal work.  Hoist it out of the block loop,
                         # but do not introduce a 32x broadcast optimization.
                         route_gs = cute.make_rmem_tensor((8,), cutlass.Float32)
-                        for cache_slot in cutlass.range_constexpr(8):
+                        # not 8: over-reads route_expert_ids -> garbage expert_id -> OOB scale gather.
+                        for cache_slot in cutlass.range_constexpr(self.num_topk):
                             route_slot = route_slot_base + Int32(cache_slot)
                             expert_id = _ld_shared_i32(
                                 route_expert_ids_addr + route_slot * Int32(4)
@@ -2158,7 +2163,8 @@ class MoEDynamicKernel:
 
                             # Preserve eight independent quant/store operations;
                             # only the BF16 load and absmax are shared.
-                            for cache_slot in cutlass.range_constexpr(8):
+                            # not 8: over-reads route_phys_rows when topk<8.
+                            for cache_slot in cutlass.range_constexpr(self.num_topk):
                                 route_slot = route_slot_base + Int32(cache_slot)
                                 phys_row = _ld_shared_i32(
                                     route_phys_rows_addr + route_slot * Int32(4)
@@ -2218,7 +2224,7 @@ class MoEDynamicKernel:
                             cute.arch.sync_warp()
                             if lane_id == Int32(0):
                                 topk_slot = Int32(0)
-                                while topk_slot < Int32(8):
+                                while topk_slot < Int32(self.num_topk):  # not 8: over-reads topk_ids when topk<8
                                     route_slot = route_slot_base + topk_slot
                                     phys_row = _ld_shared_i32(
                                         route_phys_rows_addr

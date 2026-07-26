@@ -1600,6 +1600,7 @@ def _get_dynamic_kernel(
         swiglu_beta=swiglu_beta,
         swiglu_limit=swiglu_limit,
         share_input_across_experts=share_input_across_experts,
+        num_topk=num_topk,  # compile-time topk for route unrolls (avoid topk_ids over-read)
     )
     launch = _DynamicMoELaunch(
         kernel,

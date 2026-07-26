@@ -281,6 +281,7 @@ class MoEDynamicKernel:
         swiglu_beta: float = 1.0,
         swiglu_limit: float | None = None,
         share_input_across_experts: bool = False,
+        num_topk: int = 8,
     ):
         if activation not in {"silu", "relu2", "gelu_tanh", "swigluoai_uninterleave"}:
             raise ValueError(f"unsupported activation {activation!r}")
@@ -295,6 +296,7 @@ class MoEDynamicKernel:
         self.swiglu_beta = float(swiglu_beta)
         self.swiglu_limit = float(swiglu_limit) if swiglu_limit is not None else None
         self.share_input_across_experts = share_input_across_experts
+        self.num_topk = int(num_topk)
         tile_k = sf_vec_size * 8
         self.tile_shape_mnk = (mma_tiler_mn[0], mma_tiler_mn[1], tile_k)
         self.cluster_shape_mnk = (1, 1, 1)
