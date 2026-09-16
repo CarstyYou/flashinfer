@@ -1556,6 +1556,43 @@ class SM12xMxfp8Mxfp4Config:
 
 
 @dataclass(frozen=True)
+class SM12xNvfp4Config:
+    """SM120/SM121 CuTe-DSL NVFP4 x NVFP4 backend."""
+
+    @classmethod
+    def supported(cls, arch: int) -> bool:
+        return arch in (120, 121)
+
+    @staticmethod
+    def prepare_weights(
+        w1_weight,
+        w1_weight_sf,
+        w1_up_scale,
+        w1_gate_scale,
+        w2_weight,
+        w2_weight_sf,
+        w2_alpha,
+        q0_global_scale,
+        q1_global_scale,
+    ):
+        """Build the native SM12x NVFP4 view from packed checkpoint tensors."""
+        return {
+            "w1_weight": w1_weight,
+            "w1_weight_sf": w1_weight_sf,
+            "w1_up_scale": w1_up_scale,
+            "w1_gate_scale": w1_gate_scale,
+            "w2_weight": w2_weight,
+            "w2_weight_sf": w2_weight_sf,
+            "w2_alpha": w2_alpha,
+            "q0_global_scale": q0_global_scale,
+            "q1_global_scale": q1_global_scale,
+        }
+
+    def __repr__(self) -> str:
+        return "SM12xNvfp4Config()"
+
+
+@dataclass(frozen=True)
 class B12xNvfp4Config:
     """SM120/SM121 CuTe-DSL b12x NVFP4/W4A4 backend."""
 
@@ -1664,6 +1701,7 @@ BackendConfigType = Union[
     CuteDslConfig,
     SM12xFp8Config,
     SM12xMxfp8Mxfp4Config,
+    SM12xNvfp4Config,
     B12xNvfp4Config,
     B12xW4A16Config,
 ]
@@ -1692,6 +1730,7 @@ ALL_BACKEND_CONFIGS = (
     CuteDslConfig,
     SM12xFp8Config,
     SM12xMxfp8Mxfp4Config,
+    SM12xNvfp4Config,
     B12xNvfp4Config,
     B12xW4A16Config,
 )
