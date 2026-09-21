@@ -8,16 +8,16 @@ import torch.nn.functional as F
 
 from flashinfer.cute_dsl import is_cute_dsl_available
 from flashinfer.testing.utils import per_block_cast_to_fp8, per_token_cast_to_fp8
-from flashinfer.utils import is_sm120a_supported
+from flashinfer.utils import is_sm12x_supported
 
 pytestmark = pytest.mark.skipif(
     not is_cute_dsl_available(), reason="cute_dsl not available"
 )
 
 
-def skip_if_not_sm120():
-    if not (torch.cuda.is_available() and is_sm120a_supported(torch.device("cuda"))):
-        pytest.skip("requires an SM120a device")
+def skip_if_not_sm12x():
+    if not (torch.cuda.is_available() and is_sm12x_supported(torch.device("cuda"))):
+        pytest.skip("requires an SM12x device")
 
 
 def calc_diff(x, y):
@@ -78,7 +78,7 @@ def make_inputs(m_per_expert_list, n, k):
 
 
 def test_cute_dsl_sm12x_moe_gemm_fp8_matches_reference():
-    skip_if_not_sm120()
+    skip_if_not_sm12x()
     from flashinfer.fused_moe import cute_dsl_sm12x_moe_gemm_fp8
 
     a, b, a_scale, b_scale, m_indptr, ref = make_inputs([64, 64, 64, 64], 512, 512)
@@ -120,7 +120,7 @@ def make_gated_inputs(m_per_expert_list, n, k, swiglu_limit=None):
 
 
 def test_cute_dsl_sm12x_fc1_act_fp8_matches_reference():
-    skip_if_not_sm120()
+    skip_if_not_sm12x()
     from flashinfer.fused_moe import cute_dsl_sm12x_fc1_act_fp8
 
     a, b, a_sf, b_sf, offsets, ref = make_gated_inputs([64] * 4, 512, 512)
@@ -129,7 +129,7 @@ def test_cute_dsl_sm12x_fc1_act_fp8_matches_reference():
 
 
 def test_cute_dsl_sm12x_fc1_act_q1_fp8_smoke():
-    skip_if_not_sm120()
+    skip_if_not_sm12x()
     from flashinfer.fused_moe import cute_dsl_sm12x_fc1_act_q1_fp8
 
     a, b, a_sf, b_sf, offsets, _ = make_gated_inputs([64] * 4, 512, 512)
@@ -142,7 +142,7 @@ def test_cute_dsl_sm12x_fc1_act_q1_fp8_smoke():
 
 
 def test_cute_dsl_sm12x_fc1_act_q1_fp8_swiglu_clamp_and_output_reuse():
-    skip_if_not_sm120()
+    skip_if_not_sm12x()
     from flashinfer.fused_moe import cute_dsl_sm12x_fc1_act_q1_fp8
 
     limit = 0.25
@@ -179,7 +179,7 @@ def test_cute_dsl_sm12x_fc1_act_q1_fp8_swiglu_clamp_and_output_reuse():
 
 
 def test_cute_dsl_sm12x_fc2_finalize_fp8_smoke():
-    skip_if_not_sm120()
+    skip_if_not_sm12x()
     from flashinfer.fused_moe import cute_dsl_sm12x_fc2_finalize_fp8
 
     a, b, a_sf, b_sf, offsets, _ = make_inputs([64] * 4, 512, 512)

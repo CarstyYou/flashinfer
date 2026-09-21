@@ -10,7 +10,7 @@ from flashinfer.fused_moe.cute_dsl.blackwell_sm12x._moe_utils.moe_route_meta imp
     Mxfp8Mxfp4TileSelectorRuntime,
     moe_tile_selector,
 )
-from flashinfer.utils import is_sm120a_supported
+from flashinfer.utils import is_sm12x_supported
 
 
 TILE_MN = Mxfp8Mxfp4TileSelectorRuntime.TILE_MN
@@ -60,8 +60,8 @@ def _oracle(
     ([1], [0, 1, 2, 31, 32, 33, 129], [96] * 256),
 )
 def test_selector_matches_host_oracle(counts):
-    if not (torch.cuda.is_available() and is_sm120a_supported(torch.device("cuda"))):
-        pytest.skip("requires an SM120a device")
+    if not (torch.cuda.is_available() and is_sm12x_supported(torch.device("cuda"))):
+        pytest.skip("requires an SM12x device")
     device = torch.device("cuda", torch.cuda.current_device())
     counts_gpu = torch.tensor(counts, dtype=torch.int32, device=device)
     offsets = torch.cat(
@@ -89,8 +89,8 @@ def test_selector_matches_host_oracle(counts):
 
 @pytest.mark.parametrize("intermediate", (2048, 1024, 512, 256))
 def test_selector_matches_host_oracle_across_fc1_shapes(intermediate):
-    if not (torch.cuda.is_available() and is_sm120a_supported(torch.device("cuda"))):
-        pytest.skip("requires an SM120a device")
+    if not (torch.cuda.is_available() and is_sm12x_supported(torch.device("cuda"))):
+        pytest.skip("requires an SM12x device")
     device = torch.device("cuda", torch.cuda.current_device())
     counts = [96] * 256
     counts_gpu = torch.tensor(counts, dtype=torch.int32, device=device)
@@ -120,8 +120,8 @@ def test_selector_matches_host_oracle_across_fc1_shapes(intermediate):
 
 
 def test_runtime_reuses_buffers_and_returns_both_tiles():
-    if not (torch.cuda.is_available() and is_sm120a_supported(torch.device("cuda"))):
-        pytest.skip("requires an SM120a device")
+    if not (torch.cuda.is_available() and is_sm12x_supported(torch.device("cuda"))):
+        pytest.skip("requires an SM12x device")
     device = torch.device("cuda", torch.cuda.current_device())
     plain_bms = (64, 128)
     runtime = Mxfp8Mxfp4TileSelectorRuntime(device, 4096, 256, plain_bms)

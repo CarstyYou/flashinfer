@@ -8,7 +8,7 @@ from flashinfer.fused_moe.cute_dsl.blackwell_sm12x.moe_fp8_q0_route_triton impor
     fp8_q0_route_triton,
     fp8_q0_route_workspace_shapes,
 )
-from flashinfer.utils import is_sm120a_supported
+from flashinfer.utils import is_sm12x_supported
 
 
 SF_M_ALIGN = 4
@@ -17,9 +17,9 @@ pytestmark = pytest.mark.skipif(
 )
 
 
-def _skip_if_not_sm120():
-    if not (torch.cuda.is_available() and is_sm120a_supported(torch.device("cuda"))):
-        pytest.skip("requires an SM120a device")
+def _skip_if_not_sm12x():
+    if not (torch.cuda.is_available() and is_sm12x_supported(torch.device("cuda"))):
+        pytest.skip("requires an SM12x device")
 
 
 def _padded_offset(offset, expert):
@@ -81,7 +81,7 @@ def _assert_output(x, topk_ids, topk_weights, num_experts, output):
     ((3, 1152, 1, 7), (65, 256, 4, 7)),
 )
 def test_fp8_q0_route_matches_torch(num_tokens, hidden_size, top_k, num_experts):
-    _skip_if_not_sm120()
+    _skip_if_not_sm12x()
     x, topk_ids, topk_weights = _make_inputs(
         num_tokens, hidden_size, top_k, num_experts
     )
@@ -107,7 +107,7 @@ def test_fp8_q0_route_matches_torch(num_tokens, hidden_size, top_k, num_experts)
     ),
 )
 def test_fp8_q0_route_prefill_distributions(routing, num_tokens, top_k, num_experts):
-    _skip_if_not_sm120()
+    _skip_if_not_sm12x()
     hidden_size = 256
     x, topk_ids, topk_weights = _make_inputs(
         num_tokens, hidden_size, top_k, num_experts
@@ -131,7 +131,7 @@ def test_fp8_q0_route_prefill_distributions(routing, num_tokens, top_k, num_expe
 
 @pytest.mark.parametrize("workspace_name", ("workspace13", "workspace2"))
 def test_fp8_q0_route_rejects_non_1d_workspace(workspace_name):
-    _skip_if_not_sm120()
+    _skip_if_not_sm12x()
     num_tokens, hidden_size, top_k, num_experts = 3, 256, 1, 7
     x, topk_ids, topk_weights = _make_inputs(
         num_tokens, hidden_size, top_k, num_experts

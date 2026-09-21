@@ -8,7 +8,7 @@ from flashinfer.fused_moe.cute_dsl.blackwell_sm12x.moe_mxfp8_q0_route_triton imp
     mxfp8_q0_route_triton,
     mxfp8_q0_route_workspace_shapes,
 )
-from flashinfer.utils import is_sm120a_supported
+from flashinfer.utils import is_sm12x_supported
 from tests.moe.test_cute_dsl_sm12x_mxfp8_mxfp4 import (
     compute_padded_offset,
     mxfp8_act_quantize,
@@ -34,9 +34,9 @@ pytestmark = [
 ]
 
 
-def _skip_if_not_sm120():
-    if not (torch.cuda.is_available() and is_sm120a_supported(torch.device("cuda"))):
-        pytest.skip("requires an SM120a device")
+def _skip_if_not_sm12x():
+    if not (torch.cuda.is_available() and is_sm12x_supported(torch.device("cuda"))):
+        pytest.skip("requires an SM12x device")
 
 
 def _make_inputs(num_tokens, hidden_size, top_k, num_experts):
@@ -92,7 +92,7 @@ def _assert_output(x, topk_ids, topk_weights, num_experts, output):
     ),
 )
 def test_mxfp8_q0_route_prefill_distributions(routing, num_tokens, top_k, num_experts):
-    _skip_if_not_sm120()
+    _skip_if_not_sm12x()
     hidden_size = 512
     x, topk_ids, topk_weights = _make_inputs(
         num_tokens, hidden_size, top_k, num_experts

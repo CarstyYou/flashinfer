@@ -21,7 +21,7 @@ from flashinfer.fused_moe import (
     SiTU,
     SwiGLU,
 )
-from flashinfer.utils import is_sm120a_supported
+from flashinfer.utils import is_sm12x_supported
 from tests.moe.test_cute_dsl_sm12x_mxfp8_mxfp4 import (
     calc_diff,
     dequant_e2m1_codes,
@@ -103,8 +103,8 @@ def _reference(x, ids, route_weights, w1q, w1sf, w2q, w2sf, activation):
     "activation", [SwiGLU(limit=0.25), SiTU(gate_scale=4.0, linear_scale=25.0)]
 )
 def test_sm12x_mxfp8_mxfp4_unified_runner_matches_reference(activation):
-    if not (torch.cuda.is_available() and is_sm120a_supported(torch.device("cuda"))):
-        pytest.skip("requires an SM120a device")
+    if not (torch.cuda.is_available() and is_sm12x_supported(torch.device("cuda"))):
+        pytest.skip("requires an SM12x device")
     torch.manual_seed(7)
     tokens, experts, top_k, hidden, intermediate = 8, 4, 2, 512, 512
     x = torch.randn(tokens, hidden, device="cuda", dtype=torch.bfloat16) / 10
