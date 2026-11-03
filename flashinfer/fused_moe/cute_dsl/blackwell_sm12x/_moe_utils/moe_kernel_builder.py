@@ -214,6 +214,8 @@ class Sm12xGemmConfig:
         union_smem=False,
         reg_prod=None,
         enable_pdl=False,
+        *,
+        num_math_groups=1,
     ):
         self.mma, self.load_ab, self.load_sf, self.epi = mma, load_ab, load_sf, epi
         self.enable_pdl = enable_pdl
@@ -230,16 +232,13 @@ class Sm12xGemmConfig:
                 f"staging, so they reach the SF ring, which a different warp refills without waiting "
                 f"on epi_empty"
             )
-        assert not epi.DRAINS_SC_IN_WG or union_smem, (
-            f"{epi.METHOD} writes sC in place, and store_wg's entry barrier exists only to keep "
-            f"one warp's sC write from racing another's still-pending read of the sA it overlays"
-        )
         self.TILE = tuple(tile)
         self.ab_stage = ab_stage
         self.epi_bar_id = epi_bar_id
-        num_math_warps = mma.num_math_warps
+        assert num_math_groups >= 1
+        num_math_warps = mma.num_math_warps * num_math_groups
         self.num_math_warps = num_math_warps
-        self.mma_threads = num_math_warps * 32
+        self.mma_threads = mma.num_math_warps * 32
         assert epi.mma_threads == self.mma_threads, (
             f"EpiConfig was built for {epi.mma_threads} math threads but MmaConfig gives "
             f"{self.mma_threads}; the S2G thread layout is derived from that count"

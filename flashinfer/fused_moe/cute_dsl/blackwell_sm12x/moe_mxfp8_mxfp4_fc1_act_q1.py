@@ -225,6 +225,7 @@ def compiled_kernel(sample_args, *, op, grid_x: int, sm_version: str):
         op.situ_linear_beta,
         grid_x,
         sm_version,
+        len(sample_args) == 9,
     )
     hit = _COMPILED.get(key)
     if hit is None:
@@ -290,9 +291,42 @@ def cute_dsl_sm12x_fc1_act_q1_mxfp8_mxfp4(
     situ_linear_beta: float = SITU_LINEAR_BETA,
     out_q: torch.Tensor | None = None,
     out_sf: torch.Tensor | None = None,
+    token_map: torch.Tensor | None = None,
 ):
+    """Compute gated FC1, activation and MXFP8 Q1.
+
+    ``token_map`` optionally maps grouped routed rows to token-major ``a_q``
+    and packed int32 ``a_scale``. Its consumed entries must index valid input
+    tokens. The output capacity is ``token_map.numel()``; ``m_indptr`` bounds
+    valid routed rows. Q1 and SF1 retain the grouped routed output layout.
+    """
     swiglu_limit = _normalize_swiglu_limit(activation, swiglu_limit)
     m, n, k = int(a_q.shape[0]), int(b_q.shape[1]) // 2, int(b_q.shape[2]) * 2
+    if token_map is not None:
+        if (
+            token_map.dtype is not torch.int32
+            or token_map.ndim != 1
+            or token_map.device != a_q.device
+            or not token_map.is_contiguous()
+        ):
+            raise ValueError(
+                "token_map must be contiguous rank-1 int32 on the input device"
+            )
+        if (
+            a_q.dtype is not torch.float8_e4m3fn
+            or a_q.ndim != 2
+            or not a_q.is_contiguous()
+            or a_q.shape[1] != k
+            or a_scale.dtype is not torch.int32
+            or a_scale.ndim != 2
+            or a_scale.shape[1] != a_q.shape[0]
+            or not a_scale.is_contiguous()
+            or a_scale.device != a_q.device
+        ):
+            raise ValueError(
+                "gather inputs must be contiguous token-major A and packed int32 SF"
+            )
+        m = token_map.numel()
     assert not enable_pdl or (out_q is not None and out_sf is not None), (
         "PDL requires caller-owned out_q and out_sf"
     )
@@ -303,6 +337,9 @@ def cute_dsl_sm12x_fc1_act_q1_mxfp8_mxfp4(
     num_experts = int(b_q.shape[0])
     if tile is None and tune is not False:
         chosen = None
+        inputs = [a_q, a_scale, b_q, b_scale, m_indptr]
+        if token_map is not None:
+            inputs.append(token_map)
         if MOE_AUTOTUNE_ENABLED():
             with autotune():
                 _, tactic = AutoTuner.get().choose_one(
@@ -318,7 +355,7 @@ def cute_dsl_sm12x_fc1_act_q1_mxfp8_mxfp4(
                         )
                     ],
                     TuningConfig(),
-                    [a_q, a_scale, b_q, b_scale, m_indptr],
+                    inputs,
                 )
             if tactic != -1:
                 chosen = tactic
@@ -378,6 +415,7 @@ def cute_dsl_sm12x_fc1_act_q1_mxfp8_mxfp4(
         m_indptr.to(torch.int32),
         op.cfg.epi,
         op.cfg.TILE,
+        token_map=token_map,
     )
     compiled_kernel(args, op=op, grid_x=grid_x, sm_version=sm_version)(*args)
     return q, sf
@@ -414,7 +452,7 @@ class _Fc1ActQ1Runner(TunableRunner):
         return self._out
 
     def valid_tactics(self, inputs):
-        a_q, a_scale, b_q, b_scale, m_indptr = inputs
+        a_q, a_scale, b_q, b_scale, m_indptr, token_map = _unpack_inputs(inputs)
         n, k = int(b_q.shape[1]) // 2, int(b_q.shape[2]) * 2
         return [
             t
@@ -430,26 +468,28 @@ class _Fc1ActQ1Runner(TunableRunner):
         ]
 
     def alloc_out(self, inputs):
-        a_q, a_scale, b_q, b_scale, m_indptr = inputs
+        a_q, a_scale, b_q, b_scale, m_indptr, token_map = _unpack_inputs(inputs)
         n, num_experts = int(b_q.shape[1]) // 2, int(b_q.shape[0])
-        q = torch.empty(int(a_q.shape[0]), n, dtype=self.out_dtype, device=a_q.device)
+        m = int(a_q.shape[0]) if token_map is None else token_map.numel()
+        q = torch.empty(m, n, dtype=self.out_dtype, device=a_q.device)
         sf = torch.zeros(
-            out_sf_shape(int(a_q.shape[0]), n, num_experts),
+            out_sf_shape(m, n, num_experts),
             dtype=torch.int32,
             device=a_q.device,
         )
         return q, sf
 
     def launch(self, inputs, out, tactic):
-        a_q, a_scale, b_q, b_scale, m_indptr = inputs
+        a_q, a_scale, b_q, b_scale, m_indptr, token_map = _unpack_inputs(inputs)
         q, sf = out
         n, k = int(b_q.shape[1]) // 2, int(b_q.shape[2]) * 2
         props = torch.cuda.get_device_properties(a_q.device)
         grid_x = props.multi_processor_count
         if tactic is None:
+            m = int(a_q.shape[0]) if token_map is None else token_map.numel()
             tile, epi = (
                 select_tile(
-                    total_rows=int(a_q.shape[0]),
+                    total_rows=m,
                     n=n,
                     k=k,
                     num_experts=int(b_q.shape[0]),
@@ -483,12 +523,14 @@ class _Fc1ActQ1Runner(TunableRunner):
             m_indptr.to(torch.int32),
             op.cfg.epi,
             op.cfg.TILE,
+            token_map=token_map,
         )
         sm_version = "sm_{}{}".format(props.major, props.minor)
         compiled_kernel(args, op=op, grid_x=grid_x, sm_version=sm_version)(*args)
 
     def get_cache_key_extras(self, inputs):
-        a_q, a_scale, b_q, b_scale, m_indptr = inputs
+        a_q, a_scale, b_q, b_scale, m_indptr, token_map = _unpack_inputs(inputs)
+        m = int(a_q.shape[0]) if token_map is None else token_map.numel()
         return (
             int(a_q.shape[0]),
             int(b_q.shape[0]),
@@ -501,7 +543,13 @@ class _Fc1ActQ1Runner(TunableRunner):
             self.situ_beta,
             self.situ_linear_beta,
             torch.cuda.get_device_capability(),
+            token_map is not None,
+            m,
         )
+
+
+def _unpack_inputs(inputs):
+    return (*inputs, None) if len(inputs) == 5 else tuple(inputs)
 
 
 def MOE_AUTOTUNE_ENABLED() -> bool:

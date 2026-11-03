@@ -353,7 +353,12 @@ class WgScatterEpiConfig(R2GWgEpiConfig):
     S2G_BITS = None
 
     def aux_smem_bytes(self, tile):
-        return tile[0] * (cutlass.Int32.width + cutlass.Float32.width) // 8
+        return (
+            tile[0]
+            * self.epi_stages
+            * (cutlass.Int32.width + cutlass.Float32.width)
+            // 8
+        )
 
 
 EPI_CONFIGS = {
@@ -611,7 +616,8 @@ def store_wg_scatter(
         thr_s2r, sC, sTok, sWt, gOut, (bm, bn), tile.n_block * bn, hidden
     )
     cute.arch.barrier(barrier_id=epi_bar_id, number_of_threads=mma_threads)
-    cute.arch.mbarrier_arrive(epi_empty)
+    if cutlass.const_expr(epi_empty is not None):
+        cute.arch.mbarrier_arrive(epi_empty)
 
 
 @cute.jit
