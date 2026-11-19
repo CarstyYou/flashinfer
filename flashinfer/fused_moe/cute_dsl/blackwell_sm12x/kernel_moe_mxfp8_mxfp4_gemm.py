@@ -24,6 +24,7 @@ from cutlass.cute.runtime import from_dlpack
 
 from ....utils import ceil_div
 from ._moe_utils import moe_epilogue, moe_scheduler
+from ._moe_utils.moe_copy import fence_smem_read_release, fence_smem_refill_acquire
 from ._moe_utils.moe_epilogue import EPI_CONFIGS, EpiMethod
 from ._moe_utils.moe_kernel_builder import LoadABConfig, MmaConfig, Sm12xGemmConfig
 from ._moe_utils.sm12x_blockscaled_layout import SF_M_ALIGN, Sm120SfConfigMxfp8Mxfp4
@@ -219,6 +220,7 @@ def copy_a_sfa(
             )
             stage_idx = local_k_tile_idx & (ab_stages - 1)
             cute.arch.mbarrier_wait(a_empty + stage_idx, a_phase)
+            fence_smem_refill_acquire()
             tx_bytes = a_bytes
             if cutlass.const_expr(swap or k_in_sf == 0):
                 tx_bytes += sfa_bytes
@@ -285,6 +287,7 @@ def copy_b_sfb(
             )
             stage_idx = local_k_tile_idx & (ab_stages - 1)
             cute.arch.mbarrier_wait(b_empty + stage_idx, b_phase)
+            fence_smem_refill_acquire()
             tx_bytes = b_bytes
             if cutlass.const_expr(not swap or k_in_sf == 0):
                 tx_bytes += sfb_bytes
@@ -430,6 +433,7 @@ def mma(
                     [tCrB[None, None, k_block], tCrSFB_frg[None, None, k_block, kb]],
                     acc,
                 )
+            fence_smem_read_release()
             cute.arch.mbarrier_arrive(a_empty + stage_idx)
             cute.arch.mbarrier_arrive(b_empty + stage_idx)
             if cutlass.const_expr(stage_idx == ab_stages - 1):

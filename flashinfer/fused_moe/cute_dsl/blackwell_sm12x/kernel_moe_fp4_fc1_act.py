@@ -27,6 +27,7 @@ from ....tllm_enums import DEFAULT_SITU_LINEAR_BETA as SITU_LINEAR_BETA
 from ....tllm_enums import ActivationType
 from ....utils import ceil_div
 from ._moe_utils import moe_activation, moe_epilogue, moe_scheduler
+from ._moe_utils.moe_copy import fence_smem_read_release, fence_smem_refill_acquire
 from ._moe_utils.moe_epilogue import (
     EPI_CONFIGS,
     EpiMethod,
@@ -271,6 +272,7 @@ def copy_a_sfa(
 ):
     for kt in cutlass.range(0, k_tile_count):
         cute.arch.mbarrier_wait(a_empty + stage, phase)
+        fence_smem_refill_acquire()
         with cute.arch.elect_one():
             cute.arch.mbarrier_arrive_and_expect_tx(a_full + stage, tx_bytes)
         if cutlass.const_expr(swap):
@@ -327,6 +329,7 @@ def copy_b_sfb(
 ):
     for kt in cutlass.range(0, k_tile_count):
         cute.arch.mbarrier_wait(b_empty + stage, phase)
+        fence_smem_refill_acquire()
         with cute.arch.elect_one():
             cute.arch.mbarrier_arrive_and_expect_tx(b_full + stage, tx_bytes)
         if cutlass.const_expr(swap):
@@ -527,6 +530,7 @@ def copy_a_sfa_gate_swap(
 ):
     for kt in cutlass.range(0, k_tile_count):
         cute.arch.mbarrier_wait(a_empty + stage, phase)
+        fence_smem_refill_acquire()
         with cute.arch.elect_one():
             cute.arch.mbarrier_arrive_and_expect_tx(a_full + stage, tx_bytes)
         cute.copy(
@@ -583,6 +587,7 @@ def copy_b_sfb_gate(
 ):
     for kt in cutlass.range(0, k_tile_count):
         cute.arch.mbarrier_wait(b_empty + stage, phase)
+        fence_smem_refill_acquire()
         with cute.arch.elect_one():
             cute.arch.mbarrier_arrive_and_expect_tx(b_full + stage, tx_bytes)
         cute.copy(
@@ -715,6 +720,7 @@ def mma(
         cute.gemm(tiledmma, acc, [tCrA, tCrSFA_frg], [tCrB, tCrSFB_frg], acc)
         if cutlass.const_expr(gated):
             cute.gemm(tiledmma, acc_g, [tCrA, tCrSFA_frg], [tCrG, tCrSFG_frg], acc_g)
+        fence_smem_read_release()
         cute.arch.mbarrier_arrive(a_empty + stage)
         cute.arch.mbarrier_arrive(b_empty + stage)
         stage += 1
@@ -829,6 +835,7 @@ def mma_swap(
         cute.gemm(tiledmma, acc, [tCrA, tCrSFA_frg], [tCrB, tCrSFB_frg], acc)
         if cutlass.const_expr(gated):
             cute.gemm(tiledmma, acc_g, [tCrG, tCrSFG_frg], [tCrB, tCrSFB_frg], acc_g)
+        fence_smem_read_release()
         cute.arch.mbarrier_arrive(a_empty + stage)
         cute.arch.mbarrier_arrive(b_empty + stage)
         stage += 1

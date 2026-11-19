@@ -24,6 +24,7 @@ from cutlass.cute.runtime import from_dlpack
 
 from ....utils import ceil_div
 from ._moe_utils import moe_epilogue, moe_scheduler
+from ._moe_utils.moe_copy import fence_smem_read_release, fence_smem_refill_acquire
 from ._moe_utils.moe_epilogue import (
     EPI_CONFIGS,
     EpiMethod,
@@ -240,6 +241,7 @@ def copy_a_sfa(
 ):
     for kt in cutlass.range(0, k_tile_count):
         cute.arch.mbarrier_wait(a_empty + stage, phase)
+        fence_smem_refill_acquire()
         with cute.arch.elect_one():
             cute.arch.mbarrier_arrive_and_expect_tx(a_full + stage, tx_bytes)
         if cutlass.const_expr(swap):
@@ -296,6 +298,7 @@ def copy_b_sfb(
 ):
     for kt in cutlass.range(0, k_tile_count):
         cute.arch.mbarrier_wait(b_empty + stage, phase)
+        fence_smem_refill_acquire()
         with cute.arch.elect_one():
             cute.arch.mbarrier_arrive_and_expect_tx(b_full + stage, tx_bytes)
         if cutlass.const_expr(swap):
@@ -397,6 +400,7 @@ def mma(
             cute.copy(s2r_sfa, tAsSFA[None, None, k], tCrSFA_v[None, None, k])
             cute.copy(s2r_sfb, tBsSFB[None, None, k], tCrSFB_v[None, None, k])
         cute.gemm(tiledmma, acc, [tCrA, tCrSFA_frg], [tCrB, tCrSFB_frg], acc)
+        fence_smem_read_release()
         cute.arch.mbarrier_arrive(a_empty + stage)
         cute.arch.mbarrier_arrive(b_empty + stage)
         stage += 1

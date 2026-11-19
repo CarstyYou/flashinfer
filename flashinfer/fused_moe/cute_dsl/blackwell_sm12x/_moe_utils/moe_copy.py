@@ -11,13 +11,52 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Shared token-map activation copies and TMA gather4 descriptors."""
+"""Shared copies and TMA stage synchronization."""
 
 import cutlass
 import cutlass.cute as cute
+from cutlass._mlir.dialects import llvm
 from cutlass.cute.nvgpu import cpasync
+from cutlass.cutlass_dsl import dsl_user_op
 
 from .....utils import ceil_div
+
+
+_HAS_SMEM_READ_RELEASE = (cutlass.CUDA_VERSION.major, cutlass.CUDA_VERSION.minor) >= (
+    13,
+    4,
+)
+
+
+@dsl_user_op
+def fence_smem_read_release(*, loc=None, ip=None):
+    if not _HAS_SMEM_READ_RELEASE:
+        cute.arch.fence_view_async_shared(loc=loc, ip=ip)
+        return
+    llvm.inline_asm(
+        None,
+        [],
+        "fence.proxy.async::generic.release.sync_restrict::shared::cluster::read.cluster;",
+        "~{memory}",
+        has_side_effects=True,
+        loc=loc,
+        ip=ip,
+    )
+
+
+@dsl_user_op
+def fence_smem_refill_acquire(*, loc=None, ip=None):
+    if not _HAS_SMEM_READ_RELEASE:
+        return
+    llvm.inline_asm(
+        None,
+        [],
+        "fence.proxy.async::generic.acquire.sync_restrict::shared::cluster.cluster;",
+        "~{memory}",
+        has_side_effects=True,
+        loc=loc,
+        ip=ip,
+    )
 
 
 def can_use_tma_gather4(tile, token_map, sm_version):

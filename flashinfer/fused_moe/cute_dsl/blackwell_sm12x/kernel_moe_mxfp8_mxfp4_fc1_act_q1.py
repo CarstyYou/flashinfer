@@ -31,6 +31,8 @@ from ....tllm_enums import (
 from ....utils import ceil_div
 from ._moe_utils import moe_activation, moe_epilogue, moe_scheduler
 from ._moe_utils.moe_copy import (
+    fence_smem_read_release,
+    fence_smem_refill_acquire,
     gmem_to_smem_gather4,
     gmem_to_smem_tokens,
     make_gather4_tma_atom,
@@ -207,6 +209,7 @@ def load_tokens(
         cute.arch.mbarrier_wait(empty + stage, phase)
         cute.arch.sync_warp()
         if cutlass.const_expr(tma_atom is not None):
+            fence_smem_refill_acquire()
             gmem_to_smem_gather4(
                 tma_atom,
                 tAgA,
@@ -284,6 +287,7 @@ def load_a_sfa(
                 global_k_tile = sf_cycle * sf_stages * kt_per_pack + local_k_tile
                 stage = local_k_tile & (ab_stages - 1)
                 cute.arch.mbarrier_wait(a_empty + stage, a_phase)
+                fence_smem_refill_acquire()
                 tx_bytes = a_bytes
                 if cutlass.const_expr(k_in_sf == 0):
                     tx_bytes += sfa_bytes
@@ -378,6 +382,7 @@ def load_b_sfb(
                 global_k_tile = sf_cycle * sf_stages * kt_per_pack + local_k_tile
                 stage = local_k_tile & (ab_stages - 1)
                 cute.arch.mbarrier_wait(b_empty + stage, b_phase)
+                fence_smem_refill_acquire()
                 with cute.arch.elect_one():
                     cute.arch.mbarrier_arrive_and_expect_tx(
                         b_full + stage, b_bytes + sfb_bytes
@@ -482,6 +487,7 @@ def load_a_sfa_swap(
                 global_k_tile = sf_cycle * sf_stages * kt_per_pack + local_k_tile
                 stage = local_k_tile & (ab_stages - 1)
                 cute.arch.mbarrier_wait(a_empty + stage, a_phase)
+                fence_smem_refill_acquire()
                 with cute.arch.elect_one():
                     cute.arch.mbarrier_arrive_and_expect_tx(
                         a_full + stage, a_bytes + sfa_bytes
@@ -565,6 +571,7 @@ def load_b_sfb_swap(
                 global_k_tile = sf_cycle * sf_stages * kt_per_pack + local_k_tile
                 stage = local_k_tile & (ab_stages - 1)
                 cute.arch.mbarrier_wait(b_empty + stage, b_phase)
+                fence_smem_refill_acquire()
                 tx_bytes = b_bytes
                 if cutlass.const_expr(k_in_sf == 0):
                     tx_bytes += sfb_bytes
@@ -712,6 +719,7 @@ def mma(
                         [tCrG[None, None, k_block], tCrSFG_frg[None, None, k_block, 0]],
                         acc_g,
                     )
+                fence_smem_read_release()
                 cute.arch.mbarrier_arrive(a_empty + s)
                 cute.arch.mbarrier_arrive(b_empty + s)
                 if cutlass.const_expr(s == ab_stages - 1):
@@ -839,6 +847,7 @@ def mma_swap(
                         ],
                         acc_g,
                     )
+                fence_smem_read_release()
                 cute.arch.mbarrier_arrive(a_empty + s)
                 cute.arch.mbarrier_arrive(b_empty + s)
                 if cutlass.const_expr(s == ab_stages - 1):

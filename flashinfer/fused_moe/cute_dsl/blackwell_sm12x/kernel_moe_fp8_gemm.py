@@ -24,6 +24,7 @@ from cutlass.cute.runtime import from_dlpack
 
 from ....utils import ceil_div
 from ._moe_utils import moe_epilogue, moe_scheduler
+from ._moe_utils.moe_copy import fence_smem_read_release, fence_smem_refill_acquire
 from ._moe_utils.moe_epilogue import EPI_CONFIGS, EpiMethod
 from ._moe_utils.moe_kernel_builder import LoadABConfig, MmaConfig, Sm12xGemmConfig
 from ._moe_utils.sm12x_blockscaled_layout import (
@@ -45,7 +46,7 @@ def is_swapab(tile):
 
 REG_PROD_BY_TACTIC = {
     (128, 128, EpiMethod.R2G_WG): 40,
-    (128, 128, EpiMethod.STAGED_R2G): 104,
+    (128, 128, EpiMethod.STAGED_R2G): 96,
     (64, 128, EpiMethod.R2G_WG): 40,
     (64, 128, EpiMethod.STAGED_R2G): 88,
     (32, 128, EpiMethod.R2G_WG): 40,
@@ -131,6 +132,7 @@ def load_ab(
     )
     for k_tile_idx in cutlass.range(0, k_tile_count):
         cute.arch.mbarrier_wait(ab_empty + ab_stage, ab_phase)
+        fence_smem_refill_acquire()
         with cute.arch.elect_one():
             cute.arch.mbarrier_arrive_and_expect_tx(ab_full + ab_stage, ab_bytes)
         cute.copy(
@@ -194,6 +196,7 @@ def load_ab_swap(
     )
     for k_tile_idx in cutlass.range(0, k_tile_count):
         cute.arch.mbarrier_wait(ab_empty + ab_stage, ab_phase)
+        fence_smem_refill_acquire()
         with cute.arch.elect_one():
             cute.arch.mbarrier_arrive_and_expect_tx(ab_full + ab_stage, ab_bytes)
         cute.copy(
@@ -268,6 +271,7 @@ def load_sf_tma(
 
     for k_tile_idx in cutlass.range(0, k_tile_count):
         cute.arch.mbarrier_wait(sf_empty + sf_stage, sf_phase)
+        fence_smem_refill_acquire()
         with cute.arch.elect_one():
             cute.arch.mbarrier_arrive_and_expect_tx(sf_full + sf_stage, sfa_bytes)
         cute.copy(
@@ -417,6 +421,8 @@ def mma(
 
     cute.arch.mbarrier_wait(sf_full + read_stage, ab_phase)
     copy_scale_s2r(read_stage, tCsSFA, tCsSFB, tCrSFA, tCrSFB, tscale_mn)
+    if cutlass.const_expr(not mma_cfg.swap_ab):
+        fence_smem_read_release()
     cute.arch.mbarrier_arrive(sf_empty + read_stage)
 
     cute.arch.mbarrier_wait(ab_full + read_stage, ab_phase)
@@ -435,6 +441,7 @@ def mma(
                 tiledmma, tmp, tCrA[None, None, k_block], tCrB[None, None, k_block], tmp
             )
             if k_block == k_blocks - 1:
+                fence_smem_read_release()
                 cute.arch.mbarrier_arrive(ab_empty + read_stage)
                 read_stage += 1
                 if read_stage == ab_stages:
@@ -448,6 +455,8 @@ def mma(
                 rescale(acc, tmp, tCrSFA, tCrSFB, tscale_mn)
                 cute.arch.mbarrier_wait(sf_full + read_stage, ab_phase)
                 copy_scale_s2r(read_stage, tCsSFA, tCsSFB, tCrSFA, tCrSFB, tscale_mn)
+                if cutlass.const_expr(not mma_cfg.swap_ab):
+                    fence_smem_read_release()
                 cute.arch.mbarrier_arrive(sf_empty + read_stage)
 
     for k_block in cutlass.range_constexpr(0, k_blocks):
@@ -456,6 +465,7 @@ def mma(
             cute.copy(s2r_a, tAsA_s[None, None, k_next], tCrA_v[None, None, k_next])
             cute.copy(s2r_b, tBsB_s[None, None, k_next], tCrB_v[None, None, k_next])
         if k_block == k_blocks - 1:
+            fence_smem_read_release()
             cute.arch.mbarrier_arrive(ab_empty + read_stage)
             read_stage += 1
             if read_stage == ab_stages:

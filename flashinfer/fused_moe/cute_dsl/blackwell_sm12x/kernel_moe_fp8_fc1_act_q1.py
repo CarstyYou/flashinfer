@@ -25,6 +25,8 @@ from cutlass.cute.runtime import from_dlpack
 from ....utils import ceil_div
 from ._moe_utils import moe_activation, moe_epilogue, moe_scheduler
 from ._moe_utils.moe_copy import (
+    fence_smem_read_release,
+    fence_smem_refill_acquire,
     gmem_to_smem_gather4,
     gmem_to_smem_tokens,
     make_gather4_tma_atom,
@@ -217,6 +219,7 @@ def load_ab_gather(
         tAsA = token_copy.get_slice(lane).partition_D(sToken)
     for kt in cutlass.range(0, k_tiles):
         cute.arch.mbarrier_wait(ab_empty + stage, phase)
+        fence_smem_refill_acquire()
         with cute.arch.elect_one():
             cute.arch.mbarrier_arrive_and_expect_tx(ab_full + stage, weight_bytes)
         cute.copy(
@@ -393,6 +396,7 @@ def load_ab(
     )
     for k_tile_idx in cutlass.range(0, k_tile_count):
         cute.arch.mbarrier_wait(ab_empty + ab_stage, ab_phase)
+        fence_smem_refill_acquire()
         with cute.arch.elect_one():
             cute.arch.mbarrier_arrive_and_expect_tx(ab_full + ab_stage, ab_bytes)
         cute.copy(
@@ -483,6 +487,7 @@ def load_sf_tma(
 
     for k_tile_idx in cutlass.range(0, k_tile_count):
         cute.arch.mbarrier_wait(sf_empty + sf_stage, sf_phase)
+        fence_smem_refill_acquire()
         with cute.arch.elect_one():
             cute.arch.mbarrier_arrive_and_expect_tx(sf_full + sf_stage, sfa_bytes)
         cute.copy(
@@ -539,6 +544,7 @@ def mma(
     ab_stages,
     read_stage,
     ab_phase,
+    sf_uses_tma: cutlass.Constexpr = False,
 ):
     i32 = cutlass.Int32
     bm, bn = tile_mn
@@ -574,6 +580,8 @@ def mma(
         cute.arch.mbarrier_wait(sf_full + read_stage, ab_phase)
         copy_scale_s2r(read_stage, tCsSFA, tCsSFU, tCrSFA_u, tCrSFU, tscale_mn)
         copy_scale_s2r(read_stage, tCsSFA, tCsSFG, tCrSFA_g, tCrSFG, tscale_mn)
+        if cutlass.const_expr(sf_uses_tma):
+            fence_smem_read_release()
         cute.arch.mbarrier_arrive(sf_empty + read_stage)
         cute.arch.mbarrier_wait(ab_full + read_stage, ab_phase)
         tAsA_s = tXsA[None, None, None, read_stage]
@@ -597,6 +605,7 @@ def mma(
                 tCrG[None, None, k_block],
                 tmp_g,
             )
+        fence_smem_read_release()
         cute.arch.mbarrier_arrive(ab_empty + read_stage)
         rescale(acc_u, tmp_u, tCrSFA_u, tCrSFU, tscale_mn)
         rescale(acc_g, tmp_g, tCrSFA_g, tCrSFG, tscale_mn)
@@ -664,6 +673,7 @@ def load_ab_swap(
     )
     for k_tile_idx in cutlass.range(0, k_tile_count):
         cute.arch.mbarrier_wait(ab_empty + ab_stage, ab_phase)
+        fence_smem_refill_acquire()
         with cute.arch.elect_one():
             cute.arch.mbarrier_arrive_and_expect_tx(ab_full + ab_stage, ab_bytes)
         cute.copy(
@@ -875,6 +885,7 @@ def mma_swap(
                 tCrB[None, None, k_block],
                 tmp_g,
             )
+        fence_smem_read_release()
         cute.arch.mbarrier_arrive(ab_empty + read_stage)
         rescale(acc_u, tmp_u, tCrSFA_u, tCrSFB_u, tscale_mn)
         rescale(acc_g, tmp_g, tCrSFA_g, tCrSFB_g, tscale_mn)
@@ -1504,6 +1515,7 @@ class CuteDslSm120MoeFp8Fc1ActQ1:
                         cfg.ab_stage,
                         read_stage,
                         ab_phase,
+                        sf_uses_tma=tma_atom_sfa is not None,
                     )
                     if cutlass.const_expr(self.epi_q.quant_at is QuantPoint.BEFORE_R2S):
                         store_wg_q1_before_r2s(
